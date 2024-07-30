@@ -89,9 +89,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_doesWheelSteer,
-                m_maxSpeedFullSteeringAngle,
                 m_maxSteeringAngle,
+                m_maxSpeedFullSteeringAngle,
+                m_doesWheelSteer,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -115,11 +115,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "doesWheelSteer" => Ok(__Field::m_doesWheelSteer),
+                        "maxSteeringAngle" => Ok(__Field::m_maxSteeringAngle),
                         "maxSpeedFullSteeringAngle" => {
                             Ok(__Field::m_maxSpeedFullSteeringAngle)
                         }
-                        "maxSteeringAngle" => Ok(__Field::m_maxSteeringAngle),
+                        "doesWheelSteer" => Ok(__Field::m_doesWheelSteer),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -272,11 +272,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_doesWheelSteer: _serde::__private::Option<Vec<bool>> = _serde::__private::None;
+                    let mut m_maxSteeringAngle: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxSpeedFullSteeringAngle: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_maxSteeringAngle: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_doesWheelSteer: _serde::__private::Option<Vec<bool>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -286,21 +286,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_doesWheelSteer => {
+                            __Field::m_maxSteeringAngle => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_doesWheelSteer) {
+                                if _serde::__private::Option::is_some(&m_maxSteeringAngle) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "doesWheelSteer",
+                                            "maxSteeringAngle",
                                         ),
                                     );
                                 }
-                                m_doesWheelSteer = _serde::__private::Some(
-                                    match __A::next_value::<Vec<bool>>(&mut __map) {
+                                m_maxSteeringAngle = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -336,21 +336,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxSteeringAngle => {
+                            __Field::m_doesWheelSteer => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_maxSteeringAngle) {
+                                if _serde::__private::Option::is_some(&m_doesWheelSteer) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxSteeringAngle",
+                                            "doesWheelSteer",
                                         ),
                                     );
                                 }
-                                m_maxSteeringAngle = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_doesWheelSteer = _serde::__private::Some(
+                                    match __A::next_value::<Vec<bool>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -363,13 +363,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_doesWheelSteer = match m_doesWheelSteer {
+                    let m_maxSteeringAngle = match m_maxSteeringAngle {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "doesWheelSteer",
+                                    "maxSteeringAngle",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -387,13 +387,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxSteeringAngle = match m_maxSteeringAngle {
+                    let m_doesWheelSteer = match m_doesWheelSteer {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxSteeringAngle",
+                                    "doesWheelSteer",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

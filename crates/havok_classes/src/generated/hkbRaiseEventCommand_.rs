@@ -82,9 +82,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_externalId,
-                m_global,
                 m_characterId,
+                m_global,
+                m_externalId,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -108,9 +108,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "externalId" => Ok(__Field::m_externalId),
-                        "global" => Ok(__Field::m_global),
                         "characterId" => Ok(__Field::m_characterId),
+                        "global" => Ok(__Field::m_global),
+                        "externalId" => Ok(__Field::m_externalId),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -255,9 +255,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_externalId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_global: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_global: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_externalId: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -267,21 +267,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_externalId => {
+                            __Field::m_characterId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_externalId) {
+                                if _serde::__private::Option::is_some(&m_characterId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "externalId",
+                                            "characterId",
                                         ),
                                     );
                                 }
-                                m_externalId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_characterId = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -313,21 +313,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_characterId => {
+                            __Field::m_externalId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_characterId) {
+                                if _serde::__private::Option::is_some(&m_externalId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "characterId",
+                                            "externalId",
                                         ),
                                     );
                                 }
-                                m_characterId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                m_externalId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -340,13 +340,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_externalId = match m_externalId {
+                    let m_characterId = match m_characterId {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "externalId",
+                                    "characterId",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -362,13 +362,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_characterId = match m_characterId {
+                    let m_externalId = match m_externalId {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterId",
+                                    "externalId",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

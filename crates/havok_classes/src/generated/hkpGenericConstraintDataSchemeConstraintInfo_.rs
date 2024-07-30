@@ -85,10 +85,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_numSolverElemTemps,
-                m_numSolverResults,
-                m_sizeOfSchemas,
                 m_maxSizeOfSchema,
+                m_sizeOfSchemas,
+                m_numSolverResults,
+                m_numSolverElemTemps,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -112,10 +112,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "numSolverElemTemps" => Ok(__Field::m_numSolverElemTemps),
-                        "numSolverResults" => Ok(__Field::m_numSolverResults),
-                        "sizeOfSchemas" => Ok(__Field::m_sizeOfSchemas),
                         "maxSizeOfSchema" => Ok(__Field::m_maxSizeOfSchema),
+                        "sizeOfSchemas" => Ok(__Field::m_sizeOfSchemas),
+                        "numSolverResults" => Ok(__Field::m_numSolverResults),
+                        "numSolverElemTemps" => Ok(__Field::m_numSolverElemTemps),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -295,10 +295,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_numSolverElemTemps: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numSolverResults: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_sizeOfSchemas: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_maxSizeOfSchema: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_sizeOfSchemas: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numSolverResults: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numSolverElemTemps: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -308,46 +308,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_numSolverElemTemps => {
+                            __Field::m_maxSizeOfSchema => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_numSolverElemTemps,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_maxSizeOfSchema) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numSolverElemTemps",
+                                            "maxSizeOfSchema",
                                         ),
                                     );
                                 }
-                                m_numSolverElemTemps = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numSolverResults => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_numSolverResults) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numSolverResults",
-                                        ),
-                                    );
-                                }
-                                m_numSolverResults = _serde::__private::Some(
+                                m_maxSizeOfSchema = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -382,20 +356,46 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxSizeOfSchema => {
+                            __Field::m_numSolverResults => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_maxSizeOfSchema) {
+                                if _serde::__private::Option::is_some(&m_numSolverResults) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxSizeOfSchema",
+                                            "numSolverResults",
                                         ),
                                     );
                                 }
-                                m_maxSizeOfSchema = _serde::__private::Some(
+                                m_numSolverResults = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numSolverElemTemps => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_numSolverElemTemps,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numSolverElemTemps",
+                                        ),
+                                    );
+                                }
+                                m_numSolverElemTemps = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -409,25 +409,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_numSolverElemTemps = match m_numSolverElemTemps {
+                    let m_maxSizeOfSchema = match m_maxSizeOfSchema {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "numSolverElemTemps",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numSolverResults = match m_numSolverResults {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numSolverResults",
+                                    "maxSizeOfSchema",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -445,13 +433,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxSizeOfSchema = match m_maxSizeOfSchema {
+                    let m_numSolverResults = match m_numSolverResults {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxSizeOfSchema",
+                                    "numSolverResults",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numSolverElemTemps = match m_numSolverElemTemps {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numSolverElemTemps",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

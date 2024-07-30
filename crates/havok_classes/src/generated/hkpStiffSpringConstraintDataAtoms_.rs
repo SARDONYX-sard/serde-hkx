@@ -70,8 +70,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_spring,
                 m_pivots,
+                m_spring,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -95,8 +95,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "spring" => Ok(__Field::m_spring),
                         "pivots" => Ok(__Field::m_pivots),
+                        "spring" => Ok(__Field::m_spring),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -217,11 +217,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_spring: _serde::__private::Option<
-                        hkpStiffSpringConstraintAtom,
-                    > = _serde::__private::None;
                     let mut m_pivots: _serde::__private::Option<
                         hkpSetLocalTranslationsConstraintAtom,
+                    > = _serde::__private::None;
+                    let mut m_spring: _serde::__private::Option<
+                        hkpStiffSpringConstraintAtom,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
@@ -232,30 +232,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_spring => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_spring) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("spring"),
-                                    );
-                                }
-                                m_spring = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpStiffSpringConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_pivots => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -280,25 +256,49 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_spring => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_spring) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("spring"),
+                                    );
+                                }
+                                m_spring = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpStiffSpringConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_spring = match m_spring {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("spring"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_pivots = match m_pivots {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("pivots"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_spring = match m_spring {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("spring"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -154,17 +154,17 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
+                m_name,
                 m_enable,
-                m_computeOnModify,
-                m_computeOnActivate,
-                m_inverse,
-                m_rotateOnly,
-                m_vectorOut,
-                m_vectorIn,
-                m_translation,
                 m_rotation,
+                m_translation,
+                m_vectorIn,
+                m_vectorOut,
+                m_rotateOnly,
+                m_inverse,
+                m_computeOnActivate,
+                m_computeOnModify,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -189,17 +189,17 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
+                        "name" => Ok(__Field::m_name),
                         "enable" => Ok(__Field::m_enable),
-                        "computeOnModify" => Ok(__Field::m_computeOnModify),
-                        "computeOnActivate" => Ok(__Field::m_computeOnActivate),
-                        "inverse" => Ok(__Field::m_inverse),
-                        "rotateOnly" => Ok(__Field::m_rotateOnly),
-                        "vectorOut" => Ok(__Field::m_vectorOut),
-                        "vectorIn" => Ok(__Field::m_vectorIn),
-                        "translation" => Ok(__Field::m_translation),
                         "rotation" => Ok(__Field::m_rotation),
+                        "translation" => Ok(__Field::m_translation),
+                        "vectorIn" => Ok(__Field::m_vectorIn),
+                        "vectorOut" => Ok(__Field::m_vectorOut),
+                        "rotateOnly" => Ok(__Field::m_rotateOnly),
+                        "inverse" => Ok(__Field::m_inverse),
+                        "computeOnActivate" => Ok(__Field::m_computeOnActivate),
+                        "computeOnModify" => Ok(__Field::m_computeOnModify),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -492,17 +492,17 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_computeOnModify: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_computeOnActivate: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_inverse: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_rotateOnly: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_vectorOut: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_vectorIn: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_translation: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_rotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
+                    let mut m_translation: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_vectorIn: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_vectorOut: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_rotateOnly: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_inverse: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_computeOnActivate: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_computeOnModify: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -538,28 +538,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -575,6 +553,28 @@ const _: () = {
                                 }
                                 m_userData = _serde::__private::Some(
                                     match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -606,20 +606,140 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_computeOnModify => {
+                            __Field::m_rotation => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_computeOnModify) {
+                                if _serde::__private::Option::is_some(&m_rotation) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "computeOnModify",
+                                            "rotation",
                                         ),
                                     );
                                 }
-                                m_computeOnModify = _serde::__private::Some(
+                                m_rotation = _serde::__private::Some(
+                                    match __A::next_value::<Quaternion>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_translation => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_translation) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "translation",
+                                        ),
+                                    );
+                                }
+                                m_translation = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vectorIn => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vectorIn) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vectorIn",
+                                        ),
+                                    );
+                                }
+                                m_vectorIn = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vectorOut => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vectorOut) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vectorOut",
+                                        ),
+                                    );
+                                }
+                                m_vectorOut = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_rotateOnly => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_rotateOnly) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rotateOnly",
+                                        ),
+                                    );
+                                }
+                                m_rotateOnly = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_inverse => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_inverse) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "inverse",
+                                        ),
+                                    );
+                                }
+                                m_inverse = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -656,141 +776,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_inverse => {
+                            __Field::m_computeOnModify => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_inverse) {
+                                if _serde::__private::Option::is_some(&m_computeOnModify) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "inverse",
+                                            "computeOnModify",
                                         ),
                                     );
                                 }
-                                m_inverse = _serde::__private::Some(
+                                m_computeOnModify = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_rotateOnly => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rotateOnly) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rotateOnly",
-                                        ),
-                                    );
-                                }
-                                m_rotateOnly = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_vectorOut => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vectorOut) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vectorOut",
-                                        ),
-                                    );
-                                }
-                                m_vectorOut = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_vectorIn => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vectorIn) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vectorIn",
-                                        ),
-                                    );
-                                }
-                                m_vectorIn = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_translation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_translation) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "translation",
-                                        ),
-                                    );
-                                }
-                                m_translation = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_rotation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rotation) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rotation",
-                                        ),
-                                    );
-                                }
-                                m_rotation = _serde::__private::Some(
-                                    match __A::next_value::<Quaternion>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -815,22 +815,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -845,70 +845,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_computeOnModify = match m_computeOnModify {
+                    let m_rotation = match m_rotation {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "computeOnModify",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_computeOnActivate = match m_computeOnActivate {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "computeOnActivate",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_inverse = match m_inverse {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("inverse"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_rotateOnly = match m_rotateOnly {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "rotateOnly",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vectorOut = match m_vectorOut {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "vectorOut",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vectorIn = match m_vectorIn {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("vectorIn"),
+                                <__A::Error as _serde::de::Error>::missing_field("rotation"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -925,12 +867,70 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_rotation = match m_rotation {
+                    let m_vectorIn = match m_vectorIn {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("rotation"),
+                                <__A::Error as _serde::de::Error>::missing_field("vectorIn"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vectorOut = match m_vectorOut {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "vectorOut",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_rotateOnly = match m_rotateOnly {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "rotateOnly",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_inverse = match m_inverse {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("inverse"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_computeOnActivate = match m_computeOnActivate {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "computeOnActivate",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_computeOnModify = match m_computeOnModify {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "computeOnModify",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

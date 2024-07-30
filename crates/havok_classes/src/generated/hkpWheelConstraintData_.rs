@@ -91,9 +91,9 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_initialSteeringAxisInB,
-                m_initialAxleInB,
                 m_atoms,
+                m_initialAxleInB,
+                m_initialSteeringAxisInB,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -118,9 +118,9 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
-                        "initialSteeringAxisInB" => Ok(__Field::m_initialSteeringAxisInB),
-                        "initialAxleInB" => Ok(__Field::m_initialAxleInB),
                         "atoms" => Ok(__Field::m_atoms),
+                        "initialAxleInB" => Ok(__Field::m_initialAxleInB),
+                        "initialSteeringAxisInB" => Ok(__Field::m_initialSteeringAxisInB),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -274,12 +274,12 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_initialSteeringAxisInB: _serde::__private::Option<
-                        Vector4,
-                    > = _serde::__private::None;
-                    let mut m_initialAxleInB: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_atoms: _serde::__private::Option<
                         hkpWheelConstraintDataAtoms,
+                    > = _serde::__private::None;
+                    let mut m_initialAxleInB: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_initialSteeringAxisInB: _serde::__private::Option<
+                        Vector4,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
@@ -305,6 +305,54 @@ const _: () = {
                                 }
                                 m_userData = _serde::__private::Some(
                                     match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_atoms => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_atoms) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+                                    );
+                                }
+                                m_atoms = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpWheelConstraintDataAtoms,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_initialAxleInB => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_initialAxleInB) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "initialAxleInB",
+                                        ),
+                                    );
+                                }
+                                m_initialAxleInB = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -340,54 +388,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_initialAxleInB => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_initialAxleInB) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "initialAxleInB",
-                                        ),
-                                    );
-                                }
-                                m_initialAxleInB = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_atoms => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_atoms) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
-                                    );
-                                }
-                                m_atoms = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpWheelConstraintDataAtoms,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             _ => {}
                         }
                     }
@@ -401,14 +401,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_initialSteeringAxisInB = match m_initialSteeringAxisInB {
+                    let m_atoms = match m_atoms {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "initialSteeringAxisInB",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("atoms"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -425,12 +423,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_atoms = match m_atoms {
+                    let m_initialSteeringAxisInB = match m_initialSteeringAxisInB {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("atoms"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "initialSteeringAxisInB",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

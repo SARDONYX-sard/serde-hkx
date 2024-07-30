@@ -117,12 +117,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_isReturnToPreviousState,
-                m_toStateId,
-                m_fromStateId,
-                m_transitionInfoReferenceForTE,
-                m_transitionInfoReference,
                 m_transitionEffectInternalStateInfo,
+                m_transitionInfoReference,
+                m_transitionInfoReferenceForTE,
+                m_fromStateId,
+                m_toStateId,
+                m_isReturnToPreviousState,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -146,19 +146,19 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "isReturnToPreviousState" => {
-                            Ok(__Field::m_isReturnToPreviousState)
-                        }
-                        "toStateId" => Ok(__Field::m_toStateId),
-                        "fromStateId" => Ok(__Field::m_fromStateId),
-                        "transitionInfoReferenceForTE" => {
-                            Ok(__Field::m_transitionInfoReferenceForTE)
+                        "transitionEffectInternalStateInfo" => {
+                            Ok(__Field::m_transitionEffectInternalStateInfo)
                         }
                         "transitionInfoReference" => {
                             Ok(__Field::m_transitionInfoReference)
                         }
-                        "transitionEffectInternalStateInfo" => {
-                            Ok(__Field::m_transitionEffectInternalStateInfo)
+                        "transitionInfoReferenceForTE" => {
+                            Ok(__Field::m_transitionInfoReferenceForTE)
+                        }
+                        "fromStateId" => Ok(__Field::m_fromStateId),
+                        "toStateId" => Ok(__Field::m_toStateId),
+                        "isReturnToPreviousState" => {
+                            Ok(__Field::m_isReturnToPreviousState)
                         }
                         _ => Ok(__Field::__ignore),
                     }
@@ -443,18 +443,18 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_isReturnToPreviousState: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_fromStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_transitionInfoReferenceForTE: _serde::__private::Option<
-                        hkbStateMachineTransitionInfoReference,
+                    let mut m_transitionEffectInternalStateInfo: _serde::__private::Option<
+                        Pointer,
                     > = _serde::__private::None;
                     let mut m_transitionInfoReference: _serde::__private::Option<
                         hkbStateMachineTransitionInfoReference,
                     > = _serde::__private::None;
-                    let mut m_transitionEffectInternalStateInfo: _serde::__private::Option<
-                        Pointer,
+                    let mut m_transitionInfoReferenceForTE: _serde::__private::Option<
+                        hkbStateMachineTransitionInfoReference,
                     > = _serde::__private::None;
+                    let mut m_fromStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_isReturnToPreviousState: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -464,99 +464,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_isReturnToPreviousState => {
+                            __Field::m_transitionEffectInternalStateInfo => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_isReturnToPreviousState,
+                                    &m_transitionEffectInternalStateInfo,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isReturnToPreviousState",
+                                            "transitionEffectInternalStateInfo",
                                         ),
                                     );
                                 }
-                                m_isReturnToPreviousState = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_toStateId => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_toStateId) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "toStateId",
-                                        ),
-                                    );
-                                }
-                                m_toStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_fromStateId => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_fromStateId) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fromStateId",
-                                        ),
-                                    );
-                                }
-                                m_fromStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_transitionInfoReferenceForTE => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_transitionInfoReferenceForTE,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transitionInfoReferenceForTE",
-                                        ),
-                                    );
-                                }
-                                m_transitionInfoReferenceForTE = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkbStateMachineTransitionInfoReference,
-                                    >(&mut __map) {
+                                m_transitionEffectInternalStateInfo = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -594,23 +518,99 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_transitionEffectInternalStateInfo => {
+                            __Field::m_transitionInfoReferenceForTE => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_transitionEffectInternalStateInfo,
+                                    &m_transitionInfoReferenceForTE,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transitionEffectInternalStateInfo",
+                                            "transitionInfoReferenceForTE",
                                         ),
                                     );
                                 }
-                                m_transitionEffectInternalStateInfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_transitionInfoReferenceForTE = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkbStateMachineTransitionInfoReference,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_fromStateId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_fromStateId) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "fromStateId",
+                                        ),
+                                    );
+                                }
+                                m_fromStateId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_toStateId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_toStateId) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "toStateId",
+                                        ),
+                                    );
+                                }
+                                m_toStateId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isReturnToPreviousState => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_isReturnToPreviousState,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isReturnToPreviousState",
+                                        ),
+                                    );
+                                }
+                                m_isReturnToPreviousState = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -623,49 +623,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_isReturnToPreviousState = match m_isReturnToPreviousState {
+                    let m_transitionEffectInternalStateInfo = match m_transitionEffectInternalStateInfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isReturnToPreviousState",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_toStateId = match m_toStateId {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "toStateId",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_fromStateId = match m_fromStateId {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "fromStateId",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_transitionInfoReferenceForTE = match m_transitionInfoReferenceForTE {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "transitionInfoReferenceForTE",
+                                    "transitionEffectInternalStateInfo",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -683,13 +647,49 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_transitionEffectInternalStateInfo = match m_transitionEffectInternalStateInfo {
+                    let m_transitionInfoReferenceForTE = match m_transitionInfoReferenceForTE {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transitionEffectInternalStateInfo",
+                                    "transitionInfoReferenceForTE",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_fromStateId = match m_fromStateId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "fromStateId",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_toStateId = match m_toStateId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "toStateId",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isReturnToPreviousState = match m_isReturnToPreviousState {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isReturnToPreviousState",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

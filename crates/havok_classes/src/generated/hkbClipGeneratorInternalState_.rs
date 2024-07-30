@@ -130,16 +130,16 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_pingPongBackward,
-                m_ignoreStartTime,
-                m_atEnd,
-                m_echoBufferSize,
-                m_bufferSize,
-                m_previousUserControlledTimeFraction,
-                m_time,
-                m_localTime,
-                m_echos,
                 m_extractedMotion,
+                m_echos,
+                m_localTime,
+                m_time,
+                m_previousUserControlledTimeFraction,
+                m_bufferSize,
+                m_echoBufferSize,
+                m_atEnd,
+                m_ignoreStartTime,
+                m_pingPongBackward,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -163,18 +163,18 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "pingPongBackward" => Ok(__Field::m_pingPongBackward),
-                        "ignoreStartTime" => Ok(__Field::m_ignoreStartTime),
-                        "atEnd" => Ok(__Field::m_atEnd),
-                        "echoBufferSize" => Ok(__Field::m_echoBufferSize),
-                        "bufferSize" => Ok(__Field::m_bufferSize),
+                        "extractedMotion" => Ok(__Field::m_extractedMotion),
+                        "echos" => Ok(__Field::m_echos),
+                        "localTime" => Ok(__Field::m_localTime),
+                        "time" => Ok(__Field::m_time),
                         "previousUserControlledTimeFraction" => {
                             Ok(__Field::m_previousUserControlledTimeFraction)
                         }
-                        "time" => Ok(__Field::m_time),
-                        "localTime" => Ok(__Field::m_localTime),
-                        "echos" => Ok(__Field::m_echos),
-                        "extractedMotion" => Ok(__Field::m_extractedMotion),
+                        "bufferSize" => Ok(__Field::m_bufferSize),
+                        "echoBufferSize" => Ok(__Field::m_echoBufferSize),
+                        "atEnd" => Ok(__Field::m_atEnd),
+                        "ignoreStartTime" => Ok(__Field::m_ignoreStartTime),
+                        "pingPongBackward" => Ok(__Field::m_pingPongBackward),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -524,20 +524,20 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_pingPongBackward: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_ignoreStartTime: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_atEnd: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_echoBufferSize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_bufferSize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_previousUserControlledTimeFraction: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_time: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_localTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_extractedMotion: _serde::__private::Option<QsTransform> = _serde::__private::None;
                     let mut m_echos: _serde::__private::Option<
                         Vec<hkbClipGeneratorEcho>,
                     > = _serde::__private::None;
-                    let mut m_extractedMotion: _serde::__private::Option<QsTransform> = _serde::__private::None;
+                    let mut m_localTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_time: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_previousUserControlledTimeFraction: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_bufferSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_echoBufferSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_atEnd: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_ignoreStartTime: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_pingPongBackward: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -547,21 +547,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_pingPongBackward => {
+                            __Field::m_extractedMotion => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_pingPongBackward) {
+                                if _serde::__private::Option::is_some(&m_extractedMotion) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "pingPongBackward",
+                                            "extractedMotion",
                                         ),
                                     );
                                 }
-                                m_pingPongBackward = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_extractedMotion = _serde::__private::Some(
+                                    match __A::next_value::<QsTransform>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -571,21 +571,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_ignoreStartTime => {
+                            __Field::m_echos => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_ignoreStartTime) {
+                                if _serde::__private::Option::is_some(&m_echos) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ignoreStartTime",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("echos"),
                                     );
                                 }
-                                m_ignoreStartTime = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_echos = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkbClipGeneratorEcho>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -595,19 +595,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_atEnd => {
+                            __Field::m_localTime => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_atEnd) {
+                                if _serde::__private::Option::is_some(&m_localTime) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("atEnd"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "localTime",
+                                        ),
                                     );
                                 }
-                                m_atEnd = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_localTime = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -617,45 +619,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_echoBufferSize => {
+                            __Field::m_time => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_echoBufferSize) {
+                                if _serde::__private::Option::is_some(&m_time) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "echoBufferSize",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("time"),
                                     );
                                 }
-                                m_echoBufferSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bufferSize => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bufferSize) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bufferSize",
-                                        ),
-                                    );
-                                }
-                                m_bufferSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_time = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -691,43 +667,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_time => {
+                            __Field::m_bufferSize => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_time) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("time"),
-                                    );
-                                }
-                                m_time = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_localTime => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_localTime) {
+                                if _serde::__private::Option::is_some(&m_bufferSize) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "localTime",
+                                            "bufferSize",
                                         ),
                                     );
                                 }
-                                m_localTime = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_bufferSize = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -737,45 +691,91 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_echos => {
+                            __Field::m_echoBufferSize => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_echos) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("echos"),
-                                    );
-                                }
-                                m_echos = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkbClipGeneratorEcho>,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_extractedMotion => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_extractedMotion) {
+                                if _serde::__private::Option::is_some(&m_echoBufferSize) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "extractedMotion",
+                                            "echoBufferSize",
                                         ),
                                     );
                                 }
-                                m_extractedMotion = _serde::__private::Some(
-                                    match __A::next_value::<QsTransform>(&mut __map) {
+                                m_echoBufferSize = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_atEnd => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_atEnd) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("atEnd"),
+                                    );
+                                }
+                                m_atEnd = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_ignoreStartTime => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_ignoreStartTime) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "ignoreStartTime",
+                                        ),
+                                    );
+                                }
+                                m_ignoreStartTime = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_pingPongBackward => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_pingPongBackward) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "pingPongBackward",
+                                        ),
+                                    );
+                                }
+                                m_pingPongBackward = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -788,47 +788,57 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_pingPongBackward = match m_pingPongBackward {
+                    let m_extractedMotion = match m_extractedMotion {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "pingPongBackward",
+                                    "extractedMotion",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_ignoreStartTime = match m_ignoreStartTime {
+                    let m_echos = match m_echos {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("echos"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_localTime = match m_localTime {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "ignoreStartTime",
+                                    "localTime",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_atEnd = match m_atEnd {
+                    let m_time = match m_time {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("atEnd"),
+                                <__A::Error as _serde::de::Error>::missing_field("time"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_echoBufferSize = match m_echoBufferSize {
+                    let m_previousUserControlledTimeFraction = match m_previousUserControlledTimeFraction {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "echoBufferSize",
+                                    "previousUserControlledTimeFraction",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -846,57 +856,47 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_previousUserControlledTimeFraction = match m_previousUserControlledTimeFraction {
+                    let m_echoBufferSize = match m_echoBufferSize {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "previousUserControlledTimeFraction",
+                                    "echoBufferSize",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_time = match m_time {
+                    let m_atEnd = match m_atEnd {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("time"),
+                                <__A::Error as _serde::de::Error>::missing_field("atEnd"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_localTime = match m_localTime {
+                    let m_ignoreStartTime = match m_ignoreStartTime {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "localTime",
+                                    "ignoreStartTime",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_echos = match m_echos {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("echos"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_extractedMotion = match m_extractedMotion {
+                    let m_pingPongBackward = match m_pingPongBackward {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "extractedMotion",
+                                    "pingPongBackward",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

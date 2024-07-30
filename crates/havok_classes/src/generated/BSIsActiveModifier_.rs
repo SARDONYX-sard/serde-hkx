@@ -165,19 +165,19 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
+                m_name,
                 m_enable,
-                m_bInvertActive4,
-                m_bIsActive4,
-                m_bInvertActive3,
-                m_bIsActive3,
-                m_bInvertActive2,
-                m_bIsActive2,
-                m_bInvertActive1,
-                m_bIsActive1,
-                m_bInvertActive0,
                 m_bIsActive0,
+                m_bInvertActive0,
+                m_bIsActive1,
+                m_bInvertActive1,
+                m_bIsActive2,
+                m_bInvertActive2,
+                m_bIsActive3,
+                m_bInvertActive3,
+                m_bIsActive4,
+                m_bInvertActive4,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -202,19 +202,19 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
+                        "name" => Ok(__Field::m_name),
                         "enable" => Ok(__Field::m_enable),
-                        "bInvertActive4" => Ok(__Field::m_bInvertActive4),
-                        "bIsActive4" => Ok(__Field::m_bIsActive4),
-                        "bInvertActive3" => Ok(__Field::m_bInvertActive3),
-                        "bIsActive3" => Ok(__Field::m_bIsActive3),
-                        "bInvertActive2" => Ok(__Field::m_bInvertActive2),
-                        "bIsActive2" => Ok(__Field::m_bIsActive2),
-                        "bInvertActive1" => Ok(__Field::m_bInvertActive1),
-                        "bIsActive1" => Ok(__Field::m_bIsActive1),
-                        "bInvertActive0" => Ok(__Field::m_bInvertActive0),
                         "bIsActive0" => Ok(__Field::m_bIsActive0),
+                        "bInvertActive0" => Ok(__Field::m_bInvertActive0),
+                        "bIsActive1" => Ok(__Field::m_bIsActive1),
+                        "bInvertActive1" => Ok(__Field::m_bInvertActive1),
+                        "bIsActive2" => Ok(__Field::m_bIsActive2),
+                        "bInvertActive2" => Ok(__Field::m_bInvertActive2),
+                        "bIsActive3" => Ok(__Field::m_bIsActive3),
+                        "bInvertActive3" => Ok(__Field::m_bInvertActive3),
+                        "bIsActive4" => Ok(__Field::m_bIsActive4),
+                        "bInvertActive4" => Ok(__Field::m_bInvertActive4),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -567,19 +567,19 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bInvertActive4: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bIsActive4: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bInvertActive3: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bIsActive3: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bInvertActive2: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bIsActive2: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bInvertActive1: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bIsActive1: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bInvertActive0: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_bIsActive0: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_bInvertActive0: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_bIsActive1: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_bInvertActive1: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_bIsActive2: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_bInvertActive2: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_bIsActive3: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_bInvertActive3: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_bIsActive4: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_bInvertActive4: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -615,28 +615,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -661,6 +639,28 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             __Field::m_enable => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -673,222 +673,6 @@ const _: () = {
                                     );
                                 }
                                 m_enable = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bInvertActive4 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bInvertActive4) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bInvertActive4",
-                                        ),
-                                    );
-                                }
-                                m_bInvertActive4 = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bIsActive4 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bIsActive4) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bIsActive4",
-                                        ),
-                                    );
-                                }
-                                m_bIsActive4 = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bInvertActive3 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bInvertActive3) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bInvertActive3",
-                                        ),
-                                    );
-                                }
-                                m_bInvertActive3 = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bIsActive3 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bIsActive3) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bIsActive3",
-                                        ),
-                                    );
-                                }
-                                m_bIsActive3 = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bInvertActive2 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bInvertActive2) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bInvertActive2",
-                                        ),
-                                    );
-                                }
-                                m_bInvertActive2 = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bIsActive2 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bIsActive2) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bIsActive2",
-                                        ),
-                                    );
-                                }
-                                m_bIsActive2 = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bInvertActive1 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bInvertActive1) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bInvertActive1",
-                                        ),
-                                    );
-                                }
-                                m_bInvertActive1 = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bIsActive1 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bIsActive1) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bIsActive1",
-                                        ),
-                                    );
-                                }
-                                m_bIsActive1 = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bInvertActive0 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bInvertActive0) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bInvertActive0",
-                                        ),
-                                    );
-                                }
-                                m_bInvertActive0 = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -923,6 +707,222 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_bInvertActive0 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bInvertActive0) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bInvertActive0",
+                                        ),
+                                    );
+                                }
+                                m_bInvertActive0 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bIsActive1 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bIsActive1) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bIsActive1",
+                                        ),
+                                    );
+                                }
+                                m_bIsActive1 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bInvertActive1 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bInvertActive1) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bInvertActive1",
+                                        ),
+                                    );
+                                }
+                                m_bInvertActive1 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bIsActive2 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bIsActive2) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bIsActive2",
+                                        ),
+                                    );
+                                }
+                                m_bIsActive2 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bInvertActive2 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bInvertActive2) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bInvertActive2",
+                                        ),
+                                    );
+                                }
+                                m_bInvertActive2 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bIsActive3 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bIsActive3) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bIsActive3",
+                                        ),
+                                    );
+                                }
+                                m_bIsActive3 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bInvertActive3 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bInvertActive3) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bInvertActive3",
+                                        ),
+                                    );
+                                }
+                                m_bInvertActive3 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bIsActive4 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bIsActive4) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bIsActive4",
+                                        ),
+                                    );
+                                }
+                                m_bIsActive4 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bInvertActive4 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bInvertActive4) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bInvertActive4",
+                                        ),
+                                    );
+                                }
+                                m_bInvertActive4 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
@@ -938,22 +938,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -968,97 +968,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_bInvertActive4 = match m_bInvertActive4 {
+                    let m_bIsActive0 = match m_bIsActive0 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "bInvertActive4",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bIsActive4 = match m_bIsActive4 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bIsActive4",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bInvertActive3 = match m_bInvertActive3 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bInvertActive3",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bIsActive3 = match m_bIsActive3 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bIsActive3",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bInvertActive2 = match m_bInvertActive2 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bInvertActive2",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bIsActive2 = match m_bIsActive2 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bIsActive2",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bInvertActive1 = match m_bInvertActive1 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bInvertActive1",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bIsActive1 = match m_bIsActive1 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bIsActive1",
+                                    "bIsActive0",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1076,13 +992,97 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_bIsActive0 = match m_bIsActive0 {
+                    let m_bIsActive1 = match m_bIsActive1 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "bIsActive0",
+                                    "bIsActive1",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bInvertActive1 = match m_bInvertActive1 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bInvertActive1",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bIsActive2 = match m_bIsActive2 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bIsActive2",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bInvertActive2 = match m_bInvertActive2 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bInvertActive2",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bIsActive3 = match m_bIsActive3 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bIsActive3",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bInvertActive3 = match m_bInvertActive3 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bInvertActive3",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bIsActive4 = match m_bIsActive4 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bIsActive4",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bInvertActive4 = match m_bInvertActive4 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bInvertActive4",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

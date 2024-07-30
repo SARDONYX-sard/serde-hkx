@@ -122,13 +122,13 @@ const _: () = {
             enum __Field {
                 m_userData,
                 m_radius,
-                m_extrusion,
-                m_vertexC,
-                m_vertexB,
-                m_vertexA,
-                m_isExtruded,
-                m_weldingType,
                 m_weldingInfo,
+                m_weldingType,
+                m_isExtruded,
+                m_vertexA,
+                m_vertexB,
+                m_vertexC,
+                m_extrusion,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -154,13 +154,13 @@ const _: () = {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
                         "radius" => Ok(__Field::m_radius),
-                        "extrusion" => Ok(__Field::m_extrusion),
-                        "vertexC" => Ok(__Field::m_vertexC),
-                        "vertexB" => Ok(__Field::m_vertexB),
-                        "vertexA" => Ok(__Field::m_vertexA),
-                        "isExtruded" => Ok(__Field::m_isExtruded),
-                        "weldingType" => Ok(__Field::m_weldingType),
                         "weldingInfo" => Ok(__Field::m_weldingInfo),
+                        "weldingType" => Ok(__Field::m_weldingType),
+                        "isExtruded" => Ok(__Field::m_isExtruded),
+                        "vertexA" => Ok(__Field::m_vertexA),
+                        "vertexB" => Ok(__Field::m_vertexB),
+                        "vertexC" => Ok(__Field::m_vertexC),
+                        "extrusion" => Ok(__Field::m_extrusion),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -421,13 +421,13 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_extrusion: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_vertexC: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_vertexB: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_vertexA: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_isExtruded: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
                     let mut m_weldingInfo: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
+                    let mut m_isExtruded: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_vertexA: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_vertexB: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_vertexC: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_extrusion: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -483,21 +483,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_extrusion => {
+                            __Field::m_weldingInfo => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_extrusion) {
+                                if _serde::__private::Option::is_some(&m_weldingInfo) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "extrusion",
+                                            "weldingInfo",
                                         ),
                                     );
                                 }
-                                m_extrusion = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_weldingInfo = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -507,20 +507,68 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vertexC => {
+                            __Field::m_weldingType => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_vertexC) {
+                                if _serde::__private::Option::is_some(&m_weldingType) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexC",
+                                            "weldingType",
                                         ),
                                     );
                                 }
-                                m_vertexC = _serde::__private::Some(
+                                m_weldingType = _serde::__private::Some(
+                                    match __A::next_value::<WeldingType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isExtruded => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isExtruded) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isExtruded",
+                                        ),
+                                    );
+                                }
+                                m_isExtruded = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vertexA => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vertexA) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vertexA",
+                                        ),
+                                    );
+                                }
+                                m_vertexA = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -555,20 +603,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vertexA => {
+                            __Field::m_vertexC => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_vertexA) {
+                                if _serde::__private::Option::is_some(&m_vertexC) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexA",
+                                            "vertexC",
                                         ),
                                     );
                                 }
-                                m_vertexA = _serde::__private::Some(
+                                m_vertexC = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -579,69 +627,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_isExtruded => {
+                            __Field::m_extrusion => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isExtruded) {
+                                if _serde::__private::Option::is_some(&m_extrusion) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isExtruded",
+                                            "extrusion",
                                         ),
                                     );
                                 }
-                                m_isExtruded = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_weldingType => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_weldingType) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "weldingType",
-                                        ),
-                                    );
-                                }
-                                m_weldingType = _serde::__private::Some(
-                                    match __A::next_value::<WeldingType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_weldingInfo => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_weldingInfo) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "weldingInfo",
-                                        ),
-                                    );
-                                }
-                                m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                m_extrusion = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -674,55 +674,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_extrusion = match m_extrusion {
+                    let m_weldingInfo = match m_weldingInfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "extrusion",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vertexC = match m_vertexC {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("vertexC"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vertexB = match m_vertexB {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("vertexB"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vertexA = match m_vertexA {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("vertexA"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_isExtruded = match m_isExtruded {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "isExtruded",
+                                    "weldingInfo",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -740,13 +698,55 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_weldingInfo = match m_weldingInfo {
+                    let m_isExtruded = match m_isExtruded {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "weldingInfo",
+                                    "isExtruded",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexA = match m_vertexA {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("vertexA"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexB = match m_vertexB {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("vertexB"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexC = match m_vertexC {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("vertexC"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_extrusion = match m_extrusion {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "extrusion",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

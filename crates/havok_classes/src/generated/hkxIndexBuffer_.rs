@@ -96,11 +96,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_length,
-                m_vertexBaseOffset,
-                m_indices32,
-                m_indices16,
                 m_indexType,
+                m_indices16,
+                m_indices32,
+                m_vertexBaseOffset,
+                m_length,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -124,11 +124,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "length" => Ok(__Field::m_length),
-                        "vertexBaseOffset" => Ok(__Field::m_vertexBaseOffset),
-                        "indices32" => Ok(__Field::m_indices32),
-                        "indices16" => Ok(__Field::m_indices16),
                         "indexType" => Ok(__Field::m_indexType),
+                        "indices16" => Ok(__Field::m_indices16),
+                        "indices32" => Ok(__Field::m_indices32),
+                        "vertexBaseOffset" => Ok(__Field::m_vertexBaseOffset),
+                        "length" => Ok(__Field::m_length),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -328,11 +328,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_length: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_vertexBaseOffset: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
                     let mut m_indexType: _serde::__private::Option<IndexType> = _serde::__private::None;
+                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_vertexBaseOffset: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_length: _serde::__private::Option<u32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -342,67 +342,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_length => {
+                            __Field::m_indexType => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_length) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("length"),
-                                    );
-                                }
-                                m_length = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_vertexBaseOffset => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vertexBaseOffset) {
+                                if _serde::__private::Option::is_some(&m_indexType) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexBaseOffset",
+                                            "indexType",
                                         ),
                                     );
                                 }
-                                m_vertexBaseOffset = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_indices32 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_indices32) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "indices32",
-                                        ),
-                                    );
-                                }
-                                m_indices32 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                m_indexType = _serde::__private::Some(
+                                    match __A::next_value::<IndexType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -436,21 +390,67 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_indexType => {
+                            __Field::m_indices32 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_indexType) {
+                                if _serde::__private::Option::is_some(&m_indices32) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "indexType",
+                                            "indices32",
                                         ),
                                     );
                                 }
-                                m_indexType = _serde::__private::Some(
-                                    match __A::next_value::<IndexType>(&mut __map) {
+                                m_indices32 = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vertexBaseOffset => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vertexBaseOffset) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vertexBaseOffset",
+                                        ),
+                                    );
+                                }
+                                m_vertexBaseOffset = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_length => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_length) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("length"),
+                                    );
+                                }
+                                m_length = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -463,35 +463,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_length = match m_length {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("length"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vertexBaseOffset = match m_vertexBaseOffset {
+                    let m_indexType = match m_indexType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexBaseOffset",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_indices32 = match m_indices32 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "indices32",
+                                    "indexType",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -509,14 +487,36 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_indexType = match m_indexType {
+                    let m_indices32 = match m_indices32 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "indexType",
+                                    "indices32",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexBaseOffset = match m_vertexBaseOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "vertexBaseOffset",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_length = match m_length {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("length"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

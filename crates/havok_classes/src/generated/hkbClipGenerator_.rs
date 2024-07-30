@@ -307,19 +307,19 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
-                m_flags,
-                m_mode,
-                m_animationBindingIndex,
-                m_userControlledTimeFraction,
-                m_enforcedDuration,
-                m_playbackSpeed,
-                m_startTime,
-                m_cropEndAmountLocalTime,
-                m_cropStartAmountLocalTime,
-                m_triggers,
+                m_name,
                 m_animationName,
+                m_triggers,
+                m_cropStartAmountLocalTime,
+                m_cropEndAmountLocalTime,
+                m_startTime,
+                m_playbackSpeed,
+                m_enforcedDuration,
+                m_userControlledTimeFraction,
+                m_animationBindingIndex,
+                m_mode,
+                m_flags,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -344,23 +344,23 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
-                        "flags" => Ok(__Field::m_flags),
-                        "mode" => Ok(__Field::m_mode),
-                        "animationBindingIndex" => Ok(__Field::m_animationBindingIndex),
-                        "userControlledTimeFraction" => {
-                            Ok(__Field::m_userControlledTimeFraction)
-                        }
-                        "enforcedDuration" => Ok(__Field::m_enforcedDuration),
-                        "playbackSpeed" => Ok(__Field::m_playbackSpeed),
-                        "startTime" => Ok(__Field::m_startTime),
-                        "cropEndAmountLocalTime" => Ok(__Field::m_cropEndAmountLocalTime),
+                        "name" => Ok(__Field::m_name),
+                        "animationName" => Ok(__Field::m_animationName),
+                        "triggers" => Ok(__Field::m_triggers),
                         "cropStartAmountLocalTime" => {
                             Ok(__Field::m_cropStartAmountLocalTime)
                         }
-                        "triggers" => Ok(__Field::m_triggers),
-                        "animationName" => Ok(__Field::m_animationName),
+                        "cropEndAmountLocalTime" => Ok(__Field::m_cropEndAmountLocalTime),
+                        "startTime" => Ok(__Field::m_startTime),
+                        "playbackSpeed" => Ok(__Field::m_playbackSpeed),
+                        "enforcedDuration" => Ok(__Field::m_enforcedDuration),
+                        "userControlledTimeFraction" => {
+                            Ok(__Field::m_userControlledTimeFraction)
+                        }
+                        "animationBindingIndex" => Ok(__Field::m_animationBindingIndex),
+                        "mode" => Ok(__Field::m_mode),
+                        "flags" => Ok(__Field::m_flags),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -1200,21 +1200,21 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_mode: _serde::__private::Option<PlaybackMode> = _serde::__private::None;
-                    let mut m_animationBindingIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_animationName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_triggers: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_cropStartAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_cropEndAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_startTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_playbackSpeed: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_enforcedDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_userControlledTimeFraction: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_enforcedDuration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_playbackSpeed: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_startTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_cropEndAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_cropStartAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_triggers: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_animationName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_animationBindingIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_mode: _serde::__private::Option<PlaybackMode> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<i8> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -1250,28 +1250,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -1296,19 +1274,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_flags => {
+                            __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_flags) {
+                                if _serde::__private::Option::is_some(&m_name) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
                                     );
                                 }
-                                m_flags = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1318,19 +1296,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_mode => {
+                            __Field::m_animationName => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_mode) {
+                                if _serde::__private::Option::is_some(&m_animationName) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "animationName",
+                                        ),
                                     );
                                 }
-                                m_mode = _serde::__private::Some(
-                                    match __A::next_value::<PlaybackMode>(&mut __map) {
+                                m_animationName = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1340,120 +1320,46 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_animationBindingIndex => {
+                            __Field::m_triggers => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_triggers) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "triggers",
+                                        ),
+                                    );
+                                }
+                                m_triggers = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_cropStartAmountLocalTime => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_animationBindingIndex,
+                                    &m_cropStartAmountLocalTime,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "animationBindingIndex",
+                                            "cropStartAmountLocalTime",
                                         ),
                                     );
                                 }
-                                m_animationBindingIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_userControlledTimeFraction => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_userControlledTimeFraction,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "userControlledTimeFraction",
-                                        ),
-                                    );
-                                }
-                                m_userControlledTimeFraction = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_enforcedDuration => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_enforcedDuration) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "enforcedDuration",
-                                        ),
-                                    );
-                                }
-                                m_enforcedDuration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_playbackSpeed => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_playbackSpeed) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "playbackSpeed",
-                                        ),
-                                    );
-                                }
-                                m_playbackSpeed = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_startTime => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_startTime) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "startTime",
-                                        ),
-                                    );
-                                }
-                                m_startTime = _serde::__private::Some(
+                                m_cropStartAmountLocalTime = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1490,22 +1396,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_cropStartAmountLocalTime => {
+                            __Field::m_startTime => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_cropStartAmountLocalTime,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_startTime) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "cropStartAmountLocalTime",
+                                            "startTime",
                                         ),
                                     );
                                 }
-                                m_cropStartAmountLocalTime = _serde::__private::Some(
+                                m_startTime = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1516,21 +1420,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_triggers => {
+                            __Field::m_playbackSpeed => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_triggers) {
+                                if _serde::__private::Option::is_some(&m_playbackSpeed) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "triggers",
+                                            "playbackSpeed",
                                         ),
                                     );
                                 }
-                                m_triggers = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_playbackSpeed = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1540,21 +1444,117 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_animationName => {
+                            __Field::m_enforcedDuration => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_animationName) {
+                                if _serde::__private::Option::is_some(&m_enforcedDuration) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "animationName",
+                                            "enforcedDuration",
                                         ),
                                     );
                                 }
-                                m_animationName = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_enforcedDuration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_userControlledTimeFraction => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_userControlledTimeFraction,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "userControlledTimeFraction",
+                                        ),
+                                    );
+                                }
+                                m_userControlledTimeFraction = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_animationBindingIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_animationBindingIndex,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "animationBindingIndex",
+                                        ),
+                                    );
+                                }
+                                m_animationBindingIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_mode => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_mode) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                                    );
+                                }
+                                m_mode = _serde::__private::Some(
+                                    match __A::next_value::<PlaybackMode>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_flags => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_flags) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                                    );
+                                }
+                                m_flags = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1579,16 +1579,6 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -1599,81 +1589,45 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_flags = match m_flags {
+                    let m_name = match m_name {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("flags"),
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_mode = match m_mode {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("mode"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_animationBindingIndex = match m_animationBindingIndex {
+                    let m_animationName = match m_animationName {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "animationBindingIndex",
+                                    "animationName",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_userControlledTimeFraction = match m_userControlledTimeFraction {
+                    let m_triggers = match m_triggers {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "userControlledTimeFraction",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("triggers"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_enforcedDuration = match m_enforcedDuration {
+                    let m_cropStartAmountLocalTime = match m_cropStartAmountLocalTime {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "enforcedDuration",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_playbackSpeed = match m_playbackSpeed {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "playbackSpeed",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_startTime = match m_startTime {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "startTime",
+                                    "cropStartAmountLocalTime",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1691,36 +1645,82 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_cropStartAmountLocalTime = match m_cropStartAmountLocalTime {
+                    let m_startTime = match m_startTime {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "cropStartAmountLocalTime",
+                                    "startTime",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_triggers = match m_triggers {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("triggers"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_animationName = match m_animationName {
+                    let m_playbackSpeed = match m_playbackSpeed {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "animationName",
+                                    "playbackSpeed",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_enforcedDuration = match m_enforcedDuration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "enforcedDuration",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_userControlledTimeFraction = match m_userControlledTimeFraction {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "userControlledTimeFraction",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_animationBindingIndex = match m_animationBindingIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "animationBindingIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_mode = match m_mode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("mode"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_flags = match m_flags {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("flags"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -116,13 +116,13 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_localFrames,
-                m_floatSlots,
-                m_referenceFloats,
-                m_referencePose,
-                m_bones,
-                m_parentIndices,
                 m_name,
+                m_parentIndices,
+                m_bones,
+                m_referencePose,
+                m_referenceFloats,
+                m_floatSlots,
+                m_localFrames,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -146,13 +146,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "localFrames" => Ok(__Field::m_localFrames),
-                        "floatSlots" => Ok(__Field::m_floatSlots),
-                        "referenceFloats" => Ok(__Field::m_referenceFloats),
-                        "referencePose" => Ok(__Field::m_referencePose),
-                        "bones" => Ok(__Field::m_bones),
-                        "parentIndices" => Ok(__Field::m_parentIndices),
                         "name" => Ok(__Field::m_name),
+                        "parentIndices" => Ok(__Field::m_parentIndices),
+                        "bones" => Ok(__Field::m_bones),
+                        "referencePose" => Ok(__Field::m_referencePose),
+                        "referenceFloats" => Ok(__Field::m_referenceFloats),
+                        "floatSlots" => Ok(__Field::m_floatSlots),
+                        "localFrames" => Ok(__Field::m_localFrames),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -413,19 +413,19 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_localFrames: _serde::__private::Option<
-                        Vec<hkaSkeletonLocalFrameOnBone>,
-                    > = _serde::__private::None;
-                    let mut m_floatSlots: _serde::__private::Option<
-                        Vec<StringPtr<'de>>,
-                    > = _serde::__private::None;
-                    let mut m_referenceFloats: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_parentIndices: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+                    let mut m_bones: _serde::__private::Option<Vec<hkaBone<'de>>> = _serde::__private::None;
                     let mut m_referencePose: _serde::__private::Option<
                         Vec<QsTransform>,
                     > = _serde::__private::None;
-                    let mut m_bones: _serde::__private::Option<Vec<hkaBone<'de>>> = _serde::__private::None;
-                    let mut m_parentIndices: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_referenceFloats: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
+                    let mut m_floatSlots: _serde::__private::Option<
+                        Vec<StringPtr<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_localFrames: _serde::__private::Option<
+                        Vec<hkaSkeletonLocalFrameOnBone>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -435,117 +435,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_localFrames => {
+                            __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_localFrames) {
+                                if _serde::__private::Option::is_some(&m_name) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "localFrames",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
                                     );
                                 }
-                                m_localFrames = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkaSkeletonLocalFrameOnBone>,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_floatSlots => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_floatSlots) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "floatSlots",
-                                        ),
-                                    );
-                                }
-                                m_floatSlots = _serde::__private::Some(
-                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_referenceFloats => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_referenceFloats) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "referenceFloats",
-                                        ),
-                                    );
-                                }
-                                m_referenceFloats = _serde::__private::Some(
-                                    match __A::next_value::<Vec<f32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_referencePose => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_referencePose) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "referencePose",
-                                        ),
-                                    );
-                                }
-                                m_referencePose = _serde::__private::Some(
-                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bones => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bones) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("bones"),
-                                    );
-                                }
-                                m_bones = _serde::__private::Some(
-                                    match __A::next_value::<Vec<hkaBone<'de>>>(&mut __map) {
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -579,19 +481,117 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
+                            __Field::m_bones => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_name) {
+                                if _serde::__private::Option::is_some(&m_bones) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("bones"),
                                     );
                                 }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_bones = _serde::__private::Some(
+                                    match __A::next_value::<Vec<hkaBone<'de>>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_referencePose => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_referencePose) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "referencePose",
+                                        ),
+                                    );
+                                }
+                                m_referencePose = _serde::__private::Some(
+                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_referenceFloats => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_referenceFloats) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "referenceFloats",
+                                        ),
+                                    );
+                                }
+                                m_referenceFloats = _serde::__private::Some(
+                                    match __A::next_value::<Vec<f32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_floatSlots => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_floatSlots) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "floatSlots",
+                                        ),
+                                    );
+                                }
+                                m_floatSlots = _serde::__private::Some(
+                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_localFrames => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_localFrames) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "localFrames",
+                                        ),
+                                    );
+                                }
+                                m_localFrames = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkaSkeletonLocalFrameOnBone>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -604,25 +604,45 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_localFrames = match m_localFrames {
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_parentIndices = match m_parentIndices {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "localFrames",
+                                    "parentIndices",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_floatSlots = match m_floatSlots {
+                    let m_bones = match m_bones {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("bones"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_referencePose = match m_referencePose {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "floatSlots",
+                                    "referencePose",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -640,46 +660,26 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_referencePose = match m_referencePose {
+                    let m_floatSlots = match m_floatSlots {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "referencePose",
+                                    "floatSlots",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_bones = match m_bones {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("bones"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_parentIndices = match m_parentIndices {
+                    let m_localFrames = match m_localFrames {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "parentIndices",
+                                    "localFrames",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

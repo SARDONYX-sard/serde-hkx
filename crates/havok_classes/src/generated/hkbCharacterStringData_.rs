@@ -213,19 +213,19 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_behaviorFilename,
-                m_ragdollName,
-                m_rigName,
-                m_name,
-                m_mirroredSyncPointSubstringsB,
-                m_mirroredSyncPointSubstringsA,
-                m_lodNames,
-                m_retargetingSkeletonMapperFilenames,
-                m_characterPropertyNames,
-                m_animationFilenames,
-                m_animationNames,
-                m_rigidSkinNames,
                 m_deformableSkinNames,
+                m_rigidSkinNames,
+                m_animationNames,
+                m_animationFilenames,
+                m_characterPropertyNames,
+                m_retargetingSkeletonMapperFilenames,
+                m_lodNames,
+                m_mirroredSyncPointSubstringsA,
+                m_mirroredSyncPointSubstringsB,
+                m_name,
+                m_rigName,
+                m_ragdollName,
+                m_behaviorFilename,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -249,25 +249,25 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "behaviorFilename" => Ok(__Field::m_behaviorFilename),
-                        "ragdollName" => Ok(__Field::m_ragdollName),
-                        "rigName" => Ok(__Field::m_rigName),
-                        "name" => Ok(__Field::m_name),
-                        "mirroredSyncPointSubstringsB" => {
-                            Ok(__Field::m_mirroredSyncPointSubstringsB)
-                        }
-                        "mirroredSyncPointSubstringsA" => {
-                            Ok(__Field::m_mirroredSyncPointSubstringsA)
-                        }
-                        "lodNames" => Ok(__Field::m_lodNames),
+                        "deformableSkinNames" => Ok(__Field::m_deformableSkinNames),
+                        "rigidSkinNames" => Ok(__Field::m_rigidSkinNames),
+                        "animationNames" => Ok(__Field::m_animationNames),
+                        "animationFilenames" => Ok(__Field::m_animationFilenames),
+                        "characterPropertyNames" => Ok(__Field::m_characterPropertyNames),
                         "retargetingSkeletonMapperFilenames" => {
                             Ok(__Field::m_retargetingSkeletonMapperFilenames)
                         }
-                        "characterPropertyNames" => Ok(__Field::m_characterPropertyNames),
-                        "animationFilenames" => Ok(__Field::m_animationFilenames),
-                        "animationNames" => Ok(__Field::m_animationNames),
-                        "rigidSkinNames" => Ok(__Field::m_rigidSkinNames),
-                        "deformableSkinNames" => Ok(__Field::m_deformableSkinNames),
+                        "lodNames" => Ok(__Field::m_lodNames),
+                        "mirroredSyncPointSubstringsA" => {
+                            Ok(__Field::m_mirroredSyncPointSubstringsA)
+                        }
+                        "mirroredSyncPointSubstringsB" => {
+                            Ok(__Field::m_mirroredSyncPointSubstringsB)
+                        }
+                        "name" => Ok(__Field::m_name),
+                        "rigName" => Ok(__Field::m_rigName),
+                        "ragdollName" => Ok(__Field::m_ragdollName),
+                        "behaviorFilename" => Ok(__Field::m_behaviorFilename),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -727,36 +727,36 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_behaviorFilename: _serde::__private::Option<
-                        StringPtr<'de>,
-                    > = _serde::__private::None;
-                    let mut m_ragdollName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_rigName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_mirroredSyncPointSubstringsB: _serde::__private::Option<
-                        Vec<StringPtr<'de>>,
-                    > = _serde::__private::None;
-                    let mut m_mirroredSyncPointSubstringsA: _serde::__private::Option<
-                        Vec<StringPtr<'de>>,
-                    > = _serde::__private::None;
-                    let mut m_lodNames: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
-                    let mut m_retargetingSkeletonMapperFilenames: _serde::__private::Option<
-                        Vec<StringPtr<'de>>,
-                    > = _serde::__private::None;
-                    let mut m_characterPropertyNames: _serde::__private::Option<
-                        Vec<StringPtr<'de>>,
-                    > = _serde::__private::None;
-                    let mut m_animationFilenames: _serde::__private::Option<
-                        Vec<StringPtr<'de>>,
-                    > = _serde::__private::None;
-                    let mut m_animationNames: _serde::__private::Option<
+                    let mut m_deformableSkinNames: _serde::__private::Option<
                         Vec<StringPtr<'de>>,
                     > = _serde::__private::None;
                     let mut m_rigidSkinNames: _serde::__private::Option<
                         Vec<StringPtr<'de>>,
                     > = _serde::__private::None;
-                    let mut m_deformableSkinNames: _serde::__private::Option<
+                    let mut m_animationNames: _serde::__private::Option<
                         Vec<StringPtr<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_animationFilenames: _serde::__private::Option<
+                        Vec<StringPtr<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_characterPropertyNames: _serde::__private::Option<
+                        Vec<StringPtr<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_retargetingSkeletonMapperFilenames: _serde::__private::Option<
+                        Vec<StringPtr<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_lodNames: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
+                    let mut m_mirroredSyncPointSubstringsA: _serde::__private::Option<
+                        Vec<StringPtr<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_mirroredSyncPointSubstringsB: _serde::__private::Option<
+                        Vec<StringPtr<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_rigName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_ragdollName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_behaviorFilename: _serde::__private::Option<
+                        StringPtr<'de>,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
@@ -767,116 +767,22 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_behaviorFilename => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_behaviorFilename) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "behaviorFilename",
-                                        ),
-                                    );
-                                }
-                                m_behaviorFilename = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_ragdollName => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_ragdollName) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ragdollName",
-                                        ),
-                                    );
-                                }
-                                m_ragdollName = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_rigName => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rigName) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rigName",
-                                        ),
-                                    );
-                                }
-                                m_rigName = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_mirroredSyncPointSubstringsB => {
+                            __Field::m_deformableSkinNames => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_mirroredSyncPointSubstringsB,
+                                    &m_deformableSkinNames,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "mirroredSyncPointSubstringsB",
+                                            "deformableSkinNames",
                                         ),
                                     );
                                 }
-                                m_mirroredSyncPointSubstringsB = _serde::__private::Some(
+                                m_deformableSkinNames = _serde::__private::Some(
                                     match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -887,22 +793,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_mirroredSyncPointSubstringsA => {
+                            __Field::m_rigidSkinNames => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_mirroredSyncPointSubstringsA,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_rigidSkinNames) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "mirroredSyncPointSubstringsA",
+                                            "rigidSkinNames",
                                         ),
                                     );
                                 }
-                                m_mirroredSyncPointSubstringsA = _serde::__private::Some(
+                                m_rigidSkinNames = _serde::__private::Some(
                                     match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -913,72 +817,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_lodNames => {
+                            __Field::m_animationNames => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_lodNames) {
+                                if _serde::__private::Option::is_some(&m_animationNames) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lodNames",
+                                            "animationNames",
                                         ),
                                     );
                                 }
-                                m_lodNames = _serde::__private::Some(
-                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_retargetingSkeletonMapperFilenames => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_retargetingSkeletonMapperFilenames,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "retargetingSkeletonMapperFilenames",
-                                        ),
-                                    );
-                                }
-                                m_retargetingSkeletonMapperFilenames = _serde::__private::Some(
-                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_characterPropertyNames => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_characterPropertyNames,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "characterPropertyNames",
-                                        ),
-                                    );
-                                }
-                                m_characterPropertyNames = _serde::__private::Some(
+                                m_animationNames = _serde::__private::Some(
                                     match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1015,71 +867,219 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_animationNames => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_animationNames) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "animationNames",
-                                        ),
-                                    );
-                                }
-                                m_animationNames = _serde::__private::Some(
-                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_rigidSkinNames => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rigidSkinNames) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rigidSkinNames",
-                                        ),
-                                    );
-                                }
-                                m_rigidSkinNames = _serde::__private::Some(
-                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_deformableSkinNames => {
+                            __Field::m_characterPropertyNames => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_deformableSkinNames,
+                                    &m_characterPropertyNames,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "deformableSkinNames",
+                                            "characterPropertyNames",
                                         ),
                                     );
                                 }
-                                m_deformableSkinNames = _serde::__private::Some(
+                                m_characterPropertyNames = _serde::__private::Some(
                                     match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_retargetingSkeletonMapperFilenames => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_retargetingSkeletonMapperFilenames,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "retargetingSkeletonMapperFilenames",
+                                        ),
+                                    );
+                                }
+                                m_retargetingSkeletonMapperFilenames = _serde::__private::Some(
+                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lodNames => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_lodNames) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lodNames",
+                                        ),
+                                    );
+                                }
+                                m_lodNames = _serde::__private::Some(
+                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_mirroredSyncPointSubstringsA => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_mirroredSyncPointSubstringsA,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "mirroredSyncPointSubstringsA",
+                                        ),
+                                    );
+                                }
+                                m_mirroredSyncPointSubstringsA = _serde::__private::Some(
+                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_mirroredSyncPointSubstringsB => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_mirroredSyncPointSubstringsB,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "mirroredSyncPointSubstringsB",
+                                        ),
+                                    );
+                                }
+                                m_mirroredSyncPointSubstringsB = _serde::__private::Some(
+                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_rigName => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_rigName) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rigName",
+                                        ),
+                                    );
+                                }
+                                m_rigName = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_ragdollName => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_ragdollName) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "ragdollName",
+                                        ),
+                                    );
+                                }
+                                m_ragdollName = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_behaviorFilename => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_behaviorFilename) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "behaviorFilename",
+                                        ),
+                                    );
+                                }
+                                m_behaviorFilename = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1092,127 +1092,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_behaviorFilename = match m_behaviorFilename {
+                    let m_deformableSkinNames = match m_deformableSkinNames {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "behaviorFilename",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_ragdollName = match m_ragdollName {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "ragdollName",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_rigName = match m_rigName {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("rigName"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_mirroredSyncPointSubstringsB = match m_mirroredSyncPointSubstringsB {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "mirroredSyncPointSubstringsB",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_mirroredSyncPointSubstringsA = match m_mirroredSyncPointSubstringsA {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "mirroredSyncPointSubstringsA",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lodNames = match m_lodNames {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("lodNames"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_retargetingSkeletonMapperFilenames = match m_retargetingSkeletonMapperFilenames {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "retargetingSkeletonMapperFilenames",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_characterPropertyNames = match m_characterPropertyNames {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterPropertyNames",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_animationFilenames = match m_animationFilenames {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "animationFilenames",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_animationNames = match m_animationNames {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "animationNames",
+                                    "deformableSkinNames",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1230,13 +1116,127 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_deformableSkinNames = match m_deformableSkinNames {
+                    let m_animationNames = match m_animationNames {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "deformableSkinNames",
+                                    "animationNames",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_animationFilenames = match m_animationFilenames {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "animationFilenames",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_characterPropertyNames = match m_characterPropertyNames {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "characterPropertyNames",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_retargetingSkeletonMapperFilenames = match m_retargetingSkeletonMapperFilenames {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "retargetingSkeletonMapperFilenames",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lodNames = match m_lodNames {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("lodNames"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_mirroredSyncPointSubstringsA = match m_mirroredSyncPointSubstringsA {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "mirroredSyncPointSubstringsA",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_mirroredSyncPointSubstringsB = match m_mirroredSyncPointSubstringsB {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "mirroredSyncPointSubstringsB",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_rigName = match m_rigName {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("rigName"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_ragdollName = match m_ragdollName {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "ragdollName",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_behaviorFilename = match m_behaviorFilename {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "behaviorFilename",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

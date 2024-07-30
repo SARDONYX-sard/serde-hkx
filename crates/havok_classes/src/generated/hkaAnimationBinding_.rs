@@ -121,11 +121,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_blendHint,
-                m_floatTrackToFloatSlotIndices,
-                m_transformTrackToBoneIndices,
-                m_animation,
                 m_originalSkeletonName,
+                m_animation,
+                m_transformTrackToBoneIndices,
+                m_floatTrackToFloatSlotIndices,
+                m_blendHint,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -149,15 +149,15 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "blendHint" => Ok(__Field::m_blendHint),
-                        "floatTrackToFloatSlotIndices" => {
-                            Ok(__Field::m_floatTrackToFloatSlotIndices)
-                        }
+                        "originalSkeletonName" => Ok(__Field::m_originalSkeletonName),
+                        "animation" => Ok(__Field::m_animation),
                         "transformTrackToBoneIndices" => {
                             Ok(__Field::m_transformTrackToBoneIndices)
                         }
-                        "animation" => Ok(__Field::m_animation),
-                        "originalSkeletonName" => Ok(__Field::m_originalSkeletonName),
+                        "floatTrackToFloatSlotIndices" => {
+                            Ok(__Field::m_floatTrackToFloatSlotIndices)
+                        }
+                        "blendHint" => Ok(__Field::m_blendHint),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -376,17 +376,17 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_blendHint: _serde::__private::Option<BlendHint> = _serde::__private::None;
-                    let mut m_floatTrackToFloatSlotIndices: _serde::__private::Option<
-                        Vec<i16>,
-                    > = _serde::__private::None;
-                    let mut m_transformTrackToBoneIndices: _serde::__private::Option<
-                        Vec<i16>,
-                    > = _serde::__private::None;
-                    let mut m_animation: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_originalSkeletonName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
+                    let mut m_animation: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_transformTrackToBoneIndices: _serde::__private::Option<
+                        Vec<i16>,
+                    > = _serde::__private::None;
+                    let mut m_floatTrackToFloatSlotIndices: _serde::__private::Option<
+                        Vec<i16>,
+                    > = _serde::__private::None;
+                    let mut m_blendHint: _serde::__private::Option<BlendHint> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -396,21 +396,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_blendHint => {
+                            __Field::m_originalSkeletonName => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_blendHint) {
+                                if _serde::__private::Option::is_some(
+                                    &m_originalSkeletonName,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "blendHint",
+                                            "originalSkeletonName",
                                         ),
                                     );
                                 }
-                                m_blendHint = _serde::__private::Some(
-                                    match __A::next_value::<BlendHint>(&mut __map) {
+                                m_originalSkeletonName = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -420,23 +422,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_floatTrackToFloatSlotIndices => {
+                            __Field::m_animation => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_floatTrackToFloatSlotIndices,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_animation) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "floatTrackToFloatSlotIndices",
+                                            "animation",
                                         ),
                                     );
                                 }
-                                m_floatTrackToFloatSlotIndices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                m_animation = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -472,21 +472,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_animation => {
+                            __Field::m_floatTrackToFloatSlotIndices => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_animation) {
+                                if _serde::__private::Option::is_some(
+                                    &m_floatTrackToFloatSlotIndices,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "animation",
+                                            "floatTrackToFloatSlotIndices",
                                         ),
                                     );
                                 }
-                                m_animation = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_floatTrackToFloatSlotIndices = _serde::__private::Some(
+                                    match __A::next_value::<Vec<i16>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -496,23 +498,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_originalSkeletonName => {
+                            __Field::m_blendHint => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_originalSkeletonName,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_blendHint) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "originalSkeletonName",
+                                            "blendHint",
                                         ),
                                     );
                                 }
-                                m_originalSkeletonName = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_blendHint = _serde::__private::Some(
+                                    match __A::next_value::<BlendHint>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -525,37 +525,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_blendHint = match m_blendHint {
+                    let m_originalSkeletonName = match m_originalSkeletonName {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "blendHint",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_floatTrackToFloatSlotIndices = match m_floatTrackToFloatSlotIndices {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "floatTrackToFloatSlotIndices",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_transformTrackToBoneIndices = match m_transformTrackToBoneIndices {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "transformTrackToBoneIndices",
+                                    "originalSkeletonName",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -573,13 +549,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_originalSkeletonName = match m_originalSkeletonName {
+                    let m_transformTrackToBoneIndices = match m_transformTrackToBoneIndices {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "originalSkeletonName",
+                                    "transformTrackToBoneIndices",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_floatTrackToFloatSlotIndices = match m_floatTrackToFloatSlotIndices {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "floatTrackToFloatSlotIndices",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_blendHint = match m_blendHint {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "blendHint",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

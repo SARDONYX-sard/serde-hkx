@@ -76,9 +76,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_springLength,
-                m_pivotInB,
                 m_pivotInA,
+                m_pivotInB,
+                m_springLength,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -102,9 +102,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "springLength" => Ok(__Field::m_springLength),
-                        "pivotInB" => Ok(__Field::m_pivotInB),
                         "pivotInA" => Ok(__Field::m_pivotInA),
+                        "pivotInB" => Ok(__Field::m_pivotInB),
+                        "springLength" => Ok(__Field::m_springLength),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -250,9 +250,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_springLength: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_pivotInB: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_pivotInA: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_pivotInB: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_springLength: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -262,21 +262,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_springLength => {
+                            __Field::m_pivotInA => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_springLength) {
+                                if _serde::__private::Option::is_some(&m_pivotInA) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "springLength",
+                                            "pivotInA",
                                         ),
                                     );
                                 }
-                                m_springLength = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_pivotInA = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -310,21 +310,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_pivotInA => {
+                            __Field::m_springLength => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_pivotInA) {
+                                if _serde::__private::Option::is_some(&m_springLength) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "pivotInA",
+                                            "springLength",
                                         ),
                                     );
                                 }
-                                m_pivotInA = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_springLength = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -337,14 +337,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_springLength = match m_springLength {
+                    let m_pivotInA = match m_pivotInA {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "springLength",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("pivotInA"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -359,12 +357,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_pivotInA = match m_pivotInA {
+                    let m_springLength = match m_springLength {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("pivotInA"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "springLength",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

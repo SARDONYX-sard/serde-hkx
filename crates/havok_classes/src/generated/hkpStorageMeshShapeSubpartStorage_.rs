@@ -112,12 +112,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_materialIndices16,
-                m_materials,
-                m_materialIndices,
-                m_indices32,
-                m_indices16,
                 m_vertices,
+                m_indices16,
+                m_indices32,
+                m_materialIndices,
+                m_materials,
+                m_materialIndices16,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -141,12 +141,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "materialIndices16" => Ok(__Field::m_materialIndices16),
-                        "materials" => Ok(__Field::m_materials),
-                        "materialIndices" => Ok(__Field::m_materialIndices),
-                        "indices32" => Ok(__Field::m_indices32),
-                        "indices16" => Ok(__Field::m_indices16),
                         "vertices" => Ok(__Field::m_vertices),
+                        "indices16" => Ok(__Field::m_indices16),
+                        "indices32" => Ok(__Field::m_indices32),
+                        "materialIndices" => Ok(__Field::m_materialIndices),
+                        "materials" => Ok(__Field::m_materials),
+                        "materialIndices16" => Ok(__Field::m_materialIndices16),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -384,12 +384,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_materialIndices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_materials: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_materialIndices: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
                     let mut m_vertices: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
+                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_materialIndices: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_materials: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_materialIndices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -399,22 +399,44 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_materialIndices16 => {
+                            __Field::m_vertices => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_materialIndices16,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_vertices) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "materialIndices16",
+                                            "vertices",
                                         ),
                                     );
                                 }
-                                m_materialIndices16 = _serde::__private::Some(
+                                m_vertices = _serde::__private::Some(
+                                    match __A::next_value::<Vec<f32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_indices16 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_indices16) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "indices16",
+                                        ),
+                                    );
+                                }
+                                m_indices16 = _serde::__private::Some(
                                     match __A::next_value::<Vec<u16>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -425,20 +447,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_materials => {
+                            __Field::m_indices32 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_materials) {
+                                if _serde::__private::Option::is_some(&m_indices32) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "materials",
+                                            "indices32",
                                         ),
                                     );
                                 }
-                                m_materials = _serde::__private::Some(
+                                m_indices32 = _serde::__private::Some(
                                     match __A::next_value::<Vec<u32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -473,20 +495,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_indices32 => {
+                            __Field::m_materials => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_indices32) {
+                                if _serde::__private::Option::is_some(&m_materials) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "indices32",
+                                            "materials",
                                         ),
                                     );
                                 }
-                                m_indices32 = _serde::__private::Some(
+                                m_materials = _serde::__private::Some(
                                     match __A::next_value::<Vec<u32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -497,45 +519,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_indices16 => {
+                            __Field::m_materialIndices16 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_indices16) {
+                                if _serde::__private::Option::is_some(
+                                    &m_materialIndices16,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "indices16",
+                                            "materialIndices16",
                                         ),
                                     );
                                 }
-                                m_indices16 = _serde::__private::Some(
+                                m_materialIndices16 = _serde::__private::Some(
                                     match __A::next_value::<Vec<u16>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_vertices => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vertices) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertices",
-                                        ),
-                                    );
-                                }
-                                m_vertices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<f32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -548,37 +548,23 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_materialIndices16 = match m_materialIndices16 {
+                    let m_vertices = match m_vertices {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "materialIndices16",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("vertices"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_materials = match m_materials {
+                    let m_indices16 = match m_indices16 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "materials",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_materialIndices = match m_materialIndices {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "materialIndices",
+                                    "indices16",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -596,24 +582,38 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_indices16 = match m_indices16 {
+                    let m_materialIndices = match m_materialIndices {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "indices16",
+                                    "materialIndices",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_vertices = match m_vertices {
+                    let m_materials = match m_materials {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("vertices"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "materials",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_materialIndices16 = match m_materialIndices16 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "materialIndices16",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

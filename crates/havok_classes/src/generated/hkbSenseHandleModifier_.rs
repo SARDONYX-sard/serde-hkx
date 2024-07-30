@@ -260,25 +260,25 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
+                m_name,
                 m_enable,
-                m_foundHandleOut,
-                m_keepFirstSensedHandle,
-                m_extrapolateSensorPosition,
-                m_sensingMode,
-                m_sensorAnimationBoneIndex,
-                m_sensorRagdollBoneIndex,
-                m_collisionFilterInfo,
-                m_distanceOut,
-                m_maxDistance,
-                m_minDistance,
-                m_sensorLocalFrameName,
-                m_localFrameName,
-                m_handleIn,
-                m_handleOut,
-                m_ranges,
                 m_sensorLocalOffset,
+                m_ranges,
+                m_handleOut,
+                m_handleIn,
+                m_localFrameName,
+                m_sensorLocalFrameName,
+                m_minDistance,
+                m_maxDistance,
+                m_distanceOut,
+                m_collisionFilterInfo,
+                m_sensorRagdollBoneIndex,
+                m_sensorAnimationBoneIndex,
+                m_sensingMode,
+                m_extrapolateSensorPosition,
+                m_keepFirstSensedHandle,
+                m_foundHandleOut,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -303,29 +303,29 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
+                        "name" => Ok(__Field::m_name),
                         "enable" => Ok(__Field::m_enable),
-                        "foundHandleOut" => Ok(__Field::m_foundHandleOut),
-                        "keepFirstSensedHandle" => Ok(__Field::m_keepFirstSensedHandle),
-                        "extrapolateSensorPosition" => {
-                            Ok(__Field::m_extrapolateSensorPosition)
-                        }
-                        "sensingMode" => Ok(__Field::m_sensingMode),
+                        "sensorLocalOffset" => Ok(__Field::m_sensorLocalOffset),
+                        "ranges" => Ok(__Field::m_ranges),
+                        "handleOut" => Ok(__Field::m_handleOut),
+                        "handleIn" => Ok(__Field::m_handleIn),
+                        "localFrameName" => Ok(__Field::m_localFrameName),
+                        "sensorLocalFrameName" => Ok(__Field::m_sensorLocalFrameName),
+                        "minDistance" => Ok(__Field::m_minDistance),
+                        "maxDistance" => Ok(__Field::m_maxDistance),
+                        "distanceOut" => Ok(__Field::m_distanceOut),
+                        "collisionFilterInfo" => Ok(__Field::m_collisionFilterInfo),
+                        "sensorRagdollBoneIndex" => Ok(__Field::m_sensorRagdollBoneIndex),
                         "sensorAnimationBoneIndex" => {
                             Ok(__Field::m_sensorAnimationBoneIndex)
                         }
-                        "sensorRagdollBoneIndex" => Ok(__Field::m_sensorRagdollBoneIndex),
-                        "collisionFilterInfo" => Ok(__Field::m_collisionFilterInfo),
-                        "distanceOut" => Ok(__Field::m_distanceOut),
-                        "maxDistance" => Ok(__Field::m_maxDistance),
-                        "minDistance" => Ok(__Field::m_minDistance),
-                        "sensorLocalFrameName" => Ok(__Field::m_sensorLocalFrameName),
-                        "localFrameName" => Ok(__Field::m_localFrameName),
-                        "handleIn" => Ok(__Field::m_handleIn),
-                        "handleOut" => Ok(__Field::m_handleOut),
-                        "ranges" => Ok(__Field::m_ranges),
-                        "sensorLocalOffset" => Ok(__Field::m_sensorLocalOffset),
+                        "sensingMode" => Ok(__Field::m_sensingMode),
+                        "extrapolateSensorPosition" => {
+                            Ok(__Field::m_extrapolateSensorPosition)
+                        }
+                        "keepFirstSensedHandle" => Ok(__Field::m_keepFirstSensedHandle),
+                        "foundHandleOut" => Ok(__Field::m_foundHandleOut),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -960,33 +960,33 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_foundHandleOut: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_keepFirstSensedHandle: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_extrapolateSensorPosition: _serde::__private::Option<
-                        bool,
-                    > = _serde::__private::None;
-                    let mut m_sensingMode: _serde::__private::Option<SensingMode> = _serde::__private::None;
-                    let mut m_sensorAnimationBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_sensorRagdollBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_distanceOut: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_minDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_sensorLocalFrameName: _serde::__private::Option<
-                        StringPtr<'de>,
-                    > = _serde::__private::None;
-                    let mut m_localFrameName: _serde::__private::Option<
-                        StringPtr<'de>,
-                    > = _serde::__private::None;
-                    let mut m_handleIn: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_handleOut: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_sensorLocalOffset: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_ranges: _serde::__private::Option<
                         Vec<hkbSenseHandleModifierRange>,
                     > = _serde::__private::None;
-                    let mut m_sensorLocalOffset: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_handleOut: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_handleIn: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_localFrameName: _serde::__private::Option<
+                        StringPtr<'de>,
+                    > = _serde::__private::None;
+                    let mut m_sensorLocalFrameName: _serde::__private::Option<
+                        StringPtr<'de>,
+                    > = _serde::__private::None;
+                    let mut m_minDistance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxDistance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_distanceOut: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_sensorRagdollBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_sensorAnimationBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_sensingMode: _serde::__private::Option<SensingMode> = _serde::__private::None;
+                    let mut m_extrapolateSensorPosition: _serde::__private::Option<
+                        bool,
+                    > = _serde::__private::None;
+                    let mut m_keepFirstSensedHandle: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_foundHandleOut: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -1022,28 +1022,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -1059,6 +1037,28 @@ const _: () = {
                                 }
                                 m_userData = _serde::__private::Some(
                                     match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1090,20 +1090,344 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_foundHandleOut => {
+                            __Field::m_sensorLocalOffset => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_foundHandleOut) {
+                                if _serde::__private::Option::is_some(
+                                    &m_sensorLocalOffset,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "foundHandleOut",
+                                            "sensorLocalOffset",
                                         ),
                                     );
                                 }
-                                m_foundHandleOut = _serde::__private::Some(
+                                m_sensorLocalOffset = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_ranges => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_ranges) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("ranges"),
+                                    );
+                                }
+                                m_ranges = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkbSenseHandleModifierRange>,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_handleOut => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_handleOut) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "handleOut",
+                                        ),
+                                    );
+                                }
+                                m_handleOut = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_handleIn => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_handleIn) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "handleIn",
+                                        ),
+                                    );
+                                }
+                                m_handleIn = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_localFrameName => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_localFrameName) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "localFrameName",
+                                        ),
+                                    );
+                                }
+                                m_localFrameName = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_sensorLocalFrameName => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_sensorLocalFrameName,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sensorLocalFrameName",
+                                        ),
+                                    );
+                                }
+                                m_sensorLocalFrameName = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_minDistance => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_minDistance) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "minDistance",
+                                        ),
+                                    );
+                                }
+                                m_minDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxDistance => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_maxDistance) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxDistance",
+                                        ),
+                                    );
+                                }
+                                m_maxDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_distanceOut => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_distanceOut) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "distanceOut",
+                                        ),
+                                    );
+                                }
+                                m_distanceOut = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_collisionFilterInfo => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_collisionFilterInfo,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "collisionFilterInfo",
+                                        ),
+                                    );
+                                }
+                                m_collisionFilterInfo = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_sensorRagdollBoneIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_sensorRagdollBoneIndex,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sensorRagdollBoneIndex",
+                                        ),
+                                    );
+                                }
+                                m_sensorRagdollBoneIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_sensorAnimationBoneIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_sensorAnimationBoneIndex,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sensorAnimationBoneIndex",
+                                        ),
+                                    );
+                                }
+                                m_sensorAnimationBoneIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_sensingMode => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_sensingMode) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sensingMode",
+                                        ),
+                                    );
+                                }
+                                m_sensingMode = _serde::__private::Some(
+                                    match __A::next_value::<SensingMode>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_extrapolateSensorPosition => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_extrapolateSensorPosition,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "extrapolateSensorPosition",
+                                        ),
+                                    );
+                                }
+                                m_extrapolateSensorPosition = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1140,345 +1464,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_extrapolateSensorPosition => {
+                            __Field::m_foundHandleOut => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_extrapolateSensorPosition,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_foundHandleOut) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "extrapolateSensorPosition",
+                                            "foundHandleOut",
                                         ),
                                     );
                                 }
-                                m_extrapolateSensorPosition = _serde::__private::Some(
+                                m_foundHandleOut = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_sensingMode => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_sensingMode) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sensingMode",
-                                        ),
-                                    );
-                                }
-                                m_sensingMode = _serde::__private::Some(
-                                    match __A::next_value::<SensingMode>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_sensorAnimationBoneIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_sensorAnimationBoneIndex,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sensorAnimationBoneIndex",
-                                        ),
-                                    );
-                                }
-                                m_sensorAnimationBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_sensorRagdollBoneIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_sensorRagdollBoneIndex,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sensorRagdollBoneIndex",
-                                        ),
-                                    );
-                                }
-                                m_sensorRagdollBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_collisionFilterInfo => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_collisionFilterInfo,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "collisionFilterInfo",
-                                        ),
-                                    );
-                                }
-                                m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_distanceOut => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_distanceOut) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "distanceOut",
-                                        ),
-                                    );
-                                }
-                                m_distanceOut = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxDistance => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_maxDistance) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxDistance",
-                                        ),
-                                    );
-                                }
-                                m_maxDistance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_minDistance => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_minDistance) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "minDistance",
-                                        ),
-                                    );
-                                }
-                                m_minDistance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_sensorLocalFrameName => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_sensorLocalFrameName,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sensorLocalFrameName",
-                                        ),
-                                    );
-                                }
-                                m_sensorLocalFrameName = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_localFrameName => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_localFrameName) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "localFrameName",
-                                        ),
-                                    );
-                                }
-                                m_localFrameName = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_handleIn => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_handleIn) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "handleIn",
-                                        ),
-                                    );
-                                }
-                                m_handleIn = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_handleOut => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_handleOut) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "handleOut",
-                                        ),
-                                    );
-                                }
-                                m_handleOut = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_ranges => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_ranges) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("ranges"),
-                                    );
-                                }
-                                m_ranges = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkbSenseHandleModifierRange>,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_sensorLocalOffset => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_sensorLocalOffset,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sensorLocalOffset",
-                                        ),
-                                    );
-                                }
-                                m_sensorLocalOffset = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1503,22 +1503,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -1533,121 +1533,57 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_foundHandleOut = match m_foundHandleOut {
+                    let m_sensorLocalOffset = match m_sensorLocalOffset {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "foundHandleOut",
+                                    "sensorLocalOffset",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_keepFirstSensedHandle = match m_keepFirstSensedHandle {
+                    let m_ranges = match m_ranges {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("ranges"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_handleOut = match m_handleOut {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "keepFirstSensedHandle",
+                                    "handleOut",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_extrapolateSensorPosition = match m_extrapolateSensorPosition {
+                    let m_handleIn = match m_handleIn {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "extrapolateSensorPosition",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("handleIn"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_sensingMode = match m_sensingMode {
+                    let m_localFrameName = match m_localFrameName {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "sensingMode",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_sensorAnimationBoneIndex = match m_sensorAnimationBoneIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "sensorAnimationBoneIndex",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_sensorRagdollBoneIndex = match m_sensorRagdollBoneIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "sensorRagdollBoneIndex",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_collisionFilterInfo = match m_collisionFilterInfo {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "collisionFilterInfo",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_distanceOut = match m_distanceOut {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "distanceOut",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxDistance = match m_maxDistance {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxDistance",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_minDistance = match m_minDistance {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "minDistance",
+                                    "localFrameName",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1665,57 +1601,121 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_localFrameName = match m_localFrameName {
+                    let m_minDistance = match m_minDistance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "localFrameName",
+                                    "minDistance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_handleIn = match m_handleIn {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("handleIn"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_handleOut = match m_handleOut {
+                    let m_maxDistance = match m_maxDistance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "handleOut",
+                                    "maxDistance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_ranges = match m_ranges {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("ranges"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_sensorLocalOffset = match m_sensorLocalOffset {
+                    let m_distanceOut = match m_distanceOut {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "sensorLocalOffset",
+                                    "distanceOut",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_collisionFilterInfo = match m_collisionFilterInfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "collisionFilterInfo",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_sensorRagdollBoneIndex = match m_sensorRagdollBoneIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sensorRagdollBoneIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_sensorAnimationBoneIndex = match m_sensorAnimationBoneIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sensorAnimationBoneIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_sensingMode = match m_sensingMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sensingMode",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_extrapolateSensorPosition = match m_extrapolateSensorPosition {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "extrapolateSensorPosition",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_keepFirstSensedHandle = match m_keepFirstSensedHandle {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "keepFirstSensedHandle",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_foundHandleOut = match m_foundHandleOut {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "foundHandleOut",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

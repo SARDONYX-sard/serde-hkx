@@ -153,18 +153,18 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_snapMaxAngularDistance,
-                m_snapMaxLinearDistance,
-                m_snapMaxAngularVelocity,
-                m_snapMaxLinearVelocity,
-                m_snapGain,
-                m_positionMaxAngularVelocity,
-                m_positionMaxLinearVelocity,
-                m_positionGain,
-                m_velocityGain,
-                m_accelerationGain,
-                m_velocityDamping,
                 m_hierarchyGain,
+                m_velocityDamping,
+                m_accelerationGain,
+                m_velocityGain,
+                m_positionGain,
+                m_positionMaxLinearVelocity,
+                m_positionMaxAngularVelocity,
+                m_snapGain,
+                m_snapMaxLinearVelocity,
+                m_snapMaxAngularVelocity,
+                m_snapMaxLinearDistance,
+                m_snapMaxAngularDistance,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -188,22 +188,22 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "snapMaxAngularDistance" => Ok(__Field::m_snapMaxAngularDistance),
-                        "snapMaxLinearDistance" => Ok(__Field::m_snapMaxLinearDistance),
-                        "snapMaxAngularVelocity" => Ok(__Field::m_snapMaxAngularVelocity),
-                        "snapMaxLinearVelocity" => Ok(__Field::m_snapMaxLinearVelocity),
-                        "snapGain" => Ok(__Field::m_snapGain),
-                        "positionMaxAngularVelocity" => {
-                            Ok(__Field::m_positionMaxAngularVelocity)
-                        }
+                        "hierarchyGain" => Ok(__Field::m_hierarchyGain),
+                        "velocityDamping" => Ok(__Field::m_velocityDamping),
+                        "accelerationGain" => Ok(__Field::m_accelerationGain),
+                        "velocityGain" => Ok(__Field::m_velocityGain),
+                        "positionGain" => Ok(__Field::m_positionGain),
                         "positionMaxLinearVelocity" => {
                             Ok(__Field::m_positionMaxLinearVelocity)
                         }
-                        "positionGain" => Ok(__Field::m_positionGain),
-                        "velocityGain" => Ok(__Field::m_velocityGain),
-                        "accelerationGain" => Ok(__Field::m_accelerationGain),
-                        "velocityDamping" => Ok(__Field::m_velocityDamping),
-                        "hierarchyGain" => Ok(__Field::m_hierarchyGain),
+                        "positionMaxAngularVelocity" => {
+                            Ok(__Field::m_positionMaxAngularVelocity)
+                        }
+                        "snapGain" => Ok(__Field::m_snapGain),
+                        "snapMaxLinearVelocity" => Ok(__Field::m_snapMaxLinearVelocity),
+                        "snapMaxAngularVelocity" => Ok(__Field::m_snapMaxAngularVelocity),
+                        "snapMaxLinearDistance" => Ok(__Field::m_snapMaxLinearDistance),
+                        "snapMaxAngularDistance" => Ok(__Field::m_snapMaxAngularDistance),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -627,22 +627,22 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_snapMaxAngularDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_snapMaxLinearDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_snapMaxAngularVelocity: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_snapMaxLinearVelocity: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_snapGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_positionMaxAngularVelocity: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
+                    let mut m_hierarchyGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_velocityDamping: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_accelerationGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_velocityGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_positionGain: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_positionMaxLinearVelocity: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_positionGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_velocityGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_accelerationGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_velocityDamping: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_hierarchyGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_positionMaxAngularVelocity: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_snapGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_snapMaxLinearVelocity: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_snapMaxAngularVelocity: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_snapMaxLinearDistance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_snapMaxAngularDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -652,22 +652,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_snapMaxAngularDistance => {
+                            __Field::m_hierarchyGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_snapMaxAngularDistance,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_hierarchyGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "snapMaxAngularDistance",
+                                            "hierarchyGain",
                                         ),
                                     );
                                 }
-                                m_snapMaxAngularDistance = _serde::__private::Some(
+                                m_hierarchyGain = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -678,22 +676,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_snapMaxLinearDistance => {
+                            __Field::m_velocityDamping => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_snapMaxLinearDistance,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_velocityDamping) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "snapMaxLinearDistance",
+                                            "velocityDamping",
                                         ),
                                     );
                                 }
-                                m_snapMaxLinearDistance = _serde::__private::Some(
+                                m_velocityDamping = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -704,22 +700,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_snapMaxAngularVelocity => {
+                            __Field::m_accelerationGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_snapMaxAngularVelocity,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_accelerationGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "snapMaxAngularVelocity",
+                                            "accelerationGain",
                                         ),
                                     );
                                 }
-                                m_snapMaxAngularVelocity = _serde::__private::Some(
+                                m_accelerationGain = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -730,22 +724,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_snapMaxLinearVelocity => {
+                            __Field::m_velocityGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_snapMaxLinearVelocity,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_velocityGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "snapMaxLinearVelocity",
+                                            "velocityGain",
                                         ),
                                     );
                                 }
-                                m_snapMaxLinearVelocity = _serde::__private::Some(
+                                m_velocityGain = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -756,46 +748,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_snapGain => {
+                            __Field::m_positionGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_snapGain) {
+                                if _serde::__private::Option::is_some(&m_positionGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "snapGain",
+                                            "positionGain",
                                         ),
                                     );
                                 }
-                                m_snapGain = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_positionMaxAngularVelocity => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_positionMaxAngularVelocity,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "positionMaxAngularVelocity",
-                                        ),
-                                    );
-                                }
-                                m_positionMaxAngularVelocity = _serde::__private::Some(
+                                m_positionGain = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -832,20 +798,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_positionGain => {
+                            __Field::m_positionMaxAngularVelocity => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_positionGain) {
+                                if _serde::__private::Option::is_some(
+                                    &m_positionMaxAngularVelocity,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "positionGain",
+                                            "positionMaxAngularVelocity",
                                         ),
                                     );
                                 }
-                                m_positionGain = _serde::__private::Some(
+                                m_positionMaxAngularVelocity = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -856,20 +824,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_velocityGain => {
+                            __Field::m_snapGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_velocityGain) {
+                                if _serde::__private::Option::is_some(&m_snapGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "velocityGain",
+                                            "snapGain",
                                         ),
                                     );
                                 }
-                                m_velocityGain = _serde::__private::Some(
+                                m_snapGain = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -880,20 +848,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_accelerationGain => {
+                            __Field::m_snapMaxLinearVelocity => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_accelerationGain) {
+                                if _serde::__private::Option::is_some(
+                                    &m_snapMaxLinearVelocity,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "accelerationGain",
+                                            "snapMaxLinearVelocity",
                                         ),
                                     );
                                 }
-                                m_accelerationGain = _serde::__private::Some(
+                                m_snapMaxLinearVelocity = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -904,20 +874,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_velocityDamping => {
+                            __Field::m_snapMaxAngularVelocity => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_velocityDamping) {
+                                if _serde::__private::Option::is_some(
+                                    &m_snapMaxAngularVelocity,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "velocityDamping",
+                                            "snapMaxAngularVelocity",
                                         ),
                                     );
                                 }
-                                m_velocityDamping = _serde::__private::Some(
+                                m_snapMaxAngularVelocity = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -928,20 +900,48 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_hierarchyGain => {
+                            __Field::m_snapMaxLinearDistance => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_hierarchyGain) {
+                                if _serde::__private::Option::is_some(
+                                    &m_snapMaxLinearDistance,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "hierarchyGain",
+                                            "snapMaxLinearDistance",
                                         ),
                                     );
                                 }
-                                m_hierarchyGain = _serde::__private::Some(
+                                m_snapMaxLinearDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_snapMaxAngularDistance => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_snapMaxAngularDistance,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "snapMaxAngularDistance",
+                                        ),
+                                    );
+                                }
+                                m_snapMaxAngularDistance = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -955,119 +955,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_snapMaxAngularDistance = match m_snapMaxAngularDistance {
+                    let m_hierarchyGain = match m_hierarchyGain {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "snapMaxAngularDistance",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_snapMaxLinearDistance = match m_snapMaxLinearDistance {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "snapMaxLinearDistance",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_snapMaxAngularVelocity = match m_snapMaxAngularVelocity {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "snapMaxAngularVelocity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_snapMaxLinearVelocity = match m_snapMaxLinearVelocity {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "snapMaxLinearVelocity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_snapGain = match m_snapGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("snapGain"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_positionMaxAngularVelocity = match m_positionMaxAngularVelocity {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "positionMaxAngularVelocity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_positionMaxLinearVelocity = match m_positionMaxLinearVelocity {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "positionMaxLinearVelocity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_positionGain = match m_positionGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "positionGain",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_velocityGain = match m_velocityGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "velocityGain",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_accelerationGain = match m_accelerationGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "accelerationGain",
+                                    "hierarchyGain",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1085,13 +979,119 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_hierarchyGain = match m_hierarchyGain {
+                    let m_accelerationGain = match m_accelerationGain {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "hierarchyGain",
+                                    "accelerationGain",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_velocityGain = match m_velocityGain {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "velocityGain",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_positionGain = match m_positionGain {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "positionGain",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_positionMaxLinearVelocity = match m_positionMaxLinearVelocity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "positionMaxLinearVelocity",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_positionMaxAngularVelocity = match m_positionMaxAngularVelocity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "positionMaxAngularVelocity",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_snapGain = match m_snapGain {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("snapGain"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_snapMaxLinearVelocity = match m_snapMaxLinearVelocity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "snapMaxLinearVelocity",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_snapMaxAngularVelocity = match m_snapMaxAngularVelocity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "snapMaxAngularVelocity",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_snapMaxLinearDistance = match m_snapMaxLinearDistance {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "snapMaxLinearDistance",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_snapMaxAngularDistance = match m_snapMaxAngularDistance {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "snapMaxAngularDistance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

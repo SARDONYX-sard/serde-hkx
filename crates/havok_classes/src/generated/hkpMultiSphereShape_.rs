@@ -89,8 +89,8 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_spheres,
                 m_numSpheres,
+                m_spheres,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -115,8 +115,8 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
-                        "spheres" => Ok(__Field::m_spheres),
                         "numSpheres" => Ok(__Field::m_numSpheres),
+                        "spheres" => Ok(__Field::m_spheres),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -235,8 +235,8 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_spheres: _serde::__private::Option<[Vector4; 8usize]> = _serde::__private::None;
                     let mut m_numSpheres: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_spheres: _serde::__private::Option<[Vector4; 8usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -270,30 +270,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_spheres => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_spheres) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "spheres",
-                                        ),
-                                    );
-                                }
-                                m_spheres = _serde::__private::Some(
-                                    match __A::next_value::<[Vector4; 8usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_numSpheres => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -318,6 +294,30 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_spheres => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_spheres) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "spheres",
+                                        ),
+                                    );
+                                }
+                                m_spheres = _serde::__private::Some(
+                                    match __A::next_value::<[Vector4; 8usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
@@ -331,16 +331,6 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_spheres = match m_spheres {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("spheres"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_numSpheres = match m_numSpheres {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -349,6 +339,16 @@ const _: () = {
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "numSpheres",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_spheres = match m_spheres {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("spheres"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -75,9 +75,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_limitConstraint,
-                m_numTargets,
                 m_firstTargetIdx,
+                m_numTargets,
+                m_limitConstraint,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -101,9 +101,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "limitConstraint" => Ok(__Field::m_limitConstraint),
-                        "numTargets" => Ok(__Field::m_numTargets),
                         "firstTargetIdx" => Ok(__Field::m_firstTargetIdx),
+                        "numTargets" => Ok(__Field::m_numTargets),
+                        "limitConstraint" => Ok(__Field::m_limitConstraint),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -250,9 +250,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_limitConstraint: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_numTargets: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_firstTargetIdx: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numTargets: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_limitConstraint: _serde::__private::Option<Pointer> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -262,21 +262,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_limitConstraint => {
+                            __Field::m_firstTargetIdx => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_limitConstraint) {
+                                if _serde::__private::Option::is_some(&m_firstTargetIdx) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "limitConstraint",
+                                            "firstTargetIdx",
                                         ),
                                     );
                                 }
-                                m_limitConstraint = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_firstTargetIdx = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -310,21 +310,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_firstTargetIdx => {
+                            __Field::m_limitConstraint => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_firstTargetIdx) {
+                                if _serde::__private::Option::is_some(&m_limitConstraint) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "firstTargetIdx",
+                                            "limitConstraint",
                                         ),
                                     );
                                 }
-                                m_firstTargetIdx = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_limitConstraint = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -337,13 +337,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_limitConstraint = match m_limitConstraint {
+                    let m_firstTargetIdx = match m_firstTargetIdx {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "limitConstraint",
+                                    "firstTargetIdx",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -361,13 +361,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_firstTargetIdx = match m_firstTargetIdx {
+                    let m_limitConstraint = match m_limitConstraint {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "firstTargetIdx",
+                                    "limitConstraint",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

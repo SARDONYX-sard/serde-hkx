@@ -96,9 +96,9 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_alreadyUsed,
-                m_rejectRayChassisListener,
-                m_phantom,
                 m_wheelCollisionFilterInfo,
+                m_phantom,
+                m_rejectRayChassisListener,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -123,12 +123,12 @@ const _: () = {
                 {
                     match __value {
                         "alreadyUsed" => Ok(__Field::m_alreadyUsed),
-                        "rejectRayChassisListener" => {
-                            Ok(__Field::m_rejectRayChassisListener)
-                        }
-                        "phantom" => Ok(__Field::m_phantom),
                         "wheelCollisionFilterInfo" => {
                             Ok(__Field::m_wheelCollisionFilterInfo)
+                        }
+                        "phantom" => Ok(__Field::m_phantom),
+                        "rejectRayChassisListener" => {
+                            Ok(__Field::m_rejectRayChassisListener)
                         }
                         _ => Ok(__Field::__ignore),
                     }
@@ -286,11 +286,11 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_alreadyUsed: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_wheelCollisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_phantom: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_rejectRayChassisListener: _serde::__private::Option<
                         hkpRejectChassisListener,
                     > = _serde::__private::None;
-                    let mut m_phantom: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_wheelCollisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -315,6 +315,56 @@ const _: () = {
                                 }
                                 m_alreadyUsed = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wheelCollisionFilterInfo => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_wheelCollisionFilterInfo,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wheelCollisionFilterInfo",
+                                        ),
+                                    );
+                                }
+                                m_wheelCollisionFilterInfo = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_phantom => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_phantom) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "phantom",
+                                        ),
+                                    );
+                                }
+                                m_phantom = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -352,56 +402,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_phantom => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_phantom) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "phantom",
-                                        ),
-                                    );
-                                }
-                                m_phantom = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_wheelCollisionFilterInfo => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_wheelCollisionFilterInfo,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelCollisionFilterInfo",
-                                        ),
-                                    );
-                                }
-                                m_wheelCollisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             _ => {}
                         }
                     }
@@ -417,13 +417,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_rejectRayChassisListener = match m_rejectRayChassisListener {
+                    let m_wheelCollisionFilterInfo = match m_wheelCollisionFilterInfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "rejectRayChassisListener",
+                                    "wheelCollisionFilterInfo",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -439,13 +439,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_wheelCollisionFilterInfo = match m_wheelCollisionFilterInfo {
+                    let m_rejectRayChassisListener = match m_rejectRayChassisListener {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelCollisionFilterInfo",
+                                    "rejectRayChassisListener",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

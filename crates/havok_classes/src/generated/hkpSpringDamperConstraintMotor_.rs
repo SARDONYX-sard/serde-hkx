@@ -88,10 +88,10 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_maxForce,
                 m_minForce,
-                m_springDamping,
+                m_maxForce,
                 m_springConstant,
+                m_springDamping,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -116,10 +116,10 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "maxForce" => Ok(__Field::m_maxForce),
                         "minForce" => Ok(__Field::m_minForce),
-                        "springDamping" => Ok(__Field::m_springDamping),
+                        "maxForce" => Ok(__Field::m_maxForce),
                         "springConstant" => Ok(__Field::m_springConstant),
+                        "springDamping" => Ok(__Field::m_springDamping),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -240,10 +240,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<MotorType> = _serde::__private::None;
-                    let mut m_maxForce: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minForce: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_springDamping: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxForce: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_springConstant: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_springDamping: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -266,30 +266,6 @@ const _: () = {
                                 }
                                 m_type = _serde::__private::Some(
                                     match __A::next_value::<MotorType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxForce => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_maxForce) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxForce",
-                                        ),
-                                    );
-                                }
-                                m_maxForce = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -323,20 +299,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_springDamping => {
+                            __Field::m_maxForce => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_springDamping) {
+                                if _serde::__private::Option::is_some(&m_maxForce) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "springDamping",
+                                            "maxForce",
                                         ),
                                     );
                                 }
-                                m_springDamping = _serde::__private::Some(
+                                m_maxForce = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -371,6 +347,30 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_springDamping => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_springDamping) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "springDamping",
+                                        ),
+                                    );
+                                }
+                                m_springDamping = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
@@ -380,16 +380,6 @@ const _: () = {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("type"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxForce = match m_maxForce {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("maxForce"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -404,14 +394,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_springDamping = match m_springDamping {
+                    let m_maxForce = match m_maxForce {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "springDamping",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("maxForce"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -423,6 +411,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "springConstant",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_springDamping = match m_springDamping {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "springDamping",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

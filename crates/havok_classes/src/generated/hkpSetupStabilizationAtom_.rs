@@ -81,9 +81,9 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_padding,
-                m_maxAngle,
                 m_enabled,
+                m_maxAngle,
+                m_padding,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -108,9 +108,9 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "padding" => Ok(__Field::m_padding),
-                        "maxAngle" => Ok(__Field::m_maxAngle),
                         "enabled" => Ok(__Field::m_enabled),
+                        "maxAngle" => Ok(__Field::m_maxAngle),
+                        "padding" => Ok(__Field::m_padding),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -255,9 +255,9 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_padding: _serde::__private::Option<[u8; 8usize]> = _serde::__private::None;
-                    let mut m_maxAngle: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_enabled: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_maxAngle: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_padding: _serde::__private::Option<[u8; 8usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -280,54 +280,6 @@ const _: () = {
                                 }
                                 m_type = _serde::__private::Some(
                                     match __A::next_value::<AtomType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_padding => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_padding) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "padding",
-                                        ),
-                                    );
-                                }
-                                m_padding = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 8usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxAngle => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_maxAngle) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxAngle",
-                                        ),
-                                    );
-                                }
-                                m_maxAngle = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -361,6 +313,54 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_maxAngle => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_maxAngle) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxAngle",
+                                        ),
+                                    );
+                                }
+                                m_maxAngle = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_padding => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_padding) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "padding",
+                                        ),
+                                    );
+                                }
+                                m_padding = _serde::__private::Some(
+                                    match __A::next_value::<[u8; 8usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
@@ -374,12 +374,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_padding = match m_padding {
+                    let m_enabled = match m_enabled {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("padding"),
+                                <__A::Error as _serde::de::Error>::missing_field("enabled"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -394,12 +394,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_enabled = match m_enabled {
+                    let m_padding = match m_padding {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("enabled"),
+                                <__A::Error as _serde::de::Error>::missing_field("padding"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

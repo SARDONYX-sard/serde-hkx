@@ -123,15 +123,15 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_nodeName,
-                m_keyframe,
-                m_transformSkew,
-                m_transformScale,
-                m_transformRotation,
-                m_transformPositionZ,
-                m_transformPositionY,
-                m_transformPositionX,
                 m_invert,
+                m_transformPositionX,
+                m_transformPositionY,
+                m_transformPositionZ,
+                m_transformRotation,
+                m_transformScale,
+                m_transformSkew,
+                m_keyframe,
+                m_nodeName,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -155,15 +155,15 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "nodeName" => Ok(__Field::m_nodeName),
-                        "keyframe" => Ok(__Field::m_keyframe),
-                        "transformSkew" => Ok(__Field::m_transformSkew),
-                        "transformScale" => Ok(__Field::m_transformScale),
-                        "transformRotation" => Ok(__Field::m_transformRotation),
-                        "transformPositionZ" => Ok(__Field::m_transformPositionZ),
-                        "transformPositionY" => Ok(__Field::m_transformPositionY),
-                        "transformPositionX" => Ok(__Field::m_transformPositionX),
                         "invert" => Ok(__Field::m_invert),
+                        "transformPositionX" => Ok(__Field::m_transformPositionX),
+                        "transformPositionY" => Ok(__Field::m_transformPositionY),
+                        "transformPositionZ" => Ok(__Field::m_transformPositionZ),
+                        "transformRotation" => Ok(__Field::m_transformRotation),
+                        "transformScale" => Ok(__Field::m_transformScale),
+                        "transformSkew" => Ok(__Field::m_transformSkew),
+                        "keyframe" => Ok(__Field::m_keyframe),
+                        "nodeName" => Ok(__Field::m_nodeName),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -488,15 +488,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_keyframe: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_transformSkew: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_transformScale: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_transformRotation: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_transformPositionZ: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_transformPositionY: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_transformPositionX: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_invert: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_transformPositionX: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_transformPositionY: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_transformPositionZ: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_transformRotation: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_transformScale: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_transformSkew: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_keyframe: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -506,170 +506,18 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_nodeName => {
+                            __Field::m_invert => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_nodeName) {
+                                if _serde::__private::Option::is_some(&m_invert) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "nodeName",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("invert"),
                                     );
                                 }
-                                m_nodeName = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_keyframe => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_keyframe) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "keyframe",
-                                        ),
-                                    );
-                                }
-                                m_keyframe = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_transformSkew => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_transformSkew) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transformSkew",
-                                        ),
-                                    );
-                                }
-                                m_transformSkew = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_transformScale => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_transformScale) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transformScale",
-                                        ),
-                                    );
-                                }
-                                m_transformScale = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_transformRotation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_transformRotation,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transformRotation",
-                                        ),
-                                    );
-                                }
-                                m_transformRotation = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_transformPositionZ => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_transformPositionZ,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transformPositionZ",
-                                        ),
-                                    );
-                                }
-                                m_transformPositionZ = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_transformPositionY => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_transformPositionY,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transformPositionY",
-                                        ),
-                                    );
-                                }
-                                m_transformPositionY = _serde::__private::Some(
+                                m_invert = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -706,19 +554,171 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_invert => {
+                            __Field::m_transformPositionY => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_invert) {
+                                if _serde::__private::Option::is_some(
+                                    &m_transformPositionY,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("invert"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transformPositionY",
+                                        ),
                                     );
                                 }
-                                m_invert = _serde::__private::Some(
+                                m_transformPositionY = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transformPositionZ => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_transformPositionZ,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transformPositionZ",
+                                        ),
+                                    );
+                                }
+                                m_transformPositionZ = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transformRotation => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_transformRotation,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transformRotation",
+                                        ),
+                                    );
+                                }
+                                m_transformRotation = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transformScale => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_transformScale) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transformScale",
+                                        ),
+                                    );
+                                }
+                                m_transformScale = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transformSkew => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_transformSkew) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transformSkew",
+                                        ),
+                                    );
+                                }
+                                m_transformSkew = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_keyframe => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_keyframe) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "keyframe",
+                                        ),
+                                    );
+                                }
+                                m_keyframe = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_nodeName => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_nodeName) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "nodeName",
+                                        ),
+                                    );
+                                }
+                                m_nodeName = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -731,69 +731,23 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_nodeName = match m_nodeName {
+                    let m_invert = match m_invert {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("nodeName"),
+                                <__A::Error as _serde::de::Error>::missing_field("invert"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_keyframe = match m_keyframe {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("keyframe"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_transformSkew = match m_transformSkew {
+                    let m_transformPositionX = match m_transformPositionX {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transformSkew",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_transformScale = match m_transformScale {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "transformScale",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_transformRotation = match m_transformRotation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "transformRotation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_transformPositionZ = match m_transformPositionZ {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "transformPositionZ",
+                                    "transformPositionX",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -811,24 +765,70 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_transformPositionX = match m_transformPositionX {
+                    let m_transformPositionZ = match m_transformPositionZ {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transformPositionX",
+                                    "transformPositionZ",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_invert = match m_invert {
+                    let m_transformRotation = match m_transformRotation {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("invert"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transformRotation",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transformScale = match m_transformScale {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transformScale",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transformSkew = match m_transformSkew {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transformSkew",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_keyframe = match m_keyframe {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("keyframe"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_nodeName = match m_nodeName {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("nodeName"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

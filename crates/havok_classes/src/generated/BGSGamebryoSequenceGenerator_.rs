@@ -152,11 +152,11 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
-                m_fPercent,
-                m_eBlendModeFunction,
+                m_name,
                 m_pSequence,
+                m_eBlendModeFunction,
+                m_fPercent,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -181,11 +181,11 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
-                        "fPercent" => Ok(__Field::m_fPercent),
-                        "eBlendModeFunction" => Ok(__Field::m_eBlendModeFunction),
+                        "name" => Ok(__Field::m_name),
                         "pSequence" => Ok(__Field::m_pSequence),
+                        "eBlendModeFunction" => Ok(__Field::m_eBlendModeFunction),
+                        "fPercent" => Ok(__Field::m_fPercent),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -447,13 +447,13 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_fPercent: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_pSequence: _serde::__private::Option<CString<'de>> = _serde::__private::None;
                     let mut m_eBlendModeFunction: _serde::__private::Option<
                         BlendModeFunction,
                     > = _serde::__private::None;
-                    let mut m_pSequence: _serde::__private::Option<CString<'de>> = _serde::__private::None;
+                    let mut m_fPercent: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -489,28 +489,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -535,21 +513,43 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_fPercent => {
+                            __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_fPercent) {
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_pSequence => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_pSequence) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fPercent",
+                                            "pSequence",
                                         ),
                                     );
                                 }
-                                m_fPercent = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_pSequence = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -585,21 +585,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_pSequence => {
+                            __Field::m_fPercent => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_pSequence) {
+                                if _serde::__private::Option::is_some(&m_fPercent) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "pSequence",
+                                            "fPercent",
                                         ),
                                     );
                                 }
-                                m_pSequence = _serde::__private::Some(
-                                    match __A::next_value::<CString<'de>>(&mut __map) {
+                                m_fPercent = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -624,16 +624,6 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -644,12 +634,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_fPercent = match m_fPercent {
+                    let m_name = match m_name {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("fPercent"),
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_pSequence = match m_pSequence {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "pSequence",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -666,14 +668,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_pSequence = match m_pSequence {
+                    let m_fPercent = match m_fPercent {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "pSequence",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("fPercent"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

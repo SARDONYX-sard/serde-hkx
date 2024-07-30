@@ -112,13 +112,13 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_motor,
-                m_targetAngle,
-                m_correspondingAngLimitSolverResultOffset,
-                m_previousTargetAngleOffset,
-                m_initializedOffset,
-                m_motorAxis,
                 m_isEnabled,
+                m_motorAxis,
+                m_initializedOffset,
+                m_previousTargetAngleOffset,
+                m_correspondingAngLimitSolverResultOffset,
+                m_targetAngle,
+                m_motor,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -143,17 +143,17 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "motor" => Ok(__Field::m_motor),
-                        "targetAngle" => Ok(__Field::m_targetAngle),
-                        "correspondingAngLimitSolverResultOffset" => {
-                            Ok(__Field::m_correspondingAngLimitSolverResultOffset)
-                        }
+                        "isEnabled" => Ok(__Field::m_isEnabled),
+                        "motorAxis" => Ok(__Field::m_motorAxis),
+                        "initializedOffset" => Ok(__Field::m_initializedOffset),
                         "previousTargetAngleOffset" => {
                             Ok(__Field::m_previousTargetAngleOffset)
                         }
-                        "initializedOffset" => Ok(__Field::m_initializedOffset),
-                        "motorAxis" => Ok(__Field::m_motorAxis),
-                        "isEnabled" => Ok(__Field::m_isEnabled),
+                        "correspondingAngLimitSolverResultOffset" => {
+                            Ok(__Field::m_correspondingAngLimitSolverResultOffset)
+                        }
+                        "targetAngle" => Ok(__Field::m_targetAngle),
+                        "motor" => Ok(__Field::m_motor),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -426,17 +426,17 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_motor: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_targetAngle: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_correspondingAngLimitSolverResultOffset: _serde::__private::Option<
-                        i16,
-                    > = _serde::__private::None;
+                    let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_motorAxis: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_initializedOffset: _serde::__private::Option<i16> = _serde::__private::None;
                     let mut m_previousTargetAngleOffset: _serde::__private::Option<
                         i16,
                     > = _serde::__private::None;
-                    let mut m_initializedOffset: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_motorAxis: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_correspondingAngLimitSolverResultOffset: _serde::__private::Option<
+                        i16,
+                    > = _serde::__private::None;
+                    let mut m_targetAngle: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_motor: _serde::__private::Option<Pointer> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -468,43 +468,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_motor => {
+                            __Field::m_isEnabled => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_motor) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("motor"),
-                                    );
-                                }
-                                m_motor = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_targetAngle => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_targetAngle) {
+                                if _serde::__private::Option::is_some(&m_isEnabled) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "targetAngle",
+                                            "isEnabled",
                                         ),
                                     );
                                 }
-                                m_targetAngle = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_isEnabled = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -514,22 +492,46 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_correspondingAngLimitSolverResultOffset => {
+                            __Field::m_motorAxis => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_motorAxis) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "motorAxis",
+                                        ),
+                                    );
+                                }
+                                m_motorAxis = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_initializedOffset => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_correspondingAngLimitSolverResultOffset,
+                                    &m_initializedOffset,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "correspondingAngLimitSolverResultOffset",
+                                            "initializedOffset",
                                         ),
                                     );
                                 }
-                                m_correspondingAngLimitSolverResultOffset = _serde::__private::Some(
+                                m_initializedOffset = _serde::__private::Some(
                                     match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -566,22 +568,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_initializedOffset => {
+                            __Field::m_correspondingAngLimitSolverResultOffset => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_initializedOffset,
+                                    &m_correspondingAngLimitSolverResultOffset,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "initializedOffset",
+                                            "correspondingAngLimitSolverResultOffset",
                                         ),
                                     );
                                 }
-                                m_initializedOffset = _serde::__private::Some(
+                                m_correspondingAngLimitSolverResultOffset = _serde::__private::Some(
                                     match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -592,21 +594,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_motorAxis => {
+                            __Field::m_targetAngle => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_motorAxis) {
+                                if _serde::__private::Option::is_some(&m_targetAngle) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "motorAxis",
+                                            "targetAngle",
                                         ),
                                     );
                                 }
-                                m_motorAxis = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                m_targetAngle = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -616,21 +618,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_isEnabled => {
+                            __Field::m_motor => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isEnabled) {
+                                if _serde::__private::Option::is_some(&m_motor) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isEnabled",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("motor"),
                                     );
                                 }
-                                m_isEnabled = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_motor = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -653,59 +653,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_motor = match m_motor {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("motor"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_targetAngle = match m_targetAngle {
+                    let m_isEnabled = match m_isEnabled {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "targetAngle",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_correspondingAngLimitSolverResultOffset = match m_correspondingAngLimitSolverResultOffset {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "correspondingAngLimitSolverResultOffset",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_previousTargetAngleOffset = match m_previousTargetAngleOffset {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "previousTargetAngleOffset",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_initializedOffset = match m_initializedOffset {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "initializedOffset",
+                                    "isEnabled",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -723,14 +677,60 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_isEnabled = match m_isEnabled {
+                    let m_initializedOffset = match m_initializedOffset {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isEnabled",
+                                    "initializedOffset",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_previousTargetAngleOffset = match m_previousTargetAngleOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "previousTargetAngleOffset",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_correspondingAngLimitSolverResultOffset = match m_correspondingAngLimitSolverResultOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "correspondingAngLimitSolverResultOffset",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_targetAngle = match m_targetAngle {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "targetAngle",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_motor = match m_motor {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("motor"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

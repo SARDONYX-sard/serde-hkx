@@ -111,11 +111,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_initializeCharacterPose,
-                m_applySelfTransition,
-                m_timeInTransition,
-                m_timeRemaining,
                 m_characterPoseAtBeginningOfTransition,
+                m_timeRemaining,
+                m_timeInTransition,
+                m_applySelfTransition,
+                m_initializeCharacterPose,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -139,14 +139,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "initializeCharacterPose" => {
-                            Ok(__Field::m_initializeCharacterPose)
-                        }
-                        "applySelfTransition" => Ok(__Field::m_applySelfTransition),
-                        "timeInTransition" => Ok(__Field::m_timeInTransition),
-                        "timeRemaining" => Ok(__Field::m_timeRemaining),
                         "characterPoseAtBeginningOfTransition" => {
                             Ok(__Field::m_characterPoseAtBeginningOfTransition)
+                        }
+                        "timeRemaining" => Ok(__Field::m_timeRemaining),
+                        "timeInTransition" => Ok(__Field::m_timeInTransition),
+                        "applySelfTransition" => Ok(__Field::m_applySelfTransition),
+                        "initializeCharacterPose" => {
+                            Ok(__Field::m_initializeCharacterPose)
                         }
                         _ => Ok(__Field::__ignore),
                     }
@@ -365,13 +365,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_initializeCharacterPose: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_applySelfTransition: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_timeInTransition: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_timeRemaining: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_characterPoseAtBeginningOfTransition: _serde::__private::Option<
                         Vec<QsTransform>,
                     > = _serde::__private::None;
+                    let mut m_timeRemaining: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_timeInTransition: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_applySelfTransition: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_initializeCharacterPose: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -381,23 +381,71 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_initializeCharacterPose => {
+                            __Field::m_characterPoseAtBeginningOfTransition => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_initializeCharacterPose,
+                                    &m_characterPoseAtBeginningOfTransition,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "initializeCharacterPose",
+                                            "characterPoseAtBeginningOfTransition",
                                         ),
                                     );
                                 }
-                                m_initializeCharacterPose = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_characterPoseAtBeginningOfTransition = _serde::__private::Some(
+                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_timeRemaining => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_timeRemaining) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "timeRemaining",
+                                        ),
+                                    );
+                                }
+                                m_timeRemaining = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_timeInTransition => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_timeInTransition) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "timeInTransition",
+                                        ),
+                                    );
+                                }
+                                m_timeInTransition = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -433,71 +481,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_timeInTransition => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_timeInTransition) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "timeInTransition",
-                                        ),
-                                    );
-                                }
-                                m_timeInTransition = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_timeRemaining => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_timeRemaining) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "timeRemaining",
-                                        ),
-                                    );
-                                }
-                                m_timeRemaining = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_characterPoseAtBeginningOfTransition => {
+                            __Field::m_initializeCharacterPose => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_characterPoseAtBeginningOfTransition,
+                                    &m_initializeCharacterPose,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "characterPoseAtBeginningOfTransition",
+                                            "initializeCharacterPose",
                                         ),
                                     );
                                 }
-                                m_characterPoseAtBeginningOfTransition = _serde::__private::Some(
-                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                                m_initializeCharacterPose = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -510,37 +510,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_initializeCharacterPose = match m_initializeCharacterPose {
+                    let m_characterPoseAtBeginningOfTransition = match m_characterPoseAtBeginningOfTransition {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "initializeCharacterPose",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_applySelfTransition = match m_applySelfTransition {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "applySelfTransition",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_timeInTransition = match m_timeInTransition {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "timeInTransition",
+                                    "characterPoseAtBeginningOfTransition",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -558,13 +534,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_characterPoseAtBeginningOfTransition = match m_characterPoseAtBeginningOfTransition {
+                    let m_timeInTransition = match m_timeInTransition {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterPoseAtBeginningOfTransition",
+                                    "timeInTransition",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_applySelfTransition = match m_applySelfTransition {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "applySelfTransition",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_initializeCharacterPose = match m_initializeCharacterPose {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "initializeCharacterPose",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

@@ -137,12 +137,12 @@ const _: () = {
             enum __Field {
                 m_userData,
                 m_radius,
-                m_connectivity,
-                m_planeEquations,
-                m_numVertices,
-                m_rotatedVertices,
-                m_aabbCenter,
                 m_aabbHalfExtents,
+                m_aabbCenter,
+                m_rotatedVertices,
+                m_numVertices,
+                m_planeEquations,
+                m_connectivity,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -168,12 +168,12 @@ const _: () = {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
                         "radius" => Ok(__Field::m_radius),
-                        "connectivity" => Ok(__Field::m_connectivity),
-                        "planeEquations" => Ok(__Field::m_planeEquations),
-                        "numVertices" => Ok(__Field::m_numVertices),
-                        "rotatedVertices" => Ok(__Field::m_rotatedVertices),
-                        "aabbCenter" => Ok(__Field::m_aabbCenter),
                         "aabbHalfExtents" => Ok(__Field::m_aabbHalfExtents),
+                        "aabbCenter" => Ok(__Field::m_aabbCenter),
+                        "rotatedVertices" => Ok(__Field::m_rotatedVertices),
+                        "numVertices" => Ok(__Field::m_numVertices),
+                        "planeEquations" => Ok(__Field::m_planeEquations),
+                        "connectivity" => Ok(__Field::m_connectivity),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -475,14 +475,14 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_connectivity: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_planeEquations: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
-                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_rotatedVertices: _serde::__private::Option<
                         Vec<hkpConvexVerticesShapeFourVectors>,
                     > = _serde::__private::None;
-                    let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_planeEquations: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
+                    let mut m_connectivity: _serde::__private::Option<Pointer> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -538,21 +538,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_connectivity => {
+                            __Field::m_aabbHalfExtents => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_connectivity) {
+                                if _serde::__private::Option::is_some(&m_aabbHalfExtents) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "connectivity",
+                                            "aabbHalfExtents",
                                         ),
                                     );
                                 }
-                                m_connectivity = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_aabbHalfExtents = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -562,45 +562,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_planeEquations => {
+                            __Field::m_aabbCenter => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_planeEquations) {
+                                if _serde::__private::Option::is_some(&m_aabbCenter) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "planeEquations",
+                                            "aabbCenter",
                                         ),
                                     );
                                 }
-                                m_planeEquations = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numVertices => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_numVertices) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numVertices",
-                                        ),
-                                    );
-                                }
-                                m_numVertices = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_aabbCenter = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -636,21 +612,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_aabbCenter => {
+                            __Field::m_numVertices => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_aabbCenter) {
+                                if _serde::__private::Option::is_some(&m_numVertices) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "aabbCenter",
+                                            "numVertices",
                                         ),
                                     );
                                 }
-                                m_aabbCenter = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_numVertices = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -660,21 +636,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_aabbHalfExtents => {
+                            __Field::m_planeEquations => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_aabbHalfExtents) {
+                                if _serde::__private::Option::is_some(&m_planeEquations) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "aabbHalfExtents",
+                                            "planeEquations",
                                         ),
                                     );
                                 }
-                                m_aabbHalfExtents = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_planeEquations = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_connectivity => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_connectivity) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "connectivity",
+                                        ),
+                                    );
+                                }
+                                m_connectivity = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -707,49 +707,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_connectivity = match m_connectivity {
+                    let m_aabbHalfExtents = match m_aabbHalfExtents {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "connectivity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_planeEquations = match m_planeEquations {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "planeEquations",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numVertices = match m_numVertices {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numVertices",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_rotatedVertices = match m_rotatedVertices {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "rotatedVertices",
+                                    "aabbHalfExtents",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -767,13 +731,49 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_aabbHalfExtents = match m_aabbHalfExtents {
+                    let m_rotatedVertices = match m_rotatedVertices {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "aabbHalfExtents",
+                                    "rotatedVertices",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numVertices = match m_numVertices {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numVertices",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_planeEquations = match m_planeEquations {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "planeEquations",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_connectivity = match m_connectivity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "connectivity",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

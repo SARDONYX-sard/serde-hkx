@@ -234,16 +234,16 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
-                m_children,
-                m_subtractLastChild,
-                m_flags,
-                m_indexOfSyncMasterChild,
-                m_maxCyclicBlendParameter,
-                m_minCyclicBlendParameter,
-                m_blendParameter,
+                m_name,
                 m_referencePoseWeightThreshold,
+                m_blendParameter,
+                m_minCyclicBlendParameter,
+                m_maxCyclicBlendParameter,
+                m_indexOfSyncMasterChild,
+                m_flags,
+                m_subtractLastChild,
+                m_children,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -268,22 +268,22 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
-                        "children" => Ok(__Field::m_children),
-                        "subtractLastChild" => Ok(__Field::m_subtractLastChild),
-                        "flags" => Ok(__Field::m_flags),
-                        "indexOfSyncMasterChild" => Ok(__Field::m_indexOfSyncMasterChild),
-                        "maxCyclicBlendParameter" => {
-                            Ok(__Field::m_maxCyclicBlendParameter)
-                        }
-                        "minCyclicBlendParameter" => {
-                            Ok(__Field::m_minCyclicBlendParameter)
-                        }
-                        "blendParameter" => Ok(__Field::m_blendParameter),
+                        "name" => Ok(__Field::m_name),
                         "referencePoseWeightThreshold" => {
                             Ok(__Field::m_referencePoseWeightThreshold)
                         }
+                        "blendParameter" => Ok(__Field::m_blendParameter),
+                        "minCyclicBlendParameter" => {
+                            Ok(__Field::m_minCyclicBlendParameter)
+                        }
+                        "maxCyclicBlendParameter" => {
+                            Ok(__Field::m_maxCyclicBlendParameter)
+                        }
+                        "indexOfSyncMasterChild" => Ok(__Field::m_indexOfSyncMasterChild),
+                        "flags" => Ok(__Field::m_flags),
+                        "subtractLastChild" => Ok(__Field::m_subtractLastChild),
+                        "children" => Ok(__Field::m_children),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -827,18 +827,18 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_subtractLastChild: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_indexOfSyncMasterChild: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_maxCyclicBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_minCyclicBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_blendParameter: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_referencePoseWeightThreshold: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
+                    let mut m_blendParameter: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_minCyclicBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxCyclicBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_indexOfSyncMasterChild: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_subtractLastChild: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -874,28 +874,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -920,21 +898,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_children => {
+                            __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_children) {
+                                if _serde::__private::Option::is_some(&m_name) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "children",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
                                     );
                                 }
-                                m_children = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -944,23 +920,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_subtractLastChild => {
+                            __Field::m_referencePoseWeightThreshold => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_subtractLastChild,
+                                    &m_referencePoseWeightThreshold,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "subtractLastChild",
+                                            "referencePoseWeightThreshold",
                                         ),
                                     );
                                 }
-                                m_subtractLastChild = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_referencePoseWeightThreshold = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -970,70 +946,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_flags => {
+                            __Field::m_blendParameter => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_flags) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
-                                    );
-                                }
-                                m_flags = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_indexOfSyncMasterChild => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_indexOfSyncMasterChild,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_blendParameter) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "indexOfSyncMasterChild",
+                                            "blendParameter",
                                         ),
                                     );
                                 }
-                                m_indexOfSyncMasterChild = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxCyclicBlendParameter => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxCyclicBlendParameter,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxCyclicBlendParameter",
-                                        ),
-                                    );
-                                }
-                                m_maxCyclicBlendParameter = _serde::__private::Some(
+                                m_blendParameter = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1070,20 +996,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_blendParameter => {
+                            __Field::m_maxCyclicBlendParameter => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_blendParameter) {
+                                if _serde::__private::Option::is_some(
+                                    &m_maxCyclicBlendParameter,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "blendParameter",
+                                            "maxCyclicBlendParameter",
                                         ),
                                     );
                                 }
-                                m_blendParameter = _serde::__private::Some(
+                                m_maxCyclicBlendParameter = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1094,23 +1022,95 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_referencePoseWeightThreshold => {
+                            __Field::m_indexOfSyncMasterChild => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_referencePoseWeightThreshold,
+                                    &m_indexOfSyncMasterChild,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "referencePoseWeightThreshold",
+                                            "indexOfSyncMasterChild",
                                         ),
                                     );
                                 }
-                                m_referencePoseWeightThreshold = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_indexOfSyncMasterChild = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_flags => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_flags) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                                    );
+                                }
+                                m_flags = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_subtractLastChild => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_subtractLastChild,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "subtractLastChild",
+                                        ),
+                                    );
+                                }
+                                m_subtractLastChild = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_children => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_children) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "children",
+                                        ),
+                                    );
+                                }
+                                m_children = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1135,16 +1135,6 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -1155,69 +1145,23 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_children = match m_children {
+                    let m_name = match m_name {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("children"),
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_subtractLastChild = match m_subtractLastChild {
+                    let m_referencePoseWeightThreshold = match m_referencePoseWeightThreshold {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "subtractLastChild",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_flags = match m_flags {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("flags"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_indexOfSyncMasterChild = match m_indexOfSyncMasterChild {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "indexOfSyncMasterChild",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxCyclicBlendParameter = match m_maxCyclicBlendParameter {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxCyclicBlendParameter",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_minCyclicBlendParameter = match m_minCyclicBlendParameter {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "minCyclicBlendParameter",
+                                    "referencePoseWeightThreshold",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1235,14 +1179,70 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_referencePoseWeightThreshold = match m_referencePoseWeightThreshold {
+                    let m_minCyclicBlendParameter = match m_minCyclicBlendParameter {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "referencePoseWeightThreshold",
+                                    "minCyclicBlendParameter",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxCyclicBlendParameter = match m_maxCyclicBlendParameter {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxCyclicBlendParameter",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_indexOfSyncMasterChild = match m_indexOfSyncMasterChild {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "indexOfSyncMasterChild",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_flags = match m_flags {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("flags"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_subtractLastChild = match m_subtractLastChild {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "subtractLastChild",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_children = match m_children {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("children"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

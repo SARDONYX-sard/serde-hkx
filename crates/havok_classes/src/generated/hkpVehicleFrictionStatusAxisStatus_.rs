@@ -122,15 +122,15 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_relativeForwardForce,
-                m_relativeSideForce,
-                m_forwardRhs,
-                m_sideRhs,
-                m_delayed_forward_impulse,
-                m_side_force,
-                m_skid_energy_density,
-                m_side_slip_velocity,
                 m_forward_slip_velocity,
+                m_side_slip_velocity,
+                m_skid_energy_density,
+                m_side_force,
+                m_delayed_forward_impulse,
+                m_sideRhs,
+                m_forwardRhs,
+                m_relativeSideForce,
+                m_relativeForwardForce,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -154,17 +154,17 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "relativeForwardForce" => Ok(__Field::m_relativeForwardForce),
-                        "relativeSideForce" => Ok(__Field::m_relativeSideForce),
-                        "forwardRhs" => Ok(__Field::m_forwardRhs),
-                        "sideRhs" => Ok(__Field::m_sideRhs),
+                        "forward_slip_velocity" => Ok(__Field::m_forward_slip_velocity),
+                        "side_slip_velocity" => Ok(__Field::m_side_slip_velocity),
+                        "skid_energy_density" => Ok(__Field::m_skid_energy_density),
+                        "side_force" => Ok(__Field::m_side_force),
                         "delayed_forward_impulse" => {
                             Ok(__Field::m_delayed_forward_impulse)
                         }
-                        "side_force" => Ok(__Field::m_side_force),
-                        "skid_energy_density" => Ok(__Field::m_skid_energy_density),
-                        "side_slip_velocity" => Ok(__Field::m_side_slip_velocity),
-                        "forward_slip_velocity" => Ok(__Field::m_forward_slip_velocity),
+                        "sideRhs" => Ok(__Field::m_sideRhs),
+                        "forwardRhs" => Ok(__Field::m_forwardRhs),
+                        "relativeSideForce" => Ok(__Field::m_relativeSideForce),
+                        "relativeForwardForce" => Ok(__Field::m_relativeForwardForce),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -497,15 +497,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_relativeForwardForce: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_relativeSideForce: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_forwardRhs: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_sideRhs: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_delayed_forward_impulse: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_side_force: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_skid_energy_density: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_side_slip_velocity: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_forward_slip_velocity: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_side_slip_velocity: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_skid_energy_density: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_side_force: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_delayed_forward_impulse: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_sideRhs: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_forwardRhs: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_relativeSideForce: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_relativeForwardForce: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -515,172 +515,22 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_relativeForwardForce => {
+                            __Field::m_forward_slip_velocity => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_relativeForwardForce,
+                                    &m_forward_slip_velocity,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "relativeForwardForce",
+                                            "forward_slip_velocity",
                                         ),
                                     );
                                 }
-                                m_relativeForwardForce = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_relativeSideForce => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_relativeSideForce,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "relativeSideForce",
-                                        ),
-                                    );
-                                }
-                                m_relativeSideForce = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_forwardRhs => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_forwardRhs) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "forwardRhs",
-                                        ),
-                                    );
-                                }
-                                m_forwardRhs = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_sideRhs => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_sideRhs) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sideRhs",
-                                        ),
-                                    );
-                                }
-                                m_sideRhs = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_delayed_forward_impulse => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_delayed_forward_impulse,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "delayed_forward_impulse",
-                                        ),
-                                    );
-                                }
-                                m_delayed_forward_impulse = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_side_force => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_side_force) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "side_force",
-                                        ),
-                                    );
-                                }
-                                m_side_force = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_skid_energy_density => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_skid_energy_density,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "skid_energy_density",
-                                        ),
-                                    );
-                                }
-                                m_skid_energy_density = _serde::__private::Some(
+                                m_forward_slip_velocity = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -717,22 +567,172 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_forward_slip_velocity => {
+                            __Field::m_skid_energy_density => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_forward_slip_velocity,
+                                    &m_skid_energy_density,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "forward_slip_velocity",
+                                            "skid_energy_density",
                                         ),
                                     );
                                 }
-                                m_forward_slip_velocity = _serde::__private::Some(
+                                m_skid_energy_density = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_side_force => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_side_force) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "side_force",
+                                        ),
+                                    );
+                                }
+                                m_side_force = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_delayed_forward_impulse => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_delayed_forward_impulse,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "delayed_forward_impulse",
+                                        ),
+                                    );
+                                }
+                                m_delayed_forward_impulse = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_sideRhs => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_sideRhs) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sideRhs",
+                                        ),
+                                    );
+                                }
+                                m_sideRhs = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_forwardRhs => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_forwardRhs) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "forwardRhs",
+                                        ),
+                                    );
+                                }
+                                m_forwardRhs = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_relativeSideForce => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_relativeSideForce,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "relativeSideForce",
+                                        ),
+                                    );
+                                }
+                                m_relativeSideForce = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_relativeForwardForce => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_relativeForwardForce,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "relativeForwardForce",
+                                        ),
+                                    );
+                                }
+                                m_relativeForwardForce = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -746,83 +746,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_relativeForwardForce = match m_relativeForwardForce {
+                    let m_forward_slip_velocity = match m_forward_slip_velocity {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "relativeForwardForce",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_relativeSideForce = match m_relativeSideForce {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "relativeSideForce",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_forwardRhs = match m_forwardRhs {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "forwardRhs",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_sideRhs = match m_sideRhs {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("sideRhs"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_delayed_forward_impulse = match m_delayed_forward_impulse {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "delayed_forward_impulse",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_side_force = match m_side_force {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "side_force",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_skid_energy_density = match m_skid_energy_density {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "skid_energy_density",
+                                    "forward_slip_velocity",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -840,13 +770,83 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_forward_slip_velocity = match m_forward_slip_velocity {
+                    let m_skid_energy_density = match m_skid_energy_density {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "forward_slip_velocity",
+                                    "skid_energy_density",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_side_force = match m_side_force {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "side_force",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_delayed_forward_impulse = match m_delayed_forward_impulse {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "delayed_forward_impulse",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_sideRhs = match m_sideRhs {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("sideRhs"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_forwardRhs = match m_forwardRhs {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "forwardRhs",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_relativeSideForce = match m_relativeSideForce {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "relativeSideForce",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_relativeForwardForce = match m_relativeForwardForce {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "relativeForwardForce",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

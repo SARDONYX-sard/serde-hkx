@@ -83,10 +83,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_ballSocket,
-                m_2dAng,
-                m_setupStabilization,
                 m_transforms,
+                m_setupStabilization,
+                m_2dAng,
+                m_ballSocket,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -110,10 +110,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "ballSocket" => Ok(__Field::m_ballSocket),
-                        "2dAng" => Ok(__Field::m_2dAng),
-                        "setupStabilization" => Ok(__Field::m_setupStabilization),
                         "transforms" => Ok(__Field::m_transforms),
+                        "setupStabilization" => Ok(__Field::m_setupStabilization),
+                        "2dAng" => Ok(__Field::m_2dAng),
+                        "ballSocket" => Ok(__Field::m_ballSocket),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -302,15 +302,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_ballSocket: _serde::__private::Option<
-                        hkpBallSocketConstraintAtom,
+                    let mut m_transforms: _serde::__private::Option<
+                        hkpSetLocalTransformsConstraintAtom,
                     > = _serde::__private::None;
-                    let mut m_2dAng: _serde::__private::Option<hkp2dAngConstraintAtom> = _serde::__private::None;
                     let mut m_setupStabilization: _serde::__private::Option<
                         hkpSetupStabilizationAtom,
                     > = _serde::__private::None;
-                    let mut m_transforms: _serde::__private::Option<
-                        hkpSetLocalTransformsConstraintAtom,
+                    let mut m_2dAng: _serde::__private::Option<hkp2dAngConstraintAtom> = _serde::__private::None;
+                    let mut m_ballSocket: _serde::__private::Option<
+                        hkpBallSocketConstraintAtom,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
@@ -321,46 +321,22 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_ballSocket => {
+                            __Field::m_transforms => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_ballSocket) {
+                                if _serde::__private::Option::is_some(&m_transforms) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ballSocket",
+                                            "transforms",
                                         ),
                                     );
                                 }
-                                m_ballSocket = _serde::__private::Some(
+                                m_transforms = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpBallSocketConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_2dAng => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_2dAng) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
-                                    );
-                                }
-                                m_2dAng = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkp2dAngConstraintAtom,
+                                        hkpSetLocalTransformsConstraintAtom,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -399,22 +375,46 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_transforms => {
+                            __Field::m_2dAng => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_transforms) {
+                                if _serde::__private::Option::is_some(&m_2dAng) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
+                                    );
+                                }
+                                m_2dAng = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkp2dAngConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_ballSocket => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_ballSocket) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transforms",
+                                            "ballSocket",
                                         ),
                                     );
                                 }
-                                m_transforms = _serde::__private::Some(
+                                m_ballSocket = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpSetLocalTransformsConstraintAtom,
+                                        hkpBallSocketConstraintAtom,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -428,24 +428,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_ballSocket = match m_ballSocket {
+                    let m_transforms = match m_transforms {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "ballSocket",
+                                    "transforms",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_2dAng = match m_2dAng {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("2dAng"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -462,13 +452,23 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_transforms = match m_transforms {
+                    let m_2dAng = match m_2dAng {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("2dAng"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_ballSocket = match m_ballSocket {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transforms",
+                                    "ballSocket",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

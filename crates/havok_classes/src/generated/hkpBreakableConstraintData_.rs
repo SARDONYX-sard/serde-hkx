@@ -118,13 +118,13 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_revertBackVelocityOnBreak,
-                m_removeWhenBroken,
-                m_solverResultLimit,
-                m_childNumSolverResults,
-                m_childRuntimeSize,
-                m_constraintData,
                 m_atoms,
+                m_constraintData,
+                m_childRuntimeSize,
+                m_childNumSolverResults,
+                m_solverResultLimit,
+                m_removeWhenBroken,
+                m_revertBackVelocityOnBreak,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -149,15 +149,15 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
+                        "atoms" => Ok(__Field::m_atoms),
+                        "constraintData" => Ok(__Field::m_constraintData),
+                        "childRuntimeSize" => Ok(__Field::m_childRuntimeSize),
+                        "childNumSolverResults" => Ok(__Field::m_childNumSolverResults),
+                        "solverResultLimit" => Ok(__Field::m_solverResultLimit),
+                        "removeWhenBroken" => Ok(__Field::m_removeWhenBroken),
                         "revertBackVelocityOnBreak" => {
                             Ok(__Field::m_revertBackVelocityOnBreak)
                         }
-                        "removeWhenBroken" => Ok(__Field::m_removeWhenBroken),
-                        "solverResultLimit" => Ok(__Field::m_solverResultLimit),
-                        "childNumSolverResults" => Ok(__Field::m_childNumSolverResults),
-                        "childRuntimeSize" => Ok(__Field::m_childRuntimeSize),
-                        "constraintData" => Ok(__Field::m_constraintData),
-                        "atoms" => Ok(__Field::m_atoms),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -428,15 +428,15 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
+                    let mut m_constraintData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_childRuntimeSize: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_childNumSolverResults: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_solverResultLimit: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_removeWhenBroken: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_revertBackVelocityOnBreak: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_removeWhenBroken: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_solverResultLimit: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_childNumSolverResults: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_childRuntimeSize: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_constraintData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -470,23 +470,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_revertBackVelocityOnBreak => {
+                            __Field::m_atoms => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_revertBackVelocityOnBreak,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_atoms) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "revertBackVelocityOnBreak",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
                                     );
                                 }
-                                m_revertBackVelocityOnBreak = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_atoms = _serde::__private::Some(
+                                    match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -496,21 +492,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_removeWhenBroken => {
+                            __Field::m_constraintData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_removeWhenBroken) {
+                                if _serde::__private::Option::is_some(&m_constraintData) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "removeWhenBroken",
+                                            "constraintData",
                                         ),
                                     );
                                 }
-                                m_removeWhenBroken = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_constraintData = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -520,23 +516,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_solverResultLimit => {
+                            __Field::m_childRuntimeSize => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_solverResultLimit,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_childRuntimeSize) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "solverResultLimit",
+                                            "childRuntimeSize",
                                         ),
                                     );
                                 }
-                                m_solverResultLimit = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_childRuntimeSize = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -572,21 +566,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_childRuntimeSize => {
+                            __Field::m_solverResultLimit => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_childRuntimeSize) {
+                                if _serde::__private::Option::is_some(
+                                    &m_solverResultLimit,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "childRuntimeSize",
+                                            "solverResultLimit",
                                         ),
                                     );
                                 }
-                                m_childRuntimeSize = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                m_solverResultLimit = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -596,21 +592,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_constraintData => {
+                            __Field::m_removeWhenBroken => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_constraintData) {
+                                if _serde::__private::Option::is_some(&m_removeWhenBroken) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "constraintData",
+                                            "removeWhenBroken",
                                         ),
                                     );
                                 }
-                                m_constraintData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_removeWhenBroken = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -620,19 +616,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_atoms => {
+                            __Field::m_revertBackVelocityOnBreak => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_atoms) {
+                                if _serde::__private::Option::is_some(
+                                    &m_revertBackVelocityOnBreak,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "revertBackVelocityOnBreak",
+                                        ),
                                     );
                                 }
-                                m_atoms = _serde::__private::Some(
-                                    match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
+                                m_revertBackVelocityOnBreak = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -655,49 +655,23 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_revertBackVelocityOnBreak = match m_revertBackVelocityOnBreak {
+                    let m_atoms = match m_atoms {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "revertBackVelocityOnBreak",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("atoms"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_removeWhenBroken = match m_removeWhenBroken {
+                    let m_constraintData = match m_constraintData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "removeWhenBroken",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_solverResultLimit = match m_solverResultLimit {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "solverResultLimit",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_childNumSolverResults = match m_childNumSolverResults {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "childNumSolverResults",
+                                    "constraintData",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -715,24 +689,50 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_constraintData = match m_constraintData {
+                    let m_childNumSolverResults = match m_childNumSolverResults {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "constraintData",
+                                    "childNumSolverResults",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_atoms = match m_atoms {
+                    let m_solverResultLimit = match m_solverResultLimit {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("atoms"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "solverResultLimit",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_removeWhenBroken = match m_removeWhenBroken {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "removeWhenBroken",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_revertBackVelocityOnBreak = match m_revertBackVelocityOnBreak {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "revertBackVelocityOnBreak",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -77,8 +77,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_isLocked,
                 m_vertexBuffer,
+                m_isLocked,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -102,8 +102,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "isLocked" => Ok(__Field::m_isLocked),
                         "vertexBuffer" => Ok(__Field::m_vertexBuffer),
+                        "isLocked" => Ok(__Field::m_isLocked),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -251,8 +251,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_isLocked: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_vertexBuffer: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_isLocked: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -262,30 +262,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_isLocked => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_isLocked) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isLocked",
-                                        ),
-                                    );
-                                }
-                                m_isLocked = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_vertexBuffer => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -310,19 +286,33 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_isLocked => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isLocked) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isLocked",
+                                        ),
+                                    );
+                                }
+                                m_isLocked = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_isLocked = match m_isLocked {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("isLocked"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_vertexBuffer = match m_vertexBuffer {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -331,6 +321,16 @@ const _: () = {
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "vertexBuffer",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isLocked = match m_isLocked {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("isLocked"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

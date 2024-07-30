@@ -77,9 +77,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_eventMode,
-                m_event,
                 m_upperBound,
+                m_event,
+                m_eventMode,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -103,9 +103,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "eventMode" => Ok(__Field::m_eventMode),
-                        "event" => Ok(__Field::m_event),
                         "upperBound" => Ok(__Field::m_upperBound),
+                        "event" => Ok(__Field::m_event),
+                        "eventMode" => Ok(__Field::m_eventMode),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -249,9 +249,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_eventMode: _serde::__private::Option<EventRangeMode> = _serde::__private::None;
-                    let mut m_event: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
                     let mut m_upperBound: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_event: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+                    let mut m_eventMode: _serde::__private::Option<EventRangeMode> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -261,21 +261,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_eventMode => {
+                            __Field::m_upperBound => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_eventMode) {
+                                if _serde::__private::Option::is_some(&m_upperBound) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "eventMode",
+                                            "upperBound",
                                         ),
                                     );
                                 }
-                                m_eventMode = _serde::__private::Some(
-                                    match __A::next_value::<EventRangeMode>(&mut __map) {
+                                m_upperBound = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -307,21 +307,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_upperBound => {
+                            __Field::m_eventMode => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_upperBound) {
+                                if _serde::__private::Option::is_some(&m_eventMode) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "upperBound",
+                                            "eventMode",
                                         ),
                                     );
                                 }
-                                m_upperBound = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_eventMode = _serde::__private::Some(
+                                    match __A::next_value::<EventRangeMode>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -334,13 +334,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_eventMode = match m_eventMode {
+                    let m_upperBound = match m_upperBound {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "eventMode",
+                                    "upperBound",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -356,13 +356,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_upperBound = match m_upperBound {
+                    let m_eventMode = match m_eventMode {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "upperBound",
+                                    "eventMode",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

@@ -192,24 +192,24 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_isOriginalAnkleTransformMSSet,
-                m_isPlantedMS,
-                m_hitSomething,
-                m_ankleIndex,
-                m_kneeIndex,
-                m_hipIndex,
-                m_maxAnkleAngleDegrees,
-                m_verticalError,
-                m_minKneeAngleDegrees,
-                m_maxKneeAngleDegrees,
-                m_minAnkleHeightMS,
-                m_maxAnkleHeightMS,
-                m_footRaisedAnkleHeightMS,
-                m_footPlantedAnkleHeightMS,
-                m_ungroundedEvent,
-                m_footEndLS,
-                m_kneeAxisLS,
                 m_originalAnkleTransformMS,
+                m_kneeAxisLS,
+                m_footEndLS,
+                m_ungroundedEvent,
+                m_footPlantedAnkleHeightMS,
+                m_footRaisedAnkleHeightMS,
+                m_maxAnkleHeightMS,
+                m_minAnkleHeightMS,
+                m_maxKneeAngleDegrees,
+                m_minKneeAngleDegrees,
+                m_verticalError,
+                m_maxAnkleAngleDegrees,
+                m_hipIndex,
+                m_kneeIndex,
+                m_ankleIndex,
+                m_hitSomething,
+                m_isPlantedMS,
+                m_isOriginalAnkleTransformMSSet,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -233,31 +233,31 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "isOriginalAnkleTransformMSSet" => {
-                            Ok(__Field::m_isOriginalAnkleTransformMSSet)
+                        "originalAnkleTransformMS" => {
+                            Ok(__Field::m_originalAnkleTransformMS)
                         }
-                        "isPlantedMS" => Ok(__Field::m_isPlantedMS),
-                        "hitSomething" => Ok(__Field::m_hitSomething),
-                        "ankleIndex" => Ok(__Field::m_ankleIndex),
-                        "kneeIndex" => Ok(__Field::m_kneeIndex),
-                        "hipIndex" => Ok(__Field::m_hipIndex),
-                        "maxAnkleAngleDegrees" => Ok(__Field::m_maxAnkleAngleDegrees),
-                        "verticalError" => Ok(__Field::m_verticalError),
-                        "minKneeAngleDegrees" => Ok(__Field::m_minKneeAngleDegrees),
-                        "maxKneeAngleDegrees" => Ok(__Field::m_maxKneeAngleDegrees),
-                        "minAnkleHeightMS" => Ok(__Field::m_minAnkleHeightMS),
-                        "maxAnkleHeightMS" => Ok(__Field::m_maxAnkleHeightMS),
-                        "footRaisedAnkleHeightMS" => {
-                            Ok(__Field::m_footRaisedAnkleHeightMS)
-                        }
+                        "kneeAxisLS" => Ok(__Field::m_kneeAxisLS),
+                        "footEndLS" => Ok(__Field::m_footEndLS),
+                        "ungroundedEvent" => Ok(__Field::m_ungroundedEvent),
                         "footPlantedAnkleHeightMS" => {
                             Ok(__Field::m_footPlantedAnkleHeightMS)
                         }
-                        "ungroundedEvent" => Ok(__Field::m_ungroundedEvent),
-                        "footEndLS" => Ok(__Field::m_footEndLS),
-                        "kneeAxisLS" => Ok(__Field::m_kneeAxisLS),
-                        "originalAnkleTransformMS" => {
-                            Ok(__Field::m_originalAnkleTransformMS)
+                        "footRaisedAnkleHeightMS" => {
+                            Ok(__Field::m_footRaisedAnkleHeightMS)
+                        }
+                        "maxAnkleHeightMS" => Ok(__Field::m_maxAnkleHeightMS),
+                        "minAnkleHeightMS" => Ok(__Field::m_minAnkleHeightMS),
+                        "maxKneeAngleDegrees" => Ok(__Field::m_maxKneeAngleDegrees),
+                        "minKneeAngleDegrees" => Ok(__Field::m_minKneeAngleDegrees),
+                        "verticalError" => Ok(__Field::m_verticalError),
+                        "maxAnkleAngleDegrees" => Ok(__Field::m_maxAnkleAngleDegrees),
+                        "hipIndex" => Ok(__Field::m_hipIndex),
+                        "kneeIndex" => Ok(__Field::m_kneeIndex),
+                        "ankleIndex" => Ok(__Field::m_ankleIndex),
+                        "hitSomething" => Ok(__Field::m_hitSomething),
+                        "isPlantedMS" => Ok(__Field::m_isPlantedMS),
+                        "isOriginalAnkleTransformMSSet" => {
+                            Ok(__Field::m_isOriginalAnkleTransformMSSet)
                         }
                         _ => Ok(__Field::__ignore),
                     }
@@ -887,29 +887,29 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_isOriginalAnkleTransformMSSet: _serde::__private::Option<
-                        bool,
+                    let mut m_originalAnkleTransformMS: _serde::__private::Option<
+                        QsTransform,
                     > = _serde::__private::None;
-                    let mut m_isPlantedMS: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_hitSomething: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_ankleIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_kneeIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_hipIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_maxAnkleAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_verticalError: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_minKneeAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxKneeAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_minAnkleHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxAnkleHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_footRaisedAnkleHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_footPlantedAnkleHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_kneeAxisLS: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_footEndLS: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_ungroundedEvent: _serde::__private::Option<
                         hkbEventProperty,
                     > = _serde::__private::None;
-                    let mut m_footEndLS: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_kneeAxisLS: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_originalAnkleTransformMS: _serde::__private::Option<
-                        QsTransform,
+                    let mut m_footPlantedAnkleHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_footRaisedAnkleHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxAnkleHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_minAnkleHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxKneeAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_minKneeAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_verticalError: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxAnkleAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_hipIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_kneeIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_ankleIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_hitSomething: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_isPlantedMS: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_isOriginalAnkleTransformMSSet: _serde::__private::Option<
+                        bool,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
@@ -920,23 +920,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_isOriginalAnkleTransformMSSet => {
+                            __Field::m_originalAnkleTransformMS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_isOriginalAnkleTransformMSSet,
+                                    &m_originalAnkleTransformMS,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isOriginalAnkleTransformMSSet",
+                                            "originalAnkleTransformMS",
                                         ),
                                     );
                                 }
-                                m_isOriginalAnkleTransformMSSet = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_originalAnkleTransformMS = _serde::__private::Some(
+                                    match __A::next_value::<QsTransform>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -946,21 +946,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_isPlantedMS => {
+                            __Field::m_kneeAxisLS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isPlantedMS) {
+                                if _serde::__private::Option::is_some(&m_kneeAxisLS) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isPlantedMS",
+                                            "kneeAxisLS",
                                         ),
                                     );
                                 }
-                                m_isPlantedMS = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_kneeAxisLS = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -970,21 +970,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_hitSomething => {
+                            __Field::m_footEndLS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_hitSomething) {
+                                if _serde::__private::Option::is_some(&m_footEndLS) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "hitSomething",
+                                            "footEndLS",
                                         ),
                                     );
                                 }
-                                m_hitSomething = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_footEndLS = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -994,21 +994,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_ankleIndex => {
+                            __Field::m_ungroundedEvent => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_ankleIndex) {
+                                if _serde::__private::Option::is_some(&m_ungroundedEvent) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ankleIndex",
+                                            "ungroundedEvent",
                                         ),
                                     );
                                 }
-                                m_ankleIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                m_ungroundedEvent = _serde::__private::Some(
+                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1018,194 +1018,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_kneeIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_kneeIndex) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "kneeIndex",
-                                        ),
-                                    );
-                                }
-                                m_kneeIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_hipIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_hipIndex) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "hipIndex",
-                                        ),
-                                    );
-                                }
-                                m_hipIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxAnkleAngleDegrees => {
+                            __Field::m_footPlantedAnkleHeightMS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_maxAnkleAngleDegrees,
+                                    &m_footPlantedAnkleHeightMS,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxAnkleAngleDegrees",
+                                            "footPlantedAnkleHeightMS",
                                         ),
                                     );
                                 }
-                                m_maxAnkleAngleDegrees = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_verticalError => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_verticalError) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "verticalError",
-                                        ),
-                                    );
-                                }
-                                m_verticalError = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_minKneeAngleDegrees => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_minKneeAngleDegrees,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "minKneeAngleDegrees",
-                                        ),
-                                    );
-                                }
-                                m_minKneeAngleDegrees = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxKneeAngleDegrees => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxKneeAngleDegrees,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxKneeAngleDegrees",
-                                        ),
-                                    );
-                                }
-                                m_maxKneeAngleDegrees = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_minAnkleHeightMS => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_minAnkleHeightMS) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "minAnkleHeightMS",
-                                        ),
-                                    );
-                                }
-                                m_minAnkleHeightMS = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxAnkleHeightMS => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_maxAnkleHeightMS) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxAnkleHeightMS",
-                                        ),
-                                    );
-                                }
-                                m_maxAnkleHeightMS = _serde::__private::Some(
+                                m_footPlantedAnkleHeightMS = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1242,22 +1070,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_footPlantedAnkleHeightMS => {
+                            __Field::m_maxAnkleHeightMS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_footPlantedAnkleHeightMS,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_maxAnkleHeightMS) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "footPlantedAnkleHeightMS",
+                                            "maxAnkleHeightMS",
                                         ),
                                     );
                                 }
-                                m_footPlantedAnkleHeightMS = _serde::__private::Some(
+                                m_maxAnkleHeightMS = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1268,21 +1094,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_ungroundedEvent => {
+                            __Field::m_minAnkleHeightMS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_ungroundedEvent) {
+                                if _serde::__private::Option::is_some(&m_minAnkleHeightMS) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ungroundedEvent",
+                                            "minAnkleHeightMS",
                                         ),
                                     );
                                 }
-                                m_ungroundedEvent = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                m_minAnkleHeightMS = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1292,71 +1118,245 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_footEndLS => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_footEndLS) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "footEndLS",
-                                        ),
-                                    );
-                                }
-                                m_footEndLS = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_kneeAxisLS => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_kneeAxisLS) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "kneeAxisLS",
-                                        ),
-                                    );
-                                }
-                                m_kneeAxisLS = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_originalAnkleTransformMS => {
+                            __Field::m_maxKneeAngleDegrees => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_originalAnkleTransformMS,
+                                    &m_maxKneeAngleDegrees,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "originalAnkleTransformMS",
+                                            "maxKneeAngleDegrees",
                                         ),
                                     );
                                 }
-                                m_originalAnkleTransformMS = _serde::__private::Some(
-                                    match __A::next_value::<QsTransform>(&mut __map) {
+                                m_maxKneeAngleDegrees = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_minKneeAngleDegrees => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_minKneeAngleDegrees,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "minKneeAngleDegrees",
+                                        ),
+                                    );
+                                }
+                                m_minKneeAngleDegrees = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_verticalError => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_verticalError) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "verticalError",
+                                        ),
+                                    );
+                                }
+                                m_verticalError = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxAnkleAngleDegrees => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxAnkleAngleDegrees,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxAnkleAngleDegrees",
+                                        ),
+                                    );
+                                }
+                                m_maxAnkleAngleDegrees = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_hipIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_hipIndex) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "hipIndex",
+                                        ),
+                                    );
+                                }
+                                m_hipIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_kneeIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_kneeIndex) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "kneeIndex",
+                                        ),
+                                    );
+                                }
+                                m_kneeIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_ankleIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_ankleIndex) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "ankleIndex",
+                                        ),
+                                    );
+                                }
+                                m_ankleIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_hitSomething => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_hitSomething) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "hitSomething",
+                                        ),
+                                    );
+                                }
+                                m_hitSomething = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isPlantedMS => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isPlantedMS) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isPlantedMS",
+                                        ),
+                                    );
+                                }
+                                m_isPlantedMS = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isOriginalAnkleTransformMSSet => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_isOriginalAnkleTransformMSSet,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isOriginalAnkleTransformMSSet",
+                                        ),
+                                    );
+                                }
+                                m_isOriginalAnkleTransformMSSet = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1369,191 +1369,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_isOriginalAnkleTransformMSSet = match m_isOriginalAnkleTransformMSSet {
+                    let m_originalAnkleTransformMS = match m_originalAnkleTransformMS {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isOriginalAnkleTransformMSSet",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_isPlantedMS = match m_isPlantedMS {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "isPlantedMS",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_hitSomething = match m_hitSomething {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "hitSomething",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_ankleIndex = match m_ankleIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "ankleIndex",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_kneeIndex = match m_kneeIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "kneeIndex",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_hipIndex = match m_hipIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("hipIndex"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxAnkleAngleDegrees = match m_maxAnkleAngleDegrees {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxAnkleAngleDegrees",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_verticalError = match m_verticalError {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "verticalError",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_minKneeAngleDegrees = match m_minKneeAngleDegrees {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "minKneeAngleDegrees",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxKneeAngleDegrees = match m_maxKneeAngleDegrees {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxKneeAngleDegrees",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_minAnkleHeightMS = match m_minAnkleHeightMS {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "minAnkleHeightMS",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxAnkleHeightMS = match m_maxAnkleHeightMS {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxAnkleHeightMS",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_footRaisedAnkleHeightMS = match m_footRaisedAnkleHeightMS {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "footRaisedAnkleHeightMS",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_footPlantedAnkleHeightMS = match m_footPlantedAnkleHeightMS {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "footPlantedAnkleHeightMS",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_ungroundedEvent = match m_ungroundedEvent {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "ungroundedEvent",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_footEndLS = match m_footEndLS {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "footEndLS",
+                                    "originalAnkleTransformMS",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1571,13 +1393,191 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_originalAnkleTransformMS = match m_originalAnkleTransformMS {
+                    let m_footEndLS = match m_footEndLS {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "originalAnkleTransformMS",
+                                    "footEndLS",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_ungroundedEvent = match m_ungroundedEvent {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "ungroundedEvent",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_footPlantedAnkleHeightMS = match m_footPlantedAnkleHeightMS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "footPlantedAnkleHeightMS",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_footRaisedAnkleHeightMS = match m_footRaisedAnkleHeightMS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "footRaisedAnkleHeightMS",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxAnkleHeightMS = match m_maxAnkleHeightMS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxAnkleHeightMS",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_minAnkleHeightMS = match m_minAnkleHeightMS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "minAnkleHeightMS",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxKneeAngleDegrees = match m_maxKneeAngleDegrees {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxKneeAngleDegrees",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_minKneeAngleDegrees = match m_minKneeAngleDegrees {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "minKneeAngleDegrees",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_verticalError = match m_verticalError {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "verticalError",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxAnkleAngleDegrees = match m_maxAnkleAngleDegrees {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxAnkleAngleDegrees",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_hipIndex = match m_hipIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("hipIndex"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_kneeIndex = match m_kneeIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "kneeIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_ankleIndex = match m_ankleIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "ankleIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_hitSomething = match m_hitSomething {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "hitSomething",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isPlantedMS = match m_isPlantedMS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isPlantedMS",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isOriginalAnkleTransformMSSet = match m_isOriginalAnkleTransformMSSet {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isOriginalAnkleTransformMSSet",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

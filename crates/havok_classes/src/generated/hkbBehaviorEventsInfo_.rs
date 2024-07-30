@@ -88,9 +88,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_padding,
-                m_externalEventIds,
                 m_characterId,
+                m_externalEventIds,
+                m_padding,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -114,9 +114,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "padding" => Ok(__Field::m_padding),
-                        "externalEventIds" => Ok(__Field::m_externalEventIds),
                         "characterId" => Ok(__Field::m_characterId),
+                        "externalEventIds" => Ok(__Field::m_externalEventIds),
+                        "padding" => Ok(__Field::m_padding),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -263,9 +263,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_padding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_externalEventIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
                     let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_externalEventIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+                    let mut m_padding: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -275,21 +275,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_padding => {
+                            __Field::m_characterId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_padding) {
+                                if _serde::__private::Option::is_some(&m_characterId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "padding",
+                                            "characterId",
                                         ),
                                     );
                                 }
-                                m_padding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_characterId = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -323,21 +323,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_characterId => {
+                            __Field::m_padding => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_characterId) {
+                                if _serde::__private::Option::is_some(&m_padding) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "characterId",
+                                            "padding",
                                         ),
                                     );
                                 }
-                                m_characterId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                m_padding = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -350,12 +350,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_padding = match m_padding {
+                    let m_characterId = match m_characterId {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("padding"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "characterId",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -372,14 +374,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_characterId = match m_characterId {
+                    let m_padding = match m_padding {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterId",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("padding"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

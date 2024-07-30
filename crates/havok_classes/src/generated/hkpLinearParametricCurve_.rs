@@ -103,11 +103,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_distance,
-                m_points,
-                m_dirNotParallelToTangentAlongWholePath,
-                m_closedLoop,
                 m_smoothingFactor,
+                m_closedLoop,
+                m_dirNotParallelToTangentAlongWholePath,
+                m_points,
+                m_distance,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -131,13 +131,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "distance" => Ok(__Field::m_distance),
-                        "points" => Ok(__Field::m_points),
+                        "smoothingFactor" => Ok(__Field::m_smoothingFactor),
+                        "closedLoop" => Ok(__Field::m_closedLoop),
                         "dirNotParallelToTangentAlongWholePath" => {
                             Ok(__Field::m_dirNotParallelToTangentAlongWholePath)
                         }
-                        "closedLoop" => Ok(__Field::m_closedLoop),
-                        "smoothingFactor" => Ok(__Field::m_smoothingFactor),
+                        "points" => Ok(__Field::m_points),
+                        "distance" => Ok(__Field::m_distance),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -344,13 +344,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_distance: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-                    let mut m_points: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
+                    let mut m_smoothingFactor: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_closedLoop: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_dirNotParallelToTangentAlongWholePath: _serde::__private::Option<
                         Vector4,
                     > = _serde::__private::None;
-                    let mut m_closedLoop: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_smoothingFactor: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_points: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
+                    let mut m_distance: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -360,21 +360,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_distance => {
+                            __Field::m_smoothingFactor => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_distance) {
+                                if _serde::__private::Option::is_some(&m_smoothingFactor) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "distance",
+                                            "smoothingFactor",
                                         ),
                                     );
                                 }
-                                m_distance = _serde::__private::Some(
-                                    match __A::next_value::<Vec<f32>>(&mut __map) {
+                                m_smoothingFactor = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -384,19 +384,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_points => {
+                            __Field::m_closedLoop => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_points) {
+                                if _serde::__private::Option::is_some(&m_closedLoop) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("points"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "closedLoop",
+                                        ),
                                     );
                                 }
-                                m_points = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                                m_closedLoop = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -432,21 +434,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_closedLoop => {
+                            __Field::m_points => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_closedLoop) {
+                                if _serde::__private::Option::is_some(&m_points) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "closedLoop",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("points"),
                                     );
                                 }
-                                m_closedLoop = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_points = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -456,21 +456,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_smoothingFactor => {
+                            __Field::m_distance => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_smoothingFactor) {
+                                if _serde::__private::Option::is_some(&m_distance) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "smoothingFactor",
+                                            "distance",
                                         ),
                                     );
                                 }
-                                m_smoothingFactor = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_distance = _serde::__private::Some(
+                                    match __A::next_value::<Vec<f32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -483,33 +483,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_distance = match m_distance {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("distance"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_points = match m_points {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("points"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_dirNotParallelToTangentAlongWholePath = match m_dirNotParallelToTangentAlongWholePath {
+                    let m_smoothingFactor = match m_smoothingFactor {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "dirNotParallelToTangentAlongWholePath",
+                                    "smoothingFactor",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -527,14 +507,34 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_smoothingFactor = match m_smoothingFactor {
+                    let m_dirNotParallelToTangentAlongWholePath = match m_dirNotParallelToTangentAlongWholePath {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "smoothingFactor",
+                                    "dirNotParallelToTangentAlongWholePath",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_points = match m_points {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("points"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_distance = match m_distance {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("distance"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

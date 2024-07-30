@@ -84,9 +84,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_string,
-                m_real,
                 m_int,
+                m_real,
+                m_string,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -110,9 +110,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "string" => Ok(__Field::m_string),
-                        "real" => Ok(__Field::m_real),
                         "int" => Ok(__Field::m_int),
+                        "real" => Ok(__Field::m_real),
+                        "string" => Ok(__Field::m_string),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -248,9 +248,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_string: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_real: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_int: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_real: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_string: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -260,19 +260,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_string => {
+                            __Field::m_int => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_string) {
+                                if _serde::__private::Option::is_some(&m_int) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("string"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("int"),
                                     );
                                 }
-                                m_string = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_int = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -304,19 +304,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_int => {
+                            __Field::m_string => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_int) {
+                                if _serde::__private::Option::is_some(&m_string) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("int"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("string"),
                                     );
                                 }
-                                m_int = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_string = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -329,12 +329,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_string = match m_string {
+                    let m_int = match m_int {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("string"),
+                                <__A::Error as _serde::de::Error>::missing_field("int"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -349,12 +349,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_int = match m_int {
+                    let m_string = match m_string {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("int"),
+                                <__A::Error as _serde::de::Error>::missing_field("string"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

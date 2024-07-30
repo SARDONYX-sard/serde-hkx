@@ -122,14 +122,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_keyboardKey,
                 m_name,
-                m_bulletOffsetFromCenter,
-                m_maxBulletsInWorld,
-                m_damageMultiplier,
-                m_bulletMass,
-                m_bulletVelocity,
+                m_keyboardKey,
                 m_bulletRadius,
+                m_bulletVelocity,
+                m_bulletMass,
+                m_damageMultiplier,
+                m_maxBulletsInWorld,
+                m_bulletOffsetFromCenter,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -153,14 +153,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "keyboardKey" => Ok(__Field::m_keyboardKey),
                         "name" => Ok(__Field::m_name),
-                        "bulletOffsetFromCenter" => Ok(__Field::m_bulletOffsetFromCenter),
-                        "maxBulletsInWorld" => Ok(__Field::m_maxBulletsInWorld),
-                        "damageMultiplier" => Ok(__Field::m_damageMultiplier),
-                        "bulletMass" => Ok(__Field::m_bulletMass),
-                        "bulletVelocity" => Ok(__Field::m_bulletVelocity),
+                        "keyboardKey" => Ok(__Field::m_keyboardKey),
                         "bulletRadius" => Ok(__Field::m_bulletRadius),
+                        "bulletVelocity" => Ok(__Field::m_bulletVelocity),
+                        "bulletMass" => Ok(__Field::m_bulletMass),
+                        "damageMultiplier" => Ok(__Field::m_damageMultiplier),
+                        "maxBulletsInWorld" => Ok(__Field::m_maxBulletsInWorld),
+                        "bulletOffsetFromCenter" => Ok(__Field::m_bulletOffsetFromCenter),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -429,16 +429,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_keyboardKey: _serde::__private::Option<KeyboardKey> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_keyboardKey: _serde::__private::Option<KeyboardKey> = _serde::__private::None;
+                    let mut m_bulletRadius: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_bulletVelocity: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_bulletMass: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_damageMultiplier: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxBulletsInWorld: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_bulletOffsetFromCenter: _serde::__private::Option<
                         Vector4,
                     > = _serde::__private::None;
-                    let mut m_maxBulletsInWorld: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_damageMultiplier: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_bulletMass: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_bulletVelocity: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_bulletRadius: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -448,6 +448,28 @@ const _: () = {
                         __key
                     } {
                         match __key {
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             __Field::m_keyboardKey => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -472,19 +494,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
+                            __Field::m_bulletRadius => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_name) {
+                                if _serde::__private::Option::is_some(&m_bulletRadius) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bulletRadius",
+                                        ),
                                     );
                                 }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_bulletRadius = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -494,23 +518,69 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_bulletOffsetFromCenter => {
+                            __Field::m_bulletVelocity => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_bulletOffsetFromCenter,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_bulletVelocity) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bulletOffsetFromCenter",
+                                            "bulletVelocity",
                                         ),
                                     );
                                 }
-                                m_bulletOffsetFromCenter = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_bulletVelocity = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bulletMass => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bulletMass) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bulletMass",
+                                        ),
+                                    );
+                                }
+                                m_bulletMass = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_damageMultiplier => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_damageMultiplier) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "damageMultiplier",
+                                        ),
+                                    );
+                                }
+                                m_damageMultiplier = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -546,93 +616,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_damageMultiplier => {
+                            __Field::m_bulletOffsetFromCenter => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_damageMultiplier) {
+                                if _serde::__private::Option::is_some(
+                                    &m_bulletOffsetFromCenter,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "damageMultiplier",
+                                            "bulletOffsetFromCenter",
                                         ),
                                     );
                                 }
-                                m_damageMultiplier = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bulletMass => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bulletMass) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bulletMass",
-                                        ),
-                                    );
-                                }
-                                m_bulletMass = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bulletVelocity => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bulletVelocity) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bulletVelocity",
-                                        ),
-                                    );
-                                }
-                                m_bulletVelocity = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bulletRadius => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bulletRadius) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bulletRadius",
-                                        ),
-                                    );
-                                }
-                                m_bulletRadius = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_bulletOffsetFromCenter = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -645,6 +645,16 @@ const _: () = {
                             _ => {}
                         }
                     }
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
                     let m_keyboardKey = match m_keyboardKey {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -657,59 +667,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bulletOffsetFromCenter = match m_bulletOffsetFromCenter {
+                    let m_bulletRadius = match m_bulletRadius {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "bulletOffsetFromCenter",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxBulletsInWorld = match m_maxBulletsInWorld {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxBulletsInWorld",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_damageMultiplier = match m_damageMultiplier {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "damageMultiplier",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bulletMass = match m_bulletMass {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bulletMass",
+                                    "bulletRadius",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -727,13 +691,49 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_bulletRadius = match m_bulletRadius {
+                    let m_bulletMass = match m_bulletMass {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "bulletRadius",
+                                    "bulletMass",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_damageMultiplier = match m_damageMultiplier {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "damageMultiplier",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxBulletsInWorld = match m_maxBulletsInWorld {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxBulletsInWorld",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bulletOffsetFromCenter = match m_bulletOffsetFromCenter {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bulletOffsetFromCenter",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

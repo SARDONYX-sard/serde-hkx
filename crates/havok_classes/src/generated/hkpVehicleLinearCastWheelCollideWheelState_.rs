@@ -85,10 +85,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_to,
-                m_transform,
-                m_shape,
                 m_phantom,
+                m_shape,
+                m_transform,
+                m_to,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -112,10 +112,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "to" => Ok(__Field::m_to),
-                        "transform" => Ok(__Field::m_transform),
-                        "shape" => Ok(__Field::m_shape),
                         "phantom" => Ok(__Field::m_phantom),
+                        "shape" => Ok(__Field::m_shape),
+                        "transform" => Ok(__Field::m_transform),
+                        "to" => Ok(__Field::m_to),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -284,10 +284,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_to: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_transform: _serde::__private::Option<Transform> = _serde::__private::None;
-                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_phantom: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_transform: _serde::__private::Option<Transform> = _serde::__private::None;
+                    let mut m_to: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -297,19 +297,43 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_to => {
+                            __Field::m_phantom => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_to) {
+                                if _serde::__private::Option::is_some(&m_phantom) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("to"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "phantom",
+                                        ),
                                     );
                                 }
-                                m_to = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_phantom = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_shape => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_shape) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
+                                    );
+                                }
+                                m_shape = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -343,43 +367,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_shape => {
+                            __Field::m_to => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_shape) {
+                                if _serde::__private::Option::is_some(&m_to) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("to"),
                                     );
                                 }
-                                m_shape = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_phantom => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_phantom) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "phantom",
-                                        ),
-                                    );
-                                }
-                                m_phantom = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_to = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -392,12 +392,22 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_to = match m_to {
+                    let m_phantom = match m_phantom {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("to"),
+                                <__A::Error as _serde::de::Error>::missing_field("phantom"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_shape = match m_shape {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("shape"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -414,22 +424,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_shape = match m_shape {
+                    let m_to = match m_to {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("shape"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_phantom = match m_phantom {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("phantom"),
+                                <__A::Error as _serde::de::Error>::missing_field("to"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

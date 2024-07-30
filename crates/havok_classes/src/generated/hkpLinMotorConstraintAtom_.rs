@@ -102,12 +102,12 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_motor,
-                m_targetPosition,
-                m_previousTargetPositionOffset,
-                m_initializedOffset,
-                m_motorAxis,
                 m_isEnabled,
+                m_motorAxis,
+                m_initializedOffset,
+                m_previousTargetPositionOffset,
+                m_targetPosition,
+                m_motor,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -132,14 +132,14 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "motor" => Ok(__Field::m_motor),
-                        "targetPosition" => Ok(__Field::m_targetPosition),
+                        "isEnabled" => Ok(__Field::m_isEnabled),
+                        "motorAxis" => Ok(__Field::m_motorAxis),
+                        "initializedOffset" => Ok(__Field::m_initializedOffset),
                         "previousTargetPositionOffset" => {
                             Ok(__Field::m_previousTargetPositionOffset)
                         }
-                        "initializedOffset" => Ok(__Field::m_initializedOffset),
-                        "motorAxis" => Ok(__Field::m_motorAxis),
-                        "isEnabled" => Ok(__Field::m_isEnabled),
+                        "targetPosition" => Ok(__Field::m_targetPosition),
+                        "motor" => Ok(__Field::m_motor),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -379,14 +379,14 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_motor: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_targetPosition: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_motorAxis: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_initializedOffset: _serde::__private::Option<i16> = _serde::__private::None;
                     let mut m_previousTargetPositionOffset: _serde::__private::Option<
                         i16,
                     > = _serde::__private::None;
-                    let mut m_initializedOffset: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_motorAxis: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_targetPosition: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_motor: _serde::__private::Option<Pointer> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -418,19 +418,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_motor => {
+                            __Field::m_isEnabled => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_motor) {
+                                if _serde::__private::Option::is_some(&m_isEnabled) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("motor"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isEnabled",
+                                        ),
                                     );
                                 }
-                                m_motor = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_isEnabled = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -440,47 +442,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_targetPosition => {
+                            __Field::m_motorAxis => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_targetPosition) {
+                                if _serde::__private::Option::is_some(&m_motorAxis) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "targetPosition",
+                                            "motorAxis",
                                         ),
                                     );
                                 }
-                                m_targetPosition = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_previousTargetPositionOffset => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_previousTargetPositionOffset,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "previousTargetPositionOffset",
-                                        ),
-                                    );
-                                }
-                                m_previousTargetPositionOffset = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                m_motorAxis = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -516,21 +492,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_motorAxis => {
+                            __Field::m_previousTargetPositionOffset => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_motorAxis) {
+                                if _serde::__private::Option::is_some(
+                                    &m_previousTargetPositionOffset,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "motorAxis",
+                                            "previousTargetPositionOffset",
                                         ),
                                     );
                                 }
-                                m_motorAxis = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                m_previousTargetPositionOffset = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -540,21 +518,43 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_isEnabled => {
+                            __Field::m_targetPosition => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isEnabled) {
+                                if _serde::__private::Option::is_some(&m_targetPosition) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isEnabled",
+                                            "targetPosition",
                                         ),
                                     );
                                 }
-                                m_isEnabled = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_targetPosition = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_motor => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_motor) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("motor"),
+                                    );
+                                }
+                                m_motor = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -577,47 +577,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_motor = match m_motor {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("motor"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_targetPosition = match m_targetPosition {
+                    let m_isEnabled = match m_isEnabled {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "targetPosition",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_previousTargetPositionOffset = match m_previousTargetPositionOffset {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "previousTargetPositionOffset",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_initializedOffset = match m_initializedOffset {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "initializedOffset",
+                                    "isEnabled",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -635,14 +601,48 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_isEnabled = match m_isEnabled {
+                    let m_initializedOffset = match m_initializedOffset {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isEnabled",
+                                    "initializedOffset",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_previousTargetPositionOffset = match m_previousTargetPositionOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "previousTargetPositionOffset",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_targetPosition = match m_targetPosition {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "targetPosition",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_motor = match m_motor {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("motor"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

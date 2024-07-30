@@ -79,9 +79,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_traceId,
-                m_size,
                 m_start,
+                m_size,
+                m_traceId,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -105,9 +105,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "traceId" => Ok(__Field::m_traceId),
-                        "size" => Ok(__Field::m_size),
                         "start" => Ok(__Field::m_start),
+                        "size" => Ok(__Field::m_size),
+                        "traceId" => Ok(__Field::m_traceId),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -247,9 +247,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_traceId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_size: _serde::__private::Option<u64> = _serde::__private::None;
                     let mut m_start: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_size: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_traceId: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -259,21 +259,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_traceId => {
+                            __Field::m_start => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_traceId) {
+                                if _serde::__private::Option::is_some(&m_start) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "traceId",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("start"),
                                     );
                                 }
-                                m_traceId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_start = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -305,19 +303,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_start => {
+                            __Field::m_traceId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_start) {
+                                if _serde::__private::Option::is_some(&m_traceId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("start"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "traceId",
+                                        ),
                                     );
                                 }
-                                m_start = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                m_traceId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -330,12 +330,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_traceId = match m_traceId {
+                    let m_start = match m_start {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("traceId"),
+                                <__A::Error as _serde::de::Error>::missing_field("start"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -350,12 +350,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_start = match m_start {
+                    let m_traceId = match m_traceId {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("start"),
+                                <__A::Error as _serde::de::Error>::missing_field("traceId"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

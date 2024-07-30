@@ -113,15 +113,15 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_frameStreamEnd,
-                m_frameStreamStart,
-                m_threadId,
-                m_timerFactor1,
-                m_timerFactor0,
-                m_absoluteTimeCounter,
-                m_indexOfTimer1,
-                m_indexOfTimer0,
                 m_heading,
+                m_indexOfTimer0,
+                m_indexOfTimer1,
+                m_absoluteTimeCounter,
+                m_timerFactor0,
+                m_timerFactor1,
+                m_threadId,
+                m_frameStreamStart,
+                m_frameStreamEnd,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -145,15 +145,15 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "frameStreamEnd" => Ok(__Field::m_frameStreamEnd),
-                        "frameStreamStart" => Ok(__Field::m_frameStreamStart),
-                        "threadId" => Ok(__Field::m_threadId),
-                        "timerFactor1" => Ok(__Field::m_timerFactor1),
-                        "timerFactor0" => Ok(__Field::m_timerFactor0),
-                        "absoluteTimeCounter" => Ok(__Field::m_absoluteTimeCounter),
-                        "indexOfTimer1" => Ok(__Field::m_indexOfTimer1),
-                        "indexOfTimer0" => Ok(__Field::m_indexOfTimer0),
                         "heading" => Ok(__Field::m_heading),
+                        "indexOfTimer0" => Ok(__Field::m_indexOfTimer0),
+                        "indexOfTimer1" => Ok(__Field::m_indexOfTimer1),
+                        "absoluteTimeCounter" => Ok(__Field::m_absoluteTimeCounter),
+                        "timerFactor0" => Ok(__Field::m_timerFactor0),
+                        "timerFactor1" => Ok(__Field::m_timerFactor1),
+                        "threadId" => Ok(__Field::m_threadId),
+                        "frameStreamStart" => Ok(__Field::m_frameStreamStart),
+                        "frameStreamEnd" => Ok(__Field::m_frameStreamEnd),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -474,17 +474,17 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_frameStreamEnd: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_frameStreamStart: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_threadId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_timerFactor1: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_timerFactor0: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_heading: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_indexOfTimer0: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_indexOfTimer1: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_absoluteTimeCounter: _serde::__private::Option<
                         AbsoluteTimeCounter,
                     > = _serde::__private::None;
-                    let mut m_indexOfTimer1: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_indexOfTimer0: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_heading: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_timerFactor0: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_timerFactor1: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_threadId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_frameStreamStart: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_frameStreamEnd: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -494,20 +494,44 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_frameStreamEnd => {
+                            __Field::m_heading => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_frameStreamEnd) {
+                                if _serde::__private::Option::is_some(&m_heading) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "frameStreamEnd",
+                                            "heading",
                                         ),
                                     );
                                 }
-                                m_frameStreamEnd = _serde::__private::Some(
+                                m_heading = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_indexOfTimer0 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_indexOfTimer0) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "indexOfTimer0",
+                                        ),
+                                    );
+                                }
+                                m_indexOfTimer0 = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -518,93 +542,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_frameStreamStart => {
+                            __Field::m_indexOfTimer1 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_frameStreamStart) {
+                                if _serde::__private::Option::is_some(&m_indexOfTimer1) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "frameStreamStart",
+                                            "indexOfTimer1",
                                         ),
                                     );
                                 }
-                                m_frameStreamStart = _serde::__private::Some(
+                                m_indexOfTimer1 = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_threadId => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_threadId) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "threadId",
-                                        ),
-                                    );
-                                }
-                                m_threadId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_timerFactor1 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_timerFactor1) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "timerFactor1",
-                                        ),
-                                    );
-                                }
-                                m_timerFactor1 = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_timerFactor0 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_timerFactor0) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "timerFactor0",
-                                        ),
-                                    );
-                                }
-                                m_timerFactor0 = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -640,20 +592,68 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_indexOfTimer1 => {
+                            __Field::m_timerFactor0 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_indexOfTimer1) {
+                                if _serde::__private::Option::is_some(&m_timerFactor0) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "indexOfTimer1",
+                                            "timerFactor0",
                                         ),
                                     );
                                 }
-                                m_indexOfTimer1 = _serde::__private::Some(
+                                m_timerFactor0 = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_timerFactor1 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_timerFactor1) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "timerFactor1",
+                                        ),
+                                    );
+                                }
+                                m_timerFactor1 = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_threadId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_threadId) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "threadId",
+                                        ),
+                                    );
+                                }
+                                m_threadId = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -664,20 +664,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_indexOfTimer0 => {
+                            __Field::m_frameStreamStart => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_indexOfTimer0) {
+                                if _serde::__private::Option::is_some(&m_frameStreamStart) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "indexOfTimer0",
+                                            "frameStreamStart",
                                         ),
                                     );
                                 }
-                                m_indexOfTimer0 = _serde::__private::Some(
+                                m_frameStreamStart = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -688,21 +688,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_heading => {
+                            __Field::m_frameStreamEnd => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_heading) {
+                                if _serde::__private::Option::is_some(&m_frameStreamEnd) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "heading",
+                                            "frameStreamEnd",
                                         ),
                                     );
                                 }
-                                m_heading = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_frameStreamEnd = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -715,71 +715,23 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_frameStreamEnd = match m_frameStreamEnd {
+                    let m_heading = match m_heading {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("heading"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_indexOfTimer0 = match m_indexOfTimer0 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "frameStreamEnd",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_frameStreamStart = match m_frameStreamStart {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "frameStreamStart",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_threadId = match m_threadId {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("threadId"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_timerFactor1 = match m_timerFactor1 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "timerFactor1",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_timerFactor0 = match m_timerFactor0 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "timerFactor0",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_absoluteTimeCounter = match m_absoluteTimeCounter {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "absoluteTimeCounter",
+                                    "indexOfTimer0",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -797,24 +749,72 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_indexOfTimer0 = match m_indexOfTimer0 {
+                    let m_absoluteTimeCounter = match m_absoluteTimeCounter {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "indexOfTimer0",
+                                    "absoluteTimeCounter",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_heading = match m_heading {
+                    let m_timerFactor0 = match m_timerFactor0 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("heading"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "timerFactor0",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_timerFactor1 = match m_timerFactor1 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "timerFactor1",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_threadId = match m_threadId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("threadId"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_frameStreamStart = match m_frameStreamStart {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "frameStreamStart",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_frameStreamEnd = match m_frameStreamEnd {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "frameStreamEnd",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

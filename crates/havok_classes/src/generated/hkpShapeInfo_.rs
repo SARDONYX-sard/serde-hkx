@@ -112,12 +112,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_transform,
-                m_childTransforms,
-                m_childShapeNames,
-                m_hkdShapesCollected,
-                m_isHierarchicalCompound,
                 m_shape,
+                m_isHierarchicalCompound,
+                m_hkdShapesCollected,
+                m_childShapeNames,
+                m_childTransforms,
+                m_transform,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -141,12 +141,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "transform" => Ok(__Field::m_transform),
-                        "childTransforms" => Ok(__Field::m_childTransforms),
-                        "childShapeNames" => Ok(__Field::m_childShapeNames),
-                        "hkdShapesCollected" => Ok(__Field::m_hkdShapesCollected),
-                        "isHierarchicalCompound" => Ok(__Field::m_isHierarchicalCompound),
                         "shape" => Ok(__Field::m_shape),
+                        "isHierarchicalCompound" => Ok(__Field::m_isHierarchicalCompound),
+                        "hkdShapesCollected" => Ok(__Field::m_hkdShapesCollected),
+                        "childShapeNames" => Ok(__Field::m_childShapeNames),
+                        "childTransforms" => Ok(__Field::m_childTransforms),
+                        "transform" => Ok(__Field::m_transform),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -384,16 +384,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_transform: _serde::__private::Option<Transform> = _serde::__private::None;
-                    let mut m_childTransforms: _serde::__private::Option<
-                        Vec<Transform>,
-                    > = _serde::__private::None;
+                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_isHierarchicalCompound: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_hkdShapesCollected: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_childShapeNames: _serde::__private::Option<
                         Vec<StringPtr<'de>>,
                     > = _serde::__private::None;
-                    let mut m_hkdShapesCollected: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_isHierarchicalCompound: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_childTransforms: _serde::__private::Option<
+                        Vec<Transform>,
+                    > = _serde::__private::None;
+                    let mut m_transform: _serde::__private::Option<Transform> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -403,95 +403,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_transform => {
+                            __Field::m_shape => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_transform) {
+                                if _serde::__private::Option::is_some(&m_shape) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transform",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
                                     );
                                 }
-                                m_transform = _serde::__private::Some(
-                                    match __A::next_value::<Transform>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_childTransforms => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_childTransforms) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "childTransforms",
-                                        ),
-                                    );
-                                }
-                                m_childTransforms = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Transform>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_childShapeNames => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_childShapeNames) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "childShapeNames",
-                                        ),
-                                    );
-                                }
-                                m_childShapeNames = _serde::__private::Some(
-                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_hkdShapesCollected => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_hkdShapesCollected,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "hkdShapesCollected",
-                                        ),
-                                    );
-                                }
-                                m_hkdShapesCollected = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_shape = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -527,19 +451,95 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_shape => {
+                            __Field::m_hkdShapesCollected => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_shape) {
+                                if _serde::__private::Option::is_some(
+                                    &m_hkdShapesCollected,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "hkdShapesCollected",
+                                        ),
                                     );
                                 }
-                                m_shape = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_hkdShapesCollected = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_childShapeNames => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_childShapeNames) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "childShapeNames",
+                                        ),
+                                    );
+                                }
+                                m_childShapeNames = _serde::__private::Some(
+                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_childTransforms => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_childTransforms) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "childTransforms",
+                                        ),
+                                    );
+                                }
+                                m_childTransforms = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Transform>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transform => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_transform) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transform",
+                                        ),
+                                    );
+                                }
+                                m_transform = _serde::__private::Some(
+                                    match __A::next_value::<Transform>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -552,37 +552,23 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_transform = match m_transform {
+                    let m_shape = match m_shape {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "transform",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("shape"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_childTransforms = match m_childTransforms {
+                    let m_isHierarchicalCompound = match m_isHierarchicalCompound {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "childTransforms",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_childShapeNames = match m_childShapeNames {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "childShapeNames",
+                                    "isHierarchicalCompound",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -600,24 +586,38 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_isHierarchicalCompound = match m_isHierarchicalCompound {
+                    let m_childShapeNames = match m_childShapeNames {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isHierarchicalCompound",
+                                    "childShapeNames",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_shape = match m_shape {
+                    let m_childTransforms = match m_childTransforms {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("shape"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "childTransforms",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transform = match m_transform {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transform",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

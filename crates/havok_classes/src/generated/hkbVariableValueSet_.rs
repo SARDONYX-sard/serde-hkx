@@ -108,9 +108,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_variantVariableValues,
-                m_quadVariableValues,
                 m_wordVariableValues,
+                m_quadVariableValues,
+                m_variantVariableValues,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -134,9 +134,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "variantVariableValues" => Ok(__Field::m_variantVariableValues),
-                        "quadVariableValues" => Ok(__Field::m_quadVariableValues),
                         "wordVariableValues" => Ok(__Field::m_wordVariableValues),
+                        "quadVariableValues" => Ok(__Field::m_quadVariableValues),
+                        "variantVariableValues" => Ok(__Field::m_variantVariableValues),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -296,14 +296,14 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variantVariableValues: _serde::__private::Option<
-                        Vec<Pointer>,
+                    let mut m_wordVariableValues: _serde::__private::Option<
+                        Vec<hkbVariableValue>,
                     > = _serde::__private::None;
                     let mut m_quadVariableValues: _serde::__private::Option<
                         Vec<Vector4>,
                     > = _serde::__private::None;
-                    let mut m_wordVariableValues: _serde::__private::Option<
-                        Vec<hkbVariableValue>,
+                    let mut m_variantVariableValues: _serde::__private::Option<
+                        Vec<Pointer>,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
@@ -314,23 +314,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_variantVariableValues => {
+                            __Field::m_wordVariableValues => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_variantVariableValues,
+                                    &m_wordVariableValues,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "variantVariableValues",
+                                            "wordVariableValues",
                                         ),
                                     );
                                 }
-                                m_variantVariableValues = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                m_wordVariableValues = _serde::__private::Some(
+                                    match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -366,23 +366,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_wordVariableValues => {
+                            __Field::m_variantVariableValues => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_wordVariableValues,
+                                    &m_variantVariableValues,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wordVariableValues",
+                                            "variantVariableValues",
                                         ),
                                     );
                                 }
-                                m_wordVariableValues = _serde::__private::Some(
-                                    match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
+                                m_variantVariableValues = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -395,13 +395,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_variantVariableValues = match m_variantVariableValues {
+                    let m_wordVariableValues = match m_wordVariableValues {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "variantVariableValues",
+                                    "wordVariableValues",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -419,13 +419,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_wordVariableValues = match m_wordVariableValues {
+                    let m_variantVariableValues = match m_variantVariableValues {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "wordVariableValues",
+                                    "variantVariableValues",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

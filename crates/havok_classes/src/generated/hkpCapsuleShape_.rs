@@ -92,8 +92,8 @@ const _: () = {
             enum __Field {
                 m_userData,
                 m_radius,
-                m_vertexB,
                 m_vertexA,
+                m_vertexB,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -119,8 +119,8 @@ const _: () = {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
                         "radius" => Ok(__Field::m_radius),
-                        "vertexB" => Ok(__Field::m_vertexB),
                         "vertexA" => Ok(__Field::m_vertexA),
+                        "vertexB" => Ok(__Field::m_vertexB),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -238,8 +238,8 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_vertexB: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_vertexA: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_vertexB: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -295,30 +295,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vertexB => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vertexB) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexB",
-                                        ),
-                                    );
-                                }
-                                m_vertexB = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_vertexA => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -333,6 +309,30 @@ const _: () = {
                                     );
                                 }
                                 m_vertexA = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vertexB => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vertexB) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vertexB",
+                                        ),
+                                    );
+                                }
+                                m_vertexB = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -366,22 +366,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_vertexB = match m_vertexB {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("vertexB"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_vertexA = match m_vertexA {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("vertexA"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexB = match m_vertexB {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("vertexB"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -99,11 +99,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_resetCurrentMatchLocalTime,
-                m_error,
-                m_timeSinceBetterMatch,
-                m_bestMatch,
                 m_currentMatch,
+                m_bestMatch,
+                m_timeSinceBetterMatch,
+                m_error,
+                m_resetCurrentMatchLocalTime,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -127,13 +127,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
+                        "currentMatch" => Ok(__Field::m_currentMatch),
+                        "bestMatch" => Ok(__Field::m_bestMatch),
+                        "timeSinceBetterMatch" => Ok(__Field::m_timeSinceBetterMatch),
+                        "error" => Ok(__Field::m_error),
                         "resetCurrentMatchLocalTime" => {
                             Ok(__Field::m_resetCurrentMatchLocalTime)
                         }
-                        "error" => Ok(__Field::m_error),
-                        "timeSinceBetterMatch" => Ok(__Field::m_timeSinceBetterMatch),
-                        "bestMatch" => Ok(__Field::m_bestMatch),
-                        "currentMatch" => Ok(__Field::m_currentMatch),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -345,13 +345,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_currentMatch: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_bestMatch: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_timeSinceBetterMatch: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_resetCurrentMatchLocalTime: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_timeSinceBetterMatch: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_bestMatch: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_currentMatch: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -361,23 +361,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_resetCurrentMatchLocalTime => {
+                            __Field::m_currentMatch => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_resetCurrentMatchLocalTime,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_currentMatch) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "resetCurrentMatchLocalTime",
+                                            "currentMatch",
                                         ),
                                     );
                                 }
-                                m_resetCurrentMatchLocalTime = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_currentMatch = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -387,19 +385,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_error => {
+                            __Field::m_bestMatch => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_error) {
+                                if _serde::__private::Option::is_some(&m_bestMatch) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("error"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bestMatch",
+                                        ),
                                     );
                                 }
-                                m_error = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_bestMatch = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -435,21 +435,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_bestMatch => {
+                            __Field::m_error => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_bestMatch) {
+                                if _serde::__private::Option::is_some(&m_error) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bestMatch",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("error"),
                                     );
                                 }
-                                m_bestMatch = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_error = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -459,21 +457,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_currentMatch => {
+                            __Field::m_resetCurrentMatchLocalTime => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_currentMatch) {
+                                if _serde::__private::Option::is_some(
+                                    &m_resetCurrentMatchLocalTime,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "currentMatch",
+                                            "resetCurrentMatchLocalTime",
                                         ),
                                     );
                                 }
-                                m_currentMatch = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_resetCurrentMatchLocalTime = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -486,35 +486,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_resetCurrentMatchLocalTime = match m_resetCurrentMatchLocalTime {
+                    let m_currentMatch = match m_currentMatch {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "resetCurrentMatchLocalTime",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_error = match m_error {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("error"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_timeSinceBetterMatch = match m_timeSinceBetterMatch {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "timeSinceBetterMatch",
+                                    "currentMatch",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -532,13 +510,35 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_currentMatch = match m_currentMatch {
+                    let m_timeSinceBetterMatch = match m_timeSinceBetterMatch {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "currentMatch",
+                                    "timeSinceBetterMatch",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_error = match m_error {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("error"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_resetCurrentMatchLocalTime = match m_resetCurrentMatchLocalTime {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "resetCurrentMatchLocalTime",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

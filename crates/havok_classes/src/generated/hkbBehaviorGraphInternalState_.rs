@@ -84,8 +84,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_variableValueSet,
                 m_nodeInternalStateInfos,
+                m_variableValueSet,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -109,8 +109,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "variableValueSet" => Ok(__Field::m_variableValueSet),
                         "nodeInternalStateInfos" => Ok(__Field::m_nodeInternalStateInfos),
+                        "variableValueSet" => Ok(__Field::m_variableValueSet),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -234,10 +234,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableValueSet: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_nodeInternalStateInfos: _serde::__private::Option<
                         Vec<Pointer>,
                     > = _serde::__private::None;
+                    let mut m_variableValueSet: _serde::__private::Option<Pointer> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -247,30 +247,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_variableValueSet => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_variableValueSet) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "variableValueSet",
-                                        ),
-                                    );
-                                }
-                                m_variableValueSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_nodeInternalStateInfos => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -297,21 +273,33 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_variableValueSet => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_variableValueSet) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableValueSet",
+                                        ),
+                                    );
+                                }
+                                m_variableValueSet = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_variableValueSet = match m_variableValueSet {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "variableValueSet",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_nodeInternalStateInfos = match m_nodeInternalStateInfos {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -319,6 +307,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "nodeInternalStateInfos",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_variableValueSet = match m_variableValueSet {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableValueSet",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

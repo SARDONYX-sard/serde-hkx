@@ -910,47 +910,47 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_broadPhaseUpdateSize,
-                m_broadPhaseQuerySize,
-                m_sizeOfToiEventQueue,
-                m_broadPhaseNumMarkers,
-                m_broadPhaseExtents,
-                m_phantoms,
-                m_lastConstraintUid,
-                m_lastIslandUid,
-                m_lastEntityUid,
-                m_numToisTillAllowedPenetrationToiForced,
-                m_numToisTillAllowedPenetrationToiHigher,
-                m_numToisTillAllowedPenetrationToi,
-                m_numToisTillAllowedPenetrationSimplifiedToi,
-                m_maxNumToiCollisionPairsSinglethreaded,
-                m_maxEntriesPerToiNarrowphaseCollideTask,
-                m_maxEntriesPerToiMidphaseCollideTask,
-                m_processToisMultithreaded,
-                m_maxSectorsPerNarrowphaseCollideTask,
-                m_maxSectorsPerMidphaseCollideTask,
-                m_toiCollisionResponseRotateNormal,
-                m_deactivationReferenceDistance,
-                m_shouldActivateOnRigidBodyTransformChange,
-                m_wantDeactivation,
-                m_enableToiWeldRejection,
-                m_snapCollisionToConcaveEdgeThreshold,
-                m_snapCollisionToConvexEdgeThreshold,
-                m_wantSimulationIslands,
-                m_isLocked,
-                m_minDesiredIslandSize,
-                m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob,
-                m_processActionsInSingleThread,
-                m_pendingOperationQueueCount,
-                m_criticalOperationsAllowed,
-                m_blockExecutingPendingOperations,
-                m_criticalOperationsLockCountForPhantoms,
-                m_criticalOperationsLockCount,
-                m_pendingOperationsCount,
-                m_autoUpdateTree,
-                m_fixedRigidBody,
-                m_gravity,
                 m_simulation,
+                m_gravity,
+                m_fixedRigidBody,
+                m_autoUpdateTree,
+                m_pendingOperationsCount,
+                m_criticalOperationsLockCount,
+                m_criticalOperationsLockCountForPhantoms,
+                m_blockExecutingPendingOperations,
+                m_criticalOperationsAllowed,
+                m_pendingOperationQueueCount,
+                m_processActionsInSingleThread,
+                m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob,
+                m_minDesiredIslandSize,
+                m_isLocked,
+                m_wantSimulationIslands,
+                m_snapCollisionToConvexEdgeThreshold,
+                m_snapCollisionToConcaveEdgeThreshold,
+                m_enableToiWeldRejection,
+                m_wantDeactivation,
+                m_shouldActivateOnRigidBodyTransformChange,
+                m_deactivationReferenceDistance,
+                m_toiCollisionResponseRotateNormal,
+                m_maxSectorsPerMidphaseCollideTask,
+                m_maxSectorsPerNarrowphaseCollideTask,
+                m_processToisMultithreaded,
+                m_maxEntriesPerToiMidphaseCollideTask,
+                m_maxEntriesPerToiNarrowphaseCollideTask,
+                m_maxNumToiCollisionPairsSinglethreaded,
+                m_numToisTillAllowedPenetrationSimplifiedToi,
+                m_numToisTillAllowedPenetrationToi,
+                m_numToisTillAllowedPenetrationToiHigher,
+                m_numToisTillAllowedPenetrationToiForced,
+                m_lastEntityUid,
+                m_lastIslandUid,
+                m_lastConstraintUid,
+                m_phantoms,
+                m_broadPhaseExtents,
+                m_broadPhaseNumMarkers,
+                m_sizeOfToiEventQueue,
+                m_broadPhaseQuerySize,
+                m_broadPhaseUpdateSize,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -974,93 +974,93 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "broadPhaseUpdateSize" => Ok(__Field::m_broadPhaseUpdateSize),
-                        "broadPhaseQuerySize" => Ok(__Field::m_broadPhaseQuerySize),
-                        "sizeOfToiEventQueue" => Ok(__Field::m_sizeOfToiEventQueue),
-                        "broadPhaseNumMarkers" => Ok(__Field::m_broadPhaseNumMarkers),
-                        "broadPhaseExtents" => Ok(__Field::m_broadPhaseExtents),
-                        "phantoms" => Ok(__Field::m_phantoms),
-                        "lastConstraintUid" => Ok(__Field::m_lastConstraintUid),
-                        "lastIslandUid" => Ok(__Field::m_lastIslandUid),
-                        "lastEntityUid" => Ok(__Field::m_lastEntityUid),
-                        "numToisTillAllowedPenetrationToiForced" => {
-                            Ok(__Field::m_numToisTillAllowedPenetrationToiForced)
+                        "simulation" => Ok(__Field::m_simulation),
+                        "gravity" => Ok(__Field::m_gravity),
+                        "fixedRigidBody" => Ok(__Field::m_fixedRigidBody),
+                        "autoUpdateTree" => Ok(__Field::m_autoUpdateTree),
+                        "pendingOperationsCount" => Ok(__Field::m_pendingOperationsCount),
+                        "criticalOperationsLockCount" => {
+                            Ok(__Field::m_criticalOperationsLockCount)
                         }
-                        "numToisTillAllowedPenetrationToiHigher" => {
-                            Ok(__Field::m_numToisTillAllowedPenetrationToiHigher)
+                        "criticalOperationsLockCountForPhantoms" => {
+                            Ok(__Field::m_criticalOperationsLockCountForPhantoms)
                         }
-                        "numToisTillAllowedPenetrationToi" => {
-                            Ok(__Field::m_numToisTillAllowedPenetrationToi)
+                        "blockExecutingPendingOperations" => {
+                            Ok(__Field::m_blockExecutingPendingOperations)
                         }
-                        "numToisTillAllowedPenetrationSimplifiedToi" => {
-                            Ok(__Field::m_numToisTillAllowedPenetrationSimplifiedToi)
+                        "criticalOperationsAllowed" => {
+                            Ok(__Field::m_criticalOperationsAllowed)
                         }
-                        "maxNumToiCollisionPairsSinglethreaded" => {
-                            Ok(__Field::m_maxNumToiCollisionPairsSinglethreaded)
+                        "pendingOperationQueueCount" => {
+                            Ok(__Field::m_pendingOperationQueueCount)
                         }
-                        "maxEntriesPerToiNarrowphaseCollideTask" => {
-                            Ok(__Field::m_maxEntriesPerToiNarrowphaseCollideTask)
+                        "processActionsInSingleThread" => {
+                            Ok(__Field::m_processActionsInSingleThread)
                         }
-                        "maxEntriesPerToiMidphaseCollideTask" => {
-                            Ok(__Field::m_maxEntriesPerToiMidphaseCollideTask)
-                        }
-                        "processToisMultithreaded" => {
-                            Ok(__Field::m_processToisMultithreaded)
-                        }
-                        "maxSectorsPerNarrowphaseCollideTask" => {
-                            Ok(__Field::m_maxSectorsPerNarrowphaseCollideTask)
-                        }
-                        "maxSectorsPerMidphaseCollideTask" => {
-                            Ok(__Field::m_maxSectorsPerMidphaseCollideTask)
-                        }
-                        "toiCollisionResponseRotateNormal" => {
-                            Ok(__Field::m_toiCollisionResponseRotateNormal)
-                        }
-                        "deactivationReferenceDistance" => {
-                            Ok(__Field::m_deactivationReferenceDistance)
-                        }
-                        "shouldActivateOnRigidBodyTransformChange" => {
-                            Ok(__Field::m_shouldActivateOnRigidBodyTransformChange)
-                        }
-                        "wantDeactivation" => Ok(__Field::m_wantDeactivation),
-                        "enableToiWeldRejection" => Ok(__Field::m_enableToiWeldRejection),
-                        "snapCollisionToConcaveEdgeThreshold" => {
-                            Ok(__Field::m_snapCollisionToConcaveEdgeThreshold)
-                        }
-                        "snapCollisionToConvexEdgeThreshold" => {
-                            Ok(__Field::m_snapCollisionToConvexEdgeThreshold)
-                        }
-                        "wantSimulationIslands" => Ok(__Field::m_wantSimulationIslands),
-                        "isLocked" => Ok(__Field::m_isLocked),
-                        "minDesiredIslandSize" => Ok(__Field::m_minDesiredIslandSize),
                         "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob" => {
                             Ok(
                                 __Field::m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob,
                             )
                         }
-                        "processActionsInSingleThread" => {
-                            Ok(__Field::m_processActionsInSingleThread)
+                        "minDesiredIslandSize" => Ok(__Field::m_minDesiredIslandSize),
+                        "isLocked" => Ok(__Field::m_isLocked),
+                        "wantSimulationIslands" => Ok(__Field::m_wantSimulationIslands),
+                        "snapCollisionToConvexEdgeThreshold" => {
+                            Ok(__Field::m_snapCollisionToConvexEdgeThreshold)
                         }
-                        "pendingOperationQueueCount" => {
-                            Ok(__Field::m_pendingOperationQueueCount)
+                        "snapCollisionToConcaveEdgeThreshold" => {
+                            Ok(__Field::m_snapCollisionToConcaveEdgeThreshold)
                         }
-                        "criticalOperationsAllowed" => {
-                            Ok(__Field::m_criticalOperationsAllowed)
+                        "enableToiWeldRejection" => Ok(__Field::m_enableToiWeldRejection),
+                        "wantDeactivation" => Ok(__Field::m_wantDeactivation),
+                        "shouldActivateOnRigidBodyTransformChange" => {
+                            Ok(__Field::m_shouldActivateOnRigidBodyTransformChange)
                         }
-                        "blockExecutingPendingOperations" => {
-                            Ok(__Field::m_blockExecutingPendingOperations)
+                        "deactivationReferenceDistance" => {
+                            Ok(__Field::m_deactivationReferenceDistance)
                         }
-                        "criticalOperationsLockCountForPhantoms" => {
-                            Ok(__Field::m_criticalOperationsLockCountForPhantoms)
+                        "toiCollisionResponseRotateNormal" => {
+                            Ok(__Field::m_toiCollisionResponseRotateNormal)
                         }
-                        "criticalOperationsLockCount" => {
-                            Ok(__Field::m_criticalOperationsLockCount)
+                        "maxSectorsPerMidphaseCollideTask" => {
+                            Ok(__Field::m_maxSectorsPerMidphaseCollideTask)
                         }
-                        "pendingOperationsCount" => Ok(__Field::m_pendingOperationsCount),
-                        "autoUpdateTree" => Ok(__Field::m_autoUpdateTree),
-                        "fixedRigidBody" => Ok(__Field::m_fixedRigidBody),
-                        "gravity" => Ok(__Field::m_gravity),
-                        "simulation" => Ok(__Field::m_simulation),
+                        "maxSectorsPerNarrowphaseCollideTask" => {
+                            Ok(__Field::m_maxSectorsPerNarrowphaseCollideTask)
+                        }
+                        "processToisMultithreaded" => {
+                            Ok(__Field::m_processToisMultithreaded)
+                        }
+                        "maxEntriesPerToiMidphaseCollideTask" => {
+                            Ok(__Field::m_maxEntriesPerToiMidphaseCollideTask)
+                        }
+                        "maxEntriesPerToiNarrowphaseCollideTask" => {
+                            Ok(__Field::m_maxEntriesPerToiNarrowphaseCollideTask)
+                        }
+                        "maxNumToiCollisionPairsSinglethreaded" => {
+                            Ok(__Field::m_maxNumToiCollisionPairsSinglethreaded)
+                        }
+                        "numToisTillAllowedPenetrationSimplifiedToi" => {
+                            Ok(__Field::m_numToisTillAllowedPenetrationSimplifiedToi)
+                        }
+                        "numToisTillAllowedPenetrationToi" => {
+                            Ok(__Field::m_numToisTillAllowedPenetrationToi)
+                        }
+                        "numToisTillAllowedPenetrationToiHigher" => {
+                            Ok(__Field::m_numToisTillAllowedPenetrationToiHigher)
+                        }
+                        "numToisTillAllowedPenetrationToiForced" => {
+                            Ok(__Field::m_numToisTillAllowedPenetrationToiForced)
+                        }
+                        "lastEntityUid" => Ok(__Field::m_lastEntityUid),
+                        "lastIslandUid" => Ok(__Field::m_lastIslandUid),
+                        "lastConstraintUid" => Ok(__Field::m_lastConstraintUid),
+                        "phantoms" => Ok(__Field::m_phantoms),
+                        "broadPhaseExtents" => Ok(__Field::m_broadPhaseExtents),
+                        "broadPhaseNumMarkers" => Ok(__Field::m_broadPhaseNumMarkers),
+                        "sizeOfToiEventQueue" => Ok(__Field::m_sizeOfToiEventQueue),
+                        "broadPhaseQuerySize" => Ok(__Field::m_broadPhaseQuerySize),
+                        "broadPhaseUpdateSize" => Ok(__Field::m_broadPhaseUpdateSize),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -3860,93 +3860,93 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_broadPhaseUpdateSize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_broadPhaseQuerySize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_sizeOfToiEventQueue: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_broadPhaseNumMarkers: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_broadPhaseExtents: _serde::__private::Option<
-                        [Vector4; 2usize],
-                    > = _serde::__private::None;
-                    let mut m_phantoms: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_lastConstraintUid: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_lastIslandUid: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_lastEntityUid: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_numToisTillAllowedPenetrationToiForced: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_numToisTillAllowedPenetrationToiHigher: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_numToisTillAllowedPenetrationToi: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_numToisTillAllowedPenetrationSimplifiedToi: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_maxNumToiCollisionPairsSinglethreaded: _serde::__private::Option<
+                    let mut m_simulation: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_gravity: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_fixedRigidBody: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_autoUpdateTree: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_pendingOperationsCount: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_criticalOperationsLockCount: _serde::__private::Option<
                         i32,
                     > = _serde::__private::None;
-                    let mut m_maxEntriesPerToiNarrowphaseCollideTask: _serde::__private::Option<
+                    let mut m_criticalOperationsLockCountForPhantoms: _serde::__private::Option<
                         i32,
                     > = _serde::__private::None;
-                    let mut m_maxEntriesPerToiMidphaseCollideTask: _serde::__private::Option<
-                        i32,
-                    > = _serde::__private::None;
-                    let mut m_processToisMultithreaded: _serde::__private::Option<
+                    let mut m_blockExecutingPendingOperations: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_maxSectorsPerNarrowphaseCollideTask: _serde::__private::Option<
-                        i32,
-                    > = _serde::__private::None;
-                    let mut m_maxSectorsPerMidphaseCollideTask: _serde::__private::Option<
-                        i32,
-                    > = _serde::__private::None;
-                    let mut m_toiCollisionResponseRotateNormal: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_deactivationReferenceDistance: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_shouldActivateOnRigidBodyTransformChange: _serde::__private::Option<
-                        bool,
-                    > = _serde::__private::None;
-                    let mut m_wantDeactivation: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_enableToiWeldRejection: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_snapCollisionToConcaveEdgeThreshold: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_snapCollisionToConvexEdgeThreshold: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_wantSimulationIslands: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_isLocked: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_minDesiredIslandSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob: _serde::__private::Option<
-                        bool,
-                    > = _serde::__private::None;
-                    let mut m_processActionsInSingleThread: _serde::__private::Option<
+                    let mut m_criticalOperationsAllowed: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
                     let mut m_pendingOperationQueueCount: _serde::__private::Option<
                         i32,
                     > = _serde::__private::None;
-                    let mut m_criticalOperationsAllowed: _serde::__private::Option<
+                    let mut m_processActionsInSingleThread: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_blockExecutingPendingOperations: _serde::__private::Option<
+                    let mut m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_criticalOperationsLockCountForPhantoms: _serde::__private::Option<
+                    let mut m_minDesiredIslandSize: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_isLocked: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_wantSimulationIslands: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_snapCollisionToConvexEdgeThreshold: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_snapCollisionToConcaveEdgeThreshold: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_enableToiWeldRejection: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_wantDeactivation: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_shouldActivateOnRigidBodyTransformChange: _serde::__private::Option<
+                        bool,
+                    > = _serde::__private::None;
+                    let mut m_deactivationReferenceDistance: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_toiCollisionResponseRotateNormal: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_maxSectorsPerMidphaseCollideTask: _serde::__private::Option<
                         i32,
                     > = _serde::__private::None;
-                    let mut m_criticalOperationsLockCount: _serde::__private::Option<
+                    let mut m_maxSectorsPerNarrowphaseCollideTask: _serde::__private::Option<
                         i32,
                     > = _serde::__private::None;
-                    let mut m_pendingOperationsCount: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_autoUpdateTree: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_fixedRigidBody: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_gravity: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_simulation: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_processToisMultithreaded: _serde::__private::Option<
+                        bool,
+                    > = _serde::__private::None;
+                    let mut m_maxEntriesPerToiMidphaseCollideTask: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_maxEntriesPerToiNarrowphaseCollideTask: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_maxNumToiCollisionPairsSinglethreaded: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_numToisTillAllowedPenetrationSimplifiedToi: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_numToisTillAllowedPenetrationToi: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_numToisTillAllowedPenetrationToiHigher: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_numToisTillAllowedPenetrationToiForced: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_lastEntityUid: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_lastIslandUid: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_lastConstraintUid: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_phantoms: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_broadPhaseExtents: _serde::__private::Option<
+                        [Vector4; 2usize],
+                    > = _serde::__private::None;
+                    let mut m_broadPhaseNumMarkers: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_sizeOfToiEventQueue: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_broadPhaseQuerySize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_broadPhaseUpdateSize: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -3956,23 +3956,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_broadPhaseUpdateSize => {
+                            __Field::m_simulation => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_broadPhaseUpdateSize,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_simulation) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "broadPhaseUpdateSize",
+                                            "simulation",
                                         ),
                                     );
                                 }
-                                m_broadPhaseUpdateSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_simulation = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -3982,23 +3980,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_broadPhaseQuerySize => {
+                            __Field::m_gravity => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_broadPhaseQuerySize,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_gravity) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "broadPhaseQuerySize",
+                                            "gravity",
                                         ),
                                     );
                                 }
-                                m_broadPhaseQuerySize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_gravity = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -4008,23 +4004,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_sizeOfToiEventQueue => {
+                            __Field::m_fixedRigidBody => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_sizeOfToiEventQueue,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_fixedRigidBody) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sizeOfToiEventQueue",
+                                            "fixedRigidBody",
                                         ),
                                     );
                                 }
-                                m_sizeOfToiEventQueue = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_fixedRigidBody = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -4034,354 +4028,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_broadPhaseNumMarkers => {
+                            __Field::m_autoUpdateTree => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_broadPhaseNumMarkers,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_autoUpdateTree) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "broadPhaseNumMarkers",
+                                            "autoUpdateTree",
                                         ),
                                     );
                                 }
-                                m_broadPhaseNumMarkers = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_broadPhaseExtents => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_broadPhaseExtents,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "broadPhaseExtents",
-                                        ),
-                                    );
-                                }
-                                m_broadPhaseExtents = _serde::__private::Some(
-                                    match __A::next_value::<[Vector4; 2usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_phantoms => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_phantoms) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "phantoms",
-                                        ),
-                                    );
-                                }
-                                m_phantoms = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_lastConstraintUid => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_lastConstraintUid,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lastConstraintUid",
-                                        ),
-                                    );
-                                }
-                                m_lastConstraintUid = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_lastIslandUid => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_lastIslandUid) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lastIslandUid",
-                                        ),
-                                    );
-                                }
-                                m_lastIslandUid = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_lastEntityUid => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_lastEntityUid) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lastEntityUid",
-                                        ),
-                                    );
-                                }
-                                m_lastEntityUid = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numToisTillAllowedPenetrationToiForced => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_numToisTillAllowedPenetrationToiForced,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numToisTillAllowedPenetrationToiForced",
-                                        ),
-                                    );
-                                }
-                                m_numToisTillAllowedPenetrationToiForced = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numToisTillAllowedPenetrationToiHigher => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_numToisTillAllowedPenetrationToiHigher,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numToisTillAllowedPenetrationToiHigher",
-                                        ),
-                                    );
-                                }
-                                m_numToisTillAllowedPenetrationToiHigher = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numToisTillAllowedPenetrationToi => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_numToisTillAllowedPenetrationToi,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numToisTillAllowedPenetrationToi",
-                                        ),
-                                    );
-                                }
-                                m_numToisTillAllowedPenetrationToi = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numToisTillAllowedPenetrationSimplifiedToi => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_numToisTillAllowedPenetrationSimplifiedToi,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numToisTillAllowedPenetrationSimplifiedToi",
-                                        ),
-                                    );
-                                }
-                                m_numToisTillAllowedPenetrationSimplifiedToi = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxNumToiCollisionPairsSinglethreaded => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxNumToiCollisionPairsSinglethreaded,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxNumToiCollisionPairsSinglethreaded",
-                                        ),
-                                    );
-                                }
-                                m_maxNumToiCollisionPairsSinglethreaded = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxEntriesPerToiNarrowphaseCollideTask => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxEntriesPerToiNarrowphaseCollideTask,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxEntriesPerToiNarrowphaseCollideTask",
-                                        ),
-                                    );
-                                }
-                                m_maxEntriesPerToiNarrowphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxEntriesPerToiMidphaseCollideTask => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxEntriesPerToiMidphaseCollideTask,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxEntriesPerToiMidphaseCollideTask",
-                                        ),
-                                    );
-                                }
-                                m_maxEntriesPerToiMidphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_processToisMultithreaded => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_processToisMultithreaded,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "processToisMultithreaded",
-                                        ),
-                                    );
-                                }
-                                m_processToisMultithreaded = _serde::__private::Some(
+                                m_autoUpdateTree = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -4392,460 +4052,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxSectorsPerNarrowphaseCollideTask => {
+                            __Field::m_pendingOperationsCount => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_maxSectorsPerNarrowphaseCollideTask,
+                                    &m_pendingOperationsCount,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxSectorsPerNarrowphaseCollideTask",
+                                            "pendingOperationsCount",
                                         ),
                                     );
                                 }
-                                m_maxSectorsPerNarrowphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxSectorsPerMidphaseCollideTask => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxSectorsPerMidphaseCollideTask,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxSectorsPerMidphaseCollideTask",
-                                        ),
-                                    );
-                                }
-                                m_maxSectorsPerMidphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_toiCollisionResponseRotateNormal => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_toiCollisionResponseRotateNormal,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "toiCollisionResponseRotateNormal",
-                                        ),
-                                    );
-                                }
-                                m_toiCollisionResponseRotateNormal = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_deactivationReferenceDistance => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_deactivationReferenceDistance,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "deactivationReferenceDistance",
-                                        ),
-                                    );
-                                }
-                                m_deactivationReferenceDistance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_shouldActivateOnRigidBodyTransformChange => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_shouldActivateOnRigidBodyTransformChange,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "shouldActivateOnRigidBodyTransformChange",
-                                        ),
-                                    );
-                                }
-                                m_shouldActivateOnRigidBodyTransformChange = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_wantDeactivation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_wantDeactivation) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wantDeactivation",
-                                        ),
-                                    );
-                                }
-                                m_wantDeactivation = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_enableToiWeldRejection => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_enableToiWeldRejection,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "enableToiWeldRejection",
-                                        ),
-                                    );
-                                }
-                                m_enableToiWeldRejection = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_snapCollisionToConcaveEdgeThreshold => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_snapCollisionToConcaveEdgeThreshold,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "snapCollisionToConcaveEdgeThreshold",
-                                        ),
-                                    );
-                                }
-                                m_snapCollisionToConcaveEdgeThreshold = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_snapCollisionToConvexEdgeThreshold => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_snapCollisionToConvexEdgeThreshold,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "snapCollisionToConvexEdgeThreshold",
-                                        ),
-                                    );
-                                }
-                                m_snapCollisionToConvexEdgeThreshold = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_wantSimulationIslands => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_wantSimulationIslands,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wantSimulationIslands",
-                                        ),
-                                    );
-                                }
-                                m_wantSimulationIslands = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_isLocked => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_isLocked) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isLocked",
-                                        ),
-                                    );
-                                }
-                                m_isLocked = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_minDesiredIslandSize => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_minDesiredIslandSize,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "minDesiredIslandSize",
-                                        ),
-                                    );
-                                }
-                                m_minDesiredIslandSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob",
-                                        ),
-                                    );
-                                }
-                                m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_processActionsInSingleThread => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_processActionsInSingleThread,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "processActionsInSingleThread",
-                                        ),
-                                    );
-                                }
-                                m_processActionsInSingleThread = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_pendingOperationQueueCount => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_pendingOperationQueueCount,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "pendingOperationQueueCount",
-                                        ),
-                                    );
-                                }
-                                m_pendingOperationQueueCount = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_criticalOperationsAllowed => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_criticalOperationsAllowed,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "criticalOperationsAllowed",
-                                        ),
-                                    );
-                                }
-                                m_criticalOperationsAllowed = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_blockExecutingPendingOperations => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_blockExecutingPendingOperations,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "blockExecutingPendingOperations",
-                                        ),
-                                    );
-                                }
-                                m_blockExecutingPendingOperations = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_criticalOperationsLockCountForPhantoms => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_criticalOperationsLockCountForPhantoms,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "criticalOperationsLockCountForPhantoms",
-                                        ),
-                                    );
-                                }
-                                m_criticalOperationsLockCountForPhantoms = _serde::__private::Some(
+                                m_pendingOperationsCount = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -4882,22 +4104,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_pendingOperationsCount => {
+                            __Field::m_criticalOperationsLockCountForPhantoms => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_pendingOperationsCount,
+                                    &m_criticalOperationsLockCountForPhantoms,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "pendingOperationsCount",
+                                            "criticalOperationsLockCountForPhantoms",
                                         ),
                                     );
                                 }
-                                m_pendingOperationsCount = _serde::__private::Some(
+                                m_criticalOperationsLockCountForPhantoms = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -4908,20 +4130,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_autoUpdateTree => {
+                            __Field::m_blockExecutingPendingOperations => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_autoUpdateTree) {
+                                if _serde::__private::Option::is_some(
+                                    &m_blockExecutingPendingOperations,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "autoUpdateTree",
+                                            "blockExecutingPendingOperations",
                                         ),
                                     );
                                 }
-                                m_autoUpdateTree = _serde::__private::Some(
+                                m_blockExecutingPendingOperations = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -4932,21 +4156,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_fixedRigidBody => {
+                            __Field::m_criticalOperationsAllowed => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_fixedRigidBody) {
+                                if _serde::__private::Option::is_some(
+                                    &m_criticalOperationsAllowed,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fixedRigidBody",
+                                            "criticalOperationsAllowed",
                                         ),
                                     );
                                 }
-                                m_fixedRigidBody = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_criticalOperationsAllowed = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -4956,21 +4182,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_gravity => {
+                            __Field::m_pendingOperationQueueCount => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_gravity) {
+                                if _serde::__private::Option::is_some(
+                                    &m_pendingOperationQueueCount,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "gravity",
+                                            "pendingOperationQueueCount",
                                         ),
                                     );
                                 }
-                                m_gravity = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_pendingOperationQueueCount = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -4980,21 +4208,793 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_simulation => {
+                            __Field::m_processActionsInSingleThread => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_simulation) {
+                                if _serde::__private::Option::is_some(
+                                    &m_processActionsInSingleThread,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "simulation",
+                                            "processActionsInSingleThread",
                                         ),
                                     );
                                 }
-                                m_simulation = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_processActionsInSingleThread = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob",
+                                        ),
+                                    );
+                                }
+                                m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_minDesiredIslandSize => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_minDesiredIslandSize,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "minDesiredIslandSize",
+                                        ),
+                                    );
+                                }
+                                m_minDesiredIslandSize = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isLocked => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isLocked) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isLocked",
+                                        ),
+                                    );
+                                }
+                                m_isLocked = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wantSimulationIslands => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_wantSimulationIslands,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wantSimulationIslands",
+                                        ),
+                                    );
+                                }
+                                m_wantSimulationIslands = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_snapCollisionToConvexEdgeThreshold => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_snapCollisionToConvexEdgeThreshold,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "snapCollisionToConvexEdgeThreshold",
+                                        ),
+                                    );
+                                }
+                                m_snapCollisionToConvexEdgeThreshold = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_snapCollisionToConcaveEdgeThreshold => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_snapCollisionToConcaveEdgeThreshold,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "snapCollisionToConcaveEdgeThreshold",
+                                        ),
+                                    );
+                                }
+                                m_snapCollisionToConcaveEdgeThreshold = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_enableToiWeldRejection => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_enableToiWeldRejection,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "enableToiWeldRejection",
+                                        ),
+                                    );
+                                }
+                                m_enableToiWeldRejection = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wantDeactivation => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_wantDeactivation) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wantDeactivation",
+                                        ),
+                                    );
+                                }
+                                m_wantDeactivation = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_shouldActivateOnRigidBodyTransformChange => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_shouldActivateOnRigidBodyTransformChange,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "shouldActivateOnRigidBodyTransformChange",
+                                        ),
+                                    );
+                                }
+                                m_shouldActivateOnRigidBodyTransformChange = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_deactivationReferenceDistance => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_deactivationReferenceDistance,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "deactivationReferenceDistance",
+                                        ),
+                                    );
+                                }
+                                m_deactivationReferenceDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_toiCollisionResponseRotateNormal => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_toiCollisionResponseRotateNormal,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "toiCollisionResponseRotateNormal",
+                                        ),
+                                    );
+                                }
+                                m_toiCollisionResponseRotateNormal = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxSectorsPerMidphaseCollideTask => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxSectorsPerMidphaseCollideTask,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxSectorsPerMidphaseCollideTask",
+                                        ),
+                                    );
+                                }
+                                m_maxSectorsPerMidphaseCollideTask = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxSectorsPerNarrowphaseCollideTask => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxSectorsPerNarrowphaseCollideTask,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxSectorsPerNarrowphaseCollideTask",
+                                        ),
+                                    );
+                                }
+                                m_maxSectorsPerNarrowphaseCollideTask = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_processToisMultithreaded => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_processToisMultithreaded,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "processToisMultithreaded",
+                                        ),
+                                    );
+                                }
+                                m_processToisMultithreaded = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxEntriesPerToiMidphaseCollideTask => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxEntriesPerToiMidphaseCollideTask,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxEntriesPerToiMidphaseCollideTask",
+                                        ),
+                                    );
+                                }
+                                m_maxEntriesPerToiMidphaseCollideTask = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxEntriesPerToiNarrowphaseCollideTask => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxEntriesPerToiNarrowphaseCollideTask,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxEntriesPerToiNarrowphaseCollideTask",
+                                        ),
+                                    );
+                                }
+                                m_maxEntriesPerToiNarrowphaseCollideTask = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxNumToiCollisionPairsSinglethreaded => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxNumToiCollisionPairsSinglethreaded,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxNumToiCollisionPairsSinglethreaded",
+                                        ),
+                                    );
+                                }
+                                m_maxNumToiCollisionPairsSinglethreaded = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numToisTillAllowedPenetrationSimplifiedToi => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_numToisTillAllowedPenetrationSimplifiedToi,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numToisTillAllowedPenetrationSimplifiedToi",
+                                        ),
+                                    );
+                                }
+                                m_numToisTillAllowedPenetrationSimplifiedToi = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numToisTillAllowedPenetrationToi => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_numToisTillAllowedPenetrationToi,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numToisTillAllowedPenetrationToi",
+                                        ),
+                                    );
+                                }
+                                m_numToisTillAllowedPenetrationToi = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numToisTillAllowedPenetrationToiHigher => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_numToisTillAllowedPenetrationToiHigher,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numToisTillAllowedPenetrationToiHigher",
+                                        ),
+                                    );
+                                }
+                                m_numToisTillAllowedPenetrationToiHigher = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numToisTillAllowedPenetrationToiForced => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_numToisTillAllowedPenetrationToiForced,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numToisTillAllowedPenetrationToiForced",
+                                        ),
+                                    );
+                                }
+                                m_numToisTillAllowedPenetrationToiForced = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lastEntityUid => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_lastEntityUid) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lastEntityUid",
+                                        ),
+                                    );
+                                }
+                                m_lastEntityUid = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lastIslandUid => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_lastIslandUid) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lastIslandUid",
+                                        ),
+                                    );
+                                }
+                                m_lastIslandUid = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lastConstraintUid => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_lastConstraintUid,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lastConstraintUid",
+                                        ),
+                                    );
+                                }
+                                m_lastConstraintUid = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_phantoms => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_phantoms) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "phantoms",
+                                        ),
+                                    );
+                                }
+                                m_phantoms = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_broadPhaseExtents => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_broadPhaseExtents,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "broadPhaseExtents",
+                                        ),
+                                    );
+                                }
+                                m_broadPhaseExtents = _serde::__private::Some(
+                                    match __A::next_value::<[Vector4; 2usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_broadPhaseNumMarkers => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_broadPhaseNumMarkers,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "broadPhaseNumMarkers",
+                                        ),
+                                    );
+                                }
+                                m_broadPhaseNumMarkers = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_sizeOfToiEventQueue => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_sizeOfToiEventQueue,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sizeOfToiEventQueue",
+                                        ),
+                                    );
+                                }
+                                m_sizeOfToiEventQueue = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_broadPhaseQuerySize => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_broadPhaseQuerySize,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "broadPhaseQuerySize",
+                                        ),
+                                    );
+                                }
+                                m_broadPhaseQuerySize = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_broadPhaseUpdateSize => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_broadPhaseUpdateSize,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "broadPhaseUpdateSize",
+                                        ),
+                                    );
+                                }
+                                m_broadPhaseUpdateSize = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -5007,441 +5007,35 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_broadPhaseUpdateSize = match m_broadPhaseUpdateSize {
+                    let m_simulation = match m_simulation {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "broadPhaseUpdateSize",
+                                    "simulation",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_broadPhaseQuerySize = match m_broadPhaseQuerySize {
+                    let m_gravity = match m_gravity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("gravity"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_fixedRigidBody = match m_fixedRigidBody {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "broadPhaseQuerySize",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_sizeOfToiEventQueue = match m_sizeOfToiEventQueue {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "sizeOfToiEventQueue",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_broadPhaseNumMarkers = match m_broadPhaseNumMarkers {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "broadPhaseNumMarkers",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_broadPhaseExtents = match m_broadPhaseExtents {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "broadPhaseExtents",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_phantoms = match m_phantoms {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("phantoms"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lastConstraintUid = match m_lastConstraintUid {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "lastConstraintUid",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lastIslandUid = match m_lastIslandUid {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "lastIslandUid",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lastEntityUid = match m_lastEntityUid {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "lastEntityUid",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numToisTillAllowedPenetrationToiForced = match m_numToisTillAllowedPenetrationToiForced {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numToisTillAllowedPenetrationToiForced",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numToisTillAllowedPenetrationToiHigher = match m_numToisTillAllowedPenetrationToiHigher {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numToisTillAllowedPenetrationToiHigher",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numToisTillAllowedPenetrationToi = match m_numToisTillAllowedPenetrationToi {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numToisTillAllowedPenetrationToi",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numToisTillAllowedPenetrationSimplifiedToi = match m_numToisTillAllowedPenetrationSimplifiedToi {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numToisTillAllowedPenetrationSimplifiedToi",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxNumToiCollisionPairsSinglethreaded = match m_maxNumToiCollisionPairsSinglethreaded {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxNumToiCollisionPairsSinglethreaded",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxEntriesPerToiNarrowphaseCollideTask = match m_maxEntriesPerToiNarrowphaseCollideTask {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxEntriesPerToiNarrowphaseCollideTask",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxEntriesPerToiMidphaseCollideTask = match m_maxEntriesPerToiMidphaseCollideTask {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxEntriesPerToiMidphaseCollideTask",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_processToisMultithreaded = match m_processToisMultithreaded {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "processToisMultithreaded",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxSectorsPerNarrowphaseCollideTask = match m_maxSectorsPerNarrowphaseCollideTask {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxSectorsPerNarrowphaseCollideTask",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxSectorsPerMidphaseCollideTask = match m_maxSectorsPerMidphaseCollideTask {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxSectorsPerMidphaseCollideTask",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_toiCollisionResponseRotateNormal = match m_toiCollisionResponseRotateNormal {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "toiCollisionResponseRotateNormal",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_deactivationReferenceDistance = match m_deactivationReferenceDistance {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "deactivationReferenceDistance",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_shouldActivateOnRigidBodyTransformChange = match m_shouldActivateOnRigidBodyTransformChange {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "shouldActivateOnRigidBodyTransformChange",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_wantDeactivation = match m_wantDeactivation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wantDeactivation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_enableToiWeldRejection = match m_enableToiWeldRejection {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "enableToiWeldRejection",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_snapCollisionToConcaveEdgeThreshold = match m_snapCollisionToConcaveEdgeThreshold {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "snapCollisionToConcaveEdgeThreshold",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_snapCollisionToConvexEdgeThreshold = match m_snapCollisionToConvexEdgeThreshold {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "snapCollisionToConvexEdgeThreshold",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_wantSimulationIslands = match m_wantSimulationIslands {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wantSimulationIslands",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_isLocked = match m_isLocked {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("isLocked"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_minDesiredIslandSize = match m_minDesiredIslandSize {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "minDesiredIslandSize",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob = match m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_processActionsInSingleThread = match m_processActionsInSingleThread {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "processActionsInSingleThread",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_pendingOperationQueueCount = match m_pendingOperationQueueCount {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "pendingOperationQueueCount",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_criticalOperationsAllowed = match m_criticalOperationsAllowed {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "criticalOperationsAllowed",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_blockExecutingPendingOperations = match m_blockExecutingPendingOperations {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "blockExecutingPendingOperations",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_criticalOperationsLockCountForPhantoms = match m_criticalOperationsLockCountForPhantoms {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "criticalOperationsLockCountForPhantoms",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_criticalOperationsLockCount = match m_criticalOperationsLockCount {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "criticalOperationsLockCount",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_pendingOperationsCount = match m_pendingOperationsCount {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "pendingOperationsCount",
+                                    "fixedRigidBody",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -5459,35 +5053,441 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_fixedRigidBody = match m_fixedRigidBody {
+                    let m_pendingOperationsCount = match m_pendingOperationsCount {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "fixedRigidBody",
+                                    "pendingOperationsCount",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_gravity = match m_gravity {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("gravity"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_simulation = match m_simulation {
+                    let m_criticalOperationsLockCount = match m_criticalOperationsLockCount {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "simulation",
+                                    "criticalOperationsLockCount",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_criticalOperationsLockCountForPhantoms = match m_criticalOperationsLockCountForPhantoms {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "criticalOperationsLockCountForPhantoms",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_blockExecutingPendingOperations = match m_blockExecutingPendingOperations {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "blockExecutingPendingOperations",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_criticalOperationsAllowed = match m_criticalOperationsAllowed {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "criticalOperationsAllowed",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_pendingOperationQueueCount = match m_pendingOperationQueueCount {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "pendingOperationQueueCount",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_processActionsInSingleThread = match m_processActionsInSingleThread {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "processActionsInSingleThread",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob = match m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_minDesiredIslandSize = match m_minDesiredIslandSize {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "minDesiredIslandSize",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isLocked = match m_isLocked {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("isLocked"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wantSimulationIslands = match m_wantSimulationIslands {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wantSimulationIslands",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_snapCollisionToConvexEdgeThreshold = match m_snapCollisionToConvexEdgeThreshold {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "snapCollisionToConvexEdgeThreshold",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_snapCollisionToConcaveEdgeThreshold = match m_snapCollisionToConcaveEdgeThreshold {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "snapCollisionToConcaveEdgeThreshold",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_enableToiWeldRejection = match m_enableToiWeldRejection {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "enableToiWeldRejection",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wantDeactivation = match m_wantDeactivation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wantDeactivation",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_shouldActivateOnRigidBodyTransformChange = match m_shouldActivateOnRigidBodyTransformChange {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "shouldActivateOnRigidBodyTransformChange",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_deactivationReferenceDistance = match m_deactivationReferenceDistance {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "deactivationReferenceDistance",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_toiCollisionResponseRotateNormal = match m_toiCollisionResponseRotateNormal {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "toiCollisionResponseRotateNormal",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxSectorsPerMidphaseCollideTask = match m_maxSectorsPerMidphaseCollideTask {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxSectorsPerMidphaseCollideTask",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxSectorsPerNarrowphaseCollideTask = match m_maxSectorsPerNarrowphaseCollideTask {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxSectorsPerNarrowphaseCollideTask",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_processToisMultithreaded = match m_processToisMultithreaded {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "processToisMultithreaded",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxEntriesPerToiMidphaseCollideTask = match m_maxEntriesPerToiMidphaseCollideTask {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxEntriesPerToiMidphaseCollideTask",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxEntriesPerToiNarrowphaseCollideTask = match m_maxEntriesPerToiNarrowphaseCollideTask {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxEntriesPerToiNarrowphaseCollideTask",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxNumToiCollisionPairsSinglethreaded = match m_maxNumToiCollisionPairsSinglethreaded {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxNumToiCollisionPairsSinglethreaded",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numToisTillAllowedPenetrationSimplifiedToi = match m_numToisTillAllowedPenetrationSimplifiedToi {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numToisTillAllowedPenetrationSimplifiedToi",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numToisTillAllowedPenetrationToi = match m_numToisTillAllowedPenetrationToi {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numToisTillAllowedPenetrationToi",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numToisTillAllowedPenetrationToiHigher = match m_numToisTillAllowedPenetrationToiHigher {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numToisTillAllowedPenetrationToiHigher",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numToisTillAllowedPenetrationToiForced = match m_numToisTillAllowedPenetrationToiForced {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numToisTillAllowedPenetrationToiForced",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lastEntityUid = match m_lastEntityUid {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "lastEntityUid",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lastIslandUid = match m_lastIslandUid {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "lastIslandUid",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lastConstraintUid = match m_lastConstraintUid {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "lastConstraintUid",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_phantoms = match m_phantoms {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("phantoms"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_broadPhaseExtents = match m_broadPhaseExtents {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "broadPhaseExtents",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_broadPhaseNumMarkers = match m_broadPhaseNumMarkers {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "broadPhaseNumMarkers",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_sizeOfToiEventQueue = match m_sizeOfToiEventQueue {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sizeOfToiEventQueue",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_broadPhaseQuerySize = match m_broadPhaseQuerySize {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "broadPhaseQuerySize",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_broadPhaseUpdateSize = match m_broadPhaseUpdateSize {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "broadPhaseUpdateSize",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

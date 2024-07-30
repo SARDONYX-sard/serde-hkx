@@ -100,11 +100,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_name,
-                m_vertexBuffers,
-                m_shape,
-                m_transformSet,
                 m_transform,
+                m_transformSet,
+                m_shape,
+                m_vertexBuffers,
+                m_name,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -128,11 +128,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "name" => Ok(__Field::m_name),
-                        "vertexBuffers" => Ok(__Field::m_vertexBuffers),
-                        "shape" => Ok(__Field::m_shape),
-                        "transformSet" => Ok(__Field::m_transformSet),
                         "transform" => Ok(__Field::m_transform),
+                        "transformSet" => Ok(__Field::m_transformSet),
+                        "shape" => Ok(__Field::m_shape),
+                        "vertexBuffers" => Ok(__Field::m_vertexBuffers),
+                        "name" => Ok(__Field::m_name),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -332,11 +332,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_vertexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_transformSet: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_transform: _serde::__private::Option<Matrix4> = _serde::__private::None;
+                    let mut m_transformSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_vertexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -346,65 +346,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_name => {
+                            __Field::m_transform => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_vertexBuffers => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vertexBuffers) {
+                                if _serde::__private::Option::is_some(&m_transform) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexBuffers",
+                                            "transform",
                                         ),
                                     );
                                 }
-                                m_vertexBuffers = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_shape => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_shape) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
-                                    );
-                                }
-                                m_shape = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_transform = _serde::__private::Some(
+                                    match __A::next_value::<Matrix4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -438,21 +394,65 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_transform => {
+                            __Field::m_shape => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_transform) {
+                                if _serde::__private::Option::is_some(&m_shape) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
+                                    );
+                                }
+                                m_shape = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vertexBuffers => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vertexBuffers) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transform",
+                                            "vertexBuffers",
                                         ),
                                     );
                                 }
-                                m_transform = _serde::__private::Some(
-                                    match __A::next_value::<Matrix4>(&mut __map) {
+                                m_vertexBuffers = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -465,34 +465,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vertexBuffers = match m_vertexBuffers {
+                    let m_transform = match m_transform {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexBuffers",
+                                    "transform",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_shape = match m_shape {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("shape"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -509,14 +489,34 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_transform = match m_transform {
+                    let m_shape = match m_shape {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("shape"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexBuffers = match m_vertexBuffers {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transform",
+                                    "vertexBuffers",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -139,16 +139,16 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_clutchSlipRPM,
-                m_resistanceFactorAtMaxRPM,
-                m_resistanceFactorAtOptRPM,
-                m_resistanceFactorAtMinRPM,
-                m_torqueFactorAtMaxRPM,
-                m_torqueFactorAtMinRPM,
-                m_maxTorque,
-                m_maxRPM,
-                m_optRPM,
                 m_minRPM,
+                m_optRPM,
+                m_maxRPM,
+                m_maxTorque,
+                m_torqueFactorAtMinRPM,
+                m_torqueFactorAtMaxRPM,
+                m_resistanceFactorAtMinRPM,
+                m_resistanceFactorAtOptRPM,
+                m_resistanceFactorAtMaxRPM,
+                m_clutchSlipRPM,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -172,22 +172,22 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "clutchSlipRPM" => Ok(__Field::m_clutchSlipRPM),
-                        "resistanceFactorAtMaxRPM" => {
-                            Ok(__Field::m_resistanceFactorAtMaxRPM)
+                        "minRPM" => Ok(__Field::m_minRPM),
+                        "optRPM" => Ok(__Field::m_optRPM),
+                        "maxRPM" => Ok(__Field::m_maxRPM),
+                        "maxTorque" => Ok(__Field::m_maxTorque),
+                        "torqueFactorAtMinRPM" => Ok(__Field::m_torqueFactorAtMinRPM),
+                        "torqueFactorAtMaxRPM" => Ok(__Field::m_torqueFactorAtMaxRPM),
+                        "resistanceFactorAtMinRPM" => {
+                            Ok(__Field::m_resistanceFactorAtMinRPM)
                         }
                         "resistanceFactorAtOptRPM" => {
                             Ok(__Field::m_resistanceFactorAtOptRPM)
                         }
-                        "resistanceFactorAtMinRPM" => {
-                            Ok(__Field::m_resistanceFactorAtMinRPM)
+                        "resistanceFactorAtMaxRPM" => {
+                            Ok(__Field::m_resistanceFactorAtMaxRPM)
                         }
-                        "torqueFactorAtMaxRPM" => Ok(__Field::m_torqueFactorAtMaxRPM),
-                        "torqueFactorAtMinRPM" => Ok(__Field::m_torqueFactorAtMinRPM),
-                        "maxTorque" => Ok(__Field::m_maxTorque),
-                        "maxRPM" => Ok(__Field::m_maxRPM),
-                        "optRPM" => Ok(__Field::m_optRPM),
-                        "minRPM" => Ok(__Field::m_minRPM),
+                        "clutchSlipRPM" => Ok(__Field::m_clutchSlipRPM),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -537,16 +537,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_clutchSlipRPM: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_resistanceFactorAtMaxRPM: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_resistanceFactorAtOptRPM: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_resistanceFactorAtMinRPM: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_torqueFactorAtMaxRPM: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_torqueFactorAtMinRPM: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxTorque: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxRPM: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_optRPM: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minRPM: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_optRPM: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxRPM: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxTorque: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_torqueFactorAtMinRPM: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_torqueFactorAtMaxRPM: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_resistanceFactorAtMinRPM: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_resistanceFactorAtOptRPM: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_resistanceFactorAtMaxRPM: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_clutchSlipRPM: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -556,20 +556,18 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_clutchSlipRPM => {
+                            __Field::m_minRPM => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_clutchSlipRPM) {
+                                if _serde::__private::Option::is_some(&m_minRPM) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "clutchSlipRPM",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("minRPM"),
                                     );
                                 }
-                                m_clutchSlipRPM = _serde::__private::Some(
+                                m_minRPM = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -580,22 +578,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_resistanceFactorAtMaxRPM => {
+                            __Field::m_optRPM => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_resistanceFactorAtMaxRPM,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_optRPM) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "resistanceFactorAtMaxRPM",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("optRPM"),
                                     );
                                 }
-                                m_resistanceFactorAtMaxRPM = _serde::__private::Some(
+                                m_optRPM = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -606,22 +600,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_resistanceFactorAtOptRPM => {
+                            __Field::m_maxRPM => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_resistanceFactorAtOptRPM,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_maxRPM) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "resistanceFactorAtOptRPM",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("maxRPM"),
                                     );
                                 }
-                                m_resistanceFactorAtOptRPM = _serde::__private::Some(
+                                m_maxRPM = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -632,48 +622,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_resistanceFactorAtMinRPM => {
+                            __Field::m_maxTorque => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_resistanceFactorAtMinRPM,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_maxTorque) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "resistanceFactorAtMinRPM",
+                                            "maxTorque",
                                         ),
                                     );
                                 }
-                                m_resistanceFactorAtMinRPM = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_torqueFactorAtMaxRPM => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_torqueFactorAtMaxRPM,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "torqueFactorAtMaxRPM",
-                                        ),
-                                    );
-                                }
-                                m_torqueFactorAtMaxRPM = _serde::__private::Some(
+                                m_maxTorque = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -710,20 +672,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxTorque => {
+                            __Field::m_torqueFactorAtMaxRPM => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_maxTorque) {
+                                if _serde::__private::Option::is_some(
+                                    &m_torqueFactorAtMaxRPM,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxTorque",
+                                            "torqueFactorAtMaxRPM",
                                         ),
                                     );
                                 }
-                                m_maxTorque = _serde::__private::Some(
+                                m_torqueFactorAtMaxRPM = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -734,18 +698,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxRPM => {
+                            __Field::m_resistanceFactorAtMinRPM => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_maxRPM) {
+                                if _serde::__private::Option::is_some(
+                                    &m_resistanceFactorAtMinRPM,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("maxRPM"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "resistanceFactorAtMinRPM",
+                                        ),
                                     );
                                 }
-                                m_maxRPM = _serde::__private::Some(
+                                m_resistanceFactorAtMinRPM = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -756,18 +724,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_optRPM => {
+                            __Field::m_resistanceFactorAtOptRPM => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_optRPM) {
+                                if _serde::__private::Option::is_some(
+                                    &m_resistanceFactorAtOptRPM,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("optRPM"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "resistanceFactorAtOptRPM",
+                                        ),
                                     );
                                 }
-                                m_optRPM = _serde::__private::Some(
+                                m_resistanceFactorAtOptRPM = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -778,18 +750,46 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_minRPM => {
+                            __Field::m_resistanceFactorAtMaxRPM => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_minRPM) {
+                                if _serde::__private::Option::is_some(
+                                    &m_resistanceFactorAtMaxRPM,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("minRPM"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "resistanceFactorAtMaxRPM",
+                                        ),
                                     );
                                 }
-                                m_minRPM = _serde::__private::Some(
+                                m_resistanceFactorAtMaxRPM = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_clutchSlipRPM => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_clutchSlipRPM) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "clutchSlipRPM",
+                                        ),
+                                    );
+                                }
+                                m_clutchSlipRPM = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -803,61 +803,43 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_clutchSlipRPM = match m_clutchSlipRPM {
+                    let m_minRPM = match m_minRPM {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "clutchSlipRPM",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("minRPM"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_resistanceFactorAtMaxRPM = match m_resistanceFactorAtMaxRPM {
+                    let m_optRPM = match m_optRPM {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "resistanceFactorAtMaxRPM",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("optRPM"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_resistanceFactorAtOptRPM = match m_resistanceFactorAtOptRPM {
+                    let m_maxRPM = match m_maxRPM {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "resistanceFactorAtOptRPM",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("maxRPM"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_resistanceFactorAtMinRPM = match m_resistanceFactorAtMinRPM {
+                    let m_maxTorque = match m_maxTorque {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "resistanceFactorAtMinRPM",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_torqueFactorAtMaxRPM = match m_torqueFactorAtMaxRPM {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "torqueFactorAtMaxRPM",
+                                    "maxTorque",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -875,44 +857,62 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxTorque = match m_maxTorque {
+                    let m_torqueFactorAtMaxRPM = match m_torqueFactorAtMaxRPM {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxTorque",
+                                    "torqueFactorAtMaxRPM",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxRPM = match m_maxRPM {
+                    let m_resistanceFactorAtMinRPM = match m_resistanceFactorAtMinRPM {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("maxRPM"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "resistanceFactorAtMinRPM",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_optRPM = match m_optRPM {
+                    let m_resistanceFactorAtOptRPM = match m_resistanceFactorAtOptRPM {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("optRPM"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "resistanceFactorAtOptRPM",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_minRPM = match m_minRPM {
+                    let m_resistanceFactorAtMaxRPM = match m_resistanceFactorAtMaxRPM {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("minRPM"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "resistanceFactorAtMaxRPM",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_clutchSlipRPM = match m_clutchSlipRPM {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "clutchSlipRPM",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -97,11 +97,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_constantRecoveryVelocity,
-                m_proportionalRecoveryVelocity,
-                m_damping,
-                m_tau,
                 m_maxForce,
+                m_tau,
+                m_damping,
+                m_proportionalRecoveryVelocity,
+                m_constantRecoveryVelocity,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -125,15 +125,15 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "constantRecoveryVelocity" => {
-                            Ok(__Field::m_constantRecoveryVelocity)
-                        }
+                        "maxForce" => Ok(__Field::m_maxForce),
+                        "tau" => Ok(__Field::m_tau),
+                        "damping" => Ok(__Field::m_damping),
                         "proportionalRecoveryVelocity" => {
                             Ok(__Field::m_proportionalRecoveryVelocity)
                         }
-                        "damping" => Ok(__Field::m_damping),
-                        "tau" => Ok(__Field::m_tau),
-                        "maxForce" => Ok(__Field::m_maxForce),
+                        "constantRecoveryVelocity" => {
+                            Ok(__Field::m_constantRecoveryVelocity)
+                        }
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -337,13 +337,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_constantRecoveryVelocity: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxForce: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_tau: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_damping: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_proportionalRecoveryVelocity: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_damping: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_tau: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxForce: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_constantRecoveryVelocity: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -353,22 +353,66 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_constantRecoveryVelocity => {
+                            __Field::m_maxForce => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_constantRecoveryVelocity,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_maxForce) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "constantRecoveryVelocity",
+                                            "maxForce",
                                         ),
                                     );
                                 }
-                                m_constantRecoveryVelocity = _serde::__private::Some(
+                                m_maxForce = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_tau => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_tau) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("tau"),
+                                    );
+                                }
+                                m_tau = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_damping => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_damping) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "damping",
+                                        ),
+                                    );
+                                }
+                                m_damping = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -405,66 +449,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_damping => {
+                            __Field::m_constantRecoveryVelocity => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_damping) {
+                                if _serde::__private::Option::is_some(
+                                    &m_constantRecoveryVelocity,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "damping",
+                                            "constantRecoveryVelocity",
                                         ),
                                     );
                                 }
-                                m_damping = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_tau => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_tau) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("tau"),
-                                    );
-                                }
-                                m_tau = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxForce => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_maxForce) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxForce",
-                                        ),
-                                    );
-                                }
-                                m_maxForce = _serde::__private::Some(
+                                m_constantRecoveryVelocity = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -478,14 +478,32 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_constantRecoveryVelocity = match m_constantRecoveryVelocity {
+                    let m_maxForce = match m_maxForce {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "constantRecoveryVelocity",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("maxForce"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_tau = match m_tau {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("tau"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_damping = match m_damping {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("damping"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -502,32 +520,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_damping = match m_damping {
+                    let m_constantRecoveryVelocity = match m_constantRecoveryVelocity {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("damping"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_tau = match m_tau {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("tau"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxForce = match m_maxForce {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("maxForce"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "constantRecoveryVelocity",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

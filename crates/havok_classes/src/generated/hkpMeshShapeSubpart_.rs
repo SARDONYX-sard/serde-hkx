@@ -166,17 +166,17 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_triangleOffset,
-                m_numMaterials,
-                m_materialStriding,
-                m_materialIndexStriding,
-                m_numTriangles,
-                m_flipAlternateTriangles,
-                m_indexStriding,
-                m_materialIndexStridingType,
-                m_stridingType,
-                m_numVertices,
                 m_vertexStriding,
+                m_numVertices,
+                m_stridingType,
+                m_materialIndexStridingType,
+                m_indexStriding,
+                m_flipAlternateTriangles,
+                m_numTriangles,
+                m_materialIndexStriding,
+                m_materialStriding,
+                m_numMaterials,
+                m_triangleOffset,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -200,19 +200,19 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "triangleOffset" => Ok(__Field::m_triangleOffset),
-                        "numMaterials" => Ok(__Field::m_numMaterials),
-                        "materialStriding" => Ok(__Field::m_materialStriding),
-                        "materialIndexStriding" => Ok(__Field::m_materialIndexStriding),
-                        "numTriangles" => Ok(__Field::m_numTriangles),
-                        "flipAlternateTriangles" => Ok(__Field::m_flipAlternateTriangles),
-                        "indexStriding" => Ok(__Field::m_indexStriding),
+                        "vertexStriding" => Ok(__Field::m_vertexStriding),
+                        "numVertices" => Ok(__Field::m_numVertices),
+                        "stridingType" => Ok(__Field::m_stridingType),
                         "materialIndexStridingType" => {
                             Ok(__Field::m_materialIndexStridingType)
                         }
-                        "stridingType" => Ok(__Field::m_stridingType),
-                        "numVertices" => Ok(__Field::m_numVertices),
-                        "vertexStriding" => Ok(__Field::m_vertexStriding),
+                        "indexStriding" => Ok(__Field::m_indexStriding),
+                        "flipAlternateTriangles" => Ok(__Field::m_flipAlternateTriangles),
+                        "numTriangles" => Ok(__Field::m_numTriangles),
+                        "materialIndexStriding" => Ok(__Field::m_materialIndexStriding),
+                        "materialStriding" => Ok(__Field::m_materialStriding),
+                        "numMaterials" => Ok(__Field::m_numMaterials),
+                        "triangleOffset" => Ok(__Field::m_triangleOffset),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -725,21 +725,21 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_triangleOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numMaterials: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_materialStriding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_materialIndexStriding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numTriangles: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_flipAlternateTriangles: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_indexStriding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_materialIndexStridingType: _serde::__private::Option<
-                        MeshShapeMaterialIndexStridingType,
-                    > = _serde::__private::None;
+                    let mut m_vertexStriding: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_stridingType: _serde::__private::Option<
                         MeshShapeIndexStridingType,
                     > = _serde::__private::None;
-                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_vertexStriding: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_materialIndexStridingType: _serde::__private::Option<
+                        MeshShapeMaterialIndexStridingType,
+                    > = _serde::__private::None;
+                    let mut m_indexStriding: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_flipAlternateTriangles: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numTriangles: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_materialIndexStriding: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_materialStriding: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numMaterials: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_triangleOffset: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -749,20 +749,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_triangleOffset => {
+                            __Field::m_vertexStriding => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_triangleOffset) {
+                                if _serde::__private::Option::is_some(&m_vertexStriding) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "triangleOffset",
+                                            "vertexStriding",
                                         ),
                                     );
                                 }
-                                m_triangleOffset = _serde::__private::Some(
+                                m_vertexStriding = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -773,20 +773,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_numMaterials => {
+                            __Field::m_numVertices => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_numMaterials) {
+                                if _serde::__private::Option::is_some(&m_numVertices) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numMaterials",
+                                            "numVertices",
                                         ),
                                     );
                                 }
-                                m_numMaterials = _serde::__private::Some(
+                                m_numVertices = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -797,121 +797,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_materialStriding => {
+                            __Field::m_stridingType => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_materialStriding) {
+                                if _serde::__private::Option::is_some(&m_stridingType) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "materialStriding",
+                                            "stridingType",
                                         ),
                                     );
                                 }
-                                m_materialStriding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_materialIndexStriding => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_materialIndexStriding,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "materialIndexStriding",
-                                        ),
-                                    );
-                                }
-                                m_materialIndexStriding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numTriangles => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_numTriangles) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numTriangles",
-                                        ),
-                                    );
-                                }
-                                m_numTriangles = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_flipAlternateTriangles => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_flipAlternateTriangles,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "flipAlternateTriangles",
-                                        ),
-                                    );
-                                }
-                                m_flipAlternateTriangles = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_indexStriding => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_indexStriding) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "indexStriding",
-                                        ),
-                                    );
-                                }
-                                m_indexStriding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_stridingType = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        MeshShapeIndexStridingType,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -949,46 +851,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_stridingType => {
+                            __Field::m_indexStriding => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_stridingType) {
+                                if _serde::__private::Option::is_some(&m_indexStriding) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "stridingType",
+                                            "indexStriding",
                                         ),
                                     );
                                 }
-                                m_stridingType = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        MeshShapeIndexStridingType,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numVertices => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_numVertices) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numVertices",
-                                        ),
-                                    );
-                                }
-                                m_numVertices = _serde::__private::Some(
+                                m_indexStriding = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -999,20 +875,144 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vertexStriding => {
+                            __Field::m_flipAlternateTriangles => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_vertexStriding) {
+                                if _serde::__private::Option::is_some(
+                                    &m_flipAlternateTriangles,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexStriding",
+                                            "flipAlternateTriangles",
                                         ),
                                     );
                                 }
-                                m_vertexStriding = _serde::__private::Some(
+                                m_flipAlternateTriangles = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numTriangles => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_numTriangles) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numTriangles",
+                                        ),
+                                    );
+                                }
+                                m_numTriangles = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_materialIndexStriding => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_materialIndexStriding,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "materialIndexStriding",
+                                        ),
+                                    );
+                                }
+                                m_materialIndexStriding = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_materialStriding => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_materialStriding) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "materialStriding",
+                                        ),
+                                    );
+                                }
+                                m_materialStriding = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numMaterials => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_numMaterials) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numMaterials",
+                                        ),
+                                    );
+                                }
+                                m_numMaterials = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_triangleOffset => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_triangleOffset) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "triangleOffset",
+                                        ),
+                                    );
+                                }
+                                m_triangleOffset = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1026,109 +1026,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_triangleOffset = match m_triangleOffset {
+                    let m_vertexStriding = match m_vertexStriding {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "triangleOffset",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numMaterials = match m_numMaterials {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numMaterials",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_materialStriding = match m_materialStriding {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "materialStriding",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_materialIndexStriding = match m_materialIndexStriding {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "materialIndexStriding",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numTriangles = match m_numTriangles {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numTriangles",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_flipAlternateTriangles = match m_flipAlternateTriangles {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "flipAlternateTriangles",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_indexStriding = match m_indexStriding {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "indexStriding",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_materialIndexStridingType = match m_materialIndexStridingType {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "materialIndexStridingType",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_stridingType = match m_stridingType {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "stridingType",
+                                    "vertexStriding",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1146,13 +1050,109 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_vertexStriding = match m_vertexStriding {
+                    let m_stridingType = match m_stridingType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexStriding",
+                                    "stridingType",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_materialIndexStridingType = match m_materialIndexStridingType {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "materialIndexStridingType",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_indexStriding = match m_indexStriding {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "indexStriding",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_flipAlternateTriangles = match m_flipAlternateTriangles {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "flipAlternateTriangles",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numTriangles = match m_numTriangles {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numTriangles",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_materialIndexStriding = match m_materialIndexStriding {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "materialIndexStriding",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_materialStriding = match m_materialStriding {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "materialStriding",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numMaterials = match m_numMaterials {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numMaterials",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_triangleOffset = match m_triangleOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "triangleOffset",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

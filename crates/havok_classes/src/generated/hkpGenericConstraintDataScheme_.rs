@@ -93,9 +93,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_motors,
-                m_commands,
                 m_data,
+                m_commands,
+                m_motors,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -119,9 +119,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "motors" => Ok(__Field::m_motors),
-                        "commands" => Ok(__Field::m_commands),
                         "data" => Ok(__Field::m_data),
+                        "commands" => Ok(__Field::m_commands),
+                        "motors" => Ok(__Field::m_motors),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -316,9 +316,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_motors: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_commands: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
                     let mut m_data: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
+                    let mut m_commands: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_motors: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -328,19 +328,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_motors => {
+                            __Field::m_data => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_motors) {
+                                if _serde::__private::Option::is_some(&m_data) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("motors"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
                                     );
                                 }
-                                m_motors = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                m_data = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -374,19 +374,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_data => {
+                            __Field::m_motors => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_data) {
+                                if _serde::__private::Option::is_some(&m_motors) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("motors"),
                                     );
                                 }
-                                m_data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                                m_motors = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -399,12 +399,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_motors = match m_motors {
+                    let m_data = match m_data {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("motors"),
+                                <__A::Error as _serde::de::Error>::missing_field("data"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -419,12 +419,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_data = match m_data {
+                    let m_motors = match m_motors {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("data"),
+                                <__A::Error as _serde::de::Error>::missing_field("motors"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

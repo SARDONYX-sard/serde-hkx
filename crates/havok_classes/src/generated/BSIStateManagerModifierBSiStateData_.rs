@@ -75,9 +75,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_iStateToSetAs,
-                m_StateID,
                 m_pStateMachine,
+                m_StateID,
+                m_iStateToSetAs,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -101,9 +101,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "iStateToSetAs" => Ok(__Field::m_iStateToSetAs),
-                        "StateID" => Ok(__Field::m_StateID),
                         "pStateMachine" => Ok(__Field::m_pStateMachine),
+                        "StateID" => Ok(__Field::m_StateID),
+                        "iStateToSetAs" => Ok(__Field::m_iStateToSetAs),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -250,9 +250,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_iStateToSetAs: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_StateID: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_pStateMachine: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_StateID: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_iStateToSetAs: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -262,21 +262,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_iStateToSetAs => {
+                            __Field::m_pStateMachine => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_iStateToSetAs) {
+                                if _serde::__private::Option::is_some(&m_pStateMachine) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "iStateToSetAs",
+                                            "pStateMachine",
                                         ),
                                     );
                                 }
-                                m_iStateToSetAs = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_pStateMachine = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -310,21 +310,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_pStateMachine => {
+                            __Field::m_iStateToSetAs => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_pStateMachine) {
+                                if _serde::__private::Option::is_some(&m_iStateToSetAs) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "pStateMachine",
+                                            "iStateToSetAs",
                                         ),
                                     );
                                 }
-                                m_pStateMachine = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_iStateToSetAs = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -337,13 +337,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_iStateToSetAs = match m_iStateToSetAs {
+                    let m_pStateMachine = match m_pStateMachine {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "iStateToSetAs",
+                                    "pStateMachine",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -359,13 +359,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_pStateMachine = match m_pStateMachine {
+                    let m_iStateToSetAs = match m_iStateToSetAs {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "pStateMachine",
+                                    "iStateToSetAs",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

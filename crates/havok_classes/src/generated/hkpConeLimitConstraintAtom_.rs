@@ -119,14 +119,14 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_angularLimitsTauFactor,
-                m_maxAngle,
-                m_minAngle,
-                m_memOffsetToAngleOffset,
-                m_angleMeasurementMode,
-                m_refAxisInB,
-                m_twistAxisInA,
                 m_isEnabled,
+                m_twistAxisInA,
+                m_refAxisInB,
+                m_angleMeasurementMode,
+                m_memOffsetToAngleOffset,
+                m_minAngle,
+                m_maxAngle,
+                m_angularLimitsTauFactor,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -151,14 +151,14 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "angularLimitsTauFactor" => Ok(__Field::m_angularLimitsTauFactor),
-                        "maxAngle" => Ok(__Field::m_maxAngle),
-                        "minAngle" => Ok(__Field::m_minAngle),
-                        "memOffsetToAngleOffset" => Ok(__Field::m_memOffsetToAngleOffset),
-                        "angleMeasurementMode" => Ok(__Field::m_angleMeasurementMode),
-                        "refAxisInB" => Ok(__Field::m_refAxisInB),
-                        "twistAxisInA" => Ok(__Field::m_twistAxisInA),
                         "isEnabled" => Ok(__Field::m_isEnabled),
+                        "twistAxisInA" => Ok(__Field::m_twistAxisInA),
+                        "refAxisInB" => Ok(__Field::m_refAxisInB),
+                        "angleMeasurementMode" => Ok(__Field::m_angleMeasurementMode),
+                        "memOffsetToAngleOffset" => Ok(__Field::m_memOffsetToAngleOffset),
+                        "minAngle" => Ok(__Field::m_minAngle),
+                        "maxAngle" => Ok(__Field::m_maxAngle),
+                        "angularLimitsTauFactor" => Ok(__Field::m_angularLimitsTauFactor),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -458,16 +458,16 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_angularLimitsTauFactor: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxAngle: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_minAngle: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_memOffsetToAngleOffset: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_isEnabled: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_twistAxisInA: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_refAxisInB: _serde::__private::Option<u8> = _serde::__private::None;
                     let mut m_angleMeasurementMode: _serde::__private::Option<
                         MeasurementMode,
                     > = _serde::__private::None;
-                    let mut m_refAxisInB: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_twistAxisInA: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_isEnabled: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_memOffsetToAngleOffset: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_minAngle: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxAngle: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_angularLimitsTauFactor: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -499,23 +499,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_angularLimitsTauFactor => {
+                            __Field::m_isEnabled => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_angularLimitsTauFactor,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_isEnabled) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "angularLimitsTauFactor",
+                                            "isEnabled",
                                         ),
                                     );
                                 }
-                                m_angularLimitsTauFactor = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_isEnabled = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -525,21 +523,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxAngle => {
+                            __Field::m_twistAxisInA => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_maxAngle) {
+                                if _serde::__private::Option::is_some(&m_twistAxisInA) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxAngle",
+                                            "twistAxisInA",
                                         ),
                                     );
                                 }
-                                m_maxAngle = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_twistAxisInA = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -549,46 +547,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_minAngle => {
+                            __Field::m_refAxisInB => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_minAngle) {
+                                if _serde::__private::Option::is_some(&m_refAxisInB) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "minAngle",
+                                            "refAxisInB",
                                         ),
                                     );
                                 }
-                                m_minAngle = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_memOffsetToAngleOffset => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_memOffsetToAngleOffset,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "memOffsetToAngleOffset",
-                                        ),
-                                    );
-                                }
-                                m_memOffsetToAngleOffset = _serde::__private::Some(
+                                m_refAxisInB = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -625,20 +597,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_refAxisInB => {
+                            __Field::m_memOffsetToAngleOffset => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_refAxisInB) {
+                                if _serde::__private::Option::is_some(
+                                    &m_memOffsetToAngleOffset,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "refAxisInB",
+                                            "memOffsetToAngleOffset",
                                         ),
                                     );
                                 }
-                                m_refAxisInB = _serde::__private::Some(
+                                m_memOffsetToAngleOffset = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -649,21 +623,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_twistAxisInA => {
+                            __Field::m_minAngle => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_twistAxisInA) {
+                                if _serde::__private::Option::is_some(&m_minAngle) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "twistAxisInA",
+                                            "minAngle",
                                         ),
                                     );
                                 }
-                                m_twistAxisInA = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                m_minAngle = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -673,21 +647,47 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_isEnabled => {
+                            __Field::m_maxAngle => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isEnabled) {
+                                if _serde::__private::Option::is_some(&m_maxAngle) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isEnabled",
+                                            "maxAngle",
                                         ),
                                     );
                                 }
-                                m_isEnabled = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                m_maxAngle = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_angularLimitsTauFactor => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_angularLimitsTauFactor,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "angularLimitsTauFactor",
+                                        ),
+                                    );
+                                }
+                                m_angularLimitsTauFactor = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -710,69 +710,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_angularLimitsTauFactor = match m_angularLimitsTauFactor {
+                    let m_isEnabled = match m_isEnabled {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "angularLimitsTauFactor",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxAngle = match m_maxAngle {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("maxAngle"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_minAngle = match m_minAngle {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("minAngle"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_memOffsetToAngleOffset = match m_memOffsetToAngleOffset {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "memOffsetToAngleOffset",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_angleMeasurementMode = match m_angleMeasurementMode {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "angleMeasurementMode",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_refAxisInB = match m_refAxisInB {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "refAxisInB",
+                                    "isEnabled",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -790,13 +734,69 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_isEnabled = match m_isEnabled {
+                    let m_refAxisInB = match m_refAxisInB {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isEnabled",
+                                    "refAxisInB",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_angleMeasurementMode = match m_angleMeasurementMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "angleMeasurementMode",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_memOffsetToAngleOffset = match m_memOffsetToAngleOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "memOffsetToAngleOffset",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_minAngle = match m_minAngle {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("minAngle"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxAngle = match m_maxAngle {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("maxAngle"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_angularLimitsTauFactor = match m_angularLimitsTauFactor {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "angularLimitsTauFactor",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

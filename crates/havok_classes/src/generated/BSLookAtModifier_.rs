@@ -243,25 +243,25 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
+                m_name,
                 m_enable,
-                m_lookAtCameraZ,
-                m_lookAtCameraY,
-                m_lookAtCameraX,
-                m_lookAtCamera,
-                m_targetOutOfLimitEvent,
-                m_targetOutsideLimits,
-                m_targetLocation,
-                m_useBoneGains,
-                m_offGain,
-                m_onGain,
-                m_continueLookOutsideOfLimit,
-                m_limitAngleThresholdDegrees,
-                m_limitAngleDegrees,
-                m_eyeBones,
-                m_bones,
                 m_lookAtTarget,
+                m_bones,
+                m_eyeBones,
+                m_limitAngleDegrees,
+                m_limitAngleThresholdDegrees,
+                m_continueLookOutsideOfLimit,
+                m_onGain,
+                m_offGain,
+                m_useBoneGains,
+                m_targetLocation,
+                m_targetOutsideLimits,
+                m_targetOutOfLimitEvent,
+                m_lookAtCamera,
+                m_lookAtCameraX,
+                m_lookAtCameraY,
+                m_lookAtCameraZ,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -286,29 +286,29 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
+                        "name" => Ok(__Field::m_name),
                         "enable" => Ok(__Field::m_enable),
-                        "lookAtCameraZ" => Ok(__Field::m_lookAtCameraZ),
-                        "lookAtCameraY" => Ok(__Field::m_lookAtCameraY),
-                        "lookAtCameraX" => Ok(__Field::m_lookAtCameraX),
-                        "lookAtCamera" => Ok(__Field::m_lookAtCamera),
-                        "targetOutOfLimitEvent" => Ok(__Field::m_targetOutOfLimitEvent),
-                        "targetOutsideLimits" => Ok(__Field::m_targetOutsideLimits),
-                        "targetLocation" => Ok(__Field::m_targetLocation),
-                        "useBoneGains" => Ok(__Field::m_useBoneGains),
-                        "offGain" => Ok(__Field::m_offGain),
-                        "onGain" => Ok(__Field::m_onGain),
-                        "continueLookOutsideOfLimit" => {
-                            Ok(__Field::m_continueLookOutsideOfLimit)
-                        }
+                        "lookAtTarget" => Ok(__Field::m_lookAtTarget),
+                        "bones" => Ok(__Field::m_bones),
+                        "eyeBones" => Ok(__Field::m_eyeBones),
+                        "limitAngleDegrees" => Ok(__Field::m_limitAngleDegrees),
                         "limitAngleThresholdDegrees" => {
                             Ok(__Field::m_limitAngleThresholdDegrees)
                         }
-                        "limitAngleDegrees" => Ok(__Field::m_limitAngleDegrees),
-                        "eyeBones" => Ok(__Field::m_eyeBones),
-                        "bones" => Ok(__Field::m_bones),
-                        "lookAtTarget" => Ok(__Field::m_lookAtTarget),
+                        "continueLookOutsideOfLimit" => {
+                            Ok(__Field::m_continueLookOutsideOfLimit)
+                        }
+                        "onGain" => Ok(__Field::m_onGain),
+                        "offGain" => Ok(__Field::m_offGain),
+                        "useBoneGains" => Ok(__Field::m_useBoneGains),
+                        "targetLocation" => Ok(__Field::m_targetLocation),
+                        "targetOutsideLimits" => Ok(__Field::m_targetOutsideLimits),
+                        "targetOutOfLimitEvent" => Ok(__Field::m_targetOutOfLimitEvent),
+                        "lookAtCamera" => Ok(__Field::m_lookAtCamera),
+                        "lookAtCameraX" => Ok(__Field::m_lookAtCameraX),
+                        "lookAtCameraY" => Ok(__Field::m_lookAtCameraY),
+                        "lookAtCameraZ" => Ok(__Field::m_lookAtCameraZ),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -938,35 +938,35 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_lookAtCameraZ: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_lookAtCameraY: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_lookAtCameraX: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_lookAtCamera: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_targetOutOfLimitEvent: _serde::__private::Option<
-                        hkbEventProperty,
-                    > = _serde::__private::None;
-                    let mut m_targetOutsideLimits: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_targetLocation: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_useBoneGains: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_offGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_onGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_continueLookOutsideOfLimit: _serde::__private::Option<
-                        bool,
-                    > = _serde::__private::None;
-                    let mut m_limitAngleThresholdDegrees: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_limitAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_eyeBones: _serde::__private::Option<
-                        Vec<BSLookAtModifierBoneData>,
-                    > = _serde::__private::None;
+                    let mut m_lookAtTarget: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_bones: _serde::__private::Option<
                         Vec<BSLookAtModifierBoneData>,
                     > = _serde::__private::None;
-                    let mut m_lookAtTarget: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_eyeBones: _serde::__private::Option<
+                        Vec<BSLookAtModifierBoneData>,
+                    > = _serde::__private::None;
+                    let mut m_limitAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_limitAngleThresholdDegrees: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_continueLookOutsideOfLimit: _serde::__private::Option<
+                        bool,
+                    > = _serde::__private::None;
+                    let mut m_onGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_offGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_useBoneGains: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_targetLocation: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_targetOutsideLimits: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_targetOutOfLimitEvent: _serde::__private::Option<
+                        hkbEventProperty,
+                    > = _serde::__private::None;
+                    let mut m_lookAtCamera: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_lookAtCameraX: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_lookAtCameraY: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_lookAtCameraZ: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -1002,28 +1002,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -1039,6 +1017,28 @@ const _: () = {
                                 }
                                 m_userData = _serde::__private::Some(
                                     match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1070,92 +1070,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_lookAtCameraZ => {
+                            __Field::m_lookAtTarget => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_lookAtCameraZ) {
+                                if _serde::__private::Option::is_some(&m_lookAtTarget) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lookAtCameraZ",
+                                            "lookAtTarget",
                                         ),
                                     );
                                 }
-                                m_lookAtCameraZ = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_lookAtCameraY => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_lookAtCameraY) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lookAtCameraY",
-                                        ),
-                                    );
-                                }
-                                m_lookAtCameraY = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_lookAtCameraX => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_lookAtCameraX) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lookAtCameraX",
-                                        ),
-                                    );
-                                }
-                                m_lookAtCameraX = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_lookAtCamera => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_lookAtCamera) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lookAtCamera",
-                                        ),
-                                    );
-                                }
-                                m_lookAtCamera = _serde::__private::Some(
+                                m_lookAtTarget = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1166,120 +1094,72 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_targetOutOfLimitEvent => {
+                            __Field::m_bones => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bones) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("bones"),
+                                    );
+                                }
+                                m_bones = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<BSLookAtModifierBoneData>,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_eyeBones => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_eyeBones) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "eyeBones",
+                                        ),
+                                    );
+                                }
+                                m_eyeBones = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<BSLookAtModifierBoneData>,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_limitAngleDegrees => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_targetOutOfLimitEvent,
+                                    &m_limitAngleDegrees,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "targetOutOfLimitEvent",
+                                            "limitAngleDegrees",
                                         ),
                                     );
                                 }
-                                m_targetOutOfLimitEvent = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_targetOutsideLimits => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_targetOutsideLimits,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "targetOutsideLimits",
-                                        ),
-                                    );
-                                }
-                                m_targetOutsideLimits = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_targetLocation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_targetLocation) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "targetLocation",
-                                        ),
-                                    );
-                                }
-                                m_targetLocation = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_useBoneGains => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_useBoneGains) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "useBoneGains",
-                                        ),
-                                    );
-                                }
-                                m_useBoneGains = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_offGain => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_offGain) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "offGain",
-                                        ),
-                                    );
-                                }
-                                m_offGain = _serde::__private::Some(
+                                m_limitAngleDegrees = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1290,18 +1170,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_onGain => {
+                            __Field::m_limitAngleThresholdDegrees => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_onGain) {
+                                if _serde::__private::Option::is_some(
+                                    &m_limitAngleThresholdDegrees,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("onGain"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "limitAngleThresholdDegrees",
+                                        ),
                                     );
                                 }
-                                m_onGain = _serde::__private::Some(
+                                m_limitAngleThresholdDegrees = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1338,22 +1222,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_limitAngleThresholdDegrees => {
+                            __Field::m_onGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_limitAngleThresholdDegrees,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_onGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "limitAngleThresholdDegrees",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("onGain"),
                                     );
                                 }
-                                m_limitAngleThresholdDegrees = _serde::__private::Some(
+                                m_onGain = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1364,22 +1244,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_limitAngleDegrees => {
+                            __Field::m_offGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_limitAngleDegrees,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_offGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "limitAngleDegrees",
+                                            "offGain",
                                         ),
                                     );
                                 }
-                                m_limitAngleDegrees = _serde::__private::Some(
+                                m_offGain = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1390,71 +1268,193 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_eyeBones => {
+                            __Field::m_useBoneGains => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_eyeBones) {
+                                if _serde::__private::Option::is_some(&m_useBoneGains) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "eyeBones",
+                                            "useBoneGains",
                                         ),
                                     );
                                 }
-                                m_eyeBones = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<BSLookAtModifierBoneData>,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bones => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bones) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("bones"),
-                                    );
-                                }
-                                m_bones = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<BSLookAtModifierBoneData>,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_lookAtTarget => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_lookAtTarget) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lookAtTarget",
-                                        ),
-                                    );
-                                }
-                                m_lookAtTarget = _serde::__private::Some(
+                                m_useBoneGains = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_targetLocation => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_targetLocation) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "targetLocation",
+                                        ),
+                                    );
+                                }
+                                m_targetLocation = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_targetOutsideLimits => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_targetOutsideLimits,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "targetOutsideLimits",
+                                        ),
+                                    );
+                                }
+                                m_targetOutsideLimits = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_targetOutOfLimitEvent => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_targetOutOfLimitEvent,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "targetOutOfLimitEvent",
+                                        ),
+                                    );
+                                }
+                                m_targetOutOfLimitEvent = _serde::__private::Some(
+                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lookAtCamera => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_lookAtCamera) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lookAtCamera",
+                                        ),
+                                    );
+                                }
+                                m_lookAtCamera = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lookAtCameraX => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_lookAtCameraX) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lookAtCameraX",
+                                        ),
+                                    );
+                                }
+                                m_lookAtCameraX = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lookAtCameraY => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_lookAtCameraY) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lookAtCameraY",
+                                        ),
+                                    );
+                                }
+                                m_lookAtCameraY = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lookAtCameraZ => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_lookAtCameraZ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lookAtCameraZ",
+                                        ),
+                                    );
+                                }
+                                m_lookAtCameraZ = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1479,22 +1479,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -1509,129 +1509,45 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_lookAtCameraZ = match m_lookAtCameraZ {
+                    let m_lookAtTarget = match m_lookAtTarget {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "lookAtCameraZ",
+                                    "lookAtTarget",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_lookAtCameraY = match m_lookAtCameraY {
+                    let m_bones = match m_bones {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("bones"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_eyeBones = match m_eyeBones {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("eyeBones"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_limitAngleDegrees = match m_limitAngleDegrees {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "lookAtCameraY",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lookAtCameraX = match m_lookAtCameraX {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "lookAtCameraX",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lookAtCamera = match m_lookAtCamera {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "lookAtCamera",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_targetOutOfLimitEvent = match m_targetOutOfLimitEvent {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "targetOutOfLimitEvent",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_targetOutsideLimits = match m_targetOutsideLimits {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "targetOutsideLimits",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_targetLocation = match m_targetLocation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "targetLocation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_useBoneGains = match m_useBoneGains {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "useBoneGains",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_offGain = match m_offGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("offGain"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_onGain = match m_onGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("onGain"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_continueLookOutsideOfLimit = match m_continueLookOutsideOfLimit {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "continueLookOutsideOfLimit",
+                                    "limitAngleDegrees",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1649,45 +1565,129 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_limitAngleDegrees = match m_limitAngleDegrees {
+                    let m_continueLookOutsideOfLimit = match m_continueLookOutsideOfLimit {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "limitAngleDegrees",
+                                    "continueLookOutsideOfLimit",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_eyeBones = match m_eyeBones {
+                    let m_onGain = match m_onGain {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("eyeBones"),
+                                <__A::Error as _serde::de::Error>::missing_field("onGain"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_bones = match m_bones {
+                    let m_offGain = match m_offGain {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("bones"),
+                                <__A::Error as _serde::de::Error>::missing_field("offGain"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_lookAtTarget = match m_lookAtTarget {
+                    let m_useBoneGains = match m_useBoneGains {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "lookAtTarget",
+                                    "useBoneGains",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_targetLocation = match m_targetLocation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "targetLocation",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_targetOutsideLimits = match m_targetOutsideLimits {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "targetOutsideLimits",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_targetOutOfLimitEvent = match m_targetOutOfLimitEvent {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "targetOutOfLimitEvent",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lookAtCamera = match m_lookAtCamera {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "lookAtCamera",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lookAtCameraX = match m_lookAtCameraX {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "lookAtCameraX",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lookAtCameraY = match m_lookAtCameraY {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "lookAtCameraY",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lookAtCameraZ = match m_lookAtCameraZ {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "lookAtCameraZ",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

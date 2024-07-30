@@ -123,14 +123,14 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_info,
-                m_maxNumContactPoints,
-                m_contactPointPropertiesStriding,
-                m_numUserDatasForBodyB,
-                m_numUserDatasForBodyA,
-                m_numReservedContactPoints,
-                m_numContactPoints,
                 m_sizeOfAllAtoms,
+                m_numContactPoints,
+                m_numReservedContactPoints,
+                m_numUserDatasForBodyA,
+                m_numUserDatasForBodyB,
+                m_contactPointPropertiesStriding,
+                m_maxNumContactPoints,
+                m_info,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -155,18 +155,18 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "info" => Ok(__Field::m_info),
-                        "maxNumContactPoints" => Ok(__Field::m_maxNumContactPoints),
-                        "contactPointPropertiesStriding" => {
-                            Ok(__Field::m_contactPointPropertiesStriding)
-                        }
-                        "numUserDatasForBodyB" => Ok(__Field::m_numUserDatasForBodyB),
-                        "numUserDatasForBodyA" => Ok(__Field::m_numUserDatasForBodyA),
+                        "sizeOfAllAtoms" => Ok(__Field::m_sizeOfAllAtoms),
+                        "numContactPoints" => Ok(__Field::m_numContactPoints),
                         "numReservedContactPoints" => {
                             Ok(__Field::m_numReservedContactPoints)
                         }
-                        "numContactPoints" => Ok(__Field::m_numContactPoints),
-                        "sizeOfAllAtoms" => Ok(__Field::m_sizeOfAllAtoms),
+                        "numUserDatasForBodyA" => Ok(__Field::m_numUserDatasForBodyA),
+                        "numUserDatasForBodyB" => Ok(__Field::m_numUserDatasForBodyB),
+                        "contactPointPropertiesStriding" => {
+                            Ok(__Field::m_contactPointPropertiesStriding)
+                        }
+                        "maxNumContactPoints" => Ok(__Field::m_maxNumContactPoints),
+                        "info" => Ok(__Field::m_info),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -475,18 +475,18 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_info: _serde::__private::Option<
-                        hkpSimpleContactConstraintDataInfo,
-                    > = _serde::__private::None;
-                    let mut m_maxNumContactPoints: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_sizeOfAllAtoms: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_numContactPoints: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_numReservedContactPoints: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_numUserDatasForBodyA: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_numUserDatasForBodyB: _serde::__private::Option<u8> = _serde::__private::None;
                     let mut m_contactPointPropertiesStriding: _serde::__private::Option<
                         u8,
                     > = _serde::__private::None;
-                    let mut m_numUserDatasForBodyB: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_numUserDatasForBodyA: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_numReservedContactPoints: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_numContactPoints: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_sizeOfAllAtoms: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_maxNumContactPoints: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_info: _serde::__private::Option<
+                        hkpSimpleContactConstraintDataInfo,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -518,46 +518,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_info => {
+                            __Field::m_sizeOfAllAtoms => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_info) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("info"),
-                                    );
-                                }
-                                m_info = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpSimpleContactConstraintDataInfo,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxNumContactPoints => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxNumContactPoints,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_sizeOfAllAtoms) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxNumContactPoints",
+                                            "sizeOfAllAtoms",
                                         ),
                                     );
                                 }
-                                m_maxNumContactPoints = _serde::__private::Some(
+                                m_sizeOfAllAtoms = _serde::__private::Some(
                                     match __A::next_value::<u16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -568,22 +542,72 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_contactPointPropertiesStriding => {
+                            __Field::m_numContactPoints => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_numContactPoints) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numContactPoints",
+                                        ),
+                                    );
+                                }
+                                m_numContactPoints = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numReservedContactPoints => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_contactPointPropertiesStriding,
+                                    &m_numReservedContactPoints,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "contactPointPropertiesStriding",
+                                            "numReservedContactPoints",
                                         ),
                                     );
                                 }
-                                m_contactPointPropertiesStriding = _serde::__private::Some(
+                                m_numReservedContactPoints = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numUserDatasForBodyA => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_numUserDatasForBodyA,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numUserDatasForBodyA",
+                                        ),
+                                    );
+                                }
+                                m_numUserDatasForBodyA = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -620,22 +644,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_numUserDatasForBodyA => {
+                            __Field::m_contactPointPropertiesStriding => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_numUserDatasForBodyA,
+                                    &m_contactPointPropertiesStriding,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numUserDatasForBodyA",
+                                            "contactPointPropertiesStriding",
                                         ),
                                     );
                                 }
-                                m_numUserDatasForBodyA = _serde::__private::Some(
+                                m_contactPointPropertiesStriding = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -646,22 +670,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_numReservedContactPoints => {
+                            __Field::m_maxNumContactPoints => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_numReservedContactPoints,
+                                    &m_maxNumContactPoints,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numReservedContactPoints",
+                                            "maxNumContactPoints",
                                         ),
                                     );
                                 }
-                                m_numReservedContactPoints = _serde::__private::Some(
+                                m_maxNumContactPoints = _serde::__private::Some(
                                     match __A::next_value::<u16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -672,45 +696,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_numContactPoints => {
+                            __Field::m_info => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_numContactPoints) {
+                                if _serde::__private::Option::is_some(&m_info) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numContactPoints",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("info"),
                                     );
                                 }
-                                m_numContactPoints = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_sizeOfAllAtoms => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_sizeOfAllAtoms) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sizeOfAllAtoms",
-                                        ),
-                                    );
-                                }
-                                m_sizeOfAllAtoms = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                m_info = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpSimpleContactConstraintDataInfo,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -733,71 +733,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_info = match m_info {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("info"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxNumContactPoints = match m_maxNumContactPoints {
+                    let m_sizeOfAllAtoms = match m_sizeOfAllAtoms {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxNumContactPoints",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_contactPointPropertiesStriding = match m_contactPointPropertiesStriding {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "contactPointPropertiesStriding",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numUserDatasForBodyB = match m_numUserDatasForBodyB {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numUserDatasForBodyB",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numUserDatasForBodyA = match m_numUserDatasForBodyA {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numUserDatasForBodyA",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numReservedContactPoints = match m_numReservedContactPoints {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numReservedContactPoints",
+                                    "sizeOfAllAtoms",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -815,14 +757,72 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_sizeOfAllAtoms = match m_sizeOfAllAtoms {
+                    let m_numReservedContactPoints = match m_numReservedContactPoints {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "sizeOfAllAtoms",
+                                    "numReservedContactPoints",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numUserDatasForBodyA = match m_numUserDatasForBodyA {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numUserDatasForBodyA",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numUserDatasForBodyB = match m_numUserDatasForBodyB {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numUserDatasForBodyB",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_contactPointPropertiesStriding = match m_contactPointPropertiesStriding {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contactPointPropertiesStriding",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxNumContactPoints = match m_maxNumContactPoints {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxNumContactPoints",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_info = match m_info {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("info"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

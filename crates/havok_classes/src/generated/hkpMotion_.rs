@@ -156,18 +156,18 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_gravityFactor,
-                m_savedQualityTypeIndex,
-                m_savedMotion,
-                m_deactivationRefOrientation,
-                m_deactivationRefPosition,
-                m_angularVelocity,
-                m_linearVelocity,
-                m_inertiaAndMassInv,
-                m_motionState,
-                m_deactivationNumInactiveFrames,
-                m_deactivationIntegrateCounter,
                 m_type,
+                m_deactivationIntegrateCounter,
+                m_deactivationNumInactiveFrames,
+                m_motionState,
+                m_inertiaAndMassInv,
+                m_linearVelocity,
+                m_angularVelocity,
+                m_deactivationRefPosition,
+                m_deactivationRefOrientation,
+                m_savedMotion,
+                m_savedQualityTypeIndex,
+                m_gravityFactor,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -191,26 +191,26 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "gravityFactor" => Ok(__Field::m_gravityFactor),
-                        "savedQualityTypeIndex" => Ok(__Field::m_savedQualityTypeIndex),
-                        "savedMotion" => Ok(__Field::m_savedMotion),
-                        "deactivationRefOrientation" => {
-                            Ok(__Field::m_deactivationRefOrientation)
-                        }
-                        "deactivationRefPosition" => {
-                            Ok(__Field::m_deactivationRefPosition)
-                        }
-                        "angularVelocity" => Ok(__Field::m_angularVelocity),
-                        "linearVelocity" => Ok(__Field::m_linearVelocity),
-                        "inertiaAndMassInv" => Ok(__Field::m_inertiaAndMassInv),
-                        "motionState" => Ok(__Field::m_motionState),
-                        "deactivationNumInactiveFrames" => {
-                            Ok(__Field::m_deactivationNumInactiveFrames)
-                        }
+                        "type" => Ok(__Field::m_type),
                         "deactivationIntegrateCounter" => {
                             Ok(__Field::m_deactivationIntegrateCounter)
                         }
-                        "type" => Ok(__Field::m_type),
+                        "deactivationNumInactiveFrames" => {
+                            Ok(__Field::m_deactivationNumInactiveFrames)
+                        }
+                        "motionState" => Ok(__Field::m_motionState),
+                        "inertiaAndMassInv" => Ok(__Field::m_inertiaAndMassInv),
+                        "linearVelocity" => Ok(__Field::m_linearVelocity),
+                        "angularVelocity" => Ok(__Field::m_angularVelocity),
+                        "deactivationRefPosition" => {
+                            Ok(__Field::m_deactivationRefPosition)
+                        }
+                        "deactivationRefOrientation" => {
+                            Ok(__Field::m_deactivationRefOrientation)
+                        }
+                        "savedMotion" => Ok(__Field::m_savedMotion),
+                        "savedQualityTypeIndex" => Ok(__Field::m_savedQualityTypeIndex),
+                        "gravityFactor" => Ok(__Field::m_gravityFactor),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -634,26 +634,26 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_gravityFactor: _serde::__private::Option<f16> = _serde::__private::None;
-                    let mut m_savedQualityTypeIndex: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_savedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_deactivationRefOrientation: _serde::__private::Option<
-                        [u32; 2usize],
-                    > = _serde::__private::None;
-                    let mut m_deactivationRefPosition: _serde::__private::Option<
-                        [Vector4; 2usize],
-                    > = _serde::__private::None;
-                    let mut m_angularVelocity: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_linearVelocity: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_inertiaAndMassInv: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_motionState: _serde::__private::Option<hkMotionState> = _serde::__private::None;
-                    let mut m_deactivationNumInactiveFrames: _serde::__private::Option<
-                        [u16; 2usize],
-                    > = _serde::__private::None;
+                    let mut m_type: _serde::__private::Option<MotionType> = _serde::__private::None;
                     let mut m_deactivationIntegrateCounter: _serde::__private::Option<
                         u8,
                     > = _serde::__private::None;
-                    let mut m_type: _serde::__private::Option<MotionType> = _serde::__private::None;
+                    let mut m_deactivationNumInactiveFrames: _serde::__private::Option<
+                        [u16; 2usize],
+                    > = _serde::__private::None;
+                    let mut m_motionState: _serde::__private::Option<hkMotionState> = _serde::__private::None;
+                    let mut m_inertiaAndMassInv: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_linearVelocity: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_angularVelocity: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_deactivationRefPosition: _serde::__private::Option<
+                        [Vector4; 2usize],
+                    > = _serde::__private::None;
+                    let mut m_deactivationRefOrientation: _serde::__private::Option<
+                        [u32; 2usize],
+                    > = _serde::__private::None;
+                    let mut m_savedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_savedQualityTypeIndex: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_gravityFactor: _serde::__private::Option<f16> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -663,247 +663,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_gravityFactor => {
+                            __Field::m_type => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_gravityFactor) {
+                                if _serde::__private::Option::is_some(&m_type) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "gravityFactor",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("type"),
                                     );
                                 }
-                                m_gravityFactor = _serde::__private::Some(
-                                    match __A::next_value::<f16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_savedQualityTypeIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_savedQualityTypeIndex,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "savedQualityTypeIndex",
-                                        ),
-                                    );
-                                }
-                                m_savedQualityTypeIndex = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_savedMotion => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_savedMotion) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "savedMotion",
-                                        ),
-                                    );
-                                }
-                                m_savedMotion = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_deactivationRefOrientation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_deactivationRefOrientation,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "deactivationRefOrientation",
-                                        ),
-                                    );
-                                }
-                                m_deactivationRefOrientation = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_deactivationRefPosition => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_deactivationRefPosition,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "deactivationRefPosition",
-                                        ),
-                                    );
-                                }
-                                m_deactivationRefPosition = _serde::__private::Some(
-                                    match __A::next_value::<[Vector4; 2usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_angularVelocity => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_angularVelocity) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "angularVelocity",
-                                        ),
-                                    );
-                                }
-                                m_angularVelocity = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_linearVelocity => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_linearVelocity) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "linearVelocity",
-                                        ),
-                                    );
-                                }
-                                m_linearVelocity = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_inertiaAndMassInv => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_inertiaAndMassInv,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "inertiaAndMassInv",
-                                        ),
-                                    );
-                                }
-                                m_inertiaAndMassInv = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_motionState => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_motionState) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "motionState",
-                                        ),
-                                    );
-                                }
-                                m_motionState = _serde::__private::Some(
-                                    match __A::next_value::<hkMotionState>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_deactivationNumInactiveFrames => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_deactivationNumInactiveFrames,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "deactivationNumInactiveFrames",
-                                        ),
-                                    );
-                                }
-                                m_deactivationNumInactiveFrames = _serde::__private::Some(
-                                    match __A::next_value::<[u16; 2usize]>(&mut __map) {
+                                m_type = _serde::__private::Some(
+                                    match __A::next_value::<MotionType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -939,19 +711,247 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_type => {
+                            __Field::m_deactivationNumInactiveFrames => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_type) {
+                                if _serde::__private::Option::is_some(
+                                    &m_deactivationNumInactiveFrames,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("type"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "deactivationNumInactiveFrames",
+                                        ),
                                     );
                                 }
-                                m_type = _serde::__private::Some(
-                                    match __A::next_value::<MotionType>(&mut __map) {
+                                m_deactivationNumInactiveFrames = _serde::__private::Some(
+                                    match __A::next_value::<[u16; 2usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_motionState => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_motionState) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "motionState",
+                                        ),
+                                    );
+                                }
+                                m_motionState = _serde::__private::Some(
+                                    match __A::next_value::<hkMotionState>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_inertiaAndMassInv => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_inertiaAndMassInv,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "inertiaAndMassInv",
+                                        ),
+                                    );
+                                }
+                                m_inertiaAndMassInv = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_linearVelocity => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_linearVelocity) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "linearVelocity",
+                                        ),
+                                    );
+                                }
+                                m_linearVelocity = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_angularVelocity => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_angularVelocity) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "angularVelocity",
+                                        ),
+                                    );
+                                }
+                                m_angularVelocity = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_deactivationRefPosition => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_deactivationRefPosition,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "deactivationRefPosition",
+                                        ),
+                                    );
+                                }
+                                m_deactivationRefPosition = _serde::__private::Some(
+                                    match __A::next_value::<[Vector4; 2usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_deactivationRefOrientation => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_deactivationRefOrientation,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "deactivationRefOrientation",
+                                        ),
+                                    );
+                                }
+                                m_deactivationRefOrientation = _serde::__private::Some(
+                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_savedMotion => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_savedMotion) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "savedMotion",
+                                        ),
+                                    );
+                                }
+                                m_savedMotion = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_savedQualityTypeIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_savedQualityTypeIndex,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "savedQualityTypeIndex",
+                                        ),
+                                    );
+                                }
+                                m_savedQualityTypeIndex = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_gravityFactor => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_gravityFactor) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "gravityFactor",
+                                        ),
+                                    );
+                                }
+                                m_gravityFactor = _serde::__private::Some(
+                                    match __A::next_value::<f16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -964,109 +964,23 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_gravityFactor = match m_gravityFactor {
+                    let m_type = match m_type {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "gravityFactor",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("type"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_savedQualityTypeIndex = match m_savedQualityTypeIndex {
+                    let m_deactivationIntegrateCounter = match m_deactivationIntegrateCounter {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "savedQualityTypeIndex",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_savedMotion = match m_savedMotion {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "savedMotion",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_deactivationRefOrientation = match m_deactivationRefOrientation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "deactivationRefOrientation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_deactivationRefPosition = match m_deactivationRefPosition {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "deactivationRefPosition",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_angularVelocity = match m_angularVelocity {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "angularVelocity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_linearVelocity = match m_linearVelocity {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "linearVelocity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_inertiaAndMassInv = match m_inertiaAndMassInv {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "inertiaAndMassInv",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_motionState = match m_motionState {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "motionState",
+                                    "deactivationIntegrateCounter",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1084,24 +998,110 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_deactivationIntegrateCounter = match m_deactivationIntegrateCounter {
+                    let m_motionState = match m_motionState {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "deactivationIntegrateCounter",
+                                    "motionState",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_type = match m_type {
+                    let m_inertiaAndMassInv = match m_inertiaAndMassInv {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("type"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "inertiaAndMassInv",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_linearVelocity = match m_linearVelocity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "linearVelocity",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_angularVelocity = match m_angularVelocity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "angularVelocity",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_deactivationRefPosition = match m_deactivationRefPosition {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "deactivationRefPosition",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_deactivationRefOrientation = match m_deactivationRefOrientation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "deactivationRefOrientation",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_savedMotion = match m_savedMotion {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "savedMotion",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_savedQualityTypeIndex = match m_savedQualityTypeIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "savedQualityTypeIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_gravityFactor = match m_gravityFactor {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "gravityFactor",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -107,12 +107,12 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_memOffsetToRevolutionCounter,
-                m_memOffsetToPrevAngle,
-                m_memOffsetToInitialAngleOffset,
-                m_isScrew,
-                m_cogWheelRadiusB,
                 m_cogWheelRadiusA,
+                m_cogWheelRadiusB,
+                m_isScrew,
+                m_memOffsetToInitialAngleOffset,
+                m_memOffsetToPrevAngle,
+                m_memOffsetToRevolutionCounter,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -137,16 +137,16 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "memOffsetToRevolutionCounter" => {
-                            Ok(__Field::m_memOffsetToRevolutionCounter)
-                        }
-                        "memOffsetToPrevAngle" => Ok(__Field::m_memOffsetToPrevAngle),
+                        "cogWheelRadiusA" => Ok(__Field::m_cogWheelRadiusA),
+                        "cogWheelRadiusB" => Ok(__Field::m_cogWheelRadiusB),
+                        "isScrew" => Ok(__Field::m_isScrew),
                         "memOffsetToInitialAngleOffset" => {
                             Ok(__Field::m_memOffsetToInitialAngleOffset)
                         }
-                        "isScrew" => Ok(__Field::m_isScrew),
-                        "cogWheelRadiusB" => Ok(__Field::m_cogWheelRadiusB),
-                        "cogWheelRadiusA" => Ok(__Field::m_cogWheelRadiusA),
+                        "memOffsetToPrevAngle" => Ok(__Field::m_memOffsetToPrevAngle),
+                        "memOffsetToRevolutionCounter" => {
+                            Ok(__Field::m_memOffsetToRevolutionCounter)
+                        }
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -392,16 +392,16 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_memOffsetToRevolutionCounter: _serde::__private::Option<
-                        i8,
-                    > = _serde::__private::None;
-                    let mut m_memOffsetToPrevAngle: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_cogWheelRadiusA: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_cogWheelRadiusB: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_isScrew: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_memOffsetToInitialAngleOffset: _serde::__private::Option<
                         i8,
                     > = _serde::__private::None;
-                    let mut m_isScrew: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_cogWheelRadiusB: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_cogWheelRadiusA: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_memOffsetToPrevAngle: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_memOffsetToRevolutionCounter: _serde::__private::Option<
+                        i8,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -433,22 +433,94 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_memOffsetToRevolutionCounter => {
+                            __Field::m_cogWheelRadiusA => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_cogWheelRadiusA) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "cogWheelRadiusA",
+                                        ),
+                                    );
+                                }
+                                m_cogWheelRadiusA = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_cogWheelRadiusB => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_cogWheelRadiusB) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "cogWheelRadiusB",
+                                        ),
+                                    );
+                                }
+                                m_cogWheelRadiusB = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isScrew => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isScrew) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isScrew",
+                                        ),
+                                    );
+                                }
+                                m_isScrew = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_memOffsetToInitialAngleOffset => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_memOffsetToRevolutionCounter,
+                                    &m_memOffsetToInitialAngleOffset,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "memOffsetToRevolutionCounter",
+                                            "memOffsetToInitialAngleOffset",
                                         ),
                                     );
                                 }
-                                m_memOffsetToRevolutionCounter = _serde::__private::Some(
+                                m_memOffsetToInitialAngleOffset = _serde::__private::Some(
                                     match __A::next_value::<i8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -485,95 +557,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_memOffsetToInitialAngleOffset => {
+                            __Field::m_memOffsetToRevolutionCounter => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_memOffsetToInitialAngleOffset,
+                                    &m_memOffsetToRevolutionCounter,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "memOffsetToInitialAngleOffset",
+                                            "memOffsetToRevolutionCounter",
                                         ),
                                     );
                                 }
-                                m_memOffsetToInitialAngleOffset = _serde::__private::Some(
+                                m_memOffsetToRevolutionCounter = _serde::__private::Some(
                                     match __A::next_value::<i8>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_isScrew => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_isScrew) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isScrew",
-                                        ),
-                                    );
-                                }
-                                m_isScrew = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_cogWheelRadiusB => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_cogWheelRadiusB) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "cogWheelRadiusB",
-                                        ),
-                                    );
-                                }
-                                m_cogWheelRadiusB = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_cogWheelRadiusA => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_cogWheelRadiusA) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "cogWheelRadiusA",
-                                        ),
-                                    );
-                                }
-                                m_cogWheelRadiusA = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -596,13 +596,47 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_memOffsetToRevolutionCounter = match m_memOffsetToRevolutionCounter {
+                    let m_cogWheelRadiusA = match m_cogWheelRadiusA {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "memOffsetToRevolutionCounter",
+                                    "cogWheelRadiusA",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_cogWheelRadiusB = match m_cogWheelRadiusB {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "cogWheelRadiusB",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isScrew = match m_isScrew {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("isScrew"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_memOffsetToInitialAngleOffset = match m_memOffsetToInitialAngleOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "memOffsetToInitialAngleOffset",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -620,47 +654,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_memOffsetToInitialAngleOffset = match m_memOffsetToInitialAngleOffset {
+                    let m_memOffsetToRevolutionCounter = match m_memOffsetToRevolutionCounter {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "memOffsetToInitialAngleOffset",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_isScrew = match m_isScrew {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("isScrew"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_cogWheelRadiusB = match m_cogWheelRadiusB {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "cogWheelRadiusB",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_cogWheelRadiusA = match m_cogWheelRadiusA {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "cogWheelRadiusA",
+                                    "memOffsetToRevolutionCounter",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

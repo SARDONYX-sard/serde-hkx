@@ -109,9 +109,9 @@ const _: () = {
             enum __Field {
                 m_userData,
                 m_bvTreeType,
-                m_padding,
-                m_wantAabbRejectionTest,
                 m_childContainer,
+                m_wantAabbRejectionTest,
+                m_padding,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -137,9 +137,9 @@ const _: () = {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
                         "bvTreeType" => Ok(__Field::m_bvTreeType),
-                        "padding" => Ok(__Field::m_padding),
-                        "wantAabbRejectionTest" => Ok(__Field::m_wantAabbRejectionTest),
                         "childContainer" => Ok(__Field::m_childContainer),
+                        "wantAabbRejectionTest" => Ok(__Field::m_wantAabbRejectionTest),
+                        "padding" => Ok(__Field::m_padding),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -326,11 +326,11 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
                     let mut m_bvTreeType: _serde::__private::Option<BvTreeType> = _serde::__private::None;
-                    let mut m_padding: _serde::__private::Option<[u8; 12usize]> = _serde::__private::None;
-                    let mut m_wantAabbRejectionTest: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_childContainer: _serde::__private::Option<
                         hkpSingleShapeContainer,
                     > = _serde::__private::None;
+                    let mut m_wantAabbRejectionTest: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_padding: _serde::__private::Option<[u8; 12usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -388,21 +388,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_padding => {
+                            __Field::m_childContainer => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_padding) {
+                                if _serde::__private::Option::is_some(&m_childContainer) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "padding",
+                                            "childContainer",
                                         ),
                                     );
                                 }
-                                m_padding = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 12usize]>(&mut __map) {
+                                m_childContainer = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpSingleShapeContainer,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -438,23 +440,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_childContainer => {
+                            __Field::m_padding => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_childContainer) {
+                                if _serde::__private::Option::is_some(&m_padding) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "childContainer",
+                                            "padding",
                                         ),
                                     );
                                 }
-                                m_childContainer = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpSingleShapeContainer,
-                                    >(&mut __map) {
+                                m_padding = _serde::__private::Some(
+                                    match __A::next_value::<[u8; 12usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -489,12 +489,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_padding = match m_padding {
+                    let m_childContainer = match m_childContainer {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("padding"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "childContainer",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -511,14 +513,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_childContainer = match m_childContainer {
+                    let m_padding = match m_padding {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "childContainer",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("padding"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

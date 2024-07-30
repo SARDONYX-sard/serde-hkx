@@ -76,10 +76,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_subTracks,
                 m_sectors,
-                m_offsetInSector,
+                m_subTracks,
                 m_sectorIndex,
+                m_offsetInSector,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -103,10 +103,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "subTracks" => Ok(__Field::m_subTracks),
                         "sectors" => Ok(__Field::m_sectors),
-                        "offsetInSector" => Ok(__Field::m_offsetInSector),
+                        "subTracks" => Ok(__Field::m_subTracks),
                         "sectorIndex" => Ok(__Field::m_sectorIndex),
+                        "offsetInSector" => Ok(__Field::m_offsetInSector),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -226,10 +226,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_subTracks: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     let mut m_sectors: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_offsetInSector: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_subTracks: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     let mut m_sectorIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_offsetInSector: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -239,30 +239,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_subTracks => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_subTracks) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "subTracks",
-                                        ),
-                                    );
-                                }
-                                m_subTracks = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_sectors => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -287,21 +263,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_offsetInSector => {
+                            __Field::m_subTracks => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_offsetInSector) {
+                                if _serde::__private::Option::is_some(&m_subTracks) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "offsetInSector",
+                                            "subTracks",
                                         ),
                                     );
                                 }
-                                m_offsetInSector = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_subTracks = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -335,9 +311,43 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_offsetInSector => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_offsetInSector) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "offsetInSector",
+                                        ),
+                                    );
+                                }
+                                m_offsetInSector = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
+                    let m_sectors = match m_sectors {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("sectors"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
                     let m_subTracks = match m_subTracks {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -350,12 +360,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_sectors = match m_sectors {
+                    let m_sectorIndex = match m_sectorIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("sectors"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sectorIndex",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -367,18 +379,6 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "offsetInSector",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_sectorIndex = match m_sectorIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "sectorIndex",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

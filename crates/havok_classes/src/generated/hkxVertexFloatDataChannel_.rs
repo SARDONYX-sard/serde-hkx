@@ -79,8 +79,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_dimensions,
                 m_perVertexFloats,
+                m_dimensions,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -104,8 +104,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "dimensions" => Ok(__Field::m_dimensions),
                         "perVertexFloats" => Ok(__Field::m_perVertexFloats),
+                        "dimensions" => Ok(__Field::m_dimensions),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -228,10 +228,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_perVertexFloats: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
                     let mut m_dimensions: _serde::__private::Option<
                         VertexFloatDimensions,
                     > = _serde::__private::None;
-                    let mut m_perVertexFloats: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -241,30 +241,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_dimensions => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_dimensions) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "dimensions",
-                                        ),
-                                    );
-                                }
-                                m_dimensions = _serde::__private::Some(
-                                    match __A::next_value::<VertexFloatDimensions>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_perVertexFloats => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -289,21 +265,33 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_dimensions => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_dimensions) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "dimensions",
+                                        ),
+                                    );
+                                }
+                                m_dimensions = _serde::__private::Some(
+                                    match __A::next_value::<VertexFloatDimensions>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_dimensions = match m_dimensions {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "dimensions",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_perVertexFloats = match m_perVertexFloats {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -311,6 +299,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "perVertexFloats",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_dimensions = match m_dimensions {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "dimensions",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

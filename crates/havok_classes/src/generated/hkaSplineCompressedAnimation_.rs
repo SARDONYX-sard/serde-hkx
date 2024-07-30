@@ -189,25 +189,25 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_annotationTracks,
-                m_extractedMotion,
-                m_numberOfFloatTracks,
-                m_numberOfTransformTracks,
-                m_duration,
                 m_type,
-                m_endian,
-                m_data,
-                m_floatOffsets,
-                m_transformOffsets,
-                m_floatBlockOffsets,
-                m_blockOffsets,
-                m_frameDuration,
-                m_blockInverseDuration,
-                m_blockDuration,
-                m_maskAndQuantizationSize,
-                m_maxFramesPerBlock,
-                m_numBlocks,
+                m_duration,
+                m_numberOfTransformTracks,
+                m_numberOfFloatTracks,
+                m_extractedMotion,
+                m_annotationTracks,
                 m_numFrames,
+                m_numBlocks,
+                m_maxFramesPerBlock,
+                m_maskAndQuantizationSize,
+                m_blockDuration,
+                m_blockInverseDuration,
+                m_frameDuration,
+                m_blockOffsets,
+                m_floatBlockOffsets,
+                m_transformOffsets,
+                m_floatOffsets,
+                m_data,
+                m_endian,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -231,29 +231,29 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "annotationTracks" => Ok(__Field::m_annotationTracks),
-                        "extractedMotion" => Ok(__Field::m_extractedMotion),
-                        "numberOfFloatTracks" => Ok(__Field::m_numberOfFloatTracks),
+                        "type" => Ok(__Field::m_type),
+                        "duration" => Ok(__Field::m_duration),
                         "numberOfTransformTracks" => {
                             Ok(__Field::m_numberOfTransformTracks)
                         }
-                        "duration" => Ok(__Field::m_duration),
-                        "type" => Ok(__Field::m_type),
-                        "endian" => Ok(__Field::m_endian),
-                        "data" => Ok(__Field::m_data),
-                        "floatOffsets" => Ok(__Field::m_floatOffsets),
-                        "transformOffsets" => Ok(__Field::m_transformOffsets),
-                        "floatBlockOffsets" => Ok(__Field::m_floatBlockOffsets),
-                        "blockOffsets" => Ok(__Field::m_blockOffsets),
-                        "frameDuration" => Ok(__Field::m_frameDuration),
-                        "blockInverseDuration" => Ok(__Field::m_blockInverseDuration),
-                        "blockDuration" => Ok(__Field::m_blockDuration),
+                        "numberOfFloatTracks" => Ok(__Field::m_numberOfFloatTracks),
+                        "extractedMotion" => Ok(__Field::m_extractedMotion),
+                        "annotationTracks" => Ok(__Field::m_annotationTracks),
+                        "numFrames" => Ok(__Field::m_numFrames),
+                        "numBlocks" => Ok(__Field::m_numBlocks),
+                        "maxFramesPerBlock" => Ok(__Field::m_maxFramesPerBlock),
                         "maskAndQuantizationSize" => {
                             Ok(__Field::m_maskAndQuantizationSize)
                         }
-                        "maxFramesPerBlock" => Ok(__Field::m_maxFramesPerBlock),
-                        "numBlocks" => Ok(__Field::m_numBlocks),
-                        "numFrames" => Ok(__Field::m_numFrames),
+                        "blockDuration" => Ok(__Field::m_blockDuration),
+                        "blockInverseDuration" => Ok(__Field::m_blockInverseDuration),
+                        "frameDuration" => Ok(__Field::m_frameDuration),
+                        "blockOffsets" => Ok(__Field::m_blockOffsets),
+                        "floatBlockOffsets" => Ok(__Field::m_floatBlockOffsets),
+                        "transformOffsets" => Ok(__Field::m_transformOffsets),
+                        "floatOffsets" => Ok(__Field::m_floatOffsets),
+                        "data" => Ok(__Field::m_data),
+                        "endian" => Ok(__Field::m_endian),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -696,27 +696,27 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_type: _serde::__private::Option<AnimationType> = _serde::__private::None;
+                    let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_numberOfTransformTracks: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numberOfFloatTracks: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_extractedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_annotationTracks: _serde::__private::Option<
                         Vec<hkaAnnotationTrack<'de>>,
                     > = _serde::__private::None;
-                    let mut m_extractedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_numberOfFloatTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numberOfTransformTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_type: _serde::__private::Option<AnimationType> = _serde::__private::None;
-                    let mut m_endian: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_floatOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_transformOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_floatBlockOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_blockOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_frameDuration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_blockInverseDuration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_blockDuration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maskAndQuantizationSize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_maxFramesPerBlock: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numBlocks: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_numFrames: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numBlocks: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_maxFramesPerBlock: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_maskAndQuantizationSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_blockDuration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_blockInverseDuration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_frameDuration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_blockOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_floatBlockOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_transformOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_floatOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_endian: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -726,23 +726,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_annotationTracks => {
+                            __Field::m_type => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_annotationTracks) {
+                                if _serde::__private::Option::is_some(&m_type) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "annotationTracks",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("type"),
                                     );
                                 }
-                                m_annotationTracks = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkaAnnotationTrack<'de>>,
-                                    >(&mut __map) {
+                                m_type = _serde::__private::Some(
+                                    match __A::next_value::<AnimationType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -752,47 +748,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_extractedMotion => {
+                            __Field::m_duration => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_extractedMotion) {
+                                if _serde::__private::Option::is_some(&m_duration) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "extractedMotion",
+                                            "duration",
                                         ),
                                     );
                                 }
-                                m_extractedMotion = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numberOfFloatTracks => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_numberOfFloatTracks,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numberOfFloatTracks",
-                                        ),
-                                    );
-                                }
-                                m_numberOfFloatTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_duration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -828,64 +798,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_duration => {
+                            __Field::m_numberOfFloatTracks => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_duration) {
+                                if _serde::__private::Option::is_some(
+                                    &m_numberOfFloatTracks,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "duration",
+                                            "numberOfFloatTracks",
                                         ),
                                     );
                                 }
-                                m_duration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_type => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_type) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("type"),
-                                    );
-                                }
-                                m_type = _serde::__private::Some(
-                                    match __A::next_value::<AnimationType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_endian => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_endian) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("endian"),
-                                    );
-                                }
-                                m_endian = _serde::__private::Some(
+                                m_numberOfFloatTracks = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -896,19 +824,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_data => {
+                            __Field::m_extractedMotion => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_data) {
+                                if _serde::__private::Option::is_some(&m_extractedMotion) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "extractedMotion",
+                                        ),
                                     );
                                 }
-                                m_data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                m_extractedMotion = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -918,21 +848,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_floatOffsets => {
+                            __Field::m_annotationTracks => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_floatOffsets) {
+                                if _serde::__private::Option::is_some(&m_annotationTracks) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "floatOffsets",
+                                            "annotationTracks",
                                         ),
                                     );
                                 }
-                                m_floatOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                m_annotationTracks = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkaAnnotationTrack<'de>>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -942,21 +874,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_transformOffsets => {
+                            __Field::m_numFrames => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_transformOffsets) {
+                                if _serde::__private::Option::is_some(&m_numFrames) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transformOffsets",
+                                            "numFrames",
                                         ),
                                     );
                                 }
-                                m_transformOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                m_numFrames = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -966,146 +898,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_floatBlockOffsets => {
+                            __Field::m_numBlocks => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_floatBlockOffsets,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_numBlocks) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "floatBlockOffsets",
+                                            "numBlocks",
                                         ),
                                     );
                                 }
-                                m_floatBlockOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_blockOffsets => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_blockOffsets) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "blockOffsets",
-                                        ),
-                                    );
-                                }
-                                m_blockOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_frameDuration => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_frameDuration) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "frameDuration",
-                                        ),
-                                    );
-                                }
-                                m_frameDuration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_blockInverseDuration => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_blockInverseDuration,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "blockInverseDuration",
-                                        ),
-                                    );
-                                }
-                                m_blockInverseDuration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_blockDuration => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_blockDuration) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "blockDuration",
-                                        ),
-                                    );
-                                }
-                                m_blockDuration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maskAndQuantizationSize => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maskAndQuantizationSize,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maskAndQuantizationSize",
-                                        ),
-                                    );
-                                }
-                                m_maskAndQuantizationSize = _serde::__private::Some(
+                                m_numBlocks = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1142,20 +948,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_numBlocks => {
+                            __Field::m_maskAndQuantizationSize => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_numBlocks) {
+                                if _serde::__private::Option::is_some(
+                                    &m_maskAndQuantizationSize,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numBlocks",
+                                            "maskAndQuantizationSize",
                                         ),
                                     );
                                 }
-                                m_numBlocks = _serde::__private::Some(
+                                m_maskAndQuantizationSize = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1166,20 +974,212 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_numFrames => {
+                            __Field::m_blockDuration => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_numFrames) {
+                                if _serde::__private::Option::is_some(&m_blockDuration) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numFrames",
+                                            "blockDuration",
                                         ),
                                     );
                                 }
-                                m_numFrames = _serde::__private::Some(
+                                m_blockDuration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_blockInverseDuration => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_blockInverseDuration,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "blockInverseDuration",
+                                        ),
+                                    );
+                                }
+                                m_blockInverseDuration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_frameDuration => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_frameDuration) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "frameDuration",
+                                        ),
+                                    );
+                                }
+                                m_frameDuration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_blockOffsets => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_blockOffsets) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "blockOffsets",
+                                        ),
+                                    );
+                                }
+                                m_blockOffsets = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_floatBlockOffsets => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_floatBlockOffsets,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "floatBlockOffsets",
+                                        ),
+                                    );
+                                }
+                                m_floatBlockOffsets = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transformOffsets => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_transformOffsets) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transformOffsets",
+                                        ),
+                                    );
+                                }
+                                m_transformOffsets = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_floatOffsets => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_floatOffsets) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "floatOffsets",
+                                        ),
+                                    );
+                                }
+                                m_floatOffsets = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_data => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_data) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                                    );
+                                }
+                                m_data = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_endian => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_endian) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("endian"),
+                                    );
+                                }
+                                m_endian = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1193,25 +1193,33 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_annotationTracks = match m_annotationTracks {
+                    let m_type = match m_type {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "annotationTracks",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("type"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_extractedMotion = match m_extractedMotion {
+                    let m_duration = match m_duration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("duration"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numberOfTransformTracks = match m_numberOfTransformTracks {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "extractedMotion",
+                                    "numberOfTransformTracks",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1229,161 +1237,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_numberOfTransformTracks = match m_numberOfTransformTracks {
+                    let m_extractedMotion = match m_extractedMotion {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "numberOfTransformTracks",
+                                    "extractedMotion",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_duration = match m_duration {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("duration"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_type = match m_type {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("type"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_endian = match m_endian {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("endian"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_data = match m_data {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("data"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_floatOffsets = match m_floatOffsets {
+                    let m_annotationTracks = match m_annotationTracks {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "floatOffsets",
+                                    "annotationTracks",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_transformOffsets = match m_transformOffsets {
+                    let m_numFrames = match m_numFrames {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transformOffsets",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_floatBlockOffsets = match m_floatBlockOffsets {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "floatBlockOffsets",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_blockOffsets = match m_blockOffsets {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "blockOffsets",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_frameDuration = match m_frameDuration {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "frameDuration",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_blockInverseDuration = match m_blockInverseDuration {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "blockInverseDuration",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_blockDuration = match m_blockDuration {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "blockDuration",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maskAndQuantizationSize = match m_maskAndQuantizationSize {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maskAndQuantizationSize",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxFramesPerBlock = match m_maxFramesPerBlock {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxFramesPerBlock",
+                                    "numFrames",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1401,14 +1285,130 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_numFrames = match m_numFrames {
+                    let m_maxFramesPerBlock = match m_maxFramesPerBlock {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "numFrames",
+                                    "maxFramesPerBlock",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maskAndQuantizationSize = match m_maskAndQuantizationSize {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maskAndQuantizationSize",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_blockDuration = match m_blockDuration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "blockDuration",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_blockInverseDuration = match m_blockInverseDuration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "blockInverseDuration",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_frameDuration = match m_frameDuration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "frameDuration",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_blockOffsets = match m_blockOffsets {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "blockOffsets",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_floatBlockOffsets = match m_floatBlockOffsets {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "floatBlockOffsets",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transformOffsets = match m_transformOffsets {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transformOffsets",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_floatOffsets = match m_floatOffsets {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "floatOffsets",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_data = match m_data {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("data"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_endian = match m_endian {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("endian"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

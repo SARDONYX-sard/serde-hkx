@@ -248,17 +248,17 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
-                m_sAnimationBindingIndex,
-                m_bApplyMotionFromRoot,
-                m_bReorientSupportChar,
-                m_bLeadCharacter,
-                m_fMarkErrorThreshold,
-                m_fGetToMarkTime,
-                m_bSyncClipIgnoreMarkPlacement,
-                m_SyncAnimPrefix,
+                m_name,
                 m_pClipGenerator,
+                m_SyncAnimPrefix,
+                m_bSyncClipIgnoreMarkPlacement,
+                m_fGetToMarkTime,
+                m_fMarkErrorThreshold,
+                m_bLeadCharacter,
+                m_bReorientSupportChar,
+                m_bApplyMotionFromRoot,
+                m_sAnimationBindingIndex,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -283,19 +283,19 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
-                        "sAnimationBindingIndex" => Ok(__Field::m_sAnimationBindingIndex),
-                        "bApplyMotionFromRoot" => Ok(__Field::m_bApplyMotionFromRoot),
-                        "bReorientSupportChar" => Ok(__Field::m_bReorientSupportChar),
-                        "bLeadCharacter" => Ok(__Field::m_bLeadCharacter),
-                        "fMarkErrorThreshold" => Ok(__Field::m_fMarkErrorThreshold),
-                        "fGetToMarkTime" => Ok(__Field::m_fGetToMarkTime),
+                        "name" => Ok(__Field::m_name),
+                        "pClipGenerator" => Ok(__Field::m_pClipGenerator),
+                        "SyncAnimPrefix" => Ok(__Field::m_SyncAnimPrefix),
                         "bSyncClipIgnoreMarkPlacement" => {
                             Ok(__Field::m_bSyncClipIgnoreMarkPlacement)
                         }
-                        "SyncAnimPrefix" => Ok(__Field::m_SyncAnimPrefix),
-                        "pClipGenerator" => Ok(__Field::m_pClipGenerator),
+                        "fGetToMarkTime" => Ok(__Field::m_fGetToMarkTime),
+                        "fMarkErrorThreshold" => Ok(__Field::m_fMarkErrorThreshold),
+                        "bLeadCharacter" => Ok(__Field::m_bLeadCharacter),
+                        "bReorientSupportChar" => Ok(__Field::m_bReorientSupportChar),
+                        "bApplyMotionFromRoot" => Ok(__Field::m_bApplyMotionFromRoot),
+                        "sAnimationBindingIndex" => Ok(__Field::m_sAnimationBindingIndex),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -931,19 +931,19 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_sAnimationBindingIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_bApplyMotionFromRoot: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bReorientSupportChar: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bLeadCharacter: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_fMarkErrorThreshold: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_fGetToMarkTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_pClipGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_SyncAnimPrefix: _serde::__private::Option<CString<'de>> = _serde::__private::None;
                     let mut m_bSyncClipIgnoreMarkPlacement: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_SyncAnimPrefix: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-                    let mut m_pClipGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_fGetToMarkTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_fMarkErrorThreshold: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_bLeadCharacter: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_bReorientSupportChar: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_bApplyMotionFromRoot: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_sAnimationBindingIndex: _serde::__private::Option<i16> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -979,28 +979,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -1025,23 +1003,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_sAnimationBindingIndex => {
+                            __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_sAnimationBindingIndex,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_name) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sAnimationBindingIndex",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
                                     );
                                 }
-                                m_sAnimationBindingIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1051,22 +1025,144 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_bApplyMotionFromRoot => {
+                            __Field::m_pClipGenerator => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_pClipGenerator) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "pClipGenerator",
+                                        ),
+                                    );
+                                }
+                                m_pClipGenerator = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_SyncAnimPrefix => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_SyncAnimPrefix) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "SyncAnimPrefix",
+                                        ),
+                                    );
+                                }
+                                m_SyncAnimPrefix = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bSyncClipIgnoreMarkPlacement => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_bApplyMotionFromRoot,
+                                    &m_bSyncClipIgnoreMarkPlacement,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bApplyMotionFromRoot",
+                                            "bSyncClipIgnoreMarkPlacement",
                                         ),
                                     );
                                 }
-                                m_bApplyMotionFromRoot = _serde::__private::Some(
+                                m_bSyncClipIgnoreMarkPlacement = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_fGetToMarkTime => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_fGetToMarkTime) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "fGetToMarkTime",
+                                        ),
+                                    );
+                                }
+                                m_fGetToMarkTime = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_fMarkErrorThreshold => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_fMarkErrorThreshold,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "fMarkErrorThreshold",
+                                        ),
+                                    );
+                                }
+                                m_fMarkErrorThreshold = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bLeadCharacter => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bLeadCharacter) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bLeadCharacter",
+                                        ),
+                                    );
+                                }
+                                m_bLeadCharacter = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1103,20 +1199,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_bLeadCharacter => {
+                            __Field::m_bApplyMotionFromRoot => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_bLeadCharacter) {
+                                if _serde::__private::Option::is_some(
+                                    &m_bApplyMotionFromRoot,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bLeadCharacter",
+                                            "bApplyMotionFromRoot",
                                         ),
                                     );
                                 }
-                                m_bLeadCharacter = _serde::__private::Some(
+                                m_bApplyMotionFromRoot = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1127,121 +1225,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_fMarkErrorThreshold => {
+                            __Field::m_sAnimationBindingIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_fMarkErrorThreshold,
+                                    &m_sAnimationBindingIndex,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fMarkErrorThreshold",
+                                            "sAnimationBindingIndex",
                                         ),
                                     );
                                 }
-                                m_fMarkErrorThreshold = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_fGetToMarkTime => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_fGetToMarkTime) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fGetToMarkTime",
-                                        ),
-                                    );
-                                }
-                                m_fGetToMarkTime = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bSyncClipIgnoreMarkPlacement => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_bSyncClipIgnoreMarkPlacement,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bSyncClipIgnoreMarkPlacement",
-                                        ),
-                                    );
-                                }
-                                m_bSyncClipIgnoreMarkPlacement = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_SyncAnimPrefix => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_SyncAnimPrefix) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "SyncAnimPrefix",
-                                        ),
-                                    );
-                                }
-                                m_SyncAnimPrefix = _serde::__private::Some(
-                                    match __A::next_value::<CString<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_pClipGenerator => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_pClipGenerator) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "pClipGenerator",
-                                        ),
-                                    );
-                                }
-                                m_pClipGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_sAnimationBindingIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1266,16 +1266,6 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -1286,85 +1276,23 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_sAnimationBindingIndex = match m_sAnimationBindingIndex {
+                    let m_name = match m_name {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "sAnimationBindingIndex",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_bApplyMotionFromRoot = match m_bApplyMotionFromRoot {
+                    let m_pClipGenerator = match m_pClipGenerator {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "bApplyMotionFromRoot",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bReorientSupportChar = match m_bReorientSupportChar {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bReorientSupportChar",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bLeadCharacter = match m_bLeadCharacter {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bLeadCharacter",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_fMarkErrorThreshold = match m_fMarkErrorThreshold {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "fMarkErrorThreshold",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_fGetToMarkTime = match m_fGetToMarkTime {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "fGetToMarkTime",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bSyncClipIgnoreMarkPlacement = match m_bSyncClipIgnoreMarkPlacement {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bSyncClipIgnoreMarkPlacement",
+                                    "pClipGenerator",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1382,13 +1310,85 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_pClipGenerator = match m_pClipGenerator {
+                    let m_bSyncClipIgnoreMarkPlacement = match m_bSyncClipIgnoreMarkPlacement {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "pClipGenerator",
+                                    "bSyncClipIgnoreMarkPlacement",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_fGetToMarkTime = match m_fGetToMarkTime {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "fGetToMarkTime",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_fMarkErrorThreshold = match m_fMarkErrorThreshold {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "fMarkErrorThreshold",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bLeadCharacter = match m_bLeadCharacter {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bLeadCharacter",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bReorientSupportChar = match m_bReorientSupportChar {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bReorientSupportChar",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bApplyMotionFromRoot = match m_bApplyMotionFromRoot {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bApplyMotionFromRoot",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_sAnimationBindingIndex = match m_sAnimationBindingIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sAnimationBindingIndex",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

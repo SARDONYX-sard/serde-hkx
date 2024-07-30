@@ -81,10 +81,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_exitTime,
-                m_enterTime,
-                m_exitEventId,
                 m_enterEventId,
+                m_exitEventId,
+                m_enterTime,
+                m_exitTime,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -108,10 +108,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "exitTime" => Ok(__Field::m_exitTime),
-                        "enterTime" => Ok(__Field::m_enterTime),
-                        "exitEventId" => Ok(__Field::m_exitEventId),
                         "enterEventId" => Ok(__Field::m_enterEventId),
+                        "exitEventId" => Ok(__Field::m_exitEventId),
+                        "enterTime" => Ok(__Field::m_enterTime),
+                        "exitTime" => Ok(__Field::m_exitTime),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -285,10 +285,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_exitTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_enterTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_exitEventId: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_enterEventId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_exitEventId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_enterTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_exitTime: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -298,45 +298,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_exitTime => {
+                            __Field::m_enterEventId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_exitTime) {
+                                if _serde::__private::Option::is_some(&m_enterEventId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "exitTime",
+                                            "enterEventId",
                                         ),
                                     );
                                 }
-                                m_exitTime = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_enterTime => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_enterTime) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "enterTime",
-                                        ),
-                                    );
-                                }
-                                m_enterTime = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_enterEventId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -370,21 +346,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_enterEventId => {
+                            __Field::m_enterTime => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_enterEventId) {
+                                if _serde::__private::Option::is_some(&m_enterTime) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "enterEventId",
+                                            "enterTime",
                                         ),
                                     );
                                 }
-                                m_enterEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_enterTime = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_exitTime => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_exitTime) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "exitTime",
+                                        ),
+                                    );
+                                }
+                                m_exitTime = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -397,23 +397,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_exitTime = match m_exitTime {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("exitTime"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_enterTime = match m_enterTime {
+                    let m_enterEventId = match m_enterEventId {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "enterTime",
+                                    "enterEventId",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -431,14 +421,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_enterEventId = match m_enterEventId {
+                    let m_enterTime = match m_enterTime {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "enterEventId",
+                                    "enterTime",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_exitTime = match m_exitTime {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("exitTime"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

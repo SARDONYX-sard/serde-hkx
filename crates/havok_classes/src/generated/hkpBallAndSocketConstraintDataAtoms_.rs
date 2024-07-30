@@ -76,9 +76,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_ballSocket,
-                m_setupStabilization,
                 m_pivots,
+                m_setupStabilization,
+                m_ballSocket,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -102,9 +102,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "ballSocket" => Ok(__Field::m_ballSocket),
-                        "setupStabilization" => Ok(__Field::m_setupStabilization),
                         "pivots" => Ok(__Field::m_pivots),
+                        "setupStabilization" => Ok(__Field::m_setupStabilization),
+                        "ballSocket" => Ok(__Field::m_ballSocket),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -263,14 +263,14 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_ballSocket: _serde::__private::Option<
-                        hkpBallSocketConstraintAtom,
+                    let mut m_pivots: _serde::__private::Option<
+                        hkpSetLocalTranslationsConstraintAtom,
                     > = _serde::__private::None;
                     let mut m_setupStabilization: _serde::__private::Option<
                         hkpSetupStabilizationAtom,
                     > = _serde::__private::None;
-                    let mut m_pivots: _serde::__private::Option<
-                        hkpSetLocalTranslationsConstraintAtom,
+                    let mut m_ballSocket: _serde::__private::Option<
+                        hkpBallSocketConstraintAtom,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
@@ -281,22 +281,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_ballSocket => {
+                            __Field::m_pivots => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_ballSocket) {
+                                if _serde::__private::Option::is_some(&m_pivots) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ballSocket",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("pivots"),
                                     );
                                 }
-                                m_ballSocket = _serde::__private::Some(
+                                m_pivots = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpBallSocketConstraintAtom,
+                                        hkpSetLocalTranslationsConstraintAtom,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -335,20 +333,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_pivots => {
+                            __Field::m_ballSocket => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_pivots) {
+                                if _serde::__private::Option::is_some(&m_ballSocket) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("pivots"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "ballSocket",
+                                        ),
                                     );
                                 }
-                                m_pivots = _serde::__private::Some(
+                                m_ballSocket = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpSetLocalTranslationsConstraintAtom,
+                                        hkpBallSocketConstraintAtom,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -362,14 +362,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_ballSocket = match m_ballSocket {
+                    let m_pivots = match m_pivots {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "ballSocket",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("pivots"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -386,12 +384,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_pivots = match m_pivots {
+                    let m_ballSocket = match m_ballSocket {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("pivots"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "ballSocket",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

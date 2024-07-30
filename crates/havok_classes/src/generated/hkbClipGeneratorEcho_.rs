@@ -77,9 +77,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_dwdt,
-                m_weight,
                 m_offsetLocalTime,
+                m_weight,
+                m_dwdt,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -103,9 +103,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "dwdt" => Ok(__Field::m_dwdt),
-                        "weight" => Ok(__Field::m_weight),
                         "offsetLocalTime" => Ok(__Field::m_offsetLocalTime),
+                        "weight" => Ok(__Field::m_weight),
+                        "dwdt" => Ok(__Field::m_dwdt),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -244,9 +244,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_dwdt: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_weight: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_offsetLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_weight: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_dwdt: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -256,18 +256,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_dwdt => {
+                            __Field::m_offsetLocalTime => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_dwdt) {
+                                if _serde::__private::Option::is_some(&m_offsetLocalTime) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("dwdt"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "offsetLocalTime",
+                                        ),
                                     );
                                 }
-                                m_dwdt = _serde::__private::Some(
+                                m_offsetLocalTime = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -300,20 +302,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_offsetLocalTime => {
+                            __Field::m_dwdt => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_offsetLocalTime) {
+                                if _serde::__private::Option::is_some(&m_dwdt) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "offsetLocalTime",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("dwdt"),
                                     );
                                 }
-                                m_offsetLocalTime = _serde::__private::Some(
+                                m_dwdt = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -327,12 +327,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_dwdt = match m_dwdt {
+                    let m_offsetLocalTime = match m_offsetLocalTime {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("dwdt"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "offsetLocalTime",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -347,14 +349,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_offsetLocalTime = match m_offsetLocalTime {
+                    let m_dwdt = match m_dwdt {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "offsetLocalTime",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("dwdt"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -91,11 +91,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_shapeKey,
                 m_shape,
-                m_allowedPenetrationDepth,
-                m_broadPhaseHandle,
+                m_shapeKey,
                 m_forceCollideOntoPpu,
+                m_broadPhaseHandle,
+                m_allowedPenetrationDepth,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -119,13 +119,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "shapeKey" => Ok(__Field::m_shapeKey),
                         "shape" => Ok(__Field::m_shape),
+                        "shapeKey" => Ok(__Field::m_shapeKey),
+                        "forceCollideOntoPpu" => Ok(__Field::m_forceCollideOntoPpu),
+                        "broadPhaseHandle" => Ok(__Field::m_broadPhaseHandle),
                         "allowedPenetrationDepth" => {
                             Ok(__Field::m_allowedPenetrationDepth)
                         }
-                        "broadPhaseHandle" => Ok(__Field::m_broadPhaseHandle),
-                        "forceCollideOntoPpu" => Ok(__Field::m_forceCollideOntoPpu),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -215,13 +215,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_shapeKey: _serde::__private::Option<u32> = _serde::__private::None;
                     let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_allowedPenetrationDepth: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_shapeKey: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_forceCollideOntoPpu: _serde::__private::Option<u8> = _serde::__private::None;
                     let mut m_broadPhaseHandle: _serde::__private::Option<
                         hkpTypedBroadPhaseHandle,
                     > = _serde::__private::None;
-                    let mut m_forceCollideOntoPpu: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_allowedPenetrationDepth: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -231,30 +231,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_shapeKey => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_shapeKey) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "shapeKey",
-                                        ),
-                                    );
-                                }
-                                m_shapeKey = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_shape => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -277,49 +253,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_allowedPenetrationDepth => {
+                            __Field::m_shapeKey => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_allowedPenetrationDepth,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_shapeKey) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "allowedPenetrationDepth",
+                                            "shapeKey",
                                         ),
                                     );
                                 }
-                                m_allowedPenetrationDepth = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_broadPhaseHandle => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_broadPhaseHandle) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "broadPhaseHandle",
-                                        ),
-                                    );
-                                }
-                                m_broadPhaseHandle = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpTypedBroadPhaseHandle,
-                                    >(&mut __map) {
+                                m_shapeKey = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -355,19 +303,61 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_broadPhaseHandle => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_broadPhaseHandle) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "broadPhaseHandle",
+                                        ),
+                                    );
+                                }
+                                m_broadPhaseHandle = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpTypedBroadPhaseHandle,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_allowedPenetrationDepth => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_allowedPenetrationDepth,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "allowedPenetrationDepth",
+                                        ),
+                                    );
+                                }
+                                m_allowedPenetrationDepth = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_shapeKey = match m_shapeKey {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("shapeKey"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_shape = match m_shape {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -378,13 +368,23 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_allowedPenetrationDepth = match m_allowedPenetrationDepth {
+                    let m_shapeKey = match m_shapeKey {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("shapeKey"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_forceCollideOntoPpu = match m_forceCollideOntoPpu {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "allowedPenetrationDepth",
+                                    "forceCollideOntoPpu",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -402,13 +402,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_forceCollideOntoPpu = match m_forceCollideOntoPpu {
+                    let m_allowedPenetrationDepth = match m_allowedPenetrationDepth {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "forceCollideOntoPpu",
+                                    "allowedPenetrationDepth",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

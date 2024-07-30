@@ -131,12 +131,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_padding,
-                m_expansionMax,
-                m_max,
-                m_expansionShift,
-                m_expansionMin,
                 m_min,
+                m_expansionMin,
+                m_expansionShift,
+                m_max,
+                m_expansionMax,
+                m_padding,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -160,12 +160,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "padding" => Ok(__Field::m_padding),
-                        "expansionMax" => Ok(__Field::m_expansionMax),
-                        "max" => Ok(__Field::m_max),
-                        "expansionShift" => Ok(__Field::m_expansionShift),
-                        "expansionMin" => Ok(__Field::m_expansionMin),
                         "min" => Ok(__Field::m_min),
+                        "expansionMin" => Ok(__Field::m_expansionMin),
+                        "expansionShift" => Ok(__Field::m_expansionShift),
+                        "max" => Ok(__Field::m_max),
+                        "expansionMax" => Ok(__Field::m_expansionMax),
+                        "padding" => Ok(__Field::m_padding),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -510,12 +510,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_padding: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_expansionMax: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
-                    let mut m_max: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
-                    let mut m_expansionShift: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_expansionMin: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
                     let mut m_min: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
+                    let mut m_expansionMin: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
+                    let mut m_expansionShift: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_max: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
+                    let mut m_expansionMax: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
+                    let mut m_padding: _serde::__private::Option<u8> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -525,91 +525,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_padding => {
+                            __Field::m_min => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_padding) {
+                                if _serde::__private::Option::is_some(&m_min) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "padding",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("min"),
                                     );
                                 }
-                                m_padding = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_expansionMax => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_expansionMax) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "expansionMax",
-                                        ),
-                                    );
-                                }
-                                m_expansionMax = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 3usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_max => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_max) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("max"),
-                                    );
-                                }
-                                m_max = _serde::__private::Some(
+                                m_min = _serde::__private::Some(
                                     match __A::next_value::<[u32; 3usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_expansionShift => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_expansionShift) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "expansionShift",
-                                        ),
-                                    );
-                                }
-                                m_expansionShift = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -643,19 +571,91 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_min => {
+                            __Field::m_expansionShift => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_min) {
+                                if _serde::__private::Option::is_some(&m_expansionShift) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("min"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "expansionShift",
+                                        ),
                                     );
                                 }
-                                m_min = _serde::__private::Some(
+                                m_expansionShift = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_max => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_max) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("max"),
+                                    );
+                                }
+                                m_max = _serde::__private::Some(
                                     match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_expansionMax => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_expansionMax) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "expansionMax",
+                                        ),
+                                    );
+                                }
+                                m_expansionMax = _serde::__private::Some(
+                                    match __A::next_value::<[u8; 3usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_padding => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_padding) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "padding",
+                                        ),
+                                    );
+                                }
+                                m_padding = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -668,46 +668,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_padding = match m_padding {
+                    let m_min = match m_min {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("padding"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_expansionMax = match m_expansionMax {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "expansionMax",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_max = match m_max {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("max"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_expansionShift = match m_expansionShift {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "expansionShift",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("min"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -724,12 +690,46 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_min = match m_min {
+                    let m_expansionShift = match m_expansionShift {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("min"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "expansionShift",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_max = match m_max {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("max"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_expansionMax = match m_expansionMax {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "expansionMax",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_padding = match m_padding {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("padding"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

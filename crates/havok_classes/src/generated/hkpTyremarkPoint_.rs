@@ -69,8 +69,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_pointRight,
                 m_pointLeft,
+                m_pointRight,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -94,8 +94,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "pointRight" => Ok(__Field::m_pointRight),
                         "pointLeft" => Ok(__Field::m_pointLeft),
+                        "pointRight" => Ok(__Field::m_pointRight),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -212,8 +212,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_pointRight: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_pointLeft: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_pointRight: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -223,30 +223,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_pointRight => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_pointRight) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "pointRight",
-                                        ),
-                                    );
-                                }
-                                m_pointRight = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_pointLeft => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -271,21 +247,33 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_pointRight => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_pointRight) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "pointRight",
+                                        ),
+                                    );
+                                }
+                                m_pointRight = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_pointRight = match m_pointRight {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "pointRight",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_pointLeft = match m_pointLeft {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -293,6 +281,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "pointLeft",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_pointRight = match m_pointRight {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "pointRight",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

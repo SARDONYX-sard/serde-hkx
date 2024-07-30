@@ -96,10 +96,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_sequenceNumber,
-                m_triggerBody,
-                m_eventQueue,
                 m_overlappingBodies,
+                m_eventQueue,
+                m_triggerBody,
+                m_sequenceNumber,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -123,10 +123,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "sequenceNumber" => Ok(__Field::m_sequenceNumber),
-                        "triggerBody" => Ok(__Field::m_triggerBody),
-                        "eventQueue" => Ok(__Field::m_eventQueue),
                         "overlappingBodies" => Ok(__Field::m_overlappingBodies),
+                        "eventQueue" => Ok(__Field::m_eventQueue),
+                        "triggerBody" => Ok(__Field::m_triggerBody),
+                        "sequenceNumber" => Ok(__Field::m_sequenceNumber),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -313,14 +313,14 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_sequenceNumber: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_triggerBody: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_eventQueue: _serde::__private::Option<
-                        Vec<hkpTriggerVolumeEventInfo>,
-                    > = _serde::__private::None;
                     let mut m_overlappingBodies: _serde::__private::Option<
                         Vec<Pointer>,
                     > = _serde::__private::None;
+                    let mut m_eventQueue: _serde::__private::Option<
+                        Vec<hkpTriggerVolumeEventInfo>,
+                    > = _serde::__private::None;
+                    let mut m_triggerBody: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_sequenceNumber: _serde::__private::Option<u32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -330,45 +330,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_sequenceNumber => {
+                            __Field::m_overlappingBodies => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_sequenceNumber) {
+                                if _serde::__private::Option::is_some(
+                                    &m_overlappingBodies,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sequenceNumber",
+                                            "overlappingBodies",
                                         ),
                                     );
                                 }
-                                m_sequenceNumber = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_triggerBody => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_triggerBody) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "triggerBody",
-                                        ),
-                                    );
-                                }
-                                m_triggerBody = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_overlappingBodies = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -404,23 +382,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_overlappingBodies => {
+                            __Field::m_triggerBody => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_overlappingBodies,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_triggerBody) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "overlappingBodies",
+                                            "triggerBody",
                                         ),
                                     );
                                 }
-                                m_overlappingBodies = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                m_triggerBody = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_sequenceNumber => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_sequenceNumber) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sequenceNumber",
+                                        ),
+                                    );
+                                }
+                                m_sequenceNumber = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -433,25 +433,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_sequenceNumber = match m_sequenceNumber {
+                    let m_overlappingBodies = match m_overlappingBodies {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "sequenceNumber",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_triggerBody = match m_triggerBody {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "triggerBody",
+                                    "overlappingBodies",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -469,13 +457,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_overlappingBodies = match m_overlappingBodies {
+                    let m_triggerBody = match m_triggerBody {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "overlappingBodies",
+                                    "triggerBody",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_sequenceNumber = match m_sequenceNumber {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sequenceNumber",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

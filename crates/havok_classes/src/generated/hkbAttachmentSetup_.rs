@@ -118,14 +118,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_attachmentType,
-                m_maxAngularDistance,
-                m_maxLinearDistance,
-                m_fixUpGain,
-                m_extrapolationTimeStep,
-                m_gain,
-                m_moveAttacherFraction,
                 m_blendInTime,
+                m_moveAttacherFraction,
+                m_gain,
+                m_extrapolationTimeStep,
+                m_fixUpGain,
+                m_maxLinearDistance,
+                m_maxAngularDistance,
+                m_attachmentType,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -149,14 +149,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "attachmentType" => Ok(__Field::m_attachmentType),
-                        "maxAngularDistance" => Ok(__Field::m_maxAngularDistance),
-                        "maxLinearDistance" => Ok(__Field::m_maxLinearDistance),
-                        "fixUpGain" => Ok(__Field::m_fixUpGain),
-                        "extrapolationTimeStep" => Ok(__Field::m_extrapolationTimeStep),
-                        "gain" => Ok(__Field::m_gain),
-                        "moveAttacherFraction" => Ok(__Field::m_moveAttacherFraction),
                         "blendInTime" => Ok(__Field::m_blendInTime),
+                        "moveAttacherFraction" => Ok(__Field::m_moveAttacherFraction),
+                        "gain" => Ok(__Field::m_gain),
+                        "extrapolationTimeStep" => Ok(__Field::m_extrapolationTimeStep),
+                        "fixUpGain" => Ok(__Field::m_fixUpGain),
+                        "maxLinearDistance" => Ok(__Field::m_maxLinearDistance),
+                        "maxAngularDistance" => Ok(__Field::m_maxAngularDistance),
+                        "attachmentType" => Ok(__Field::m_attachmentType),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -456,16 +456,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_blendInTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_moveAttacherFraction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_gain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_extrapolationTimeStep: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_fixUpGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxLinearDistance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxAngularDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_attachmentType: _serde::__private::Option<
                         AttachmentType,
                     > = _serde::__private::None;
-                    let mut m_maxAngularDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxLinearDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_fixUpGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_extrapolationTimeStep: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_gain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_moveAttacherFraction: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_blendInTime: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -475,144 +475,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_attachmentType => {
+                            __Field::m_blendInTime => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_attachmentType) {
+                                if _serde::__private::Option::is_some(&m_blendInTime) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "attachmentType",
+                                            "blendInTime",
                                         ),
                                     );
                                 }
-                                m_attachmentType = _serde::__private::Some(
-                                    match __A::next_value::<AttachmentType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxAngularDistance => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxAngularDistance,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxAngularDistance",
-                                        ),
-                                    );
-                                }
-                                m_maxAngularDistance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxLinearDistance => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxLinearDistance,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxLinearDistance",
-                                        ),
-                                    );
-                                }
-                                m_maxLinearDistance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_fixUpGain => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_fixUpGain) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fixUpGain",
-                                        ),
-                                    );
-                                }
-                                m_fixUpGain = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_extrapolationTimeStep => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_extrapolationTimeStep,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "extrapolationTimeStep",
-                                        ),
-                                    );
-                                }
-                                m_extrapolationTimeStep = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_gain => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_gain) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("gain"),
-                                    );
-                                }
-                                m_gain = _serde::__private::Some(
+                                m_blendInTime = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -649,21 +525,145 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_blendInTime => {
+                            __Field::m_gain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_blendInTime) {
+                                if _serde::__private::Option::is_some(&m_gain) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("gain"),
+                                    );
+                                }
+                                m_gain = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_extrapolationTimeStep => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_extrapolationTimeStep,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "blendInTime",
+                                            "extrapolationTimeStep",
                                         ),
                                     );
                                 }
-                                m_blendInTime = _serde::__private::Some(
+                                m_extrapolationTimeStep = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_fixUpGain => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_fixUpGain) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "fixUpGain",
+                                        ),
+                                    );
+                                }
+                                m_fixUpGain = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxLinearDistance => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxLinearDistance,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxLinearDistance",
+                                        ),
+                                    );
+                                }
+                                m_maxLinearDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxAngularDistance => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxAngularDistance,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxAngularDistance",
+                                        ),
+                                    );
+                                }
+                                m_maxAngularDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_attachmentType => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_attachmentType) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "attachmentType",
+                                        ),
+                                    );
+                                }
+                                m_attachmentType = _serde::__private::Some(
+                                    match __A::next_value::<AttachmentType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -676,37 +676,47 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_attachmentType = match m_attachmentType {
+                    let m_blendInTime = match m_blendInTime {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "attachmentType",
+                                    "blendInTime",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxAngularDistance = match m_maxAngularDistance {
+                    let m_moveAttacherFraction = match m_moveAttacherFraction {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxAngularDistance",
+                                    "moveAttacherFraction",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxLinearDistance = match m_maxLinearDistance {
+                    let m_gain = match m_gain {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("gain"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_extrapolationTimeStep = match m_extrapolationTimeStep {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxLinearDistance",
+                                    "extrapolationTimeStep",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -724,47 +734,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_extrapolationTimeStep = match m_extrapolationTimeStep {
+                    let m_maxLinearDistance = match m_maxLinearDistance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "extrapolationTimeStep",
+                                    "maxLinearDistance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_gain = match m_gain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("gain"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_moveAttacherFraction = match m_moveAttacherFraction {
+                    let m_maxAngularDistance = match m_maxAngularDistance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "moveAttacherFraction",
+                                    "maxAngularDistance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_blendInTime = match m_blendInTime {
+                    let m_attachmentType = match m_attachmentType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "blendInTime",
+                                    "attachmentType",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

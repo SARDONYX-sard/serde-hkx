@@ -71,8 +71,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_numBits,
                 m_words,
+                m_numBits,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -96,8 +96,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "numBits" => Ok(__Field::m_numBits),
                         "words" => Ok(__Field::m_words),
+                        "numBits" => Ok(__Field::m_numBits),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -206,8 +206,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_numBits: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_words: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_numBits: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -217,6 +217,28 @@ const _: () = {
                         __key
                     } {
                         match __key {
+                            __Field::m_words => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_words) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("words"),
+                                    );
+                                }
+                                m_words = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             __Field::m_numBits => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -241,47 +263,25 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_words => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_words) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("words"),
-                                    );
-                                }
-                                m_words = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             _ => {}
                         }
                     }
-                    let m_numBits = match m_numBits {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("numBits"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_words = match m_words {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("words"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numBits = match m_numBits {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("numBits"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

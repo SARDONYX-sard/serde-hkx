@@ -98,10 +98,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_skeleton,
-                m_boneToRigidBodyMap,
-                m_constraints,
                 m_rigidBodies,
+                m_constraints,
+                m_boneToRigidBodyMap,
+                m_skeleton,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -125,10 +125,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "skeleton" => Ok(__Field::m_skeleton),
-                        "boneToRigidBodyMap" => Ok(__Field::m_boneToRigidBodyMap),
-                        "constraints" => Ok(__Field::m_constraints),
                         "rigidBodies" => Ok(__Field::m_rigidBodies),
+                        "constraints" => Ok(__Field::m_constraints),
+                        "boneToRigidBodyMap" => Ok(__Field::m_boneToRigidBodyMap),
+                        "skeleton" => Ok(__Field::m_skeleton),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -305,10 +305,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_boneToRigidBodyMap: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_constraints: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     let mut m_rigidBodies: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_constraints: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_boneToRigidBodyMap: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -318,21 +318,45 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_skeleton => {
+                            __Field::m_rigidBodies => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_skeleton) {
+                                if _serde::__private::Option::is_some(&m_rigidBodies) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "skeleton",
+                                            "rigidBodies",
                                         ),
                                     );
                                 }
-                                m_skeleton = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_rigidBodies = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_constraints => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_constraints) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "constraints",
+                                        ),
+                                    );
+                                }
+                                m_constraints = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -368,45 +392,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_constraints => {
+                            __Field::m_skeleton => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_constraints) {
+                                if _serde::__private::Option::is_some(&m_skeleton) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "constraints",
+                                            "skeleton",
                                         ),
                                     );
                                 }
-                                m_constraints = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_rigidBodies => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rigidBodies) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rigidBodies",
-                                        ),
-                                    );
-                                }
-                                m_rigidBodies = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                m_skeleton = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -419,23 +419,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_skeleton = match m_skeleton {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("skeleton"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_boneToRigidBodyMap = match m_boneToRigidBodyMap {
+                    let m_rigidBodies = match m_rigidBodies {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "boneToRigidBodyMap",
+                                    "rigidBodies",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -453,14 +443,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_rigidBodies = match m_rigidBodies {
+                    let m_boneToRigidBodyMap = match m_boneToRigidBodyMap {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "rigidBodies",
+                                    "boneToRigidBodyMap",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_skeleton = match m_skeleton {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("skeleton"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

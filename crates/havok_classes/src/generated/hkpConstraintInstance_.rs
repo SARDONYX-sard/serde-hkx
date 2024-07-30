@@ -145,14 +145,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_userData,
-                m_name,
-                m_destructionRemapInfo,
-                m_wantRuntime,
-                m_priority,
-                m_entities,
-                m_constraintModifiers,
                 m_data,
+                m_constraintModifiers,
+                m_entities,
+                m_priority,
+                m_wantRuntime,
+                m_destructionRemapInfo,
+                m_name,
+                m_userData,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -176,14 +176,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "userData" => Ok(__Field::m_userData),
-                        "name" => Ok(__Field::m_name),
-                        "destructionRemapInfo" => Ok(__Field::m_destructionRemapInfo),
-                        "wantRuntime" => Ok(__Field::m_wantRuntime),
-                        "priority" => Ok(__Field::m_priority),
-                        "entities" => Ok(__Field::m_entities),
-                        "constraintModifiers" => Ok(__Field::m_constraintModifiers),
                         "data" => Ok(__Field::m_data),
+                        "constraintModifiers" => Ok(__Field::m_constraintModifiers),
+                        "entities" => Ok(__Field::m_entities),
+                        "priority" => Ok(__Field::m_priority),
+                        "wantRuntime" => Ok(__Field::m_wantRuntime),
+                        "destructionRemapInfo" => Ok(__Field::m_destructionRemapInfo),
+                        "name" => Ok(__Field::m_name),
+                        "userData" => Ok(__Field::m_userData),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -582,16 +582,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_constraintModifiers: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_entities: _serde::__private::Option<[Pointer; 2usize]> = _serde::__private::None;
+                    let mut m_priority: _serde::__private::Option<ConstraintPriority> = _serde::__private::None;
+                    let mut m_wantRuntime: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_destructionRemapInfo: _serde::__private::Option<
                         OnDestructionRemapInfo,
                     > = _serde::__private::None;
-                    let mut m_wantRuntime: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_priority: _serde::__private::Option<ConstraintPriority> = _serde::__private::None;
-                    let mut m_entities: _serde::__private::Option<[Pointer; 2usize]> = _serde::__private::None;
-                    let mut m_constraintModifiers: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -601,21 +601,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_userData => {
+                            __Field::m_data => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_userData) {
+                                if _serde::__private::Option::is_some(&m_data) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "userData",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
                                     );
                                 }
-                                m_userData = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                m_data = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -625,19 +623,95 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
+                            __Field::m_constraintModifiers => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_name) {
+                                if _serde::__private::Option::is_some(
+                                    &m_constraintModifiers,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "constraintModifiers",
+                                        ),
                                     );
                                 }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_constraintModifiers = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_entities => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_entities) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "entities",
+                                        ),
+                                    );
+                                }
+                                m_entities = _serde::__private::Some(
+                                    match __A::next_value::<[Pointer; 2usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_priority => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_priority) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "priority",
+                                        ),
+                                    );
+                                }
+                                m_priority = _serde::__private::Some(
+                                    match __A::next_value::<ConstraintPriority>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wantRuntime => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_wantRuntime) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wantRuntime",
+                                        ),
+                                    );
+                                }
+                                m_wantRuntime = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -675,21 +749,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_wantRuntime => {
+                            __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_wantRuntime) {
+                                if _serde::__private::Option::is_some(&m_name) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wantRuntime",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
                                     );
                                 }
-                                m_wantRuntime = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -699,93 +771,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_priority => {
+                            __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_priority) {
+                                if _serde::__private::Option::is_some(&m_userData) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "priority",
+                                            "userData",
                                         ),
                                     );
                                 }
-                                m_priority = _serde::__private::Some(
-                                    match __A::next_value::<ConstraintPriority>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_entities => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_entities) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "entities",
-                                        ),
-                                    );
-                                }
-                                m_entities = _serde::__private::Some(
-                                    match __A::next_value::<[Pointer; 2usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_constraintModifiers => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_constraintModifiers,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "constraintModifiers",
-                                        ),
-                                    );
-                                }
-                                m_constraintModifiers = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_data => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_data) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
-                                    );
-                                }
-                                m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_userData = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -798,66 +798,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_userData = match m_userData {
+                    let m_data = match m_data {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("userData"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_destructionRemapInfo = match m_destructionRemapInfo {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "destructionRemapInfo",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_wantRuntime = match m_wantRuntime {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wantRuntime",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_priority = match m_priority {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("priority"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_entities = match m_entities {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("entities"),
+                                <__A::Error as _serde::de::Error>::missing_field("data"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -874,12 +820,66 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_data = match m_data {
+                    let m_entities = match m_entities {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("data"),
+                                <__A::Error as _serde::de::Error>::missing_field("entities"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_priority = match m_priority {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("priority"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wantRuntime = match m_wantRuntime {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wantRuntime",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_destructionRemapInfo = match m_destructionRemapInfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "destructionRemapInfo",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_userData = match m_userData {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("userData"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

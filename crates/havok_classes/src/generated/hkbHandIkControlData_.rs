@@ -135,18 +135,18 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_fixUp,
-                m_handleChangeMode,
-                m_handleChangeSpeed,
-                m_extrapolationTimeStep,
-                m_fadeOutDuration,
-                m_fadeInDuration,
-                m_normalOnFraction,
-                m_transformOnFraction,
-                m_targetHandle,
-                m_targetNormal,
-                m_targetRotation,
                 m_targetPosition,
+                m_targetRotation,
+                m_targetNormal,
+                m_targetHandle,
+                m_transformOnFraction,
+                m_normalOnFraction,
+                m_fadeInDuration,
+                m_fadeOutDuration,
+                m_extrapolationTimeStep,
+                m_handleChangeSpeed,
+                m_handleChangeMode,
+                m_fixUp,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -170,18 +170,18 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "fixUp" => Ok(__Field::m_fixUp),
-                        "handleChangeMode" => Ok(__Field::m_handleChangeMode),
-                        "handleChangeSpeed" => Ok(__Field::m_handleChangeSpeed),
-                        "extrapolationTimeStep" => Ok(__Field::m_extrapolationTimeStep),
-                        "fadeOutDuration" => Ok(__Field::m_fadeOutDuration),
-                        "fadeInDuration" => Ok(__Field::m_fadeInDuration),
-                        "normalOnFraction" => Ok(__Field::m_normalOnFraction),
-                        "transformOnFraction" => Ok(__Field::m_transformOnFraction),
-                        "targetHandle" => Ok(__Field::m_targetHandle),
-                        "targetNormal" => Ok(__Field::m_targetNormal),
-                        "targetRotation" => Ok(__Field::m_targetRotation),
                         "targetPosition" => Ok(__Field::m_targetPosition),
+                        "targetRotation" => Ok(__Field::m_targetRotation),
+                        "targetNormal" => Ok(__Field::m_targetNormal),
+                        "targetHandle" => Ok(__Field::m_targetHandle),
+                        "transformOnFraction" => Ok(__Field::m_transformOnFraction),
+                        "normalOnFraction" => Ok(__Field::m_normalOnFraction),
+                        "fadeInDuration" => Ok(__Field::m_fadeInDuration),
+                        "fadeOutDuration" => Ok(__Field::m_fadeOutDuration),
+                        "extrapolationTimeStep" => Ok(__Field::m_extrapolationTimeStep),
+                        "handleChangeSpeed" => Ok(__Field::m_handleChangeSpeed),
+                        "handleChangeMode" => Ok(__Field::m_handleChangeMode),
+                        "fixUp" => Ok(__Field::m_fixUp),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -593,20 +593,20 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_fixUp: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_targetPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_targetRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
+                    let mut m_targetNormal: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_targetHandle: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_transformOnFraction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_normalOnFraction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_fadeInDuration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_fadeOutDuration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_extrapolationTimeStep: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_handleChangeSpeed: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_handleChangeMode: _serde::__private::Option<
                         HandleChangeMode,
                     > = _serde::__private::None;
-                    let mut m_handleChangeSpeed: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_extrapolationTimeStep: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_fadeOutDuration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_fadeInDuration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_normalOnFraction: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_transformOnFraction: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_targetHandle: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_targetNormal: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_targetRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
-                    let mut m_targetPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_fixUp: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -616,43 +616,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_fixUp => {
+                            __Field::m_targetPosition => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_fixUp) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("fixUp"),
-                                    );
-                                }
-                                m_fixUp = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_handleChangeMode => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_handleChangeMode) {
+                                if _serde::__private::Option::is_some(&m_targetPosition) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "handleChangeMode",
+                                            "targetPosition",
                                         ),
                                     );
                                 }
-                                m_handleChangeMode = _serde::__private::Some(
-                                    match __A::next_value::<HandleChangeMode>(&mut __map) {
+                                m_targetPosition = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -662,22 +640,166 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_handleChangeSpeed => {
+                            __Field::m_targetRotation => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_targetRotation) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "targetRotation",
+                                        ),
+                                    );
+                                }
+                                m_targetRotation = _serde::__private::Some(
+                                    match __A::next_value::<Quaternion>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_targetNormal => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_targetNormal) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "targetNormal",
+                                        ),
+                                    );
+                                }
+                                m_targetNormal = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_targetHandle => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_targetHandle) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "targetHandle",
+                                        ),
+                                    );
+                                }
+                                m_targetHandle = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transformOnFraction => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_handleChangeSpeed,
+                                    &m_transformOnFraction,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "handleChangeSpeed",
+                                            "transformOnFraction",
                                         ),
                                     );
                                 }
-                                m_handleChangeSpeed = _serde::__private::Some(
+                                m_transformOnFraction = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_normalOnFraction => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_normalOnFraction) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "normalOnFraction",
+                                        ),
+                                    );
+                                }
+                                m_normalOnFraction = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_fadeInDuration => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_fadeInDuration) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "fadeInDuration",
+                                        ),
+                                    );
+                                }
+                                m_fadeInDuration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_fadeOutDuration => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_fadeOutDuration) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "fadeOutDuration",
+                                        ),
+                                    );
+                                }
+                                m_fadeOutDuration = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -714,94 +836,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_fadeOutDuration => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_fadeOutDuration) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fadeOutDuration",
-                                        ),
-                                    );
-                                }
-                                m_fadeOutDuration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_fadeInDuration => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_fadeInDuration) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fadeInDuration",
-                                        ),
-                                    );
-                                }
-                                m_fadeInDuration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_normalOnFraction => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_normalOnFraction) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "normalOnFraction",
-                                        ),
-                                    );
-                                }
-                                m_normalOnFraction = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_transformOnFraction => {
+                            __Field::m_handleChangeSpeed => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_transformOnFraction,
+                                    &m_handleChangeSpeed,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transformOnFraction",
+                                            "handleChangeSpeed",
                                         ),
                                     );
                                 }
-                                m_transformOnFraction = _serde::__private::Some(
+                                m_handleChangeSpeed = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -812,21 +862,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_targetHandle => {
+                            __Field::m_handleChangeMode => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_targetHandle) {
+                                if _serde::__private::Option::is_some(&m_handleChangeMode) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "targetHandle",
+                                            "handleChangeMode",
                                         ),
                                     );
                                 }
-                                m_targetHandle = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_handleChangeMode = _serde::__private::Some(
+                                    match __A::next_value::<HandleChangeMode>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -836,69 +886,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_targetNormal => {
+                            __Field::m_fixUp => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_targetNormal) {
+                                if _serde::__private::Option::is_some(&m_fixUp) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "targetNormal",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("fixUp"),
                                     );
                                 }
-                                m_targetNormal = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_targetRotation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_targetRotation) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "targetRotation",
-                                        ),
-                                    );
-                                }
-                                m_targetRotation = _serde::__private::Some(
-                                    match __A::next_value::<Quaternion>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_targetPosition => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_targetPosition) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "targetPosition",
-                                        ),
-                                    );
-                                }
-                                m_targetPosition = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_fixUp = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -911,119 +911,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_fixUp = match m_fixUp {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("fixUp"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_handleChangeMode = match m_handleChangeMode {
+                    let m_targetPosition = match m_targetPosition {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "handleChangeMode",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_handleChangeSpeed = match m_handleChangeSpeed {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "handleChangeSpeed",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_extrapolationTimeStep = match m_extrapolationTimeStep {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "extrapolationTimeStep",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_fadeOutDuration = match m_fadeOutDuration {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "fadeOutDuration",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_fadeInDuration = match m_fadeInDuration {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "fadeInDuration",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_normalOnFraction = match m_normalOnFraction {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "normalOnFraction",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_transformOnFraction = match m_transformOnFraction {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "transformOnFraction",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_targetHandle = match m_targetHandle {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "targetHandle",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_targetNormal = match m_targetNormal {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "targetNormal",
+                                    "targetPosition",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1041,14 +935,120 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_targetPosition = match m_targetPosition {
+                    let m_targetNormal = match m_targetNormal {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "targetPosition",
+                                    "targetNormal",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_targetHandle = match m_targetHandle {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "targetHandle",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transformOnFraction = match m_transformOnFraction {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transformOnFraction",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_normalOnFraction = match m_normalOnFraction {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "normalOnFraction",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_fadeInDuration = match m_fadeInDuration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "fadeInDuration",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_fadeOutDuration = match m_fadeOutDuration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "fadeOutDuration",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_extrapolationTimeStep = match m_extrapolationTimeStep {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "extrapolationTimeStep",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_handleChangeSpeed = match m_handleChangeSpeed {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "handleChangeSpeed",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_handleChangeMode = match m_handleChangeMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "handleChangeMode",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_fixUp = match m_fixUp {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("fixUp"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

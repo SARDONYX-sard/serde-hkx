@@ -110,14 +110,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_transformIndex,
-                m_reference,
-                m_materialInfo,
-                m_weldingInfo,
-                m_stripLengths,
-                m_indices,
-                m_vertices,
                 m_offset,
+                m_vertices,
+                m_indices,
+                m_stripLengths,
+                m_weldingInfo,
+                m_materialInfo,
+                m_reference,
+                m_transformIndex,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -141,14 +141,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "transformIndex" => Ok(__Field::m_transformIndex),
-                        "reference" => Ok(__Field::m_reference),
-                        "materialInfo" => Ok(__Field::m_materialInfo),
-                        "weldingInfo" => Ok(__Field::m_weldingInfo),
-                        "stripLengths" => Ok(__Field::m_stripLengths),
-                        "indices" => Ok(__Field::m_indices),
-                        "vertices" => Ok(__Field::m_vertices),
                         "offset" => Ok(__Field::m_offset),
+                        "vertices" => Ok(__Field::m_vertices),
+                        "indices" => Ok(__Field::m_indices),
+                        "stripLengths" => Ok(__Field::m_stripLengths),
+                        "weldingInfo" => Ok(__Field::m_weldingInfo),
+                        "materialInfo" => Ok(__Field::m_materialInfo),
+                        "reference" => Ok(__Field::m_reference),
+                        "transformIndex" => Ok(__Field::m_transformIndex),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -433,14 +433,14 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_transformIndex: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_reference: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_materialInfo: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_stripLengths: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_indices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_vertices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
                     let mut m_offset: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_vertices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_indices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_stripLengths: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_materialInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_reference: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_transformIndex: _serde::__private::Option<u16> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -450,21 +450,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_transformIndex => {
+                            __Field::m_offset => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_transformIndex) {
+                                if _serde::__private::Option::is_some(&m_offset) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transformIndex",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("offset"),
                                     );
                                 }
-                                m_transformIndex = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                m_offset = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -474,92 +472,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_reference => {
+                            __Field::m_vertices => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_reference) {
+                                if _serde::__private::Option::is_some(&m_vertices) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "reference",
+                                            "vertices",
                                         ),
                                     );
                                 }
-                                m_reference = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_materialInfo => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_materialInfo) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "materialInfo",
-                                        ),
-                                    );
-                                }
-                                m_materialInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_weldingInfo => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_weldingInfo) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "weldingInfo",
-                                        ),
-                                    );
-                                }
-                                m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_stripLengths => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_stripLengths) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "stripLengths",
-                                        ),
-                                    );
-                                }
-                                m_stripLengths = _serde::__private::Some(
+                                m_vertices = _serde::__private::Some(
                                     match __A::next_value::<Vec<u16>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -594,20 +520,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vertices => {
+                            __Field::m_stripLengths => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_vertices) {
+                                if _serde::__private::Option::is_some(&m_stripLengths) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertices",
+                                            "stripLengths",
                                         ),
                                     );
                                 }
-                                m_vertices = _serde::__private::Some(
+                                m_stripLengths = _serde::__private::Some(
                                     match __A::next_value::<Vec<u16>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -618,19 +544,93 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_offset => {
+                            __Field::m_weldingInfo => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_offset) {
+                                if _serde::__private::Option::is_some(&m_weldingInfo) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("offset"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "weldingInfo",
+                                        ),
                                     );
                                 }
-                                m_offset = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_weldingInfo = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_materialInfo => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_materialInfo) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "materialInfo",
+                                        ),
+                                    );
+                                }
+                                m_materialInfo = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_reference => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_reference) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "reference",
+                                        ),
+                                    );
+                                }
+                                m_reference = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transformIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_transformIndex) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transformIndex",
+                                        ),
+                                    );
+                                }
+                                m_transformIndex = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -643,37 +643,43 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_transformIndex = match m_transformIndex {
+                    let m_offset = match m_offset {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "transformIndex",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("offset"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_reference = match m_reference {
+                    let m_vertices = match m_vertices {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "reference",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("vertices"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_materialInfo = match m_materialInfo {
+                    let m_indices = match m_indices {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("indices"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_stripLengths = match m_stripLengths {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "materialInfo",
+                                    "stripLengths",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -691,44 +697,38 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_stripLengths = match m_stripLengths {
+                    let m_materialInfo = match m_materialInfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "stripLengths",
+                                    "materialInfo",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_indices = match m_indices {
+                    let m_reference = match m_reference {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("indices"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "reference",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_vertices = match m_vertices {
+                    let m_transformIndex = match m_transformIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("vertices"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_offset = match m_offset {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("offset"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transformIndex",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

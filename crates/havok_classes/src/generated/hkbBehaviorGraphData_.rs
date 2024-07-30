@@ -151,14 +151,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_stringData,
-                m_variableInitialValues,
-                m_wordMaxVariableValues,
-                m_wordMinVariableValues,
-                m_eventInfos,
-                m_characterPropertyInfos,
-                m_variableInfos,
                 m_attributeDefaults,
+                m_variableInfos,
+                m_characterPropertyInfos,
+                m_eventInfos,
+                m_wordMinVariableValues,
+                m_wordMaxVariableValues,
+                m_variableInitialValues,
+                m_stringData,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -182,14 +182,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "stringData" => Ok(__Field::m_stringData),
-                        "variableInitialValues" => Ok(__Field::m_variableInitialValues),
-                        "wordMaxVariableValues" => Ok(__Field::m_wordMaxVariableValues),
-                        "wordMinVariableValues" => Ok(__Field::m_wordMinVariableValues),
-                        "eventInfos" => Ok(__Field::m_eventInfos),
-                        "characterPropertyInfos" => Ok(__Field::m_characterPropertyInfos),
-                        "variableInfos" => Ok(__Field::m_variableInfos),
                         "attributeDefaults" => Ok(__Field::m_attributeDefaults),
+                        "variableInfos" => Ok(__Field::m_variableInfos),
+                        "characterPropertyInfos" => Ok(__Field::m_characterPropertyInfos),
+                        "eventInfos" => Ok(__Field::m_eventInfos),
+                        "wordMinVariableValues" => Ok(__Field::m_wordMinVariableValues),
+                        "wordMaxVariableValues" => Ok(__Field::m_wordMaxVariableValues),
+                        "variableInitialValues" => Ok(__Field::m_variableInitialValues),
+                        "stringData" => Ok(__Field::m_stringData),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -502,24 +502,24 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_variableInitialValues: _serde::__private::Option<
-                        Pointer,
+                    let mut m_attributeDefaults: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
+                    let mut m_variableInfos: _serde::__private::Option<
+                        Vec<hkbVariableInfo>,
+                    > = _serde::__private::None;
+                    let mut m_characterPropertyInfos: _serde::__private::Option<
+                        Vec<hkbVariableInfo>,
+                    > = _serde::__private::None;
+                    let mut m_eventInfos: _serde::__private::Option<Vec<hkbEventInfo>> = _serde::__private::None;
+                    let mut m_wordMinVariableValues: _serde::__private::Option<
+                        Vec<hkbVariableValue>,
                     > = _serde::__private::None;
                     let mut m_wordMaxVariableValues: _serde::__private::Option<
                         Vec<hkbVariableValue>,
                     > = _serde::__private::None;
-                    let mut m_wordMinVariableValues: _serde::__private::Option<
-                        Vec<hkbVariableValue>,
+                    let mut m_variableInitialValues: _serde::__private::Option<
+                        Pointer,
                     > = _serde::__private::None;
-                    let mut m_eventInfos: _serde::__private::Option<Vec<hkbEventInfo>> = _serde::__private::None;
-                    let mut m_characterPropertyInfos: _serde::__private::Option<
-                        Vec<hkbVariableInfo>,
-                    > = _serde::__private::None;
-                    let mut m_variableInfos: _serde::__private::Option<
-                        Vec<hkbVariableInfo>,
-                    > = _serde::__private::None;
-                    let mut m_attributeDefaults: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -529,47 +529,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_stringData => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_stringData) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "stringData",
-                                        ),
-                                    );
-                                }
-                                m_stringData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_variableInitialValues => {
+                            __Field::m_attributeDefaults => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_variableInitialValues,
+                                    &m_attributeDefaults,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "variableInitialValues",
+                                            "attributeDefaults",
                                         ),
                                     );
                                 }
-                                m_variableInitialValues = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_attributeDefaults = _serde::__private::Some(
+                                    match __A::next_value::<Vec<f32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -579,73 +555,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_wordMaxVariableValues => {
+                            __Field::m_variableInfos => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_wordMaxVariableValues,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_variableInfos) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wordMaxVariableValues",
+                                            "variableInfos",
                                         ),
                                     );
                                 }
-                                m_wordMaxVariableValues = _serde::__private::Some(
-                                    match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_wordMinVariableValues => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_wordMinVariableValues,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wordMinVariableValues",
-                                        ),
-                                    );
-                                }
-                                m_wordMinVariableValues = _serde::__private::Some(
-                                    match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_eventInfos => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_eventInfos) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "eventInfos",
-                                        ),
-                                    );
-                                }
-                                m_eventInfos = _serde::__private::Some(
-                                    match __A::next_value::<Vec<hkbEventInfo>>(&mut __map) {
+                                m_variableInfos = _serde::__private::Some(
+                                    match __A::next_value::<Vec<hkbVariableInfo>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -681,21 +605,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_variableInfos => {
+                            __Field::m_eventInfos => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_variableInfos) {
+                                if _serde::__private::Option::is_some(&m_eventInfos) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "variableInfos",
+                                            "eventInfos",
                                         ),
                                     );
                                 }
-                                m_variableInfos = _serde::__private::Some(
-                                    match __A::next_value::<Vec<hkbVariableInfo>>(&mut __map) {
+                                m_eventInfos = _serde::__private::Some(
+                                    match __A::next_value::<Vec<hkbEventInfo>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -705,23 +629,99 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_attributeDefaults => {
+                            __Field::m_wordMinVariableValues => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_attributeDefaults,
+                                    &m_wordMinVariableValues,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "attributeDefaults",
+                                            "wordMinVariableValues",
                                         ),
                                     );
                                 }
-                                m_attributeDefaults = _serde::__private::Some(
-                                    match __A::next_value::<Vec<f32>>(&mut __map) {
+                                m_wordMinVariableValues = _serde::__private::Some(
+                                    match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wordMaxVariableValues => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_wordMaxVariableValues,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wordMaxVariableValues",
+                                        ),
+                                    );
+                                }
+                                m_wordMaxVariableValues = _serde::__private::Some(
+                                    match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_variableInitialValues => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_variableInitialValues,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableInitialValues",
+                                        ),
+                                    );
+                                }
+                                m_variableInitialValues = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_stringData => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_stringData) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "stringData",
+                                        ),
+                                    );
+                                }
+                                m_stringData = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -734,73 +734,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_stringData = match m_stringData {
+                    let m_attributeDefaults = match m_attributeDefaults {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "stringData",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_variableInitialValues = match m_variableInitialValues {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "variableInitialValues",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_wordMaxVariableValues = match m_wordMaxVariableValues {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wordMaxVariableValues",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_wordMinVariableValues = match m_wordMinVariableValues {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wordMinVariableValues",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_eventInfos = match m_eventInfos {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "eventInfos",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_characterPropertyInfos = match m_characterPropertyInfos {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterPropertyInfos",
+                                    "attributeDefaults",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -818,13 +758,73 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_attributeDefaults = match m_attributeDefaults {
+                    let m_characterPropertyInfos = match m_characterPropertyInfos {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "attributeDefaults",
+                                    "characterPropertyInfos",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_eventInfos = match m_eventInfos {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "eventInfos",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wordMinVariableValues = match m_wordMinVariableValues {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wordMinVariableValues",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wordMaxVariableValues = match m_wordMaxVariableValues {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wordMaxVariableValues",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_variableInitialValues = match m_variableInitialValues {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableInitialValues",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_stringData = match m_stringData {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "stringData",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

@@ -83,8 +83,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_shapeKey,
                 m_shape,
+                m_shapeKey,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -108,8 +108,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "shapeKey" => Ok(__Field::m_shapeKey),
                         "shape" => Ok(__Field::m_shape),
+                        "shapeKey" => Ok(__Field::m_shapeKey),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -268,8 +268,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_shapeKey: _serde::__private::Option<u32> = _serde::__private::None;
                     let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_shapeKey: _serde::__private::Option<u32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -279,6 +279,28 @@ const _: () = {
                         __key
                     } {
                         match __key {
+                            __Field::m_shape => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_shape) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
+                                    );
+                                }
+                                m_shape = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             __Field::m_shapeKey => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -303,47 +325,25 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_shape => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_shape) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
-                                    );
-                                }
-                                m_shape = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             _ => {}
                         }
                     }
-                    let m_shapeKey = match m_shapeKey {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("shapeKey"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_shape = match m_shape {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("shape"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_shapeKey = match m_shapeKey {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("shapeKey"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

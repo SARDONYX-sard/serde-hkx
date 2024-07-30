@@ -56,7 +56,8 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x13a39ba7)));
-            let mut serializer = __serializer.serialize_struct("hkbProjectData", class_meta)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkbProjectData", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -82,36 +83,44 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_defaultEventMode,
-                m_stringData,
                 m_worldUpWS,
+                m_stringData,
+                m_defaultEventMode,
                 __ignore,
             }
             struct __FieldVisitor;
             impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
                 type Value = __Field;
-                fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
                     core::fmt::Formatter::write_str(__formatter, "field identifier")
                 }
                 /// Intended for use in XML.
                 #[allow(clippy::match_single_binding)]
                 #[allow(clippy::reversed_empty_ranges)]
                 #[allow(clippy::single_match)]
-                fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+                fn visit_key<__E>(
+                    self,
+                    __value: &str,
+                ) -> core::result::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "defaultEventMode" => Ok(__Field::m_defaultEventMode),
-                        "stringData" => Ok(__Field::m_stringData),
                         "worldUpWS" => Ok(__Field::m_worldUpWS),
+                        "stringData" => Ok(__Field::m_stringData),
+                        "defaultEventMode" => Ok(__Field::m_defaultEventMode),
                         _ => Ok(__Field::__ignore),
                     }
                 }
             }
             impl<'de> _serde::Deserialize<'de> for __Field {
                 #[inline]
-                fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> core::result::Result<Self, __D::Error>
                 where
                     __D: _serde::Deserializer<'de>,
                 {
@@ -127,7 +136,10 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkbProjectDataVisitor<'de> {
                 type Value = hkbProjectData;
-                fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
                     core::fmt::Formatter::write_str(__formatter, "struct hkbProjectData")
                 }
                 fn visit_struct_for_bytes<__A>(
@@ -139,12 +151,9 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_worldUpWS: _serde::__private::Option<Vector4> =
-                        _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> =
-                        _serde::__private::None;
-                    let mut m_defaultEventMode: _serde::__private::Option<EventMode> =
-                        _serde::__private::None;
+                    let mut m_worldUpWS: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_defaultEventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
                             0usize => {
@@ -207,7 +216,9 @@ const _: () = {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("worldUpWS"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "worldUpWS",
+                                ),
                             );
                         }
                     };
@@ -215,7 +226,9 @@ const _: () = {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("stringData"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "stringData",
+                                ),
                             );
                         }
                     };
@@ -245,74 +258,24 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_defaultEventMode: _serde::__private::Option<EventMode> =
-                        _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> =
-                        _serde::__private::None;
-                    let mut m_worldUpWS: _serde::__private::Option<Vector4> =
-                        _serde::__private::None;
+                    let mut m_worldUpWS: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_defaultEventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
-                        let __key =
-                            __A::next_key::<__Field>(&mut __map).unwrap_or(Some(__Field::__ignore));
+                        let __key = __A::next_key::<__Field>(&mut __map)
+                            .unwrap_or(Some(__Field::__ignore));
                         #[cfg(feature = "strict")]
                         let __key = __A::next_key::<__Field>(&mut __map)?;
                         __key
                     } {
                         match __key {
-                            __Field::m_defaultEventMode => {
-                                #[cfg(any(feature = "strict", feature = "ignore_duplicates"))]
-                                if _serde::__private::Option::is_some(&m_defaultEventMode) {
-                                    #[cfg(feature = "ignore_duplicates")]
-                                    continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "defaultEventMode",
-                                        ),
-                                    );
-                                }
-                                m_defaultEventMode = _serde::__private::Some(
-                                    match __A::next_value::<EventMode>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))]
-                                            Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_stringData => {
-                                #[cfg(any(feature = "strict", feature = "ignore_duplicates"))]
-                                if _serde::__private::Option::is_some(&m_stringData) {
-                                    #[cfg(feature = "ignore_duplicates")]
-                                    continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "stringData",
-                                        ),
-                                    );
-                                }
-                                m_stringData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))]
-                                            Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_worldUpWS => {
-                                #[cfg(any(feature = "strict", feature = "ignore_duplicates"))]
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
                                 if _serde::__private::Option::is_some(&m_worldUpWS) {
-                                    #[cfg(feature = "ignore_duplicates")]
-                                    continue;
+                                    #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -326,8 +289,55 @@ const _: () = {
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))]
-                                            Default::default()
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_stringData => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_stringData) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "stringData",
+                                        ),
+                                    );
+                                }
+                                m_stringData = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_defaultEventMode => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_defaultEventMode) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "defaultEventMode",
+                                        ),
+                                    );
+                                }
+                                m_defaultEventMode = _serde::__private::Some(
+                                    match __A::next_value::<EventMode>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );
@@ -335,6 +345,30 @@ const _: () = {
                             _ => {}
                         }
                     }
+                    let m_worldUpWS = match m_worldUpWS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "worldUpWS",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_stringData = match m_stringData {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "stringData",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
                     let m_defaultEventMode = match m_defaultEventMode {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -344,30 +378,7 @@ const _: () = {
                                     "defaultEventMode",
                                 ),
                             );
-                            #[cfg(not(feature = "strict"))]
-                            Default::default()
-                        }
-                    };
-                    let m_stringData = match m_stringData {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("stringData"),
-                            );
-                            #[cfg(not(feature = "strict"))]
-                            Default::default()
-                        }
-                    };
-                    let m_worldUpWS = match m_worldUpWS {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("worldUpWS"),
-                            );
-                            #[cfg(not(feature = "strict"))]
-                            Default::default()
+                            #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
                     let __ptr = None;

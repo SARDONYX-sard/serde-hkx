@@ -132,11 +132,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_data,
-                m_animationToRagdollSkeletonMapper,
-                m_ragdollToAnimationSkeletonMapper,
-                m_animationSkeleton,
                 m_retargetingSkeletonMappers,
+                m_animationSkeleton,
+                m_ragdollToAnimationSkeletonMapper,
+                m_animationToRagdollSkeletonMapper,
+                m_data,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -160,17 +160,17 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "data" => Ok(__Field::m_data),
-                        "animationToRagdollSkeletonMapper" => {
-                            Ok(__Field::m_animationToRagdollSkeletonMapper)
-                        }
-                        "ragdollToAnimationSkeletonMapper" => {
-                            Ok(__Field::m_ragdollToAnimationSkeletonMapper)
-                        }
-                        "animationSkeleton" => Ok(__Field::m_animationSkeleton),
                         "retargetingSkeletonMappers" => {
                             Ok(__Field::m_retargetingSkeletonMappers)
                         }
+                        "animationSkeleton" => Ok(__Field::m_animationSkeleton),
+                        "ragdollToAnimationSkeletonMapper" => {
+                            Ok(__Field::m_ragdollToAnimationSkeletonMapper)
+                        }
+                        "animationToRagdollSkeletonMapper" => {
+                            Ok(__Field::m_animationToRagdollSkeletonMapper)
+                        }
+                        "data" => Ok(__Field::m_data),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -479,17 +479,17 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_animationToRagdollSkeletonMapper: _serde::__private::Option<
-                        Pointer,
-                    > = _serde::__private::None;
-                    let mut m_ragdollToAnimationSkeletonMapper: _serde::__private::Option<
-                        Pointer,
-                    > = _serde::__private::None;
-                    let mut m_animationSkeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_retargetingSkeletonMappers: _serde::__private::Option<
                         Vec<Pointer>,
                     > = _serde::__private::None;
+                    let mut m_animationSkeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_ragdollToAnimationSkeletonMapper: _serde::__private::Option<
+                        Pointer,
+                    > = _serde::__private::None;
+                    let mut m_animationToRagdollSkeletonMapper: _serde::__private::Option<
+                        Pointer,
+                    > = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -499,19 +499,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_data => {
+                            __Field::m_retargetingSkeletonMappers => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_data) {
+                                if _serde::__private::Option::is_some(
+                                    &m_retargetingSkeletonMappers,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "retargetingSkeletonMappers",
+                                        ),
                                     );
                                 }
-                                m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_retargetingSkeletonMappers = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -521,22 +525,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_animationToRagdollSkeletonMapper => {
+                            __Field::m_animationSkeleton => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_animationToRagdollSkeletonMapper,
+                                    &m_animationSkeleton,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "animationToRagdollSkeletonMapper",
+                                            "animationSkeleton",
                                         ),
                                     );
                                 }
-                                m_animationToRagdollSkeletonMapper = _serde::__private::Some(
+                                m_animationSkeleton = _serde::__private::Some(
                                     match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -573,22 +577,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_animationSkeleton => {
+                            __Field::m_animationToRagdollSkeletonMapper => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_animationSkeleton,
+                                    &m_animationToRagdollSkeletonMapper,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "animationSkeleton",
+                                            "animationToRagdollSkeletonMapper",
                                         ),
                                     );
                                 }
-                                m_animationSkeleton = _serde::__private::Some(
+                                m_animationToRagdollSkeletonMapper = _serde::__private::Some(
                                     match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -599,23 +603,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_retargetingSkeletonMappers => {
+                            __Field::m_data => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_retargetingSkeletonMappers,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_data) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "retargetingSkeletonMappers",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
                                     );
                                 }
-                                m_retargetingSkeletonMappers = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                m_data = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -628,35 +628,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_data = match m_data {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("data"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_animationToRagdollSkeletonMapper = match m_animationToRagdollSkeletonMapper {
+                    let m_retargetingSkeletonMappers = match m_retargetingSkeletonMappers {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "animationToRagdollSkeletonMapper",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_ragdollToAnimationSkeletonMapper = match m_ragdollToAnimationSkeletonMapper {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "ragdollToAnimationSkeletonMapper",
+                                    "retargetingSkeletonMappers",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -674,14 +652,36 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_retargetingSkeletonMappers = match m_retargetingSkeletonMappers {
+                    let m_ragdollToAnimationSkeletonMapper = match m_ragdollToAnimationSkeletonMapper {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "retargetingSkeletonMappers",
+                                    "ragdollToAnimationSkeletonMapper",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_animationToRagdollSkeletonMapper = match m_animationToRagdollSkeletonMapper {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "animationToRagdollSkeletonMapper",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_data = match m_data {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("data"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

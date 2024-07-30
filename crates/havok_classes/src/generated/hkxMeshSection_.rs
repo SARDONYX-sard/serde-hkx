@@ -89,10 +89,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_userChannels,
-                m_material,
-                m_indexBuffers,
                 m_vertexBuffer,
+                m_indexBuffers,
+                m_material,
+                m_userChannels,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -116,10 +116,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "userChannels" => Ok(__Field::m_userChannels),
-                        "material" => Ok(__Field::m_material),
-                        "indexBuffers" => Ok(__Field::m_indexBuffers),
                         "vertexBuffer" => Ok(__Field::m_vertexBuffer),
+                        "indexBuffers" => Ok(__Field::m_indexBuffers),
+                        "material" => Ok(__Field::m_material),
+                        "userChannels" => Ok(__Field::m_userChannels),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -291,10 +291,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_userChannels: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_material: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_indexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     let mut m_vertexBuffer: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_indexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_material: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_userChannels: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -304,44 +304,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_userChannels => {
+                            __Field::m_vertexBuffer => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_userChannels) {
+                                if _serde::__private::Option::is_some(&m_vertexBuffer) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "userChannels",
+                                            "vertexBuffer",
                                         ),
                                     );
                                 }
-                                m_userChannels = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_material => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_material) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "material",
-                                        ),
-                                    );
-                                }
-                                m_material = _serde::__private::Some(
+                                m_vertexBuffer = _serde::__private::Some(
                                     match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -376,21 +352,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vertexBuffer => {
+                            __Field::m_material => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_vertexBuffer) {
+                                if _serde::__private::Option::is_some(&m_material) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexBuffer",
+                                            "material",
                                         ),
                                     );
                                 }
-                                m_vertexBuffer = _serde::__private::Some(
+                                m_material = _serde::__private::Some(
                                     match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_userChannels => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_userChannels) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "userChannels",
+                                        ),
+                                    );
+                                }
+                                m_userChannels = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -403,24 +403,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_userChannels = match m_userChannels {
+                    let m_vertexBuffer = match m_vertexBuffer {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "userChannels",
+                                    "vertexBuffer",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_material = match m_material {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("material"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -437,13 +427,23 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_vertexBuffer = match m_vertexBuffer {
+                    let m_material = match m_material {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("material"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_userChannels = match m_userChannels {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexBuffer",
+                                    "userChannels",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

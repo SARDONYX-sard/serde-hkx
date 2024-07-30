@@ -84,9 +84,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_isConnectedToHandbrake,
-                m_minPedalInputToBlock,
                 m_maxBreakingTorque,
+                m_minPedalInputToBlock,
+                m_isConnectedToHandbrake,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -110,9 +110,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "isConnectedToHandbrake" => Ok(__Field::m_isConnectedToHandbrake),
-                        "minPedalInputToBlock" => Ok(__Field::m_minPedalInputToBlock),
                         "maxBreakingTorque" => Ok(__Field::m_maxBreakingTorque),
+                        "minPedalInputToBlock" => Ok(__Field::m_minPedalInputToBlock),
+                        "isConnectedToHandbrake" => Ok(__Field::m_isConnectedToHandbrake),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -268,9 +268,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_isConnectedToHandbrake: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_minPedalInputToBlock: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxBreakingTorque: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_minPedalInputToBlock: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_isConnectedToHandbrake: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -280,23 +280,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_isConnectedToHandbrake => {
+                            __Field::m_maxBreakingTorque => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_isConnectedToHandbrake,
+                                    &m_maxBreakingTorque,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isConnectedToHandbrake",
+                                            "maxBreakingTorque",
                                         ),
                                     );
                                 }
-                                m_isConnectedToHandbrake = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_maxBreakingTorque = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -332,23 +332,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxBreakingTorque => {
+                            __Field::m_isConnectedToHandbrake => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_maxBreakingTorque,
+                                    &m_isConnectedToHandbrake,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxBreakingTorque",
+                                            "isConnectedToHandbrake",
                                         ),
                                     );
                                 }
-                                m_maxBreakingTorque = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_isConnectedToHandbrake = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -361,13 +361,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_isConnectedToHandbrake = match m_isConnectedToHandbrake {
+                    let m_maxBreakingTorque = match m_maxBreakingTorque {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isConnectedToHandbrake",
+                                    "maxBreakingTorque",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -385,13 +385,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxBreakingTorque = match m_maxBreakingTorque {
+                    let m_isConnectedToHandbrake = match m_isConnectedToHandbrake {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxBreakingTorque",
+                                    "isConnectedToHandbrake",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

@@ -76,8 +76,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_systems,
                 m_worldCinfo,
+                m_systems,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -101,8 +101,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "systems" => Ok(__Field::m_systems),
                         "worldCinfo" => Ok(__Field::m_worldCinfo),
+                        "systems" => Ok(__Field::m_systems),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -216,8 +216,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_systems: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     let mut m_worldCinfo: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_systems: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -227,30 +227,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_systems => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_systems) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "systems",
-                                        ),
-                                    );
-                                }
-                                m_systems = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_worldCinfo => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -275,19 +251,33 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_systems => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_systems) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "systems",
+                                        ),
+                                    );
+                                }
+                                m_systems = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_systems = match m_systems {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("systems"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_worldCinfo = match m_worldCinfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -296,6 +286,16 @@ const _: () = {
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "worldCinfo",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_systems = match m_systems {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("systems"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

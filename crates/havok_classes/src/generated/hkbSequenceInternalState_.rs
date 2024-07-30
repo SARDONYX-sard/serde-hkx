@@ -114,12 +114,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_isEnabled,
-                m_time,
-                m_nextSampleInts,
-                m_nextSampleBools,
-                m_nextSampleReals,
                 m_nextSampleEvents,
+                m_nextSampleReals,
+                m_nextSampleBools,
+                m_nextSampleInts,
+                m_time,
+                m_isEnabled,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -143,12 +143,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "isEnabled" => Ok(__Field::m_isEnabled),
-                        "time" => Ok(__Field::m_time),
-                        "nextSampleInts" => Ok(__Field::m_nextSampleInts),
-                        "nextSampleBools" => Ok(__Field::m_nextSampleBools),
-                        "nextSampleReals" => Ok(__Field::m_nextSampleReals),
                         "nextSampleEvents" => Ok(__Field::m_nextSampleEvents),
+                        "nextSampleReals" => Ok(__Field::m_nextSampleReals),
+                        "nextSampleBools" => Ok(__Field::m_nextSampleBools),
+                        "nextSampleInts" => Ok(__Field::m_nextSampleInts),
+                        "time" => Ok(__Field::m_time),
+                        "isEnabled" => Ok(__Field::m_isEnabled),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -381,12 +381,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_time: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_nextSampleInts: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_nextSampleBools: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_nextSampleReals: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
                     let mut m_nextSampleEvents: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_nextSampleReals: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_nextSampleBools: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_nextSampleInts: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_time: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -396,90 +396,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_isEnabled => {
+                            __Field::m_nextSampleEvents => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isEnabled) {
+                                if _serde::__private::Option::is_some(&m_nextSampleEvents) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isEnabled",
+                                            "nextSampleEvents",
                                         ),
                                     );
                                 }
-                                m_isEnabled = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_time => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_time) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("time"),
-                                    );
-                                }
-                                m_time = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_nextSampleInts => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_nextSampleInts) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "nextSampleInts",
-                                        ),
-                                    );
-                                }
-                                m_nextSampleInts = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_nextSampleBools => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_nextSampleBools) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "nextSampleBools",
-                                        ),
-                                    );
-                                }
-                                m_nextSampleBools = _serde::__private::Some(
+                                m_nextSampleEvents = _serde::__private::Some(
                                     match __A::next_value::<Vec<i32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -514,21 +444,91 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_nextSampleEvents => {
+                            __Field::m_nextSampleBools => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_nextSampleEvents) {
+                                if _serde::__private::Option::is_some(&m_nextSampleBools) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "nextSampleEvents",
+                                            "nextSampleBools",
                                         ),
                                     );
                                 }
-                                m_nextSampleEvents = _serde::__private::Some(
+                                m_nextSampleBools = _serde::__private::Some(
                                     match __A::next_value::<Vec<i32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_nextSampleInts => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_nextSampleInts) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "nextSampleInts",
+                                        ),
+                                    );
+                                }
+                                m_nextSampleInts = _serde::__private::Some(
+                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_time => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_time) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("time"),
+                                    );
+                                }
+                                m_time = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isEnabled => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isEnabled) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isEnabled",
+                                        ),
+                                    );
+                                }
+                                m_isEnabled = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -541,47 +541,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_isEnabled = match m_isEnabled {
+                    let m_nextSampleEvents = match m_nextSampleEvents {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isEnabled",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_time = match m_time {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("time"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_nextSampleInts = match m_nextSampleInts {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "nextSampleInts",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_nextSampleBools = match m_nextSampleBools {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "nextSampleBools",
+                                    "nextSampleEvents",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -599,13 +565,47 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_nextSampleEvents = match m_nextSampleEvents {
+                    let m_nextSampleBools = match m_nextSampleBools {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "nextSampleEvents",
+                                    "nextSampleBools",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_nextSampleInts = match m_nextSampleInts {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "nextSampleInts",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_time = match m_time {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("time"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isEnabled = match m_isEnabled {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isEnabled",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

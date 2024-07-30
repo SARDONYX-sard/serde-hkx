@@ -133,10 +133,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_bindingType,
-                m_bitIndex,
-                m_variableIndex,
                 m_memberPath,
+                m_variableIndex,
+                m_bitIndex,
+                m_bindingType,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -160,10 +160,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "bindingType" => Ok(__Field::m_bindingType),
-                        "bitIndex" => Ok(__Field::m_bitIndex),
-                        "variableIndex" => Ok(__Field::m_variableIndex),
                         "memberPath" => Ok(__Field::m_memberPath),
+                        "variableIndex" => Ok(__Field::m_variableIndex),
+                        "bitIndex" => Ok(__Field::m_bitIndex),
+                        "bindingType" => Ok(__Field::m_bindingType),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -545,10 +545,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_bindingType: _serde::__private::Option<BindingType> = _serde::__private::None;
-                    let mut m_bitIndex: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_variableIndex: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_memberPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_variableIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_bitIndex: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_bindingType: _serde::__private::Option<BindingType> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -558,45 +558,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_bindingType => {
+                            __Field::m_memberPath => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_bindingType) {
+                                if _serde::__private::Option::is_some(&m_memberPath) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bindingType",
+                                            "memberPath",
                                         ),
                                     );
                                 }
-                                m_bindingType = _serde::__private::Some(
-                                    match __A::next_value::<BindingType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bitIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bitIndex) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bitIndex",
-                                        ),
-                                    );
-                                }
-                                m_bitIndex = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                m_memberPath = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -630,21 +606,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_memberPath => {
+                            __Field::m_bitIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_memberPath) {
+                                if _serde::__private::Option::is_some(&m_bitIndex) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "memberPath",
+                                            "bitIndex",
                                         ),
                                     );
                                 }
-                                m_memberPath = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_bitIndex = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bindingType => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bindingType) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bindingType",
+                                        ),
+                                    );
+                                }
+                                m_bindingType = _serde::__private::Some(
+                                    match __A::next_value::<BindingType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -657,24 +657,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_bindingType = match m_bindingType {
+                    let m_memberPath = match m_memberPath {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "bindingType",
+                                    "memberPath",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bitIndex = match m_bitIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("bitIndex"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -691,13 +681,23 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_memberPath = match m_memberPath {
+                    let m_bitIndex = match m_bitIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("bitIndex"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bindingType = match m_bindingType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "memberPath",
+                                    "bindingType",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

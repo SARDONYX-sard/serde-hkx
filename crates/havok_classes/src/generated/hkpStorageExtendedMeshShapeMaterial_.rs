@@ -79,9 +79,9 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_filterInfo,
-                m_userData,
-                m_friction,
                 m_restitution,
+                m_friction,
+                m_userData,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -106,9 +106,9 @@ const _: () = {
                 {
                     match __value {
                         "filterInfo" => Ok(__Field::m_filterInfo),
-                        "userData" => Ok(__Field::m_userData),
-                        "friction" => Ok(__Field::m_friction),
                         "restitution" => Ok(__Field::m_restitution),
+                        "friction" => Ok(__Field::m_friction),
+                        "userData" => Ok(__Field::m_userData),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -256,9 +256,9 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_filterInfo: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_friction: _serde::__private::Option<f16> = _serde::__private::None;
                     let mut m_restitution: _serde::__private::Option<f16> = _serde::__private::None;
+                    let mut m_friction: _serde::__private::Option<f16> = _serde::__private::None;
+                    let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -292,21 +292,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_userData => {
+                            __Field::m_restitution => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_userData) {
+                                if _serde::__private::Option::is_some(&m_restitution) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "userData",
+                                            "restitution",
                                         ),
                                     );
                                 }
-                                m_userData = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                m_restitution = _serde::__private::Some(
+                                    match __A::next_value::<f16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -340,21 +340,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_restitution => {
+                            __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_restitution) {
+                                if _serde::__private::Option::is_some(&m_userData) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "restitution",
+                                            "userData",
                                         ),
                                     );
                                 }
-                                m_restitution = _serde::__private::Some(
-                                    match __A::next_value::<f16>(&mut __map) {
+                                m_userData = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -379,12 +379,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_userData = match m_userData {
+                    let m_restitution = match m_restitution {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("userData"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "restitution",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -399,14 +401,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_restitution = match m_restitution {
+                    let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "restitution",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("userData"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

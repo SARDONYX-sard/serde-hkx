@@ -85,9 +85,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_flags,
-                m_items,
                 m_name,
+                m_items,
+                m_flags,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -111,9 +111,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "flags" => Ok(__Field::m_flags),
-                        "items" => Ok(__Field::m_items),
                         "name" => Ok(__Field::m_name),
+                        "items" => Ok(__Field::m_items),
+                        "flags" => Ok(__Field::m_flags),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -279,11 +279,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_flags: _serde::__private::Option<FlagValues> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
                     let mut m_items: _serde::__private::Option<
                         Vec<hkClassEnumItem<'de>>,
                     > = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<FlagValues> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -293,19 +293,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_flags => {
+                            __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_flags) {
+                                if _serde::__private::Option::is_some(&m_name) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
                                     );
                                 }
-                                m_flags = _serde::__private::Some(
-                                    match __A::next_value::<FlagValues>(&mut __map) {
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -339,19 +339,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
+                            __Field::m_flags => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_name) {
+                                if _serde::__private::Option::is_some(&m_flags) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
                                     );
                                 }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<CString<'de>>(&mut __map) {
+                                m_flags = _serde::__private::Some(
+                                    match __A::next_value::<FlagValues>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -364,12 +364,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_flags = match m_flags {
+                    let m_name = match m_name {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("flags"),
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -384,12 +384,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
+                    let m_flags = match m_flags {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                                <__A::Error as _serde::de::Error>::missing_field("flags"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

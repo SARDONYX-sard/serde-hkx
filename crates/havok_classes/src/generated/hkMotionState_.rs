@@ -119,16 +119,16 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_deactivationClass,
-                m_maxAngularVelocity,
-                m_maxLinearVelocity,
-                m_timeFactor,
-                m_angularDamping,
-                m_linearDamping,
-                m_objectRadius,
-                m_deltaAngle,
-                m_sweptTransform,
                 m_transform,
+                m_sweptTransform,
+                m_deltaAngle,
+                m_objectRadius,
+                m_linearDamping,
+                m_angularDamping,
+                m_timeFactor,
+                m_maxLinearVelocity,
+                m_maxAngularVelocity,
+                m_deactivationClass,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -152,16 +152,16 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "deactivationClass" => Ok(__Field::m_deactivationClass),
-                        "maxAngularVelocity" => Ok(__Field::m_maxAngularVelocity),
-                        "maxLinearVelocity" => Ok(__Field::m_maxLinearVelocity),
-                        "timeFactor" => Ok(__Field::m_timeFactor),
-                        "angularDamping" => Ok(__Field::m_angularDamping),
-                        "linearDamping" => Ok(__Field::m_linearDamping),
-                        "objectRadius" => Ok(__Field::m_objectRadius),
-                        "deltaAngle" => Ok(__Field::m_deltaAngle),
-                        "sweptTransform" => Ok(__Field::m_sweptTransform),
                         "transform" => Ok(__Field::m_transform),
+                        "sweptTransform" => Ok(__Field::m_sweptTransform),
+                        "deltaAngle" => Ok(__Field::m_deltaAngle),
+                        "objectRadius" => Ok(__Field::m_objectRadius),
+                        "linearDamping" => Ok(__Field::m_linearDamping),
+                        "angularDamping" => Ok(__Field::m_angularDamping),
+                        "timeFactor" => Ok(__Field::m_timeFactor),
+                        "maxLinearVelocity" => Ok(__Field::m_maxLinearVelocity),
+                        "maxAngularVelocity" => Ok(__Field::m_maxAngularVelocity),
+                        "deactivationClass" => Ok(__Field::m_deactivationClass),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -516,18 +516,18 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_deactivationClass: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_maxAngularVelocity: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_maxLinearVelocity: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_timeFactor: _serde::__private::Option<f16> = _serde::__private::None;
-                    let mut m_angularDamping: _serde::__private::Option<f16> = _serde::__private::None;
-                    let mut m_linearDamping: _serde::__private::Option<f16> = _serde::__private::None;
-                    let mut m_objectRadius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_deltaAngle: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_transform: _serde::__private::Option<Transform> = _serde::__private::None;
                     let mut m_sweptTransform: _serde::__private::Option<
                         hkSweptTransform,
                     > = _serde::__private::None;
-                    let mut m_transform: _serde::__private::Option<Transform> = _serde::__private::None;
+                    let mut m_deltaAngle: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_objectRadius: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_linearDamping: _serde::__private::Option<f16> = _serde::__private::None;
+                    let mut m_angularDamping: _serde::__private::Option<f16> = _serde::__private::None;
+                    let mut m_timeFactor: _serde::__private::Option<f16> = _serde::__private::None;
+                    let mut m_maxLinearVelocity: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_maxAngularVelocity: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_deactivationClass: _serde::__private::Option<u8> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -537,22 +537,190 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_deactivationClass => {
+                            __Field::m_transform => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_transform) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transform",
+                                        ),
+                                    );
+                                }
+                                m_transform = _serde::__private::Some(
+                                    match __A::next_value::<Transform>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_sweptTransform => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_sweptTransform) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sweptTransform",
+                                        ),
+                                    );
+                                }
+                                m_sweptTransform = _serde::__private::Some(
+                                    match __A::next_value::<hkSweptTransform>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_deltaAngle => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_deltaAngle) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "deltaAngle",
+                                        ),
+                                    );
+                                }
+                                m_deltaAngle = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_objectRadius => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_objectRadius) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "objectRadius",
+                                        ),
+                                    );
+                                }
+                                m_objectRadius = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_linearDamping => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_linearDamping) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "linearDamping",
+                                        ),
+                                    );
+                                }
+                                m_linearDamping = _serde::__private::Some(
+                                    match __A::next_value::<f16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_angularDamping => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_angularDamping) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "angularDamping",
+                                        ),
+                                    );
+                                }
+                                m_angularDamping = _serde::__private::Some(
+                                    match __A::next_value::<f16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_timeFactor => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_timeFactor) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "timeFactor",
+                                        ),
+                                    );
+                                }
+                                m_timeFactor = _serde::__private::Some(
+                                    match __A::next_value::<f16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxLinearVelocity => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_deactivationClass,
+                                    &m_maxLinearVelocity,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "deactivationClass",
+                                            "maxLinearVelocity",
                                         ),
                                     );
                                 }
-                                m_deactivationClass = _serde::__private::Some(
+                                m_maxLinearVelocity = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -589,191 +757,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxLinearVelocity => {
+                            __Field::m_deactivationClass => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_maxLinearVelocity,
+                                    &m_deactivationClass,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxLinearVelocity",
+                                            "deactivationClass",
                                         ),
                                     );
                                 }
-                                m_maxLinearVelocity = _serde::__private::Some(
+                                m_deactivationClass = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_timeFactor => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_timeFactor) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "timeFactor",
-                                        ),
-                                    );
-                                }
-                                m_timeFactor = _serde::__private::Some(
-                                    match __A::next_value::<f16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_angularDamping => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_angularDamping) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "angularDamping",
-                                        ),
-                                    );
-                                }
-                                m_angularDamping = _serde::__private::Some(
-                                    match __A::next_value::<f16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_linearDamping => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_linearDamping) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "linearDamping",
-                                        ),
-                                    );
-                                }
-                                m_linearDamping = _serde::__private::Some(
-                                    match __A::next_value::<f16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_objectRadius => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_objectRadius) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "objectRadius",
-                                        ),
-                                    );
-                                }
-                                m_objectRadius = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_deltaAngle => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_deltaAngle) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "deltaAngle",
-                                        ),
-                                    );
-                                }
-                                m_deltaAngle = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_sweptTransform => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_sweptTransform) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sweptTransform",
-                                        ),
-                                    );
-                                }
-                                m_sweptTransform = _serde::__private::Some(
-                                    match __A::next_value::<hkSweptTransform>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_transform => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_transform) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transform",
-                                        ),
-                                    );
-                                }
-                                m_transform = _serde::__private::Some(
-                                    match __A::next_value::<Transform>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -786,97 +786,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_deactivationClass = match m_deactivationClass {
+                    let m_transform = match m_transform {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "deactivationClass",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxAngularVelocity = match m_maxAngularVelocity {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxAngularVelocity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxLinearVelocity = match m_maxLinearVelocity {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxLinearVelocity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_timeFactor = match m_timeFactor {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "timeFactor",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_angularDamping = match m_angularDamping {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "angularDamping",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_linearDamping = match m_linearDamping {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "linearDamping",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_objectRadius = match m_objectRadius {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "objectRadius",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_deltaAngle = match m_deltaAngle {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "deltaAngle",
+                                    "transform",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -894,13 +810,97 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_transform = match m_transform {
+                    let m_deltaAngle = match m_deltaAngle {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transform",
+                                    "deltaAngle",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_objectRadius = match m_objectRadius {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "objectRadius",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_linearDamping = match m_linearDamping {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "linearDamping",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_angularDamping = match m_angularDamping {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "angularDamping",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_timeFactor = match m_timeFactor {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "timeFactor",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxLinearVelocity = match m_maxLinearVelocity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxLinearVelocity",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxAngularVelocity = match m_maxAngularVelocity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxAngularVelocity",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_deactivationClass = match m_deactivationClass {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "deactivationClass",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

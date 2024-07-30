@@ -136,13 +136,13 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
+                m_name,
                 m_enable,
-                m_alignWithGroundRotation,
-                m_errorOutTranslation,
-                m_legs,
                 m_controlData,
+                m_legs,
+                m_errorOutTranslation,
+                m_alignWithGroundRotation,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -167,15 +167,15 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
+                        "name" => Ok(__Field::m_name),
                         "enable" => Ok(__Field::m_enable),
+                        "controlData" => Ok(__Field::m_controlData),
+                        "legs" => Ok(__Field::m_legs),
+                        "errorOutTranslation" => Ok(__Field::m_errorOutTranslation),
                         "alignWithGroundRotation" => {
                             Ok(__Field::m_alignWithGroundRotation)
                         }
-                        "errorOutTranslation" => Ok(__Field::m_errorOutTranslation),
-                        "legs" => Ok(__Field::m_legs),
-                        "controlData" => Ok(__Field::m_controlData),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -364,18 +364,18 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_alignWithGroundRotation: _serde::__private::Option<
-                        Quaternion,
+                    let mut m_controlData: _serde::__private::Option<
+                        hkbFootIkControlData,
                     > = _serde::__private::None;
-                    let mut m_errorOutTranslation: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_legs: _serde::__private::Option<
                         Vec<hkbFootIkControlsModifierLeg>,
                     > = _serde::__private::None;
-                    let mut m_controlData: _serde::__private::Option<
-                        hkbFootIkControlData,
+                    let mut m_errorOutTranslation: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_alignWithGroundRotation: _serde::__private::Option<
+                        Quaternion,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
@@ -412,28 +412,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -449,6 +427,28 @@ const _: () = {
                                 }
                                 m_userData = _serde::__private::Some(
                                     match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -480,23 +480,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_alignWithGroundRotation => {
+                            __Field::m_controlData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_alignWithGroundRotation,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_controlData) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "alignWithGroundRotation",
+                                            "controlData",
                                         ),
                                     );
                                 }
-                                m_alignWithGroundRotation = _serde::__private::Some(
-                                    match __A::next_value::<Quaternion>(&mut __map) {
+                                m_controlData = _serde::__private::Some(
+                                    match __A::next_value::<hkbFootIkControlData>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_legs => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_legs) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("legs"),
+                                    );
+                                }
+                                m_legs = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkbFootIkControlsModifierLeg>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -532,45 +554,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_legs => {
+                            __Field::m_alignWithGroundRotation => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_legs) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("legs"),
-                                    );
-                                }
-                                m_legs = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkbFootIkControlsModifierLeg>,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_controlData => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_controlData) {
+                                if _serde::__private::Option::is_some(
+                                    &m_alignWithGroundRotation,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "controlData",
+                                            "alignWithGroundRotation",
                                         ),
                                     );
                                 }
-                                m_controlData = _serde::__private::Some(
-                                    match __A::next_value::<hkbFootIkControlData>(&mut __map) {
+                                m_alignWithGroundRotation = _serde::__private::Some(
+                                    match __A::next_value::<Quaternion>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -595,22 +595,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -625,14 +625,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_alignWithGroundRotation = match m_alignWithGroundRotation {
+                    let m_controlData = match m_controlData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "alignWithGroundRotation",
+                                    "controlData",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_legs = match m_legs {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("legs"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -649,23 +659,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_legs = match m_legs {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("legs"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_controlData = match m_controlData {
+                    let m_alignWithGroundRotation = match m_alignWithGroundRotation {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "controlData",
+                                    "alignWithGroundRotation",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

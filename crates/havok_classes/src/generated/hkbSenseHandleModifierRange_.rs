@@ -82,10 +82,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_ignoreHandle,
-                m_maxDistance,
-                m_minDistance,
                 m_event,
+                m_minDistance,
+                m_maxDistance,
+                m_ignoreHandle,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -109,10 +109,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "ignoreHandle" => Ok(__Field::m_ignoreHandle),
-                        "maxDistance" => Ok(__Field::m_maxDistance),
-                        "minDistance" => Ok(__Field::m_minDistance),
                         "event" => Ok(__Field::m_event),
+                        "minDistance" => Ok(__Field::m_minDistance),
+                        "maxDistance" => Ok(__Field::m_maxDistance),
+                        "ignoreHandle" => Ok(__Field::m_ignoreHandle),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -285,10 +285,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_ignoreHandle: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_maxDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_minDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_event: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+                    let mut m_minDistance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxDistance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_ignoreHandle: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -298,45 +298,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_ignoreHandle => {
+                            __Field::m_event => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_ignoreHandle) {
+                                if _serde::__private::Option::is_some(&m_event) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ignoreHandle",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("event"),
                                     );
                                 }
-                                m_ignoreHandle = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxDistance => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_maxDistance) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxDistance",
-                                        ),
-                                    );
-                                }
-                                m_maxDistance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_event = _serde::__private::Some(
+                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -370,19 +344,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_event => {
+                            __Field::m_maxDistance => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_event) {
+                                if _serde::__private::Option::is_some(&m_maxDistance) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("event"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxDistance",
+                                        ),
                                     );
                                 }
-                                m_event = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                m_maxDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_ignoreHandle => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_ignoreHandle) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "ignoreHandle",
+                                        ),
+                                    );
+                                }
+                                m_ignoreHandle = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -395,13 +395,23 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_ignoreHandle = match m_ignoreHandle {
+                    let m_event = match m_event {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("event"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_minDistance = match m_minDistance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "ignoreHandle",
+                                    "minDistance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -419,24 +429,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_minDistance = match m_minDistance {
+                    let m_ignoreHandle = match m_ignoreHandle {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "minDistance",
+                                    "ignoreHandle",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_event = match m_event {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("event"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

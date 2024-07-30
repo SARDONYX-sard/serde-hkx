@@ -118,14 +118,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_mappingType,
-                m_keepUnmappedLocal,
-                m_extractedMotionMapping,
-                m_unmappedBones,
-                m_chainMappings,
-                m_simpleMappings,
-                m_skeletonB,
                 m_skeletonA,
+                m_skeletonB,
+                m_simpleMappings,
+                m_chainMappings,
+                m_unmappedBones,
+                m_extractedMotionMapping,
+                m_keepUnmappedLocal,
+                m_mappingType,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -149,14 +149,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "mappingType" => Ok(__Field::m_mappingType),
-                        "keepUnmappedLocal" => Ok(__Field::m_keepUnmappedLocal),
-                        "extractedMotionMapping" => Ok(__Field::m_extractedMotionMapping),
-                        "unmappedBones" => Ok(__Field::m_unmappedBones),
-                        "chainMappings" => Ok(__Field::m_chainMappings),
-                        "simpleMappings" => Ok(__Field::m_simpleMappings),
-                        "skeletonB" => Ok(__Field::m_skeletonB),
                         "skeletonA" => Ok(__Field::m_skeletonA),
+                        "skeletonB" => Ok(__Field::m_skeletonB),
+                        "simpleMappings" => Ok(__Field::m_simpleMappings),
+                        "chainMappings" => Ok(__Field::m_chainMappings),
+                        "unmappedBones" => Ok(__Field::m_unmappedBones),
+                        "extractedMotionMapping" => Ok(__Field::m_extractedMotionMapping),
+                        "keepUnmappedLocal" => Ok(__Field::m_keepUnmappedLocal),
+                        "mappingType" => Ok(__Field::m_mappingType),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -464,20 +464,20 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_mappingType: _serde::__private::Option<MappingType> = _serde::__private::None;
-                    let mut m_keepUnmappedLocal: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_extractedMotionMapping: _serde::__private::Option<
-                        QsTransform,
-                    > = _serde::__private::None;
-                    let mut m_unmappedBones: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
-                    let mut m_chainMappings: _serde::__private::Option<
-                        Vec<hkaSkeletonMapperDataChainMapping>,
-                    > = _serde::__private::None;
+                    let mut m_skeletonA: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_skeletonB: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_simpleMappings: _serde::__private::Option<
                         Vec<hkaSkeletonMapperDataSimpleMapping>,
                     > = _serde::__private::None;
-                    let mut m_skeletonB: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_skeletonA: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_chainMappings: _serde::__private::Option<
+                        Vec<hkaSkeletonMapperDataChainMapping>,
+                    > = _serde::__private::None;
+                    let mut m_unmappedBones: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+                    let mut m_extractedMotionMapping: _serde::__private::Option<
+                        QsTransform,
+                    > = _serde::__private::None;
+                    let mut m_keepUnmappedLocal: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_mappingType: _serde::__private::Option<MappingType> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -487,21 +487,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_mappingType => {
+                            __Field::m_skeletonA => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_mappingType) {
+                                if _serde::__private::Option::is_some(&m_skeletonA) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "mappingType",
+                                            "skeletonA",
                                         ),
                                     );
                                 }
-                                m_mappingType = _serde::__private::Some(
-                                    match __A::next_value::<MappingType>(&mut __map) {
+                                m_skeletonA = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -511,99 +511,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_keepUnmappedLocal => {
+                            __Field::m_skeletonB => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_keepUnmappedLocal,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_skeletonB) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "keepUnmappedLocal",
+                                            "skeletonB",
                                         ),
                                     );
                                 }
-                                m_keepUnmappedLocal = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_extractedMotionMapping => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_extractedMotionMapping,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "extractedMotionMapping",
-                                        ),
-                                    );
-                                }
-                                m_extractedMotionMapping = _serde::__private::Some(
-                                    match __A::next_value::<QsTransform>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_unmappedBones => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_unmappedBones) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "unmappedBones",
-                                        ),
-                                    );
-                                }
-                                m_unmappedBones = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_chainMappings => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_chainMappings) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "chainMappings",
-                                        ),
-                                    );
-                                }
-                                m_chainMappings = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkaSkeletonMapperDataChainMapping>,
-                                    >(&mut __map) {
+                                m_skeletonB = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -639,21 +561,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_skeletonB => {
+                            __Field::m_chainMappings => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_skeletonB) {
+                                if _serde::__private::Option::is_some(&m_chainMappings) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "skeletonB",
+                                            "chainMappings",
                                         ),
                                     );
                                 }
-                                m_skeletonB = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_chainMappings = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkaSkeletonMapperDataChainMapping>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -663,21 +587,97 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_skeletonA => {
+                            __Field::m_unmappedBones => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_skeletonA) {
+                                if _serde::__private::Option::is_some(&m_unmappedBones) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "skeletonA",
+                                            "unmappedBones",
                                         ),
                                     );
                                 }
-                                m_skeletonA = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_unmappedBones = _serde::__private::Some(
+                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_extractedMotionMapping => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_extractedMotionMapping,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "extractedMotionMapping",
+                                        ),
+                                    );
+                                }
+                                m_extractedMotionMapping = _serde::__private::Some(
+                                    match __A::next_value::<QsTransform>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_keepUnmappedLocal => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_keepUnmappedLocal,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "keepUnmappedLocal",
+                                        ),
+                                    );
+                                }
+                                m_keepUnmappedLocal = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_mappingType => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_mappingType) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "mappingType",
+                                        ),
+                                    );
+                                }
+                                m_mappingType = _serde::__private::Some(
+                                    match __A::next_value::<MappingType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -690,73 +690,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_mappingType = match m_mappingType {
+                    let m_skeletonA = match m_skeletonA {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "mappingType",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_keepUnmappedLocal = match m_keepUnmappedLocal {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "keepUnmappedLocal",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_extractedMotionMapping = match m_extractedMotionMapping {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "extractedMotionMapping",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_unmappedBones = match m_unmappedBones {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "unmappedBones",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_chainMappings = match m_chainMappings {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "chainMappings",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_simpleMappings = match m_simpleMappings {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "simpleMappings",
+                                    "skeletonA",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -774,13 +714,73 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_skeletonA = match m_skeletonA {
+                    let m_simpleMappings = match m_simpleMappings {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "skeletonA",
+                                    "simpleMappings",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_chainMappings = match m_chainMappings {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "chainMappings",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_unmappedBones = match m_unmappedBones {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "unmappedBones",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_extractedMotionMapping = match m_extractedMotionMapping {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "extractedMotionMapping",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_keepUnmappedLocal = match m_keepUnmappedLocal {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "keepUnmappedLocal",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_mappingType = match m_mappingType {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "mappingType",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

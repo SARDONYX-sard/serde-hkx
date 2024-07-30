@@ -92,9 +92,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_numExpressions,
-                m_expressionToRpnIndex,
                 m_rpn,
+                m_expressionToRpnIndex,
+                m_numExpressions,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -118,9 +118,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "numExpressions" => Ok(__Field::m_numExpressions),
-                        "expressionToRpnIndex" => Ok(__Field::m_expressionToRpnIndex),
                         "rpn" => Ok(__Field::m_rpn),
+                        "expressionToRpnIndex" => Ok(__Field::m_expressionToRpnIndex),
+                        "numExpressions" => Ok(__Field::m_numExpressions),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -274,13 +274,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_numExpressions: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_expressionToRpnIndex: _serde::__private::Option<
-                        Vec<i32>,
-                    > = _serde::__private::None;
                     let mut m_rpn: _serde::__private::Option<
                         Vec<hkbCompiledExpressionSetToken>,
                     > = _serde::__private::None;
+                    let mut m_expressionToRpnIndex: _serde::__private::Option<
+                        Vec<i32>,
+                    > = _serde::__private::None;
+                    let mut m_numExpressions: _serde::__private::Option<i8> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -290,21 +290,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_numExpressions => {
+                            __Field::m_rpn => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_numExpressions) {
+                                if _serde::__private::Option::is_some(&m_rpn) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numExpressions",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("rpn"),
                                     );
                                 }
-                                m_numExpressions = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                m_rpn = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkbCompiledExpressionSetToken>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -340,21 +340,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_rpn => {
+                            __Field::m_numExpressions => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_rpn) {
+                                if _serde::__private::Option::is_some(&m_numExpressions) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("rpn"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numExpressions",
+                                        ),
                                     );
                                 }
-                                m_rpn = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkbCompiledExpressionSetToken>,
-                                    >(&mut __map) {
+                                m_numExpressions = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -367,14 +367,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_numExpressions = match m_numExpressions {
+                    let m_rpn = match m_rpn {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numExpressions",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("rpn"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -391,12 +389,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_rpn = match m_rpn {
+                    let m_numExpressions = match m_numExpressions {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("rpn"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numExpressions",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -86,10 +86,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_restitution,
-                m_friction,
-                m_rollingFrictionMultiplier,
                 m_responseType,
+                m_rollingFrictionMultiplier,
+                m_friction,
+                m_restitution,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -113,12 +113,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "restitution" => Ok(__Field::m_restitution),
-                        "friction" => Ok(__Field::m_friction),
+                        "responseType" => Ok(__Field::m_responseType),
                         "rollingFrictionMultiplier" => {
                             Ok(__Field::m_rollingFrictionMultiplier)
                         }
-                        "responseType" => Ok(__Field::m_responseType),
+                        "friction" => Ok(__Field::m_friction),
+                        "restitution" => Ok(__Field::m_restitution),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -293,12 +293,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_restitution: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_friction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_responseType: _serde::__private::Option<ResponseType> = _serde::__private::None;
                     let mut m_rollingFrictionMultiplier: _serde::__private::Option<
                         f16,
                     > = _serde::__private::None;
-                    let mut m_responseType: _serde::__private::Option<ResponseType> = _serde::__private::None;
+                    let mut m_friction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_restitution: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -308,45 +308,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_restitution => {
+                            __Field::m_responseType => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_restitution) {
+                                if _serde::__private::Option::is_some(&m_responseType) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "restitution",
+                                            "responseType",
                                         ),
                                     );
                                 }
-                                m_restitution = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_friction => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_friction) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "friction",
-                                        ),
-                                    );
-                                }
-                                m_friction = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_responseType = _serde::__private::Some(
+                                    match __A::next_value::<ResponseType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -382,21 +358,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_responseType => {
+                            __Field::m_friction => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_responseType) {
+                                if _serde::__private::Option::is_some(&m_friction) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "responseType",
+                                            "friction",
                                         ),
                                     );
                                 }
-                                m_responseType = _serde::__private::Some(
-                                    match __A::next_value::<ResponseType>(&mut __map) {
+                                m_friction = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_restitution => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_restitution) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "restitution",
+                                        ),
+                                    );
+                                }
+                                m_restitution = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -409,24 +409,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_restitution = match m_restitution {
+                    let m_responseType = match m_responseType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "restitution",
+                                    "responseType",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_friction = match m_friction {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("friction"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -443,13 +433,23 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_responseType = match m_responseType {
+                    let m_friction = match m_friction {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("friction"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_restitution = match m_restitution {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "responseType",
+                                    "restitution",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

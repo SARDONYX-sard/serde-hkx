@@ -101,10 +101,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_referenceFrameSamples,
-                m_duration,
-                m_forward,
                 m_up,
+                m_forward,
+                m_duration,
+                m_referenceFrameSamples,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -128,10 +128,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "referenceFrameSamples" => Ok(__Field::m_referenceFrameSamples),
-                        "duration" => Ok(__Field::m_duration),
-                        "forward" => Ok(__Field::m_forward),
                         "up" => Ok(__Field::m_up),
+                        "forward" => Ok(__Field::m_forward),
+                        "duration" => Ok(__Field::m_duration),
+                        "referenceFrameSamples" => Ok(__Field::m_referenceFrameSamples),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -308,12 +308,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_up: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_forward: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_referenceFrameSamples: _serde::__private::Option<
                         Vec<Vector4>,
                     > = _serde::__private::None;
-                    let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_forward: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_up: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -323,47 +323,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_referenceFrameSamples => {
+                            __Field::m_up => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_referenceFrameSamples,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_up) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "referenceFrameSamples",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("up"),
                                     );
                                 }
-                                m_referenceFrameSamples = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_duration => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_duration) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "duration",
-                                        ),
-                                    );
-                                }
-                                m_duration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_up = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -397,19 +369,47 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_up => {
+                            __Field::m_duration => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_up) {
+                                if _serde::__private::Option::is_some(&m_duration) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("up"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "duration",
+                                        ),
                                     );
                                 }
-                                m_up = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_duration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_referenceFrameSamples => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_referenceFrameSamples,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "referenceFrameSamples",
+                                        ),
+                                    );
+                                }
+                                m_referenceFrameSamples = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -422,24 +422,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_referenceFrameSamples = match m_referenceFrameSamples {
+                    let m_up = match m_up {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "referenceFrameSamples",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_duration = match m_duration {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("duration"),
+                                <__A::Error as _serde::de::Error>::missing_field("up"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -454,12 +442,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_up = match m_up {
+                    let m_duration = match m_duration {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("up"),
+                                <__A::Error as _serde::de::Error>::missing_field("duration"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_referenceFrameSamples = match m_referenceFrameSamples {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "referenceFrameSamples",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

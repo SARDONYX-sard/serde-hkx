@@ -108,13 +108,13 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_transformIndex,
-                m_vertexStartIndex,
-                m_indexType,
-                m_numPrimitives,
-                m_primitiveType,
-                m_material,
                 m_vertexBuffer,
+                m_material,
+                m_primitiveType,
+                m_numPrimitives,
+                m_indexType,
+                m_vertexStartIndex,
+                m_transformIndex,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -138,13 +138,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "transformIndex" => Ok(__Field::m_transformIndex),
-                        "vertexStartIndex" => Ok(__Field::m_vertexStartIndex),
-                        "indexType" => Ok(__Field::m_indexType),
-                        "numPrimitives" => Ok(__Field::m_numPrimitives),
-                        "primitiveType" => Ok(__Field::m_primitiveType),
-                        "material" => Ok(__Field::m_material),
                         "vertexBuffer" => Ok(__Field::m_vertexBuffer),
+                        "material" => Ok(__Field::m_material),
+                        "primitiveType" => Ok(__Field::m_primitiveType),
+                        "numPrimitives" => Ok(__Field::m_numPrimitives),
+                        "indexType" => Ok(__Field::m_indexType),
+                        "vertexStartIndex" => Ok(__Field::m_vertexStartIndex),
+                        "transformIndex" => Ok(__Field::m_transformIndex),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -435,15 +435,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_transformIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_vertexStartIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_vertexBuffer: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_material: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_primitiveType: _serde::__private::Option<PrimitiveType> = _serde::__private::None;
+                    let mut m_numPrimitives: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_indexType: _serde::__private::Option<
                         MeshSectionIndexType,
                     > = _serde::__private::None;
-                    let mut m_numPrimitives: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_primitiveType: _serde::__private::Option<PrimitiveType> = _serde::__private::None;
-                    let mut m_material: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_vertexBuffer: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_vertexStartIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_transformIndex: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -453,21 +453,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_transformIndex => {
+                            __Field::m_vertexBuffer => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_transformIndex) {
+                                if _serde::__private::Option::is_some(&m_vertexBuffer) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transformIndex",
+                                            "vertexBuffer",
                                         ),
                                     );
                                 }
-                                m_transformIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_vertexBuffer = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -477,20 +477,68 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vertexStartIndex => {
+                            __Field::m_material => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_vertexStartIndex) {
+                                if _serde::__private::Option::is_some(&m_material) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexStartIndex",
+                                            "material",
                                         ),
                                     );
                                 }
-                                m_vertexStartIndex = _serde::__private::Some(
+                                m_material = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_primitiveType => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_primitiveType) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "primitiveType",
+                                        ),
+                                    );
+                                }
+                                m_primitiveType = _serde::__private::Some(
+                                    match __A::next_value::<PrimitiveType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numPrimitives => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_numPrimitives) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numPrimitives",
+                                        ),
+                                    );
+                                }
+                                m_numPrimitives = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -525,20 +573,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_numPrimitives => {
+                            __Field::m_vertexStartIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_numPrimitives) {
+                                if _serde::__private::Option::is_some(&m_vertexStartIndex) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numPrimitives",
+                                            "vertexStartIndex",
                                         ),
                                     );
                                 }
-                                m_numPrimitives = _serde::__private::Some(
+                                m_vertexStartIndex = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -549,69 +597,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_primitiveType => {
+                            __Field::m_transformIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_primitiveType) {
+                                if _serde::__private::Option::is_some(&m_transformIndex) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "primitiveType",
+                                            "transformIndex",
                                         ),
                                     );
                                 }
-                                m_primitiveType = _serde::__private::Some(
-                                    match __A::next_value::<PrimitiveType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_material => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_material) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "material",
-                                        ),
-                                    );
-                                }
-                                m_material = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_vertexBuffer => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vertexBuffer) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexBuffer",
-                                        ),
-                                    );
-                                }
-                                m_vertexBuffer = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_transformIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -624,37 +624,35 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_transformIndex = match m_transformIndex {
+                    let m_vertexBuffer = match m_vertexBuffer {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transformIndex",
+                                    "vertexBuffer",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_vertexStartIndex = match m_vertexStartIndex {
+                    let m_material = match m_material {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexStartIndex",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("material"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_indexType = match m_indexType {
+                    let m_primitiveType = match m_primitiveType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "indexType",
+                                    "primitiveType",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -672,35 +670,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_primitiveType = match m_primitiveType {
+                    let m_indexType = match m_indexType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "primitiveType",
+                                    "indexType",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_material = match m_material {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("material"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vertexBuffer = match m_vertexBuffer {
+                    let m_vertexStartIndex = match m_vertexStartIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexBuffer",
+                                    "vertexStartIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transformIndex = match m_transformIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transformIndex",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

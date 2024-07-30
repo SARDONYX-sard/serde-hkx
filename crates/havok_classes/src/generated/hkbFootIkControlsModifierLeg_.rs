@@ -88,11 +88,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_isPlantedMS,
-                m_hitSomething,
-                m_verticalError,
-                m_ungroundedEvent,
                 m_groundPosition,
+                m_ungroundedEvent,
+                m_verticalError,
+                m_hitSomething,
+                m_isPlantedMS,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -116,11 +116,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "isPlantedMS" => Ok(__Field::m_isPlantedMS),
-                        "hitSomething" => Ok(__Field::m_hitSomething),
-                        "verticalError" => Ok(__Field::m_verticalError),
-                        "ungroundedEvent" => Ok(__Field::m_ungroundedEvent),
                         "groundPosition" => Ok(__Field::m_groundPosition),
+                        "ungroundedEvent" => Ok(__Field::m_ungroundedEvent),
+                        "verticalError" => Ok(__Field::m_verticalError),
+                        "hitSomething" => Ok(__Field::m_hitSomething),
+                        "isPlantedMS" => Ok(__Field::m_isPlantedMS),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -328,13 +328,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_isPlantedMS: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_hitSomething: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_verticalError: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_groundPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_ungroundedEvent: _serde::__private::Option<
                         hkbEventProperty,
                     > = _serde::__private::None;
-                    let mut m_groundPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_verticalError: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_hitSomething: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_isPlantedMS: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -344,69 +344,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_isPlantedMS => {
+                            __Field::m_groundPosition => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isPlantedMS) {
+                                if _serde::__private::Option::is_some(&m_groundPosition) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isPlantedMS",
+                                            "groundPosition",
                                         ),
                                     );
                                 }
-                                m_isPlantedMS = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_hitSomething => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_hitSomething) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "hitSomething",
-                                        ),
-                                    );
-                                }
-                                m_hitSomething = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_verticalError => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_verticalError) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "verticalError",
-                                        ),
-                                    );
-                                }
-                                m_verticalError = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_groundPosition = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -440,21 +392,69 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_groundPosition => {
+                            __Field::m_verticalError => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_groundPosition) {
+                                if _serde::__private::Option::is_some(&m_verticalError) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "groundPosition",
+                                            "verticalError",
                                         ),
                                     );
                                 }
-                                m_groundPosition = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_verticalError = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_hitSomething => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_hitSomething) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "hitSomething",
+                                        ),
+                                    );
+                                }
+                                m_hitSomething = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isPlantedMS => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isPlantedMS) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isPlantedMS",
+                                        ),
+                                    );
+                                }
+                                m_isPlantedMS = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -467,37 +467,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_isPlantedMS = match m_isPlantedMS {
+                    let m_groundPosition = match m_groundPosition {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isPlantedMS",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_hitSomething = match m_hitSomething {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "hitSomething",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_verticalError = match m_verticalError {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "verticalError",
+                                    "groundPosition",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -515,13 +491,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_groundPosition = match m_groundPosition {
+                    let m_verticalError = match m_verticalError {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "groundPosition",
+                                    "verticalError",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_hitSomething = match m_hitSomething {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "hitSomething",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isPlantedMS = match m_isPlantedMS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isPlantedMS",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

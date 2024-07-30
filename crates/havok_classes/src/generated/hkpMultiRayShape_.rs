@@ -87,8 +87,8 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_rayPenetrationDistance,
                 m_rays,
+                m_rayPenetrationDistance,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -113,8 +113,8 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
-                        "rayPenetrationDistance" => Ok(__Field::m_rayPenetrationDistance),
                         "rays" => Ok(__Field::m_rays),
+                        "rayPenetrationDistance" => Ok(__Field::m_rayPenetrationDistance),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -237,10 +237,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_rayPenetrationDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_rays: _serde::__private::Option<
                         Vec<hkpMultiRayShapeRay>,
                     > = _serde::__private::None;
+                    let mut m_rayPenetrationDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -265,6 +265,30 @@ const _: () = {
                                 }
                                 m_userData = _serde::__private::Some(
                                     match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_rays => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_rays) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("rays"),
+                                    );
+                                }
+                                m_rays = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkpMultiRayShapeRay>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -300,30 +324,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_rays => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rays) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("rays"),
-                                    );
-                                }
-                                m_rays = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkpMultiRayShapeRay>,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             _ => {}
                         }
                     }
@@ -337,6 +337,16 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
+                    let m_rays = match m_rays {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("rays"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
                     let m_rayPenetrationDistance = match m_rayPenetrationDistance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -345,16 +355,6 @@ const _: () = {
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "rayPenetrationDistance",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_rays = match m_rays {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("rays"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

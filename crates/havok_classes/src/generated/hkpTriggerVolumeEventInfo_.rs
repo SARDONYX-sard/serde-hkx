@@ -76,9 +76,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_operation,
-                m_body,
                 m_sortValue,
+                m_body,
+                m_operation,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -102,9 +102,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "operation" => Ok(__Field::m_operation),
-                        "body" => Ok(__Field::m_body),
                         "sortValue" => Ok(__Field::m_sortValue),
+                        "body" => Ok(__Field::m_body),
+                        "operation" => Ok(__Field::m_operation),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -248,9 +248,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_operation: _serde::__private::Option<Operation> = _serde::__private::None;
-                    let mut m_body: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_sortValue: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_body: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_operation: _serde::__private::Option<Operation> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -260,21 +260,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_operation => {
+                            __Field::m_sortValue => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_operation) {
+                                if _serde::__private::Option::is_some(&m_sortValue) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "operation",
+                                            "sortValue",
                                         ),
                                     );
                                 }
-                                m_operation = _serde::__private::Some(
-                                    match __A::next_value::<Operation>(&mut __map) {
+                                m_sortValue = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -306,21 +306,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_sortValue => {
+                            __Field::m_operation => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_sortValue) {
+                                if _serde::__private::Option::is_some(&m_operation) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sortValue",
+                                            "operation",
                                         ),
                                     );
                                 }
-                                m_sortValue = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                m_operation = _serde::__private::Some(
+                                    match __A::next_value::<Operation>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -333,13 +333,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_operation = match m_operation {
+                    let m_sortValue = match m_sortValue {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "operation",
+                                    "sortValue",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -355,13 +355,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_sortValue = match m_sortValue {
+                    let m_operation = match m_operation {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "sortValue",
+                                    "operation",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

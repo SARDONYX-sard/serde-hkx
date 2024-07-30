@@ -98,12 +98,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_postpad,
-                m_type,
                 m_prepad,
-                m_pad256,
-                m_collisionLookupTable,
+                m_type,
+                m_postpad,
                 m_nextFreeSystemGroup,
+                m_collisionLookupTable,
+                m_pad256,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -127,12 +127,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "postpad" => Ok(__Field::m_postpad),
-                        "type" => Ok(__Field::m_type),
                         "prepad" => Ok(__Field::m_prepad),
-                        "pad256" => Ok(__Field::m_pad256),
-                        "collisionLookupTable" => Ok(__Field::m_collisionLookupTable),
+                        "type" => Ok(__Field::m_type),
+                        "postpad" => Ok(__Field::m_postpad),
                         "nextFreeSystemGroup" => Ok(__Field::m_nextFreeSystemGroup),
+                        "collisionLookupTable" => Ok(__Field::m_collisionLookupTable),
+                        "pad256" => Ok(__Field::m_pad256),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -280,14 +280,14 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_postpad: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
-                    let mut m_type: _serde::__private::Option<hkpFilterType> = _serde::__private::None;
                     let mut m_prepad: _serde::__private::Option<[u32; 2usize]> = _serde::__private::None;
-                    let mut m_pad256: _serde::__private::Option<[Vector4; 4usize]> = _serde::__private::None;
+                    let mut m_type: _serde::__private::Option<hkpFilterType> = _serde::__private::None;
+                    let mut m_postpad: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
+                    let mut m_nextFreeSystemGroup: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_collisionLookupTable: _serde::__private::Option<
                         [u32; 32usize],
                     > = _serde::__private::None;
-                    let mut m_nextFreeSystemGroup: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_pad256: _serde::__private::Option<[Vector4; 4usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -297,21 +297,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_postpad => {
+                            __Field::m_prepad => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_postpad) {
+                                if _serde::__private::Option::is_some(&m_prepad) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "postpad",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("prepad"),
                                     );
                                 }
-                                m_postpad = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                m_prepad = _serde::__private::Some(
+                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -343,67 +341,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_prepad => {
+                            __Field::m_postpad => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_prepad) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("prepad"),
-                                    );
-                                }
-                                m_prepad = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_pad256 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_pad256) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("pad256"),
-                                    );
-                                }
-                                m_pad256 = _serde::__private::Some(
-                                    match __A::next_value::<[Vector4; 4usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_collisionLookupTable => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_collisionLookupTable,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_postpad) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "collisionLookupTable",
+                                            "postpad",
                                         ),
                                     );
                                 }
-                                m_collisionLookupTable = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 32usize]>(&mut __map) {
+                                m_postpad = _serde::__private::Some(
+                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -439,15 +391,63 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_collisionLookupTable => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_collisionLookupTable,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "collisionLookupTable",
+                                        ),
+                                    );
+                                }
+                                m_collisionLookupTable = _serde::__private::Some(
+                                    match __A::next_value::<[u32; 32usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_pad256 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_pad256) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("pad256"),
+                                    );
+                                }
+                                m_pad256 = _serde::__private::Some(
+                                    match __A::next_value::<[Vector4; 4usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_postpad = match m_postpad {
+                    let m_prepad = match m_prepad {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("postpad"),
+                                <__A::Error as _serde::de::Error>::missing_field("prepad"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -462,22 +462,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_prepad = match m_prepad {
+                    let m_postpad = match m_postpad {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("prepad"),
+                                <__A::Error as _serde::de::Error>::missing_field("postpad"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_pad256 = match m_pad256 {
+                    let m_nextFreeSystemGroup = match m_nextFreeSystemGroup {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("pad256"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "nextFreeSystemGroup",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -494,14 +496,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_nextFreeSystemGroup = match m_nextFreeSystemGroup {
+                    let m_pad256 = match m_pad256 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "nextFreeSystemGroup",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("pad256"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

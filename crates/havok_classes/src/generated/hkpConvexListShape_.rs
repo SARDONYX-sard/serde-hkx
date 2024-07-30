@@ -118,11 +118,11 @@ const _: () = {
             enum __Field {
                 m_userData,
                 m_radius,
-                m_childShapes,
-                m_useCachedAabb,
-                m_aabbCenter,
-                m_aabbHalfExtents,
                 m_minDistanceToUseConvexHullForGetClosestPoints,
+                m_aabbHalfExtents,
+                m_aabbCenter,
+                m_useCachedAabb,
+                m_childShapes,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -148,13 +148,13 @@ const _: () = {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
                         "radius" => Ok(__Field::m_radius),
-                        "childShapes" => Ok(__Field::m_childShapes),
-                        "useCachedAabb" => Ok(__Field::m_useCachedAabb),
-                        "aabbCenter" => Ok(__Field::m_aabbCenter),
-                        "aabbHalfExtents" => Ok(__Field::m_aabbHalfExtents),
                         "minDistanceToUseConvexHullForGetClosestPoints" => {
                             Ok(__Field::m_minDistanceToUseConvexHullForGetClosestPoints)
                         }
+                        "aabbHalfExtents" => Ok(__Field::m_aabbHalfExtents),
+                        "aabbCenter" => Ok(__Field::m_aabbCenter),
+                        "useCachedAabb" => Ok(__Field::m_useCachedAabb),
+                        "childShapes" => Ok(__Field::m_childShapes),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -370,13 +370,13 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_childShapes: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_useCachedAabb: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_minDistanceToUseConvexHullForGetClosestPoints: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
+                    let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_useCachedAabb: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_childShapes: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -432,69 +432,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_childShapes => {
+                            __Field::m_minDistanceToUseConvexHullForGetClosestPoints => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_childShapes) {
+                                if _serde::__private::Option::is_some(
+                                    &m_minDistanceToUseConvexHullForGetClosestPoints,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "childShapes",
+                                            "minDistanceToUseConvexHullForGetClosestPoints",
                                         ),
                                     );
                                 }
-                                m_childShapes = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_useCachedAabb => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_useCachedAabb) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "useCachedAabb",
-                                        ),
-                                    );
-                                }
-                                m_useCachedAabb = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_aabbCenter => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_aabbCenter) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "aabbCenter",
-                                        ),
-                                    );
-                                }
-                                m_aabbCenter = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_minDistanceToUseConvexHullForGetClosestPoints = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -528,23 +482,69 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_minDistanceToUseConvexHullForGetClosestPoints => {
+                            __Field::m_aabbCenter => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_minDistanceToUseConvexHullForGetClosestPoints,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_aabbCenter) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "minDistanceToUseConvexHullForGetClosestPoints",
+                                            "aabbCenter",
                                         ),
                                     );
                                 }
-                                m_minDistanceToUseConvexHullForGetClosestPoints = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_aabbCenter = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_useCachedAabb => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_useCachedAabb) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "useCachedAabb",
+                                        ),
+                                    );
+                                }
+                                m_useCachedAabb = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_childShapes => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_childShapes) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "childShapes",
+                                        ),
+                                    );
+                                }
+                                m_childShapes = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -577,37 +577,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_childShapes = match m_childShapes {
+                    let m_minDistanceToUseConvexHullForGetClosestPoints = match m_minDistanceToUseConvexHullForGetClosestPoints {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "childShapes",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_useCachedAabb = match m_useCachedAabb {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "useCachedAabb",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_aabbCenter = match m_aabbCenter {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "aabbCenter",
+                                    "minDistanceToUseConvexHullForGetClosestPoints",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -625,13 +601,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_minDistanceToUseConvexHullForGetClosestPoints = match m_minDistanceToUseConvexHullForGetClosestPoints {
+                    let m_aabbCenter = match m_aabbCenter {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "minDistanceToUseConvexHullForGetClosestPoints",
+                                    "aabbCenter",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_useCachedAabb = match m_useCachedAabb {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "useCachedAabb",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_childShapes = match m_childShapes {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "childShapes",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

@@ -117,15 +117,15 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_endOffset,
-                m_importsOffset,
-                m_exportsOffset,
-                m_virtualFixupsOffset,
-                m_globalFixupsOffset,
-                m_localFixupsOffset,
-                m_absoluteDataStart,
-                m_nullByte,
                 m_sectionTag,
+                m_nullByte,
+                m_absoluteDataStart,
+                m_localFixupsOffset,
+                m_globalFixupsOffset,
+                m_virtualFixupsOffset,
+                m_exportsOffset,
+                m_importsOffset,
+                m_endOffset,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -149,15 +149,15 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "endOffset" => Ok(__Field::m_endOffset),
-                        "importsOffset" => Ok(__Field::m_importsOffset),
-                        "exportsOffset" => Ok(__Field::m_exportsOffset),
-                        "virtualFixupsOffset" => Ok(__Field::m_virtualFixupsOffset),
-                        "globalFixupsOffset" => Ok(__Field::m_globalFixupsOffset),
-                        "localFixupsOffset" => Ok(__Field::m_localFixupsOffset),
-                        "absoluteDataStart" => Ok(__Field::m_absoluteDataStart),
-                        "nullByte" => Ok(__Field::m_nullByte),
                         "sectionTag" => Ok(__Field::m_sectionTag),
+                        "nullByte" => Ok(__Field::m_nullByte),
+                        "absoluteDataStart" => Ok(__Field::m_absoluteDataStart),
+                        "localFixupsOffset" => Ok(__Field::m_localFixupsOffset),
+                        "globalFixupsOffset" => Ok(__Field::m_globalFixupsOffset),
+                        "virtualFixupsOffset" => Ok(__Field::m_virtualFixupsOffset),
+                        "exportsOffset" => Ok(__Field::m_exportsOffset),
+                        "importsOffset" => Ok(__Field::m_importsOffset),
+                        "endOffset" => Ok(__Field::m_endOffset),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -484,15 +484,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_endOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_importsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_exportsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_virtualFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_globalFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_localFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_absoluteDataStart: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_nullByte: _serde::__private::Option<char> = _serde::__private::None;
                     let mut m_sectionTag: _serde::__private::Option<[char; 19usize]> = _serde::__private::None;
+                    let mut m_nullByte: _serde::__private::Option<char> = _serde::__private::None;
+                    let mut m_absoluteDataStart: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_localFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_globalFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_virtualFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_exportsOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_importsOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_endOffset: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -502,21 +502,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_endOffset => {
+                            __Field::m_sectionTag => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_endOffset) {
+                                if _serde::__private::Option::is_some(&m_sectionTag) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "endOffset",
+                                            "sectionTag",
                                         ),
                                     );
                                 }
-                                m_endOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_sectionTag = _serde::__private::Some(
+                                    match __A::next_value::<[char; 19usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -526,21 +526,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_importsOffset => {
+                            __Field::m_nullByte => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_importsOffset) {
+                                if _serde::__private::Option::is_some(&m_nullByte) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "importsOffset",
+                                            "nullByte",
                                         ),
                                     );
                                 }
-                                m_importsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_nullByte = _serde::__private::Some(
+                                    match __A::next_value::<char>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -550,72 +550,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_exportsOffset => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_exportsOffset) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "exportsOffset",
-                                        ),
-                                    );
-                                }
-                                m_exportsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_virtualFixupsOffset => {
+                            __Field::m_absoluteDataStart => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_virtualFixupsOffset,
+                                    &m_absoluteDataStart,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "virtualFixupsOffset",
+                                            "absoluteDataStart",
                                         ),
                                     );
                                 }
-                                m_virtualFixupsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_globalFixupsOffset => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_globalFixupsOffset,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "globalFixupsOffset",
-                                        ),
-                                    );
-                                }
-                                m_globalFixupsOffset = _serde::__private::Some(
+                                m_absoluteDataStart = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -652,22 +602,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_absoluteDataStart => {
+                            __Field::m_globalFixupsOffset => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_absoluteDataStart,
+                                    &m_globalFixupsOffset,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "absoluteDataStart",
+                                            "globalFixupsOffset",
                                         ),
                                     );
                                 }
-                                m_absoluteDataStart = _serde::__private::Some(
+                                m_globalFixupsOffset = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -678,21 +628,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_nullByte => {
+                            __Field::m_virtualFixupsOffset => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_nullByte) {
+                                if _serde::__private::Option::is_some(
+                                    &m_virtualFixupsOffset,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "nullByte",
+                                            "virtualFixupsOffset",
                                         ),
                                     );
                                 }
-                                m_nullByte = _serde::__private::Some(
-                                    match __A::next_value::<char>(&mut __map) {
+                                m_virtualFixupsOffset = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -702,21 +654,69 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_sectionTag => {
+                            __Field::m_exportsOffset => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_sectionTag) {
+                                if _serde::__private::Option::is_some(&m_exportsOffset) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sectionTag",
+                                            "exportsOffset",
                                         ),
                                     );
                                 }
-                                m_sectionTag = _serde::__private::Some(
-                                    match __A::next_value::<[char; 19usize]>(&mut __map) {
+                                m_exportsOffset = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_importsOffset => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_importsOffset) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "importsOffset",
+                                        ),
+                                    );
+                                }
+                                m_importsOffset = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_endOffset => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_endOffset) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "endOffset",
+                                        ),
+                                    );
+                                }
+                                m_endOffset = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -729,61 +729,35 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_endOffset = match m_endOffset {
+                    let m_sectionTag = match m_sectionTag {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "endOffset",
+                                    "sectionTag",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_importsOffset = match m_importsOffset {
+                    let m_nullByte = match m_nullByte {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "importsOffset",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("nullByte"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_exportsOffset = match m_exportsOffset {
+                    let m_absoluteDataStart = match m_absoluteDataStart {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "exportsOffset",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_virtualFixupsOffset = match m_virtualFixupsOffset {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "virtualFixupsOffset",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_globalFixupsOffset = match m_globalFixupsOffset {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "globalFixupsOffset",
+                                    "absoluteDataStart",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -801,35 +775,61 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_absoluteDataStart = match m_absoluteDataStart {
+                    let m_globalFixupsOffset = match m_globalFixupsOffset {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "absoluteDataStart",
+                                    "globalFixupsOffset",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_nullByte = match m_nullByte {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("nullByte"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_sectionTag = match m_sectionTag {
+                    let m_virtualFixupsOffset = match m_virtualFixupsOffset {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "sectionTag",
+                                    "virtualFixupsOffset",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_exportsOffset = match m_exportsOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "exportsOffset",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_importsOffset = match m_importsOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "importsOffset",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_endOffset = match m_endOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "endOffset",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

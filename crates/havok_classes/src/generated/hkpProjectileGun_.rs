@@ -115,10 +115,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_keyboardKey,
                 m_name,
-                m_reloadTime,
+                m_keyboardKey,
                 m_maxProjectiles,
+                m_reloadTime,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -142,10 +142,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "keyboardKey" => Ok(__Field::m_keyboardKey),
                         "name" => Ok(__Field::m_name),
-                        "reloadTime" => Ok(__Field::m_reloadTime),
+                        "keyboardKey" => Ok(__Field::m_keyboardKey),
                         "maxProjectiles" => Ok(__Field::m_maxProjectiles),
+                        "reloadTime" => Ok(__Field::m_reloadTime),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -373,10 +373,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_keyboardKey: _serde::__private::Option<KeyboardKey> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_reloadTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_keyboardKey: _serde::__private::Option<KeyboardKey> = _serde::__private::None;
                     let mut m_maxProjectiles: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_reloadTime: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -386,30 +386,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_keyboardKey => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_keyboardKey) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "keyboardKey",
-                                        ),
-                                    );
-                                }
-                                m_keyboardKey = _serde::__private::Some(
-                                    match __A::next_value::<KeyboardKey>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -432,21 +408,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_reloadTime => {
+                            __Field::m_keyboardKey => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_reloadTime) {
+                                if _serde::__private::Option::is_some(&m_keyboardKey) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "reloadTime",
+                                            "keyboardKey",
                                         ),
                                     );
                                 }
-                                m_reloadTime = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_keyboardKey = _serde::__private::Some(
+                                    match __A::next_value::<KeyboardKey>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -480,9 +456,43 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_reloadTime => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_reloadTime) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "reloadTime",
+                                        ),
+                                    );
+                                }
+                                m_reloadTime = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
                     let m_keyboardKey = match m_keyboardKey {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -495,12 +505,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
+                    let m_maxProjectiles = match m_maxProjectiles {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxProjectiles",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -512,18 +524,6 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "reloadTime",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxProjectiles = match m_maxProjectiles {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxProjectiles",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

@@ -125,14 +125,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_describedVersion,
-                m_flags,
-                m_declaredMembers,
-                m_declaredEnums,
-                m_numImplementedInterfaces,
-                m_objectSize,
-                m_parent,
                 m_name,
+                m_parent,
+                m_objectSize,
+                m_numImplementedInterfaces,
+                m_declaredEnums,
+                m_declaredMembers,
+                m_flags,
+                m_describedVersion,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -156,16 +156,16 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "describedVersion" => Ok(__Field::m_describedVersion),
-                        "flags" => Ok(__Field::m_flags),
-                        "declaredMembers" => Ok(__Field::m_declaredMembers),
-                        "declaredEnums" => Ok(__Field::m_declaredEnums),
+                        "name" => Ok(__Field::m_name),
+                        "parent" => Ok(__Field::m_parent),
+                        "objectSize" => Ok(__Field::m_objectSize),
                         "numImplementedInterfaces" => {
                             Ok(__Field::m_numImplementedInterfaces)
                         }
-                        "objectSize" => Ok(__Field::m_objectSize),
-                        "parent" => Ok(__Field::m_parent),
-                        "name" => Ok(__Field::m_name),
+                        "declaredEnums" => Ok(__Field::m_declaredEnums),
+                        "declaredMembers" => Ok(__Field::m_declaredMembers),
+                        "flags" => Ok(__Field::m_flags),
+                        "describedVersion" => Ok(__Field::m_describedVersion),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -507,18 +507,18 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_describedVersion: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<FlagValues> = _serde::__private::None;
-                    let mut m_declaredMembers: _serde::__private::Option<
-                        Vec<hkClassMember<'de>>,
-                    > = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
+                    let mut m_parent: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_objectSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numImplementedInterfaces: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_declaredEnums: _serde::__private::Option<
                         Vec<hkClassEnum<'de>>,
                     > = _serde::__private::None;
-                    let mut m_numImplementedInterfaces: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_objectSize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_parent: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
+                    let mut m_declaredMembers: _serde::__private::Option<
+                        Vec<hkClassMember<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<FlagValues> = _serde::__private::None;
+                    let mut m_describedVersion: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -528,93 +528,65 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_describedVersion => {
+                            __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_describedVersion) {
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_parent => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_parent) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("parent"),
+                                    );
+                                }
+                                m_parent = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_objectSize => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_objectSize) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "describedVersion",
+                                            "objectSize",
                                         ),
                                     );
                                 }
-                                m_describedVersion = _serde::__private::Some(
+                                m_objectSize = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_flags => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_flags) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
-                                    );
-                                }
-                                m_flags = _serde::__private::Some(
-                                    match __A::next_value::<FlagValues>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_declaredMembers => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_declaredMembers) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "declaredMembers",
-                                        ),
-                                    );
-                                }
-                                m_declaredMembers = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkClassMember<'de>>,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_declaredEnums => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_declaredEnums) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "declaredEnums",
-                                        ),
-                                    );
-                                }
-                                m_declaredEnums = _serde::__private::Some(
-                                    match __A::next_value::<Vec<hkClassEnum<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -650,65 +622,93 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_objectSize => {
+                            __Field::m_declaredEnums => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_objectSize) {
+                                if _serde::__private::Option::is_some(&m_declaredEnums) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "objectSize",
+                                            "declaredEnums",
                                         ),
                                     );
                                 }
-                                m_objectSize = _serde::__private::Some(
+                                m_declaredEnums = _serde::__private::Some(
+                                    match __A::next_value::<Vec<hkClassEnum<'de>>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_declaredMembers => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_declaredMembers) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "declaredMembers",
+                                        ),
+                                    );
+                                }
+                                m_declaredMembers = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkClassMember<'de>>,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_flags => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_flags) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                                    );
+                                }
+                                m_flags = _serde::__private::Some(
+                                    match __A::next_value::<FlagValues>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_describedVersion => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_describedVersion) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "describedVersion",
+                                        ),
+                                    );
+                                }
+                                m_describedVersion = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_parent => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_parent) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("parent"),
-                                    );
-                                }
-                                m_parent = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<CString<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -721,47 +721,33 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_describedVersion = match m_describedVersion {
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_parent = match m_parent {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("parent"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_objectSize = match m_objectSize {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "describedVersion",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_flags = match m_flags {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("flags"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_declaredMembers = match m_declaredMembers {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "declaredMembers",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_declaredEnums = match m_declaredEnums {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "declaredEnums",
+                                    "objectSize",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -779,34 +765,48 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_objectSize = match m_objectSize {
+                    let m_declaredEnums = match m_declaredEnums {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "objectSize",
+                                    "declaredEnums",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_parent = match m_parent {
+                    let m_declaredMembers = match m_declaredMembers {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("parent"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "declaredMembers",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
+                    let m_flags = match m_flags {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                                <__A::Error as _serde::de::Error>::missing_field("flags"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_describedVersion = match m_describedVersion {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "describedVersion",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

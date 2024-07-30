@@ -83,9 +83,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_defaultEventMode,
-                m_stringData,
                 m_worldUpWS,
+                m_stringData,
+                m_defaultEventMode,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -109,9 +109,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "defaultEventMode" => Ok(__Field::m_defaultEventMode),
-                        "stringData" => Ok(__Field::m_stringData),
                         "worldUpWS" => Ok(__Field::m_worldUpWS),
+                        "stringData" => Ok(__Field::m_stringData),
+                        "defaultEventMode" => Ok(__Field::m_defaultEventMode),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -258,9 +258,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_defaultEventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_worldUpWS: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_defaultEventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -270,21 +270,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_defaultEventMode => {
+                            __Field::m_worldUpWS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_defaultEventMode) {
+                                if _serde::__private::Option::is_some(&m_worldUpWS) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "defaultEventMode",
+                                            "worldUpWS",
                                         ),
                                     );
                                 }
-                                m_defaultEventMode = _serde::__private::Some(
-                                    match __A::next_value::<EventMode>(&mut __map) {
+                                m_worldUpWS = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -318,21 +318,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_worldUpWS => {
+                            __Field::m_defaultEventMode => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_worldUpWS) {
+                                if _serde::__private::Option::is_some(&m_defaultEventMode) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "worldUpWS",
+                                            "defaultEventMode",
                                         ),
                                     );
                                 }
-                                m_worldUpWS = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_defaultEventMode = _serde::__private::Some(
+                                    match __A::next_value::<EventMode>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -345,13 +345,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_defaultEventMode = match m_defaultEventMode {
+                    let m_worldUpWS = match m_worldUpWS {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "defaultEventMode",
+                                    "worldUpWS",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -369,13 +369,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_worldUpWS = match m_worldUpWS {
+                    let m_defaultEventMode = match m_defaultEventMode {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "worldUpWS",
+                                    "defaultEventMode",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

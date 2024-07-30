@@ -76,9 +76,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_operator,
-                m_type,
                 m_data,
+                m_type,
+                m_operator,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -102,9 +102,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "operator" => Ok(__Field::m_operator),
-                        "type" => Ok(__Field::m_type),
                         "data" => Ok(__Field::m_data),
+                        "type" => Ok(__Field::m_type),
+                        "operator" => Ok(__Field::m_operator),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -242,9 +242,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_operator: _serde::__private::Option<Operator> = _serde::__private::None;
-                    let mut m_type: _serde::__private::Option<TokenType> = _serde::__private::None;
                     let mut m_data: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_type: _serde::__private::Option<TokenType> = _serde::__private::None;
+                    let mut m_operator: _serde::__private::Option<Operator> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -254,21 +254,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_operator => {
+                            __Field::m_data => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_operator) {
+                                if _serde::__private::Option::is_some(&m_data) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "operator",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
                                     );
                                 }
-                                m_operator = _serde::__private::Some(
-                                    match __A::next_value::<Operator>(&mut __map) {
+                                m_data = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -300,19 +298,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_data => {
+                            __Field::m_operator => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_data) {
+                                if _serde::__private::Option::is_some(&m_operator) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "operator",
+                                        ),
                                     );
                                 }
-                                m_data = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_operator = _serde::__private::Some(
+                                    match __A::next_value::<Operator>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -325,12 +325,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_operator = match m_operator {
+                    let m_data = match m_data {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("operator"),
+                                <__A::Error as _serde::de::Error>::missing_field("data"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -345,12 +345,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_data = match m_data {
+                    let m_operator = match m_operator {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("data"),
+                                <__A::Error as _serde::de::Error>::missing_field("operator"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

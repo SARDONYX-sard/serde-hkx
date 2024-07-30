@@ -86,9 +86,9 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_strength,
-                m_atoms,
                 m_constraintData,
+                m_atoms,
+                m_strength,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -113,9 +113,9 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
-                        "strength" => Ok(__Field::m_strength),
-                        "atoms" => Ok(__Field::m_atoms),
                         "constraintData" => Ok(__Field::m_constraintData),
+                        "atoms" => Ok(__Field::m_atoms),
+                        "strength" => Ok(__Field::m_strength),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -260,9 +260,9 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_strength: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
                     let mut m_constraintData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
+                    let mut m_strength: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -296,21 +296,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_strength => {
+                            __Field::m_constraintData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_strength) {
+                                if _serde::__private::Option::is_some(&m_constraintData) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "strength",
+                                            "constraintData",
                                         ),
                                     );
                                 }
-                                m_strength = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_constraintData = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -342,21 +342,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_constraintData => {
+                            __Field::m_strength => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_constraintData) {
+                                if _serde::__private::Option::is_some(&m_strength) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "constraintData",
+                                            "strength",
                                         ),
                                     );
                                 }
-                                m_constraintData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_strength = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -379,12 +379,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_strength = match m_strength {
+                    let m_constraintData = match m_constraintData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("strength"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "constraintData",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -399,14 +401,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_constraintData = match m_constraintData {
+                    let m_strength = match m_strength {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "constraintData",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("strength"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -79,8 +79,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_variableIndex,
                 m_samples,
+                m_variableIndex,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -104,8 +104,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "variableIndex" => Ok(__Field::m_variableIndex),
                         "samples" => Ok(__Field::m_samples),
+                        "variableIndex" => Ok(__Field::m_variableIndex),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -228,10 +228,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableIndex: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_samples: _serde::__private::Option<
                         Vec<hkbIntVariableSequencedDataSample>,
                     > = _serde::__private::None;
+                    let mut m_variableIndex: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -241,30 +241,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_variableIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_variableIndex) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "variableIndex",
-                                        ),
-                                    );
-                                }
-                                m_variableIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_samples => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -291,9 +267,43 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_variableIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_variableIndex) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableIndex",
+                                        ),
+                                    );
+                                }
+                                m_variableIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
+                    let m_samples = match m_samples {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("samples"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
                     let m_variableIndex = match m_variableIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -302,16 +312,6 @@ const _: () = {
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "variableIndex",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_samples = match m_samples {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("samples"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

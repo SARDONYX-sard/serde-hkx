@@ -84,9 +84,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_buildType,
-                m_data,
                 m_info,
+                m_data,
+                m_buildType,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -110,9 +110,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "buildType" => Ok(__Field::m_buildType),
-                        "data" => Ok(__Field::m_data),
                         "info" => Ok(__Field::m_info),
+                        "data" => Ok(__Field::m_data),
+                        "buildType" => Ok(__Field::m_buildType),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -251,9 +251,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_buildType: _serde::__private::Option<BuildType> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
                     let mut m_info: _serde::__private::Option<hkpMoppCodeCodeInfo> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_buildType: _serde::__private::Option<BuildType> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -263,21 +263,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_buildType => {
+                            __Field::m_info => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_buildType) {
+                                if _serde::__private::Option::is_some(&m_info) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "buildType",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("info"),
                                     );
                                 }
-                                m_buildType = _serde::__private::Some(
-                                    match __A::next_value::<BuildType>(&mut __map) {
+                                m_info = _serde::__private::Some(
+                                    match __A::next_value::<hkpMoppCodeCodeInfo>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -309,19 +307,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_info => {
+                            __Field::m_buildType => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_info) {
+                                if _serde::__private::Option::is_some(&m_buildType) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("info"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "buildType",
+                                        ),
                                     );
                                 }
-                                m_info = _serde::__private::Some(
-                                    match __A::next_value::<hkpMoppCodeCodeInfo>(&mut __map) {
+                                m_buildType = _serde::__private::Some(
+                                    match __A::next_value::<BuildType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -334,14 +334,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_buildType = match m_buildType {
+                    let m_info = match m_info {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "buildType",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("info"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -356,12 +354,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_info = match m_info {
+                    let m_buildType = match m_buildType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("info"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "buildType",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

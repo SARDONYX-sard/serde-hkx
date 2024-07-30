@@ -88,10 +88,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_animationBoneIndex,
-                m_character,
-                m_rigidBody,
                 m_frame,
+                m_rigidBody,
+                m_character,
+                m_animationBoneIndex,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -115,10 +115,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "animationBoneIndex" => Ok(__Field::m_animationBoneIndex),
-                        "character" => Ok(__Field::m_character),
-                        "rigidBody" => Ok(__Field::m_rigidBody),
                         "frame" => Ok(__Field::m_frame),
+                        "rigidBody" => Ok(__Field::m_rigidBody),
+                        "character" => Ok(__Field::m_character),
+                        "animationBoneIndex" => Ok(__Field::m_animationBoneIndex),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -291,10 +291,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_animationBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_character: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_rigidBody: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_frame: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_rigidBody: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_character: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_animationBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -304,46 +304,18 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_animationBoneIndex => {
+                            __Field::m_frame => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_animationBoneIndex,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_frame) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "animationBoneIndex",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("frame"),
                                     );
                                 }
-                                m_animationBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_character => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_character) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "character",
-                                        ),
-                                    );
-                                }
-                                m_character = _serde::__private::Some(
+                                m_frame = _serde::__private::Some(
                                     match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -378,19 +350,47 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_frame => {
+                            __Field::m_character => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_frame) {
+                                if _serde::__private::Option::is_some(&m_character) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("frame"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "character",
+                                        ),
                                     );
                                 }
-                                m_frame = _serde::__private::Some(
+                                m_character = _serde::__private::Some(
                                     match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_animationBoneIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_animationBoneIndex,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "animationBoneIndex",
+                                        ),
+                                    );
+                                }
+                                m_animationBoneIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -403,13 +403,23 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_animationBoneIndex = match m_animationBoneIndex {
+                    let m_frame = match m_frame {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("frame"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_rigidBody = match m_rigidBody {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "animationBoneIndex",
+                                    "rigidBody",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -427,24 +437,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_rigidBody = match m_rigidBody {
+                    let m_animationBoneIndex = match m_animationBoneIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "rigidBody",
+                                    "animationBoneIndex",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_frame = match m_frame {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("frame"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

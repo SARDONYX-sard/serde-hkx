@@ -93,12 +93,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_pad,
-                m_flags,
-                m_subUsage,
-                m_usage,
-                m_numValues,
                 m_dataType,
+                m_numValues,
+                m_usage,
+                m_subUsage,
+                m_flags,
+                m_pad,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -122,12 +122,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "pad" => Ok(__Field::m_pad),
-                        "flags" => Ok(__Field::m_flags),
-                        "subUsage" => Ok(__Field::m_subUsage),
-                        "usage" => Ok(__Field::m_usage),
-                        "numValues" => Ok(__Field::m_numValues),
                         "dataType" => Ok(__Field::m_dataType),
+                        "numValues" => Ok(__Field::m_numValues),
+                        "usage" => Ok(__Field::m_usage),
+                        "subUsage" => Ok(__Field::m_subUsage),
+                        "flags" => Ok(__Field::m_flags),
+                        "pad" => Ok(__Field::m_pad),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -344,12 +344,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_pad: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<HintFlags> = _serde::__private::None;
-                    let mut m_subUsage: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_usage: _serde::__private::Option<ComponentUsage> = _serde::__private::None;
-                    let mut m_numValues: _serde::__private::Option<u8> = _serde::__private::None;
                     let mut m_dataType: _serde::__private::Option<ComponentType> = _serde::__private::None;
+                    let mut m_numValues: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_usage: _serde::__private::Option<ComponentUsage> = _serde::__private::None;
+                    let mut m_subUsage: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<HintFlags> = _serde::__private::None;
+                    let mut m_pad: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -359,87 +359,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_pad => {
+                            __Field::m_dataType => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_pad) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("pad"),
-                                    );
-                                }
-                                m_pad = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 3usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_flags => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_flags) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
-                                    );
-                                }
-                                m_flags = _serde::__private::Some(
-                                    match __A::next_value::<HintFlags>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_subUsage => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_subUsage) {
+                                if _serde::__private::Option::is_some(&m_dataType) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "subUsage",
+                                            "dataType",
                                         ),
                                     );
                                 }
-                                m_subUsage = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_usage => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_usage) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("usage"),
-                                    );
-                                }
-                                m_usage = _serde::__private::Some(
-                                    match __A::next_value::<ComponentUsage>(&mut __map) {
+                                m_dataType = _serde::__private::Some(
+                                    match __A::next_value::<ComponentType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -473,21 +407,87 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_dataType => {
+                            __Field::m_usage => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_dataType) {
+                                if _serde::__private::Option::is_some(&m_usage) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("usage"),
+                                    );
+                                }
+                                m_usage = _serde::__private::Some(
+                                    match __A::next_value::<ComponentUsage>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_subUsage => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_subUsage) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "dataType",
+                                            "subUsage",
                                         ),
                                     );
                                 }
-                                m_dataType = _serde::__private::Some(
-                                    match __A::next_value::<ComponentType>(&mut __map) {
+                                m_subUsage = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_flags => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_flags) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                                    );
+                                }
+                                m_flags = _serde::__private::Some(
+                                    match __A::next_value::<HintFlags>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_pad => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_pad) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("pad"),
+                                    );
+                                }
+                                m_pad = _serde::__private::Some(
+                                    match __A::next_value::<[u8; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -500,42 +500,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_pad = match m_pad {
+                    let m_dataType = match m_dataType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("pad"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_flags = match m_flags {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("flags"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_subUsage = match m_subUsage {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("subUsage"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_usage = match m_usage {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("usage"),
+                                <__A::Error as _serde::de::Error>::missing_field("dataType"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -552,12 +522,42 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_dataType = match m_dataType {
+                    let m_usage = match m_usage {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("dataType"),
+                                <__A::Error as _serde::de::Error>::missing_field("usage"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_subUsage = match m_subUsage {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("subUsage"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_flags = match m_flags {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("flags"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_pad = match m_pad {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("pad"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

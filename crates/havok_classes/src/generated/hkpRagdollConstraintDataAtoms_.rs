@@ -107,14 +107,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_ballSocket,
-                m_planesLimit,
-                m_coneLimit,
-                m_twistLimit,
-                m_angFriction,
-                m_ragdollMotors,
-                m_setupStabilization,
                 m_transforms,
+                m_setupStabilization,
+                m_ragdollMotors,
+                m_angFriction,
+                m_twistLimit,
+                m_coneLimit,
+                m_planesLimit,
+                m_ballSocket,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -138,14 +138,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "ballSocket" => Ok(__Field::m_ballSocket),
-                        "planesLimit" => Ok(__Field::m_planesLimit),
-                        "coneLimit" => Ok(__Field::m_coneLimit),
-                        "twistLimit" => Ok(__Field::m_twistLimit),
-                        "angFriction" => Ok(__Field::m_angFriction),
-                        "ragdollMotors" => Ok(__Field::m_ragdollMotors),
-                        "setupStabilization" => Ok(__Field::m_setupStabilization),
                         "transforms" => Ok(__Field::m_transforms),
+                        "setupStabilization" => Ok(__Field::m_setupStabilization),
+                        "ragdollMotors" => Ok(__Field::m_ragdollMotors),
+                        "angFriction" => Ok(__Field::m_angFriction),
+                        "twistLimit" => Ok(__Field::m_twistLimit),
+                        "coneLimit" => Ok(__Field::m_coneLimit),
+                        "planesLimit" => Ok(__Field::m_planesLimit),
+                        "ballSocket" => Ok(__Field::m_ballSocket),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -472,29 +472,29 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_ballSocket: _serde::__private::Option<
-                        hkpBallSocketConstraintAtom,
-                    > = _serde::__private::None;
-                    let mut m_planesLimit: _serde::__private::Option<
-                        hkpConeLimitConstraintAtom,
-                    > = _serde::__private::None;
-                    let mut m_coneLimit: _serde::__private::Option<
-                        hkpConeLimitConstraintAtom,
-                    > = _serde::__private::None;
-                    let mut m_twistLimit: _serde::__private::Option<
-                        hkpTwistLimitConstraintAtom,
-                    > = _serde::__private::None;
-                    let mut m_angFriction: _serde::__private::Option<
-                        hkpAngFrictionConstraintAtom,
-                    > = _serde::__private::None;
-                    let mut m_ragdollMotors: _serde::__private::Option<
-                        hkpRagdollMotorConstraintAtom,
+                    let mut m_transforms: _serde::__private::Option<
+                        hkpSetLocalTransformsConstraintAtom,
                     > = _serde::__private::None;
                     let mut m_setupStabilization: _serde::__private::Option<
                         hkpSetupStabilizationAtom,
                     > = _serde::__private::None;
-                    let mut m_transforms: _serde::__private::Option<
-                        hkpSetLocalTransformsConstraintAtom,
+                    let mut m_ragdollMotors: _serde::__private::Option<
+                        hkpRagdollMotorConstraintAtom,
+                    > = _serde::__private::None;
+                    let mut m_angFriction: _serde::__private::Option<
+                        hkpAngFrictionConstraintAtom,
+                    > = _serde::__private::None;
+                    let mut m_twistLimit: _serde::__private::Option<
+                        hkpTwistLimitConstraintAtom,
+                    > = _serde::__private::None;
+                    let mut m_coneLimit: _serde::__private::Option<
+                        hkpConeLimitConstraintAtom,
+                    > = _serde::__private::None;
+                    let mut m_planesLimit: _serde::__private::Option<
+                        hkpConeLimitConstraintAtom,
+                    > = _serde::__private::None;
+                    let mut m_ballSocket: _serde::__private::Option<
+                        hkpBallSocketConstraintAtom,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
@@ -505,152 +505,22 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_ballSocket => {
+                            __Field::m_transforms => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_ballSocket) {
+                                if _serde::__private::Option::is_some(&m_transforms) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ballSocket",
+                                            "transforms",
                                         ),
                                     );
                                 }
-                                m_ballSocket = _serde::__private::Some(
+                                m_transforms = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpBallSocketConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_planesLimit => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_planesLimit) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "planesLimit",
-                                        ),
-                                    );
-                                }
-                                m_planesLimit = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpConeLimitConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_coneLimit => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_coneLimit) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "coneLimit",
-                                        ),
-                                    );
-                                }
-                                m_coneLimit = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpConeLimitConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_twistLimit => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_twistLimit) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "twistLimit",
-                                        ),
-                                    );
-                                }
-                                m_twistLimit = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpTwistLimitConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_angFriction => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_angFriction) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "angFriction",
-                                        ),
-                                    );
-                                }
-                                m_angFriction = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpAngFrictionConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_ragdollMotors => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_ragdollMotors) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ragdollMotors",
-                                        ),
-                                    );
-                                }
-                                m_ragdollMotors = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpRagdollMotorConstraintAtom,
+                                        hkpSetLocalTransformsConstraintAtom,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -689,22 +559,152 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_transforms => {
+                            __Field::m_ragdollMotors => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_transforms) {
+                                if _serde::__private::Option::is_some(&m_ragdollMotors) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transforms",
+                                            "ragdollMotors",
                                         ),
                                     );
                                 }
-                                m_transforms = _serde::__private::Some(
+                                m_ragdollMotors = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpSetLocalTransformsConstraintAtom,
+                                        hkpRagdollMotorConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_angFriction => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_angFriction) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "angFriction",
+                                        ),
+                                    );
+                                }
+                                m_angFriction = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpAngFrictionConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_twistLimit => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_twistLimit) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "twistLimit",
+                                        ),
+                                    );
+                                }
+                                m_twistLimit = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpTwistLimitConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_coneLimit => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_coneLimit) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "coneLimit",
+                                        ),
+                                    );
+                                }
+                                m_coneLimit = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpConeLimitConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_planesLimit => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_planesLimit) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "planesLimit",
+                                        ),
+                                    );
+                                }
+                                m_planesLimit = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpConeLimitConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_ballSocket => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_ballSocket) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "ballSocket",
+                                        ),
+                                    );
+                                }
+                                m_ballSocket = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpBallSocketConstraintAtom,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -718,73 +718,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_ballSocket = match m_ballSocket {
+                    let m_transforms = match m_transforms {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "ballSocket",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_planesLimit = match m_planesLimit {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "planesLimit",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_coneLimit = match m_coneLimit {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "coneLimit",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_twistLimit = match m_twistLimit {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "twistLimit",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_angFriction = match m_angFriction {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "angFriction",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_ragdollMotors = match m_ragdollMotors {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "ragdollMotors",
+                                    "transforms",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -802,13 +742,73 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_transforms = match m_transforms {
+                    let m_ragdollMotors = match m_ragdollMotors {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transforms",
+                                    "ragdollMotors",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_angFriction = match m_angFriction {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "angFriction",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_twistLimit = match m_twistLimit {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "twistLimit",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_coneLimit = match m_coneLimit {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "coneLimit",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_planesLimit = match m_planesLimit {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "planesLimit",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_ballSocket = match m_ballSocket {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "ballSocket",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

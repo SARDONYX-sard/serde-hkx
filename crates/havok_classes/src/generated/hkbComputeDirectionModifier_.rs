@@ -173,20 +173,20 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
+                m_name,
                 m_enable,
-                m_computedOutput,
-                m_computeOnlyOnce,
-                m_normalizePoint,
-                m_projectPoint,
-                m_reverseUpAngle,
-                m_reverseGroundAngle,
-                m_verticalOffset,
-                m_upAngleOut,
-                m_groundAngleOut,
-                m_pointOut,
                 m_pointIn,
+                m_pointOut,
+                m_groundAngleOut,
+                m_upAngleOut,
+                m_verticalOffset,
+                m_reverseGroundAngle,
+                m_reverseUpAngle,
+                m_projectPoint,
+                m_normalizePoint,
+                m_computeOnlyOnce,
+                m_computedOutput,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -211,20 +211,20 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
+                        "name" => Ok(__Field::m_name),
                         "enable" => Ok(__Field::m_enable),
-                        "computedOutput" => Ok(__Field::m_computedOutput),
-                        "computeOnlyOnce" => Ok(__Field::m_computeOnlyOnce),
-                        "normalizePoint" => Ok(__Field::m_normalizePoint),
-                        "projectPoint" => Ok(__Field::m_projectPoint),
-                        "reverseUpAngle" => Ok(__Field::m_reverseUpAngle),
-                        "reverseGroundAngle" => Ok(__Field::m_reverseGroundAngle),
-                        "verticalOffset" => Ok(__Field::m_verticalOffset),
-                        "upAngleOut" => Ok(__Field::m_upAngleOut),
-                        "groundAngleOut" => Ok(__Field::m_groundAngleOut),
-                        "pointOut" => Ok(__Field::m_pointOut),
                         "pointIn" => Ok(__Field::m_pointIn),
+                        "pointOut" => Ok(__Field::m_pointOut),
+                        "groundAngleOut" => Ok(__Field::m_groundAngleOut),
+                        "upAngleOut" => Ok(__Field::m_upAngleOut),
+                        "verticalOffset" => Ok(__Field::m_verticalOffset),
+                        "reverseGroundAngle" => Ok(__Field::m_reverseGroundAngle),
+                        "reverseUpAngle" => Ok(__Field::m_reverseUpAngle),
+                        "projectPoint" => Ok(__Field::m_projectPoint),
+                        "normalizePoint" => Ok(__Field::m_normalizePoint),
+                        "computeOnlyOnce" => Ok(__Field::m_computeOnlyOnce),
+                        "computedOutput" => Ok(__Field::m_computedOutput),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -606,20 +606,20 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_computedOutput: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_computeOnlyOnce: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_normalizePoint: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_projectPoint: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_reverseUpAngle: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_reverseGroundAngle: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_upAngleOut: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_groundAngleOut: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_pointOut: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_pointIn: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_pointOut: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_groundAngleOut: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_upAngleOut: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_reverseGroundAngle: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_reverseUpAngle: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_projectPoint: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_normalizePoint: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_computeOnlyOnce: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_computedOutput: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -655,28 +655,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -692,6 +670,28 @@ const _: () = {
                                 }
                                 m_userData = _serde::__private::Some(
                                     match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -723,21 +723,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_computedOutput => {
+                            __Field::m_pointIn => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_computedOutput) {
+                                if _serde::__private::Option::is_some(&m_pointIn) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "computedOutput",
+                                            "pointIn",
                                         ),
                                     );
                                 }
-                                m_computedOutput = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_pointIn = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -747,21 +747,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_computeOnlyOnce => {
+                            __Field::m_pointOut => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_computeOnlyOnce) {
+                                if _serde::__private::Option::is_some(&m_pointOut) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "computeOnlyOnce",
+                                            "pointOut",
                                         ),
                                     );
                                 }
-                                m_computeOnlyOnce = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_pointOut = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -771,21 +771,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_normalizePoint => {
+                            __Field::m_groundAngleOut => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_normalizePoint) {
+                                if _serde::__private::Option::is_some(&m_groundAngleOut) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "normalizePoint",
+                                            "groundAngleOut",
                                         ),
                                     );
                                 }
-                                m_normalizePoint = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_groundAngleOut = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -795,21 +795,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_projectPoint => {
+                            __Field::m_upAngleOut => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_projectPoint) {
+                                if _serde::__private::Option::is_some(&m_upAngleOut) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "projectPoint",
+                                            "upAngleOut",
                                         ),
                                     );
                                 }
-                                m_projectPoint = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_upAngleOut = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -819,21 +819,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_reverseUpAngle => {
+                            __Field::m_verticalOffset => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_reverseUpAngle) {
+                                if _serde::__private::Option::is_some(&m_verticalOffset) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "reverseUpAngle",
+                                            "verticalOffset",
                                         ),
                                     );
                                 }
-                                m_reverseUpAngle = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_verticalOffset = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -869,21 +869,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_verticalOffset => {
+                            __Field::m_reverseUpAngle => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_verticalOffset) {
+                                if _serde::__private::Option::is_some(&m_reverseUpAngle) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "verticalOffset",
+                                            "reverseUpAngle",
                                         ),
                                     );
                                 }
-                                m_verticalOffset = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_reverseUpAngle = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -893,21 +893,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_upAngleOut => {
+                            __Field::m_projectPoint => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_upAngleOut) {
+                                if _serde::__private::Option::is_some(&m_projectPoint) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "upAngleOut",
+                                            "projectPoint",
                                         ),
                                     );
                                 }
-                                m_upAngleOut = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_projectPoint = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -917,21 +917,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_groundAngleOut => {
+                            __Field::m_normalizePoint => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_groundAngleOut) {
+                                if _serde::__private::Option::is_some(&m_normalizePoint) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "groundAngleOut",
+                                            "normalizePoint",
                                         ),
                                     );
                                 }
-                                m_groundAngleOut = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_normalizePoint = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -941,21 +941,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_pointOut => {
+                            __Field::m_computeOnlyOnce => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_pointOut) {
+                                if _serde::__private::Option::is_some(&m_computeOnlyOnce) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "pointOut",
+                                            "computeOnlyOnce",
                                         ),
                                     );
                                 }
-                                m_pointOut = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_computeOnlyOnce = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -965,21 +965,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_pointIn => {
+                            __Field::m_computedOutput => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_pointIn) {
+                                if _serde::__private::Option::is_some(&m_computedOutput) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "pointIn",
+                                            "computedOutput",
                                         ),
                                     );
                                 }
-                                m_pointIn = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_computedOutput = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1004,22 +1004,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -1034,85 +1034,33 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_computedOutput = match m_computedOutput {
+                    let m_pointIn = match m_pointIn {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "computedOutput",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("pointIn"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_computeOnlyOnce = match m_computeOnlyOnce {
+                    let m_pointOut = match m_pointOut {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "computeOnlyOnce",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("pointOut"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_normalizePoint = match m_normalizePoint {
+                    let m_groundAngleOut = match m_groundAngleOut {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "normalizePoint",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_projectPoint = match m_projectPoint {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "projectPoint",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_reverseUpAngle = match m_reverseUpAngle {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "reverseUpAngle",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_reverseGroundAngle = match m_reverseGroundAngle {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "reverseGroundAngle",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_verticalOffset = match m_verticalOffset {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "verticalOffset",
+                                    "groundAngleOut",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1130,34 +1078,86 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_groundAngleOut = match m_groundAngleOut {
+                    let m_verticalOffset = match m_verticalOffset {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "groundAngleOut",
+                                    "verticalOffset",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_pointOut = match m_pointOut {
+                    let m_reverseGroundAngle = match m_reverseGroundAngle {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("pointOut"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "reverseGroundAngle",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_pointIn = match m_pointIn {
+                    let m_reverseUpAngle = match m_reverseUpAngle {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("pointIn"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "reverseUpAngle",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_projectPoint = match m_projectPoint {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "projectPoint",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_normalizePoint = match m_normalizePoint {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "normalizePoint",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_computeOnlyOnce = match m_computeOnlyOnce {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "computeOnlyOnce",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_computedOutput = match m_computedOutput {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "computedOutput",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

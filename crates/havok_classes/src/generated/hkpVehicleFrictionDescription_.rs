@@ -77,9 +77,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_axleDescr,
-                m_chassisMassInv,
                 m_wheelDistance,
+                m_chassisMassInv,
+                m_axleDescr,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -103,9 +103,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "axleDescr" => Ok(__Field::m_axleDescr),
-                        "chassisMassInv" => Ok(__Field::m_chassisMassInv),
                         "wheelDistance" => Ok(__Field::m_wheelDistance),
+                        "chassisMassInv" => Ok(__Field::m_chassisMassInv),
+                        "axleDescr" => Ok(__Field::m_axleDescr),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -257,11 +257,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_wheelDistance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_chassisMassInv: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_axleDescr: _serde::__private::Option<
                         [hkpVehicleFrictionDescriptionAxisDescription; 2usize],
                     > = _serde::__private::None;
-                    let mut m_chassisMassInv: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_wheelDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -271,23 +271,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_axleDescr => {
+                            __Field::m_wheelDistance => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_axleDescr) {
+                                if _serde::__private::Option::is_some(&m_wheelDistance) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "axleDescr",
+                                            "wheelDistance",
                                         ),
                                     );
                                 }
-                                m_axleDescr = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        [hkpVehicleFrictionDescriptionAxisDescription; 2usize],
-                                    >(&mut __map) {
+                                m_wheelDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -321,21 +319,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_wheelDistance => {
+                            __Field::m_axleDescr => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_wheelDistance) {
+                                if _serde::__private::Option::is_some(&m_axleDescr) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelDistance",
+                                            "axleDescr",
                                         ),
                                     );
                                 }
-                                m_wheelDistance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_axleDescr = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        [hkpVehicleFrictionDescriptionAxisDescription; 2usize],
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -348,13 +348,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_axleDescr = match m_axleDescr {
+                    let m_wheelDistance = match m_wheelDistance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "axleDescr",
+                                    "wheelDistance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -372,13 +372,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_wheelDistance = match m_wheelDistance {
+                    let m_axleDescr = match m_axleDescr {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelDistance",
+                                    "axleDescr",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

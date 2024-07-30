@@ -240,14 +240,14 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
-                m_eventMode,
+                m_name,
                 m_selfTransitionMode,
-                m_syncToGeneratorStartTime,
-                m_blendOutDuration,
-                m_blendInDuration,
+                m_eventMode,
                 m_transitionGenerator,
+                m_blendInDuration,
+                m_blendOutDuration,
+                m_syncToGeneratorStartTime,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -272,16 +272,16 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
-                        "eventMode" => Ok(__Field::m_eventMode),
+                        "name" => Ok(__Field::m_name),
                         "selfTransitionMode" => Ok(__Field::m_selfTransitionMode),
+                        "eventMode" => Ok(__Field::m_eventMode),
+                        "transitionGenerator" => Ok(__Field::m_transitionGenerator),
+                        "blendInDuration" => Ok(__Field::m_blendInDuration),
+                        "blendOutDuration" => Ok(__Field::m_blendOutDuration),
                         "syncToGeneratorStartTime" => {
                             Ok(__Field::m_syncToGeneratorStartTime)
                         }
-                        "blendOutDuration" => Ok(__Field::m_blendOutDuration),
-                        "blendInDuration" => Ok(__Field::m_blendInDuration),
-                        "transitionGenerator" => Ok(__Field::m_transitionGenerator),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -822,18 +822,18 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_eventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_selfTransitionMode: _serde::__private::Option<
                         SelfTransitionMode,
                     > = _serde::__private::None;
+                    let mut m_eventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
+                    let mut m_transitionGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_blendInDuration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_blendOutDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_syncToGeneratorStartTime: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_blendOutDuration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_blendInDuration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_transitionGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -869,28 +869,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -915,21 +893,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_eventMode => {
+                            __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_eventMode) {
+                                if _serde::__private::Option::is_some(&m_name) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "eventMode",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
                                     );
                                 }
-                                m_eventMode = _serde::__private::Some(
-                                    match __A::next_value::<EventMode>(&mut __map) {
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -965,71 +941,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_syncToGeneratorStartTime => {
+                            __Field::m_eventMode => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_syncToGeneratorStartTime,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_eventMode) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "syncToGeneratorStartTime",
+                                            "eventMode",
                                         ),
                                     );
                                 }
-                                m_syncToGeneratorStartTime = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_blendOutDuration => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_blendOutDuration) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "blendOutDuration",
-                                        ),
-                                    );
-                                }
-                                m_blendOutDuration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_blendInDuration => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_blendInDuration) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "blendInDuration",
-                                        ),
-                                    );
-                                }
-                                m_blendInDuration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_eventMode = _serde::__private::Some(
+                                    match __A::next_value::<EventMode>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1065,6 +991,80 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_blendInDuration => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_blendInDuration) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "blendInDuration",
+                                        ),
+                                    );
+                                }
+                                m_blendInDuration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_blendOutDuration => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_blendOutDuration) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "blendOutDuration",
+                                        ),
+                                    );
+                                }
+                                m_blendOutDuration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_syncToGeneratorStartTime => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_syncToGeneratorStartTime,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "syncToGeneratorStartTime",
+                                        ),
+                                    );
+                                }
+                                m_syncToGeneratorStartTime = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
@@ -1080,16 +1080,6 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -1100,14 +1090,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_eventMode = match m_eventMode {
+                    let m_name = match m_name {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "eventMode",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -1124,25 +1112,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_syncToGeneratorStartTime = match m_syncToGeneratorStartTime {
+                    let m_eventMode = match m_eventMode {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "syncToGeneratorStartTime",
+                                    "eventMode",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_blendOutDuration = match m_blendOutDuration {
+                    let m_transitionGenerator = match m_transitionGenerator {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "blendOutDuration",
+                                    "transitionGenerator",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1160,13 +1148,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_transitionGenerator = match m_transitionGenerator {
+                    let m_blendOutDuration = match m_blendOutDuration {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transitionGenerator",
+                                    "blendOutDuration",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_syncToGeneratorStartTime = match m_syncToGeneratorStartTime {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "syncToGeneratorStartTime",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

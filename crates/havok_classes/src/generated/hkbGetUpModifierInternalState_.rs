@@ -82,9 +82,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_initNextModify,
-                m_timeStep,
                 m_timeSinceBegin,
+                m_timeStep,
+                m_initNextModify,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -108,9 +108,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "initNextModify" => Ok(__Field::m_initNextModify),
-                        "timeStep" => Ok(__Field::m_timeStep),
                         "timeSinceBegin" => Ok(__Field::m_timeSinceBegin),
+                        "timeStep" => Ok(__Field::m_timeStep),
+                        "initNextModify" => Ok(__Field::m_initNextModify),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -258,9 +258,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_initNextModify: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_timeStep: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_timeSinceBegin: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_timeStep: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_initNextModify: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -270,21 +270,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_initNextModify => {
+                            __Field::m_timeSinceBegin => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_initNextModify) {
+                                if _serde::__private::Option::is_some(&m_timeSinceBegin) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "initNextModify",
+                                            "timeSinceBegin",
                                         ),
                                     );
                                 }
-                                m_initNextModify = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_timeSinceBegin = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -318,21 +318,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_timeSinceBegin => {
+                            __Field::m_initNextModify => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_timeSinceBegin) {
+                                if _serde::__private::Option::is_some(&m_initNextModify) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "timeSinceBegin",
+                                            "initNextModify",
                                         ),
                                     );
                                 }
-                                m_timeSinceBegin = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_initNextModify = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -345,13 +345,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_initNextModify = match m_initNextModify {
+                    let m_timeSinceBegin = match m_timeSinceBegin {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "initNextModify",
+                                    "timeSinceBegin",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -367,13 +367,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_timeSinceBegin = match m_timeSinceBegin {
+                    let m_initNextModify = match m_initNextModify {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "timeSinceBegin",
+                                    "initNextModify",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

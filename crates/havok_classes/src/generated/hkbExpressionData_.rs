@@ -103,10 +103,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_eventMode,
-                m_assignmentEventIndex,
-                m_assignmentVariableIndex,
                 m_expression,
+                m_assignmentVariableIndex,
+                m_assignmentEventIndex,
+                m_eventMode,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -130,12 +130,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "eventMode" => Ok(__Field::m_eventMode),
-                        "assignmentEventIndex" => Ok(__Field::m_assignmentEventIndex),
+                        "expression" => Ok(__Field::m_expression),
                         "assignmentVariableIndex" => {
                             Ok(__Field::m_assignmentVariableIndex)
                         }
-                        "expression" => Ok(__Field::m_expression),
+                        "assignmentEventIndex" => Ok(__Field::m_assignmentEventIndex),
+                        "eventMode" => Ok(__Field::m_eventMode),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -377,12 +377,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_expression: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_assignmentVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_assignmentEventIndex: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_eventMode: _serde::__private::Option<
                         ExpressionEventMode,
                     > = _serde::__private::None;
-                    let mut m_assignmentEventIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_assignmentVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_expression: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -392,47 +392,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_eventMode => {
+                            __Field::m_expression => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_eventMode) {
+                                if _serde::__private::Option::is_some(&m_expression) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "eventMode",
+                                            "expression",
                                         ),
                                     );
                                 }
-                                m_eventMode = _serde::__private::Some(
-                                    match __A::next_value::<ExpressionEventMode>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_assignmentEventIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_assignmentEventIndex,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "assignmentEventIndex",
-                                        ),
-                                    );
-                                }
-                                m_assignmentEventIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_expression = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -468,21 +442,47 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_expression => {
+                            __Field::m_assignmentEventIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_expression) {
+                                if _serde::__private::Option::is_some(
+                                    &m_assignmentEventIndex,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "expression",
+                                            "assignmentEventIndex",
                                         ),
                                     );
                                 }
-                                m_expression = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_assignmentEventIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_eventMode => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_eventMode) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "eventMode",
+                                        ),
+                                    );
+                                }
+                                m_eventMode = _serde::__private::Some(
+                                    match __A::next_value::<ExpressionEventMode>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -495,25 +495,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_eventMode = match m_eventMode {
+                    let m_expression = match m_expression {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "eventMode",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_assignmentEventIndex = match m_assignmentEventIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "assignmentEventIndex",
+                                    "expression",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -531,13 +519,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_expression = match m_expression {
+                    let m_assignmentEventIndex = match m_assignmentEventIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "expression",
+                                    "assignmentEventIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_eventMode = match m_eventMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "eventMode",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

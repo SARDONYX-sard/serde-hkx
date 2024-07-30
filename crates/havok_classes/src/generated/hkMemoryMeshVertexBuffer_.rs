@@ -121,14 +121,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_isSharable,
-                m_isBigEndian,
-                m_numVertices,
-                m_locked,
-                m_vertexStride,
-                m_memory,
-                m_elementOffsets,
                 m_format,
+                m_elementOffsets,
+                m_memory,
+                m_vertexStride,
+                m_locked,
+                m_numVertices,
+                m_isBigEndian,
+                m_isSharable,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -152,14 +152,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "isSharable" => Ok(__Field::m_isSharable),
-                        "isBigEndian" => Ok(__Field::m_isBigEndian),
-                        "numVertices" => Ok(__Field::m_numVertices),
-                        "locked" => Ok(__Field::m_locked),
-                        "vertexStride" => Ok(__Field::m_vertexStride),
-                        "memory" => Ok(__Field::m_memory),
-                        "elementOffsets" => Ok(__Field::m_elementOffsets),
                         "format" => Ok(__Field::m_format),
+                        "elementOffsets" => Ok(__Field::m_elementOffsets),
+                        "memory" => Ok(__Field::m_memory),
+                        "vertexStride" => Ok(__Field::m_vertexStride),
+                        "locked" => Ok(__Field::m_locked),
+                        "numVertices" => Ok(__Field::m_numVertices),
+                        "isBigEndian" => Ok(__Field::m_isBigEndian),
+                        "isSharable" => Ok(__Field::m_isSharable),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -446,16 +446,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_isSharable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_isBigEndian: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_locked: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_vertexStride: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_memory: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_format: _serde::__private::Option<hkVertexFormat> = _serde::__private::None;
                     let mut m_elementOffsets: _serde::__private::Option<
                         [i32; 32usize],
                     > = _serde::__private::None;
-                    let mut m_format: _serde::__private::Option<hkVertexFormat> = _serde::__private::None;
+                    let mut m_memory: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_vertexStride: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_locked: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_isBigEndian: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_isSharable: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -465,21 +465,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_isSharable => {
+                            __Field::m_format => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isSharable) {
+                                if _serde::__private::Option::is_some(&m_format) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isSharable",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("format"),
                                     );
                                 }
-                                m_isSharable = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_format = _serde::__private::Some(
+                                    match __A::next_value::<hkVertexFormat>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -489,20 +487,88 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_isBigEndian => {
+                            __Field::m_elementOffsets => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isBigEndian) {
+                                if _serde::__private::Option::is_some(&m_elementOffsets) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isBigEndian",
+                                            "elementOffsets",
                                         ),
                                     );
                                 }
-                                m_isBigEndian = _serde::__private::Some(
+                                m_elementOffsets = _serde::__private::Some(
+                                    match __A::next_value::<[i32; 32usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_memory => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_memory) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("memory"),
+                                    );
+                                }
+                                m_memory = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vertexStride => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vertexStride) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vertexStride",
+                                        ),
+                                    );
+                                }
+                                m_vertexStride = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_locked => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_locked) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("locked"),
+                                    );
+                                }
+                                m_locked = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -537,18 +603,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_locked => {
+                            __Field::m_isBigEndian => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_locked) {
+                                if _serde::__private::Option::is_some(&m_isBigEndian) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("locked"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isBigEndian",
+                                        ),
                                     );
                                 }
-                                m_locked = _serde::__private::Some(
+                                m_isBigEndian = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -559,89 +627,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vertexStride => {
+                            __Field::m_isSharable => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_vertexStride) {
+                                if _serde::__private::Option::is_some(&m_isSharable) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexStride",
+                                            "isSharable",
                                         ),
                                     );
                                 }
-                                m_vertexStride = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_memory => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_memory) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("memory"),
-                                    );
-                                }
-                                m_memory = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_elementOffsets => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_elementOffsets) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "elementOffsets",
-                                        ),
-                                    );
-                                }
-                                m_elementOffsets = _serde::__private::Some(
-                                    match __A::next_value::<[i32; 32usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_format => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_format) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("format"),
-                                    );
-                                }
-                                m_format = _serde::__private::Some(
-                                    match __A::next_value::<hkVertexFormat>(&mut __map) {
+                                m_isSharable = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -654,13 +654,67 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_isSharable = match m_isSharable {
+                    let m_format = match m_format {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("format"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_elementOffsets = match m_elementOffsets {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isSharable",
+                                    "elementOffsets",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_memory = match m_memory {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("memory"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexStride = match m_vertexStride {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "vertexStride",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_locked = match m_locked {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("locked"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numVertices = match m_numVertices {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numVertices",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -678,68 +732,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_numVertices = match m_numVertices {
+                    let m_isSharable = match m_isSharable {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "numVertices",
+                                    "isSharable",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_locked = match m_locked {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("locked"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vertexStride = match m_vertexStride {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexStride",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_memory = match m_memory {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("memory"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_elementOffsets = match m_elementOffsets {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "elementOffsets",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_format = match m_format {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("format"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

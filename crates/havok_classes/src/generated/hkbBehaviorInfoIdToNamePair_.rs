@@ -86,10 +86,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_id,
-                m_toolType,
-                m_nodeName,
                 m_behaviorName,
+                m_nodeName,
+                m_toolType,
+                m_id,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -113,10 +113,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "id" => Ok(__Field::m_id),
-                        "toolType" => Ok(__Field::m_toolType),
-                        "nodeName" => Ok(__Field::m_nodeName),
                         "behaviorName" => Ok(__Field::m_behaviorName),
+                        "nodeName" => Ok(__Field::m_nodeName),
+                        "toolType" => Ok(__Field::m_toolType),
+                        "id" => Ok(__Field::m_id),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -286,10 +286,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_id: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_toolType: _serde::__private::Option<ToolNodeType> = _serde::__private::None;
-                    let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_behaviorName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_toolType: _serde::__private::Option<ToolNodeType> = _serde::__private::None;
+                    let mut m_id: _serde::__private::Option<i16> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -299,43 +299,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_id => {
+                            __Field::m_behaviorName => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_id) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("id"),
-                                    );
-                                }
-                                m_id = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_toolType => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_toolType) {
+                                if _serde::__private::Option::is_some(&m_behaviorName) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "toolType",
+                                            "behaviorName",
                                         ),
                                     );
                                 }
-                                m_toolType = _serde::__private::Some(
-                                    match __A::next_value::<ToolNodeType>(&mut __map) {
+                                m_behaviorName = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -369,21 +347,43 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_behaviorName => {
+                            __Field::m_toolType => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_behaviorName) {
+                                if _serde::__private::Option::is_some(&m_toolType) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "behaviorName",
+                                            "toolType",
                                         ),
                                     );
                                 }
-                                m_behaviorName = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_toolType = _serde::__private::Some(
+                                    match __A::next_value::<ToolNodeType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_id => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_id) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("id"),
+                                    );
+                                }
+                                m_id = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -396,22 +396,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_id = match m_id {
+                    let m_behaviorName = match m_behaviorName {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("id"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_toolType = match m_toolType {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("toolType"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "behaviorName",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -426,14 +418,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_behaviorName = match m_behaviorName {
+                    let m_toolType = match m_toolType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "behaviorName",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("toolType"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_id = match m_id {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("id"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

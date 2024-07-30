@@ -171,18 +171,18 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_scale,
-                m_mirroredSkeletonInfo,
-                m_stringData,
-                m_handIkDriverInfo,
-                m_footIkDriverInfo,
-                m_characterPropertyValues,
-                m_numBonesPerLod,
-                m_characterPropertyInfos,
-                m_modelRightMS,
-                m_modelForwardMS,
-                m_modelUpMS,
                 m_characterControllerInfo,
+                m_modelUpMS,
+                m_modelForwardMS,
+                m_modelRightMS,
+                m_characterPropertyInfos,
+                m_numBonesPerLod,
+                m_characterPropertyValues,
+                m_footIkDriverInfo,
+                m_handIkDriverInfo,
+                m_stringData,
+                m_mirroredSkeletonInfo,
+                m_scale,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -206,22 +206,22 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "scale" => Ok(__Field::m_scale),
-                        "mirroredSkeletonInfo" => Ok(__Field::m_mirroredSkeletonInfo),
-                        "stringData" => Ok(__Field::m_stringData),
-                        "handIkDriverInfo" => Ok(__Field::m_handIkDriverInfo),
-                        "footIkDriverInfo" => Ok(__Field::m_footIkDriverInfo),
-                        "characterPropertyValues" => {
-                            Ok(__Field::m_characterPropertyValues)
-                        }
-                        "numBonesPerLod" => Ok(__Field::m_numBonesPerLod),
-                        "characterPropertyInfos" => Ok(__Field::m_characterPropertyInfos),
-                        "modelRightMS" => Ok(__Field::m_modelRightMS),
-                        "modelForwardMS" => Ok(__Field::m_modelForwardMS),
-                        "modelUpMS" => Ok(__Field::m_modelUpMS),
                         "characterControllerInfo" => {
                             Ok(__Field::m_characterControllerInfo)
                         }
+                        "modelUpMS" => Ok(__Field::m_modelUpMS),
+                        "modelForwardMS" => Ok(__Field::m_modelForwardMS),
+                        "modelRightMS" => Ok(__Field::m_modelRightMS),
+                        "characterPropertyInfos" => Ok(__Field::m_characterPropertyInfos),
+                        "numBonesPerLod" => Ok(__Field::m_numBonesPerLod),
+                        "characterPropertyValues" => {
+                            Ok(__Field::m_characterPropertyValues)
+                        }
+                        "footIkDriverInfo" => Ok(__Field::m_footIkDriverInfo),
+                        "handIkDriverInfo" => Ok(__Field::m_handIkDriverInfo),
+                        "stringData" => Ok(__Field::m_stringData),
+                        "mirroredSkeletonInfo" => Ok(__Field::m_mirroredSkeletonInfo),
+                        "scale" => Ok(__Field::m_scale),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -700,24 +700,24 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_scale: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_mirroredSkeletonInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_handIkDriverInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_footIkDriverInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_characterPropertyValues: _serde::__private::Option<
-                        Pointer,
-                    > = _serde::__private::None;
-                    let mut m_numBonesPerLod: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_characterPropertyInfos: _serde::__private::Option<
-                        Vec<hkbVariableInfo>,
-                    > = _serde::__private::None;
-                    let mut m_modelRightMS: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_modelForwardMS: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_modelUpMS: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_characterControllerInfo: _serde::__private::Option<
                         hkbCharacterDataCharacterControllerInfo,
                     > = _serde::__private::None;
+                    let mut m_modelUpMS: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_modelForwardMS: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_modelRightMS: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_characterPropertyInfos: _serde::__private::Option<
+                        Vec<hkbVariableInfo>,
+                    > = _serde::__private::None;
+                    let mut m_numBonesPerLod: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_characterPropertyValues: _serde::__private::Option<
+                        Pointer,
+                    > = _serde::__private::None;
+                    let mut m_footIkDriverInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_handIkDriverInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_mirroredSkeletonInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_scale: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -727,45 +727,25 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_scale => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_scale) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("scale"),
-                                    );
-                                }
-                                m_scale = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_mirroredSkeletonInfo => {
+                            __Field::m_characterControllerInfo => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_mirroredSkeletonInfo,
+                                    &m_characterControllerInfo,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "mirroredSkeletonInfo",
+                                            "characterControllerInfo",
                                         ),
                                     );
                                 }
-                                m_mirroredSkeletonInfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_characterControllerInfo = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkbCharacterDataCharacterControllerInfo,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -775,21 +755,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_stringData => {
+                            __Field::m_modelUpMS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_stringData) {
+                                if _serde::__private::Option::is_some(&m_modelUpMS) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "stringData",
+                                            "modelUpMS",
                                         ),
                                     );
                                 }
-                                m_stringData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_modelUpMS = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -799,21 +779,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_handIkDriverInfo => {
+                            __Field::m_modelForwardMS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_handIkDriverInfo) {
+                                if _serde::__private::Option::is_some(&m_modelForwardMS) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "handIkDriverInfo",
+                                            "modelForwardMS",
                                         ),
                                     );
                                 }
-                                m_handIkDriverInfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_modelForwardMS = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -823,71 +803,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_footIkDriverInfo => {
+                            __Field::m_modelRightMS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_footIkDriverInfo) {
+                                if _serde::__private::Option::is_some(&m_modelRightMS) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "footIkDriverInfo",
+                                            "modelRightMS",
                                         ),
                                     );
                                 }
-                                m_footIkDriverInfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_characterPropertyValues => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_characterPropertyValues,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "characterPropertyValues",
-                                        ),
-                                    );
-                                }
-                                m_characterPropertyValues = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numBonesPerLod => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_numBonesPerLod) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numBonesPerLod",
-                                        ),
-                                    );
-                                }
-                                m_numBonesPerLod = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                m_modelRightMS = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -923,21 +853,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_modelRightMS => {
+                            __Field::m_numBonesPerLod => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_modelRightMS) {
+                                if _serde::__private::Option::is_some(&m_numBonesPerLod) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "modelRightMS",
+                                            "numBonesPerLod",
                                         ),
                                     );
                                 }
-                                m_modelRightMS = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_numBonesPerLod = _serde::__private::Some(
+                                    match __A::next_value::<Vec<i32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -947,73 +877,143 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_modelForwardMS => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_modelForwardMS) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "modelForwardMS",
-                                        ),
-                                    );
-                                }
-                                m_modelForwardMS = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_modelUpMS => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_modelUpMS) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "modelUpMS",
-                                        ),
-                                    );
-                                }
-                                m_modelUpMS = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_characterControllerInfo => {
+                            __Field::m_characterPropertyValues => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_characterControllerInfo,
+                                    &m_characterPropertyValues,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "characterControllerInfo",
+                                            "characterPropertyValues",
                                         ),
                                     );
                                 }
-                                m_characterControllerInfo = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkbCharacterDataCharacterControllerInfo,
-                                    >(&mut __map) {
+                                m_characterPropertyValues = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_footIkDriverInfo => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_footIkDriverInfo) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "footIkDriverInfo",
+                                        ),
+                                    );
+                                }
+                                m_footIkDriverInfo = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_handIkDriverInfo => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_handIkDriverInfo) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "handIkDriverInfo",
+                                        ),
+                                    );
+                                }
+                                m_handIkDriverInfo = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_stringData => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_stringData) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "stringData",
+                                        ),
+                                    );
+                                }
+                                m_stringData = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_mirroredSkeletonInfo => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_mirroredSkeletonInfo,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "mirroredSkeletonInfo",
+                                        ),
+                                    );
+                                }
+                                m_mirroredSkeletonInfo = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_scale => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_scale) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("scale"),
+                                    );
+                                }
+                                m_scale = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1026,119 +1026,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_scale = match m_scale {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("scale"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_mirroredSkeletonInfo = match m_mirroredSkeletonInfo {
+                    let m_characterControllerInfo = match m_characterControllerInfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "mirroredSkeletonInfo",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_stringData = match m_stringData {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "stringData",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_handIkDriverInfo = match m_handIkDriverInfo {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "handIkDriverInfo",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_footIkDriverInfo = match m_footIkDriverInfo {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "footIkDriverInfo",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_characterPropertyValues = match m_characterPropertyValues {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterPropertyValues",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numBonesPerLod = match m_numBonesPerLod {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numBonesPerLod",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_characterPropertyInfos = match m_characterPropertyInfos {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterPropertyInfos",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_modelRightMS = match m_modelRightMS {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "modelRightMS",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_modelForwardMS = match m_modelForwardMS {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "modelForwardMS",
+                                    "characterControllerInfo",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1156,14 +1050,120 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_characterControllerInfo = match m_characterControllerInfo {
+                    let m_modelForwardMS = match m_modelForwardMS {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterControllerInfo",
+                                    "modelForwardMS",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_modelRightMS = match m_modelRightMS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "modelRightMS",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_characterPropertyInfos = match m_characterPropertyInfos {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "characterPropertyInfos",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numBonesPerLod = match m_numBonesPerLod {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numBonesPerLod",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_characterPropertyValues = match m_characterPropertyValues {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "characterPropertyValues",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_footIkDriverInfo = match m_footIkDriverInfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "footIkDriverInfo",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_handIkDriverInfo = match m_handIkDriverInfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "handIkDriverInfo",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_stringData = match m_stringData {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "stringData",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_mirroredSkeletonInfo = match m_mirroredSkeletonInfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "mirroredSkeletonInfo",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_scale = match m_scale {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("scale"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -100,13 +100,13 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_2dAng,
-                m_steeringBase,
-                m_lin2,
-                m_lin1,
-                m_lin0Soft,
-                m_lin0Limit,
                 m_suspensionBase,
+                m_lin0Limit,
+                m_lin0Soft,
+                m_lin1,
+                m_lin2,
+                m_steeringBase,
+                m_2dAng,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -130,13 +130,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "2dAng" => Ok(__Field::m_2dAng),
-                        "steeringBase" => Ok(__Field::m_steeringBase),
-                        "lin2" => Ok(__Field::m_lin2),
-                        "lin1" => Ok(__Field::m_lin1),
-                        "lin0Soft" => Ok(__Field::m_lin0Soft),
-                        "lin0Limit" => Ok(__Field::m_lin0Limit),
                         "suspensionBase" => Ok(__Field::m_suspensionBase),
+                        "lin0Limit" => Ok(__Field::m_lin0Limit),
+                        "lin0Soft" => Ok(__Field::m_lin0Soft),
+                        "lin1" => Ok(__Field::m_lin1),
+                        "lin2" => Ok(__Field::m_lin2),
+                        "steeringBase" => Ok(__Field::m_steeringBase),
+                        "2dAng" => Ok(__Field::m_2dAng),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -404,21 +404,21 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_2dAng: _serde::__private::Option<hkp2dAngConstraintAtom> = _serde::__private::None;
-                    let mut m_steeringBase: _serde::__private::Option<
-                        hkpSetLocalRotationsConstraintAtom,
-                    > = _serde::__private::None;
-                    let mut m_lin2: _serde::__private::Option<hkpLinConstraintAtom> = _serde::__private::None;
-                    let mut m_lin1: _serde::__private::Option<hkpLinConstraintAtom> = _serde::__private::None;
-                    let mut m_lin0Soft: _serde::__private::Option<
-                        hkpLinSoftConstraintAtom,
+                    let mut m_suspensionBase: _serde::__private::Option<
+                        hkpSetLocalTransformsConstraintAtom,
                     > = _serde::__private::None;
                     let mut m_lin0Limit: _serde::__private::Option<
                         hkpLinLimitConstraintAtom,
                     > = _serde::__private::None;
-                    let mut m_suspensionBase: _serde::__private::Option<
-                        hkpSetLocalTransformsConstraintAtom,
+                    let mut m_lin0Soft: _serde::__private::Option<
+                        hkpLinSoftConstraintAtom,
                     > = _serde::__private::None;
+                    let mut m_lin1: _serde::__private::Option<hkpLinConstraintAtom> = _serde::__private::None;
+                    let mut m_lin2: _serde::__private::Option<hkpLinConstraintAtom> = _serde::__private::None;
+                    let mut m_steeringBase: _serde::__private::Option<
+                        hkpSetLocalRotationsConstraintAtom,
+                    > = _serde::__private::None;
+                    let mut m_2dAng: _serde::__private::Option<hkp2dAngConstraintAtom> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -428,116 +428,22 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_2dAng => {
+                            __Field::m_suspensionBase => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_2dAng) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
-                                    );
-                                }
-                                m_2dAng = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkp2dAngConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_steeringBase => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_steeringBase) {
+                                if _serde::__private::Option::is_some(&m_suspensionBase) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "steeringBase",
+                                            "suspensionBase",
                                         ),
                                     );
                                 }
-                                m_steeringBase = _serde::__private::Some(
+                                m_suspensionBase = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpSetLocalRotationsConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_lin2 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_lin2) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("lin2"),
-                                    );
-                                }
-                                m_lin2 = _serde::__private::Some(
-                                    match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_lin1 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_lin1) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("lin1"),
-                                    );
-                                }
-                                m_lin1 = _serde::__private::Some(
-                                    match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_lin0Soft => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_lin0Soft) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lin0Soft",
-                                        ),
-                                    );
-                                }
-                                m_lin0Soft = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpLinSoftConstraintAtom,
+                                        hkpSetLocalTransformsConstraintAtom,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -574,22 +480,116 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_suspensionBase => {
+                            __Field::m_lin0Soft => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_suspensionBase) {
+                                if _serde::__private::Option::is_some(&m_lin0Soft) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "suspensionBase",
+                                            "lin0Soft",
                                         ),
                                     );
                                 }
-                                m_suspensionBase = _serde::__private::Some(
+                                m_lin0Soft = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpSetLocalTransformsConstraintAtom,
+                                        hkpLinSoftConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lin1 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_lin1) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("lin1"),
+                                    );
+                                }
+                                m_lin1 = _serde::__private::Some(
+                                    match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lin2 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_lin2) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("lin2"),
+                                    );
+                                }
+                                m_lin2 = _serde::__private::Some(
+                                    match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_steeringBase => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_steeringBase) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "steeringBase",
+                                        ),
+                                    );
+                                }
+                                m_steeringBase = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpSetLocalRotationsConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_2dAng => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_2dAng) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
+                                    );
+                                }
+                                m_2dAng = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkp2dAngConstraintAtom,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -603,54 +603,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_2dAng = match m_2dAng {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("2dAng"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_steeringBase = match m_steeringBase {
+                    let m_suspensionBase = match m_suspensionBase {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "steeringBase",
+                                    "suspensionBase",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lin2 = match m_lin2 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("lin2"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lin1 = match m_lin1 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("lin1"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lin0Soft = match m_lin0Soft {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("lin0Soft"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -667,14 +627,54 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_suspensionBase = match m_suspensionBase {
+                    let m_lin0Soft = match m_lin0Soft {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("lin0Soft"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lin1 = match m_lin1 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("lin1"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lin2 = match m_lin2 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("lin2"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_steeringBase = match m_steeringBase {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "suspensionBase",
+                                    "steeringBase",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_2dAng = match m_2dAng {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("2dAng"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

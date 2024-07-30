@@ -139,16 +139,16 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_absoluteFloatTolerance,
-                m_scaleTolerance,
-                m_rotationTolerance,
-                m_relativePositionTolerance,
-                m_absolutePositionTolerance,
-                m_useOldStyleTruncation,
-                m_truncProp,
-                m_preserve,
-                m_blockSize,
                 m_quantizationBits,
+                m_blockSize,
+                m_preserve,
+                m_truncProp,
+                m_useOldStyleTruncation,
+                m_absolutePositionTolerance,
+                m_relativePositionTolerance,
+                m_rotationTolerance,
+                m_scaleTolerance,
+                m_absoluteFloatTolerance,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -172,20 +172,20 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "absoluteFloatTolerance" => Ok(__Field::m_absoluteFloatTolerance),
-                        "scaleTolerance" => Ok(__Field::m_scaleTolerance),
-                        "rotationTolerance" => Ok(__Field::m_rotationTolerance),
-                        "relativePositionTolerance" => {
-                            Ok(__Field::m_relativePositionTolerance)
-                        }
+                        "quantizationBits" => Ok(__Field::m_quantizationBits),
+                        "blockSize" => Ok(__Field::m_blockSize),
+                        "preserve" => Ok(__Field::m_preserve),
+                        "truncProp" => Ok(__Field::m_truncProp),
+                        "useOldStyleTruncation" => Ok(__Field::m_useOldStyleTruncation),
                         "absolutePositionTolerance" => {
                             Ok(__Field::m_absolutePositionTolerance)
                         }
-                        "useOldStyleTruncation" => Ok(__Field::m_useOldStyleTruncation),
-                        "truncProp" => Ok(__Field::m_truncProp),
-                        "preserve" => Ok(__Field::m_preserve),
-                        "blockSize" => Ok(__Field::m_blockSize),
-                        "quantizationBits" => Ok(__Field::m_quantizationBits),
+                        "relativePositionTolerance" => {
+                            Ok(__Field::m_relativePositionTolerance)
+                        }
+                        "rotationTolerance" => Ok(__Field::m_rotationTolerance),
+                        "scaleTolerance" => Ok(__Field::m_scaleTolerance),
+                        "absoluteFloatTolerance" => Ok(__Field::m_absoluteFloatTolerance),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -551,20 +551,20 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_absoluteFloatTolerance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_scaleTolerance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_rotationTolerance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_relativePositionTolerance: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
+                    let mut m_quantizationBits: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_blockSize: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_preserve: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_truncProp: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_useOldStyleTruncation: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_absolutePositionTolerance: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_useOldStyleTruncation: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_truncProp: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_preserve: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_blockSize: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_quantizationBits: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_relativePositionTolerance: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_rotationTolerance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_scaleTolerance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_absoluteFloatTolerance: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -574,23 +574,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_absoluteFloatTolerance => {
+                            __Field::m_quantizationBits => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_absoluteFloatTolerance,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_quantizationBits) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "absoluteFloatTolerance",
+                                            "quantizationBits",
                                         ),
                                     );
                                 }
-                                m_absoluteFloatTolerance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_quantizationBits = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -600,21 +598,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_scaleTolerance => {
+                            __Field::m_blockSize => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_scaleTolerance) {
+                                if _serde::__private::Option::is_some(&m_blockSize) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "scaleTolerance",
+                                            "blockSize",
                                         ),
                                     );
                                 }
-                                m_scaleTolerance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_blockSize = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -624,23 +622,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_rotationTolerance => {
+                            __Field::m_preserve => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_rotationTolerance,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_preserve) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rotationTolerance",
+                                            "preserve",
                                         ),
                                     );
                                 }
-                                m_rotationTolerance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_preserve = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -650,48 +646,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_relativePositionTolerance => {
+                            __Field::m_truncProp => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_relativePositionTolerance,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_truncProp) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "relativePositionTolerance",
+                                            "truncProp",
                                         ),
                                     );
                                 }
-                                m_relativePositionTolerance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_absolutePositionTolerance => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_absolutePositionTolerance,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "absolutePositionTolerance",
-                                        ),
-                                    );
-                                }
-                                m_absolutePositionTolerance = _serde::__private::Some(
+                                m_truncProp = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -728,20 +696,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_truncProp => {
+                            __Field::m_absolutePositionTolerance => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_truncProp) {
+                                if _serde::__private::Option::is_some(
+                                    &m_absolutePositionTolerance,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "truncProp",
+                                            "absolutePositionTolerance",
                                         ),
                                     );
                                 }
-                                m_truncProp = _serde::__private::Some(
+                                m_absolutePositionTolerance = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -752,21 +722,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_preserve => {
+                            __Field::m_relativePositionTolerance => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_preserve) {
+                                if _serde::__private::Option::is_some(
+                                    &m_relativePositionTolerance,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "preserve",
+                                            "relativePositionTolerance",
                                         ),
                                     );
                                 }
-                                m_preserve = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                m_relativePositionTolerance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -776,21 +748,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_blockSize => {
+                            __Field::m_rotationTolerance => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_blockSize) {
+                                if _serde::__private::Option::is_some(
+                                    &m_rotationTolerance,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "blockSize",
+                                            "rotationTolerance",
                                         ),
                                     );
                                 }
-                                m_blockSize = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                m_rotationTolerance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -800,21 +774,47 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_quantizationBits => {
+                            __Field::m_scaleTolerance => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_quantizationBits) {
+                                if _serde::__private::Option::is_some(&m_scaleTolerance) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "quantizationBits",
+                                            "scaleTolerance",
                                         ),
                                     );
                                 }
-                                m_quantizationBits = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                m_scaleTolerance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_absoluteFloatTolerance => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_absoluteFloatTolerance,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "absoluteFloatTolerance",
+                                        ),
+                                    );
+                                }
+                                m_absoluteFloatTolerance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -827,61 +827,47 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_absoluteFloatTolerance = match m_absoluteFloatTolerance {
+                    let m_quantizationBits = match m_quantizationBits {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "absoluteFloatTolerance",
+                                    "quantizationBits",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_scaleTolerance = match m_scaleTolerance {
+                    let m_blockSize = match m_blockSize {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "scaleTolerance",
+                                    "blockSize",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_rotationTolerance = match m_rotationTolerance {
+                    let m_preserve = match m_preserve {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "rotationTolerance",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("preserve"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_relativePositionTolerance = match m_relativePositionTolerance {
+                    let m_truncProp = match m_truncProp {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "relativePositionTolerance",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_absolutePositionTolerance = match m_absolutePositionTolerance {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "absolutePositionTolerance",
+                                    "truncProp",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -899,47 +885,61 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_truncProp = match m_truncProp {
+                    let m_absolutePositionTolerance = match m_absolutePositionTolerance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "truncProp",
+                                    "absolutePositionTolerance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_preserve = match m_preserve {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("preserve"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_blockSize = match m_blockSize {
+                    let m_relativePositionTolerance = match m_relativePositionTolerance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "blockSize",
+                                    "relativePositionTolerance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_quantizationBits = match m_quantizationBits {
+                    let m_rotationTolerance = match m_rotationTolerance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "quantizationBits",
+                                    "rotationTolerance",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_scaleTolerance = match m_scaleTolerance {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "scaleTolerance",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_absoluteFloatTolerance = match m_absoluteFloatTolerance {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "absoluteFloatTolerance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

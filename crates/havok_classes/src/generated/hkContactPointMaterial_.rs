@@ -88,11 +88,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_flags,
-                m_maxImpulse,
-                m_restitution,
-                m_friction,
                 m_userData,
+                m_friction,
+                m_restitution,
+                m_maxImpulse,
+                m_flags,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -116,11 +116,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "flags" => Ok(__Field::m_flags),
-                        "maxImpulse" => Ok(__Field::m_maxImpulse),
-                        "restitution" => Ok(__Field::m_restitution),
-                        "friction" => Ok(__Field::m_friction),
                         "userData" => Ok(__Field::m_userData),
+                        "friction" => Ok(__Field::m_friction),
+                        "restitution" => Ok(__Field::m_restitution),
+                        "maxImpulse" => Ok(__Field::m_maxImpulse),
+                        "flags" => Ok(__Field::m_flags),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -317,11 +317,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_flags: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_maxImpulse: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_restitution: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_friction: _serde::__private::Option<u8> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_friction: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_restitution: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_maxImpulse: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<u8> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -331,19 +331,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_flags => {
+                            __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_flags) {
+                                if _serde::__private::Option::is_some(&m_userData) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "userData",
+                                        ),
                                     );
                                 }
-                                m_flags = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                m_userData = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -353,20 +355,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxImpulse => {
+                            __Field::m_friction => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_maxImpulse) {
+                                if _serde::__private::Option::is_some(&m_friction) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxImpulse",
+                                            "friction",
                                         ),
                                     );
                                 }
-                                m_maxImpulse = _serde::__private::Some(
+                                m_friction = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -401,20 +403,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_friction => {
+                            __Field::m_maxImpulse => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_friction) {
+                                if _serde::__private::Option::is_some(&m_maxImpulse) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "friction",
+                                            "maxImpulse",
                                         ),
                                     );
                                 }
-                                m_friction = _serde::__private::Some(
+                                m_maxImpulse = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -425,21 +427,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_userData => {
+                            __Field::m_flags => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_userData) {
+                                if _serde::__private::Option::is_some(&m_flags) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "userData",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
                                     );
                                 }
-                                m_userData = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                m_flags = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -452,24 +452,22 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_flags = match m_flags {
+                    let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("flags"),
+                                <__A::Error as _serde::de::Error>::missing_field("userData"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxImpulse = match m_maxImpulse {
+                    let m_friction = match m_friction {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxImpulse",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("friction"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -486,22 +484,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_friction = match m_friction {
+                    let m_maxImpulse = match m_maxImpulse {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("friction"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxImpulse",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_userData = match m_userData {
+                    let m_flags = match m_flags {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("userData"),
+                                <__A::Error as _serde::de::Error>::missing_field("flags"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

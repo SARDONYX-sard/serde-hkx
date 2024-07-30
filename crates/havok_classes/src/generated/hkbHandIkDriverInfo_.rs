@@ -77,8 +77,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_fadeInOutCurve,
                 m_hands,
+                m_fadeInOutCurve,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -102,8 +102,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "fadeInOutCurve" => Ok(__Field::m_fadeInOutCurve),
                         "hands" => Ok(__Field::m_hands),
+                        "fadeInOutCurve" => Ok(__Field::m_fadeInOutCurve),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -223,10 +223,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_fadeInOutCurve: _serde::__private::Option<BlendCurve> = _serde::__private::None;
                     let mut m_hands: _serde::__private::Option<
                         Vec<hkbHandIkDriverInfoHand<'de>>,
                     > = _serde::__private::None;
+                    let mut m_fadeInOutCurve: _serde::__private::Option<BlendCurve> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -236,30 +236,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_fadeInOutCurve => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_fadeInOutCurve) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fadeInOutCurve",
-                                        ),
-                                    );
-                                }
-                                m_fadeInOutCurve = _serde::__private::Some(
-                                    match __A::next_value::<BlendCurve>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_hands => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -284,9 +260,43 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_fadeInOutCurve => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_fadeInOutCurve) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "fadeInOutCurve",
+                                        ),
+                                    );
+                                }
+                                m_fadeInOutCurve = _serde::__private::Some(
+                                    match __A::next_value::<BlendCurve>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
+                    let m_hands = match m_hands {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("hands"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
                     let m_fadeInOutCurve = match m_fadeInOutCurve {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -295,16 +305,6 @@ const _: () = {
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "fadeInOutCurve",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_hands = match m_hands {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("hands"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

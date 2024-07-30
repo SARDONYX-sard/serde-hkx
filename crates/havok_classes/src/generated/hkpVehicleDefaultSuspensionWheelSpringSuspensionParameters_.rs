@@ -82,9 +82,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_dampingRelaxation,
-                m_dampingCompression,
                 m_strength,
+                m_dampingCompression,
+                m_dampingRelaxation,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -108,9 +108,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "dampingRelaxation" => Ok(__Field::m_dampingRelaxation),
-                        "dampingCompression" => Ok(__Field::m_dampingCompression),
                         "strength" => Ok(__Field::m_strength),
+                        "dampingCompression" => Ok(__Field::m_dampingCompression),
+                        "dampingRelaxation" => Ok(__Field::m_dampingRelaxation),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -265,9 +265,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_dampingRelaxation: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_dampingCompression: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_strength: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_dampingCompression: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_dampingRelaxation: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -277,22 +277,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_dampingRelaxation => {
+                            __Field::m_strength => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_dampingRelaxation,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_strength) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "dampingRelaxation",
+                                            "strength",
                                         ),
                                     );
                                 }
-                                m_dampingRelaxation = _serde::__private::Some(
+                                m_strength = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -329,20 +327,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_strength => {
+                            __Field::m_dampingRelaxation => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_strength) {
+                                if _serde::__private::Option::is_some(
+                                    &m_dampingRelaxation,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "strength",
+                                            "dampingRelaxation",
                                         ),
                                     );
                                 }
-                                m_strength = _serde::__private::Some(
+                                m_dampingRelaxation = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -356,14 +356,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_dampingRelaxation = match m_dampingRelaxation {
+                    let m_strength = match m_strength {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "dampingRelaxation",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("strength"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -380,12 +378,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_strength = match m_strength {
+                    let m_dampingRelaxation = match m_dampingRelaxation {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("strength"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "dampingRelaxation",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

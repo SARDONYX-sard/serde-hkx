@@ -84,9 +84,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_chains,
-                m_targets,
                 m_links,
+                m_targets,
+                m_chains,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -110,9 +110,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "chains" => Ok(__Field::m_chains),
-                        "targets" => Ok(__Field::m_targets),
                         "links" => Ok(__Field::m_links),
+                        "targets" => Ok(__Field::m_targets),
+                        "chains" => Ok(__Field::m_chains),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -258,13 +258,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_chains: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_targets: _serde::__private::Option<
-                        Vec<hkpPoweredChainMapperTarget>,
-                    > = _serde::__private::None;
                     let mut m_links: _serde::__private::Option<
                         Vec<hkpPoweredChainMapperLinkInfo>,
                     > = _serde::__private::None;
+                    let mut m_targets: _serde::__private::Option<
+                        Vec<hkpPoweredChainMapperTarget>,
+                    > = _serde::__private::None;
+                    let mut m_chains: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -274,19 +274,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_chains => {
+                            __Field::m_links => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_chains) {
+                                if _serde::__private::Option::is_some(&m_links) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("chains"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("links"),
                                     );
                                 }
-                                m_chains = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                m_links = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkpPoweredChainMapperLinkInfo>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -322,21 +324,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_links => {
+                            __Field::m_chains => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_links) {
+                                if _serde::__private::Option::is_some(&m_chains) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("links"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("chains"),
                                     );
                                 }
-                                m_links = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkpPoweredChainMapperLinkInfo>,
-                                    >(&mut __map) {
+                                m_chains = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -349,12 +349,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_chains = match m_chains {
+                    let m_links = match m_links {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("chains"),
+                                <__A::Error as _serde::de::Error>::missing_field("links"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -369,12 +369,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_links = match m_links {
+                    let m_chains = match m_chains {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("links"),
+                                <__A::Error as _serde::de::Error>::missing_field("chains"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

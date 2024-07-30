@@ -69,8 +69,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_cogWheels,
                 m_transforms,
+                m_cogWheels,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -94,8 +94,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "cogWheels" => Ok(__Field::m_cogWheels),
                         "transforms" => Ok(__Field::m_transforms),
+                        "cogWheels" => Ok(__Field::m_cogWheels),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -221,11 +221,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_cogWheels: _serde::__private::Option<
-                        hkpCogWheelConstraintAtom,
-                    > = _serde::__private::None;
                     let mut m_transforms: _serde::__private::Option<
                         hkpSetLocalTransformsConstraintAtom,
+                    > = _serde::__private::None;
+                    let mut m_cogWheels: _serde::__private::Option<
+                        hkpCogWheelConstraintAtom,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
@@ -236,32 +236,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_cogWheels => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_cogWheels) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "cogWheels",
-                                        ),
-                                    );
-                                }
-                                m_cogWheels = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpCogWheelConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_transforms => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -288,21 +262,35 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_cogWheels => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_cogWheels) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "cogWheels",
+                                        ),
+                                    );
+                                }
+                                m_cogWheels = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpCogWheelConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_cogWheels = match m_cogWheels {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "cogWheels",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_transforms = match m_transforms {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -310,6 +298,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "transforms",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_cogWheels = match m_cogWheels {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "cogWheels",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

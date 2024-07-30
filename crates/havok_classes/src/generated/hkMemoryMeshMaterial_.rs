@@ -80,8 +80,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_textures,
                 m_materialName,
+                m_textures,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -105,8 +105,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "textures" => Ok(__Field::m_textures),
                         "materialName" => Ok(__Field::m_materialName),
+                        "textures" => Ok(__Field::m_textures),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -223,8 +223,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_textures: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     let mut m_materialName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_textures: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -234,30 +234,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_textures => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_textures) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "textures",
-                                        ),
-                                    );
-                                }
-                                m_textures = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_materialName => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -282,19 +258,33 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_textures => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_textures) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "textures",
+                                        ),
+                                    );
+                                }
+                                m_textures = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_textures = match m_textures {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("textures"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_materialName = match m_materialName {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -303,6 +293,16 @@ const _: () = {
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "materialName",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_textures = match m_textures {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("textures"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

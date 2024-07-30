@@ -83,8 +83,8 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_collectionType,
                 m_disableWelding,
+                m_collectionType,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -109,8 +109,8 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
-                        "collectionType" => Ok(__Field::m_collectionType),
                         "disableWelding" => Ok(__Field::m_disableWelding),
+                        "collectionType" => Ok(__Field::m_collectionType),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -234,10 +234,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_disableWelding: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_collectionType: _serde::__private::Option<
                         CollectionType,
                     > = _serde::__private::None;
-                    let mut m_disableWelding: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -271,30 +271,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_collectionType => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_collectionType) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "collectionType",
-                                        ),
-                                    );
-                                }
-                                m_collectionType = _serde::__private::Some(
-                                    match __A::next_value::<CollectionType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_disableWelding => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -319,6 +295,30 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_collectionType => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_collectionType) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "collectionType",
+                                        ),
+                                    );
+                                }
+                                m_collectionType = _serde::__private::Some(
+                                    match __A::next_value::<CollectionType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
@@ -332,18 +332,6 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_collectionType = match m_collectionType {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "collectionType",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_disableWelding = match m_disableWelding {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -351,6 +339,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "disableWelding",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_collectionType = match m_collectionType {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "collectionType",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

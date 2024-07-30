@@ -110,13 +110,13 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_textureCoordChannel,
-                m_usageHint,
-                m_filterMode,
-                m_hasMipMaps,
-                m_format,
-                m_data,
                 m_filename,
+                m_data,
+                m_format,
+                m_hasMipMaps,
+                m_filterMode,
+                m_usageHint,
+                m_textureCoordChannel,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -140,13 +140,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "textureCoordChannel" => Ok(__Field::m_textureCoordChannel),
-                        "usageHint" => Ok(__Field::m_usageHint),
-                        "filterMode" => Ok(__Field::m_filterMode),
-                        "hasMipMaps" => Ok(__Field::m_hasMipMaps),
-                        "format" => Ok(__Field::m_format),
-                        "data" => Ok(__Field::m_data),
                         "filename" => Ok(__Field::m_filename),
+                        "data" => Ok(__Field::m_data),
+                        "format" => Ok(__Field::m_format),
+                        "hasMipMaps" => Ok(__Field::m_hasMipMaps),
+                        "filterMode" => Ok(__Field::m_filterMode),
+                        "usageHint" => Ok(__Field::m_usageHint),
+                        "textureCoordChannel" => Ok(__Field::m_textureCoordChannel),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -402,13 +402,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_textureCoordChannel: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_usageHint: _serde::__private::Option<TextureUsageType> = _serde::__private::None;
-                    let mut m_filterMode: _serde::__private::Option<FilterMode> = _serde::__private::None;
-                    let mut m_hasMipMaps: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_format: _serde::__private::Option<Format> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
                     let mut m_filename: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_format: _serde::__private::Option<Format> = _serde::__private::None;
+                    let mut m_hasMipMaps: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_filterMode: _serde::__private::Option<FilterMode> = _serde::__private::None;
+                    let mut m_usageHint: _serde::__private::Option<TextureUsageType> = _serde::__private::None;
+                    let mut m_textureCoordChannel: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -418,23 +418,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_textureCoordChannel => {
+                            __Field::m_filename => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_textureCoordChannel,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_filename) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "textureCoordChannel",
+                                            "filename",
                                         ),
                                     );
                                 }
-                                m_textureCoordChannel = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_filename = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -444,21 +442,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_usageHint => {
+                            __Field::m_data => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_usageHint) {
+                                if _serde::__private::Option::is_some(&m_data) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "usageHint",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
                                     );
                                 }
-                                m_usageHint = _serde::__private::Some(
-                                    match __A::next_value::<TextureUsageType>(&mut __map) {
+                                m_data = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u8>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -468,21 +464,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_filterMode => {
+                            __Field::m_format => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_filterMode) {
+                                if _serde::__private::Option::is_some(&m_format) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "filterMode",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("format"),
                                     );
                                 }
-                                m_filterMode = _serde::__private::Some(
-                                    match __A::next_value::<FilterMode>(&mut __map) {
+                                m_format = _serde::__private::Some(
+                                    match __A::next_value::<Format>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -516,65 +510,71 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_format => {
+                            __Field::m_filterMode => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_format) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("format"),
-                                    );
-                                }
-                                m_format = _serde::__private::Some(
-                                    match __A::next_value::<Format>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_data => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_data) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
-                                    );
-                                }
-                                m_data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_filename => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_filename) {
+                                if _serde::__private::Option::is_some(&m_filterMode) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "filename",
+                                            "filterMode",
                                         ),
                                     );
                                 }
-                                m_filename = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_filterMode = _serde::__private::Some(
+                                    match __A::next_value::<FilterMode>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_usageHint => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_usageHint) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "usageHint",
+                                        ),
+                                    );
+                                }
+                                m_usageHint = _serde::__private::Some(
+                                    match __A::next_value::<TextureUsageType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_textureCoordChannel => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_textureCoordChannel,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "textureCoordChannel",
+                                        ),
+                                    );
+                                }
+                                m_textureCoordChannel = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -587,25 +587,43 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_textureCoordChannel = match m_textureCoordChannel {
+                    let m_filename = match m_filename {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "textureCoordChannel",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("filename"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_usageHint = match m_usageHint {
+                    let m_data = match m_data {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("data"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_format = match m_format {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("format"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_hasMipMaps = match m_hasMipMaps {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "usageHint",
+                                    "hasMipMaps",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -623,44 +641,26 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_hasMipMaps = match m_hasMipMaps {
+                    let m_usageHint = match m_usageHint {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "hasMipMaps",
+                                    "usageHint",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_format = match m_format {
+                    let m_textureCoordChannel = match m_textureCoordChannel {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("format"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_data = match m_data {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("data"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_filename = match m_filename {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("filename"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "textureCoordChannel",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -177,22 +177,22 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_vdbColor,
-                m_hardSupportDistance,
-                m_supportDistance,
-                m_maxSpeedForSimplexSolver,
-                m_unweldingHeightOffsetFactor,
-                m_maxForce,
-                m_maxSlope,
-                m_up,
-                m_allowedPenetrationDepth,
-                m_maxLinearVelocity,
-                m_friction,
-                m_mass,
-                m_rotation,
-                m_position,
-                m_shape,
                 m_collisionFilterInfo,
+                m_shape,
+                m_position,
+                m_rotation,
+                m_mass,
+                m_friction,
+                m_maxLinearVelocity,
+                m_allowedPenetrationDepth,
+                m_up,
+                m_maxSlope,
+                m_maxForce,
+                m_unweldingHeightOffsetFactor,
+                m_maxSpeedForSimplexSolver,
+                m_supportDistance,
+                m_hardSupportDistance,
+                m_vdbColor,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -216,28 +216,28 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "vdbColor" => Ok(__Field::m_vdbColor),
-                        "hardSupportDistance" => Ok(__Field::m_hardSupportDistance),
-                        "supportDistance" => Ok(__Field::m_supportDistance),
-                        "maxSpeedForSimplexSolver" => {
-                            Ok(__Field::m_maxSpeedForSimplexSolver)
-                        }
-                        "unweldingHeightOffsetFactor" => {
-                            Ok(__Field::m_unweldingHeightOffsetFactor)
-                        }
-                        "maxForce" => Ok(__Field::m_maxForce),
-                        "maxSlope" => Ok(__Field::m_maxSlope),
-                        "up" => Ok(__Field::m_up),
+                        "collisionFilterInfo" => Ok(__Field::m_collisionFilterInfo),
+                        "shape" => Ok(__Field::m_shape),
+                        "position" => Ok(__Field::m_position),
+                        "rotation" => Ok(__Field::m_rotation),
+                        "mass" => Ok(__Field::m_mass),
+                        "friction" => Ok(__Field::m_friction),
+                        "maxLinearVelocity" => Ok(__Field::m_maxLinearVelocity),
                         "allowedPenetrationDepth" => {
                             Ok(__Field::m_allowedPenetrationDepth)
                         }
-                        "maxLinearVelocity" => Ok(__Field::m_maxLinearVelocity),
-                        "friction" => Ok(__Field::m_friction),
-                        "mass" => Ok(__Field::m_mass),
-                        "rotation" => Ok(__Field::m_rotation),
-                        "position" => Ok(__Field::m_position),
-                        "shape" => Ok(__Field::m_shape),
-                        "collisionFilterInfo" => Ok(__Field::m_collisionFilterInfo),
+                        "up" => Ok(__Field::m_up),
+                        "maxSlope" => Ok(__Field::m_maxSlope),
+                        "maxForce" => Ok(__Field::m_maxForce),
+                        "unweldingHeightOffsetFactor" => {
+                            Ok(__Field::m_unweldingHeightOffsetFactor)
+                        }
+                        "maxSpeedForSimplexSolver" => {
+                            Ok(__Field::m_maxSpeedForSimplexSolver)
+                        }
+                        "supportDistance" => Ok(__Field::m_supportDistance),
+                        "hardSupportDistance" => Ok(__Field::m_hardSupportDistance),
+                        "vdbColor" => Ok(__Field::m_vdbColor),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -755,24 +755,24 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_vdbColor: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_hardSupportDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_supportDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxSpeedForSimplexSolver: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_position: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_rotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
+                    let mut m_mass: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_friction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxLinearVelocity: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_allowedPenetrationDepth: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_up: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_maxSlope: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxForce: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_unweldingHeightOffsetFactor: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_maxForce: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxSlope: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_up: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_allowedPenetrationDepth: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxLinearVelocity: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_friction: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_mass: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_rotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
-                    let mut m_position: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_maxSpeedForSimplexSolver: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_supportDistance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_hardSupportDistance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_vdbColor: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -782,47 +782,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_vdbColor => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vdbColor) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vdbColor",
-                                        ),
-                                    );
-                                }
-                                m_vdbColor = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_hardSupportDistance => {
+                            __Field::m_collisionFilterInfo => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_hardSupportDistance,
+                                    &m_collisionFilterInfo,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "hardSupportDistance",
+                                            "collisionFilterInfo",
                                         ),
                                     );
                                 }
-                                m_hardSupportDistance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_collisionFilterInfo = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -832,142 +808,42 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_supportDistance => {
+                            __Field::m_shape => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_supportDistance) {
+                                if _serde::__private::Option::is_some(&m_shape) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
+                                    );
+                                }
+                                m_shape = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_position => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_position) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "supportDistance",
+                                            "position",
                                         ),
                                     );
                                 }
-                                m_supportDistance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxSpeedForSimplexSolver => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxSpeedForSimplexSolver,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxSpeedForSimplexSolver",
-                                        ),
-                                    );
-                                }
-                                m_maxSpeedForSimplexSolver = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_unweldingHeightOffsetFactor => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_unweldingHeightOffsetFactor,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "unweldingHeightOffsetFactor",
-                                        ),
-                                    );
-                                }
-                                m_unweldingHeightOffsetFactor = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxForce => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_maxForce) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxForce",
-                                        ),
-                                    );
-                                }
-                                m_maxForce = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxSlope => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_maxSlope) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxSlope",
-                                        ),
-                                    );
-                                }
-                                m_maxSlope = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_up => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_up) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("up"),
-                                    );
-                                }
-                                m_up = _serde::__private::Some(
+                                m_position = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -978,22 +854,66 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_allowedPenetrationDepth => {
+                            __Field::m_rotation => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_allowedPenetrationDepth,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_rotation) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "allowedPenetrationDepth",
+                                            "rotation",
                                         ),
                                     );
                                 }
-                                m_allowedPenetrationDepth = _serde::__private::Some(
+                                m_rotation = _serde::__private::Some(
+                                    match __A::next_value::<Quaternion>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_mass => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_mass) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("mass"),
+                                    );
+                                }
+                                m_mass = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_friction => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_friction) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "friction",
+                                        ),
+                                    );
+                                }
+                                m_friction = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1030,20 +950,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_friction => {
+                            __Field::m_allowedPenetrationDepth => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_friction) {
+                                if _serde::__private::Option::is_some(
+                                    &m_allowedPenetrationDepth,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "friction",
+                                            "allowedPenetrationDepth",
                                         ),
                                     );
                                 }
-                                m_friction = _serde::__private::Some(
+                                m_allowedPenetrationDepth = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1054,66 +976,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_mass => {
+                            __Field::m_up => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_mass) {
+                                if _serde::__private::Option::is_some(&m_up) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("mass"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("up"),
                                     );
                                 }
-                                m_mass = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_rotation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rotation) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rotation",
-                                        ),
-                                    );
-                                }
-                                m_rotation = _serde::__private::Some(
-                                    match __A::next_value::<Quaternion>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_position => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_position) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "position",
-                                        ),
-                                    );
-                                }
-                                m_position = _serde::__private::Some(
+                                m_up = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1124,19 +998,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_shape => {
+                            __Field::m_maxSlope => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_shape) {
+                                if _serde::__private::Option::is_some(&m_maxSlope) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxSlope",
+                                        ),
                                     );
                                 }
-                                m_shape = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_maxSlope = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1146,23 +1022,147 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_collisionFilterInfo => {
+                            __Field::m_maxForce => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_maxForce) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxForce",
+                                        ),
+                                    );
+                                }
+                                m_maxForce = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_unweldingHeightOffsetFactor => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_collisionFilterInfo,
+                                    &m_unweldingHeightOffsetFactor,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "collisionFilterInfo",
+                                            "unweldingHeightOffsetFactor",
                                         ),
                                     );
                                 }
-                                m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                m_unweldingHeightOffsetFactor = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxSpeedForSimplexSolver => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxSpeedForSimplexSolver,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxSpeedForSimplexSolver",
+                                        ),
+                                    );
+                                }
+                                m_maxSpeedForSimplexSolver = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_supportDistance => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_supportDistance) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "supportDistance",
+                                        ),
+                                    );
+                                }
+                                m_supportDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_hardSupportDistance => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_hardSupportDistance,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "hardSupportDistance",
+                                        ),
+                                    );
+                                }
+                                m_hardSupportDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vdbColor => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vdbColor) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vdbColor",
+                                        ),
+                                    );
+                                }
+                                m_vdbColor = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1175,35 +1175,129 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_vdbColor = match m_vdbColor {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("vdbColor"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_hardSupportDistance = match m_hardSupportDistance {
+                    let m_collisionFilterInfo = match m_collisionFilterInfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "hardSupportDistance",
+                                    "collisionFilterInfo",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_supportDistance = match m_supportDistance {
+                    let m_shape = match m_shape {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("shape"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_position = match m_position {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("position"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_rotation = match m_rotation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("rotation"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_mass = match m_mass {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("mass"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_friction = match m_friction {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("friction"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxLinearVelocity = match m_maxLinearVelocity {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "supportDistance",
+                                    "maxLinearVelocity",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_allowedPenetrationDepth = match m_allowedPenetrationDepth {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "allowedPenetrationDepth",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_up = match m_up {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("up"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxSlope = match m_maxSlope {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("maxSlope"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxForce = match m_maxForce {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("maxForce"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_unweldingHeightOffsetFactor = match m_unweldingHeightOffsetFactor {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "unweldingHeightOffsetFactor",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1221,130 +1315,36 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_unweldingHeightOffsetFactor = match m_unweldingHeightOffsetFactor {
+                    let m_supportDistance = match m_supportDistance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "unweldingHeightOffsetFactor",
+                                    "supportDistance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxForce = match m_maxForce {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("maxForce"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxSlope = match m_maxSlope {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("maxSlope"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_up = match m_up {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("up"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_allowedPenetrationDepth = match m_allowedPenetrationDepth {
+                    let m_hardSupportDistance = match m_hardSupportDistance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "allowedPenetrationDepth",
+                                    "hardSupportDistance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxLinearVelocity = match m_maxLinearVelocity {
+                    let m_vdbColor = match m_vdbColor {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxLinearVelocity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_friction = match m_friction {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("friction"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_mass = match m_mass {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("mass"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_rotation = match m_rotation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("rotation"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_position = match m_position {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("position"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_shape = match m_shape {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("shape"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_collisionFilterInfo = match m_collisionFilterInfo {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "collisionFilterInfo",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("vdbColor"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

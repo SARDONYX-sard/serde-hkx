@@ -106,15 +106,15 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_collectionType,
                 m_disableWelding,
-                m_pad,
-                m_radius,
-                m_weldingType,
-                m_weldingInfo,
-                m_subparts,
-                m_numBitsForSubpartIndex,
+                m_collectionType,
                 m_scaling,
+                m_numBitsForSubpartIndex,
+                m_subparts,
+                m_weldingInfo,
+                m_weldingType,
+                m_radius,
+                m_pad,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -139,15 +139,15 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
-                        "collectionType" => Ok(__Field::m_collectionType),
                         "disableWelding" => Ok(__Field::m_disableWelding),
-                        "pad" => Ok(__Field::m_pad),
-                        "radius" => Ok(__Field::m_radius),
-                        "weldingType" => Ok(__Field::m_weldingType),
-                        "weldingInfo" => Ok(__Field::m_weldingInfo),
-                        "subparts" => Ok(__Field::m_subparts),
-                        "numBitsForSubpartIndex" => Ok(__Field::m_numBitsForSubpartIndex),
+                        "collectionType" => Ok(__Field::m_collectionType),
                         "scaling" => Ok(__Field::m_scaling),
+                        "numBitsForSubpartIndex" => Ok(__Field::m_numBitsForSubpartIndex),
+                        "subparts" => Ok(__Field::m_subparts),
+                        "weldingInfo" => Ok(__Field::m_weldingInfo),
+                        "weldingType" => Ok(__Field::m_weldingType),
+                        "radius" => Ok(__Field::m_radius),
+                        "pad" => Ok(__Field::m_pad),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -206,19 +206,19 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_disableWelding: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_collectionType: _serde::__private::Option<
                         CollectionType,
                     > = _serde::__private::None;
-                    let mut m_disableWelding: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_pad: _serde::__private::Option<[i32; 3usize]> = _serde::__private::None;
-                    let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
-                    let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_scaling: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_numBitsForSubpartIndex: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_subparts: _serde::__private::Option<
                         Vec<hkpMeshShapeSubpart>,
                     > = _serde::__private::None;
-                    let mut m_numBitsForSubpartIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_scaling: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
+                    let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_pad: _serde::__private::Option<[i32; 3usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -252,30 +252,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_collectionType => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_collectionType) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "collectionType",
-                                        ),
-                                    );
-                                }
-                                m_collectionType = _serde::__private::Some(
-                                    match __A::next_value::<CollectionType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_disableWelding => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -300,65 +276,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_pad => {
+                            __Field::m_collectionType => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_pad) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("pad"),
-                                    );
-                                }
-                                m_pad = _serde::__private::Some(
-                                    match __A::next_value::<[i32; 3usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_radius => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_radius) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("radius"),
-                                    );
-                                }
-                                m_radius = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_weldingType => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_weldingType) {
+                                if _serde::__private::Option::is_some(&m_collectionType) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "weldingType",
+                                            "collectionType",
                                         ),
                                     );
                                 }
-                                m_weldingType = _serde::__private::Some(
-                                    match __A::next_value::<WeldingType>(&mut __map) {
+                                m_collectionType = _serde::__private::Some(
+                                    match __A::next_value::<CollectionType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -368,47 +300,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_weldingInfo => {
+                            __Field::m_scaling => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_weldingInfo) {
+                                if _serde::__private::Option::is_some(&m_scaling) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "weldingInfo",
+                                            "scaling",
                                         ),
                                     );
                                 }
-                                m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_subparts => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_subparts) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "subparts",
-                                        ),
-                                    );
-                                }
-                                m_subparts = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkpMeshShapeSubpart>,
-                                    >(&mut __map) {
+                                m_scaling = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -444,21 +350,115 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_scaling => {
+                            __Field::m_subparts => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_scaling) {
+                                if _serde::__private::Option::is_some(&m_subparts) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "scaling",
+                                            "subparts",
                                         ),
                                     );
                                 }
-                                m_scaling = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_subparts = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkpMeshShapeSubpart>,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_weldingInfo => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_weldingInfo) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "weldingInfo",
+                                        ),
+                                    );
+                                }
+                                m_weldingInfo = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_weldingType => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_weldingType) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "weldingType",
+                                        ),
+                                    );
+                                }
+                                m_weldingType = _serde::__private::Some(
+                                    match __A::next_value::<WeldingType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_radius => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_radius) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("radius"),
+                                    );
+                                }
+                                m_radius = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_pad => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_pad) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("pad"),
+                                    );
+                                }
+                                m_pad = _serde::__private::Some(
+                                    match __A::next_value::<[i32; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -481,18 +481,6 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_collectionType = match m_collectionType {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "collectionType",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_disableWelding = match m_disableWelding {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -505,56 +493,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_pad = match m_pad {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("pad"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_radius = match m_radius {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("radius"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_weldingType = match m_weldingType {
+                    let m_collectionType = match m_collectionType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "weldingType",
+                                    "collectionType",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_weldingInfo = match m_weldingInfo {
+                    let m_scaling = match m_scaling {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "weldingInfo",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_subparts = match m_subparts {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("subparts"),
+                                <__A::Error as _serde::de::Error>::missing_field("scaling"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -571,12 +527,56 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_scaling = match m_scaling {
+                    let m_subparts = match m_subparts {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("scaling"),
+                                <__A::Error as _serde::de::Error>::missing_field("subparts"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_weldingInfo = match m_weldingInfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "weldingInfo",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_weldingType = match m_weldingType {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "weldingType",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_radius = match m_radius {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("radius"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_pad = match m_pad {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("pad"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

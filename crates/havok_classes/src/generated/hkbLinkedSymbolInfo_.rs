@@ -78,8 +78,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_variableNames,
                 m_eventNames,
+                m_variableNames,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -103,8 +103,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "variableNames" => Ok(__Field::m_variableNames),
                         "eventNames" => Ok(__Field::m_eventNames),
+                        "variableNames" => Ok(__Field::m_variableNames),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -227,10 +227,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableNames: _serde::__private::Option<
+                    let mut m_eventNames: _serde::__private::Option<
                         Vec<StringPtr<'de>>,
                     > = _serde::__private::None;
-                    let mut m_eventNames: _serde::__private::Option<
+                    let mut m_variableNames: _serde::__private::Option<
                         Vec<StringPtr<'de>>,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -242,30 +242,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_variableNames => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_variableNames) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "variableNames",
-                                        ),
-                                    );
-                                }
-                                m_variableNames = _serde::__private::Some(
-                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_eventNames => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -290,21 +266,33 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_variableNames => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_variableNames) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableNames",
+                                        ),
+                                    );
+                                }
+                                m_variableNames = _serde::__private::Some(
+                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_variableNames = match m_variableNames {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "variableNames",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_eventNames = match m_eventNames {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -312,6 +300,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "eventNames",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_variableNames = match m_variableNames {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableNames",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

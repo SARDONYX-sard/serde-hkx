@@ -99,11 +99,11 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_maxForce,
                 m_minForce,
-                m_useVelocityTargetFromConstraintTargets,
-                m_velocityTarget,
+                m_maxForce,
                 m_tau,
+                m_velocityTarget,
+                m_useVelocityTargetFromConstraintTargets,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -128,13 +128,13 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "maxForce" => Ok(__Field::m_maxForce),
                         "minForce" => Ok(__Field::m_minForce),
+                        "maxForce" => Ok(__Field::m_maxForce),
+                        "tau" => Ok(__Field::m_tau),
+                        "velocityTarget" => Ok(__Field::m_velocityTarget),
                         "useVelocityTargetFromConstraintTargets" => {
                             Ok(__Field::m_useVelocityTargetFromConstraintTargets)
                         }
-                        "velocityTarget" => Ok(__Field::m_velocityTarget),
-                        "tau" => Ok(__Field::m_tau),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -285,13 +285,13 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<MotorType> = _serde::__private::None;
-                    let mut m_maxForce: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minForce: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxForce: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_tau: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_velocityTarget: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_useVelocityTargetFromConstraintTargets: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_velocityTarget: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_tau: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -314,6 +314,30 @@ const _: () = {
                                 }
                                 m_type = _serde::__private::Some(
                                     match __A::next_value::<MotorType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_minForce => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_minForce) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "minForce",
+                                        ),
+                                    );
+                                }
+                                m_minForce = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -347,20 +371,42 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_minForce => {
+                            __Field::m_tau => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_minForce) {
+                                if _serde::__private::Option::is_some(&m_tau) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("tau"),
+                                    );
+                                }
+                                m_tau = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_velocityTarget => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_velocityTarget) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "minForce",
+                                            "velocityTarget",
                                         ),
                                     );
                                 }
-                                m_minForce = _serde::__private::Some(
+                                m_velocityTarget = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -397,52 +443,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_velocityTarget => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_velocityTarget) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "velocityTarget",
-                                        ),
-                                    );
-                                }
-                                m_velocityTarget = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_tau => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_tau) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("tau"),
-                                    );
-                                }
-                                m_tau = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             _ => {}
                         }
                     }
@@ -452,16 +452,6 @@ const _: () = {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("type"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxForce = match m_maxForce {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("maxForce"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -476,14 +466,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_useVelocityTargetFromConstraintTargets = match m_useVelocityTargetFromConstraintTargets {
+                    let m_maxForce = match m_maxForce {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "useVelocityTargetFromConstraintTargets",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("maxForce"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_tau = match m_tau {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("tau"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -500,12 +498,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_tau = match m_tau {
+                    let m_useVelocityTargetFromConstraintTargets = match m_useVelocityTargetFromConstraintTargets {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("tau"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "useVelocityTargetFromConstraintTargets",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

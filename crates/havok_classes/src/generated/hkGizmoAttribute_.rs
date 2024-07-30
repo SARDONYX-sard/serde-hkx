@@ -78,9 +78,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_type,
-                m_label,
                 m_visible,
+                m_label,
+                m_type,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -104,9 +104,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "type" => Ok(__Field::m_type),
-                        "label" => Ok(__Field::m_label),
                         "visible" => Ok(__Field::m_visible),
+                        "label" => Ok(__Field::m_label),
+                        "type" => Ok(__Field::m_type),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -244,9 +244,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_type: _serde::__private::Option<GizmoType> = _serde::__private::None;
-                    let mut m_label: _serde::__private::Option<CString<'de>> = _serde::__private::None;
                     let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_label: _serde::__private::Option<CString<'de>> = _serde::__private::None;
+                    let mut m_type: _serde::__private::Option<GizmoType> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -256,19 +256,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_type => {
+                            __Field::m_visible => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_type) {
+                                if _serde::__private::Option::is_some(&m_visible) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("type"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "visible",
+                                        ),
                                     );
                                 }
-                                m_type = _serde::__private::Some(
-                                    match __A::next_value::<GizmoType>(&mut __map) {
+                                m_visible = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -300,21 +302,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_visible => {
+                            __Field::m_type => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_visible) {
+                                if _serde::__private::Option::is_some(&m_type) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "visible",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("type"),
                                     );
                                 }
-                                m_visible = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_type = _serde::__private::Some(
+                                    match __A::next_value::<GizmoType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -327,12 +327,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_type = match m_type {
+                    let m_visible = match m_visible {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("type"),
+                                <__A::Error as _serde::de::Error>::missing_field("visible"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -347,12 +347,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_visible = match m_visible {
+                    let m_type = match m_type {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("visible"),
+                                <__A::Error as _serde::de::Error>::missing_field("type"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

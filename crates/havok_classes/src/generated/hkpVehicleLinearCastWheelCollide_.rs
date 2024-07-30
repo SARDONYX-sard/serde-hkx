@@ -111,11 +111,11 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_alreadyUsed,
-                m_startPointTolerance,
-                m_maxExtraPenetration,
-                m_rejectChassisListener,
-                m_wheelStates,
                 m_wheelCollisionFilterInfo,
+                m_wheelStates,
+                m_rejectChassisListener,
+                m_maxExtraPenetration,
+                m_startPointTolerance,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -140,13 +140,13 @@ const _: () = {
                 {
                     match __value {
                         "alreadyUsed" => Ok(__Field::m_alreadyUsed),
-                        "startPointTolerance" => Ok(__Field::m_startPointTolerance),
-                        "maxExtraPenetration" => Ok(__Field::m_maxExtraPenetration),
-                        "rejectChassisListener" => Ok(__Field::m_rejectChassisListener),
-                        "wheelStates" => Ok(__Field::m_wheelStates),
                         "wheelCollisionFilterInfo" => {
                             Ok(__Field::m_wheelCollisionFilterInfo)
                         }
+                        "wheelStates" => Ok(__Field::m_wheelStates),
+                        "rejectChassisListener" => Ok(__Field::m_rejectChassisListener),
+                        "maxExtraPenetration" => Ok(__Field::m_maxExtraPenetration),
+                        "startPointTolerance" => Ok(__Field::m_startPointTolerance),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -371,15 +371,15 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_alreadyUsed: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_startPointTolerance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxExtraPenetration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_rejectChassisListener: _serde::__private::Option<
-                        hkpRejectChassisListener,
-                    > = _serde::__private::None;
+                    let mut m_wheelCollisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
                     let mut m_wheelStates: _serde::__private::Option<
                         Vec<hkpVehicleLinearCastWheelCollideWheelState>,
                     > = _serde::__private::None;
-                    let mut m_wheelCollisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_rejectChassisListener: _serde::__private::Option<
+                        hkpRejectChassisListener,
+                    > = _serde::__private::None;
+                    let mut m_maxExtraPenetration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_startPointTolerance: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -413,23 +413,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_startPointTolerance => {
+                            __Field::m_wheelCollisionFilterInfo => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_startPointTolerance,
+                                    &m_wheelCollisionFilterInfo,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "startPointTolerance",
+                                            "wheelCollisionFilterInfo",
                                         ),
                                     );
                                 }
-                                m_startPointTolerance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_wheelCollisionFilterInfo = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -439,23 +439,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxExtraPenetration => {
+                            __Field::m_wheelStates => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxExtraPenetration,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_wheelStates) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxExtraPenetration",
+                                            "wheelStates",
                                         ),
                                     );
                                 }
-                                m_maxExtraPenetration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_wheelStates = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkpVehicleLinearCastWheelCollideWheelState>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -493,23 +493,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_wheelStates => {
+                            __Field::m_maxExtraPenetration => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_wheelStates) {
+                                if _serde::__private::Option::is_some(
+                                    &m_maxExtraPenetration,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelStates",
+                                            "maxExtraPenetration",
                                         ),
                                     );
                                 }
-                                m_wheelStates = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkpVehicleLinearCastWheelCollideWheelState>,
-                                    >(&mut __map) {
+                                m_maxExtraPenetration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -519,23 +519,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_wheelCollisionFilterInfo => {
+                            __Field::m_startPointTolerance => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_wheelCollisionFilterInfo,
+                                    &m_startPointTolerance,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelCollisionFilterInfo",
+                                            "startPointTolerance",
                                         ),
                                     );
                                 }
-                                m_wheelCollisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                m_startPointTolerance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -560,37 +560,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_startPointTolerance = match m_startPointTolerance {
+                    let m_wheelCollisionFilterInfo = match m_wheelCollisionFilterInfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "startPointTolerance",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxExtraPenetration = match m_maxExtraPenetration {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxExtraPenetration",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_rejectChassisListener = match m_rejectChassisListener {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "rejectChassisListener",
+                                    "wheelCollisionFilterInfo",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -608,13 +584,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_wheelCollisionFilterInfo = match m_wheelCollisionFilterInfo {
+                    let m_rejectChassisListener = match m_rejectChassisListener {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelCollisionFilterInfo",
+                                    "rejectChassisListener",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxExtraPenetration = match m_maxExtraPenetration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxExtraPenetration",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_startPointTolerance = match m_startPointTolerance {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "startPointTolerance",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

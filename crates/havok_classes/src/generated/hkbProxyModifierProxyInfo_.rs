@@ -160,20 +160,20 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_refreshManifoldInCheckSupport,
-                m_maxCastIterations,
-                m_penetrationRecoverySpeed,
-                m_maxSlope,
-                m_characterMass,
-                m_characterStrength,
-                m_maxCharacterSpeedForSolver,
-                m_userPlanes,
-                m_contactAngleSensitivity,
-                m_keepDistance,
-                m_up,
-                m_keepContactTolerance,
-                m_staticFriction,
                 m_dynamicFriction,
+                m_staticFriction,
+                m_keepContactTolerance,
+                m_up,
+                m_keepDistance,
+                m_contactAngleSensitivity,
+                m_userPlanes,
+                m_maxCharacterSpeedForSolver,
+                m_characterStrength,
+                m_characterMass,
+                m_maxSlope,
+                m_penetrationRecoverySpeed,
+                m_maxCastIterations,
+                m_refreshManifoldInCheckSupport,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -197,28 +197,28 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "refreshManifoldInCheckSupport" => {
-                            Ok(__Field::m_refreshManifoldInCheckSupport)
-                        }
-                        "maxCastIterations" => Ok(__Field::m_maxCastIterations),
-                        "penetrationRecoverySpeed" => {
-                            Ok(__Field::m_penetrationRecoverySpeed)
-                        }
-                        "maxSlope" => Ok(__Field::m_maxSlope),
-                        "characterMass" => Ok(__Field::m_characterMass),
-                        "characterStrength" => Ok(__Field::m_characterStrength),
-                        "maxCharacterSpeedForSolver" => {
-                            Ok(__Field::m_maxCharacterSpeedForSolver)
-                        }
-                        "userPlanes" => Ok(__Field::m_userPlanes),
+                        "dynamicFriction" => Ok(__Field::m_dynamicFriction),
+                        "staticFriction" => Ok(__Field::m_staticFriction),
+                        "keepContactTolerance" => Ok(__Field::m_keepContactTolerance),
+                        "up" => Ok(__Field::m_up),
+                        "keepDistance" => Ok(__Field::m_keepDistance),
                         "contactAngleSensitivity" => {
                             Ok(__Field::m_contactAngleSensitivity)
                         }
-                        "keepDistance" => Ok(__Field::m_keepDistance),
-                        "up" => Ok(__Field::m_up),
-                        "keepContactTolerance" => Ok(__Field::m_keepContactTolerance),
-                        "staticFriction" => Ok(__Field::m_staticFriction),
-                        "dynamicFriction" => Ok(__Field::m_dynamicFriction),
+                        "userPlanes" => Ok(__Field::m_userPlanes),
+                        "maxCharacterSpeedForSolver" => {
+                            Ok(__Field::m_maxCharacterSpeedForSolver)
+                        }
+                        "characterStrength" => Ok(__Field::m_characterStrength),
+                        "characterMass" => Ok(__Field::m_characterMass),
+                        "maxSlope" => Ok(__Field::m_maxSlope),
+                        "penetrationRecoverySpeed" => {
+                            Ok(__Field::m_penetrationRecoverySpeed)
+                        }
+                        "maxCastIterations" => Ok(__Field::m_maxCastIterations),
+                        "refreshManifoldInCheckSupport" => {
+                            Ok(__Field::m_refreshManifoldInCheckSupport)
+                        }
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -698,24 +698,24 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_refreshManifoldInCheckSupport: _serde::__private::Option<
-                        bool,
-                    > = _serde::__private::None;
-                    let mut m_maxCastIterations: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_penetrationRecoverySpeed: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxSlope: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_characterMass: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_characterStrength: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_dynamicFriction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_staticFriction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_keepContactTolerance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_up: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_keepDistance: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_contactAngleSensitivity: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_userPlanes: _serde::__private::Option<u32> = _serde::__private::None;
                     let mut m_maxCharacterSpeedForSolver: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_userPlanes: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_contactAngleSensitivity: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_keepDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_up: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_keepContactTolerance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_staticFriction: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_dynamicFriction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_characterStrength: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_characterMass: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxSlope: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_penetrationRecoverySpeed: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxCastIterations: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_refreshManifoldInCheckSupport: _serde::__private::Option<
+                        bool,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -725,74 +725,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_refreshManifoldInCheckSupport => {
+                            __Field::m_dynamicFriction => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_refreshManifoldInCheckSupport,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_dynamicFriction) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "refreshManifoldInCheckSupport",
+                                            "dynamicFriction",
                                         ),
                                     );
                                 }
-                                m_refreshManifoldInCheckSupport = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxCastIterations => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxCastIterations,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxCastIterations",
-                                        ),
-                                    );
-                                }
-                                m_maxCastIterations = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_penetrationRecoverySpeed => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_penetrationRecoverySpeed,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "penetrationRecoverySpeed",
-                                        ),
-                                    );
-                                }
-                                m_penetrationRecoverySpeed = _serde::__private::Some(
+                                m_dynamicFriction = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -803,20 +749,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxSlope => {
+                            __Field::m_staticFriction => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_maxSlope) {
+                                if _serde::__private::Option::is_some(&m_staticFriction) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxSlope",
+                                            "staticFriction",
                                         ),
                                     );
                                 }
-                                m_maxSlope = _serde::__private::Some(
+                                m_staticFriction = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -827,20 +773,144 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_characterMass => {
+                            __Field::m_keepContactTolerance => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_characterMass) {
+                                if _serde::__private::Option::is_some(
+                                    &m_keepContactTolerance,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "characterMass",
+                                            "keepContactTolerance",
                                         ),
                                     );
                                 }
-                                m_characterMass = _serde::__private::Some(
+                                m_keepContactTolerance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_up => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_up) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("up"),
+                                    );
+                                }
+                                m_up = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_keepDistance => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_keepDistance) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "keepDistance",
+                                        ),
+                                    );
+                                }
+                                m_keepDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_contactAngleSensitivity => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_contactAngleSensitivity,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contactAngleSensitivity",
+                                        ),
+                                    );
+                                }
+                                m_contactAngleSensitivity = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_userPlanes => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_userPlanes) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "userPlanes",
+                                        ),
+                                    );
+                                }
+                                m_userPlanes = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxCharacterSpeedForSolver => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxCharacterSpeedForSolver,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxCharacterSpeedForSolver",
+                                        ),
+                                    );
+                                }
+                                m_maxCharacterSpeedForSolver = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -877,22 +947,70 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxCharacterSpeedForSolver => {
+                            __Field::m_characterMass => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_characterMass) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "characterMass",
+                                        ),
+                                    );
+                                }
+                                m_characterMass = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxSlope => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_maxSlope) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxSlope",
+                                        ),
+                                    );
+                                }
+                                m_maxSlope = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_penetrationRecoverySpeed => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_maxCharacterSpeedForSolver,
+                                    &m_penetrationRecoverySpeed,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxCharacterSpeedForSolver",
+                                            "penetrationRecoverySpeed",
                                         ),
                                     );
                                 }
-                                m_maxCharacterSpeedForSolver = _serde::__private::Some(
+                                m_penetrationRecoverySpeed = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -903,47 +1021,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_userPlanes => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_userPlanes) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "userPlanes",
-                                        ),
-                                    );
-                                }
-                                m_userPlanes = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_contactAngleSensitivity => {
+                            __Field::m_maxCastIterations => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_contactAngleSensitivity,
+                                    &m_maxCastIterations,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "contactAngleSensitivity",
+                                            "maxCastIterations",
                                         ),
                                     );
                                 }
-                                m_contactAngleSensitivity = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_maxCastIterations = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -953,117 +1047,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_keepDistance => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_keepDistance) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "keepDistance",
-                                        ),
-                                    );
-                                }
-                                m_keepDistance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_up => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_up) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("up"),
-                                    );
-                                }
-                                m_up = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_keepContactTolerance => {
+                            __Field::m_refreshManifoldInCheckSupport => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_keepContactTolerance,
+                                    &m_refreshManifoldInCheckSupport,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "keepContactTolerance",
+                                            "refreshManifoldInCheckSupport",
                                         ),
                                     );
                                 }
-                                m_keepContactTolerance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_staticFriction => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_staticFriction) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "staticFriction",
-                                        ),
-                                    );
-                                }
-                                m_staticFriction = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_dynamicFriction => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_dynamicFriction) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "dynamicFriction",
-                                        ),
-                                    );
-                                }
-                                m_dynamicFriction = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_refreshManifoldInCheckSupport = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1076,141 +1076,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_refreshManifoldInCheckSupport = match m_refreshManifoldInCheckSupport {
+                    let m_dynamicFriction = match m_dynamicFriction {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "refreshManifoldInCheckSupport",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxCastIterations = match m_maxCastIterations {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxCastIterations",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_penetrationRecoverySpeed = match m_penetrationRecoverySpeed {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "penetrationRecoverySpeed",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxSlope = match m_maxSlope {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("maxSlope"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_characterMass = match m_characterMass {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterMass",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_characterStrength = match m_characterStrength {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterStrength",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxCharacterSpeedForSolver = match m_maxCharacterSpeedForSolver {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxCharacterSpeedForSolver",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_userPlanes = match m_userPlanes {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "userPlanes",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_contactAngleSensitivity = match m_contactAngleSensitivity {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "contactAngleSensitivity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_keepDistance = match m_keepDistance {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "keepDistance",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_up = match m_up {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("up"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_keepContactTolerance = match m_keepContactTolerance {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "keepContactTolerance",
+                                    "dynamicFriction",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1228,13 +1100,141 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_dynamicFriction = match m_dynamicFriction {
+                    let m_keepContactTolerance = match m_keepContactTolerance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "dynamicFriction",
+                                    "keepContactTolerance",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_up = match m_up {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("up"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_keepDistance = match m_keepDistance {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "keepDistance",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_contactAngleSensitivity = match m_contactAngleSensitivity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contactAngleSensitivity",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_userPlanes = match m_userPlanes {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "userPlanes",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxCharacterSpeedForSolver = match m_maxCharacterSpeedForSolver {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxCharacterSpeedForSolver",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_characterStrength = match m_characterStrength {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "characterStrength",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_characterMass = match m_characterMass {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "characterMass",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxSlope = match m_maxSlope {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("maxSlope"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_penetrationRecoverySpeed = match m_penetrationRecoverySpeed {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "penetrationRecoverySpeed",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxCastIterations = match m_maxCastIterations {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxCastIterations",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_refreshManifoldInCheckSupport = match m_refreshManifoldInCheckSupport {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "refreshManifoldInCheckSupport",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

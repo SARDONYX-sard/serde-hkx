@@ -88,9 +88,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_length,
-                m_directionChassisSpace,
                 m_hardpointChassisSpace,
+                m_directionChassisSpace,
+                m_length,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -114,9 +114,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "length" => Ok(__Field::m_length),
-                        "directionChassisSpace" => Ok(__Field::m_directionChassisSpace),
                         "hardpointChassisSpace" => Ok(__Field::m_hardpointChassisSpace),
+                        "directionChassisSpace" => Ok(__Field::m_directionChassisSpace),
+                        "length" => Ok(__Field::m_length),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -270,13 +270,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_length: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_directionChassisSpace: _serde::__private::Option<
-                        Vector4,
-                    > = _serde::__private::None;
                     let mut m_hardpointChassisSpace: _serde::__private::Option<
                         Vector4,
                     > = _serde::__private::None;
+                    let mut m_directionChassisSpace: _serde::__private::Option<
+                        Vector4,
+                    > = _serde::__private::None;
+                    let mut m_length: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -286,19 +286,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_length => {
+                            __Field::m_hardpointChassisSpace => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_length) {
+                                if _serde::__private::Option::is_some(
+                                    &m_hardpointChassisSpace,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("length"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "hardpointChassisSpace",
+                                        ),
                                     );
                                 }
-                                m_length = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_hardpointChassisSpace = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -334,23 +338,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_hardpointChassisSpace => {
+                            __Field::m_length => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_hardpointChassisSpace,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_length) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "hardpointChassisSpace",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("length"),
                                     );
                                 }
-                                m_hardpointChassisSpace = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_length = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -363,12 +363,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_length = match m_length {
+                    let m_hardpointChassisSpace = match m_hardpointChassisSpace {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("length"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "hardpointChassisSpace",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -385,14 +387,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_hardpointChassisSpace = match m_hardpointChassisSpace {
+                    let m_length = match m_length {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "hardpointChassisSpace",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("length"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

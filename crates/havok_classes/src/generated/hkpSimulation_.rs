@@ -127,15 +127,15 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_previousStepResult,
-                m_frameMarkerPsiSnap,
-                m_simulateUntilTime,
-                m_physicsDeltaTime,
-                m_currentPsiTime,
-                m_currentTime,
-                m_lastProcessingStep,
-                m_world,
                 m_determinismCheckFrameCounter,
+                m_world,
+                m_lastProcessingStep,
+                m_currentTime,
+                m_currentPsiTime,
+                m_physicsDeltaTime,
+                m_simulateUntilTime,
+                m_frameMarkerPsiSnap,
+                m_previousStepResult,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -159,17 +159,17 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "previousStepResult" => Ok(__Field::m_previousStepResult),
-                        "frameMarkerPsiSnap" => Ok(__Field::m_frameMarkerPsiSnap),
-                        "simulateUntilTime" => Ok(__Field::m_simulateUntilTime),
-                        "physicsDeltaTime" => Ok(__Field::m_physicsDeltaTime),
-                        "currentPsiTime" => Ok(__Field::m_currentPsiTime),
-                        "currentTime" => Ok(__Field::m_currentTime),
-                        "lastProcessingStep" => Ok(__Field::m_lastProcessingStep),
-                        "world" => Ok(__Field::m_world),
                         "determinismCheckFrameCounter" => {
                             Ok(__Field::m_determinismCheckFrameCounter)
                         }
+                        "world" => Ok(__Field::m_world),
+                        "lastProcessingStep" => Ok(__Field::m_lastProcessingStep),
+                        "currentTime" => Ok(__Field::m_currentTime),
+                        "currentPsiTime" => Ok(__Field::m_currentPsiTime),
+                        "physicsDeltaTime" => Ok(__Field::m_physicsDeltaTime),
+                        "simulateUntilTime" => Ok(__Field::m_simulateUntilTime),
+                        "frameMarkerPsiSnap" => Ok(__Field::m_frameMarkerPsiSnap),
+                        "previousStepResult" => Ok(__Field::m_previousStepResult),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -501,19 +501,19 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_previousStepResult: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_frameMarkerPsiSnap: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_simulateUntilTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_physicsDeltaTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_currentPsiTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_currentTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_lastProcessingStep: _serde::__private::Option<
-                        LastProcessingStep,
-                    > = _serde::__private::None;
-                    let mut m_world: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_determinismCheckFrameCounter: _serde::__private::Option<
                         u32,
                     > = _serde::__private::None;
+                    let mut m_world: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_lastProcessingStep: _serde::__private::Option<
+                        LastProcessingStep,
+                    > = _serde::__private::None;
+                    let mut m_currentTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_currentPsiTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_physicsDeltaTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_simulateUntilTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_frameMarkerPsiSnap: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_previousStepResult: _serde::__private::Option<u32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -523,22 +523,22 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_previousStepResult => {
+                            __Field::m_determinismCheckFrameCounter => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_previousStepResult,
+                                    &m_determinismCheckFrameCounter,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "previousStepResult",
+                                            "determinismCheckFrameCounter",
                                         ),
                                     );
                                 }
-                                m_previousStepResult = _serde::__private::Some(
+                                m_determinismCheckFrameCounter = _serde::__private::Some(
                                     match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -549,22 +549,116 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_frameMarkerPsiSnap => {
+                            __Field::m_world => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_world) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("world"),
+                                    );
+                                }
+                                m_world = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lastProcessingStep => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_frameMarkerPsiSnap,
+                                    &m_lastProcessingStep,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "frameMarkerPsiSnap",
+                                            "lastProcessingStep",
                                         ),
                                     );
                                 }
-                                m_frameMarkerPsiSnap = _serde::__private::Some(
+                                m_lastProcessingStep = _serde::__private::Some(
+                                    match __A::next_value::<LastProcessingStep>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_currentTime => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_currentTime) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "currentTime",
+                                        ),
+                                    );
+                                }
+                                m_currentTime = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_currentPsiTime => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_currentPsiTime) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "currentPsiTime",
+                                        ),
+                                    );
+                                }
+                                m_currentPsiTime = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_physicsDeltaTime => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_physicsDeltaTime) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "physicsDeltaTime",
+                                        ),
+                                    );
+                                }
+                                m_physicsDeltaTime = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -601,95 +695,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_physicsDeltaTime => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_physicsDeltaTime) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "physicsDeltaTime",
-                                        ),
-                                    );
-                                }
-                                m_physicsDeltaTime = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_currentPsiTime => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_currentPsiTime) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "currentPsiTime",
-                                        ),
-                                    );
-                                }
-                                m_currentPsiTime = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_currentTime => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_currentTime) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "currentTime",
-                                        ),
-                                    );
-                                }
-                                m_currentTime = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_lastProcessingStep => {
+                            __Field::m_frameMarkerPsiSnap => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_lastProcessingStep,
+                                    &m_frameMarkerPsiSnap,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lastProcessingStep",
+                                            "frameMarkerPsiSnap",
                                         ),
                                     );
                                 }
-                                m_lastProcessingStep = _serde::__private::Some(
-                                    match __A::next_value::<LastProcessingStep>(&mut __map) {
+                                m_frameMarkerPsiSnap = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -699,44 +721,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_world => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_world) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("world"),
-                                    );
-                                }
-                                m_world = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_determinismCheckFrameCounter => {
+                            __Field::m_previousStepResult => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_determinismCheckFrameCounter,
+                                    &m_previousStepResult,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "determinismCheckFrameCounter",
+                                            "previousStepResult",
                                         ),
                                     );
                                 }
-                                m_determinismCheckFrameCounter = _serde::__private::Some(
+                                m_previousStepResult = _serde::__private::Some(
                                     match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -750,61 +750,35 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_previousStepResult = match m_previousStepResult {
+                    let m_determinismCheckFrameCounter = match m_determinismCheckFrameCounter {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "previousStepResult",
+                                    "determinismCheckFrameCounter",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_frameMarkerPsiSnap = match m_frameMarkerPsiSnap {
+                    let m_world = match m_world {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "frameMarkerPsiSnap",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("world"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_simulateUntilTime = match m_simulateUntilTime {
+                    let m_lastProcessingStep = match m_lastProcessingStep {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "simulateUntilTime",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_physicsDeltaTime = match m_physicsDeltaTime {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "physicsDeltaTime",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_currentPsiTime = match m_currentPsiTime {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "currentPsiTime",
+                                    "lastProcessingStep",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -822,35 +796,61 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_lastProcessingStep = match m_lastProcessingStep {
+                    let m_currentPsiTime = match m_currentPsiTime {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "lastProcessingStep",
+                                    "currentPsiTime",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_world = match m_world {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("world"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_determinismCheckFrameCounter = match m_determinismCheckFrameCounter {
+                    let m_physicsDeltaTime = match m_physicsDeltaTime {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "determinismCheckFrameCounter",
+                                    "physicsDeltaTime",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_simulateUntilTime = match m_simulateUntilTime {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "simulateUntilTime",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_frameMarkerPsiSnap = match m_frameMarkerPsiSnap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "frameMarkerPsiSnap",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_previousStepResult = match m_previousStepResult {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "previousStepResult",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

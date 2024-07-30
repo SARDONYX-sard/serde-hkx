@@ -110,12 +110,12 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_maxErrorDistance,
-                m_cfm,
-                m_damping,
-                m_tau,
-                m_infos,
                 m_atoms,
+                m_infos,
+                m_tau,
+                m_damping,
+                m_cfm,
+                m_maxErrorDistance,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -140,12 +140,12 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
-                        "maxErrorDistance" => Ok(__Field::m_maxErrorDistance),
-                        "cfm" => Ok(__Field::m_cfm),
-                        "damping" => Ok(__Field::m_damping),
-                        "tau" => Ok(__Field::m_tau),
-                        "infos" => Ok(__Field::m_infos),
                         "atoms" => Ok(__Field::m_atoms),
+                        "infos" => Ok(__Field::m_infos),
+                        "tau" => Ok(__Field::m_tau),
+                        "damping" => Ok(__Field::m_damping),
+                        "cfm" => Ok(__Field::m_cfm),
+                        "maxErrorDistance" => Ok(__Field::m_maxErrorDistance),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -367,14 +367,14 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_maxErrorDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_cfm: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_damping: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_tau: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
                     let mut m_infos: _serde::__private::Option<
                         Vec<hkpBallSocketChainDataConstraintInfo>,
                     > = _serde::__private::None;
-                    let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
+                    let mut m_tau: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_damping: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_cfm: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxErrorDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -408,21 +408,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxErrorDistance => {
+                            __Field::m_atoms => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_maxErrorDistance) {
+                                if _serde::__private::Option::is_some(&m_atoms) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxErrorDistance",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
                                     );
                                 }
-                                m_maxErrorDistance = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_atoms = _serde::__private::Some(
+                                    match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -432,18 +430,42 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_cfm => {
+                            __Field::m_infos => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_cfm) {
+                                if _serde::__private::Option::is_some(&m_infos) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("cfm"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("infos"),
                                     );
                                 }
-                                m_cfm = _serde::__private::Some(
+                                m_infos = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkpBallSocketChainDataConstraintInfo>,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_tau => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_tau) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("tau"),
+                                    );
+                                }
+                                m_tau = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -478,18 +500,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_tau => {
+                            __Field::m_cfm => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_tau) {
+                                if _serde::__private::Option::is_some(&m_cfm) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("tau"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("cfm"),
                                     );
                                 }
-                                m_tau = _serde::__private::Some(
+                                m_cfm = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -500,43 +522,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_infos => {
+                            __Field::m_maxErrorDistance => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_infos) {
+                                if _serde::__private::Option::is_some(&m_maxErrorDistance) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("infos"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxErrorDistance",
+                                        ),
                                     );
                                 }
-                                m_infos = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkpBallSocketChainDataConstraintInfo>,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_atoms => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_atoms) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
-                                    );
-                                }
-                                m_atoms = _serde::__private::Some(
-                                    match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
+                                m_maxErrorDistance = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -559,44 +559,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxErrorDistance = match m_maxErrorDistance {
+                    let m_atoms = match m_atoms {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxErrorDistance",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_cfm = match m_cfm {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("cfm"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_damping = match m_damping {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("damping"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_tau = match m_tau {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("tau"),
+                                <__A::Error as _serde::de::Error>::missing_field("atoms"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -611,12 +579,44 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_atoms = match m_atoms {
+                    let m_tau = match m_tau {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("atoms"),
+                                <__A::Error as _serde::de::Error>::missing_field("tau"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_damping = match m_damping {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("damping"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_cfm = match m_cfm {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("cfm"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxErrorDistance = match m_maxErrorDistance {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxErrorDistance",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

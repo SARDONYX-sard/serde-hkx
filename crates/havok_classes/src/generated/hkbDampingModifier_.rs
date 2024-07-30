@@ -187,22 +187,22 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
+                m_name,
                 m_enable,
-                m_previousError,
-                m_errorSum,
-                m_vecPreviousError,
-                m_vecErrorSum,
-                m_dampedVector,
-                m_rawVector,
-                m_dampedValue,
-                m_rawValue,
-                m_enableVectorDamping,
-                m_enableScalarDamping,
-                m_kD,
-                m_kI,
                 m_kP,
+                m_kI,
+                m_kD,
+                m_enableScalarDamping,
+                m_enableVectorDamping,
+                m_rawValue,
+                m_dampedValue,
+                m_rawVector,
+                m_dampedVector,
+                m_vecErrorSum,
+                m_vecPreviousError,
+                m_errorSum,
+                m_previousError,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -227,22 +227,22 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
+                        "name" => Ok(__Field::m_name),
                         "enable" => Ok(__Field::m_enable),
-                        "previousError" => Ok(__Field::m_previousError),
-                        "errorSum" => Ok(__Field::m_errorSum),
-                        "vecPreviousError" => Ok(__Field::m_vecPreviousError),
-                        "vecErrorSum" => Ok(__Field::m_vecErrorSum),
-                        "dampedVector" => Ok(__Field::m_dampedVector),
-                        "rawVector" => Ok(__Field::m_rawVector),
-                        "dampedValue" => Ok(__Field::m_dampedValue),
-                        "rawValue" => Ok(__Field::m_rawValue),
-                        "enableVectorDamping" => Ok(__Field::m_enableVectorDamping),
-                        "enableScalarDamping" => Ok(__Field::m_enableScalarDamping),
-                        "kD" => Ok(__Field::m_kD),
-                        "kI" => Ok(__Field::m_kI),
                         "kP" => Ok(__Field::m_kP),
+                        "kI" => Ok(__Field::m_kI),
+                        "kD" => Ok(__Field::m_kD),
+                        "enableScalarDamping" => Ok(__Field::m_enableScalarDamping),
+                        "enableVectorDamping" => Ok(__Field::m_enableVectorDamping),
+                        "rawValue" => Ok(__Field::m_rawValue),
+                        "dampedValue" => Ok(__Field::m_dampedValue),
+                        "rawVector" => Ok(__Field::m_rawVector),
+                        "dampedVector" => Ok(__Field::m_dampedVector),
+                        "vecErrorSum" => Ok(__Field::m_vecErrorSum),
+                        "vecPreviousError" => Ok(__Field::m_vecPreviousError),
+                        "errorSum" => Ok(__Field::m_errorSum),
+                        "previousError" => Ok(__Field::m_previousError),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -672,22 +672,22 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_previousError: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_errorSum: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_vecPreviousError: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_vecErrorSum: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_dampedVector: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_rawVector: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_dampedValue: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_rawValue: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_enableVectorDamping: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_enableScalarDamping: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_kD: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_kI: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_kP: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_kI: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_kD: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_enableScalarDamping: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_enableVectorDamping: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_rawValue: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_dampedValue: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_rawVector: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_dampedVector: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_vecErrorSum: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_vecPreviousError: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_errorSum: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_previousError: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -723,28 +723,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -760,6 +738,28 @@ const _: () = {
                                 }
                                 m_userData = _serde::__private::Some(
                                     match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -791,20 +791,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_previousError => {
+                            __Field::m_kP => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_previousError) {
+                                if _serde::__private::Option::is_some(&m_kP) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "previousError",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("kP"),
                                     );
                                 }
-                                m_previousError = _serde::__private::Some(
+                                m_kP = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -815,20 +813,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_errorSum => {
+                            __Field::m_kI => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_errorSum) {
+                                if _serde::__private::Option::is_some(&m_kI) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "errorSum",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("kI"),
                                     );
                                 }
-                                m_errorSum = _serde::__private::Some(
+                                m_kI = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -839,167 +835,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vecPreviousError => {
+                            __Field::m_kD => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_vecPreviousError) {
+                                if _serde::__private::Option::is_some(&m_kD) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vecPreviousError",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("kD"),
                                     );
                                 }
-                                m_vecPreviousError = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_vecErrorSum => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vecErrorSum) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vecErrorSum",
-                                        ),
-                                    );
-                                }
-                                m_vecErrorSum = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_dampedVector => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_dampedVector) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "dampedVector",
-                                        ),
-                                    );
-                                }
-                                m_dampedVector = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_rawVector => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rawVector) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rawVector",
-                                        ),
-                                    );
-                                }
-                                m_rawVector = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_dampedValue => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_dampedValue) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "dampedValue",
-                                        ),
-                                    );
-                                }
-                                m_dampedValue = _serde::__private::Some(
+                                m_kD = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_rawValue => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rawValue) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rawValue",
-                                        ),
-                                    );
-                                }
-                                m_rawValue = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_enableVectorDamping => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_enableVectorDamping,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "enableVectorDamping",
-                                        ),
-                                    );
-                                }
-                                m_enableVectorDamping = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1035,18 +883,46 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_kD => {
+                            __Field::m_enableVectorDamping => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_kD) {
+                                if _serde::__private::Option::is_some(
+                                    &m_enableVectorDamping,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("kD"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "enableVectorDamping",
+                                        ),
                                     );
                                 }
-                                m_kD = _serde::__private::Some(
+                                m_enableVectorDamping = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_rawValue => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_rawValue) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rawValue",
+                                        ),
+                                    );
+                                }
+                                m_rawValue = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1057,18 +933,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_kI => {
+                            __Field::m_dampedValue => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_kI) {
+                                if _serde::__private::Option::is_some(&m_dampedValue) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("kI"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "dampedValue",
+                                        ),
                                     );
                                 }
-                                m_kI = _serde::__private::Some(
+                                m_dampedValue = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1079,18 +957,140 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_kP => {
+                            __Field::m_rawVector => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_kP) {
+                                if _serde::__private::Option::is_some(&m_rawVector) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("kP"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rawVector",
+                                        ),
                                     );
                                 }
-                                m_kP = _serde::__private::Some(
+                                m_rawVector = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_dampedVector => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_dampedVector) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "dampedVector",
+                                        ),
+                                    );
+                                }
+                                m_dampedVector = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vecErrorSum => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vecErrorSum) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vecErrorSum",
+                                        ),
+                                    );
+                                }
+                                m_vecErrorSum = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vecPreviousError => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vecPreviousError) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vecPreviousError",
+                                        ),
+                                    );
+                                }
+                                m_vecPreviousError = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_errorSum => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_errorSum) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "errorSum",
+                                        ),
+                                    );
+                                }
+                                m_errorSum = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_previousError => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_previousError) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "previousError",
+                                        ),
+                                    );
+                                }
+                                m_previousError = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1116,22 +1116,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -1146,59 +1146,77 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_previousError = match m_previousError {
+                    let m_kP = match m_kP {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("kP"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_kI = match m_kI {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("kI"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_kD = match m_kD {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("kD"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_enableScalarDamping = match m_enableScalarDamping {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "previousError",
+                                    "enableScalarDamping",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_errorSum = match m_errorSum {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("errorSum"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vecPreviousError = match m_vecPreviousError {
+                    let m_enableVectorDamping = match m_enableVectorDamping {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "vecPreviousError",
+                                    "enableVectorDamping",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_vecErrorSum = match m_vecErrorSum {
+                    let m_rawValue = match m_rawValue {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "vecErrorSum",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("rawValue"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_dampedVector = match m_dampedVector {
+                    let m_dampedValue = match m_dampedValue {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "dampedVector",
+                                    "dampedValue",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1216,78 +1234,60 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_dampedValue = match m_dampedValue {
+                    let m_dampedVector = match m_dampedVector {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "dampedValue",
+                                    "dampedVector",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_rawValue = match m_rawValue {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("rawValue"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_enableVectorDamping = match m_enableVectorDamping {
+                    let m_vecErrorSum = match m_vecErrorSum {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "enableVectorDamping",
+                                    "vecErrorSum",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_enableScalarDamping = match m_enableScalarDamping {
+                    let m_vecPreviousError = match m_vecPreviousError {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "enableScalarDamping",
+                                    "vecPreviousError",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_kD = match m_kD {
+                    let m_errorSum = match m_errorSum {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("kD"),
+                                <__A::Error as _serde::de::Error>::missing_field("errorSum"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_kI = match m_kI {
+                    let m_previousError = match m_previousError {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("kI"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_kP = match m_kP {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("kP"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "previousError",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

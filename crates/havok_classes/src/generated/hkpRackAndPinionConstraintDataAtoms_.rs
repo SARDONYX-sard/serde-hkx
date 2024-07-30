@@ -70,8 +70,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_rackAndPinion,
                 m_transforms,
+                m_rackAndPinion,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -95,8 +95,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "rackAndPinion" => Ok(__Field::m_rackAndPinion),
                         "transforms" => Ok(__Field::m_transforms),
+                        "rackAndPinion" => Ok(__Field::m_rackAndPinion),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -225,11 +225,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_rackAndPinion: _serde::__private::Option<
-                        hkpRackAndPinionConstraintAtom,
-                    > = _serde::__private::None;
                     let mut m_transforms: _serde::__private::Option<
                         hkpSetLocalTransformsConstraintAtom,
+                    > = _serde::__private::None;
+                    let mut m_rackAndPinion: _serde::__private::Option<
+                        hkpRackAndPinionConstraintAtom,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
@@ -240,32 +240,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_rackAndPinion => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rackAndPinion) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rackAndPinion",
-                                        ),
-                                    );
-                                }
-                                m_rackAndPinion = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpRackAndPinionConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_transforms => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -292,21 +266,35 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_rackAndPinion => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_rackAndPinion) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rackAndPinion",
+                                        ),
+                                    );
+                                }
+                                m_rackAndPinion = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpRackAndPinionConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_rackAndPinion = match m_rackAndPinion {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "rackAndPinion",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_transforms = match m_transforms {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -314,6 +302,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "transforms",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_rackAndPinion = match m_rackAndPinion {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "rackAndPinion",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

@@ -128,17 +128,17 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_uint8Stride,
-                m_uint16Stride,
-                m_uint32Stride,
-                m_floatStride,
-                m_vectorStride,
-                m_numVerts,
-                m_uint8Data,
-                m_uint16Data,
-                m_uint32Data,
-                m_floatData,
                 m_vectorData,
+                m_floatData,
+                m_uint32Data,
+                m_uint16Data,
+                m_uint8Data,
+                m_numVerts,
+                m_vectorStride,
+                m_floatStride,
+                m_uint32Stride,
+                m_uint16Stride,
+                m_uint8Stride,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -162,17 +162,17 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "uint8Stride" => Ok(__Field::m_uint8Stride),
-                        "uint16Stride" => Ok(__Field::m_uint16Stride),
-                        "uint32Stride" => Ok(__Field::m_uint32Stride),
-                        "floatStride" => Ok(__Field::m_floatStride),
-                        "vectorStride" => Ok(__Field::m_vectorStride),
-                        "numVerts" => Ok(__Field::m_numVerts),
-                        "uint8Data" => Ok(__Field::m_uint8Data),
-                        "uint16Data" => Ok(__Field::m_uint16Data),
-                        "uint32Data" => Ok(__Field::m_uint32Data),
-                        "floatData" => Ok(__Field::m_floatData),
                         "vectorData" => Ok(__Field::m_vectorData),
+                        "floatData" => Ok(__Field::m_floatData),
+                        "uint32Data" => Ok(__Field::m_uint32Data),
+                        "uint16Data" => Ok(__Field::m_uint16Data),
+                        "uint8Data" => Ok(__Field::m_uint8Data),
+                        "numVerts" => Ok(__Field::m_numVerts),
+                        "vectorStride" => Ok(__Field::m_vectorStride),
+                        "floatStride" => Ok(__Field::m_floatStride),
+                        "uint32Stride" => Ok(__Field::m_uint32Stride),
+                        "uint16Stride" => Ok(__Field::m_uint16Stride),
+                        "uint8Stride" => Ok(__Field::m_uint8Stride),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -549,17 +549,17 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_uint8Stride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_uint16Stride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_uint32Stride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_floatStride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_vectorStride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_numVerts: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_uint8Data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_uint16Data: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_uint32Data: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_floatData: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
                     let mut m_vectorData: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
+                    let mut m_floatData: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
+                    let mut m_uint32Data: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_uint16Data: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_uint8Data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_numVerts: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_vectorStride: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_floatStride: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_uint32Stride: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_uint16Stride: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_uint8Stride: _serde::__private::Option<u32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -569,21 +569,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_uint8Stride => {
+                            __Field::m_vectorData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_uint8Stride) {
+                                if _serde::__private::Option::is_some(&m_vectorData) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "uint8Stride",
+                                            "vectorData",
                                         ),
                                     );
                                 }
-                                m_uint8Stride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                m_vectorData = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -593,21 +593,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_uint16Stride => {
+                            __Field::m_floatData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_uint16Stride) {
+                                if _serde::__private::Option::is_some(&m_floatData) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "uint16Stride",
+                                            "floatData",
                                         ),
                                     );
                                 }
-                                m_uint16Stride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                m_floatData = _serde::__private::Some(
+                                    match __A::next_value::<Vec<f32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -617,21 +617,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_uint32Stride => {
+                            __Field::m_uint32Data => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_uint32Stride) {
+                                if _serde::__private::Option::is_some(&m_uint32Data) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "uint32Stride",
+                                            "uint32Data",
                                         ),
                                     );
                                 }
-                                m_uint32Stride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                m_uint32Data = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -641,20 +641,68 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_floatStride => {
+                            __Field::m_uint16Data => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_floatStride) {
+                                if _serde::__private::Option::is_some(&m_uint16Data) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "floatStride",
+                                            "uint16Data",
                                         ),
                                     );
                                 }
-                                m_floatStride = _serde::__private::Some(
+                                m_uint16Data = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_uint8Data => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_uint8Data) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "uint8Data",
+                                        ),
+                                    );
+                                }
+                                m_uint8Data = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numVerts => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_numVerts) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numVerts",
+                                        ),
+                                    );
+                                }
+                                m_numVerts = _serde::__private::Some(
                                     match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -689,20 +737,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_numVerts => {
+                            __Field::m_floatStride => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_numVerts) {
+                                if _serde::__private::Option::is_some(&m_floatStride) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numVerts",
+                                            "floatStride",
                                         ),
                                     );
                                 }
-                                m_numVerts = _serde::__private::Some(
+                                m_floatStride = _serde::__private::Some(
                                     match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -713,21 +761,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_uint8Data => {
+                            __Field::m_uint32Stride => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_uint8Data) {
+                                if _serde::__private::Option::is_some(&m_uint32Stride) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "uint8Data",
+                                            "uint32Stride",
                                         ),
                                     );
                                 }
-                                m_uint8Data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                m_uint32Stride = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -737,21 +785,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_uint16Data => {
+                            __Field::m_uint16Stride => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_uint16Data) {
+                                if _serde::__private::Option::is_some(&m_uint16Stride) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "uint16Data",
+                                            "uint16Stride",
                                         ),
                                     );
                                 }
-                                m_uint16Data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                m_uint16Stride = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -761,69 +809,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_uint32Data => {
+                            __Field::m_uint8Stride => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_uint32Data) {
+                                if _serde::__private::Option::is_some(&m_uint8Stride) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "uint32Data",
+                                            "uint8Stride",
                                         ),
                                     );
                                 }
-                                m_uint32Data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_floatData => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_floatData) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "floatData",
-                                        ),
-                                    );
-                                }
-                                m_floatData = _serde::__private::Some(
-                                    match __A::next_value::<Vec<f32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_vectorData => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vectorData) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vectorData",
-                                        ),
-                                    );
-                                }
-                                m_vectorData = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                                m_uint8Stride = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -836,107 +836,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_uint8Stride = match m_uint8Stride {
+                    let m_vectorData = match m_vectorData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "uint8Stride",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_uint16Stride = match m_uint16Stride {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "uint16Stride",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_uint32Stride = match m_uint32Stride {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "uint32Stride",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_floatStride = match m_floatStride {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "floatStride",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vectorStride = match m_vectorStride {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "vectorStride",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numVerts = match m_numVerts {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("numVerts"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_uint8Data = match m_uint8Data {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "uint8Data",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_uint16Data = match m_uint16Data {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "uint16Data",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_uint32Data = match m_uint32Data {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "uint32Data",
+                                    "vectorData",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -954,13 +860,107 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_vectorData = match m_vectorData {
+                    let m_uint32Data = match m_uint32Data {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "vectorData",
+                                    "uint32Data",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_uint16Data = match m_uint16Data {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "uint16Data",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_uint8Data = match m_uint8Data {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "uint8Data",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numVerts = match m_numVerts {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("numVerts"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vectorStride = match m_vectorStride {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "vectorStride",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_floatStride = match m_floatStride {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "floatStride",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_uint32Stride = match m_uint32Stride {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "uint32Stride",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_uint16Stride = match m_uint16Stride {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "uint16Stride",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_uint8Stride = match m_uint8Stride {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "uint8Stride",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

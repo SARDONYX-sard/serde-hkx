@@ -103,9 +103,9 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_relativeDirection,
-                m_relativePosition,
                 m_generator,
+                m_relativePosition,
+                m_relativeDirection,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -130,9 +130,9 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "relativeDirection" => Ok(__Field::m_relativeDirection),
-                        "relativePosition" => Ok(__Field::m_relativePosition),
                         "generator" => Ok(__Field::m_generator),
+                        "relativePosition" => Ok(__Field::m_relativePosition),
+                        "relativeDirection" => Ok(__Field::m_relativeDirection),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -284,9 +284,9 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_relativeDirection: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_relativePosition: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_generator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_relativePosition: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_relativeDirection: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -322,23 +322,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_relativeDirection => {
+                            __Field::m_generator => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_relativeDirection,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_generator) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "relativeDirection",
+                                            "generator",
                                         ),
                                     );
                                 }
-                                m_relativeDirection = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_generator = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -372,21 +370,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_generator => {
+                            __Field::m_relativeDirection => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_generator) {
+                                if _serde::__private::Option::is_some(
+                                    &m_relativeDirection,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "generator",
+                                            "relativeDirection",
                                         ),
                                     );
                                 }
-                                m_generator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_relativeDirection = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -411,13 +411,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_relativeDirection = match m_relativeDirection {
+                    let m_generator = match m_generator {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "relativeDirection",
+                                    "generator",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -435,13 +435,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_generator = match m_generator {
+                    let m_relativeDirection = match m_relativeDirection {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "generator",
+                                    "relativeDirection",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

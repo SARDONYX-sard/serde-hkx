@@ -83,9 +83,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_tyremarksWheel,
-                m_maxTyremarkEnergy,
                 m_minTyremarkEnergy,
+                m_maxTyremarkEnergy,
+                m_tyremarksWheel,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -109,9 +109,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "tyremarksWheel" => Ok(__Field::m_tyremarksWheel),
-                        "maxTyremarkEnergy" => Ok(__Field::m_maxTyremarkEnergy),
                         "minTyremarkEnergy" => Ok(__Field::m_minTyremarkEnergy),
+                        "maxTyremarkEnergy" => Ok(__Field::m_maxTyremarkEnergy),
+                        "tyremarksWheel" => Ok(__Field::m_tyremarksWheel),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -263,9 +263,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_tyremarksWheel: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_maxTyremarkEnergy: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minTyremarkEnergy: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxTyremarkEnergy: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_tyremarksWheel: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -275,21 +275,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_tyremarksWheel => {
+                            __Field::m_minTyremarkEnergy => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_tyremarksWheel) {
+                                if _serde::__private::Option::is_some(
+                                    &m_minTyremarkEnergy,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "tyremarksWheel",
+                                            "minTyremarkEnergy",
                                         ),
                                     );
                                 }
-                                m_tyremarksWheel = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                m_minTyremarkEnergy = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -325,23 +327,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_minTyremarkEnergy => {
+                            __Field::m_tyremarksWheel => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_minTyremarkEnergy,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_tyremarksWheel) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "minTyremarkEnergy",
+                                            "tyremarksWheel",
                                         ),
                                     );
                                 }
-                                m_minTyremarkEnergy = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_tyremarksWheel = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -354,13 +354,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_tyremarksWheel = match m_tyremarksWheel {
+                    let m_minTyremarkEnergy = match m_minTyremarkEnergy {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "tyremarksWheel",
+                                    "minTyremarkEnergy",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -378,13 +378,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_minTyremarkEnergy = match m_minTyremarkEnergy {
+                    let m_tyremarksWheel = match m_tyremarksWheel {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "minTyremarkEnergy",
+                                    "tyremarksWheel",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

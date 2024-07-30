@@ -117,12 +117,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_data,
-                m_pixelEntryName,
-                m_geomEntryName,
-                m_vertexEntryName,
-                m_type,
                 m_name,
+                m_type,
+                m_vertexEntryName,
+                m_geomEntryName,
+                m_pixelEntryName,
+                m_data,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -146,12 +146,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "data" => Ok(__Field::m_data),
-                        "pixelEntryName" => Ok(__Field::m_pixelEntryName),
-                        "geomEntryName" => Ok(__Field::m_geomEntryName),
-                        "vertexEntryName" => Ok(__Field::m_vertexEntryName),
-                        "type" => Ok(__Field::m_type),
                         "name" => Ok(__Field::m_name),
+                        "type" => Ok(__Field::m_type),
+                        "vertexEntryName" => Ok(__Field::m_vertexEntryName),
+                        "geomEntryName" => Ok(__Field::m_geomEntryName),
+                        "pixelEntryName" => Ok(__Field::m_pixelEntryName),
+                        "data" => Ok(__Field::m_data),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -379,16 +379,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_pixelEntryName: _serde::__private::Option<
-                        StringPtr<'de>,
-                    > = _serde::__private::None;
-                    let mut m_geomEntryName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_type: _serde::__private::Option<ShaderType> = _serde::__private::None;
                     let mut m_vertexEntryName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
-                    let mut m_type: _serde::__private::Option<ShaderType> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_geomEntryName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_pixelEntryName: _serde::__private::Option<
+                        StringPtr<'de>,
+                    > = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -398,19 +398,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_data => {
+                            __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_data) {
+                                if _serde::__private::Option::is_some(&m_name) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
                                     );
                                 }
-                                m_data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -420,20 +420,42 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_pixelEntryName => {
+                            __Field::m_type => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_pixelEntryName) {
+                                if _serde::__private::Option::is_some(&m_type) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("type"),
+                                    );
+                                }
+                                m_type = _serde::__private::Some(
+                                    match __A::next_value::<ShaderType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vertexEntryName => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vertexEntryName) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "pixelEntryName",
+                                            "vertexEntryName",
                                         ),
                                     );
                                 }
-                                m_pixelEntryName = _serde::__private::Some(
+                                m_vertexEntryName = _serde::__private::Some(
                                     match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -468,20 +490,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vertexEntryName => {
+                            __Field::m_pixelEntryName => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_vertexEntryName) {
+                                if _serde::__private::Option::is_some(&m_pixelEntryName) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexEntryName",
+                                            "pixelEntryName",
                                         ),
                                     );
                                 }
-                                m_vertexEntryName = _serde::__private::Some(
+                                m_pixelEntryName = _serde::__private::Some(
                                     match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -492,41 +514,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_type => {
+                            __Field::m_data => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_type) {
+                                if _serde::__private::Option::is_some(&m_data) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("type"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
                                     );
                                 }
-                                m_type = _serde::__private::Some(
-                                    match __A::next_value::<ShaderType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_data = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u8>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -539,23 +539,33 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_data = match m_data {
+                    let m_name = match m_name {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("data"),
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_pixelEntryName = match m_pixelEntryName {
+                    let m_type = match m_type {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("type"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexEntryName = match m_vertexEntryName {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "pixelEntryName",
+                                    "vertexEntryName",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -573,34 +583,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_vertexEntryName = match m_vertexEntryName {
+                    let m_pixelEntryName = match m_pixelEntryName {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexEntryName",
+                                    "pixelEntryName",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_type = match m_type {
+                    let m_data = match m_data {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("type"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                                <__A::Error as _serde::de::Error>::missing_field("data"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

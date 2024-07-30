@@ -92,9 +92,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_originalFilename,
-                m_name,
                 m_filename,
+                m_name,
+                m_originalFilename,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -118,9 +118,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "originalFilename" => Ok(__Field::m_originalFilename),
-                        "name" => Ok(__Field::m_name),
                         "filename" => Ok(__Field::m_filename),
+                        "name" => Ok(__Field::m_name),
+                        "originalFilename" => Ok(__Field::m_originalFilename),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -261,11 +261,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_filename: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_originalFilename: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_filename: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -275,20 +275,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_originalFilename => {
+                            __Field::m_filename => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_originalFilename) {
+                                if _serde::__private::Option::is_some(&m_filename) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "originalFilename",
+                                            "filename",
                                         ),
                                     );
                                 }
-                                m_originalFilename = _serde::__private::Some(
+                                m_filename = _serde::__private::Some(
                                     match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -321,20 +321,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_filename => {
+                            __Field::m_originalFilename => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_filename) {
+                                if _serde::__private::Option::is_some(&m_originalFilename) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "filename",
+                                            "originalFilename",
                                         ),
                                     );
                                 }
-                                m_filename = _serde::__private::Some(
+                                m_originalFilename = _serde::__private::Some(
                                     match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -348,14 +348,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_originalFilename = match m_originalFilename {
+                    let m_filename = match m_filename {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "originalFilename",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("filename"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -370,12 +368,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_filename = match m_filename {
+                    let m_originalFilename = match m_originalFilename {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("filename"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "originalFilename",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

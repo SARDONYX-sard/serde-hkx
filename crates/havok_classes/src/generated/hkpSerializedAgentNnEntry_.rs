@@ -168,20 +168,20 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_version,
-                m_endianCheckBuffer,
-                m_trackInfo,
-                m_nnEntryData,
-                m_cpIdMgr,
-                m_contactPoints,
-                m_propertiesStream,
-                m_atom,
-                m_agentType,
-                m_useEntityIds,
-                m_bodyBId,
-                m_bodyAId,
-                m_bodyB,
                 m_bodyA,
+                m_bodyB,
+                m_bodyAId,
+                m_bodyBId,
+                m_useEntityIds,
+                m_agentType,
+                m_atom,
+                m_propertiesStream,
+                m_contactPoints,
+                m_cpIdMgr,
+                m_nnEntryData,
+                m_trackInfo,
+                m_endianCheckBuffer,
+                m_version,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -205,20 +205,20 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "version" => Ok(__Field::m_version),
-                        "endianCheckBuffer" => Ok(__Field::m_endianCheckBuffer),
-                        "trackInfo" => Ok(__Field::m_trackInfo),
-                        "nnEntryData" => Ok(__Field::m_nnEntryData),
-                        "cpIdMgr" => Ok(__Field::m_cpIdMgr),
-                        "contactPoints" => Ok(__Field::m_contactPoints),
-                        "propertiesStream" => Ok(__Field::m_propertiesStream),
-                        "atom" => Ok(__Field::m_atom),
-                        "agentType" => Ok(__Field::m_agentType),
-                        "useEntityIds" => Ok(__Field::m_useEntityIds),
-                        "bodyBId" => Ok(__Field::m_bodyBId),
-                        "bodyAId" => Ok(__Field::m_bodyAId),
-                        "bodyB" => Ok(__Field::m_bodyB),
                         "bodyA" => Ok(__Field::m_bodyA),
+                        "bodyB" => Ok(__Field::m_bodyB),
+                        "bodyAId" => Ok(__Field::m_bodyAId),
+                        "bodyBId" => Ok(__Field::m_bodyBId),
+                        "useEntityIds" => Ok(__Field::m_useEntityIds),
+                        "agentType" => Ok(__Field::m_agentType),
+                        "atom" => Ok(__Field::m_atom),
+                        "propertiesStream" => Ok(__Field::m_propertiesStream),
+                        "contactPoints" => Ok(__Field::m_contactPoints),
+                        "cpIdMgr" => Ok(__Field::m_cpIdMgr),
+                        "nnEntryData" => Ok(__Field::m_nnEntryData),
+                        "trackInfo" => Ok(__Field::m_trackInfo),
+                        "endianCheckBuffer" => Ok(__Field::m_endianCheckBuffer),
+                        "version" => Ok(__Field::m_version),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -684,30 +684,30 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_version: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_endianCheckBuffer: _serde::__private::Option<
-                        [u8; 4usize],
-                    > = _serde::__private::None;
-                    let mut m_trackInfo: _serde::__private::Option<
-                        hkpSerializedTrack1nInfo,
-                    > = _serde::__private::None;
-                    let mut m_nnEntryData: _serde::__private::Option<[u8; 160usize]> = _serde::__private::None;
-                    let mut m_cpIdMgr: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_contactPoints: _serde::__private::Option<
-                        Vec<hkContactPoint>,
-                    > = _serde::__private::None;
-                    let mut m_propertiesStream: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_atom: _serde::__private::Option<
-                        hkpSimpleContactConstraintAtom,
-                    > = _serde::__private::None;
+                    let mut m_bodyA: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_bodyB: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_bodyAId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_bodyBId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_useEntityIds: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_agentType: _serde::__private::Option<
                         SerializedAgentType,
                     > = _serde::__private::None;
-                    let mut m_useEntityIds: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_bodyBId: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_bodyAId: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_bodyB: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_bodyA: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_atom: _serde::__private::Option<
+                        hkpSimpleContactConstraintAtom,
+                    > = _serde::__private::None;
+                    let mut m_propertiesStream: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_contactPoints: _serde::__private::Option<
+                        Vec<hkContactPoint>,
+                    > = _serde::__private::None;
+                    let mut m_cpIdMgr: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_nnEntryData: _serde::__private::Option<[u8; 160usize]> = _serde::__private::None;
+                    let mut m_trackInfo: _serde::__private::Option<
+                        hkpSerializedTrack1nInfo,
+                    > = _serde::__private::None;
+                    let mut m_endianCheckBuffer: _serde::__private::Option<
+                        [u8; 4usize],
+                    > = _serde::__private::None;
+                    let mut m_version: _serde::__private::Option<u32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -717,21 +717,284 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_version => {
+                            __Field::m_bodyA => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_version) {
+                                if _serde::__private::Option::is_some(&m_bodyA) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("bodyA"),
+                                    );
+                                }
+                                m_bodyA = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bodyB => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bodyB) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("bodyB"),
+                                    );
+                                }
+                                m_bodyB = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bodyAId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bodyAId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "version",
+                                            "bodyAId",
                                         ),
                                     );
                                 }
-                                m_version = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                m_bodyAId = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bodyBId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bodyBId) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bodyBId",
+                                        ),
+                                    );
+                                }
+                                m_bodyBId = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_useEntityIds => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_useEntityIds) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "useEntityIds",
+                                        ),
+                                    );
+                                }
+                                m_useEntityIds = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_agentType => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_agentType) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "agentType",
+                                        ),
+                                    );
+                                }
+                                m_agentType = _serde::__private::Some(
+                                    match __A::next_value::<SerializedAgentType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_atom => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_atom) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("atom"),
+                                    );
+                                }
+                                m_atom = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpSimpleContactConstraintAtom,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_propertiesStream => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_propertiesStream) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "propertiesStream",
+                                        ),
+                                    );
+                                }
+                                m_propertiesStream = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_contactPoints => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_contactPoints) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contactPoints",
+                                        ),
+                                    );
+                                }
+                                m_contactPoints = _serde::__private::Some(
+                                    match __A::next_value::<Vec<hkContactPoint>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_cpIdMgr => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_cpIdMgr) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "cpIdMgr",
+                                        ),
+                                    );
+                                }
+                                m_cpIdMgr = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_nnEntryData => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_nnEntryData) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "nnEntryData",
+                                        ),
+                                    );
+                                }
+                                m_nnEntryData = _serde::__private::Some(
+                                    match __A::next_value::<[u8; 160usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))]
+                                            [Default::default(); 160usize]
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_trackInfo => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_trackInfo) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "trackInfo",
+                                        ),
+                                    );
+                                }
+                                m_trackInfo = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpSerializedTrack1nInfo,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -767,284 +1030,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_trackInfo => {
+                            __Field::m_version => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_trackInfo) {
+                                if _serde::__private::Option::is_some(&m_version) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "trackInfo",
+                                            "version",
                                         ),
                                     );
                                 }
-                                m_trackInfo = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpSerializedTrack1nInfo,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_nnEntryData => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_nnEntryData) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "nnEntryData",
-                                        ),
-                                    );
-                                }
-                                m_nnEntryData = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 160usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))]
-                                            [Default::default(); 160usize]
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_cpIdMgr => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_cpIdMgr) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "cpIdMgr",
-                                        ),
-                                    );
-                                }
-                                m_cpIdMgr = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_contactPoints => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_contactPoints) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "contactPoints",
-                                        ),
-                                    );
-                                }
-                                m_contactPoints = _serde::__private::Some(
-                                    match __A::next_value::<Vec<hkContactPoint>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_propertiesStream => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_propertiesStream) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "propertiesStream",
-                                        ),
-                                    );
-                                }
-                                m_propertiesStream = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_atom => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_atom) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("atom"),
-                                    );
-                                }
-                                m_atom = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpSimpleContactConstraintAtom,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_agentType => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_agentType) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "agentType",
-                                        ),
-                                    );
-                                }
-                                m_agentType = _serde::__private::Some(
-                                    match __A::next_value::<SerializedAgentType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_useEntityIds => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_useEntityIds) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "useEntityIds",
-                                        ),
-                                    );
-                                }
-                                m_useEntityIds = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bodyBId => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bodyBId) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bodyBId",
-                                        ),
-                                    );
-                                }
-                                m_bodyBId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bodyAId => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bodyAId) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bodyAId",
-                                        ),
-                                    );
-                                }
-                                m_bodyAId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bodyB => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bodyB) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("bodyB"),
-                                    );
-                                }
-                                m_bodyB = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bodyA => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bodyA) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("bodyA"),
-                                    );
-                                }
-                                m_bodyA = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_version = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1057,36 +1057,110 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_version = match m_version {
+                    let m_bodyA = match m_bodyA {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("version"),
+                                <__A::Error as _serde::de::Error>::missing_field("bodyA"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_endianCheckBuffer = match m_endianCheckBuffer {
+                    let m_bodyB = match m_bodyB {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("bodyB"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bodyAId = match m_bodyAId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("bodyAId"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bodyBId = match m_bodyBId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("bodyBId"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_useEntityIds = match m_useEntityIds {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "endianCheckBuffer",
+                                    "useEntityIds",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_trackInfo = match m_trackInfo {
+                    let m_agentType = match m_agentType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "trackInfo",
+                                    "agentType",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_atom = match m_atom {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("atom"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_propertiesStream = match m_propertiesStream {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "propertiesStream",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_contactPoints = match m_contactPoints {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contactPoints",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_cpIdMgr = match m_cpIdMgr {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("cpIdMgr"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -1104,110 +1178,36 @@ const _: () = {
                             [Default::default(); 160usize]
                         }
                     };
-                    let m_cpIdMgr = match m_cpIdMgr {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("cpIdMgr"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_contactPoints = match m_contactPoints {
+                    let m_trackInfo = match m_trackInfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "contactPoints",
+                                    "trackInfo",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_propertiesStream = match m_propertiesStream {
+                    let m_endianCheckBuffer = match m_endianCheckBuffer {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "propertiesStream",
+                                    "endianCheckBuffer",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_atom = match m_atom {
+                    let m_version = match m_version {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("atom"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_agentType = match m_agentType {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "agentType",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_useEntityIds = match m_useEntityIds {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "useEntityIds",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bodyBId = match m_bodyBId {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("bodyBId"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bodyAId = match m_bodyAId {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("bodyAId"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bodyB = match m_bodyB {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("bodyB"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bodyA = match m_bodyA {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("bodyA"),
+                                <__A::Error as _serde::de::Error>::missing_field("version"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

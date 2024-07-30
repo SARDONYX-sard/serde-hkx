@@ -87,11 +87,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_centerOfMassLocal,
-                m_rotation1,
-                m_rotation0,
-                m_centerOfMass1,
                 m_centerOfMass0,
+                m_centerOfMass1,
+                m_rotation0,
+                m_rotation1,
+                m_centerOfMassLocal,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -115,11 +115,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "centerOfMassLocal" => Ok(__Field::m_centerOfMassLocal),
-                        "rotation1" => Ok(__Field::m_rotation1),
-                        "rotation0" => Ok(__Field::m_rotation0),
-                        "centerOfMass1" => Ok(__Field::m_centerOfMass1),
                         "centerOfMass0" => Ok(__Field::m_centerOfMass0),
+                        "centerOfMass1" => Ok(__Field::m_centerOfMass1),
+                        "rotation0" => Ok(__Field::m_rotation0),
+                        "rotation1" => Ok(__Field::m_rotation1),
+                        "centerOfMassLocal" => Ok(__Field::m_centerOfMassLocal),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -325,11 +325,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_centerOfMassLocal: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_rotation1: _serde::__private::Option<Quaternion> = _serde::__private::None;
-                    let mut m_rotation0: _serde::__private::Option<Quaternion> = _serde::__private::None;
-                    let mut m_centerOfMass1: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_centerOfMass0: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_centerOfMass1: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_rotation0: _serde::__private::Option<Quaternion> = _serde::__private::None;
+                    let mut m_rotation1: _serde::__private::Option<Quaternion> = _serde::__private::None;
+                    let mut m_centerOfMassLocal: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -339,71 +339,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_centerOfMassLocal => {
+                            __Field::m_centerOfMass0 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_centerOfMassLocal,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_centerOfMass0) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "centerOfMassLocal",
+                                            "centerOfMass0",
                                         ),
                                     );
                                 }
-                                m_centerOfMassLocal = _serde::__private::Some(
+                                m_centerOfMass0 = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_rotation1 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rotation1) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rotation1",
-                                        ),
-                                    );
-                                }
-                                m_rotation1 = _serde::__private::Some(
-                                    match __A::next_value::<Quaternion>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_rotation0 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rotation0) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rotation0",
-                                        ),
-                                    );
-                                }
-                                m_rotation0 = _serde::__private::Some(
-                                    match __A::next_value::<Quaternion>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -437,20 +387,70 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_centerOfMass0 => {
+                            __Field::m_rotation0 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_centerOfMass0) {
+                                if _serde::__private::Option::is_some(&m_rotation0) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "centerOfMass0",
+                                            "rotation0",
                                         ),
                                     );
                                 }
-                                m_centerOfMass0 = _serde::__private::Some(
+                                m_rotation0 = _serde::__private::Some(
+                                    match __A::next_value::<Quaternion>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_rotation1 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_rotation1) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rotation1",
+                                        ),
+                                    );
+                                }
+                                m_rotation1 = _serde::__private::Some(
+                                    match __A::next_value::<Quaternion>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_centerOfMassLocal => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_centerOfMassLocal,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "centerOfMassLocal",
+                                        ),
+                                    );
+                                }
+                                m_centerOfMassLocal = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -464,37 +464,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_centerOfMassLocal = match m_centerOfMassLocal {
+                    let m_centerOfMass0 = match m_centerOfMass0 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "centerOfMassLocal",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_rotation1 = match m_rotation1 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "rotation1",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_rotation0 = match m_rotation0 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "rotation0",
+                                    "centerOfMass0",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -512,13 +488,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_centerOfMass0 = match m_centerOfMass0 {
+                    let m_rotation0 = match m_rotation0 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "centerOfMass0",
+                                    "rotation0",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_rotation1 = match m_rotation1 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "rotation1",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_centerOfMassLocal = match m_centerOfMassLocal {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "centerOfMassLocal",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

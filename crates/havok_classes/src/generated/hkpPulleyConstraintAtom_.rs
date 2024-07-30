@@ -89,10 +89,10 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_leverageOnBodyB,
-                m_ropeLength,
-                m_fixedPivotBinWorld,
                 m_fixedPivotAinWorld,
+                m_fixedPivotBinWorld,
+                m_ropeLength,
+                m_leverageOnBodyB,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -117,10 +117,10 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "leverageOnBodyB" => Ok(__Field::m_leverageOnBodyB),
-                        "ropeLength" => Ok(__Field::m_ropeLength),
-                        "fixedPivotBinWorld" => Ok(__Field::m_fixedPivotBinWorld),
                         "fixedPivotAinWorld" => Ok(__Field::m_fixedPivotAinWorld),
+                        "fixedPivotBinWorld" => Ok(__Field::m_fixedPivotBinWorld),
+                        "ropeLength" => Ok(__Field::m_ropeLength),
+                        "leverageOnBodyB" => Ok(__Field::m_leverageOnBodyB),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -305,10 +305,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_leverageOnBodyB: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_ropeLength: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_fixedPivotBinWorld: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_fixedPivotAinWorld: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_fixedPivotBinWorld: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_ropeLength: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_leverageOnBodyB: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -331,80 +331,6 @@ const _: () = {
                                 }
                                 m_type = _serde::__private::Some(
                                     match __A::next_value::<AtomType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_leverageOnBodyB => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_leverageOnBodyB) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "leverageOnBodyB",
-                                        ),
-                                    );
-                                }
-                                m_leverageOnBodyB = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_ropeLength => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_ropeLength) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ropeLength",
-                                        ),
-                                    );
-                                }
-                                m_ropeLength = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_fixedPivotBinWorld => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_fixedPivotBinWorld,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fixedPivotBinWorld",
-                                        ),
-                                    );
-                                }
-                                m_fixedPivotBinWorld = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -440,6 +366,80 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_fixedPivotBinWorld => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_fixedPivotBinWorld,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "fixedPivotBinWorld",
+                                        ),
+                                    );
+                                }
+                                m_fixedPivotBinWorld = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_ropeLength => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_ropeLength) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "ropeLength",
+                                        ),
+                                    );
+                                }
+                                m_ropeLength = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_leverageOnBodyB => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_leverageOnBodyB) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "leverageOnBodyB",
+                                        ),
+                                    );
+                                }
+                                m_leverageOnBodyB = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
@@ -453,25 +453,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_leverageOnBodyB = match m_leverageOnBodyB {
+                    let m_fixedPivotAinWorld = match m_fixedPivotAinWorld {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "leverageOnBodyB",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_ropeLength = match m_ropeLength {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "ropeLength",
+                                    "fixedPivotAinWorld",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -489,13 +477,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_fixedPivotAinWorld = match m_fixedPivotAinWorld {
+                    let m_ropeLength = match m_ropeLength {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "fixedPivotAinWorld",
+                                    "ropeLength",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_leverageOnBodyB = match m_leverageOnBodyB {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "leverageOnBodyB",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

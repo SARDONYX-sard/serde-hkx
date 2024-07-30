@@ -138,16 +138,16 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_wheelDownForceSumFactor,
-                m_wheelDownForceFactor,
-                m_wheelRadiusInv,
-                m_wheelRadius,
-                m_wheelChassisMassRatio,
-                m_wheelSurfaceInertiaInv,
-                m_wheelSurfaceInertia,
-                m_xStart,
-                m_xStep,
                 m_frictionCircleYtab,
+                m_xStep,
+                m_xStart,
+                m_wheelSurfaceInertia,
+                m_wheelSurfaceInertiaInv,
+                m_wheelChassisMassRatio,
+                m_wheelRadius,
+                m_wheelRadiusInv,
+                m_wheelDownForceFactor,
+                m_wheelDownForceSumFactor,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -171,18 +171,18 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
+                        "frictionCircleYtab" => Ok(__Field::m_frictionCircleYtab),
+                        "xStep" => Ok(__Field::m_xStep),
+                        "xStart" => Ok(__Field::m_xStart),
+                        "wheelSurfaceInertia" => Ok(__Field::m_wheelSurfaceInertia),
+                        "wheelSurfaceInertiaInv" => Ok(__Field::m_wheelSurfaceInertiaInv),
+                        "wheelChassisMassRatio" => Ok(__Field::m_wheelChassisMassRatio),
+                        "wheelRadius" => Ok(__Field::m_wheelRadius),
+                        "wheelRadiusInv" => Ok(__Field::m_wheelRadiusInv),
+                        "wheelDownForceFactor" => Ok(__Field::m_wheelDownForceFactor),
                         "wheelDownForceSumFactor" => {
                             Ok(__Field::m_wheelDownForceSumFactor)
                         }
-                        "wheelDownForceFactor" => Ok(__Field::m_wheelDownForceFactor),
-                        "wheelRadiusInv" => Ok(__Field::m_wheelRadiusInv),
-                        "wheelRadius" => Ok(__Field::m_wheelRadius),
-                        "wheelChassisMassRatio" => Ok(__Field::m_wheelChassisMassRatio),
-                        "wheelSurfaceInertiaInv" => Ok(__Field::m_wheelSurfaceInertiaInv),
-                        "wheelSurfaceInertia" => Ok(__Field::m_wheelSurfaceInertia),
-                        "xStart" => Ok(__Field::m_xStart),
-                        "xStep" => Ok(__Field::m_xStep),
-                        "frictionCircleYtab" => Ok(__Field::m_frictionCircleYtab),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -540,18 +540,18 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_wheelDownForceSumFactor: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_wheelDownForceFactor: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_wheelRadiusInv: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_wheelRadius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_wheelChassisMassRatio: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_wheelSurfaceInertiaInv: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_wheelSurfaceInertia: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_xStart: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_xStep: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_frictionCircleYtab: _serde::__private::Option<
                         [f32; 16usize],
                     > = _serde::__private::None;
+                    let mut m_xStep: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_xStart: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_wheelSurfaceInertia: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_wheelSurfaceInertiaInv: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_wheelChassisMassRatio: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_wheelRadius: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_wheelRadiusInv: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_wheelDownForceFactor: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_wheelDownForceSumFactor: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -561,22 +561,44 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_wheelDownForceSumFactor => {
+                            __Field::m_frictionCircleYtab => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_wheelDownForceSumFactor,
+                                    &m_frictionCircleYtab,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelDownForceSumFactor",
+                                            "frictionCircleYtab",
                                         ),
                                     );
                                 }
-                                m_wheelDownForceSumFactor = _serde::__private::Some(
+                                m_frictionCircleYtab = _serde::__private::Some(
+                                    match __A::next_value::<[f32; 16usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_xStep => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_xStep) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("xStep"),
+                                    );
+                                }
+                                m_xStep = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -587,122 +609,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_wheelDownForceFactor => {
+                            __Field::m_xStart => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_wheelDownForceFactor,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_xStart) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelDownForceFactor",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("xStart"),
                                     );
                                 }
-                                m_wheelDownForceFactor = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_wheelRadiusInv => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_wheelRadiusInv) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelRadiusInv",
-                                        ),
-                                    );
-                                }
-                                m_wheelRadiusInv = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_wheelRadius => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_wheelRadius) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelRadius",
-                                        ),
-                                    );
-                                }
-                                m_wheelRadius = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_wheelChassisMassRatio => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_wheelChassisMassRatio,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelChassisMassRatio",
-                                        ),
-                                    );
-                                }
-                                m_wheelChassisMassRatio = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_wheelSurfaceInertiaInv => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_wheelSurfaceInertiaInv,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelSurfaceInertiaInv",
-                                        ),
-                                    );
-                                }
-                                m_wheelSurfaceInertiaInv = _serde::__private::Some(
+                                m_xStart = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -739,67 +657,149 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_xStart => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_xStart) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("xStart"),
-                                    );
-                                }
-                                m_xStart = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_xStep => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_xStep) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("xStep"),
-                                    );
-                                }
-                                m_xStep = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_frictionCircleYtab => {
+                            __Field::m_wheelSurfaceInertiaInv => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_frictionCircleYtab,
+                                    &m_wheelSurfaceInertiaInv,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "frictionCircleYtab",
+                                            "wheelSurfaceInertiaInv",
                                         ),
                                     );
                                 }
-                                m_frictionCircleYtab = _serde::__private::Some(
-                                    match __A::next_value::<[f32; 16usize]>(&mut __map) {
+                                m_wheelSurfaceInertiaInv = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wheelChassisMassRatio => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_wheelChassisMassRatio,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wheelChassisMassRatio",
+                                        ),
+                                    );
+                                }
+                                m_wheelChassisMassRatio = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wheelRadius => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_wheelRadius) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wheelRadius",
+                                        ),
+                                    );
+                                }
+                                m_wheelRadius = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wheelRadiusInv => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_wheelRadiusInv) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wheelRadiusInv",
+                                        ),
+                                    );
+                                }
+                                m_wheelRadiusInv = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wheelDownForceFactor => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_wheelDownForceFactor,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wheelDownForceFactor",
+                                        ),
+                                    );
+                                }
+                                m_wheelDownForceFactor = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wheelDownForceSumFactor => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_wheelDownForceSumFactor,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wheelDownForceSumFactor",
+                                        ),
+                                    );
+                                }
+                                m_wheelDownForceSumFactor = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -812,61 +812,45 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_wheelDownForceSumFactor = match m_wheelDownForceSumFactor {
+                    let m_frictionCircleYtab = match m_frictionCircleYtab {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelDownForceSumFactor",
+                                    "frictionCircleYtab",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_wheelDownForceFactor = match m_wheelDownForceFactor {
+                    let m_xStep = match m_xStep {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelDownForceFactor",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("xStep"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_wheelRadiusInv = match m_wheelRadiusInv {
+                    let m_xStart = match m_xStart {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelRadiusInv",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("xStart"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_wheelRadius = match m_wheelRadius {
+                    let m_wheelSurfaceInertia = match m_wheelSurfaceInertia {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelRadius",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_wheelChassisMassRatio = match m_wheelChassisMassRatio {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelChassisMassRatio",
+                                    "wheelSurfaceInertia",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -884,45 +868,61 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_wheelSurfaceInertia = match m_wheelSurfaceInertia {
+                    let m_wheelChassisMassRatio = match m_wheelChassisMassRatio {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelSurfaceInertia",
+                                    "wheelChassisMassRatio",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_xStart = match m_xStart {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("xStart"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_xStep = match m_xStep {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("xStep"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_frictionCircleYtab = match m_frictionCircleYtab {
+                    let m_wheelRadius = match m_wheelRadius {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "frictionCircleYtab",
+                                    "wheelRadius",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wheelRadiusInv = match m_wheelRadiusInv {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wheelRadiusInv",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wheelDownForceFactor = match m_wheelDownForceFactor {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wheelDownForceFactor",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wheelDownForceSumFactor = match m_wheelDownForceSumFactor {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wheelDownForceSumFactor",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

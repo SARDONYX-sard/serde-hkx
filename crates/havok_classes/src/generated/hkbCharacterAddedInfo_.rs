@@ -122,13 +122,13 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_poseModelSpace,
-                m_worldFromModel,
-                m_skeleton,
-                m_fullPathToProject,
-                m_templateName,
-                m_instanceName,
                 m_characterId,
+                m_instanceName,
+                m_templateName,
+                m_fullPathToProject,
+                m_skeleton,
+                m_worldFromModel,
+                m_poseModelSpace,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -152,13 +152,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "poseModelSpace" => Ok(__Field::m_poseModelSpace),
-                        "worldFromModel" => Ok(__Field::m_worldFromModel),
-                        "skeleton" => Ok(__Field::m_skeleton),
-                        "fullPathToProject" => Ok(__Field::m_fullPathToProject),
-                        "templateName" => Ok(__Field::m_templateName),
-                        "instanceName" => Ok(__Field::m_instanceName),
                         "characterId" => Ok(__Field::m_characterId),
+                        "instanceName" => Ok(__Field::m_instanceName),
+                        "templateName" => Ok(__Field::m_templateName),
+                        "fullPathToProject" => Ok(__Field::m_fullPathToProject),
+                        "skeleton" => Ok(__Field::m_skeleton),
+                        "worldFromModel" => Ok(__Field::m_worldFromModel),
+                        "poseModelSpace" => Ok(__Field::m_poseModelSpace),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -428,17 +428,17 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_poseModelSpace: _serde::__private::Option<
-                        Vec<QsTransform>,
-                    > = _serde::__private::None;
-                    let mut m_worldFromModel: _serde::__private::Option<QsTransform> = _serde::__private::None;
-                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_instanceName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_templateName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_fullPathToProject: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
-                    let mut m_templateName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_instanceName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_worldFromModel: _serde::__private::Option<QsTransform> = _serde::__private::None;
+                    let mut m_poseModelSpace: _serde::__private::Option<
+                        Vec<QsTransform>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -448,21 +448,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_poseModelSpace => {
+                            __Field::m_characterId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_poseModelSpace) {
+                                if _serde::__private::Option::is_some(&m_characterId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "poseModelSpace",
+                                            "characterId",
                                         ),
                                     );
                                 }
-                                m_poseModelSpace = _serde::__private::Some(
-                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                                m_characterId = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -472,21 +472,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_worldFromModel => {
+                            __Field::m_instanceName => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_worldFromModel) {
+                                if _serde::__private::Option::is_some(&m_instanceName) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "worldFromModel",
+                                            "instanceName",
                                         ),
                                     );
                                 }
-                                m_worldFromModel = _serde::__private::Some(
-                                    match __A::next_value::<QsTransform>(&mut __map) {
+                                m_instanceName = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -496,21 +496,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_skeleton => {
+                            __Field::m_templateName => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_skeleton) {
+                                if _serde::__private::Option::is_some(&m_templateName) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "skeleton",
+                                            "templateName",
                                         ),
                                     );
                                 }
-                                m_skeleton = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_templateName = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -546,21 +546,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_templateName => {
+                            __Field::m_skeleton => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_templateName) {
+                                if _serde::__private::Option::is_some(&m_skeleton) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "templateName",
+                                            "skeleton",
                                         ),
                                     );
                                 }
-                                m_templateName = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_skeleton = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -570,21 +570,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_instanceName => {
+                            __Field::m_worldFromModel => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_instanceName) {
+                                if _serde::__private::Option::is_some(&m_worldFromModel) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "instanceName",
+                                            "worldFromModel",
                                         ),
                                     );
                                 }
-                                m_instanceName = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_worldFromModel = _serde::__private::Some(
+                                    match __A::next_value::<QsTransform>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -594,21 +594,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_characterId => {
+                            __Field::m_poseModelSpace => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_characterId) {
+                                if _serde::__private::Option::is_some(&m_poseModelSpace) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "characterId",
+                                            "poseModelSpace",
                                         ),
                                     );
                                 }
-                                m_characterId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                m_poseModelSpace = _serde::__private::Some(
+                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -621,59 +621,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_poseModelSpace = match m_poseModelSpace {
+                    let m_characterId = match m_characterId {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "poseModelSpace",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_worldFromModel = match m_worldFromModel {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "worldFromModel",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_skeleton = match m_skeleton {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("skeleton"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_fullPathToProject = match m_fullPathToProject {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "fullPathToProject",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_templateName = match m_templateName {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "templateName",
+                                    "characterId",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -691,13 +645,59 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_characterId = match m_characterId {
+                    let m_templateName = match m_templateName {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterId",
+                                    "templateName",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_fullPathToProject = match m_fullPathToProject {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "fullPathToProject",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_skeleton = match m_skeleton {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("skeleton"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_worldFromModel = match m_worldFromModel {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "worldFromModel",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_poseModelSpace = match m_poseModelSpace {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "poseModelSpace",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

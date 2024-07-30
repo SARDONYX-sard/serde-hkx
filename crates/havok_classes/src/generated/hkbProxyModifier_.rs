@@ -337,31 +337,31 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
+                m_name,
                 m_enable,
-                m_isTouchingGround,
-                m_followWorldFromModel,
-                m_includeDownwardMomentum,
-                m_ignoreIncomingTranslation,
-                m_ignoreCollisionDuringRotation,
-                m_ignoreIncomingRotation,
-                m_linearVelocityMode,
-                m_phantomType,
-                m_collisionFilterInfo,
-                m_maxSlopeForRotation,
-                m_capsuleRadius,
-                m_capsuleHeight,
-                m_minVerticalDisplacement,
-                m_maxVerticalDisplacement,
-                m_verticalDisplacementErrorGain,
-                m_verticalDisplacementError,
-                m_maxVerticalSeparation,
-                m_maxHorizontalSeparation,
-                m_verticalGain,
-                m_horizontalGain,
-                m_linearVelocity,
                 m_proxyInfo,
+                m_linearVelocity,
+                m_horizontalGain,
+                m_verticalGain,
+                m_maxHorizontalSeparation,
+                m_maxVerticalSeparation,
+                m_verticalDisplacementError,
+                m_verticalDisplacementErrorGain,
+                m_maxVerticalDisplacement,
+                m_minVerticalDisplacement,
+                m_capsuleHeight,
+                m_capsuleRadius,
+                m_maxSlopeForRotation,
+                m_collisionFilterInfo,
+                m_phantomType,
+                m_linearVelocityMode,
+                m_ignoreIncomingRotation,
+                m_ignoreCollisionDuringRotation,
+                m_ignoreIncomingTranslation,
+                m_includeDownwardMomentum,
+                m_followWorldFromModel,
+                m_isTouchingGround,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -386,47 +386,47 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
+                        "name" => Ok(__Field::m_name),
                         "enable" => Ok(__Field::m_enable),
-                        "isTouchingGround" => Ok(__Field::m_isTouchingGround),
-                        "followWorldFromModel" => Ok(__Field::m_followWorldFromModel),
-                        "includeDownwardMomentum" => {
-                            Ok(__Field::m_includeDownwardMomentum)
+                        "proxyInfo" => Ok(__Field::m_proxyInfo),
+                        "linearVelocity" => Ok(__Field::m_linearVelocity),
+                        "horizontalGain" => Ok(__Field::m_horizontalGain),
+                        "verticalGain" => Ok(__Field::m_verticalGain),
+                        "maxHorizontalSeparation" => {
+                            Ok(__Field::m_maxHorizontalSeparation)
                         }
-                        "ignoreIncomingTranslation" => {
-                            Ok(__Field::m_ignoreIncomingTranslation)
-                        }
-                        "ignoreCollisionDuringRotation" => {
-                            Ok(__Field::m_ignoreCollisionDuringRotation)
-                        }
-                        "ignoreIncomingRotation" => Ok(__Field::m_ignoreIncomingRotation),
-                        "linearVelocityMode" => Ok(__Field::m_linearVelocityMode),
-                        "phantomType" => Ok(__Field::m_phantomType),
-                        "collisionFilterInfo" => Ok(__Field::m_collisionFilterInfo),
-                        "maxSlopeForRotation" => Ok(__Field::m_maxSlopeForRotation),
-                        "capsuleRadius" => Ok(__Field::m_capsuleRadius),
-                        "capsuleHeight" => Ok(__Field::m_capsuleHeight),
-                        "minVerticalDisplacement" => {
-                            Ok(__Field::m_minVerticalDisplacement)
-                        }
-                        "maxVerticalDisplacement" => {
-                            Ok(__Field::m_maxVerticalDisplacement)
+                        "maxVerticalSeparation" => Ok(__Field::m_maxVerticalSeparation),
+                        "verticalDisplacementError" => {
+                            Ok(__Field::m_verticalDisplacementError)
                         }
                         "verticalDisplacementErrorGain" => {
                             Ok(__Field::m_verticalDisplacementErrorGain)
                         }
-                        "verticalDisplacementError" => {
-                            Ok(__Field::m_verticalDisplacementError)
+                        "maxVerticalDisplacement" => {
+                            Ok(__Field::m_maxVerticalDisplacement)
                         }
-                        "maxVerticalSeparation" => Ok(__Field::m_maxVerticalSeparation),
-                        "maxHorizontalSeparation" => {
-                            Ok(__Field::m_maxHorizontalSeparation)
+                        "minVerticalDisplacement" => {
+                            Ok(__Field::m_minVerticalDisplacement)
                         }
-                        "verticalGain" => Ok(__Field::m_verticalGain),
-                        "horizontalGain" => Ok(__Field::m_horizontalGain),
-                        "linearVelocity" => Ok(__Field::m_linearVelocity),
-                        "proxyInfo" => Ok(__Field::m_proxyInfo),
+                        "capsuleHeight" => Ok(__Field::m_capsuleHeight),
+                        "capsuleRadius" => Ok(__Field::m_capsuleRadius),
+                        "maxSlopeForRotation" => Ok(__Field::m_maxSlopeForRotation),
+                        "collisionFilterInfo" => Ok(__Field::m_collisionFilterInfo),
+                        "phantomType" => Ok(__Field::m_phantomType),
+                        "linearVelocityMode" => Ok(__Field::m_linearVelocityMode),
+                        "ignoreIncomingRotation" => Ok(__Field::m_ignoreIncomingRotation),
+                        "ignoreCollisionDuringRotation" => {
+                            Ok(__Field::m_ignoreCollisionDuringRotation)
+                        }
+                        "ignoreIncomingTranslation" => {
+                            Ok(__Field::m_ignoreIncomingTranslation)
+                        }
+                        "includeDownwardMomentum" => {
+                            Ok(__Field::m_includeDownwardMomentum)
+                        }
+                        "followWorldFromModel" => Ok(__Field::m_followWorldFromModel),
+                        "isTouchingGround" => Ok(__Field::m_isTouchingGround),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -1380,43 +1380,43 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_isTouchingGround: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_followWorldFromModel: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_includeDownwardMomentum: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_ignoreIncomingTranslation: _serde::__private::Option<
-                        bool,
-                    > = _serde::__private::None;
-                    let mut m_ignoreCollisionDuringRotation: _serde::__private::Option<
-                        bool,
-                    > = _serde::__private::None;
-                    let mut m_ignoreIncomingRotation: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_linearVelocityMode: _serde::__private::Option<
-                        LinearVelocityMode,
-                    > = _serde::__private::None;
-                    let mut m_phantomType: _serde::__private::Option<PhantomType> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_maxSlopeForRotation: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_capsuleRadius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_capsuleHeight: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_minVerticalDisplacement: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxVerticalDisplacement: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_verticalDisplacementErrorGain: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_verticalDisplacementError: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_maxVerticalSeparation: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxHorizontalSeparation: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_verticalGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_horizontalGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_linearVelocity: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_proxyInfo: _serde::__private::Option<
                         hkbProxyModifierProxyInfo,
                     > = _serde::__private::None;
+                    let mut m_linearVelocity: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_horizontalGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_verticalGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxHorizontalSeparation: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxVerticalSeparation: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_verticalDisplacementError: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_verticalDisplacementErrorGain: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_maxVerticalDisplacement: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_minVerticalDisplacement: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_capsuleHeight: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_capsuleRadius: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxSlopeForRotation: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_phantomType: _serde::__private::Option<PhantomType> = _serde::__private::None;
+                    let mut m_linearVelocityMode: _serde::__private::Option<
+                        LinearVelocityMode,
+                    > = _serde::__private::None;
+                    let mut m_ignoreIncomingRotation: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_ignoreCollisionDuringRotation: _serde::__private::Option<
+                        bool,
+                    > = _serde::__private::None;
+                    let mut m_ignoreIncomingTranslation: _serde::__private::Option<
+                        bool,
+                    > = _serde::__private::None;
+                    let mut m_includeDownwardMomentum: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_followWorldFromModel: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_isTouchingGround: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -1452,28 +1452,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -1489,6 +1467,28 @@ const _: () = {
                                 }
                                 m_userData = _serde::__private::Some(
                                     match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1520,21 +1520,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_isTouchingGround => {
+                            __Field::m_proxyInfo => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isTouchingGround) {
+                                if _serde::__private::Option::is_some(&m_proxyInfo) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isTouchingGround",
+                                            "proxyInfo",
                                         ),
                                     );
                                 }
-                                m_isTouchingGround = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_proxyInfo = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkbProxyModifierProxyInfo,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1544,23 +1546,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_followWorldFromModel => {
+                            __Field::m_linearVelocity => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_followWorldFromModel,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_linearVelocity) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "followWorldFromModel",
+                                            "linearVelocity",
                                         ),
                                     );
                                 }
-                                m_followWorldFromModel = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_linearVelocity = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1570,202 +1570,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_includeDownwardMomentum => {
+                            __Field::m_horizontalGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_includeDownwardMomentum,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_horizontalGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "includeDownwardMomentum",
+                                            "horizontalGain",
                                         ),
                                     );
                                 }
-                                m_includeDownwardMomentum = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_ignoreIncomingTranslation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_ignoreIncomingTranslation,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ignoreIncomingTranslation",
-                                        ),
-                                    );
-                                }
-                                m_ignoreIncomingTranslation = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_ignoreCollisionDuringRotation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_ignoreCollisionDuringRotation,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ignoreCollisionDuringRotation",
-                                        ),
-                                    );
-                                }
-                                m_ignoreCollisionDuringRotation = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_ignoreIncomingRotation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_ignoreIncomingRotation,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "ignoreIncomingRotation",
-                                        ),
-                                    );
-                                }
-                                m_ignoreIncomingRotation = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_linearVelocityMode => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_linearVelocityMode,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "linearVelocityMode",
-                                        ),
-                                    );
-                                }
-                                m_linearVelocityMode = _serde::__private::Some(
-                                    match __A::next_value::<LinearVelocityMode>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_phantomType => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_phantomType) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "phantomType",
-                                        ),
-                                    );
-                                }
-                                m_phantomType = _serde::__private::Some(
-                                    match __A::next_value::<PhantomType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_collisionFilterInfo => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_collisionFilterInfo,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "collisionFilterInfo",
-                                        ),
-                                    );
-                                }
-                                m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxSlopeForRotation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxSlopeForRotation,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxSlopeForRotation",
-                                        ),
-                                    );
-                                }
-                                m_maxSlopeForRotation = _serde::__private::Some(
+                                m_horizontalGain = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1776,174 +1594,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_capsuleRadius => {
+                            __Field::m_verticalGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_capsuleRadius) {
+                                if _serde::__private::Option::is_some(&m_verticalGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "capsuleRadius",
+                                            "verticalGain",
                                         ),
                                     );
                                 }
-                                m_capsuleRadius = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_capsuleHeight => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_capsuleHeight) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "capsuleHeight",
-                                        ),
-                                    );
-                                }
-                                m_capsuleHeight = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_minVerticalDisplacement => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_minVerticalDisplacement,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "minVerticalDisplacement",
-                                        ),
-                                    );
-                                }
-                                m_minVerticalDisplacement = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxVerticalDisplacement => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxVerticalDisplacement,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxVerticalDisplacement",
-                                        ),
-                                    );
-                                }
-                                m_maxVerticalDisplacement = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_verticalDisplacementErrorGain => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_verticalDisplacementErrorGain,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "verticalDisplacementErrorGain",
-                                        ),
-                                    );
-                                }
-                                m_verticalDisplacementErrorGain = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_verticalDisplacementError => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_verticalDisplacementError,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "verticalDisplacementError",
-                                        ),
-                                    );
-                                }
-                                m_verticalDisplacementError = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxVerticalSeparation => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxVerticalSeparation,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxVerticalSeparation",
-                                        ),
-                                    );
-                                }
-                                m_maxVerticalSeparation = _serde::__private::Some(
+                                m_verticalGain = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1980,20 +1644,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_verticalGain => {
+                            __Field::m_maxVerticalSeparation => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_verticalGain) {
+                                if _serde::__private::Option::is_some(
+                                    &m_maxVerticalSeparation,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "verticalGain",
+                                            "maxVerticalSeparation",
                                         ),
                                     );
                                 }
-                                m_verticalGain = _serde::__private::Some(
+                                m_maxVerticalSeparation = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -2004,20 +1670,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_horizontalGain => {
+                            __Field::m_verticalDisplacementError => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_horizontalGain) {
+                                if _serde::__private::Option::is_some(
+                                    &m_verticalDisplacementError,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "horizontalGain",
+                                            "verticalDisplacementError",
                                         ),
                                     );
                                 }
-                                m_horizontalGain = _serde::__private::Some(
+                                m_verticalDisplacementError = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -2028,21 +1696,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_linearVelocity => {
+                            __Field::m_verticalDisplacementErrorGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_linearVelocity) {
+                                if _serde::__private::Option::is_some(
+                                    &m_verticalDisplacementErrorGain,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "linearVelocity",
+                                            "verticalDisplacementErrorGain",
                                         ),
                                     );
                                 }
-                                m_linearVelocity = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_verticalDisplacementErrorGain = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -2052,23 +1722,353 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_proxyInfo => {
+                            __Field::m_maxVerticalDisplacement => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_proxyInfo) {
+                                if _serde::__private::Option::is_some(
+                                    &m_maxVerticalDisplacement,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "proxyInfo",
+                                            "maxVerticalDisplacement",
                                         ),
                                     );
                                 }
-                                m_proxyInfo = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkbProxyModifierProxyInfo,
-                                    >(&mut __map) {
+                                m_maxVerticalDisplacement = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_minVerticalDisplacement => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_minVerticalDisplacement,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "minVerticalDisplacement",
+                                        ),
+                                    );
+                                }
+                                m_minVerticalDisplacement = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_capsuleHeight => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_capsuleHeight) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "capsuleHeight",
+                                        ),
+                                    );
+                                }
+                                m_capsuleHeight = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_capsuleRadius => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_capsuleRadius) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "capsuleRadius",
+                                        ),
+                                    );
+                                }
+                                m_capsuleRadius = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxSlopeForRotation => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxSlopeForRotation,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxSlopeForRotation",
+                                        ),
+                                    );
+                                }
+                                m_maxSlopeForRotation = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_collisionFilterInfo => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_collisionFilterInfo,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "collisionFilterInfo",
+                                        ),
+                                    );
+                                }
+                                m_collisionFilterInfo = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_phantomType => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_phantomType) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "phantomType",
+                                        ),
+                                    );
+                                }
+                                m_phantomType = _serde::__private::Some(
+                                    match __A::next_value::<PhantomType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_linearVelocityMode => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_linearVelocityMode,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "linearVelocityMode",
+                                        ),
+                                    );
+                                }
+                                m_linearVelocityMode = _serde::__private::Some(
+                                    match __A::next_value::<LinearVelocityMode>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_ignoreIncomingRotation => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_ignoreIncomingRotation,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "ignoreIncomingRotation",
+                                        ),
+                                    );
+                                }
+                                m_ignoreIncomingRotation = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_ignoreCollisionDuringRotation => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_ignoreCollisionDuringRotation,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "ignoreCollisionDuringRotation",
+                                        ),
+                                    );
+                                }
+                                m_ignoreCollisionDuringRotation = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_ignoreIncomingTranslation => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_ignoreIncomingTranslation,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "ignoreIncomingTranslation",
+                                        ),
+                                    );
+                                }
+                                m_ignoreIncomingTranslation = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_includeDownwardMomentum => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_includeDownwardMomentum,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "includeDownwardMomentum",
+                                        ),
+                                    );
+                                }
+                                m_includeDownwardMomentum = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_followWorldFromModel => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_followWorldFromModel,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "followWorldFromModel",
+                                        ),
+                                    );
+                                }
+                                m_followWorldFromModel = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isTouchingGround => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isTouchingGround) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isTouchingGround",
+                                        ),
+                                    );
+                                }
+                                m_isTouchingGround = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -2093,22 +2093,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -2123,241 +2123,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_isTouchingGround = match m_isTouchingGround {
+                    let m_proxyInfo = match m_proxyInfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isTouchingGround",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_followWorldFromModel = match m_followWorldFromModel {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "followWorldFromModel",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_includeDownwardMomentum = match m_includeDownwardMomentum {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "includeDownwardMomentum",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_ignoreIncomingTranslation = match m_ignoreIncomingTranslation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "ignoreIncomingTranslation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_ignoreCollisionDuringRotation = match m_ignoreCollisionDuringRotation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "ignoreCollisionDuringRotation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_ignoreIncomingRotation = match m_ignoreIncomingRotation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "ignoreIncomingRotation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_linearVelocityMode = match m_linearVelocityMode {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "linearVelocityMode",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_phantomType = match m_phantomType {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "phantomType",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_collisionFilterInfo = match m_collisionFilterInfo {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "collisionFilterInfo",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxSlopeForRotation = match m_maxSlopeForRotation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxSlopeForRotation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_capsuleRadius = match m_capsuleRadius {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "capsuleRadius",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_capsuleHeight = match m_capsuleHeight {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "capsuleHeight",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_minVerticalDisplacement = match m_minVerticalDisplacement {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "minVerticalDisplacement",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxVerticalDisplacement = match m_maxVerticalDisplacement {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxVerticalDisplacement",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_verticalDisplacementErrorGain = match m_verticalDisplacementErrorGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "verticalDisplacementErrorGain",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_verticalDisplacementError = match m_verticalDisplacementError {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "verticalDisplacementError",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxVerticalSeparation = match m_maxVerticalSeparation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxVerticalSeparation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxHorizontalSeparation = match m_maxHorizontalSeparation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxHorizontalSeparation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_verticalGain = match m_verticalGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "verticalGain",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_horizontalGain = match m_horizontalGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "horizontalGain",
+                                    "proxyInfo",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -2375,13 +2147,241 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_proxyInfo = match m_proxyInfo {
+                    let m_horizontalGain = match m_horizontalGain {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "proxyInfo",
+                                    "horizontalGain",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_verticalGain = match m_verticalGain {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "verticalGain",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxHorizontalSeparation = match m_maxHorizontalSeparation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxHorizontalSeparation",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxVerticalSeparation = match m_maxVerticalSeparation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxVerticalSeparation",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_verticalDisplacementError = match m_verticalDisplacementError {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "verticalDisplacementError",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_verticalDisplacementErrorGain = match m_verticalDisplacementErrorGain {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "verticalDisplacementErrorGain",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxVerticalDisplacement = match m_maxVerticalDisplacement {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxVerticalDisplacement",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_minVerticalDisplacement = match m_minVerticalDisplacement {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "minVerticalDisplacement",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_capsuleHeight = match m_capsuleHeight {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "capsuleHeight",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_capsuleRadius = match m_capsuleRadius {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "capsuleRadius",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxSlopeForRotation = match m_maxSlopeForRotation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxSlopeForRotation",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_collisionFilterInfo = match m_collisionFilterInfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "collisionFilterInfo",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_phantomType = match m_phantomType {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "phantomType",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_linearVelocityMode = match m_linearVelocityMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "linearVelocityMode",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_ignoreIncomingRotation = match m_ignoreIncomingRotation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "ignoreIncomingRotation",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_ignoreCollisionDuringRotation = match m_ignoreCollisionDuringRotation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "ignoreCollisionDuringRotation",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_ignoreIncomingTranslation = match m_ignoreIncomingTranslation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "ignoreIncomingTranslation",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_includeDownwardMomentum = match m_includeDownwardMomentum {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "includeDownwardMomentum",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_followWorldFromModel = match m_followWorldFromModel {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "followWorldFromModel",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isTouchingGround = match m_isTouchingGround {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isTouchingGround",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

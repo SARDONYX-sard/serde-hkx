@@ -106,11 +106,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_boneIndex,
-                m_name,
-                m_attachment,
-                m_boneFromAttachment,
                 m_originalSkeletonName,
+                m_boneFromAttachment,
+                m_attachment,
+                m_name,
+                m_boneIndex,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -134,11 +134,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "boneIndex" => Ok(__Field::m_boneIndex),
-                        "name" => Ok(__Field::m_name),
-                        "attachment" => Ok(__Field::m_attachment),
-                        "boneFromAttachment" => Ok(__Field::m_boneFromAttachment),
                         "originalSkeletonName" => Ok(__Field::m_originalSkeletonName),
+                        "boneFromAttachment" => Ok(__Field::m_boneFromAttachment),
+                        "attachment" => Ok(__Field::m_attachment),
+                        "name" => Ok(__Field::m_name),
+                        "boneIndex" => Ok(__Field::m_boneIndex),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -348,13 +348,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_boneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_attachment: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_boneFromAttachment: _serde::__private::Option<Matrix4> = _serde::__private::None;
                     let mut m_originalSkeletonName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
+                    let mut m_boneFromAttachment: _serde::__private::Option<Matrix4> = _serde::__private::None;
+                    let mut m_attachment: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_boneIndex: _serde::__private::Option<i16> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -364,67 +364,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_boneIndex => {
+                            __Field::m_originalSkeletonName => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_boneIndex) {
+                                if _serde::__private::Option::is_some(
+                                    &m_originalSkeletonName,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "boneIndex",
+                                            "originalSkeletonName",
                                         ),
                                     );
                                 }
-                                m_boneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
+                                m_originalSkeletonName = _serde::__private::Some(
                                     match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_attachment => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_attachment) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "attachment",
-                                        ),
-                                    );
-                                }
-                                m_attachment = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -460,23 +416,67 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_originalSkeletonName => {
+                            __Field::m_attachment => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_originalSkeletonName,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_attachment) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "originalSkeletonName",
+                                            "attachment",
                                         ),
                                     );
                                 }
-                                m_originalSkeletonName = _serde::__private::Some(
+                                m_attachment = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
                                     match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_boneIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_boneIndex) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "boneIndex",
+                                        ),
+                                    );
+                                }
+                                m_boneIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -489,35 +489,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_boneIndex = match m_boneIndex {
+                    let m_originalSkeletonName = match m_originalSkeletonName {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "boneIndex",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_attachment = match m_attachment {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "attachment",
+                                    "originalSkeletonName",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -535,13 +513,35 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_originalSkeletonName = match m_originalSkeletonName {
+                    let m_attachment = match m_attachment {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "originalSkeletonName",
+                                    "attachment",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_boneIndex = match m_boneIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "boneIndex",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

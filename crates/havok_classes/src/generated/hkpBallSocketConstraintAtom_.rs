@@ -100,11 +100,11 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_inertiaStabilizationFactor,
-                m_maxImpulse,
-                m_velocityStabilizationFactor,
-                m_bodiesToNotify,
                 m_solvingMethod,
+                m_bodiesToNotify,
+                m_velocityStabilizationFactor,
+                m_maxImpulse,
+                m_inertiaStabilizationFactor,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -129,15 +129,15 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "inertiaStabilizationFactor" => {
-                            Ok(__Field::m_inertiaStabilizationFactor)
-                        }
-                        "maxImpulse" => Ok(__Field::m_maxImpulse),
+                        "solvingMethod" => Ok(__Field::m_solvingMethod),
+                        "bodiesToNotify" => Ok(__Field::m_bodiesToNotify),
                         "velocityStabilizationFactor" => {
                             Ok(__Field::m_velocityStabilizationFactor)
                         }
-                        "bodiesToNotify" => Ok(__Field::m_bodiesToNotify),
-                        "solvingMethod" => Ok(__Field::m_solvingMethod),
+                        "maxImpulse" => Ok(__Field::m_maxImpulse),
+                        "inertiaStabilizationFactor" => {
+                            Ok(__Field::m_inertiaStabilizationFactor)
+                        }
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -354,15 +354,15 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_inertiaStabilizationFactor: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_maxImpulse: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_solvingMethod: _serde::__private::Option<SolvingMethod> = _serde::__private::None;
+                    let mut m_bodiesToNotify: _serde::__private::Option<u8> = _serde::__private::None;
                     let mut m_velocityStabilizationFactor: _serde::__private::Option<
                         u8,
                     > = _serde::__private::None;
-                    let mut m_bodiesToNotify: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_solvingMethod: _serde::__private::Option<SolvingMethod> = _serde::__private::None;
+                    let mut m_maxImpulse: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_inertiaStabilizationFactor: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -394,23 +394,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_inertiaStabilizationFactor => {
+                            __Field::m_solvingMethod => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_inertiaStabilizationFactor,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_solvingMethod) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "inertiaStabilizationFactor",
+                                            "solvingMethod",
                                         ),
                                     );
                                 }
-                                m_inertiaStabilizationFactor = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_solvingMethod = _serde::__private::Some(
+                                    match __A::next_value::<SolvingMethod>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -420,21 +418,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxImpulse => {
+                            __Field::m_bodiesToNotify => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_maxImpulse) {
+                                if _serde::__private::Option::is_some(&m_bodiesToNotify) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxImpulse",
+                                            "bodiesToNotify",
                                         ),
                                     );
                                 }
-                                m_maxImpulse = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_bodiesToNotify = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -470,21 +468,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_bodiesToNotify => {
+                            __Field::m_maxImpulse => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_bodiesToNotify) {
+                                if _serde::__private::Option::is_some(&m_maxImpulse) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bodiesToNotify",
+                                            "maxImpulse",
                                         ),
                                     );
                                 }
-                                m_bodiesToNotify = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                m_maxImpulse = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -494,21 +492,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_solvingMethod => {
+                            __Field::m_inertiaStabilizationFactor => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_solvingMethod) {
+                                if _serde::__private::Option::is_some(
+                                    &m_inertiaStabilizationFactor,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "solvingMethod",
+                                            "inertiaStabilizationFactor",
                                         ),
                                     );
                                 }
-                                m_solvingMethod = _serde::__private::Some(
-                                    match __A::next_value::<SolvingMethod>(&mut __map) {
+                                m_inertiaStabilizationFactor = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -531,37 +531,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_inertiaStabilizationFactor = match m_inertiaStabilizationFactor {
+                    let m_solvingMethod = match m_solvingMethod {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "inertiaStabilizationFactor",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxImpulse = match m_maxImpulse {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxImpulse",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_velocityStabilizationFactor = match m_velocityStabilizationFactor {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "velocityStabilizationFactor",
+                                    "solvingMethod",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -579,13 +555,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_solvingMethod = match m_solvingMethod {
+                    let m_velocityStabilizationFactor = match m_velocityStabilizationFactor {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "solvingMethod",
+                                    "velocityStabilizationFactor",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxImpulse = match m_maxImpulse {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxImpulse",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_inertiaStabilizationFactor = match m_inertiaStabilizationFactor {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "inertiaStabilizationFactor",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

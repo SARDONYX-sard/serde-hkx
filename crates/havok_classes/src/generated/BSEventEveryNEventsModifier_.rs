@@ -166,14 +166,14 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_name,
                 m_userData,
+                m_name,
                 m_enable,
-                m_randomizeNumberOfEvents,
-                m_minimumNumberOfEventsBeforeSend,
-                m_numberOfEventsBeforeSend,
-                m_eventToSend,
                 m_eventToCheckFor,
+                m_eventToSend,
+                m_numberOfEventsBeforeSend,
+                m_minimumNumberOfEventsBeforeSend,
+                m_randomizeNumberOfEvents,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -198,20 +198,20 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
+                        "name" => Ok(__Field::m_name),
                         "enable" => Ok(__Field::m_enable),
-                        "randomizeNumberOfEvents" => {
-                            Ok(__Field::m_randomizeNumberOfEvents)
+                        "eventToCheckFor" => Ok(__Field::m_eventToCheckFor),
+                        "eventToSend" => Ok(__Field::m_eventToSend),
+                        "numberOfEventsBeforeSend" => {
+                            Ok(__Field::m_numberOfEventsBeforeSend)
                         }
                         "minimumNumberOfEventsBeforeSend" => {
                             Ok(__Field::m_minimumNumberOfEventsBeforeSend)
                         }
-                        "numberOfEventsBeforeSend" => {
-                            Ok(__Field::m_numberOfEventsBeforeSend)
+                        "randomizeNumberOfEvents" => {
+                            Ok(__Field::m_randomizeNumberOfEvents)
                         }
-                        "eventToSend" => Ok(__Field::m_eventToSend),
-                        "eventToCheckFor" => Ok(__Field::m_eventToCheckFor),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -495,18 +495,18 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_randomizeNumberOfEvents: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_minimumNumberOfEventsBeforeSend: _serde::__private::Option<
-                        i8,
-                    > = _serde::__private::None;
-                    let mut m_numberOfEventsBeforeSend: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_eventToSend: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
                     let mut m_eventToCheckFor: _serde::__private::Option<
                         hkbEventProperty,
                     > = _serde::__private::None;
+                    let mut m_eventToSend: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+                    let mut m_numberOfEventsBeforeSend: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_minimumNumberOfEventsBeforeSend: _serde::__private::Option<
+                        i8,
+                    > = _serde::__private::None;
+                    let mut m_randomizeNumberOfEvents: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -542,28 +542,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -579,6 +557,28 @@ const _: () = {
                                 }
                                 m_userData = _serde::__private::Some(
                                     match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -610,23 +610,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_randomizeNumberOfEvents => {
+                            __Field::m_eventToCheckFor => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_randomizeNumberOfEvents,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_eventToCheckFor) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "randomizeNumberOfEvents",
+                                            "eventToCheckFor",
                                         ),
                                     );
                                 }
-                                m_randomizeNumberOfEvents = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_eventToCheckFor = _serde::__private::Some(
+                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -636,23 +634,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_minimumNumberOfEventsBeforeSend => {
+                            __Field::m_eventToSend => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_minimumNumberOfEventsBeforeSend,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_eventToSend) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "minimumNumberOfEventsBeforeSend",
+                                            "eventToSend",
                                         ),
                                     );
                                 }
-                                m_minimumNumberOfEventsBeforeSend = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                m_eventToSend = _serde::__private::Some(
+                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -688,21 +684,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_eventToSend => {
+                            __Field::m_minimumNumberOfEventsBeforeSend => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_eventToSend) {
+                                if _serde::__private::Option::is_some(
+                                    &m_minimumNumberOfEventsBeforeSend,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "eventToSend",
+                                            "minimumNumberOfEventsBeforeSend",
                                         ),
                                     );
                                 }
-                                m_eventToSend = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                m_minimumNumberOfEventsBeforeSend = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -712,21 +710,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_eventToCheckFor => {
+                            __Field::m_randomizeNumberOfEvents => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_eventToCheckFor) {
+                                if _serde::__private::Option::is_some(
+                                    &m_randomizeNumberOfEvents,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "eventToCheckFor",
+                                            "randomizeNumberOfEvents",
                                         ),
                                     );
                                 }
-                                m_eventToCheckFor = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                m_randomizeNumberOfEvents = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -751,22 +751,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -781,37 +781,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_randomizeNumberOfEvents = match m_randomizeNumberOfEvents {
+                    let m_eventToCheckFor = match m_eventToCheckFor {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "randomizeNumberOfEvents",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_minimumNumberOfEventsBeforeSend = match m_minimumNumberOfEventsBeforeSend {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "minimumNumberOfEventsBeforeSend",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numberOfEventsBeforeSend = match m_numberOfEventsBeforeSend {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numberOfEventsBeforeSend",
+                                    "eventToCheckFor",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -829,13 +805,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_eventToCheckFor = match m_eventToCheckFor {
+                    let m_numberOfEventsBeforeSend = match m_numberOfEventsBeforeSend {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "eventToCheckFor",
+                                    "numberOfEventsBeforeSend",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_minimumNumberOfEventsBeforeSend = match m_minimumNumberOfEventsBeforeSend {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "minimumNumberOfEventsBeforeSend",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_randomizeNumberOfEvents = match m_randomizeNumberOfEvents {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "randomizeNumberOfEvents",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

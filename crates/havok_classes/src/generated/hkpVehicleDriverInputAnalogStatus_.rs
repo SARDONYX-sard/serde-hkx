@@ -95,10 +95,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_reverseButtonPressed,
-                m_handbrakeButtonPressed,
-                m_positionY,
                 m_positionX,
+                m_positionY,
+                m_handbrakeButtonPressed,
+                m_reverseButtonPressed,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -122,10 +122,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "reverseButtonPressed" => Ok(__Field::m_reverseButtonPressed),
-                        "handbrakeButtonPressed" => Ok(__Field::m_handbrakeButtonPressed),
-                        "positionY" => Ok(__Field::m_positionY),
                         "positionX" => Ok(__Field::m_positionX),
+                        "positionY" => Ok(__Field::m_positionY),
+                        "handbrakeButtonPressed" => Ok(__Field::m_handbrakeButtonPressed),
+                        "reverseButtonPressed" => Ok(__Field::m_reverseButtonPressed),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -310,10 +310,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_reverseButtonPressed: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_handbrakeButtonPressed: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_positionY: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_positionX: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_positionY: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_handbrakeButtonPressed: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_reverseButtonPressed: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -323,23 +323,45 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_reverseButtonPressed => {
+                            __Field::m_positionX => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_reverseButtonPressed,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_positionX) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "reverseButtonPressed",
+                                            "positionX",
                                         ),
                                     );
                                 }
-                                m_reverseButtonPressed = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_positionX = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_positionY => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_positionY) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "positionY",
+                                        ),
+                                    );
+                                }
+                                m_positionY = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -375,45 +397,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_positionY => {
+                            __Field::m_reverseButtonPressed => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_positionY) {
+                                if _serde::__private::Option::is_some(
+                                    &m_reverseButtonPressed,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "positionY",
+                                            "reverseButtonPressed",
                                         ),
                                     );
                                 }
-                                m_positionY = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_positionX => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_positionX) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "positionX",
-                                        ),
-                                    );
-                                }
-                                m_positionX = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_reverseButtonPressed = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -426,25 +426,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_reverseButtonPressed = match m_reverseButtonPressed {
+                    let m_positionX = match m_positionX {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "reverseButtonPressed",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_handbrakeButtonPressed = match m_handbrakeButtonPressed {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "handbrakeButtonPressed",
+                                    "positionX",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -462,13 +450,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_positionX = match m_positionX {
+                    let m_handbrakeButtonPressed = match m_handbrakeButtonPressed {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "positionX",
+                                    "handbrakeButtonPressed",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_reverseButtonPressed = match m_reverseButtonPressed {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "reverseButtonPressed",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

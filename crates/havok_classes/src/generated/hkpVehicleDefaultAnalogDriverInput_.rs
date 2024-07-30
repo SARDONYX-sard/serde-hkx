@@ -90,10 +90,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_autoReverse,
-                m_deadZone,
-                m_initialSlope,
                 m_slopeChangePointX,
+                m_initialSlope,
+                m_deadZone,
+                m_autoReverse,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -117,10 +117,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "autoReverse" => Ok(__Field::m_autoReverse),
-                        "deadZone" => Ok(__Field::m_deadZone),
-                        "initialSlope" => Ok(__Field::m_initialSlope),
                         "slopeChangePointX" => Ok(__Field::m_slopeChangePointX),
+                        "initialSlope" => Ok(__Field::m_initialSlope),
+                        "deadZone" => Ok(__Field::m_deadZone),
+                        "autoReverse" => Ok(__Field::m_autoReverse),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -301,10 +301,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_autoReverse: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_deadZone: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_initialSlope: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_slopeChangePointX: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_initialSlope: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_deadZone: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_autoReverse: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -314,44 +314,22 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_autoReverse => {
+                            __Field::m_slopeChangePointX => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_autoReverse) {
+                                if _serde::__private::Option::is_some(
+                                    &m_slopeChangePointX,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "autoReverse",
+                                            "slopeChangePointX",
                                         ),
                                     );
                                 }
-                                m_autoReverse = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_deadZone => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_deadZone) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "deadZone",
-                                        ),
-                                    );
-                                }
-                                m_deadZone = _serde::__private::Some(
+                                m_slopeChangePointX = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -386,23 +364,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_slopeChangePointX => {
+                            __Field::m_deadZone => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_slopeChangePointX,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_deadZone) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "slopeChangePointX",
+                                            "deadZone",
                                         ),
                                     );
                                 }
-                                m_slopeChangePointX = _serde::__private::Some(
+                                m_deadZone = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_autoReverse => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_autoReverse) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "autoReverse",
+                                        ),
+                                    );
+                                }
+                                m_autoReverse = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -415,24 +415,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_autoReverse = match m_autoReverse {
+                    let m_slopeChangePointX = match m_slopeChangePointX {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "autoReverse",
+                                    "slopeChangePointX",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_deadZone = match m_deadZone {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("deadZone"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -449,13 +439,23 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_slopeChangePointX = match m_slopeChangePointX {
+                    let m_deadZone = match m_deadZone {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("deadZone"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_autoReverse = match m_autoReverse {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "slopeChangePointX",
+                                    "autoReverse",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

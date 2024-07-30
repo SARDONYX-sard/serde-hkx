@@ -96,11 +96,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_postpad,
-                m_type,
                 m_prepad,
-                m_collisionGroups,
+                m_type,
+                m_postpad,
                 m_noGroupCollisionEnabled,
+                m_collisionGroups,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -124,13 +124,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "postpad" => Ok(__Field::m_postpad),
-                        "type" => Ok(__Field::m_type),
                         "prepad" => Ok(__Field::m_prepad),
-                        "collisionGroups" => Ok(__Field::m_collisionGroups),
+                        "type" => Ok(__Field::m_type),
+                        "postpad" => Ok(__Field::m_postpad),
                         "noGroupCollisionEnabled" => {
                             Ok(__Field::m_noGroupCollisionEnabled)
                         }
+                        "collisionGroups" => Ok(__Field::m_collisionGroups),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -256,13 +256,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_postpad: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
-                    let mut m_type: _serde::__private::Option<hkpFilterType> = _serde::__private::None;
                     let mut m_prepad: _serde::__private::Option<[u32; 2usize]> = _serde::__private::None;
+                    let mut m_type: _serde::__private::Option<hkpFilterType> = _serde::__private::None;
+                    let mut m_postpad: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
+                    let mut m_noGroupCollisionEnabled: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_collisionGroups: _serde::__private::Option<
                         [u32; 32usize],
                     > = _serde::__private::None;
-                    let mut m_noGroupCollisionEnabled: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -272,21 +272,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_postpad => {
+                            __Field::m_prepad => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_postpad) {
+                                if _serde::__private::Option::is_some(&m_prepad) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "postpad",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("prepad"),
                                     );
                                 }
-                                m_postpad = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                m_prepad = _serde::__private::Some(
+                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -318,43 +316,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_prepad => {
+                            __Field::m_postpad => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_prepad) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("prepad"),
-                                    );
-                                }
-                                m_prepad = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_collisionGroups => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_collisionGroups) {
+                                if _serde::__private::Option::is_some(&m_postpad) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "collisionGroups",
+                                            "postpad",
                                         ),
                                     );
                                 }
-                                m_collisionGroups = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 32usize]>(&mut __map) {
+                                m_postpad = _serde::__private::Some(
+                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -390,15 +366,39 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_collisionGroups => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_collisionGroups) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "collisionGroups",
+                                        ),
+                                    );
+                                }
+                                m_collisionGroups = _serde::__private::Some(
+                                    match __A::next_value::<[u32; 32usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_postpad = match m_postpad {
+                    let m_prepad = match m_prepad {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("postpad"),
+                                <__A::Error as _serde::de::Error>::missing_field("prepad"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -413,24 +413,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_prepad = match m_prepad {
+                    let m_postpad = match m_postpad {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("prepad"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_collisionGroups = match m_collisionGroups {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "collisionGroups",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("postpad"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -442,6 +430,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "noGroupCollisionEnabled",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_collisionGroups = match m_collisionGroups {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "collisionGroups",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

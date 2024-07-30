@@ -111,12 +111,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_allMatricesAreAffine,
-                m_indexMappings,
-                m_matricesNames,
-                m_matricesOrder,
-                m_inverseMatrices,
                 m_matrices,
+                m_inverseMatrices,
+                m_matricesOrder,
+                m_matricesNames,
+                m_indexMappings,
+                m_allMatricesAreAffine,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -140,12 +140,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "allMatricesAreAffine" => Ok(__Field::m_allMatricesAreAffine),
-                        "indexMappings" => Ok(__Field::m_indexMappings),
-                        "matricesNames" => Ok(__Field::m_matricesNames),
-                        "matricesOrder" => Ok(__Field::m_matricesOrder),
-                        "inverseMatrices" => Ok(__Field::m_inverseMatrices),
                         "matrices" => Ok(__Field::m_matrices),
+                        "inverseMatrices" => Ok(__Field::m_inverseMatrices),
+                        "matricesOrder" => Ok(__Field::m_matricesOrder),
+                        "matricesNames" => Ok(__Field::m_matricesNames),
+                        "indexMappings" => Ok(__Field::m_indexMappings),
+                        "allMatricesAreAffine" => Ok(__Field::m_allMatricesAreAffine),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -387,16 +387,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_allMatricesAreAffine: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_indexMappings: _serde::__private::Option<
-                        Vec<hkMeshBoneIndexMapping>,
-                    > = _serde::__private::None;
+                    let mut m_matrices: _serde::__private::Option<Vec<Matrix4>> = _serde::__private::None;
+                    let mut m_inverseMatrices: _serde::__private::Option<Vec<Matrix4>> = _serde::__private::None;
+                    let mut m_matricesOrder: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
                     let mut m_matricesNames: _serde::__private::Option<
                         Vec<StringPtr<'de>>,
                     > = _serde::__private::None;
-                    let mut m_matricesOrder: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
-                    let mut m_inverseMatrices: _serde::__private::Option<Vec<Matrix4>> = _serde::__private::None;
-                    let mut m_matrices: _serde::__private::Option<Vec<Matrix4>> = _serde::__private::None;
+                    let mut m_indexMappings: _serde::__private::Option<
+                        Vec<hkMeshBoneIndexMapping>,
+                    > = _serde::__private::None;
+                    let mut m_allMatricesAreAffine: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -406,23 +406,93 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_allMatricesAreAffine => {
+                            __Field::m_matrices => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_allMatricesAreAffine,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_matrices) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "allMatricesAreAffine",
+                                            "matrices",
                                         ),
                                     );
                                 }
-                                m_allMatricesAreAffine = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_matrices = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Matrix4>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_inverseMatrices => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_inverseMatrices) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "inverseMatrices",
+                                        ),
+                                    );
+                                }
+                                m_inverseMatrices = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Matrix4>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_matricesOrder => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_matricesOrder) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "matricesOrder",
+                                        ),
+                                    );
+                                }
+                                m_matricesOrder = _serde::__private::Some(
+                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_matricesNames => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_matricesNames) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "matricesNames",
+                                        ),
+                                    );
+                                }
+                                m_matricesNames = _serde::__private::Some(
+                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -458,93 +528,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_matricesNames => {
+                            __Field::m_allMatricesAreAffine => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_matricesNames) {
+                                if _serde::__private::Option::is_some(
+                                    &m_allMatricesAreAffine,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "matricesNames",
+                                            "allMatricesAreAffine",
                                         ),
                                     );
                                 }
-                                m_matricesNames = _serde::__private::Some(
-                                    match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_matricesOrder => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_matricesOrder) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "matricesOrder",
-                                        ),
-                                    );
-                                }
-                                m_matricesOrder = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_inverseMatrices => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_inverseMatrices) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "inverseMatrices",
-                                        ),
-                                    );
-                                }
-                                m_inverseMatrices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Matrix4>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_matrices => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_matrices) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "matrices",
-                                        ),
-                                    );
-                                }
-                                m_matrices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Matrix4>>(&mut __map) {
+                                m_allMatricesAreAffine = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -557,37 +557,23 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_allMatricesAreAffine = match m_allMatricesAreAffine {
+                    let m_matrices = match m_matrices {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "allMatricesAreAffine",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("matrices"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_indexMappings = match m_indexMappings {
+                    let m_inverseMatrices = match m_inverseMatrices {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "indexMappings",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_matricesNames = match m_matricesNames {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "matricesNames",
+                                    "inverseMatrices",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -605,24 +591,38 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_inverseMatrices = match m_inverseMatrices {
+                    let m_matricesNames = match m_matricesNames {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "inverseMatrices",
+                                    "matricesNames",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_matrices = match m_matrices {
+                    let m_indexMappings = match m_indexMappings {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("matrices"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "indexMappings",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_allMatricesAreAffine = match m_allMatricesAreAffine {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "allMatricesAreAffine",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

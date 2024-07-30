@@ -119,13 +119,13 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_wheelsTorqueRatio,
-                m_gearsRatio,
-                m_reverseGearRatio,
-                m_clutchDelayTime,
-                m_primaryTransmissionRatio,
-                m_upshiftRPM,
                 m_downshiftRPM,
+                m_upshiftRPM,
+                m_primaryTransmissionRatio,
+                m_clutchDelayTime,
+                m_reverseGearRatio,
+                m_gearsRatio,
+                m_wheelsTorqueRatio,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -149,15 +149,15 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "wheelsTorqueRatio" => Ok(__Field::m_wheelsTorqueRatio),
-                        "gearsRatio" => Ok(__Field::m_gearsRatio),
-                        "reverseGearRatio" => Ok(__Field::m_reverseGearRatio),
-                        "clutchDelayTime" => Ok(__Field::m_clutchDelayTime),
+                        "downshiftRPM" => Ok(__Field::m_downshiftRPM),
+                        "upshiftRPM" => Ok(__Field::m_upshiftRPM),
                         "primaryTransmissionRatio" => {
                             Ok(__Field::m_primaryTransmissionRatio)
                         }
-                        "upshiftRPM" => Ok(__Field::m_upshiftRPM),
-                        "downshiftRPM" => Ok(__Field::m_downshiftRPM),
+                        "clutchDelayTime" => Ok(__Field::m_clutchDelayTime),
+                        "reverseGearRatio" => Ok(__Field::m_reverseGearRatio),
+                        "gearsRatio" => Ok(__Field::m_gearsRatio),
+                        "wheelsTorqueRatio" => Ok(__Field::m_wheelsTorqueRatio),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -427,13 +427,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_wheelsTorqueRatio: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-                    let mut m_gearsRatio: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-                    let mut m_reverseGearRatio: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_clutchDelayTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_primaryTransmissionRatio: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_upshiftRPM: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_downshiftRPM: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_upshiftRPM: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_primaryTransmissionRatio: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_clutchDelayTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_reverseGearRatio: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_gearsRatio: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
+                    let mut m_wheelsTorqueRatio: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -443,70 +443,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_wheelsTorqueRatio => {
+                            __Field::m_downshiftRPM => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_wheelsTorqueRatio,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_downshiftRPM) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelsTorqueRatio",
+                                            "downshiftRPM",
                                         ),
                                     );
                                 }
-                                m_wheelsTorqueRatio = _serde::__private::Some(
-                                    match __A::next_value::<Vec<f32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_gearsRatio => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_gearsRatio) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "gearsRatio",
-                                        ),
-                                    );
-                                }
-                                m_gearsRatio = _serde::__private::Some(
-                                    match __A::next_value::<Vec<f32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_reverseGearRatio => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_reverseGearRatio) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "reverseGearRatio",
-                                        ),
-                                    );
-                                }
-                                m_reverseGearRatio = _serde::__private::Some(
+                                m_downshiftRPM = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -517,20 +467,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_clutchDelayTime => {
+                            __Field::m_upshiftRPM => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_clutchDelayTime) {
+                                if _serde::__private::Option::is_some(&m_upshiftRPM) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "clutchDelayTime",
+                                            "upshiftRPM",
                                         ),
                                     );
                                 }
-                                m_clutchDelayTime = _serde::__private::Some(
+                                m_upshiftRPM = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -567,20 +517,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_upshiftRPM => {
+                            __Field::m_clutchDelayTime => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_upshiftRPM) {
+                                if _serde::__private::Option::is_some(&m_clutchDelayTime) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "upshiftRPM",
+                                            "clutchDelayTime",
                                         ),
                                     );
                                 }
-                                m_upshiftRPM = _serde::__private::Some(
+                                m_clutchDelayTime = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -591,21 +541,71 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_downshiftRPM => {
+                            __Field::m_reverseGearRatio => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_downshiftRPM) {
+                                if _serde::__private::Option::is_some(&m_reverseGearRatio) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "downshiftRPM",
+                                            "reverseGearRatio",
                                         ),
                                     );
                                 }
-                                m_downshiftRPM = _serde::__private::Some(
+                                m_reverseGearRatio = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_gearsRatio => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_gearsRatio) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "gearsRatio",
+                                        ),
+                                    );
+                                }
+                                m_gearsRatio = _serde::__private::Some(
+                                    match __A::next_value::<Vec<f32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wheelsTorqueRatio => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_wheelsTorqueRatio,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wheelsTorqueRatio",
+                                        ),
+                                    );
+                                }
+                                m_wheelsTorqueRatio = _serde::__private::Some(
+                                    match __A::next_value::<Vec<f32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -618,61 +618,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_wheelsTorqueRatio = match m_wheelsTorqueRatio {
+                    let m_downshiftRPM = match m_downshiftRPM {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelsTorqueRatio",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_gearsRatio = match m_gearsRatio {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "gearsRatio",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_reverseGearRatio = match m_reverseGearRatio {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "reverseGearRatio",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_clutchDelayTime = match m_clutchDelayTime {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "clutchDelayTime",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_primaryTransmissionRatio = match m_primaryTransmissionRatio {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "primaryTransmissionRatio",
+                                    "downshiftRPM",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -690,13 +642,61 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_downshiftRPM = match m_downshiftRPM {
+                    let m_primaryTransmissionRatio = match m_primaryTransmissionRatio {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "downshiftRPM",
+                                    "primaryTransmissionRatio",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_clutchDelayTime = match m_clutchDelayTime {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "clutchDelayTime",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_reverseGearRatio = match m_reverseGearRatio {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "reverseGearRatio",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_gearsRatio = match m_gearsRatio {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "gearsRatio",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wheelsTorqueRatio = match m_wheelsTorqueRatio {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wheelsTorqueRatio",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

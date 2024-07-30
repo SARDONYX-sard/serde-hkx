@@ -125,14 +125,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_doSubtractiveBlend,
-                m_initSync,
-                m_endIntervalIndex,
-                m_beginIntervalIndex,
-                m_numActiveChildren,
-                m_endIntervalWeight,
-                m_sortedChildren,
                 m_childrenInternalStates,
+                m_sortedChildren,
+                m_endIntervalWeight,
+                m_numActiveChildren,
+                m_beginIntervalIndex,
+                m_endIntervalIndex,
+                m_initSync,
+                m_doSubtractiveBlend,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -156,14 +156,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "doSubtractiveBlend" => Ok(__Field::m_doSubtractiveBlend),
-                        "initSync" => Ok(__Field::m_initSync),
-                        "endIntervalIndex" => Ok(__Field::m_endIntervalIndex),
-                        "beginIntervalIndex" => Ok(__Field::m_beginIntervalIndex),
-                        "numActiveChildren" => Ok(__Field::m_numActiveChildren),
-                        "endIntervalWeight" => Ok(__Field::m_endIntervalWeight),
-                        "sortedChildren" => Ok(__Field::m_sortedChildren),
                         "childrenInternalStates" => Ok(__Field::m_childrenInternalStates),
+                        "sortedChildren" => Ok(__Field::m_sortedChildren),
+                        "endIntervalWeight" => Ok(__Field::m_endIntervalWeight),
+                        "numActiveChildren" => Ok(__Field::m_numActiveChildren),
+                        "beginIntervalIndex" => Ok(__Field::m_beginIntervalIndex),
+                        "endIntervalIndex" => Ok(__Field::m_endIntervalIndex),
+                        "initSync" => Ok(__Field::m_initSync),
+                        "doSubtractiveBlend" => Ok(__Field::m_doSubtractiveBlend),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -470,16 +470,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_doSubtractiveBlend: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_initSync: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_endIntervalIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_beginIntervalIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_numActiveChildren: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_endIntervalWeight: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_sortedChildren: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
                     let mut m_childrenInternalStates: _serde::__private::Option<
                         Vec<hkbBlenderGeneratorChildInternalState>,
                     > = _serde::__private::None;
+                    let mut m_sortedChildren: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+                    let mut m_endIntervalWeight: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_numActiveChildren: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_beginIntervalIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_endIntervalIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_initSync: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_doSubtractiveBlend: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -489,23 +489,25 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_doSubtractiveBlend => {
+                            __Field::m_childrenInternalStates => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_doSubtractiveBlend,
+                                    &m_childrenInternalStates,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "doSubtractiveBlend",
+                                            "childrenInternalStates",
                                         ),
                                     );
                                 }
-                                m_doSubtractiveBlend = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_childrenInternalStates = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkbBlenderGeneratorChildInternalState>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -515,97 +517,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_initSync => {
+                            __Field::m_sortedChildren => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_initSync) {
+                                if _serde::__private::Option::is_some(&m_sortedChildren) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "initSync",
+                                            "sortedChildren",
                                         ),
                                     );
                                 }
-                                m_initSync = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_endIntervalIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_endIntervalIndex) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "endIntervalIndex",
-                                        ),
-                                    );
-                                }
-                                m_endIntervalIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_beginIntervalIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_beginIntervalIndex,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "beginIntervalIndex",
-                                        ),
-                                    );
-                                }
-                                m_beginIntervalIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numActiveChildren => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_numActiveChildren,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numActiveChildren",
-                                        ),
-                                    );
-                                }
-                                m_numActiveChildren = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_sortedChildren = _serde::__private::Some(
+                                    match __A::next_value::<Vec<i16>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -641,21 +567,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_sortedChildren => {
+                            __Field::m_numActiveChildren => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_sortedChildren) {
+                                if _serde::__private::Option::is_some(
+                                    &m_numActiveChildren,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sortedChildren",
+                                            "numActiveChildren",
                                         ),
                                     );
                                 }
-                                m_sortedChildren = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                m_numActiveChildren = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -665,25 +593,97 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_childrenInternalStates => {
+                            __Field::m_beginIntervalIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_childrenInternalStates,
+                                    &m_beginIntervalIndex,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "childrenInternalStates",
+                                            "beginIntervalIndex",
                                         ),
                                     );
                                 }
-                                m_childrenInternalStates = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkbBlenderGeneratorChildInternalState>,
-                                    >(&mut __map) {
+                                m_beginIntervalIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_endIntervalIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_endIntervalIndex) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "endIntervalIndex",
+                                        ),
+                                    );
+                                }
+                                m_endIntervalIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_initSync => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_initSync) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "initSync",
+                                        ),
+                                    );
+                                }
+                                m_initSync = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_doSubtractiveBlend => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_doSubtractiveBlend,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "doSubtractiveBlend",
+                                        ),
+                                    );
+                                }
+                                m_doSubtractiveBlend = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -696,71 +696,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_doSubtractiveBlend = match m_doSubtractiveBlend {
+                    let m_childrenInternalStates = match m_childrenInternalStates {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "doSubtractiveBlend",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_initSync = match m_initSync {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("initSync"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_endIntervalIndex = match m_endIntervalIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "endIntervalIndex",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_beginIntervalIndex = match m_beginIntervalIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "beginIntervalIndex",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numActiveChildren = match m_numActiveChildren {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numActiveChildren",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_endIntervalWeight = match m_endIntervalWeight {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "endIntervalWeight",
+                                    "childrenInternalStates",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -778,13 +720,71 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_childrenInternalStates = match m_childrenInternalStates {
+                    let m_endIntervalWeight = match m_endIntervalWeight {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "childrenInternalStates",
+                                    "endIntervalWeight",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numActiveChildren = match m_numActiveChildren {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numActiveChildren",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_beginIntervalIndex = match m_beginIntervalIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "beginIntervalIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_endIntervalIndex = match m_endIntervalIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "endIntervalIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_initSync = match m_initSync {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("initSync"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_doSubtractiveBlend = match m_doSubtractiveBlend {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "doSubtractiveBlend",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

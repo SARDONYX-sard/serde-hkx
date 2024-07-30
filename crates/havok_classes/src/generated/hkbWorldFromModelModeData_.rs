@@ -82,10 +82,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_mode,
-                m_poseMatchingBone2,
-                m_poseMatchingBone1,
                 m_poseMatchingBone0,
+                m_poseMatchingBone1,
+                m_poseMatchingBone2,
+                m_mode,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -109,10 +109,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "mode" => Ok(__Field::m_mode),
-                        "poseMatchingBone2" => Ok(__Field::m_poseMatchingBone2),
-                        "poseMatchingBone1" => Ok(__Field::m_poseMatchingBone1),
                         "poseMatchingBone0" => Ok(__Field::m_poseMatchingBone0),
+                        "poseMatchingBone1" => Ok(__Field::m_poseMatchingBone1),
+                        "poseMatchingBone2" => Ok(__Field::m_poseMatchingBone2),
+                        "mode" => Ok(__Field::m_mode),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -291,10 +291,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_mode: _serde::__private::Option<WorldFromModelMode> = _serde::__private::None;
-                    let mut m_poseMatchingBone2: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_poseMatchingBone1: _serde::__private::Option<i16> = _serde::__private::None;
                     let mut m_poseMatchingBone0: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_poseMatchingBone1: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_poseMatchingBone2: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_mode: _serde::__private::Option<WorldFromModelMode> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -304,44 +304,22 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_mode => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_mode) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("mode"),
-                                    );
-                                }
-                                m_mode = _serde::__private::Some(
-                                    match __A::next_value::<WorldFromModelMode>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_poseMatchingBone2 => {
+                            __Field::m_poseMatchingBone0 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_poseMatchingBone2,
+                                    &m_poseMatchingBone0,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "poseMatchingBone2",
+                                            "poseMatchingBone0",
                                         ),
                                     );
                                 }
-                                m_poseMatchingBone2 = _serde::__private::Some(
+                                m_poseMatchingBone0 = _serde::__private::Some(
                                     match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -378,23 +356,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_poseMatchingBone0 => {
+                            __Field::m_poseMatchingBone2 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_poseMatchingBone0,
+                                    &m_poseMatchingBone2,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "poseMatchingBone0",
+                                            "poseMatchingBone2",
                                         ),
                                     );
                                 }
-                                m_poseMatchingBone0 = _serde::__private::Some(
+                                m_poseMatchingBone2 = _serde::__private::Some(
                                     match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_mode => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_mode) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                                    );
+                                }
+                                m_mode = _serde::__private::Some(
+                                    match __A::next_value::<WorldFromModelMode>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -407,23 +407,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_mode = match m_mode {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("mode"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_poseMatchingBone2 = match m_poseMatchingBone2 {
+                    let m_poseMatchingBone0 = match m_poseMatchingBone0 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "poseMatchingBone2",
+                                    "poseMatchingBone0",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -441,14 +431,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_poseMatchingBone0 = match m_poseMatchingBone0 {
+                    let m_poseMatchingBone2 = match m_poseMatchingBone2 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "poseMatchingBone0",
+                                    "poseMatchingBone2",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_mode = match m_mode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("mode"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

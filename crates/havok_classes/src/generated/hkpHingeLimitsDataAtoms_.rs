@@ -76,9 +76,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_2dAng,
-                m_angLimit,
                 m_rotations,
+                m_angLimit,
+                m_2dAng,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -102,9 +102,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "2dAng" => Ok(__Field::m_2dAng),
-                        "angLimit" => Ok(__Field::m_angLimit),
                         "rotations" => Ok(__Field::m_rotations),
+                        "angLimit" => Ok(__Field::m_angLimit),
+                        "2dAng" => Ok(__Field::m_2dAng),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -256,13 +256,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_2dAng: _serde::__private::Option<hkp2dAngConstraintAtom> = _serde::__private::None;
-                    let mut m_angLimit: _serde::__private::Option<
-                        hkpAngLimitConstraintAtom,
-                    > = _serde::__private::None;
                     let mut m_rotations: _serde::__private::Option<
                         hkpSetLocalRotationsConstraintAtom,
                     > = _serde::__private::None;
+                    let mut m_angLimit: _serde::__private::Option<
+                        hkpAngLimitConstraintAtom,
+                    > = _serde::__private::None;
+                    let mut m_2dAng: _serde::__private::Option<hkp2dAngConstraintAtom> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -272,20 +272,22 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_2dAng => {
+                            __Field::m_rotations => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_2dAng) {
+                                if _serde::__private::Option::is_some(&m_rotations) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rotations",
+                                        ),
                                     );
                                 }
-                                m_2dAng = _serde::__private::Some(
+                                m_rotations = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkp2dAngConstraintAtom,
+                                        hkpSetLocalRotationsConstraintAtom,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -322,22 +324,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_rotations => {
+                            __Field::m_2dAng => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_rotations) {
+                                if _serde::__private::Option::is_some(&m_2dAng) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rotations",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
                                     );
                                 }
-                                m_rotations = _serde::__private::Some(
+                                m_2dAng = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpSetLocalRotationsConstraintAtom,
+                                        hkp2dAngConstraintAtom,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -351,12 +351,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_2dAng = match m_2dAng {
+                    let m_rotations = match m_rotations {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("2dAng"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "rotations",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -371,14 +373,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_rotations = match m_rotations {
+                    let m_2dAng = match m_2dAng {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "rotations",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("2dAng"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

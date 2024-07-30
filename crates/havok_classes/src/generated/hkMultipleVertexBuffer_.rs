@@ -144,17 +144,17 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_constructionComplete,
-                m_isSharable,
-                m_writeLock,
-                m_updateCount,
-                m_isLocked,
-                m_numVertices,
-                m_vertexBufferInfos,
-                m_elementInfos,
-                m_lockedBuffer,
-                m_lockedElements,
                 m_vertexFormat,
+                m_lockedElements,
+                m_lockedBuffer,
+                m_elementInfos,
+                m_vertexBufferInfos,
+                m_numVertices,
+                m_isLocked,
+                m_updateCount,
+                m_writeLock,
+                m_isSharable,
+                m_constructionComplete,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -178,17 +178,17 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "constructionComplete" => Ok(__Field::m_constructionComplete),
-                        "isSharable" => Ok(__Field::m_isSharable),
-                        "writeLock" => Ok(__Field::m_writeLock),
-                        "updateCount" => Ok(__Field::m_updateCount),
-                        "isLocked" => Ok(__Field::m_isLocked),
-                        "numVertices" => Ok(__Field::m_numVertices),
-                        "vertexBufferInfos" => Ok(__Field::m_vertexBufferInfos),
-                        "elementInfos" => Ok(__Field::m_elementInfos),
-                        "lockedBuffer" => Ok(__Field::m_lockedBuffer),
-                        "lockedElements" => Ok(__Field::m_lockedElements),
                         "vertexFormat" => Ok(__Field::m_vertexFormat),
+                        "lockedElements" => Ok(__Field::m_lockedElements),
+                        "lockedBuffer" => Ok(__Field::m_lockedBuffer),
+                        "elementInfos" => Ok(__Field::m_elementInfos),
+                        "vertexBufferInfos" => Ok(__Field::m_vertexBufferInfos),
+                        "numVertices" => Ok(__Field::m_numVertices),
+                        "isLocked" => Ok(__Field::m_isLocked),
+                        "updateCount" => Ok(__Field::m_updateCount),
+                        "writeLock" => Ok(__Field::m_writeLock),
+                        "isSharable" => Ok(__Field::m_isSharable),
+                        "constructionComplete" => Ok(__Field::m_constructionComplete),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -585,23 +585,23 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_constructionComplete: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_isSharable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_writeLock: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_updateCount: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_isLocked: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_vertexBufferInfos: _serde::__private::Option<
-                        Vec<hkMultipleVertexBufferVertexBufferInfo>,
-                    > = _serde::__private::None;
-                    let mut m_elementInfos: _serde::__private::Option<
-                        Vec<hkMultipleVertexBufferElementInfo>,
-                    > = _serde::__private::None;
-                    let mut m_lockedBuffer: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_vertexFormat: _serde::__private::Option<hkVertexFormat> = _serde::__private::None;
                     let mut m_lockedElements: _serde::__private::Option<
                         Vec<hkMultipleVertexBufferLockedElement>,
                     > = _serde::__private::None;
-                    let mut m_vertexFormat: _serde::__private::Option<hkVertexFormat> = _serde::__private::None;
+                    let mut m_lockedBuffer: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_elementInfos: _serde::__private::Option<
+                        Vec<hkMultipleVertexBufferElementInfo>,
+                    > = _serde::__private::None;
+                    let mut m_vertexBufferInfos: _serde::__private::Option<
+                        Vec<hkMultipleVertexBufferVertexBufferInfo>,
+                    > = _serde::__private::None;
+                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_isLocked: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_updateCount: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_writeLock: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_isSharable: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_constructionComplete: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -611,23 +611,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_constructionComplete => {
+                            __Field::m_vertexFormat => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_constructionComplete,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_vertexFormat) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "constructionComplete",
+                                            "vertexFormat",
                                         ),
                                     );
                                 }
-                                m_constructionComplete = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_vertexFormat = _serde::__private::Some(
+                                    match __A::next_value::<hkVertexFormat>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -637,21 +635,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_isSharable => {
+                            __Field::m_lockedElements => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isSharable) {
+                                if _serde::__private::Option::is_some(&m_lockedElements) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isSharable",
+                                            "lockedElements",
                                         ),
                                     );
                                 }
-                                m_isSharable = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_lockedElements = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkMultipleVertexBufferLockedElement>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -661,21 +661,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_writeLock => {
+                            __Field::m_lockedBuffer => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_writeLock) {
+                                if _serde::__private::Option::is_some(&m_lockedBuffer) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "writeLock",
+                                            "lockedBuffer",
                                         ),
                                     );
                                 }
-                                m_writeLock = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_lockedBuffer = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -685,69 +685,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_updateCount => {
+                            __Field::m_elementInfos => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_updateCount) {
+                                if _serde::__private::Option::is_some(&m_elementInfos) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "updateCount",
+                                            "elementInfos",
                                         ),
                                     );
                                 }
-                                m_updateCount = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_isLocked => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_isLocked) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isLocked",
-                                        ),
-                                    );
-                                }
-                                m_isLocked = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numVertices => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_numVertices) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numVertices",
-                                        ),
-                                    );
-                                }
-                                m_numVertices = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_elementInfos = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkMultipleVertexBufferElementInfo>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -785,23 +739,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_elementInfos => {
+                            __Field::m_numVertices => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_elementInfos) {
+                                if _serde::__private::Option::is_some(&m_numVertices) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "elementInfos",
+                                            "numVertices",
                                         ),
                                     );
                                 }
-                                m_elementInfos = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkMultipleVertexBufferElementInfo>,
-                                    >(&mut __map) {
+                                m_numVertices = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -811,21 +763,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_lockedBuffer => {
+                            __Field::m_isLocked => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_lockedBuffer) {
+                                if _serde::__private::Option::is_some(&m_isLocked) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lockedBuffer",
+                                            "isLocked",
                                         ),
                                     );
                                 }
-                                m_lockedBuffer = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_isLocked = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -835,23 +787,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_lockedElements => {
+                            __Field::m_updateCount => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_lockedElements) {
+                                if _serde::__private::Option::is_some(&m_updateCount) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lockedElements",
+                                            "updateCount",
                                         ),
                                     );
                                 }
-                                m_lockedElements = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkMultipleVertexBufferLockedElement>,
-                                    >(&mut __map) {
+                                m_updateCount = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -861,21 +811,71 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vertexFormat => {
+                            __Field::m_writeLock => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_vertexFormat) {
+                                if _serde::__private::Option::is_some(&m_writeLock) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexFormat",
+                                            "writeLock",
                                         ),
                                     );
                                 }
-                                m_vertexFormat = _serde::__private::Some(
-                                    match __A::next_value::<hkVertexFormat>(&mut __map) {
+                                m_writeLock = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isSharable => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isSharable) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isSharable",
+                                        ),
+                                    );
+                                }
+                                m_isSharable = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_constructionComplete => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_constructionComplete,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "constructionComplete",
+                                        ),
+                                    );
+                                }
+                                m_constructionComplete = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -888,107 +888,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_constructionComplete = match m_constructionComplete {
+                    let m_vertexFormat = match m_vertexFormat {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "constructionComplete",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_isSharable = match m_isSharable {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "isSharable",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_writeLock = match m_writeLock {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "writeLock",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_updateCount = match m_updateCount {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "updateCount",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_isLocked = match m_isLocked {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("isLocked"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numVertices = match m_numVertices {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numVertices",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vertexBufferInfos = match m_vertexBufferInfos {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexBufferInfos",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_elementInfos = match m_elementInfos {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "elementInfos",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lockedBuffer = match m_lockedBuffer {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "lockedBuffer",
+                                    "vertexFormat",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1006,13 +912,107 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_vertexFormat = match m_vertexFormat {
+                    let m_lockedBuffer = match m_lockedBuffer {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexFormat",
+                                    "lockedBuffer",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_elementInfos = match m_elementInfos {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "elementInfos",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexBufferInfos = match m_vertexBufferInfos {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "vertexBufferInfos",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numVertices = match m_numVertices {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numVertices",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isLocked = match m_isLocked {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("isLocked"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_updateCount = match m_updateCount {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "updateCount",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_writeLock = match m_writeLock {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "writeLock",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isSharable = match m_isSharable {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isSharable",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_constructionComplete = match m_constructionComplete {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "constructionComplete",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

@@ -93,10 +93,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_name,
-                m_indices32,
-                m_indices16,
                 m_sections,
+                m_indices16,
+                m_indices32,
+                m_name,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -120,10 +120,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "name" => Ok(__Field::m_name),
-                        "indices32" => Ok(__Field::m_indices32),
-                        "indices16" => Ok(__Field::m_indices16),
                         "sections" => Ok(__Field::m_sections),
+                        "indices16" => Ok(__Field::m_indices16),
+                        "indices32" => Ok(__Field::m_indices32),
+                        "name" => Ok(__Field::m_name),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -298,12 +298,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
                     let mut m_sections: _serde::__private::Option<
                         Vec<hkMeshSectionCinfo>,
                     > = _serde::__private::None;
+                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -313,43 +313,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_name => {
+                            __Field::m_sections => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_indices32 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_indices32) {
+                                if _serde::__private::Option::is_some(&m_sections) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "indices32",
+                                            "sections",
                                         ),
                                     );
                                 }
-                                m_indices32 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                m_sections = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkMeshSectionCinfo>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -383,23 +363,43 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_sections => {
+                            __Field::m_indices32 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_sections) {
+                                if _serde::__private::Option::is_some(&m_indices32) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "sections",
+                                            "indices32",
                                         ),
                                     );
                                 }
-                                m_sections = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkMeshSectionCinfo>,
-                                    >(&mut __map) {
+                                m_indices32 = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -412,24 +412,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_name = match m_name {
+                    let m_sections = match m_sections {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_indices32 = match m_indices32 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "indices32",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("sections"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -446,12 +434,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_sections = match m_sections {
+                    let m_indices32 = match m_indices32 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("sections"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "indices32",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

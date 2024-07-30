@@ -89,11 +89,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_data,
-                m_pad2,
-                m_pad1,
-                m_pad0,
                 m_bytesAllocated,
+                m_pad0,
+                m_pad1,
+                m_pad2,
+                m_data,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -117,11 +117,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "data" => Ok(__Field::m_data),
-                        "pad2" => Ok(__Field::m_pad2),
-                        "pad1" => Ok(__Field::m_pad1),
-                        "pad0" => Ok(__Field::m_pad0),
                         "bytesAllocated" => Ok(__Field::m_bytesAllocated),
+                        "pad0" => Ok(__Field::m_pad0),
+                        "pad1" => Ok(__Field::m_pad1),
+                        "pad2" => Ok(__Field::m_pad2),
+                        "data" => Ok(__Field::m_data),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -309,11 +309,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_data: _serde::__private::Option<[u8; 496usize]> = _serde::__private::None;
-                    let mut m_pad2: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_pad1: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_pad0: _serde::__private::Option<u32> = _serde::__private::None;
                     let mut m_bytesAllocated: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_pad0: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_pad1: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_pad2: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<[u8; 496usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -323,63 +323,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_data => {
+                            __Field::m_bytesAllocated => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_data) {
+                                if _serde::__private::Option::is_some(&m_bytesAllocated) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bytesAllocated",
+                                        ),
                                     );
                                 }
-                                m_data = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 496usize]>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))]
-                                            [Default::default(); 496usize]
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_pad2 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_pad2) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("pad2"),
-                                    );
-                                }
-                                m_pad2 = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_pad1 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_pad1) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("pad1"),
-                                    );
-                                }
-                                m_pad1 = _serde::__private::Some(
+                                m_bytesAllocated = _serde::__private::Some(
                                     match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -412,20 +369,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_bytesAllocated => {
+                            __Field::m_pad1 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_bytesAllocated) {
+                                if _serde::__private::Option::is_some(&m_pad1) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bytesAllocated",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("pad1"),
                                     );
                                 }
-                                m_bytesAllocated = _serde::__private::Some(
+                                m_pad1 = _serde::__private::Some(
                                     match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -436,36 +391,62 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_pad2 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_pad2) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("pad2"),
+                                    );
+                                }
+                                m_pad2 = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_data => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_data) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                                    );
+                                }
+                                m_data = _serde::__private::Some(
+                                    match __A::next_value::<[u8; 496usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))]
+                                            [Default::default(); 496usize]
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_data = match m_data {
+                    let m_bytesAllocated = match m_bytesAllocated {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("data"),
-                            );
-                            #[cfg(not(feature = "strict"))]
-                            [Default::default(); 496usize]
-                        }
-                    };
-                    let m_pad2 = match m_pad2 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("pad2"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_pad1 = match m_pad1 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("pad1"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bytesAllocated",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -480,16 +461,35 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_bytesAllocated = match m_bytesAllocated {
+                    let m_pad1 = match m_pad1 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bytesAllocated",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("pad1"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_pad2 = match m_pad2 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("pad2"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_data = match m_data {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("data"),
+                            );
+                            #[cfg(not(feature = "strict"))]
+                            [Default::default(); 496usize]
                         }
                     };
                     let __ptr = __A::class_ptr(&mut __map);

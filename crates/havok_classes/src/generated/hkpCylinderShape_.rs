@@ -120,12 +120,12 @@ const _: () = {
             enum __Field {
                 m_userData,
                 m_radius,
-                m_perpendicular2,
-                m_perpendicular1,
-                m_vertexB,
-                m_vertexA,
-                m_cylBaseRadiusFactorForHeightFieldCollisions,
                 m_cylRadius,
+                m_cylBaseRadiusFactorForHeightFieldCollisions,
+                m_vertexA,
+                m_vertexB,
+                m_perpendicular1,
+                m_perpendicular2,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -151,14 +151,14 @@ const _: () = {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
                         "radius" => Ok(__Field::m_radius),
-                        "perpendicular2" => Ok(__Field::m_perpendicular2),
-                        "perpendicular1" => Ok(__Field::m_perpendicular1),
-                        "vertexB" => Ok(__Field::m_vertexB),
-                        "vertexA" => Ok(__Field::m_vertexA),
+                        "cylRadius" => Ok(__Field::m_cylRadius),
                         "cylBaseRadiusFactorForHeightFieldCollisions" => {
                             Ok(__Field::m_cylBaseRadiusFactorForHeightFieldCollisions)
                         }
-                        "cylRadius" => Ok(__Field::m_cylRadius),
+                        "vertexA" => Ok(__Field::m_vertexA),
+                        "vertexB" => Ok(__Field::m_vertexB),
+                        "perpendicular1" => Ok(__Field::m_perpendicular1),
+                        "perpendicular2" => Ok(__Field::m_perpendicular2),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -396,14 +396,14 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_perpendicular2: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_perpendicular1: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_vertexB: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_vertexA: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_cylRadius: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_cylBaseRadiusFactorForHeightFieldCollisions: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_cylRadius: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_vertexA: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_vertexB: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_perpendicular1: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_perpendicular2: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -459,93 +459,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_perpendicular2 => {
+                            __Field::m_cylRadius => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_perpendicular2) {
+                                if _serde::__private::Option::is_some(&m_cylRadius) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "perpendicular2",
+                                            "cylRadius",
                                         ),
                                     );
                                 }
-                                m_perpendicular2 = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_perpendicular1 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_perpendicular1) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "perpendicular1",
-                                        ),
-                                    );
-                                }
-                                m_perpendicular1 = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_vertexB => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vertexB) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexB",
-                                        ),
-                                    );
-                                }
-                                m_vertexB = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_vertexA => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_vertexA) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexA",
-                                        ),
-                                    );
-                                }
-                                m_vertexA = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_cylRadius = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -581,21 +509,93 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_cylRadius => {
+                            __Field::m_vertexA => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_cylRadius) {
+                                if _serde::__private::Option::is_some(&m_vertexA) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "cylRadius",
+                                            "vertexA",
                                         ),
                                     );
                                 }
-                                m_cylRadius = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_vertexA = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vertexB => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vertexB) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vertexB",
+                                        ),
+                                    );
+                                }
+                                m_vertexB = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_perpendicular1 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_perpendicular1) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "perpendicular1",
+                                        ),
+                                    );
+                                }
+                                m_perpendicular1 = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_perpendicular2 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_perpendicular2) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "perpendicular2",
+                                        ),
+                                    );
+                                }
+                                m_perpendicular2 = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -628,46 +628,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_perpendicular2 = match m_perpendicular2 {
+                    let m_cylRadius = match m_cylRadius {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "perpendicular2",
+                                    "cylRadius",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_perpendicular1 = match m_perpendicular1 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "perpendicular1",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vertexB = match m_vertexB {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("vertexB"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vertexA = match m_vertexA {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("vertexA"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -684,13 +652,45 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_cylRadius = match m_cylRadius {
+                    let m_vertexA = match m_vertexA {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("vertexA"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexB = match m_vertexB {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("vertexB"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_perpendicular1 = match m_perpendicular1 {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "cylRadius",
+                                    "perpendicular1",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_perpendicular2 = match m_perpendicular2 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "perpendicular2",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

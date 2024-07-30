@@ -231,29 +231,29 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_collectionType,
                 m_disableWelding,
-                m_namedMaterials,
-                m_numMaterials,
-                m_materialStriding,
-                m_defaultCollisionFilterInfo,
-                m_bounds,
-                m_error,
-                m_convexPieces,
-                m_chunks,
-                m_bigTriangles,
-                m_bigVertices,
-                m_transforms,
-                m_materials8,
-                m_materials16,
-                m_materials,
-                m_materialType,
-                m_weldingType,
-                m_radius,
-                m_indexMask,
-                m_wIndexMask,
-                m_bitsPerWIndex,
+                m_collectionType,
                 m_bitsPerIndex,
+                m_bitsPerWIndex,
+                m_wIndexMask,
+                m_indexMask,
+                m_radius,
+                m_weldingType,
+                m_materialType,
+                m_materials,
+                m_materials16,
+                m_materials8,
+                m_transforms,
+                m_bigVertices,
+                m_bigTriangles,
+                m_chunks,
+                m_convexPieces,
+                m_error,
+                m_bounds,
+                m_defaultCollisionFilterInfo,
+                m_materialStriding,
+                m_numMaterials,
+                m_namedMaterials,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -278,31 +278,31 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
-                        "collectionType" => Ok(__Field::m_collectionType),
                         "disableWelding" => Ok(__Field::m_disableWelding),
-                        "namedMaterials" => Ok(__Field::m_namedMaterials),
-                        "numMaterials" => Ok(__Field::m_numMaterials),
-                        "materialStriding" => Ok(__Field::m_materialStriding),
+                        "collectionType" => Ok(__Field::m_collectionType),
+                        "bitsPerIndex" => Ok(__Field::m_bitsPerIndex),
+                        "bitsPerWIndex" => Ok(__Field::m_bitsPerWIndex),
+                        "wIndexMask" => Ok(__Field::m_wIndexMask),
+                        "indexMask" => Ok(__Field::m_indexMask),
+                        "radius" => Ok(__Field::m_radius),
+                        "weldingType" => Ok(__Field::m_weldingType),
+                        "materialType" => Ok(__Field::m_materialType),
+                        "materials" => Ok(__Field::m_materials),
+                        "materials16" => Ok(__Field::m_materials16),
+                        "materials8" => Ok(__Field::m_materials8),
+                        "transforms" => Ok(__Field::m_transforms),
+                        "bigVertices" => Ok(__Field::m_bigVertices),
+                        "bigTriangles" => Ok(__Field::m_bigTriangles),
+                        "chunks" => Ok(__Field::m_chunks),
+                        "convexPieces" => Ok(__Field::m_convexPieces),
+                        "error" => Ok(__Field::m_error),
+                        "bounds" => Ok(__Field::m_bounds),
                         "defaultCollisionFilterInfo" => {
                             Ok(__Field::m_defaultCollisionFilterInfo)
                         }
-                        "bounds" => Ok(__Field::m_bounds),
-                        "error" => Ok(__Field::m_error),
-                        "convexPieces" => Ok(__Field::m_convexPieces),
-                        "chunks" => Ok(__Field::m_chunks),
-                        "bigTriangles" => Ok(__Field::m_bigTriangles),
-                        "bigVertices" => Ok(__Field::m_bigVertices),
-                        "transforms" => Ok(__Field::m_transforms),
-                        "materials8" => Ok(__Field::m_materials8),
-                        "materials16" => Ok(__Field::m_materials16),
-                        "materials" => Ok(__Field::m_materials),
-                        "materialType" => Ok(__Field::m_materialType),
-                        "weldingType" => Ok(__Field::m_weldingType),
-                        "radius" => Ok(__Field::m_radius),
-                        "indexMask" => Ok(__Field::m_indexMask),
-                        "wIndexMask" => Ok(__Field::m_wIndexMask),
-                        "bitsPerWIndex" => Ok(__Field::m_bitsPerWIndex),
-                        "bitsPerIndex" => Ok(__Field::m_bitsPerIndex),
+                        "materialStriding" => Ok(__Field::m_materialStriding),
+                        "numMaterials" => Ok(__Field::m_numMaterials),
+                        "namedMaterials" => Ok(__Field::m_namedMaterials),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -1011,41 +1011,41 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_disableWelding: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_collectionType: _serde::__private::Option<
                         CollectionType,
                     > = _serde::__private::None;
-                    let mut m_disableWelding: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_namedMaterials: _serde::__private::Option<
-                        Vec<hkpNamedMeshMaterial<'de>>,
-                    > = _serde::__private::None;
-                    let mut m_numMaterials: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_materialStriding: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_defaultCollisionFilterInfo: _serde::__private::Option<
-                        u32,
-                    > = _serde::__private::None;
-                    let mut m_bounds: _serde::__private::Option<hkAabb> = _serde::__private::None;
-                    let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_convexPieces: _serde::__private::Option<
-                        Vec<hkpCompressedMeshShapeConvexPiece>,
+                    let mut m_bitsPerIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_bitsPerWIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_wIndexMask: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_indexMask: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
+                    let mut m_materialType: _serde::__private::Option<MaterialType> = _serde::__private::None;
+                    let mut m_materials: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_materials16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_materials8: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_transforms: _serde::__private::Option<Vec<QsTransform>> = _serde::__private::None;
+                    let mut m_bigVertices: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
+                    let mut m_bigTriangles: _serde::__private::Option<
+                        Vec<hkpCompressedMeshShapeBigTriangle>,
                     > = _serde::__private::None;
                     let mut m_chunks: _serde::__private::Option<
                         Vec<hkpCompressedMeshShapeChunk>,
                     > = _serde::__private::None;
-                    let mut m_bigTriangles: _serde::__private::Option<
-                        Vec<hkpCompressedMeshShapeBigTriangle>,
+                    let mut m_convexPieces: _serde::__private::Option<
+                        Vec<hkpCompressedMeshShapeConvexPiece>,
                     > = _serde::__private::None;
-                    let mut m_bigVertices: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
-                    let mut m_transforms: _serde::__private::Option<Vec<QsTransform>> = _serde::__private::None;
-                    let mut m_materials8: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_materials16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_materials: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_materialType: _serde::__private::Option<MaterialType> = _serde::__private::None;
-                    let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
-                    let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_indexMask: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_wIndexMask: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_bitsPerWIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_bitsPerIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_bounds: _serde::__private::Option<hkAabb> = _serde::__private::None;
+                    let mut m_defaultCollisionFilterInfo: _serde::__private::Option<
+                        u32,
+                    > = _serde::__private::None;
+                    let mut m_materialStriding: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_numMaterials: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_namedMaterials: _serde::__private::Option<
+                        Vec<hkpNamedMeshMaterial<'de>>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -1079,30 +1079,6 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_collectionType => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_collectionType) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "collectionType",
-                                        ),
-                                    );
-                                }
-                                m_collectionType = _serde::__private::Some(
-                                    match __A::next_value::<CollectionType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_disableWelding => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -1127,23 +1103,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_namedMaterials => {
+                            __Field::m_collectionType => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_namedMaterials) {
+                                if _serde::__private::Option::is_some(&m_collectionType) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "namedMaterials",
+                                            "collectionType",
                                         ),
                                     );
                                 }
-                                m_namedMaterials = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkpNamedMeshMaterial<'de>>,
-                                    >(&mut __map) {
+                                m_collectionType = _serde::__private::Some(
+                                    match __A::next_value::<CollectionType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1153,21 +1127,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_numMaterials => {
+                            __Field::m_bitsPerIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_numMaterials) {
+                                if _serde::__private::Option::is_some(&m_bitsPerIndex) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numMaterials",
+                                            "bitsPerIndex",
                                         ),
                                     );
                                 }
-                                m_numMaterials = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                m_bitsPerIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1177,21 +1151,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_materialStriding => {
+                            __Field::m_bitsPerWIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_materialStriding) {
+                                if _serde::__private::Option::is_some(&m_bitsPerWIndex) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "materialStriding",
+                                            "bitsPerWIndex",
                                         ),
                                     );
                                 }
-                                m_materialStriding = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                m_bitsPerWIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1201,23 +1175,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_defaultCollisionFilterInfo => {
+                            __Field::m_wIndexMask => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_defaultCollisionFilterInfo,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_wIndexMask) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "defaultCollisionFilterInfo",
+                                            "wIndexMask",
                                         ),
                                     );
                                 }
-                                m_defaultCollisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                m_wIndexMask = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1227,19 +1199,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_bounds => {
+                            __Field::m_indexMask => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_bounds) {
+                                if _serde::__private::Option::is_some(&m_indexMask) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("bounds"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "indexMask",
+                                        ),
                                     );
                                 }
-                                m_bounds = _serde::__private::Some(
-                                    match __A::next_value::<hkAabb>(&mut __map) {
+                                m_indexMask = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1249,18 +1223,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_error => {
+                            __Field::m_radius => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_error) {
+                                if _serde::__private::Option::is_some(&m_radius) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("error"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("radius"),
                                     );
                                 }
-                                m_error = _serde::__private::Some(
+                                m_radius = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1271,23 +1245,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_convexPieces => {
+                            __Field::m_weldingType => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_convexPieces) {
+                                if _serde::__private::Option::is_some(&m_weldingType) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "convexPieces",
+                                            "weldingType",
                                         ),
                                     );
                                 }
-                                m_convexPieces = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkpCompressedMeshShapeConvexPiece>,
-                                    >(&mut __map) {
+                                m_weldingType = _serde::__private::Some(
+                                    match __A::next_value::<WeldingType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1297,21 +1269,141 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_chunks => {
+                            __Field::m_materialType => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_chunks) {
+                                if _serde::__private::Option::is_some(&m_materialType) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("chunks"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "materialType",
+                                        ),
                                     );
                                 }
-                                m_chunks = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkpCompressedMeshShapeChunk>,
-                                    >(&mut __map) {
+                                m_materialType = _serde::__private::Some(
+                                    match __A::next_value::<MaterialType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_materials => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_materials) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "materials",
+                                        ),
+                                    );
+                                }
+                                m_materials = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_materials16 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_materials16) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "materials16",
+                                        ),
+                                    );
+                                }
+                                m_materials16 = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_materials8 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_materials8) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "materials8",
+                                        ),
+                                    );
+                                }
+                                m_materials8 = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transforms => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_transforms) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transforms",
+                                        ),
+                                    );
+                                }
+                                m_transforms = _serde::__private::Some(
+                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bigVertices => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bigVertices) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bigVertices",
+                                        ),
+                                    );
+                                }
+                                m_bigVertices = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1347,21 +1439,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_bigVertices => {
+                            __Field::m_chunks => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_bigVertices) {
+                                if _serde::__private::Option::is_some(&m_chunks) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bigVertices",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("chunks"),
                                     );
                                 }
-                                m_bigVertices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                                m_chunks = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkpCompressedMeshShapeChunk>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1371,21 +1463,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_transforms => {
+                            __Field::m_convexPieces => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_transforms) {
+                                if _serde::__private::Option::is_some(&m_convexPieces) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transforms",
+                                            "convexPieces",
                                         ),
                                     );
                                 }
-                                m_transforms = _serde::__private::Some(
-                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                                m_convexPieces = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkpCompressedMeshShapeConvexPiece>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1395,138 +1489,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_materials8 => {
+                            __Field::m_error => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_materials8) {
+                                if _serde::__private::Option::is_some(&m_error) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "materials8",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("error"),
                                     );
                                 }
-                                m_materials8 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_materials16 => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_materials16) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "materials16",
-                                        ),
-                                    );
-                                }
-                                m_materials16 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_materials => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_materials) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "materials",
-                                        ),
-                                    );
-                                }
-                                m_materials = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_materialType => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_materialType) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "materialType",
-                                        ),
-                                    );
-                                }
-                                m_materialType = _serde::__private::Some(
-                                    match __A::next_value::<MaterialType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_weldingType => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_weldingType) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "weldingType",
-                                        ),
-                                    );
-                                }
-                                m_weldingType = _serde::__private::Some(
-                                    match __A::next_value::<WeldingType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_radius => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_radius) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("radius"),
-                                    );
-                                }
-                                m_radius = _serde::__private::Some(
+                                m_error = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1537,21 +1511,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_indexMask => {
+                            __Field::m_bounds => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_indexMask) {
+                                if _serde::__private::Option::is_some(&m_bounds) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "indexMask",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("bounds"),
                                     );
                                 }
-                                m_indexMask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_bounds = _serde::__private::Some(
+                                    match __A::next_value::<hkAabb>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1561,21 +1533,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_wIndexMask => {
+                            __Field::m_defaultCollisionFilterInfo => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_wIndexMask) {
+                                if _serde::__private::Option::is_some(
+                                    &m_defaultCollisionFilterInfo,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wIndexMask",
+                                            "defaultCollisionFilterInfo",
                                         ),
                                     );
                                 }
-                                m_wIndexMask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_defaultCollisionFilterInfo = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1585,21 +1559,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_bitsPerWIndex => {
+                            __Field::m_materialStriding => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_bitsPerWIndex) {
+                                if _serde::__private::Option::is_some(&m_materialStriding) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bitsPerWIndex",
+                                            "materialStriding",
                                         ),
                                     );
                                 }
-                                m_bitsPerWIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_materialStriding = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1609,21 +1583,47 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_bitsPerIndex => {
+                            __Field::m_numMaterials => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_bitsPerIndex) {
+                                if _serde::__private::Option::is_some(&m_numMaterials) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bitsPerIndex",
+                                            "numMaterials",
                                         ),
                                     );
                                 }
-                                m_bitsPerIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_numMaterials = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_namedMaterials => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_namedMaterials) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "namedMaterials",
+                                        ),
+                                    );
+                                }
+                                m_namedMaterials = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkpNamedMeshMaterial<'de>>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1646,18 +1646,6 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_collectionType = match m_collectionType {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "collectionType",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_disableWelding = match m_disableWelding {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -1670,221 +1658,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_namedMaterials = match m_namedMaterials {
+                    let m_collectionType = match m_collectionType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "namedMaterials",
+                                    "collectionType",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_numMaterials = match m_numMaterials {
+                    let m_bitsPerIndex = match m_bitsPerIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "numMaterials",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_materialStriding = match m_materialStriding {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "materialStriding",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_defaultCollisionFilterInfo = match m_defaultCollisionFilterInfo {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "defaultCollisionFilterInfo",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bounds = match m_bounds {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("bounds"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_error = match m_error {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("error"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_convexPieces = match m_convexPieces {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "convexPieces",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_chunks = match m_chunks {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("chunks"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bigTriangles = match m_bigTriangles {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bigTriangles",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bigVertices = match m_bigVertices {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "bigVertices",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_transforms = match m_transforms {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "transforms",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_materials8 = match m_materials8 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "materials8",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_materials16 = match m_materials16 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "materials16",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_materials = match m_materials {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "materials",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_materialType = match m_materialType {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "materialType",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_weldingType = match m_weldingType {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "weldingType",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_radius = match m_radius {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("radius"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_indexMask = match m_indexMask {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "indexMask",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_wIndexMask = match m_wIndexMask {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wIndexMask",
+                                    "bitsPerIndex",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -1902,13 +1694,221 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_bitsPerIndex = match m_bitsPerIndex {
+                    let m_wIndexMask = match m_wIndexMask {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "bitsPerIndex",
+                                    "wIndexMask",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_indexMask = match m_indexMask {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "indexMask",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_radius = match m_radius {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("radius"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_weldingType = match m_weldingType {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "weldingType",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_materialType = match m_materialType {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "materialType",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_materials = match m_materials {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "materials",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_materials16 = match m_materials16 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "materials16",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_materials8 = match m_materials8 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "materials8",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transforms = match m_transforms {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transforms",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bigVertices = match m_bigVertices {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bigVertices",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bigTriangles = match m_bigTriangles {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bigTriangles",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_chunks = match m_chunks {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("chunks"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_convexPieces = match m_convexPieces {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "convexPieces",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_error = match m_error {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("error"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bounds = match m_bounds {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("bounds"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_defaultCollisionFilterInfo = match m_defaultCollisionFilterInfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "defaultCollisionFilterInfo",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_materialStriding = match m_materialStriding {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "materialStriding",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numMaterials = match m_numMaterials {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numMaterials",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_namedMaterials = match m_namedMaterials {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "namedMaterials",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

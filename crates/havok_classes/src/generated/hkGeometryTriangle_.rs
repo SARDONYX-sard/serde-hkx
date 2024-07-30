@@ -81,10 +81,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_material,
-                m_c,
-                m_b,
                 m_a,
+                m_b,
+                m_c,
+                m_material,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -108,10 +108,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "material" => Ok(__Field::m_material),
-                        "c" => Ok(__Field::m_c),
-                        "b" => Ok(__Field::m_b),
                         "a" => Ok(__Field::m_a),
+                        "b" => Ok(__Field::m_b),
+                        "c" => Ok(__Field::m_c),
+                        "material" => Ok(__Field::m_material),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -272,10 +272,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_material: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_c: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_b: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_a: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_b: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_c: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_material: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -285,42 +285,18 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_material => {
+                            __Field::m_a => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_material) {
+                                if _serde::__private::Option::is_some(&m_a) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "material",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("a"),
                                     );
                                 }
-                                m_material = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_c => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_c) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("c"),
-                                    );
-                                }
-                                m_c = _serde::__private::Some(
+                                m_a = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -353,18 +329,42 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_a => {
+                            __Field::m_c => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_a) {
+                                if _serde::__private::Option::is_some(&m_c) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("a"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("c"),
                                     );
                                 }
-                                m_a = _serde::__private::Some(
+                                m_c = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_material => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_material) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "material",
+                                        ),
+                                    );
+                                }
+                                m_material = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -378,22 +378,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_material = match m_material {
+                    let m_a = match m_a {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("material"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_c = match m_c {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("c"),
+                                <__A::Error as _serde::de::Error>::missing_field("a"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -408,12 +398,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_a = match m_a {
+                    let m_c = match m_c {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("a"),
+                                <__A::Error as _serde::de::Error>::missing_field("c"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_material = match m_material {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("material"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

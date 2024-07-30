@@ -93,9 +93,9 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_aabbHalfExtents,
-                m_aabbCenter,
                 m_plane,
+                m_aabbCenter,
+                m_aabbHalfExtents,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -120,9 +120,9 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
-                        "aabbHalfExtents" => Ok(__Field::m_aabbHalfExtents),
-                        "aabbCenter" => Ok(__Field::m_aabbCenter),
                         "plane" => Ok(__Field::m_plane),
+                        "aabbCenter" => Ok(__Field::m_aabbCenter),
+                        "aabbHalfExtents" => Ok(__Field::m_aabbHalfExtents),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -264,9 +264,9 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_plane: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -300,20 +300,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_aabbHalfExtents => {
+                            __Field::m_plane => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_aabbHalfExtents) {
+                                if _serde::__private::Option::is_some(&m_plane) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "aabbHalfExtents",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("plane"),
                                     );
                                 }
-                                m_aabbHalfExtents = _serde::__private::Some(
+                                m_plane = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -348,18 +346,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_plane => {
+                            __Field::m_aabbHalfExtents => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_plane) {
+                                if _serde::__private::Option::is_some(&m_aabbHalfExtents) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("plane"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "aabbHalfExtents",
+                                        ),
                                     );
                                 }
-                                m_plane = _serde::__private::Some(
+                                m_aabbHalfExtents = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -383,14 +383,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_aabbHalfExtents = match m_aabbHalfExtents {
+                    let m_plane = match m_plane {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "aabbHalfExtents",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("plane"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -407,12 +405,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_plane = match m_plane {
+                    let m_aabbHalfExtents = match m_aabbHalfExtents {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("plane"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "aabbHalfExtents",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

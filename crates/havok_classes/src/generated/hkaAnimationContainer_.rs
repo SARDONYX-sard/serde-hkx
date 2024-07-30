@@ -98,11 +98,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_skins,
-                m_attachments,
-                m_bindings,
-                m_animations,
                 m_skeletons,
+                m_animations,
+                m_bindings,
+                m_attachments,
+                m_skins,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -126,11 +126,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "skins" => Ok(__Field::m_skins),
-                        "attachments" => Ok(__Field::m_attachments),
-                        "bindings" => Ok(__Field::m_bindings),
-                        "animations" => Ok(__Field::m_animations),
                         "skeletons" => Ok(__Field::m_skeletons),
+                        "animations" => Ok(__Field::m_animations),
+                        "bindings" => Ok(__Field::m_bindings),
+                        "attachments" => Ok(__Field::m_attachments),
+                        "skins" => Ok(__Field::m_skins),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -330,11 +330,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_skins: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_attachments: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_bindings: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_animations: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     let mut m_skeletons: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_animations: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_bindings: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_attachments: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_skins: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -344,66 +344,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_skins => {
+                            __Field::m_skeletons => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_skins) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("skins"),
-                                    );
-                                }
-                                m_skins = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_attachments => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_attachments) {
+                                if _serde::__private::Option::is_some(&m_skeletons) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "attachments",
+                                            "skeletons",
                                         ),
                                     );
                                 }
-                                m_attachments = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bindings => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bindings) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bindings",
-                                        ),
-                                    );
-                                }
-                                m_bindings = _serde::__private::Some(
+                                m_skeletons = _serde::__private::Some(
                                     match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -438,20 +392,66 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_skeletons => {
+                            __Field::m_bindings => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_skeletons) {
+                                if _serde::__private::Option::is_some(&m_bindings) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "skeletons",
+                                            "bindings",
                                         ),
                                     );
                                 }
-                                m_skeletons = _serde::__private::Some(
+                                m_bindings = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_attachments => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_attachments) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "attachments",
+                                        ),
+                                    );
+                                }
+                                m_attachments = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_skins => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_skins) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("skins"),
+                                    );
+                                }
+                                m_skins = _serde::__private::Some(
                                     match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -465,34 +465,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_skins = match m_skins {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("skins"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_attachments = match m_attachments {
+                    let m_skeletons = match m_skeletons {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "attachments",
+                                    "skeletons",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bindings = match m_bindings {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("bindings"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -509,14 +489,34 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_skeletons = match m_skeletons {
+                    let m_bindings = match m_bindings {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("bindings"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_attachments = match m_attachments {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "skeletons",
+                                    "attachments",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_skins = match m_skins {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("skins"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

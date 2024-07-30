@@ -76,9 +76,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_enable,
-                m_handIndex,
                 m_controlData,
+                m_handIndex,
+                m_enable,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -102,9 +102,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "enable" => Ok(__Field::m_enable),
-                        "handIndex" => Ok(__Field::m_handIndex),
                         "controlData" => Ok(__Field::m_controlData),
+                        "handIndex" => Ok(__Field::m_handIndex),
+                        "enable" => Ok(__Field::m_enable),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -250,11 +250,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_handIndex: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_controlData: _serde::__private::Option<
                         hkbHandIkControlData,
                     > = _serde::__private::None;
+                    let mut m_handIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -264,19 +264,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_enable => {
+                            __Field::m_controlData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_enable) {
+                                if _serde::__private::Option::is_some(&m_controlData) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("enable"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "controlData",
+                                        ),
                                     );
                                 }
-                                m_enable = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_controlData = _serde::__private::Some(
+                                    match __A::next_value::<hkbHandIkControlData>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -310,21 +312,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_controlData => {
+                            __Field::m_enable => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_controlData) {
+                                if _serde::__private::Option::is_some(&m_enable) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "controlData",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("enable"),
                                     );
                                 }
-                                m_controlData = _serde::__private::Some(
-                                    match __A::next_value::<hkbHandIkControlData>(&mut __map) {
+                                m_enable = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -337,12 +337,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_enable = match m_enable {
+                    let m_controlData = match m_controlData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("enable"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "controlData",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -359,14 +361,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_controlData = match m_controlData {
+                    let m_enable = match m_enable {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "controlData",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("enable"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

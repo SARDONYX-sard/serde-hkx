@@ -112,10 +112,10 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_variableBindingSet,
-                m_worldFromModelWeight,
-                m_weight,
-                m_boneWeights,
                 m_generator,
+                m_boneWeights,
+                m_weight,
+                m_worldFromModelWeight,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -140,10 +140,10 @@ const _: () = {
                 {
                     match __value {
                         "variableBindingSet" => Ok(__Field::m_variableBindingSet),
-                        "worldFromModelWeight" => Ok(__Field::m_worldFromModelWeight),
-                        "weight" => Ok(__Field::m_weight),
-                        "boneWeights" => Ok(__Field::m_boneWeights),
                         "generator" => Ok(__Field::m_generator),
+                        "boneWeights" => Ok(__Field::m_boneWeights),
+                        "weight" => Ok(__Field::m_weight),
+                        "worldFromModelWeight" => Ok(__Field::m_worldFromModelWeight),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -322,10 +322,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_worldFromModelWeight: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_weight: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_boneWeights: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_generator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_boneWeights: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_weight: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_worldFromModelWeight: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -361,45 +361,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_worldFromModelWeight => {
+                            __Field::m_generator => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_worldFromModelWeight,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_generator) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "worldFromModelWeight",
+                                            "generator",
                                         ),
                                     );
                                 }
-                                m_worldFromModelWeight = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_weight => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_weight) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("weight"),
-                                    );
-                                }
-                                m_weight = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_generator = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -433,21 +409,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_generator => {
+                            __Field::m_weight => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_generator) {
+                                if _serde::__private::Option::is_some(&m_weight) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("weight"),
+                                    );
+                                }
+                                m_weight = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_worldFromModelWeight => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_worldFromModelWeight,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "generator",
+                                            "worldFromModelWeight",
                                         ),
                                     );
                                 }
-                                m_generator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_worldFromModelWeight = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -472,24 +472,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_worldFromModelWeight = match m_worldFromModelWeight {
+                    let m_generator = match m_generator {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "worldFromModelWeight",
+                                    "generator",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_weight = match m_weight {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("weight"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -506,13 +496,23 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_generator = match m_generator {
+                    let m_weight = match m_weight {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("weight"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_worldFromModelWeight = match m_worldFromModelWeight {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "generator",
+                                    "worldFromModelWeight",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

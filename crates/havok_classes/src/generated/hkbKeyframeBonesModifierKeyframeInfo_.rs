@@ -82,10 +82,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_isValid,
-                m_boneIndex,
-                m_keyframedRotation,
                 m_keyframedPosition,
+                m_keyframedRotation,
+                m_boneIndex,
+                m_isValid,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -109,10 +109,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "isValid" => Ok(__Field::m_isValid),
-                        "boneIndex" => Ok(__Field::m_boneIndex),
-                        "keyframedRotation" => Ok(__Field::m_keyframedRotation),
                         "keyframedPosition" => Ok(__Field::m_keyframedPosition),
+                        "keyframedRotation" => Ok(__Field::m_keyframedRotation),
+                        "boneIndex" => Ok(__Field::m_boneIndex),
+                        "isValid" => Ok(__Field::m_isValid),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -293,10 +293,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_isValid: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_boneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_keyframedRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
                     let mut m_keyframedPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_keyframedRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
+                    let mut m_boneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_isValid: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -306,45 +306,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_isValid => {
+                            __Field::m_keyframedPosition => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isValid) {
+                                if _serde::__private::Option::is_some(
+                                    &m_keyframedPosition,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isValid",
+                                            "keyframedPosition",
                                         ),
                                     );
                                 }
-                                m_isValid = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_boneIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_boneIndex) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "boneIndex",
-                                        ),
-                                    );
-                                }
-                                m_boneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                m_keyframedPosition = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -380,23 +358,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_keyframedPosition => {
+                            __Field::m_boneIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_keyframedPosition,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_boneIndex) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "keyframedPosition",
+                                            "boneIndex",
                                         ),
                                     );
                                 }
-                                m_keyframedPosition = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_boneIndex = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isValid => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isValid) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isValid",
+                                        ),
+                                    );
+                                }
+                                m_isValid = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -409,23 +409,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_isValid = match m_isValid {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("isValid"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_boneIndex = match m_boneIndex {
+                    let m_keyframedPosition = match m_keyframedPosition {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "boneIndex",
+                                    "keyframedPosition",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -443,14 +433,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_keyframedPosition = match m_keyframedPosition {
+                    let m_boneIndex = match m_boneIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "keyframedPosition",
+                                    "boneIndex",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isValid = match m_isValid {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("isValid"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

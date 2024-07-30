@@ -69,8 +69,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_separatingNormal,
                 m_position,
+                m_separatingNormal,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -94,8 +94,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "separatingNormal" => Ok(__Field::m_separatingNormal),
                         "position" => Ok(__Field::m_position),
+                        "separatingNormal" => Ok(__Field::m_separatingNormal),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -207,8 +207,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_separatingNormal: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_position: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_separatingNormal: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -218,30 +218,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_separatingNormal => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_separatingNormal) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "separatingNormal",
-                                        ),
-                                    );
-                                }
-                                m_separatingNormal = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_position => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -266,9 +242,43 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_separatingNormal => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_separatingNormal) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "separatingNormal",
+                                        ),
+                                    );
+                                }
+                                m_separatingNormal = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
+                    let m_position = match m_position {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("position"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
                     let m_separatingNormal = match m_separatingNormal {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -277,16 +287,6 @@ const _: () = {
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "separatingNormal",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_position = match m_position {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("position"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

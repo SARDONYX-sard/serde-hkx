@@ -98,12 +98,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_bitWidthIdx,
-                m_scaleIdx,
-                m_offsetIdx,
-                m_numD,
-                m_preserved,
                 m_maxBitWidth,
+                m_preserved,
+                m_numD,
+                m_offsetIdx,
+                m_scaleIdx,
+                m_bitWidthIdx,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -127,12 +127,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "bitWidthIdx" => Ok(__Field::m_bitWidthIdx),
-                        "scaleIdx" => Ok(__Field::m_scaleIdx),
-                        "offsetIdx" => Ok(__Field::m_offsetIdx),
-                        "numD" => Ok(__Field::m_numD),
-                        "preserved" => Ok(__Field::m_preserved),
                         "maxBitWidth" => Ok(__Field::m_maxBitWidth),
+                        "preserved" => Ok(__Field::m_preserved),
+                        "numD" => Ok(__Field::m_numD),
+                        "offsetIdx" => Ok(__Field::m_offsetIdx),
+                        "scaleIdx" => Ok(__Field::m_scaleIdx),
+                        "bitWidthIdx" => Ok(__Field::m_bitWidthIdx),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -363,12 +363,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_bitWidthIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_scaleIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_offsetIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_numD: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_preserved: _serde::__private::Option<u8> = _serde::__private::None;
                     let mut m_maxBitWidth: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_preserved: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_numD: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_offsetIdx: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_scaleIdx: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_bitWidthIdx: _serde::__private::Option<u32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -378,21 +378,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_bitWidthIdx => {
+                            __Field::m_maxBitWidth => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_bitWidthIdx) {
+                                if _serde::__private::Option::is_some(&m_maxBitWidth) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bitWidthIdx",
+                                            "maxBitWidth",
                                         ),
                                     );
                                 }
-                                m_bitWidthIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                m_maxBitWidth = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -402,20 +402,42 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_scaleIdx => {
+                            __Field::m_preserved => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_scaleIdx) {
+                                if _serde::__private::Option::is_some(&m_preserved) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "scaleIdx",
+                                            "preserved",
                                         ),
                                     );
                                 }
-                                m_scaleIdx = _serde::__private::Some(
+                                m_preserved = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numD => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_numD) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("numD"),
+                                    );
+                                }
+                                m_numD = _serde::__private::Some(
                                     match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -450,18 +472,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_numD => {
+                            __Field::m_scaleIdx => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_numD) {
+                                if _serde::__private::Option::is_some(&m_scaleIdx) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("numD"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "scaleIdx",
+                                        ),
                                     );
                                 }
-                                m_numD = _serde::__private::Some(
+                                m_scaleIdx = _serde::__private::Some(
                                     match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -472,45 +496,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_preserved => {
+                            __Field::m_bitWidthIdx => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_preserved) {
+                                if _serde::__private::Option::is_some(&m_bitWidthIdx) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "preserved",
+                                            "bitWidthIdx",
                                         ),
                                     );
                                 }
-                                m_preserved = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxBitWidth => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_maxBitWidth) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxBitWidth",
-                                        ),
-                                    );
-                                }
-                                m_maxBitWidth = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                m_bitWidthIdx = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -523,46 +523,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_bitWidthIdx = match m_bitWidthIdx {
+                    let m_maxBitWidth = match m_maxBitWidth {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "bitWidthIdx",
+                                    "maxBitWidth",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_scaleIdx = match m_scaleIdx {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("scaleIdx"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_offsetIdx = match m_offsetIdx {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "offsetIdx",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numD = match m_numD {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("numD"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -579,13 +547,45 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxBitWidth = match m_maxBitWidth {
+                    let m_numD = match m_numD {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("numD"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_offsetIdx = match m_offsetIdx {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxBitWidth",
+                                    "offsetIdx",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_scaleIdx = match m_scaleIdx {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("scaleIdx"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bitWidthIdx = match m_bitWidthIdx {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bitWidthIdx",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

@@ -96,12 +96,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_numReferences,
-                m_startReferenceIndex,
-                m_arraySize,
-                m_size,
-                m_start,
                 m_typeIndex,
+                m_start,
+                m_size,
+                m_arraySize,
+                m_startReferenceIndex,
+                m_numReferences,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -125,12 +125,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "numReferences" => Ok(__Field::m_numReferences),
-                        "startReferenceIndex" => Ok(__Field::m_startReferenceIndex),
-                        "arraySize" => Ok(__Field::m_arraySize),
-                        "size" => Ok(__Field::m_size),
-                        "start" => Ok(__Field::m_start),
                         "typeIndex" => Ok(__Field::m_typeIndex),
+                        "start" => Ok(__Field::m_start),
+                        "size" => Ok(__Field::m_size),
+                        "arraySize" => Ok(__Field::m_arraySize),
+                        "startReferenceIndex" => Ok(__Field::m_startReferenceIndex),
+                        "numReferences" => Ok(__Field::m_numReferences),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -362,12 +362,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_numReferences: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_startReferenceIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_arraySize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_size: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_start: _serde::__private::Option<u64> = _serde::__private::None;
                     let mut m_typeIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_start: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_size: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_arraySize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_startReferenceIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numReferences: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -377,20 +377,88 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_numReferences => {
+                            __Field::m_typeIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_numReferences) {
+                                if _serde::__private::Option::is_some(&m_typeIndex) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numReferences",
+                                            "typeIndex",
                                         ),
                                     );
                                 }
-                                m_numReferences = _serde::__private::Some(
+                                m_typeIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_start => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_start) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("start"),
+                                    );
+                                }
+                                m_start = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_size => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_size) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("size"),
+                                    );
+                                }
+                                m_size = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_arraySize => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_arraySize) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "arraySize",
+                                        ),
+                                    );
+                                }
+                                m_arraySize = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -427,88 +495,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_arraySize => {
+                            __Field::m_numReferences => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_arraySize) {
+                                if _serde::__private::Option::is_some(&m_numReferences) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "arraySize",
+                                            "numReferences",
                                         ),
                                     );
                                 }
-                                m_arraySize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_size => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_size) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("size"),
-                                    );
-                                }
-                                m_size = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_start => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_start) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("start"),
-                                    );
-                                }
-                                m_start = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_typeIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_typeIndex) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "typeIndex",
-                                        ),
-                                    );
-                                }
-                                m_typeIndex = _serde::__private::Some(
+                                m_numReferences = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -522,13 +522,45 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_numReferences = match m_numReferences {
+                    let m_typeIndex = match m_typeIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "numReferences",
+                                    "typeIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_start = match m_start {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("start"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_size = match m_size {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("size"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_arraySize = match m_arraySize {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "arraySize",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -546,45 +578,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_arraySize = match m_arraySize {
+                    let m_numReferences = match m_numReferences {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "arraySize",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_size = match m_size {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("size"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_start = match m_start {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("start"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_typeIndex = match m_typeIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "typeIndex",
+                                    "numReferences",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

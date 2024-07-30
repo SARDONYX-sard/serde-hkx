@@ -76,9 +76,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_aFromBTransform,
-                m_boneB,
                 m_boneA,
+                m_boneB,
+                m_aFromBTransform,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -102,9 +102,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "aFromBTransform" => Ok(__Field::m_aFromBTransform),
-                        "boneB" => Ok(__Field::m_boneB),
                         "boneA" => Ok(__Field::m_boneA),
+                        "boneB" => Ok(__Field::m_boneB),
+                        "aFromBTransform" => Ok(__Field::m_aFromBTransform),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -246,9 +246,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_aFromBTransform: _serde::__private::Option<QsTransform> = _serde::__private::None;
-                    let mut m_boneB: _serde::__private::Option<i16> = _serde::__private::None;
                     let mut m_boneA: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_boneB: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_aFromBTransform: _serde::__private::Option<QsTransform> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -258,21 +258,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_aFromBTransform => {
+                            __Field::m_boneA => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_aFromBTransform) {
+                                if _serde::__private::Option::is_some(&m_boneA) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "aFromBTransform",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("boneA"),
                                     );
                                 }
-                                m_aFromBTransform = _serde::__private::Some(
-                                    match __A::next_value::<QsTransform>(&mut __map) {
+                                m_boneA = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -304,19 +302,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_boneA => {
+                            __Field::m_aFromBTransform => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_boneA) {
+                                if _serde::__private::Option::is_some(&m_aFromBTransform) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("boneA"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "aFromBTransform",
+                                        ),
                                     );
                                 }
-                                m_boneA = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                m_aFromBTransform = _serde::__private::Some(
+                                    match __A::next_value::<QsTransform>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -329,14 +329,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_aFromBTransform = match m_aFromBTransform {
+                    let m_boneA = match m_boneA {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "aFromBTransform",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("boneA"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -351,12 +349,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_boneA = match m_boneA {
+                    let m_aFromBTransform = match m_aFromBTransform {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("boneA"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "aFromBTransform",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

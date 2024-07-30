@@ -118,14 +118,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_advanced,
-                m_endGroup2,
-                m_endGroup,
-                m_hideBaseClassMembers,
-                m_group,
-                m_label,
-                m_hideInModeler,
                 m_visible,
+                m_hideInModeler,
+                m_label,
+                m_group,
+                m_hideBaseClassMembers,
+                m_endGroup,
+                m_endGroup2,
+                m_advanced,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -149,14 +149,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "advanced" => Ok(__Field::m_advanced),
-                        "endGroup2" => Ok(__Field::m_endGroup2),
-                        "endGroup" => Ok(__Field::m_endGroup),
-                        "hideBaseClassMembers" => Ok(__Field::m_hideBaseClassMembers),
-                        "group" => Ok(__Field::m_group),
-                        "label" => Ok(__Field::m_label),
-                        "hideInModeler" => Ok(__Field::m_hideInModeler),
                         "visible" => Ok(__Field::m_visible),
+                        "hideInModeler" => Ok(__Field::m_hideInModeler),
+                        "label" => Ok(__Field::m_label),
+                        "group" => Ok(__Field::m_group),
+                        "hideBaseClassMembers" => Ok(__Field::m_hideBaseClassMembers),
+                        "endGroup" => Ok(__Field::m_endGroup),
+                        "endGroup2" => Ok(__Field::m_endGroup2),
+                        "advanced" => Ok(__Field::m_advanced),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -436,16 +436,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_advanced: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_endGroup2: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_endGroup: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_hideInModeler: _serde::__private::Option<HideInModeler> = _serde::__private::None;
+                    let mut m_label: _serde::__private::Option<CString<'de>> = _serde::__private::None;
+                    let mut m_group: _serde::__private::Option<CString<'de>> = _serde::__private::None;
                     let mut m_hideBaseClassMembers: _serde::__private::Option<
                         CString<'de>,
                     > = _serde::__private::None;
-                    let mut m_group: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-                    let mut m_label: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-                    let mut m_hideInModeler: _serde::__private::Option<HideInModeler> = _serde::__private::None;
-                    let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_endGroup: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_endGroup2: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_advanced: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -455,20 +455,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_advanced => {
+                            __Field::m_visible => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_advanced) {
+                                if _serde::__private::Option::is_some(&m_visible) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "advanced",
+                                            "visible",
                                         ),
                                     );
                                 }
-                                m_advanced = _serde::__private::Some(
+                                m_visible = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -479,21 +479,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_endGroup2 => {
+                            __Field::m_hideInModeler => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_endGroup2) {
+                                if _serde::__private::Option::is_some(&m_hideInModeler) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "endGroup2",
+                                            "hideInModeler",
                                         ),
                                     );
                                 }
-                                m_endGroup2 = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_hideInModeler = _serde::__private::Some(
+                                    match __A::next_value::<HideInModeler>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -503,21 +503,41 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_endGroup => {
+                            __Field::m_label => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_endGroup) {
+                                if _serde::__private::Option::is_some(&m_label) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "endGroup",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("label"),
                                     );
                                 }
-                                m_endGroup = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_label = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_group => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_group) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("group"),
+                                    );
+                                }
+                                m_group = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -553,65 +573,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_group => {
+                            __Field::m_endGroup => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_group) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("group"),
-                                    );
-                                }
-                                m_group = _serde::__private::Some(
-                                    match __A::next_value::<CString<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_label => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_label) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("label"),
-                                    );
-                                }
-                                m_label = _serde::__private::Some(
-                                    match __A::next_value::<CString<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_hideInModeler => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_hideInModeler) {
+                                if _serde::__private::Option::is_some(&m_endGroup) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "hideInModeler",
+                                            "endGroup",
                                         ),
                                     );
                                 }
-                                m_hideInModeler = _serde::__private::Some(
-                                    match __A::next_value::<HideInModeler>(&mut __map) {
+                                m_endGroup = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -621,20 +597,44 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_visible => {
+                            __Field::m_endGroup2 => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_visible) {
+                                if _serde::__private::Option::is_some(&m_endGroup2) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "visible",
+                                            "endGroup2",
                                         ),
                                     );
                                 }
-                                m_visible = _serde::__private::Some(
+                                m_endGroup2 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_advanced => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_advanced) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "advanced",
+                                        ),
+                                    );
+                                }
+                                m_advanced = _serde::__private::Some(
                                     match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -648,66 +648,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_advanced = match m_advanced {
+                    let m_visible = match m_visible {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("advanced"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_endGroup2 = match m_endGroup2 {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "endGroup2",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_endGroup = match m_endGroup {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("endGroup"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_hideBaseClassMembers = match m_hideBaseClassMembers {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "hideBaseClassMembers",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_group = match m_group {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("group"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_label = match m_label {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("label"),
+                                <__A::Error as _serde::de::Error>::missing_field("visible"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -724,12 +670,66 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_visible = match m_visible {
+                    let m_label = match m_label {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("visible"),
+                                <__A::Error as _serde::de::Error>::missing_field("label"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_group = match m_group {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("group"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_hideBaseClassMembers = match m_hideBaseClassMembers {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "hideBaseClassMembers",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_endGroup = match m_endGroup {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("endGroup"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_endGroup2 = match m_endGroup2 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "endGroup2",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_advanced = match m_advanced {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("advanced"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

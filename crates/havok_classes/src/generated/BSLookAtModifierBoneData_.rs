@@ -102,12 +102,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_enabled,
-                m_offGain,
-                m_onGain,
-                m_limitAngleDegrees,
-                m_fwdAxisLS,
                 m_index,
+                m_fwdAxisLS,
+                m_limitAngleDegrees,
+                m_onGain,
+                m_offGain,
+                m_enabled,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -131,12 +131,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "enabled" => Ok(__Field::m_enabled),
-                        "offGain" => Ok(__Field::m_offGain),
-                        "onGain" => Ok(__Field::m_onGain),
-                        "limitAngleDegrees" => Ok(__Field::m_limitAngleDegrees),
-                        "fwdAxisLS" => Ok(__Field::m_fwdAxisLS),
                         "index" => Ok(__Field::m_index),
+                        "fwdAxisLS" => Ok(__Field::m_fwdAxisLS),
+                        "limitAngleDegrees" => Ok(__Field::m_limitAngleDegrees),
+                        "onGain" => Ok(__Field::m_onGain),
+                        "offGain" => Ok(__Field::m_offGain),
+                        "enabled" => Ok(__Field::m_enabled),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -391,12 +391,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_enabled: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_offGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_onGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_limitAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_fwdAxisLS: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_index: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_fwdAxisLS: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_limitAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_onGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_offGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_enabled: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -406,21 +406,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_enabled => {
+                            __Field::m_index => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_enabled) {
+                                if _serde::__private::Option::is_some(&m_index) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "enabled",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("index"),
                                     );
                                 }
-                                m_enabled = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_index = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -430,43 +428,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_offGain => {
+                            __Field::m_fwdAxisLS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_offGain) {
+                                if _serde::__private::Option::is_some(&m_fwdAxisLS) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "offGain",
+                                            "fwdAxisLS",
                                         ),
                                     );
                                 }
-                                m_offGain = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_onGain => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_onGain) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("onGain"),
-                                    );
-                                }
-                                m_onGain = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_fwdAxisLS = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -502,21 +478,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_fwdAxisLS => {
+                            __Field::m_onGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_fwdAxisLS) {
+                                if _serde::__private::Option::is_some(&m_onGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fwdAxisLS",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("onGain"),
                                     );
                                 }
-                                m_fwdAxisLS = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_onGain = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -526,19 +500,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_index => {
+                            __Field::m_offGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_index) {
+                                if _serde::__private::Option::is_some(&m_offGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("index"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "offGain",
+                                        ),
                                     );
                                 }
-                                m_index = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                m_offGain = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_enabled => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_enabled) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "enabled",
+                                        ),
+                                    );
+                                }
+                                m_enabled = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -551,44 +551,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_enabled = match m_enabled {
+                    let m_index = match m_index {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("enabled"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_offGain = match m_offGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("offGain"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_onGain = match m_onGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("onGain"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_limitAngleDegrees = match m_limitAngleDegrees {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "limitAngleDegrees",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("index"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -605,12 +573,44 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_index = match m_index {
+                    let m_limitAngleDegrees = match m_limitAngleDegrees {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("index"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "limitAngleDegrees",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_onGain = match m_onGain {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("onGain"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_offGain = match m_offGain {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("offGain"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_enabled = match m_enabled {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("enabled"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

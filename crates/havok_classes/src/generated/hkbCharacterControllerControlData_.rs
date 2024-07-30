@@ -99,11 +99,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_maxHorizontalSeparation,
-                m_maxVerticalSeparation,
-                m_horizontalCatchUpGain,
-                m_verticalGain,
                 m_desiredVelocity,
+                m_verticalGain,
+                m_horizontalCatchUpGain,
+                m_maxVerticalSeparation,
+                m_maxHorizontalSeparation,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -127,13 +127,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
+                        "desiredVelocity" => Ok(__Field::m_desiredVelocity),
+                        "verticalGain" => Ok(__Field::m_verticalGain),
+                        "horizontalCatchUpGain" => Ok(__Field::m_horizontalCatchUpGain),
+                        "maxVerticalSeparation" => Ok(__Field::m_maxVerticalSeparation),
                         "maxHorizontalSeparation" => {
                             Ok(__Field::m_maxHorizontalSeparation)
                         }
-                        "maxVerticalSeparation" => Ok(__Field::m_maxVerticalSeparation),
-                        "horizontalCatchUpGain" => Ok(__Field::m_horizontalCatchUpGain),
-                        "verticalGain" => Ok(__Field::m_verticalGain),
-                        "desiredVelocity" => Ok(__Field::m_desiredVelocity),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -346,11 +346,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_maxHorizontalSeparation: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxVerticalSeparation: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_horizontalCatchUpGain: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_verticalGain: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_desiredVelocity: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_verticalGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_horizontalCatchUpGain: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxVerticalSeparation: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxHorizontalSeparation: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -360,23 +360,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_maxHorizontalSeparation => {
+                            __Field::m_desiredVelocity => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxHorizontalSeparation,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_desiredVelocity) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxHorizontalSeparation",
+                                            "desiredVelocity",
                                         ),
                                     );
                                 }
-                                m_maxHorizontalSeparation = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_desiredVelocity = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -386,22 +384,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxVerticalSeparation => {
+                            __Field::m_verticalGain => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxVerticalSeparation,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_verticalGain) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxVerticalSeparation",
+                                            "verticalGain",
                                         ),
                                     );
                                 }
-                                m_maxVerticalSeparation = _serde::__private::Some(
+                                m_verticalGain = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -438,20 +434,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_verticalGain => {
+                            __Field::m_maxVerticalSeparation => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_verticalGain) {
+                                if _serde::__private::Option::is_some(
+                                    &m_maxVerticalSeparation,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "verticalGain",
+                                            "maxVerticalSeparation",
                                         ),
                                     );
                                 }
-                                m_verticalGain = _serde::__private::Some(
+                                m_maxVerticalSeparation = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -462,21 +460,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_desiredVelocity => {
+                            __Field::m_maxHorizontalSeparation => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_desiredVelocity) {
+                                if _serde::__private::Option::is_some(
+                                    &m_maxHorizontalSeparation,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "desiredVelocity",
+                                            "maxHorizontalSeparation",
                                         ),
                                     );
                                 }
-                                m_desiredVelocity = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_maxHorizontalSeparation = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -489,37 +489,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_maxHorizontalSeparation = match m_maxHorizontalSeparation {
+                    let m_desiredVelocity = match m_desiredVelocity {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxHorizontalSeparation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxVerticalSeparation = match m_maxVerticalSeparation {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxVerticalSeparation",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_horizontalCatchUpGain = match m_horizontalCatchUpGain {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "horizontalCatchUpGain",
+                                    "desiredVelocity",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -537,13 +513,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_desiredVelocity = match m_desiredVelocity {
+                    let m_horizontalCatchUpGain = match m_horizontalCatchUpGain {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "desiredVelocity",
+                                    "horizontalCatchUpGain",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxVerticalSeparation = match m_maxVerticalSeparation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxVerticalSeparation",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxHorizontalSeparation = match m_maxHorizontalSeparation {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxHorizontalSeparation",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

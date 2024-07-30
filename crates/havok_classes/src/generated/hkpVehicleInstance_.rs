@@ -247,34 +247,34 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_name,
                 m_userData,
+                m_name,
                 m_entity,
-                m_clutchDelayCountdown,
-                m_delayed,
-                m_currentGear,
-                m_isReversing,
-                m_wheelsSteeringAngle,
-                m_mainSteeringAngle,
-                m_rpm,
-                m_torque,
-                m_tryingToReverse,
-                m_wheelsTimeSinceMaxPedalInput,
-                m_isFixed,
-                m_deviceStatus,
-                m_frictionStatus,
-                m_wheelsInfo,
-                m_velocityDamper,
-                m_tyreMarks,
-                m_wheelCollide,
-                m_aerodynamics,
-                m_suspension,
-                m_brake,
-                m_transmission,
-                m_engine,
-                m_steering,
-                m_driverInput,
                 m_data,
+                m_driverInput,
+                m_steering,
+                m_engine,
+                m_transmission,
+                m_brake,
+                m_suspension,
+                m_aerodynamics,
+                m_wheelCollide,
+                m_tyreMarks,
+                m_velocityDamper,
+                m_wheelsInfo,
+                m_frictionStatus,
+                m_deviceStatus,
+                m_isFixed,
+                m_wheelsTimeSinceMaxPedalInput,
+                m_tryingToReverse,
+                m_torque,
+                m_rpm,
+                m_mainSteeringAngle,
+                m_wheelsSteeringAngle,
+                m_isReversing,
+                m_currentGear,
+                m_delayed,
+                m_clutchDelayCountdown,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -298,36 +298,36 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "name" => Ok(__Field::m_name),
                         "userData" => Ok(__Field::m_userData),
+                        "name" => Ok(__Field::m_name),
                         "entity" => Ok(__Field::m_entity),
-                        "clutchDelayCountdown" => Ok(__Field::m_clutchDelayCountdown),
-                        "delayed" => Ok(__Field::m_delayed),
-                        "currentGear" => Ok(__Field::m_currentGear),
-                        "isReversing" => Ok(__Field::m_isReversing),
-                        "wheelsSteeringAngle" => Ok(__Field::m_wheelsSteeringAngle),
-                        "mainSteeringAngle" => Ok(__Field::m_mainSteeringAngle),
-                        "rpm" => Ok(__Field::m_rpm),
-                        "torque" => Ok(__Field::m_torque),
-                        "tryingToReverse" => Ok(__Field::m_tryingToReverse),
+                        "data" => Ok(__Field::m_data),
+                        "driverInput" => Ok(__Field::m_driverInput),
+                        "steering" => Ok(__Field::m_steering),
+                        "engine" => Ok(__Field::m_engine),
+                        "transmission" => Ok(__Field::m_transmission),
+                        "brake" => Ok(__Field::m_brake),
+                        "suspension" => Ok(__Field::m_suspension),
+                        "aerodynamics" => Ok(__Field::m_aerodynamics),
+                        "wheelCollide" => Ok(__Field::m_wheelCollide),
+                        "tyreMarks" => Ok(__Field::m_tyreMarks),
+                        "velocityDamper" => Ok(__Field::m_velocityDamper),
+                        "wheelsInfo" => Ok(__Field::m_wheelsInfo),
+                        "frictionStatus" => Ok(__Field::m_frictionStatus),
+                        "deviceStatus" => Ok(__Field::m_deviceStatus),
+                        "isFixed" => Ok(__Field::m_isFixed),
                         "wheelsTimeSinceMaxPedalInput" => {
                             Ok(__Field::m_wheelsTimeSinceMaxPedalInput)
                         }
-                        "isFixed" => Ok(__Field::m_isFixed),
-                        "deviceStatus" => Ok(__Field::m_deviceStatus),
-                        "frictionStatus" => Ok(__Field::m_frictionStatus),
-                        "wheelsInfo" => Ok(__Field::m_wheelsInfo),
-                        "velocityDamper" => Ok(__Field::m_velocityDamper),
-                        "tyreMarks" => Ok(__Field::m_tyreMarks),
-                        "wheelCollide" => Ok(__Field::m_wheelCollide),
-                        "aerodynamics" => Ok(__Field::m_aerodynamics),
-                        "suspension" => Ok(__Field::m_suspension),
-                        "brake" => Ok(__Field::m_brake),
-                        "transmission" => Ok(__Field::m_transmission),
-                        "engine" => Ok(__Field::m_engine),
-                        "steering" => Ok(__Field::m_steering),
-                        "driverInput" => Ok(__Field::m_driverInput),
-                        "data" => Ok(__Field::m_data),
+                        "tryingToReverse" => Ok(__Field::m_tryingToReverse),
+                        "torque" => Ok(__Field::m_torque),
+                        "rpm" => Ok(__Field::m_rpm),
+                        "mainSteeringAngle" => Ok(__Field::m_mainSteeringAngle),
+                        "wheelsSteeringAngle" => Ok(__Field::m_wheelsSteeringAngle),
+                        "isReversing" => Ok(__Field::m_isReversing),
+                        "currentGear" => Ok(__Field::m_currentGear),
+                        "delayed" => Ok(__Field::m_delayed),
+                        "clutchDelayCountdown" => Ok(__Field::m_clutchDelayCountdown),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -1108,40 +1108,40 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_entity: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_clutchDelayCountdown: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_delayed: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_currentGear: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_isReversing: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_wheelsSteeringAngle: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-                    let mut m_mainSteeringAngle: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_rpm: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_torque: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_tryingToReverse: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_wheelsTimeSinceMaxPedalInput: _serde::__private::Option<
-                        f32,
-                    > = _serde::__private::None;
-                    let mut m_isFixed: _serde::__private::Option<Vec<bool>> = _serde::__private::None;
-                    let mut m_deviceStatus: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_frictionStatus: _serde::__private::Option<
-                        hkpVehicleFrictionStatus,
-                    > = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_driverInput: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_steering: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_engine: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_transmission: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_brake: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_suspension: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_aerodynamics: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_wheelCollide: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_tyreMarks: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_velocityDamper: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_wheelsInfo: _serde::__private::Option<
                         Vec<hkpVehicleInstanceWheelInfo>,
                     > = _serde::__private::None;
-                    let mut m_velocityDamper: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_tyreMarks: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_wheelCollide: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_aerodynamics: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_suspension: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_brake: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_transmission: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_engine: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_steering: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_driverInput: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_frictionStatus: _serde::__private::Option<
+                        hkpVehicleFrictionStatus,
+                    > = _serde::__private::None;
+                    let mut m_deviceStatus: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_isFixed: _serde::__private::Option<Vec<bool>> = _serde::__private::None;
+                    let mut m_wheelsTimeSinceMaxPedalInput: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_tryingToReverse: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_torque: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_rpm: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_mainSteeringAngle: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_wheelsSteeringAngle: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
+                    let mut m_isReversing: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_currentGear: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_delayed: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_clutchDelayCountdown: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -1151,28 +1151,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_userData => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -1188,6 +1166,28 @@ const _: () = {
                                 }
                                 m_userData = _serde::__private::Some(
                                     match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1219,288 +1219,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_clutchDelayCountdown => {
+                            __Field::m_data => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_clutchDelayCountdown,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_data) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "clutchDelayCountdown",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
                                     );
                                 }
-                                m_clutchDelayCountdown = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_delayed => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_delayed) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "delayed",
-                                        ),
-                                    );
-                                }
-                                m_delayed = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_currentGear => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_currentGear) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "currentGear",
-                                        ),
-                                    );
-                                }
-                                m_currentGear = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_isReversing => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_isReversing) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isReversing",
-                                        ),
-                                    );
-                                }
-                                m_isReversing = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_wheelsSteeringAngle => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_wheelsSteeringAngle,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelsSteeringAngle",
-                                        ),
-                                    );
-                                }
-                                m_wheelsSteeringAngle = _serde::__private::Some(
-                                    match __A::next_value::<Vec<f32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_mainSteeringAngle => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_mainSteeringAngle,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "mainSteeringAngle",
-                                        ),
-                                    );
-                                }
-                                m_mainSteeringAngle = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_rpm => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_rpm) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("rpm"),
-                                    );
-                                }
-                                m_rpm = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_torque => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_torque) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("torque"),
-                                    );
-                                }
-                                m_torque = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_tryingToReverse => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_tryingToReverse) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "tryingToReverse",
-                                        ),
-                                    );
-                                }
-                                m_tryingToReverse = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_wheelsTimeSinceMaxPedalInput => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_wheelsTimeSinceMaxPedalInput,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelsTimeSinceMaxPedalInput",
-                                        ),
-                                    );
-                                }
-                                m_wheelsTimeSinceMaxPedalInput = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_isFixed => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_isFixed) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isFixed",
-                                        ),
-                                    );
-                                }
-                                m_isFixed = _serde::__private::Some(
-                                    match __A::next_value::<Vec<bool>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_deviceStatus => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_deviceStatus) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "deviceStatus",
-                                        ),
-                                    );
-                                }
-                                m_deviceStatus = _serde::__private::Some(
+                                m_data = _serde::__private::Some(
                                     match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1511,23 +1241,233 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_frictionStatus => {
+                            __Field::m_driverInput => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_frictionStatus) {
+                                if _serde::__private::Option::is_some(&m_driverInput) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "frictionStatus",
+                                            "driverInput",
                                         ),
                                     );
                                 }
-                                m_frictionStatus = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkpVehicleFrictionStatus,
-                                    >(&mut __map) {
+                                m_driverInput = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_steering => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_steering) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "steering",
+                                        ),
+                                    );
+                                }
+                                m_steering = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_engine => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_engine) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("engine"),
+                                    );
+                                }
+                                m_engine = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transmission => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_transmission) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transmission",
+                                        ),
+                                    );
+                                }
+                                m_transmission = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_brake => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_brake) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("brake"),
+                                    );
+                                }
+                                m_brake = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_suspension => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_suspension) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "suspension",
+                                        ),
+                                    );
+                                }
+                                m_suspension = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_aerodynamics => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_aerodynamics) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "aerodynamics",
+                                        ),
+                                    );
+                                }
+                                m_aerodynamics = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wheelCollide => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_wheelCollide) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wheelCollide",
+                                        ),
+                                    );
+                                }
+                                m_wheelCollide = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_tyreMarks => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_tyreMarks) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "tyreMarks",
+                                        ),
+                                    );
+                                }
+                                m_tyreMarks = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_velocityDamper => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_velocityDamper) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "velocityDamper",
+                                        ),
+                                    );
+                                }
+                                m_velocityDamper = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1563,21 +1503,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_velocityDamper => {
+                            __Field::m_frictionStatus => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_velocityDamper) {
+                                if _serde::__private::Option::is_some(&m_frictionStatus) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "velocityDamper",
+                                            "frictionStatus",
                                         ),
                                     );
                                 }
-                                m_velocityDamper = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_frictionStatus = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkpVehicleFrictionStatus,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1587,20 +1529,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_tyreMarks => {
+                            __Field::m_deviceStatus => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_tyreMarks) {
+                                if _serde::__private::Option::is_some(&m_deviceStatus) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "tyreMarks",
+                                            "deviceStatus",
                                         ),
                                     );
                                 }
-                                m_tyreMarks = _serde::__private::Some(
+                                m_deviceStatus = _serde::__private::Some(
                                     match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1611,21 +1553,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_wheelCollide => {
+                            __Field::m_isFixed => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_wheelCollide) {
+                                if _serde::__private::Option::is_some(&m_isFixed) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wheelCollide",
+                                            "isFixed",
                                         ),
                                     );
                                 }
-                                m_wheelCollide = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_isFixed = _serde::__private::Some(
+                                    match __A::next_value::<Vec<bool>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1635,21 +1577,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_aerodynamics => {
+                            __Field::m_wheelsTimeSinceMaxPedalInput => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_aerodynamics) {
+                                if _serde::__private::Option::is_some(
+                                    &m_wheelsTimeSinceMaxPedalInput,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "aerodynamics",
+                                            "wheelsTimeSinceMaxPedalInput",
                                         ),
                                     );
                                 }
-                                m_aerodynamics = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_wheelsTimeSinceMaxPedalInput = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1659,21 +1603,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_suspension => {
+                            __Field::m_tryingToReverse => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_suspension) {
+                                if _serde::__private::Option::is_some(&m_tryingToReverse) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "suspension",
+                                            "tryingToReverse",
                                         ),
                                     );
                                 }
-                                m_suspension = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_tryingToReverse = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1683,19 +1627,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_brake => {
+                            __Field::m_torque => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_brake) {
+                                if _serde::__private::Option::is_some(&m_torque) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("brake"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("torque"),
                                     );
                                 }
-                                m_brake = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_torque = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1705,21 +1649,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_transmission => {
+                            __Field::m_rpm => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_transmission) {
+                                if _serde::__private::Option::is_some(&m_rpm) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("rpm"),
+                                    );
+                                }
+                                m_rpm = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_mainSteeringAngle => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_mainSteeringAngle,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transmission",
+                                            "mainSteeringAngle",
                                         ),
                                     );
                                 }
-                                m_transmission = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_mainSteeringAngle = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1729,43 +1697,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_engine => {
+                            __Field::m_wheelsSteeringAngle => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_engine) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("engine"),
-                                    );
-                                }
-                                m_engine = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_steering => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_steering) {
+                                if _serde::__private::Option::is_some(
+                                    &m_wheelsSteeringAngle,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "steering",
+                                            "wheelsSteeringAngle",
                                         ),
                                     );
                                 }
-                                m_steering = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_wheelsSteeringAngle = _serde::__private::Some(
+                                    match __A::next_value::<Vec<f32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1775,21 +1723,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_driverInput => {
+                            __Field::m_isReversing => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_driverInput) {
+                                if _serde::__private::Option::is_some(&m_isReversing) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "driverInput",
+                                            "isReversing",
                                         ),
                                     );
                                 }
-                                m_driverInput = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_isReversing = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1799,19 +1747,71 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_data => {
+                            __Field::m_currentGear => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_data) {
+                                if _serde::__private::Option::is_some(&m_currentGear) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "currentGear",
+                                        ),
                                     );
                                 }
-                                m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_currentGear = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_delayed => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_delayed) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "delayed",
+                                        ),
+                                    );
+                                }
+                                m_delayed = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_clutchDelayCountdown => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_clutchDelayCountdown,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "clutchDelayCountdown",
+                                        ),
+                                    );
+                                }
+                                m_clutchDelayCountdown = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -1824,22 +1824,22 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_userData = match m_userData {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -1854,197 +1854,77 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_clutchDelayCountdown = match m_clutchDelayCountdown {
+                    let m_data = match m_data {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("data"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_driverInput = match m_driverInput {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "clutchDelayCountdown",
+                                    "driverInput",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_delayed = match m_delayed {
+                    let m_steering = match m_steering {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("delayed"),
+                                <__A::Error as _serde::de::Error>::missing_field("steering"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_currentGear = match m_currentGear {
+                    let m_engine = match m_engine {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("engine"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transmission = match m_transmission {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "currentGear",
+                                    "transmission",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_isReversing = match m_isReversing {
+                    let m_brake = match m_brake {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("brake"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_suspension = match m_suspension {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isReversing",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_wheelsSteeringAngle = match m_wheelsSteeringAngle {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelsSteeringAngle",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_mainSteeringAngle = match m_mainSteeringAngle {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "mainSteeringAngle",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_rpm = match m_rpm {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("rpm"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_torque = match m_torque {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("torque"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_tryingToReverse = match m_tryingToReverse {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "tryingToReverse",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_wheelsTimeSinceMaxPedalInput = match m_wheelsTimeSinceMaxPedalInput {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelsTimeSinceMaxPedalInput",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_isFixed = match m_isFixed {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("isFixed"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_deviceStatus = match m_deviceStatus {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "deviceStatus",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_frictionStatus = match m_frictionStatus {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "frictionStatus",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_wheelsInfo = match m_wheelsInfo {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelsInfo",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_velocityDamper = match m_velocityDamper {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "velocityDamper",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_tyreMarks = match m_tyreMarks {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "tyreMarks",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_wheelCollide = match m_wheelCollide {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "wheelCollide",
+                                    "suspension",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -2062,78 +1942,198 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_suspension = match m_suspension {
+                    let m_wheelCollide = match m_wheelCollide {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "suspension",
+                                    "wheelCollide",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_brake = match m_brake {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("brake"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_transmission = match m_transmission {
+                    let m_tyreMarks = match m_tyreMarks {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transmission",
+                                    "tyreMarks",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_engine = match m_engine {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("engine"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_steering = match m_steering {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("steering"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_driverInput = match m_driverInput {
+                    let m_velocityDamper = match m_velocityDamper {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "driverInput",
+                                    "velocityDamper",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_data = match m_data {
+                    let m_wheelsInfo = match m_wheelsInfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("data"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wheelsInfo",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_frictionStatus = match m_frictionStatus {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "frictionStatus",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_deviceStatus = match m_deviceStatus {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "deviceStatus",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isFixed = match m_isFixed {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("isFixed"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wheelsTimeSinceMaxPedalInput = match m_wheelsTimeSinceMaxPedalInput {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wheelsTimeSinceMaxPedalInput",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_tryingToReverse = match m_tryingToReverse {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "tryingToReverse",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_torque = match m_torque {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("torque"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_rpm = match m_rpm {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("rpm"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_mainSteeringAngle = match m_mainSteeringAngle {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "mainSteeringAngle",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wheelsSteeringAngle = match m_wheelsSteeringAngle {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wheelsSteeringAngle",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isReversing = match m_isReversing {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isReversing",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_currentGear = match m_currentGear {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "currentGear",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_delayed = match m_delayed {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("delayed"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_clutchDelayCountdown = match m_clutchDelayCountdown {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "clutchDelayCountdown",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

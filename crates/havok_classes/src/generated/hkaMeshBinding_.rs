@@ -112,11 +112,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_boneFromSkinMeshTransforms,
-                m_mappings,
-                m_skeleton,
-                m_originalSkeletonName,
                 m_mesh,
+                m_originalSkeletonName,
+                m_skeleton,
+                m_mappings,
+                m_boneFromSkinMeshTransforms,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -140,13 +140,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
+                        "mesh" => Ok(__Field::m_mesh),
+                        "originalSkeletonName" => Ok(__Field::m_originalSkeletonName),
+                        "skeleton" => Ok(__Field::m_skeleton),
+                        "mappings" => Ok(__Field::m_mappings),
                         "boneFromSkinMeshTransforms" => {
                             Ok(__Field::m_boneFromSkinMeshTransforms)
                         }
-                        "mappings" => Ok(__Field::m_mappings),
-                        "skeleton" => Ok(__Field::m_skeleton),
-                        "originalSkeletonName" => Ok(__Field::m_originalSkeletonName),
-                        "mesh" => Ok(__Field::m_mesh),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -353,17 +353,17 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_boneFromSkinMeshTransforms: _serde::__private::Option<
-                        Vec<Transform>,
-                    > = _serde::__private::None;
-                    let mut m_mappings: _serde::__private::Option<
-                        Vec<hkaMeshBindingMapping>,
-                    > = _serde::__private::None;
-                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_mesh: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_originalSkeletonName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
-                    let mut m_mesh: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_mappings: _serde::__private::Option<
+                        Vec<hkaMeshBindingMapping>,
+                    > = _serde::__private::None;
+                    let mut m_boneFromSkinMeshTransforms: _serde::__private::Option<
+                        Vec<Transform>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -373,72 +373,18 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_boneFromSkinMeshTransforms => {
+                            __Field::m_mesh => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_boneFromSkinMeshTransforms,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_mesh) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "boneFromSkinMeshTransforms",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("mesh"),
                                     );
                                 }
-                                m_boneFromSkinMeshTransforms = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Transform>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_mappings => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_mappings) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "mappings",
-                                        ),
-                                    );
-                                }
-                                m_mappings = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkaMeshBindingMapping>,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_skeleton => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_skeleton) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "skeleton",
-                                        ),
-                                    );
-                                }
-                                m_skeleton = _serde::__private::Some(
+                                m_mesh = _serde::__private::Some(
                                     match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -475,19 +421,73 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_mesh => {
+                            __Field::m_skeleton => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_mesh) {
+                                if _serde::__private::Option::is_some(&m_skeleton) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("mesh"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "skeleton",
+                                        ),
                                     );
                                 }
-                                m_mesh = _serde::__private::Some(
+                                m_skeleton = _serde::__private::Some(
                                     match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_mappings => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_mappings) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "mappings",
+                                        ),
+                                    );
+                                }
+                                m_mappings = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkaMeshBindingMapping>,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_boneFromSkinMeshTransforms => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_boneFromSkinMeshTransforms,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "boneFromSkinMeshTransforms",
+                                        ),
+                                    );
+                                }
+                                m_boneFromSkinMeshTransforms = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Transform>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -500,34 +500,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_boneFromSkinMeshTransforms = match m_boneFromSkinMeshTransforms {
+                    let m_mesh = match m_mesh {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "boneFromSkinMeshTransforms",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_mappings = match m_mappings {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("mappings"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_skeleton = match m_skeleton {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("skeleton"),
+                                <__A::Error as _serde::de::Error>::missing_field("mesh"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -544,12 +522,34 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_mesh = match m_mesh {
+                    let m_skeleton = match m_skeleton {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("mesh"),
+                                <__A::Error as _serde::de::Error>::missing_field("skeleton"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_mappings = match m_mappings {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("mappings"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_boneFromSkinMeshTransforms = match m_boneFromSkinMeshTransforms {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "boneFromSkinMeshTransforms",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -75,9 +75,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_z,
-                m_y,
                 m_x,
+                m_y,
+                m_z,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -101,9 +101,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "z" => Ok(__Field::m_z),
-                        "y" => Ok(__Field::m_y),
                         "x" => Ok(__Field::m_x),
+                        "y" => Ok(__Field::m_y),
+                        "z" => Ok(__Field::m_z),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -240,9 +240,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_z: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_y: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_x: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_y: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_z: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -252,18 +252,18 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_z => {
+                            __Field::m_x => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_z) {
+                                if _serde::__private::Option::is_some(&m_x) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("z"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("x"),
                                     );
                                 }
-                                m_z = _serde::__private::Some(
+                                m_x = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -296,18 +296,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_x => {
+                            __Field::m_z => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_x) {
+                                if _serde::__private::Option::is_some(&m_z) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("x"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("z"),
                                     );
                                 }
-                                m_x = _serde::__private::Some(
+                                m_z = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -321,12 +321,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_z = match m_z {
+                    let m_x = match m_x {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("z"),
+                                <__A::Error as _serde::de::Error>::missing_field("x"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -341,12 +341,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_x = match m_x {
+                    let m_z = match m_z {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("x"),
+                                <__A::Error as _serde::de::Error>::missing_field("z"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

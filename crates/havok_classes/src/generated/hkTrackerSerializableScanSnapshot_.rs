@@ -112,13 +112,13 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_traceParents,
-                m_traceAddrs,
-                m_traceText,
-                m_typeNames,
-                m_refs,
-                m_blocks,
                 m_allocations,
+                m_blocks,
+                m_refs,
+                m_typeNames,
+                m_traceText,
+                m_traceAddrs,
+                m_traceParents,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -142,13 +142,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "traceParents" => Ok(__Field::m_traceParents),
-                        "traceAddrs" => Ok(__Field::m_traceAddrs),
-                        "traceText" => Ok(__Field::m_traceText),
-                        "typeNames" => Ok(__Field::m_typeNames),
-                        "refs" => Ok(__Field::m_refs),
-                        "blocks" => Ok(__Field::m_blocks),
                         "allocations" => Ok(__Field::m_allocations),
+                        "blocks" => Ok(__Field::m_blocks),
+                        "refs" => Ok(__Field::m_refs),
+                        "typeNames" => Ok(__Field::m_typeNames),
+                        "traceText" => Ok(__Field::m_traceText),
+                        "traceAddrs" => Ok(__Field::m_traceAddrs),
+                        "traceParents" => Ok(__Field::m_traceParents),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -415,17 +415,17 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_traceParents: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_traceAddrs: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
-                    let mut m_traceText: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_typeNames: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_refs: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_blocks: _serde::__private::Option<
-                        Vec<hkTrackerSerializableScanSnapshotBlock>,
-                    > = _serde::__private::None;
                     let mut m_allocations: _serde::__private::Option<
                         Vec<hkTrackerSerializableScanSnapshotAllocation>,
                     > = _serde::__private::None;
+                    let mut m_blocks: _serde::__private::Option<
+                        Vec<hkTrackerSerializableScanSnapshotBlock>,
+                    > = _serde::__private::None;
+                    let mut m_refs: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_typeNames: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_traceText: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_traceAddrs: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
+                    let mut m_traceParents: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -435,115 +435,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_traceParents => {
+                            __Field::m_allocations => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_traceParents) {
+                                if _serde::__private::Option::is_some(&m_allocations) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "traceParents",
+                                            "allocations",
                                         ),
                                     );
                                 }
-                                m_traceParents = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_traceAddrs => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_traceAddrs) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "traceAddrs",
-                                        ),
-                                    );
-                                }
-                                m_traceAddrs = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u64>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_traceText => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_traceText) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "traceText",
-                                        ),
-                                    );
-                                }
-                                m_traceText = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_typeNames => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_typeNames) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "typeNames",
-                                        ),
-                                    );
-                                }
-                                m_typeNames = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_refs => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_refs) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("refs"),
-                                    );
-                                }
-                                m_refs = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                m_allocations = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkTrackerSerializableScanSnapshotAllocation>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -577,23 +485,115 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_allocations => {
+                            __Field::m_refs => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_allocations) {
+                                if _serde::__private::Option::is_some(&m_refs) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("refs"),
+                                    );
+                                }
+                                m_refs = _serde::__private::Some(
+                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_typeNames => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_typeNames) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "allocations",
+                                            "typeNames",
                                         ),
                                     );
                                 }
-                                m_allocations = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkTrackerSerializableScanSnapshotAllocation>,
-                                    >(&mut __map) {
+                                m_typeNames = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_traceText => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_traceText) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "traceText",
+                                        ),
+                                    );
+                                }
+                                m_traceText = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_traceAddrs => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_traceAddrs) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "traceAddrs",
+                                        ),
+                                    );
+                                }
+                                m_traceAddrs = _serde::__private::Some(
+                                    match __A::next_value::<Vec<u64>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_traceParents => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_traceParents) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "traceParents",
+                                        ),
+                                    );
+                                }
+                                m_traceParents = _serde::__private::Some(
+                                    match __A::next_value::<Vec<i32>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -606,25 +606,45 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_traceParents = match m_traceParents {
+                    let m_allocations = match m_allocations {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "traceParents",
+                                    "allocations",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_traceAddrs = match m_traceAddrs {
+                    let m_blocks = match m_blocks {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("blocks"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_refs = match m_refs {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("refs"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_typeNames = match m_typeNames {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "traceAddrs",
+                                    "typeNames",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -642,45 +662,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_typeNames = match m_typeNames {
+                    let m_traceAddrs = match m_traceAddrs {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "typeNames",
+                                    "traceAddrs",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_refs = match m_refs {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("refs"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_blocks = match m_blocks {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("blocks"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_allocations = match m_allocations {
+                    let m_traceParents = match m_traceParents {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "allocations",
+                                    "traceParents",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

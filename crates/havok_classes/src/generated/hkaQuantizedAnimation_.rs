@@ -110,14 +110,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_annotationTracks,
-                m_extractedMotion,
-                m_numberOfFloatTracks,
-                m_numberOfTransformTracks,
-                m_duration,
                 m_type,
-                m_endian,
+                m_duration,
+                m_numberOfTransformTracks,
+                m_numberOfFloatTracks,
+                m_extractedMotion,
+                m_annotationTracks,
                 m_data,
+                m_endian,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -141,16 +141,16 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "annotationTracks" => Ok(__Field::m_annotationTracks),
-                        "extractedMotion" => Ok(__Field::m_extractedMotion),
-                        "numberOfFloatTracks" => Ok(__Field::m_numberOfFloatTracks),
+                        "type" => Ok(__Field::m_type),
+                        "duration" => Ok(__Field::m_duration),
                         "numberOfTransformTracks" => {
                             Ok(__Field::m_numberOfTransformTracks)
                         }
-                        "duration" => Ok(__Field::m_duration),
-                        "type" => Ok(__Field::m_type),
-                        "endian" => Ok(__Field::m_endian),
+                        "numberOfFloatTracks" => Ok(__Field::m_numberOfFloatTracks),
+                        "extractedMotion" => Ok(__Field::m_extractedMotion),
+                        "annotationTracks" => Ok(__Field::m_annotationTracks),
                         "data" => Ok(__Field::m_data),
+                        "endian" => Ok(__Field::m_endian),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -289,16 +289,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_type: _serde::__private::Option<AnimationType> = _serde::__private::None;
+                    let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_numberOfTransformTracks: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numberOfFloatTracks: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_extractedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_annotationTracks: _serde::__private::Option<
                         Vec<hkaAnnotationTrack<'de>>,
                     > = _serde::__private::None;
-                    let mut m_extractedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_numberOfFloatTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numberOfTransformTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_type: _serde::__private::Option<AnimationType> = _serde::__private::None;
-                    let mut m_endian: _serde::__private::Option<u32> = _serde::__private::None;
                     let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_endian: _serde::__private::Option<u32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -308,23 +308,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_annotationTracks => {
+                            __Field::m_type => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_annotationTracks) {
+                                if _serde::__private::Option::is_some(&m_type) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "annotationTracks",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("type"),
                                     );
                                 }
-                                m_annotationTracks = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkaAnnotationTrack<'de>>,
-                                    >(&mut __map) {
+                                m_type = _serde::__private::Some(
+                                    match __A::next_value::<AnimationType>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -334,47 +330,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_extractedMotion => {
+                            __Field::m_duration => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_extractedMotion) {
+                                if _serde::__private::Option::is_some(&m_duration) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "extractedMotion",
+                                            "duration",
                                         ),
                                     );
                                 }
-                                m_extractedMotion = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numberOfFloatTracks => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_numberOfFloatTracks,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numberOfFloatTracks",
-                                        ),
-                                    );
-                                }
-                                m_numberOfFloatTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_duration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -410,21 +380,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_duration => {
+                            __Field::m_numberOfFloatTracks => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_duration) {
+                                if _serde::__private::Option::is_some(
+                                    &m_numberOfFloatTracks,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "duration",
+                                            "numberOfFloatTracks",
                                         ),
                                     );
                                 }
-                                m_duration = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_numberOfFloatTracks = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -434,19 +406,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_type => {
+                            __Field::m_extractedMotion => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_type) {
+                                if _serde::__private::Option::is_some(&m_extractedMotion) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("type"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "extractedMotion",
+                                        ),
                                     );
                                 }
-                                m_type = _serde::__private::Some(
-                                    match __A::next_value::<AnimationType>(&mut __map) {
+                                m_extractedMotion = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -456,19 +430,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_endian => {
+                            __Field::m_annotationTracks => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_endian) {
+                                if _serde::__private::Option::is_some(&m_annotationTracks) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("endian"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "annotationTracks",
+                                        ),
                                     );
                                 }
-                                m_endian = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                m_annotationTracks = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkaAnnotationTrack<'de>>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -500,28 +478,58 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_endian => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_endian) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("endian"),
+                                    );
+                                }
+                                m_endian = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_annotationTracks = match m_annotationTracks {
+                    let m_type = match m_type {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "annotationTracks",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("type"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_extractedMotion = match m_extractedMotion {
+                    let m_duration = match m_duration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("duration"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numberOfTransformTracks = match m_numberOfTransformTracks {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "extractedMotion",
+                                    "numberOfTransformTracks",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -539,44 +547,26 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_numberOfTransformTracks = match m_numberOfTransformTracks {
+                    let m_extractedMotion = match m_extractedMotion {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "numberOfTransformTracks",
+                                    "extractedMotion",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_duration = match m_duration {
+                    let m_annotationTracks = match m_annotationTracks {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("duration"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_type = match m_type {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("type"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_endian = match m_endian {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("endian"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "annotationTracks",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -587,6 +577,16 @@ const _: () = {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field("data"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_endian = match m_endian {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("endian"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

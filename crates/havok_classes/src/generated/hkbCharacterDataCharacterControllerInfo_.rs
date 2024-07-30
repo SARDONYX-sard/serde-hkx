@@ -90,10 +90,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_characterControllerCinfo,
-                m_collisionFilterInfo,
-                m_capsuleRadius,
                 m_capsuleHeight,
+                m_capsuleRadius,
+                m_collisionFilterInfo,
+                m_characterControllerCinfo,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -117,12 +117,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
+                        "capsuleHeight" => Ok(__Field::m_capsuleHeight),
+                        "capsuleRadius" => Ok(__Field::m_capsuleRadius),
+                        "collisionFilterInfo" => Ok(__Field::m_collisionFilterInfo),
                         "characterControllerCinfo" => {
                             Ok(__Field::m_characterControllerCinfo)
                         }
-                        "collisionFilterInfo" => Ok(__Field::m_collisionFilterInfo),
-                        "capsuleRadius" => Ok(__Field::m_capsuleRadius),
-                        "capsuleHeight" => Ok(__Field::m_capsuleHeight),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -307,12 +307,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_capsuleHeight: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_capsuleRadius: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
                     let mut m_characterControllerCinfo: _serde::__private::Option<
                         Pointer,
                     > = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_capsuleRadius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_capsuleHeight: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -322,23 +322,45 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_characterControllerCinfo => {
+                            __Field::m_capsuleHeight => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_characterControllerCinfo,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_capsuleHeight) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "characterControllerCinfo",
+                                            "capsuleHeight",
                                         ),
                                     );
                                 }
-                                m_characterControllerCinfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_capsuleHeight = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_capsuleRadius => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_capsuleRadius) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "capsuleRadius",
+                                        ),
+                                    );
+                                }
+                                m_capsuleRadius = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -374,45 +396,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_capsuleRadius => {
+                            __Field::m_characterControllerCinfo => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_capsuleRadius) {
+                                if _serde::__private::Option::is_some(
+                                    &m_characterControllerCinfo,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "capsuleRadius",
+                                            "characterControllerCinfo",
                                         ),
                                     );
                                 }
-                                m_capsuleRadius = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_capsuleHeight => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_capsuleHeight) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "capsuleHeight",
-                                        ),
-                                    );
-                                }
-                                m_capsuleHeight = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_characterControllerCinfo = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -425,25 +425,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_characterControllerCinfo = match m_characterControllerCinfo {
+                    let m_capsuleHeight = match m_capsuleHeight {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterControllerCinfo",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_collisionFilterInfo = match m_collisionFilterInfo {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "collisionFilterInfo",
+                                    "capsuleHeight",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -461,13 +449,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_capsuleHeight = match m_capsuleHeight {
+                    let m_collisionFilterInfo = match m_collisionFilterInfo {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "capsuleHeight",
+                                    "collisionFilterInfo",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_characterControllerCinfo = match m_characterControllerCinfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "characterControllerCinfo",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

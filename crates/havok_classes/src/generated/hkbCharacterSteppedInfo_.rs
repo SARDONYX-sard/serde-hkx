@@ -106,11 +106,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_rigidAttachmentTransforms,
-                m_poseModelSpace,
-                m_worldFromModel,
-                m_deltaTime,
                 m_characterId,
+                m_deltaTime,
+                m_worldFromModel,
+                m_poseModelSpace,
+                m_rigidAttachmentTransforms,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -134,13 +134,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
+                        "characterId" => Ok(__Field::m_characterId),
+                        "deltaTime" => Ok(__Field::m_deltaTime),
+                        "worldFromModel" => Ok(__Field::m_worldFromModel),
+                        "poseModelSpace" => Ok(__Field::m_poseModelSpace),
                         "rigidAttachmentTransforms" => {
                             Ok(__Field::m_rigidAttachmentTransforms)
                         }
-                        "poseModelSpace" => Ok(__Field::m_poseModelSpace),
-                        "worldFromModel" => Ok(__Field::m_worldFromModel),
-                        "deltaTime" => Ok(__Field::m_deltaTime),
-                        "characterId" => Ok(__Field::m_characterId),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -355,15 +355,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_rigidAttachmentTransforms: _serde::__private::Option<
-                        Vec<QsTransform>,
-                    > = _serde::__private::None;
+                    let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_deltaTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_worldFromModel: _serde::__private::Option<QsTransform> = _serde::__private::None;
                     let mut m_poseModelSpace: _serde::__private::Option<
                         Vec<QsTransform>,
                     > = _serde::__private::None;
-                    let mut m_worldFromModel: _serde::__private::Option<QsTransform> = _serde::__private::None;
-                    let mut m_deltaTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_rigidAttachmentTransforms: _serde::__private::Option<
+                        Vec<QsTransform>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -373,71 +373,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_rigidAttachmentTransforms => {
+                            __Field::m_characterId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_rigidAttachmentTransforms,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_characterId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rigidAttachmentTransforms",
+                                            "characterId",
                                         ),
                                     );
                                 }
-                                m_rigidAttachmentTransforms = _serde::__private::Some(
-                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_poseModelSpace => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_poseModelSpace) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "poseModelSpace",
-                                        ),
-                                    );
-                                }
-                                m_poseModelSpace = _serde::__private::Some(
-                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_worldFromModel => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_worldFromModel) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "worldFromModel",
-                                        ),
-                                    );
-                                }
-                                m_worldFromModel = _serde::__private::Some(
-                                    match __A::next_value::<QsTransform>(&mut __map) {
+                                m_characterId = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -471,21 +421,71 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_characterId => {
+                            __Field::m_worldFromModel => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_characterId) {
+                                if _serde::__private::Option::is_some(&m_worldFromModel) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "characterId",
+                                            "worldFromModel",
                                         ),
                                     );
                                 }
-                                m_characterId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                m_worldFromModel = _serde::__private::Some(
+                                    match __A::next_value::<QsTransform>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_poseModelSpace => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_poseModelSpace) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "poseModelSpace",
+                                        ),
+                                    );
+                                }
+                                m_poseModelSpace = _serde::__private::Some(
+                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_rigidAttachmentTransforms => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_rigidAttachmentTransforms,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rigidAttachmentTransforms",
+                                        ),
+                                    );
+                                }
+                                m_rigidAttachmentTransforms = _serde::__private::Some(
+                                    match __A::next_value::<Vec<QsTransform>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -498,37 +498,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_rigidAttachmentTransforms = match m_rigidAttachmentTransforms {
+                    let m_characterId = match m_characterId {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "rigidAttachmentTransforms",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_poseModelSpace = match m_poseModelSpace {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "poseModelSpace",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_worldFromModel = match m_worldFromModel {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "worldFromModel",
+                                    "characterId",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -546,13 +522,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_characterId = match m_characterId {
+                    let m_worldFromModel = match m_worldFromModel {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterId",
+                                    "worldFromModel",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_poseModelSpace = match m_poseModelSpace {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "poseModelSpace",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_rigidAttachmentTransforms = match m_rigidAttachmentTransforms {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "rigidAttachmentTransforms",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

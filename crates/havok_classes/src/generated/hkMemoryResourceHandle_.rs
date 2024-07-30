@@ -91,9 +91,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_references,
-                m_name,
                 m_variant,
+                m_name,
+                m_references,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -117,9 +117,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "references" => Ok(__Field::m_references),
-                        "name" => Ok(__Field::m_name),
                         "variant" => Ok(__Field::m_variant),
+                        "name" => Ok(__Field::m_name),
+                        "references" => Ok(__Field::m_references),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -265,11 +265,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_variant: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_references: _serde::__private::Option<
                         Vec<hkMemoryResourceHandleExternalLink<'de>>,
                     > = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_variant: _serde::__private::Option<Pointer> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -279,23 +279,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_references => {
+                            __Field::m_variant => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_references) {
+                                if _serde::__private::Option::is_some(&m_variant) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "references",
+                                            "variant",
                                         ),
                                     );
                                 }
-                                m_references = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkMemoryResourceHandleExternalLink<'de>>,
-                                    >(&mut __map) {
+                                m_variant = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -327,21 +325,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_variant => {
+                            __Field::m_references => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_variant) {
+                                if _serde::__private::Option::is_some(&m_references) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "variant",
+                                            "references",
                                         ),
                                     );
                                 }
-                                m_variant = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_references = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkMemoryResourceHandleExternalLink<'de>>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -354,14 +354,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_references = match m_references {
+                    let m_variant = match m_variant {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "references",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("variant"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -376,12 +374,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_variant = match m_variant {
+                    let m_references = match m_references {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("variant"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "references",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -81,10 +81,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_softmax,
-                m_softmin,
-                m_absmax,
                 m_absmin,
+                m_absmax,
+                m_softmin,
+                m_softmax,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -108,10 +108,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "softmax" => Ok(__Field::m_softmax),
-                        "softmin" => Ok(__Field::m_softmin),
-                        "absmax" => Ok(__Field::m_absmax),
                         "absmin" => Ok(__Field::m_absmin),
+                        "absmax" => Ok(__Field::m_absmax),
+                        "softmin" => Ok(__Field::m_softmin),
+                        "softmax" => Ok(__Field::m_softmax),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -274,10 +274,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_softmax: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_softmin: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_absmax: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_absmin: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_absmax: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_softmin: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_softmax: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -287,20 +287,40 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_softmax => {
+                            __Field::m_absmin => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_softmax) {
+                                if _serde::__private::Option::is_some(&m_absmin) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "softmax",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("absmin"),
                                     );
                                 }
-                                m_softmax = _serde::__private::Some(
+                                m_absmin = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_absmax => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_absmax) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("absmax"),
+                                    );
+                                }
+                                m_absmax = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -335,40 +355,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_absmax => {
+                            __Field::m_softmax => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_absmax) {
+                                if _serde::__private::Option::is_some(&m_softmax) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("absmax"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "softmax",
+                                        ),
                                     );
                                 }
-                                m_absmax = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_absmin => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_absmin) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("absmin"),
-                                    );
-                                }
-                                m_absmin = _serde::__private::Some(
+                                m_softmax = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -382,22 +382,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_softmax = match m_softmax {
+                    let m_absmin = match m_absmin {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("softmax"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_softmin = match m_softmin {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("softmin"),
+                                <__A::Error as _serde::de::Error>::missing_field("absmin"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -412,12 +402,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_absmin = match m_absmin {
+                    let m_softmin = match m_softmin {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("absmin"),
+                                <__A::Error as _serde::de::Error>::missing_field("softmin"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_softmax = match m_softmax {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("softmax"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

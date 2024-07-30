@@ -106,11 +106,11 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_transform_OS_KS,
-                m_angularConstrainedDOF,
-                m_maxFrictionForce,
-                m_path,
                 m_atoms,
+                m_path,
+                m_maxFrictionForce,
+                m_angularConstrainedDOF,
+                m_transform_OS_KS,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -135,11 +135,11 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
-                        "transform_OS_KS" => Ok(__Field::m_transform_OS_KS),
-                        "angularConstrainedDOF" => Ok(__Field::m_angularConstrainedDOF),
-                        "maxFrictionForce" => Ok(__Field::m_maxFrictionForce),
-                        "path" => Ok(__Field::m_path),
                         "atoms" => Ok(__Field::m_atoms),
+                        "path" => Ok(__Field::m_path),
+                        "maxFrictionForce" => Ok(__Field::m_maxFrictionForce),
+                        "angularConstrainedDOF" => Ok(__Field::m_angularConstrainedDOF),
+                        "transform_OS_KS" => Ok(__Field::m_transform_OS_KS),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -348,15 +348,15 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_transform_OS_KS: _serde::__private::Option<
-                        [Transform; 2usize],
-                    > = _serde::__private::None;
+                    let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
+                    let mut m_path: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_maxFrictionForce: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_angularConstrainedDOF: _serde::__private::Option<
                         OrientationConstraintType,
                     > = _serde::__private::None;
-                    let mut m_maxFrictionForce: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_path: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
+                    let mut m_transform_OS_KS: _serde::__private::Option<
+                        [Transform; 2usize],
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -390,21 +390,65 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_transform_OS_KS => {
+                            __Field::m_atoms => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_transform_OS_KS) {
+                                if _serde::__private::Option::is_some(&m_atoms) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+                                    );
+                                }
+                                m_atoms = _serde::__private::Some(
+                                    match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_path => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_path) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("path"),
+                                    );
+                                }
+                                m_path = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxFrictionForce => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_maxFrictionForce) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transform_OS_KS",
+                                            "maxFrictionForce",
                                         ),
                                     );
                                 }
-                                m_transform_OS_KS = _serde::__private::Some(
-                                    match __A::next_value::<[Transform; 2usize]>(&mut __map) {
+                                m_maxFrictionForce = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -442,65 +486,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxFrictionForce => {
+                            __Field::m_transform_OS_KS => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_maxFrictionForce) {
+                                if _serde::__private::Option::is_some(&m_transform_OS_KS) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxFrictionForce",
+                                            "transform_OS_KS",
                                         ),
                                     );
                                 }
-                                m_maxFrictionForce = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_path => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_path) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("path"),
-                                    );
-                                }
-                                m_path = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_atoms => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_atoms) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
-                                    );
-                                }
-                                m_atoms = _serde::__private::Some(
-                                    match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
+                                m_transform_OS_KS = _serde::__private::Some(
+                                    match __A::next_value::<[Transform; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -523,13 +523,33 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_transform_OS_KS = match m_transform_OS_KS {
+                    let m_atoms = match m_atoms {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("atoms"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_path = match m_path {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("path"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxFrictionForce = match m_maxFrictionForce {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transform_OS_KS",
+                                    "maxFrictionForce",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -547,34 +567,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxFrictionForce = match m_maxFrictionForce {
+                    let m_transform_OS_KS = match m_transform_OS_KS {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxFrictionForce",
+                                    "transform_OS_KS",
                                 ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_path = match m_path {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("path"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_atoms = match m_atoms {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("atoms"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

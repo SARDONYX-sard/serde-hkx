@@ -126,16 +126,16 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_axle,
-                m_maxContactBodyAcceleration,
-                m_forceFeedbackMultiplier,
-                m_slipAngle,
-                m_maxFriction,
-                m_viscosityFriction,
-                m_friction,
-                m_width,
-                m_mass,
                 m_radius,
+                m_mass,
+                m_width,
+                m_friction,
+                m_viscosityFriction,
+                m_maxFriction,
+                m_slipAngle,
+                m_forceFeedbackMultiplier,
+                m_maxContactBodyAcceleration,
+                m_axle,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -159,20 +159,20 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "axle" => Ok(__Field::m_axle),
-                        "maxContactBodyAcceleration" => {
-                            Ok(__Field::m_maxContactBodyAcceleration)
-                        }
+                        "radius" => Ok(__Field::m_radius),
+                        "mass" => Ok(__Field::m_mass),
+                        "width" => Ok(__Field::m_width),
+                        "friction" => Ok(__Field::m_friction),
+                        "viscosityFriction" => Ok(__Field::m_viscosityFriction),
+                        "maxFriction" => Ok(__Field::m_maxFriction),
+                        "slipAngle" => Ok(__Field::m_slipAngle),
                         "forceFeedbackMultiplier" => {
                             Ok(__Field::m_forceFeedbackMultiplier)
                         }
-                        "slipAngle" => Ok(__Field::m_slipAngle),
-                        "maxFriction" => Ok(__Field::m_maxFriction),
-                        "viscosityFriction" => Ok(__Field::m_viscosityFriction),
-                        "friction" => Ok(__Field::m_friction),
-                        "width" => Ok(__Field::m_width),
-                        "mass" => Ok(__Field::m_mass),
-                        "radius" => Ok(__Field::m_radius),
+                        "maxContactBodyAcceleration" => {
+                            Ok(__Field::m_maxContactBodyAcceleration)
+                        }
+                        "axle" => Ok(__Field::m_axle),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -515,18 +515,18 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_axle: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_mass: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_width: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_friction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_viscosityFriction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxFriction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_slipAngle: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_forceFeedbackMultiplier: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxContactBodyAcceleration: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_forceFeedbackMultiplier: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_slipAngle: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxFriction: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_viscosityFriction: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_friction: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_width: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_mass: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_axle: _serde::__private::Option<i8> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -536,44 +536,18 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_axle => {
+                            __Field::m_radius => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_axle) {
+                                if _serde::__private::Option::is_some(&m_radius) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("axle"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("radius"),
                                     );
                                 }
-                                m_axle = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_maxContactBodyAcceleration => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxContactBodyAcceleration,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxContactBodyAcceleration",
-                                        ),
-                                    );
-                                }
-                                m_maxContactBodyAcceleration = _serde::__private::Some(
+                                m_radius = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -584,22 +558,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_forceFeedbackMultiplier => {
+                            __Field::m_mass => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_forceFeedbackMultiplier,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_mass) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "forceFeedbackMultiplier",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("mass"),
                                     );
                                 }
-                                m_forceFeedbackMultiplier = _serde::__private::Some(
+                                m_mass = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -610,20 +580,18 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_slipAngle => {
+                            __Field::m_width => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_slipAngle) {
+                                if _serde::__private::Option::is_some(&m_width) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "slipAngle",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("width"),
                                     );
                                 }
-                                m_slipAngle = _serde::__private::Some(
+                                m_width = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -634,20 +602,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxFriction => {
+                            __Field::m_friction => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_maxFriction) {
+                                if _serde::__private::Option::is_some(&m_friction) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxFriction",
+                                            "friction",
                                         ),
                                     );
                                 }
-                                m_maxFriction = _serde::__private::Some(
+                                m_friction = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -684,20 +652,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_friction => {
+                            __Field::m_maxFriction => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_friction) {
+                                if _serde::__private::Option::is_some(&m_maxFriction) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "friction",
+                                            "maxFriction",
                                         ),
                                     );
                                 }
-                                m_friction = _serde::__private::Some(
+                                m_maxFriction = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -708,18 +676,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_width => {
+                            __Field::m_slipAngle => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_width) {
+                                if _serde::__private::Option::is_some(&m_slipAngle) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("width"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "slipAngle",
+                                        ),
                                     );
                                 }
-                                m_width = _serde::__private::Some(
+                                m_slipAngle = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -730,18 +700,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_mass => {
+                            __Field::m_forceFeedbackMultiplier => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_mass) {
+                                if _serde::__private::Option::is_some(
+                                    &m_forceFeedbackMultiplier,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("mass"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "forceFeedbackMultiplier",
+                                        ),
                                     );
                                 }
-                                m_mass = _serde::__private::Some(
+                                m_forceFeedbackMultiplier = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -752,19 +726,45 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_radius => {
+                            __Field::m_maxContactBodyAcceleration => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_radius) {
+                                if _serde::__private::Option::is_some(
+                                    &m_maxContactBodyAcceleration,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("radius"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxContactBodyAcceleration",
+                                        ),
                                     );
                                 }
-                                m_radius = _serde::__private::Some(
+                                m_maxContactBodyAcceleration = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_axle => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_axle) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("axle"),
+                                    );
+                                }
+                                m_axle = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -777,47 +777,53 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_axle = match m_axle {
+                    let m_radius = match m_radius {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("axle"),
+                                <__A::Error as _serde::de::Error>::missing_field("radius"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxContactBodyAcceleration = match m_maxContactBodyAcceleration {
+                    let m_mass = match m_mass {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("mass"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_width = match m_width {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("width"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_friction = match m_friction {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("friction"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_viscosityFriction = match m_viscosityFriction {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxContactBodyAcceleration",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_forceFeedbackMultiplier = match m_forceFeedbackMultiplier {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "forceFeedbackMultiplier",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_slipAngle = match m_slipAngle {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "slipAngle",
+                                    "viscosityFriction",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -835,54 +841,48 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_viscosityFriction = match m_viscosityFriction {
+                    let m_slipAngle = match m_slipAngle {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "viscosityFriction",
+                                    "slipAngle",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_friction = match m_friction {
+                    let m_forceFeedbackMultiplier = match m_forceFeedbackMultiplier {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("friction"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "forceFeedbackMultiplier",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_width = match m_width {
+                    let m_maxContactBodyAcceleration = match m_maxContactBodyAcceleration {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("width"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxContactBodyAcceleration",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_mass = match m_mass {
+                    let m_axle = match m_axle {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("mass"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_radius = match m_radius {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("radius"),
+                                <__A::Error as _serde::de::Error>::missing_field("axle"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

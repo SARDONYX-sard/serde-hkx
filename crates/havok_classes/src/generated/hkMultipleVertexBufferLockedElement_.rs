@@ -99,13 +99,13 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_emulatedIndex,
-                m_outputBufferIndex,
-                m_lockFlags,
-                m_vertexFormatIndex,
-                m_lockedBufferIndex,
-                m_elementIndex,
                 m_vertexBufferIndex,
+                m_elementIndex,
+                m_lockedBufferIndex,
+                m_vertexFormatIndex,
+                m_lockFlags,
+                m_outputBufferIndex,
+                m_emulatedIndex,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -129,13 +129,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "emulatedIndex" => Ok(__Field::m_emulatedIndex),
-                        "outputBufferIndex" => Ok(__Field::m_outputBufferIndex),
-                        "lockFlags" => Ok(__Field::m_lockFlags),
-                        "vertexFormatIndex" => Ok(__Field::m_vertexFormatIndex),
-                        "lockedBufferIndex" => Ok(__Field::m_lockedBufferIndex),
-                        "elementIndex" => Ok(__Field::m_elementIndex),
                         "vertexBufferIndex" => Ok(__Field::m_vertexBufferIndex),
+                        "elementIndex" => Ok(__Field::m_elementIndex),
+                        "lockedBufferIndex" => Ok(__Field::m_lockedBufferIndex),
+                        "vertexFormatIndex" => Ok(__Field::m_vertexFormatIndex),
+                        "lockFlags" => Ok(__Field::m_lockFlags),
+                        "outputBufferIndex" => Ok(__Field::m_outputBufferIndex),
+                        "emulatedIndex" => Ok(__Field::m_emulatedIndex),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -408,13 +408,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_emulatedIndex: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_outputBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_lockFlags: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_vertexFormatIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_lockedBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_elementIndex: _serde::__private::Option<u8> = _serde::__private::None;
                     let mut m_vertexBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_elementIndex: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_lockedBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_vertexFormatIndex: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_lockFlags: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_outputBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_emulatedIndex: _serde::__private::Option<i8> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -424,46 +424,22 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_emulatedIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_emulatedIndex) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "emulatedIndex",
-                                        ),
-                                    );
-                                }
-                                m_emulatedIndex = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_outputBufferIndex => {
+                            __Field::m_vertexBufferIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_outputBufferIndex,
+                                    &m_vertexBufferIndex,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "outputBufferIndex",
+                                            "vertexBufferIndex",
                                         ),
                                     );
                                 }
-                                m_outputBufferIndex = _serde::__private::Some(
+                                m_vertexBufferIndex = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -474,46 +450,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_lockFlags => {
+                            __Field::m_elementIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_lockFlags) {
+                                if _serde::__private::Option::is_some(&m_elementIndex) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "lockFlags",
+                                            "elementIndex",
                                         ),
                                     );
                                 }
-                                m_lockFlags = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_vertexFormatIndex => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_vertexFormatIndex,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexFormatIndex",
-                                        ),
-                                    );
-                                }
-                                m_vertexFormatIndex = _serde::__private::Some(
+                                m_elementIndex = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -550,20 +500,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_elementIndex => {
+                            __Field::m_vertexFormatIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_elementIndex) {
+                                if _serde::__private::Option::is_some(
+                                    &m_vertexFormatIndex,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "elementIndex",
+                                            "vertexFormatIndex",
                                         ),
                                     );
                                 }
-                                m_elementIndex = _serde::__private::Some(
+                                m_vertexFormatIndex = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -574,23 +526,71 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_vertexBufferIndex => {
+                            __Field::m_lockFlags => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_lockFlags) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lockFlags",
+                                        ),
+                                    );
+                                }
+                                m_lockFlags = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_outputBufferIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_vertexBufferIndex,
+                                    &m_outputBufferIndex,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "vertexBufferIndex",
+                                            "outputBufferIndex",
                                         ),
                                     );
                                 }
-                                m_vertexBufferIndex = _serde::__private::Some(
+                                m_outputBufferIndex = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_emulatedIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_emulatedIndex) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "emulatedIndex",
+                                        ),
+                                    );
+                                }
+                                m_emulatedIndex = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -603,61 +603,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_emulatedIndex = match m_emulatedIndex {
+                    let m_vertexBufferIndex = match m_vertexBufferIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "emulatedIndex",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_outputBufferIndex = match m_outputBufferIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "outputBufferIndex",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lockFlags = match m_lockFlags {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "lockFlags",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_vertexFormatIndex = match m_vertexFormatIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexFormatIndex",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_lockedBufferIndex = match m_lockedBufferIndex {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "lockedBufferIndex",
+                                    "vertexBufferIndex",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -675,13 +627,61 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_vertexBufferIndex = match m_vertexBufferIndex {
+                    let m_lockedBufferIndex = match m_lockedBufferIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "vertexBufferIndex",
+                                    "lockedBufferIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexFormatIndex = match m_vertexFormatIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "vertexFormatIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lockFlags = match m_lockFlags {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "lockFlags",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_outputBufferIndex = match m_outputBufferIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "outputBufferIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_emulatedIndex = match m_emulatedIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "emulatedIndex",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

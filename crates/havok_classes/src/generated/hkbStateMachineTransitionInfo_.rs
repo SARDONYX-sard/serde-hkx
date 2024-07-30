@@ -118,16 +118,16 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_flags,
-                m_priority,
-                m_toNestedStateId,
-                m_fromNestedStateId,
-                m_toStateId,
-                m_eventId,
-                m_condition,
-                m_transition,
-                m_initiateInterval,
                 m_triggerInterval,
+                m_initiateInterval,
+                m_transition,
+                m_condition,
+                m_eventId,
+                m_toStateId,
+                m_fromNestedStateId,
+                m_toNestedStateId,
+                m_priority,
+                m_flags,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -151,16 +151,16 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "flags" => Ok(__Field::m_flags),
-                        "priority" => Ok(__Field::m_priority),
-                        "toNestedStateId" => Ok(__Field::m_toNestedStateId),
-                        "fromNestedStateId" => Ok(__Field::m_fromNestedStateId),
-                        "toStateId" => Ok(__Field::m_toStateId),
-                        "eventId" => Ok(__Field::m_eventId),
-                        "condition" => Ok(__Field::m_condition),
-                        "transition" => Ok(__Field::m_transition),
-                        "initiateInterval" => Ok(__Field::m_initiateInterval),
                         "triggerInterval" => Ok(__Field::m_triggerInterval),
+                        "initiateInterval" => Ok(__Field::m_initiateInterval),
+                        "transition" => Ok(__Field::m_transition),
+                        "condition" => Ok(__Field::m_condition),
+                        "eventId" => Ok(__Field::m_eventId),
+                        "toStateId" => Ok(__Field::m_toStateId),
+                        "fromNestedStateId" => Ok(__Field::m_fromNestedStateId),
+                        "toNestedStateId" => Ok(__Field::m_toNestedStateId),
+                        "priority" => Ok(__Field::m_priority),
+                        "flags" => Ok(__Field::m_flags),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -513,20 +513,20 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_flags: _serde::__private::Option<TransitionFlags> = _serde::__private::None;
-                    let mut m_priority: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_toNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_fromNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_eventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_condition: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_transition: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_initiateInterval: _serde::__private::Option<
-                        hkbStateMachineTimeInterval,
-                    > = _serde::__private::None;
                     let mut m_triggerInterval: _serde::__private::Option<
                         hkbStateMachineTimeInterval,
                     > = _serde::__private::None;
+                    let mut m_initiateInterval: _serde::__private::Option<
+                        hkbStateMachineTimeInterval,
+                    > = _serde::__private::None;
+                    let mut m_transition: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_condition: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_eventId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_fromNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_toNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_priority: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<TransitionFlags> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -536,19 +536,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_flags => {
+                            __Field::m_triggerInterval => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_flags) {
+                                if _serde::__private::Option::is_some(&m_triggerInterval) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "triggerInterval",
+                                        ),
                                     );
                                 }
-                                m_flags = _serde::__private::Some(
-                                    match __A::next_value::<TransitionFlags>(&mut __map) {
+                                m_triggerInterval = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkbStateMachineTimeInterval,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -558,21 +562,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_priority => {
+                            __Field::m_initiateInterval => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_priority) {
+                                if _serde::__private::Option::is_some(&m_initiateInterval) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "priority",
+                                            "initiateInterval",
                                         ),
                                     );
                                 }
-                                m_priority = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                m_initiateInterval = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkbStateMachineTimeInterval,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -582,20 +588,92 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_toNestedStateId => {
+                            __Field::m_transition => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_toNestedStateId) {
+                                if _serde::__private::Option::is_some(&m_transition) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "toNestedStateId",
+                                            "transition",
                                         ),
                                     );
                                 }
-                                m_toNestedStateId = _serde::__private::Some(
+                                m_transition = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_condition => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_condition) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "condition",
+                                        ),
+                                    );
+                                }
+                                m_condition = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_eventId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_eventId) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "eventId",
+                                        ),
+                                    );
+                                }
+                                m_eventId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_toStateId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_toStateId) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "toStateId",
+                                        ),
+                                    );
+                                }
+                                m_toStateId = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -632,20 +710,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_toStateId => {
+                            __Field::m_toNestedStateId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_toStateId) {
+                                if _serde::__private::Option::is_some(&m_toNestedStateId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "toStateId",
+                                            "toNestedStateId",
                                         ),
                                     );
                                 }
-                                m_toStateId = _serde::__private::Some(
+                                m_toNestedStateId = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -656,21 +734,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_eventId => {
+                            __Field::m_priority => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_eventId) {
+                                if _serde::__private::Option::is_some(&m_priority) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "eventId",
+                                            "priority",
                                         ),
                                     );
                                 }
-                                m_eventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_priority = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -680,97 +758,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_condition => {
+                            __Field::m_flags => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_condition) {
+                                if _serde::__private::Option::is_some(&m_flags) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "condition",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
                                     );
                                 }
-                                m_condition = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_transition => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_transition) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transition",
-                                        ),
-                                    );
-                                }
-                                m_transition = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_initiateInterval => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_initiateInterval) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "initiateInterval",
-                                        ),
-                                    );
-                                }
-                                m_initiateInterval = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkbStateMachineTimeInterval,
-                                    >(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_triggerInterval => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_triggerInterval) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "triggerInterval",
-                                        ),
-                                    );
-                                }
-                                m_triggerInterval = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkbStateMachineTimeInterval,
-                                    >(&mut __map) {
+                                m_flags = _serde::__private::Some(
+                                    match __A::next_value::<TransitionFlags>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -783,91 +783,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_flags = match m_flags {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("flags"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_priority = match m_priority {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("priority"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_toNestedStateId = match m_toNestedStateId {
+                    let m_triggerInterval = match m_triggerInterval {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "toNestedStateId",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_fromNestedStateId = match m_fromNestedStateId {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "fromNestedStateId",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_toStateId = match m_toStateId {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "toStateId",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_eventId = match m_eventId {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("eventId"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_condition = match m_condition {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "condition",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_transition = match m_transition {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "transition",
+                                    "triggerInterval",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -885,14 +807,92 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_triggerInterval = match m_triggerInterval {
+                    let m_transition = match m_transition {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "triggerInterval",
+                                    "transition",
                                 ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_condition = match m_condition {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "condition",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_eventId = match m_eventId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("eventId"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_toStateId = match m_toStateId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "toStateId",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_fromNestedStateId = match m_fromNestedStateId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "fromNestedStateId",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_toNestedStateId = match m_toNestedStateId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "toNestedStateId",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_priority = match m_priority {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("priority"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_flags = match m_flags {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("flags"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

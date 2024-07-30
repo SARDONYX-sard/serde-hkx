@@ -90,11 +90,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_isAnnotation,
-                m_acyclic,
-                m_relativeToEndOfClip,
-                m_event,
                 m_localTime,
+                m_event,
+                m_relativeToEndOfClip,
+                m_acyclic,
+                m_isAnnotation,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -118,11 +118,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "isAnnotation" => Ok(__Field::m_isAnnotation),
-                        "acyclic" => Ok(__Field::m_acyclic),
-                        "relativeToEndOfClip" => Ok(__Field::m_relativeToEndOfClip),
-                        "event" => Ok(__Field::m_event),
                         "localTime" => Ok(__Field::m_localTime),
+                        "event" => Ok(__Field::m_event),
+                        "relativeToEndOfClip" => Ok(__Field::m_relativeToEndOfClip),
+                        "acyclic" => Ok(__Field::m_acyclic),
+                        "isAnnotation" => Ok(__Field::m_isAnnotation),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -321,11 +321,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_isAnnotation: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_acyclic: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_relativeToEndOfClip: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_event: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
                     let mut m_localTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_event: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+                    let mut m_relativeToEndOfClip: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_acyclic: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_isAnnotation: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -335,21 +335,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_isAnnotation => {
+                            __Field::m_localTime => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isAnnotation) {
+                                if _serde::__private::Option::is_some(&m_localTime) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isAnnotation",
+                                            "localTime",
                                         ),
                                     );
                                 }
-                                m_isAnnotation = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_localTime = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -359,21 +359,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_acyclic => {
+                            __Field::m_event => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_acyclic) {
+                                if _serde::__private::Option::is_some(&m_event) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "acyclic",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("event"),
                                     );
                                 }
-                                m_acyclic = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_event = _serde::__private::Some(
+                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -409,19 +407,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_event => {
+                            __Field::m_acyclic => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_event) {
+                                if _serde::__private::Option::is_some(&m_acyclic) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("event"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "acyclic",
+                                        ),
                                     );
                                 }
-                                m_event = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                m_acyclic = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -431,21 +431,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_localTime => {
+                            __Field::m_isAnnotation => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_localTime) {
+                                if _serde::__private::Option::is_some(&m_isAnnotation) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "localTime",
+                                            "isAnnotation",
                                         ),
                                     );
                                 }
-                                m_localTime = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_isAnnotation = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -458,24 +458,24 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_isAnnotation = match m_isAnnotation {
+                    let m_localTime = match m_localTime {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isAnnotation",
+                                    "localTime",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_acyclic = match m_acyclic {
+                    let m_event = match m_event {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("acyclic"),
+                                <__A::Error as _serde::de::Error>::missing_field("event"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -492,23 +492,23 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_event = match m_event {
+                    let m_acyclic = match m_acyclic {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("event"),
+                                <__A::Error as _serde::de::Error>::missing_field("acyclic"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_localTime = match m_localTime {
+                    let m_isAnnotation = match m_isAnnotation {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "localTime",
+                                    "isAnnotation",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

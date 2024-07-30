@@ -145,15 +145,15 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_keyboardKey,
                 m_name,
-                m_capturedObjectsOffset,
-                m_capturedObjectPosition,
-                m_throwVelocity,
-                m_impulseAppliedWhenObjectNotPicked,
-                m_maxDistOfObjectPicked,
-                m_maxMassOfObjectPicked,
+                m_keyboardKey,
                 m_maxNumObjectsPicked,
+                m_maxMassOfObjectPicked,
+                m_maxDistOfObjectPicked,
+                m_impulseAppliedWhenObjectNotPicked,
+                m_throwVelocity,
+                m_capturedObjectPosition,
+                m_capturedObjectsOffset,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -177,17 +177,17 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "keyboardKey" => Ok(__Field::m_keyboardKey),
                         "name" => Ok(__Field::m_name),
-                        "capturedObjectsOffset" => Ok(__Field::m_capturedObjectsOffset),
-                        "capturedObjectPosition" => Ok(__Field::m_capturedObjectPosition),
-                        "throwVelocity" => Ok(__Field::m_throwVelocity),
+                        "keyboardKey" => Ok(__Field::m_keyboardKey),
+                        "maxNumObjectsPicked" => Ok(__Field::m_maxNumObjectsPicked),
+                        "maxMassOfObjectPicked" => Ok(__Field::m_maxMassOfObjectPicked),
+                        "maxDistOfObjectPicked" => Ok(__Field::m_maxDistOfObjectPicked),
                         "impulseAppliedWhenObjectNotPicked" => {
                             Ok(__Field::m_impulseAppliedWhenObjectNotPicked)
                         }
-                        "maxDistOfObjectPicked" => Ok(__Field::m_maxDistOfObjectPicked),
-                        "maxMassOfObjectPicked" => Ok(__Field::m_maxMassOfObjectPicked),
-                        "maxNumObjectsPicked" => Ok(__Field::m_maxNumObjectsPicked),
+                        "throwVelocity" => Ok(__Field::m_throwVelocity),
+                        "capturedObjectPosition" => Ok(__Field::m_capturedObjectPosition),
+                        "capturedObjectsOffset" => Ok(__Field::m_capturedObjectsOffset),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -496,21 +496,21 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_keyboardKey: _serde::__private::Option<KeyboardKey> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_capturedObjectsOffset: _serde::__private::Option<
-                        Vector4,
-                    > = _serde::__private::None;
-                    let mut m_capturedObjectPosition: _serde::__private::Option<
-                        Vector4,
-                    > = _serde::__private::None;
-                    let mut m_throwVelocity: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_keyboardKey: _serde::__private::Option<KeyboardKey> = _serde::__private::None;
+                    let mut m_maxNumObjectsPicked: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_maxMassOfObjectPicked: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_maxDistOfObjectPicked: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_impulseAppliedWhenObjectNotPicked: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_maxDistOfObjectPicked: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxMassOfObjectPicked: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxNumObjectsPicked: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_throwVelocity: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_capturedObjectPosition: _serde::__private::Option<
+                        Vector4,
+                    > = _serde::__private::None;
+                    let mut m_capturedObjectsOffset: _serde::__private::Option<
+                        Vector4,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -520,6 +520,28 @@ const _: () = {
                         __key
                     } {
                         match __key {
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             __Field::m_keyboardKey => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -544,45 +566,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                                    );
-                                }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_capturedObjectsOffset => {
+                            __Field::m_maxNumObjectsPicked => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_capturedObjectsOffset,
+                                    &m_maxNumObjectsPicked,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "capturedObjectsOffset",
+                                            "maxNumObjectsPicked",
                                         ),
                                     );
                                 }
-                                m_capturedObjectsOffset = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
+                                m_maxNumObjectsPicked = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -592,72 +592,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_capturedObjectPosition => {
+                            __Field::m_maxMassOfObjectPicked => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_capturedObjectPosition,
+                                    &m_maxMassOfObjectPicked,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "capturedObjectPosition",
+                                            "maxMassOfObjectPicked",
                                         ),
                                     );
                                 }
-                                m_capturedObjectPosition = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_throwVelocity => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_throwVelocity) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "throwVelocity",
-                                        ),
-                                    );
-                                }
-                                m_throwVelocity = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_impulseAppliedWhenObjectNotPicked => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_impulseAppliedWhenObjectNotPicked,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "impulseAppliedWhenObjectNotPicked",
-                                        ),
-                                    );
-                                }
-                                m_impulseAppliedWhenObjectNotPicked = _serde::__private::Some(
+                                m_maxMassOfObjectPicked = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -694,22 +644,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxMassOfObjectPicked => {
+                            __Field::m_impulseAppliedWhenObjectNotPicked => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_maxMassOfObjectPicked,
+                                    &m_impulseAppliedWhenObjectNotPicked,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxMassOfObjectPicked",
+                                            "impulseAppliedWhenObjectNotPicked",
                                         ),
                                     );
                                 }
-                                m_maxMassOfObjectPicked = _serde::__private::Some(
+                                m_impulseAppliedWhenObjectNotPicked = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -720,23 +670,73 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxNumObjectsPicked => {
+                            __Field::m_throwVelocity => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_throwVelocity) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "throwVelocity",
+                                        ),
+                                    );
+                                }
+                                m_throwVelocity = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_capturedObjectPosition => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_maxNumObjectsPicked,
+                                    &m_capturedObjectPosition,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxNumObjectsPicked",
+                                            "capturedObjectPosition",
                                         ),
                                     );
                                 }
-                                m_maxNumObjectsPicked = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_capturedObjectPosition = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_capturedObjectsOffset => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_capturedObjectsOffset,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "capturedObjectsOffset",
+                                        ),
+                                    );
+                                }
+                                m_capturedObjectsOffset = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -749,6 +749,16 @@ const _: () = {
                             _ => {}
                         }
                     }
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
                     let m_keyboardKey = match m_keyboardKey {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -761,71 +771,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_capturedObjectsOffset = match m_capturedObjectsOffset {
+                    let m_maxNumObjectsPicked = match m_maxNumObjectsPicked {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "capturedObjectsOffset",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_capturedObjectPosition = match m_capturedObjectPosition {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "capturedObjectPosition",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_throwVelocity = match m_throwVelocity {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "throwVelocity",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_impulseAppliedWhenObjectNotPicked = match m_impulseAppliedWhenObjectNotPicked {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "impulseAppliedWhenObjectNotPicked",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_maxDistOfObjectPicked = match m_maxDistOfObjectPicked {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxDistOfObjectPicked",
+                                    "maxNumObjectsPicked",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -843,13 +795,61 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxNumObjectsPicked = match m_maxNumObjectsPicked {
+                    let m_maxDistOfObjectPicked = match m_maxDistOfObjectPicked {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxNumObjectsPicked",
+                                    "maxDistOfObjectPicked",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_impulseAppliedWhenObjectNotPicked = match m_impulseAppliedWhenObjectNotPicked {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "impulseAppliedWhenObjectNotPicked",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_throwVelocity = match m_throwVelocity {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "throwVelocity",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_capturedObjectPosition = match m_capturedObjectPosition {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "capturedObjectPosition",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_capturedObjectsOffset = match m_capturedObjectsOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "capturedObjectsOffset",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

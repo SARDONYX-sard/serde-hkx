@@ -96,12 +96,12 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_endAFromBTransform,
-                m_startAFromBTransform,
-                m_endBoneB,
-                m_startBoneB,
-                m_endBoneA,
                 m_startBoneA,
+                m_endBoneA,
+                m_startBoneB,
+                m_endBoneB,
+                m_startAFromBTransform,
+                m_endAFromBTransform,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -125,12 +125,12 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "endAFromBTransform" => Ok(__Field::m_endAFromBTransform),
-                        "startAFromBTransform" => Ok(__Field::m_startAFromBTransform),
-                        "endBoneB" => Ok(__Field::m_endBoneB),
-                        "startBoneB" => Ok(__Field::m_startBoneB),
-                        "endBoneA" => Ok(__Field::m_endBoneA),
                         "startBoneA" => Ok(__Field::m_startBoneA),
+                        "endBoneA" => Ok(__Field::m_endBoneA),
+                        "startBoneB" => Ok(__Field::m_startBoneB),
+                        "endBoneB" => Ok(__Field::m_endBoneB),
+                        "startAFromBTransform" => Ok(__Field::m_startAFromBTransform),
+                        "endAFromBTransform" => Ok(__Field::m_endAFromBTransform),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -371,16 +371,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_endAFromBTransform: _serde::__private::Option<
-                        QsTransform,
-                    > = _serde::__private::None;
+                    let mut m_startBoneA: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_endBoneA: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_startBoneB: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_endBoneB: _serde::__private::Option<i16> = _serde::__private::None;
                     let mut m_startAFromBTransform: _serde::__private::Option<
                         QsTransform,
                     > = _serde::__private::None;
-                    let mut m_endBoneB: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_startBoneB: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_endBoneA: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_startBoneA: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_endAFromBTransform: _serde::__private::Option<
+                        QsTransform,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -390,23 +390,93 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_endAFromBTransform => {
+                            __Field::m_startBoneA => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_endAFromBTransform,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_startBoneA) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "endAFromBTransform",
+                                            "startBoneA",
                                         ),
                                     );
                                 }
-                                m_endAFromBTransform = _serde::__private::Some(
-                                    match __A::next_value::<QsTransform>(&mut __map) {
+                                m_startBoneA = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_endBoneA => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_endBoneA) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "endBoneA",
+                                        ),
+                                    );
+                                }
+                                m_endBoneA = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_startBoneB => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_startBoneB) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "startBoneB",
+                                        ),
+                                    );
+                                }
+                                m_startBoneB = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_endBoneB => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_endBoneB) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "endBoneB",
+                                        ),
+                                    );
+                                }
+                                m_endBoneB = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -442,93 +512,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_endBoneB => {
+                            __Field::m_endAFromBTransform => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_endBoneB) {
+                                if _serde::__private::Option::is_some(
+                                    &m_endAFromBTransform,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "endBoneB",
+                                            "endAFromBTransform",
                                         ),
                                     );
                                 }
-                                m_endBoneB = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_startBoneB => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_startBoneB) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "startBoneB",
-                                        ),
-                                    );
-                                }
-                                m_startBoneB = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_endBoneA => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_endBoneA) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "endBoneA",
-                                        ),
-                                    );
-                                }
-                                m_endBoneA = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_startBoneA => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_startBoneA) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "startBoneA",
-                                        ),
-                                    );
-                                }
-                                m_startBoneA = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                m_endAFromBTransform = _serde::__private::Some(
+                                    match __A::next_value::<QsTransform>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -541,36 +541,24 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_endAFromBTransform = match m_endAFromBTransform {
+                    let m_startBoneA = match m_startBoneA {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "endAFromBTransform",
+                                    "startBoneA",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_startAFromBTransform = match m_startAFromBTransform {
+                    let m_endBoneA = match m_endBoneA {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "startAFromBTransform",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_endBoneB = match m_endBoneB {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("endBoneB"),
+                                <__A::Error as _serde::de::Error>::missing_field("endBoneA"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -587,23 +575,35 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_endBoneA = match m_endBoneA {
+                    let m_endBoneB = match m_endBoneB {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("endBoneA"),
+                                <__A::Error as _serde::de::Error>::missing_field("endBoneB"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_startBoneA = match m_startBoneA {
+                    let m_startAFromBTransform = match m_startAFromBTransform {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "startBoneA",
+                                    "startAFromBTransform",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_endAFromBTransform = match m_endAFromBTransform {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "endAFromBTransform",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

@@ -77,8 +77,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_defaultColor,
                 m_colorPairs,
+                m_defaultColor,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -102,8 +102,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "defaultColor" => Ok(__Field::m_defaultColor),
                         "colorPairs" => Ok(__Field::m_colorPairs),
+                        "defaultColor" => Ok(__Field::m_defaultColor),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -228,10 +228,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_defaultColor: _serde::__private::Option<u32> = _serde::__private::None;
                     let mut m_colorPairs: _serde::__private::Option<
                         Vec<hkMonitorStreamColorTableColorPair<'de>>,
                     > = _serde::__private::None;
+                    let mut m_defaultColor: _serde::__private::Option<u32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -241,30 +241,6 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_defaultColor => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_defaultColor) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "defaultColor",
-                                        ),
-                                    );
-                                }
-                                m_defaultColor = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             __Field::m_colorPairs => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -291,21 +267,33 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_defaultColor => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_defaultColor) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "defaultColor",
+                                        ),
+                                    );
+                                }
+                                m_defaultColor = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
-                    let m_defaultColor = match m_defaultColor {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "defaultColor",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_colorPairs = match m_colorPairs {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -313,6 +301,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "colorPairs",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_defaultColor = match m_defaultColor {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "defaultColor",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

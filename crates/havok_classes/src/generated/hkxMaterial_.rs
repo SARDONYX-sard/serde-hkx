@@ -136,15 +136,15 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_attributeGroups,
-                m_properties,
-                m_extraData,
-                m_subMaterials,
-                m_emissiveColor,
-                m_specularColor,
-                m_ambientColor,
-                m_diffuseColor,
-                m_stages,
                 m_name,
+                m_stages,
+                m_diffuseColor,
+                m_ambientColor,
+                m_specularColor,
+                m_emissiveColor,
+                m_subMaterials,
+                m_extraData,
+                m_properties,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -169,15 +169,15 @@ const _: () = {
                 {
                     match __value {
                         "attributeGroups" => Ok(__Field::m_attributeGroups),
-                        "properties" => Ok(__Field::m_properties),
-                        "extraData" => Ok(__Field::m_extraData),
-                        "subMaterials" => Ok(__Field::m_subMaterials),
-                        "emissiveColor" => Ok(__Field::m_emissiveColor),
-                        "specularColor" => Ok(__Field::m_specularColor),
-                        "ambientColor" => Ok(__Field::m_ambientColor),
-                        "diffuseColor" => Ok(__Field::m_diffuseColor),
-                        "stages" => Ok(__Field::m_stages),
                         "name" => Ok(__Field::m_name),
+                        "stages" => Ok(__Field::m_stages),
+                        "diffuseColor" => Ok(__Field::m_diffuseColor),
+                        "ambientColor" => Ok(__Field::m_ambientColor),
+                        "specularColor" => Ok(__Field::m_specularColor),
+                        "emissiveColor" => Ok(__Field::m_emissiveColor),
+                        "subMaterials" => Ok(__Field::m_subMaterials),
+                        "extraData" => Ok(__Field::m_extraData),
+                        "properties" => Ok(__Field::m_properties),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -501,19 +501,19 @@ const _: () = {
                     let mut m_attributeGroups: _serde::__private::Option<
                         Vec<hkxAttributeGroup<'de>>,
                     > = _serde::__private::None;
-                    let mut m_properties: _serde::__private::Option<
-                        Vec<hkxMaterialProperty>,
-                    > = _serde::__private::None;
-                    let mut m_extraData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_subMaterials: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_emissiveColor: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_specularColor: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_ambientColor: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_diffuseColor: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_stages: _serde::__private::Option<
                         Vec<hkxMaterialTextureStage>,
                     > = _serde::__private::None;
-                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_diffuseColor: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_ambientColor: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_specularColor: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_emissiveColor: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_subMaterials: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_extraData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_properties: _serde::__private::Option<
+                        Vec<hkxMaterialProperty>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -549,22 +549,42 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_properties => {
+                            __Field::m_name => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_properties) {
+                                if _serde::__private::Option::is_some(&m_name) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "properties",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
                                     );
                                 }
-                                m_properties = _serde::__private::Some(
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_stages => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_stages) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("stages"),
+                                    );
+                                }
+                                m_stages = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkxMaterialProperty>,
+                                        Vec<hkxMaterialTextureStage>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -575,92 +595,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_extraData => {
+                            __Field::m_diffuseColor => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_extraData) {
+                                if _serde::__private::Option::is_some(&m_diffuseColor) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "extraData",
+                                            "diffuseColor",
                                         ),
                                     );
                                 }
-                                m_extraData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_subMaterials => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_subMaterials) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "subMaterials",
-                                        ),
-                                    );
-                                }
-                                m_subMaterials = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_emissiveColor => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_emissiveColor) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "emissiveColor",
-                                        ),
-                                    );
-                                }
-                                m_emissiveColor = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_specularColor => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_specularColor) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "specularColor",
-                                        ),
-                                    );
-                                }
-                                m_specularColor = _serde::__private::Some(
+                                m_diffuseColor = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -695,20 +643,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_diffuseColor => {
+                            __Field::m_specularColor => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_diffuseColor) {
+                                if _serde::__private::Option::is_some(&m_specularColor) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "diffuseColor",
+                                            "specularColor",
                                         ),
                                     );
                                 }
-                                m_diffuseColor = _serde::__private::Some(
+                                m_specularColor = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -719,21 +667,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_stages => {
+                            __Field::m_emissiveColor => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_stages) {
+                                if _serde::__private::Option::is_some(&m_emissiveColor) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("stages"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "emissiveColor",
+                                        ),
                                     );
                                 }
-                                m_stages = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        Vec<hkxMaterialTextureStage>,
-                                    >(&mut __map) {
+                                m_emissiveColor = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -743,19 +691,71 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_name => {
+                            __Field::m_subMaterials => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_name) {
+                                if _serde::__private::Option::is_some(&m_subMaterials) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "subMaterials",
+                                        ),
                                     );
                                 }
-                                m_name = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                m_subMaterials = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_extraData => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_extraData) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "extraData",
+                                        ),
+                                    );
+                                }
+                                m_extraData = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_properties => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_properties) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "properties",
+                                        ),
+                                    );
+                                }
+                                m_properties = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkxMaterialProperty>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -780,61 +780,33 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_properties = match m_properties {
+                    let m_name = match m_name {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "properties",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_extraData = match m_extraData {
+                    let m_stages = match m_stages {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "extraData",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("stages"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_subMaterials = match m_subMaterials {
+                    let m_diffuseColor = match m_diffuseColor {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "subMaterials",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_emissiveColor = match m_emissiveColor {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "emissiveColor",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_specularColor = match m_specularColor {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "specularColor",
+                                    "diffuseColor",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -852,34 +824,62 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_diffuseColor = match m_diffuseColor {
+                    let m_specularColor = match m_specularColor {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "diffuseColor",
+                                    "specularColor",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_stages = match m_stages {
+                    let m_emissiveColor = match m_emissiveColor {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("stages"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "emissiveColor",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_name = match m_name {
+                    let m_subMaterials = match m_subMaterials {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "subMaterials",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_extraData = match m_extraData {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "extraData",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_properties = match m_properties {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "properties",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

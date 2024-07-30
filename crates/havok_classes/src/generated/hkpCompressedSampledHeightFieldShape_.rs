@@ -124,19 +124,19 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_userData,
-                m_extents,
-                m_floatToIntOffsetFloorCorrected,
-                m_floatToIntScale,
-                m_intToFloatScale,
-                m_heightfieldType,
-                m_useProjectionBasedHeight,
-                m_heightCenter,
-                m_zRes,
                 m_xRes,
-                m_scale,
-                m_offset,
-                m_triangleFlip,
+                m_zRes,
+                m_heightCenter,
+                m_useProjectionBasedHeight,
+                m_heightfieldType,
+                m_intToFloatScale,
+                m_floatToIntScale,
+                m_floatToIntOffsetFloorCorrected,
+                m_extents,
                 m_storage,
+                m_triangleFlip,
+                m_offset,
+                m_scale,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -161,23 +161,23 @@ const _: () = {
                 {
                     match __value {
                         "userData" => Ok(__Field::m_userData),
-                        "extents" => Ok(__Field::m_extents),
-                        "floatToIntOffsetFloorCorrected" => {
-                            Ok(__Field::m_floatToIntOffsetFloorCorrected)
-                        }
-                        "floatToIntScale" => Ok(__Field::m_floatToIntScale),
-                        "intToFloatScale" => Ok(__Field::m_intToFloatScale),
-                        "heightfieldType" => Ok(__Field::m_heightfieldType),
+                        "xRes" => Ok(__Field::m_xRes),
+                        "zRes" => Ok(__Field::m_zRes),
+                        "heightCenter" => Ok(__Field::m_heightCenter),
                         "useProjectionBasedHeight" => {
                             Ok(__Field::m_useProjectionBasedHeight)
                         }
-                        "heightCenter" => Ok(__Field::m_heightCenter),
-                        "zRes" => Ok(__Field::m_zRes),
-                        "xRes" => Ok(__Field::m_xRes),
-                        "scale" => Ok(__Field::m_scale),
-                        "offset" => Ok(__Field::m_offset),
-                        "triangleFlip" => Ok(__Field::m_triangleFlip),
+                        "heightfieldType" => Ok(__Field::m_heightfieldType),
+                        "intToFloatScale" => Ok(__Field::m_intToFloatScale),
+                        "floatToIntScale" => Ok(__Field::m_floatToIntScale),
+                        "floatToIntOffsetFloorCorrected" => {
+                            Ok(__Field::m_floatToIntOffsetFloorCorrected)
+                        }
+                        "extents" => Ok(__Field::m_extents),
                         "storage" => Ok(__Field::m_storage),
+                        "triangleFlip" => Ok(__Field::m_triangleFlip),
+                        "offset" => Ok(__Field::m_offset),
+                        "scale" => Ok(__Field::m_scale),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -350,25 +350,25 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_extents: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_floatToIntOffsetFloorCorrected: _serde::__private::Option<
-                        Vector4,
-                    > = _serde::__private::None;
-                    let mut m_floatToIntScale: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_intToFloatScale: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_heightfieldType: _serde::__private::Option<
-                        HeightFieldType,
-                    > = _serde::__private::None;
+                    let mut m_xRes: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_zRes: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_heightCenter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_useProjectionBasedHeight: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_heightCenter: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_zRes: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_xRes: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_scale: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_offset: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_triangleFlip: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_heightfieldType: _serde::__private::Option<
+                        HeightFieldType,
+                    > = _serde::__private::None;
+                    let mut m_intToFloatScale: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_floatToIntScale: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_floatToIntOffsetFloorCorrected: _serde::__private::Option<
+                        Vector4,
+                    > = _serde::__private::None;
+                    let mut m_extents: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_storage: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_triangleFlip: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_offset: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_scale: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -402,20 +402,162 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_extents => {
+                            __Field::m_xRes => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_extents) {
+                                if _serde::__private::Option::is_some(&m_xRes) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("xRes"),
+                                    );
+                                }
+                                m_xRes = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_zRes => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_zRes) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("zRes"),
+                                    );
+                                }
+                                m_zRes = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_heightCenter => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_heightCenter) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "extents",
+                                            "heightCenter",
                                         ),
                                     );
                                 }
-                                m_extents = _serde::__private::Some(
+                                m_heightCenter = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_useProjectionBasedHeight => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_useProjectionBasedHeight,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "useProjectionBasedHeight",
+                                        ),
+                                    );
+                                }
+                                m_useProjectionBasedHeight = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_heightfieldType => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_heightfieldType) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "heightfieldType",
+                                        ),
+                                    );
+                                }
+                                m_heightfieldType = _serde::__private::Some(
+                                    match __A::next_value::<HeightFieldType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_intToFloatScale => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_intToFloatScale) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "intToFloatScale",
+                                        ),
+                                    );
+                                }
+                                m_intToFloatScale = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_floatToIntScale => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_floatToIntScale) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "floatToIntScale",
+                                        ),
+                                    );
+                                }
+                                m_floatToIntScale = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -452,231 +594,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_floatToIntScale => {
+                            __Field::m_extents => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_floatToIntScale) {
+                                if _serde::__private::Option::is_some(&m_extents) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "floatToIntScale",
+                                            "extents",
                                         ),
                                     );
                                 }
-                                m_floatToIntScale = _serde::__private::Some(
+                                m_extents = _serde::__private::Some(
                                     match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_intToFloatScale => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_intToFloatScale) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "intToFloatScale",
-                                        ),
-                                    );
-                                }
-                                m_intToFloatScale = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_heightfieldType => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_heightfieldType) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "heightfieldType",
-                                        ),
-                                    );
-                                }
-                                m_heightfieldType = _serde::__private::Some(
-                                    match __A::next_value::<HeightFieldType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_useProjectionBasedHeight => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_useProjectionBasedHeight,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "useProjectionBasedHeight",
-                                        ),
-                                    );
-                                }
-                                m_useProjectionBasedHeight = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_heightCenter => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_heightCenter) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "heightCenter",
-                                        ),
-                                    );
-                                }
-                                m_heightCenter = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_zRes => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_zRes) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("zRes"),
-                                    );
-                                }
-                                m_zRes = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_xRes => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_xRes) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("xRes"),
-                                    );
-                                }
-                                m_xRes = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_scale => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_scale) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("scale"),
-                                    );
-                                }
-                                m_scale = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_offset => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_offset) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("offset"),
-                                    );
-                                }
-                                m_offset = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_triangleFlip => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_triangleFlip) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "triangleFlip",
-                                        ),
-                                    );
-                                }
-                                m_triangleFlip = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -710,6 +642,74 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_triangleFlip => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_triangleFlip) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "triangleFlip",
+                                        ),
+                                    );
+                                }
+                                m_triangleFlip = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_offset => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_offset) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("offset"),
+                                    );
+                                }
+                                m_offset = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_scale => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_scale) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("scale"),
+                                    );
+                                }
+                                m_scale = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
@@ -723,59 +723,33 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_extents = match m_extents {
+                    let m_xRes = match m_xRes {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("extents"),
+                                <__A::Error as _serde::de::Error>::missing_field("xRes"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_floatToIntOffsetFloorCorrected = match m_floatToIntOffsetFloorCorrected {
+                    let m_zRes = match m_zRes {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("zRes"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_heightCenter = match m_heightCenter {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "floatToIntOffsetFloorCorrected",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_floatToIntScale = match m_floatToIntScale {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "floatToIntScale",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_intToFloatScale = match m_intToFloatScale {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "intToFloatScale",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_heightfieldType = match m_heightfieldType {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "heightfieldType",
+                                    "heightCenter",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -793,54 +767,70 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_heightCenter = match m_heightCenter {
+                    let m_heightfieldType = match m_heightfieldType {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "heightCenter",
+                                    "heightfieldType",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_zRes = match m_zRes {
+                    let m_intToFloatScale = match m_intToFloatScale {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("zRes"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "intToFloatScale",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_xRes = match m_xRes {
+                    let m_floatToIntScale = match m_floatToIntScale {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("xRes"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "floatToIntScale",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_scale = match m_scale {
+                    let m_floatToIntOffsetFloorCorrected = match m_floatToIntOffsetFloorCorrected {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("scale"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "floatToIntOffsetFloorCorrected",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_offset = match m_offset {
+                    let m_extents = match m_extents {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("offset"),
+                                <__A::Error as _serde::de::Error>::missing_field("extents"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_storage = match m_storage {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("storage"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -857,12 +847,22 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_storage = match m_storage {
+                    let m_offset = match m_offset {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("storage"),
+                                <__A::Error as _serde::de::Error>::missing_field("offset"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_scale = match m_scale {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("scale"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

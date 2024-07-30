@@ -71,8 +71,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_annotations,
                 m_trackName,
+                m_annotations,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -96,8 +96,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "annotations" => Ok(__Field::m_annotations),
                         "trackName" => Ok(__Field::m_trackName),
+                        "annotations" => Ok(__Field::m_annotations),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -218,10 +218,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_trackName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_annotations: _serde::__private::Option<
                         Vec<hkaAnnotationTrackAnnotation<'de>>,
                     > = _serde::__private::None;
-                    let mut m_trackName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -231,6 +231,30 @@ const _: () = {
                         __key
                     } {
                         match __key {
+                            __Field::m_trackName => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_trackName) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "trackName",
+                                        ),
+                                    );
+                                }
+                                m_trackName = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             __Field::m_annotations => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -257,45 +281,9 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_trackName => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_trackName) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "trackName",
-                                        ),
-                                    );
-                                }
-                                m_trackName = _serde::__private::Some(
-                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             _ => {}
                         }
                     }
-                    let m_annotations = match m_annotations {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "annotations",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_trackName = match m_trackName {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -303,6 +291,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "trackName",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_annotations = match m_annotations {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "annotations",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

@@ -82,10 +82,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_inertiaTensor,
-                m_centerOfMass,
-                m_mass,
                 m_volume,
+                m_mass,
+                m_centerOfMass,
+                m_inertiaTensor,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -109,10 +109,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "inertiaTensor" => Ok(__Field::m_inertiaTensor),
-                        "centerOfMass" => Ok(__Field::m_centerOfMass),
-                        "mass" => Ok(__Field::m_mass),
                         "volume" => Ok(__Field::m_volume),
+                        "mass" => Ok(__Field::m_mass),
+                        "centerOfMass" => Ok(__Field::m_centerOfMass),
+                        "inertiaTensor" => Ok(__Field::m_inertiaTensor),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -280,10 +280,10 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_inertiaTensor: _serde::__private::Option<Matrix3> = _serde::__private::None;
-                    let mut m_centerOfMass: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_mass: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_volume: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_mass: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_centerOfMass: _serde::__private::Option<Vector4> = _serde::__private::None;
+                    let mut m_inertiaTensor: _serde::__private::Option<Matrix3> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -293,21 +293,41 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_inertiaTensor => {
+                            __Field::m_volume => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_inertiaTensor) {
+                                if _serde::__private::Option::is_some(&m_volume) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "inertiaTensor",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("volume"),
                                     );
                                 }
-                                m_inertiaTensor = _serde::__private::Some(
-                                    match __A::next_value::<Matrix3>(&mut __map) {
+                                m_volume = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_mass => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_mass) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("mass"),
+                                    );
+                                }
+                                m_mass = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -341,41 +361,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_mass => {
+                            __Field::m_inertiaTensor => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_mass) {
+                                if _serde::__private::Option::is_some(&m_inertiaTensor) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("mass"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "inertiaTensor",
+                                        ),
                                     );
                                 }
-                                m_mass = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_volume => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_volume) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("volume"),
-                                    );
-                                }
-                                m_volume = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
+                                m_inertiaTensor = _serde::__private::Some(
+                                    match __A::next_value::<Matrix3>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -388,14 +388,22 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_inertiaTensor = match m_inertiaTensor {
+                    let m_volume = match m_volume {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "inertiaTensor",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("volume"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_mass = match m_mass {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("mass"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -412,22 +420,14 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_mass = match m_mass {
+                    let m_inertiaTensor = match m_inertiaTensor {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("mass"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_volume = match m_volume {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("volume"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "inertiaTensor",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

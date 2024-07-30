@@ -82,9 +82,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_nodeId,
-                m_localTime,
                 m_characterId,
+                m_localTime,
+                m_nodeId,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -108,9 +108,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "nodeId" => Ok(__Field::m_nodeId),
-                        "localTime" => Ok(__Field::m_localTime),
                         "characterId" => Ok(__Field::m_characterId),
+                        "localTime" => Ok(__Field::m_localTime),
+                        "nodeId" => Ok(__Field::m_nodeId),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -258,9 +258,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_nodeId: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_localTime: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_localTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_nodeId: _serde::__private::Option<i16> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -270,19 +270,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_nodeId => {
+                            __Field::m_characterId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_nodeId) {
+                                if _serde::__private::Option::is_some(&m_characterId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("nodeId"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "characterId",
+                                        ),
                                     );
                                 }
-                                m_nodeId = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                m_characterId = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -316,21 +318,19 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_characterId => {
+                            __Field::m_nodeId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_characterId) {
+                                if _serde::__private::Option::is_some(&m_nodeId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "characterId",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("nodeId"),
                                     );
                                 }
-                                m_characterId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                m_nodeId = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -343,12 +343,14 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_nodeId = match m_nodeId {
+                    let m_characterId = match m_characterId {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("nodeId"),
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "characterId",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -365,14 +367,12 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_characterId = match m_characterId {
+                    let m_nodeId = match m_nodeId {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "characterId",
-                                ),
+                                <__A::Error as _serde::de::Error>::missing_field("nodeId"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

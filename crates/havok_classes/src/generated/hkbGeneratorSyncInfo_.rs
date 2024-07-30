@@ -110,14 +110,14 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_isAdditive,
-                m_isMirrored,
-                m_isCyclic,
-                m_numSyncPoints,
-                m_playbackSpeed,
-                m_localTime,
-                m_baseFrequency,
                 m_syncPoints,
+                m_baseFrequency,
+                m_localTime,
+                m_playbackSpeed,
+                m_numSyncPoints,
+                m_isCyclic,
+                m_isMirrored,
+                m_isAdditive,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -141,14 +141,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "isAdditive" => Ok(__Field::m_isAdditive),
-                        "isMirrored" => Ok(__Field::m_isMirrored),
-                        "isCyclic" => Ok(__Field::m_isCyclic),
-                        "numSyncPoints" => Ok(__Field::m_numSyncPoints),
-                        "playbackSpeed" => Ok(__Field::m_playbackSpeed),
-                        "localTime" => Ok(__Field::m_localTime),
-                        "baseFrequency" => Ok(__Field::m_baseFrequency),
                         "syncPoints" => Ok(__Field::m_syncPoints),
+                        "baseFrequency" => Ok(__Field::m_baseFrequency),
+                        "localTime" => Ok(__Field::m_localTime),
+                        "playbackSpeed" => Ok(__Field::m_playbackSpeed),
+                        "numSyncPoints" => Ok(__Field::m_numSyncPoints),
+                        "isCyclic" => Ok(__Field::m_isCyclic),
+                        "isMirrored" => Ok(__Field::m_isMirrored),
+                        "isAdditive" => Ok(__Field::m_isAdditive),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -442,16 +442,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_isAdditive: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_isMirrored: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_isCyclic: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_numSyncPoints: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_playbackSpeed: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_localTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_baseFrequency: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_syncPoints: _serde::__private::Option<
                         [hkbGeneratorSyncInfoSyncPoint; 8usize],
                     > = _serde::__private::None;
+                    let mut m_baseFrequency: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_localTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_playbackSpeed: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_numSyncPoints: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_isCyclic: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_isMirrored: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_isAdditive: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -461,21 +461,23 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_isAdditive => {
+                            __Field::m_syncPoints => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isAdditive) {
+                                if _serde::__private::Option::is_some(&m_syncPoints) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isAdditive",
+                                            "syncPoints",
                                         ),
                                     );
                                 }
-                                m_isAdditive = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_syncPoints = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        [hkbGeneratorSyncInfoSyncPoint; 8usize],
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -485,92 +487,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_isMirrored => {
+                            __Field::m_baseFrequency => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isMirrored) {
+                                if _serde::__private::Option::is_some(&m_baseFrequency) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isMirrored",
+                                            "baseFrequency",
                                         ),
                                     );
                                 }
-                                m_isMirrored = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_isCyclic => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_isCyclic) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isCyclic",
-                                        ),
-                                    );
-                                }
-                                m_isCyclic = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numSyncPoints => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_numSyncPoints) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numSyncPoints",
-                                        ),
-                                    );
-                                }
-                                m_numSyncPoints = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_playbackSpeed => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_playbackSpeed) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "playbackSpeed",
-                                        ),
-                                    );
-                                }
-                                m_playbackSpeed = _serde::__private::Some(
+                                m_baseFrequency = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -605,20 +535,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_baseFrequency => {
+                            __Field::m_playbackSpeed => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_baseFrequency) {
+                                if _serde::__private::Option::is_some(&m_playbackSpeed) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "baseFrequency",
+                                            "playbackSpeed",
                                         ),
                                     );
                                 }
-                                m_baseFrequency = _serde::__private::Some(
+                                m_playbackSpeed = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -629,23 +559,93 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_syncPoints => {
+                            __Field::m_numSyncPoints => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_syncPoints) {
+                                if _serde::__private::Option::is_some(&m_numSyncPoints) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "syncPoints",
+                                            "numSyncPoints",
                                         ),
                                     );
                                 }
-                                m_syncPoints = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        [hkbGeneratorSyncInfoSyncPoint; 8usize],
-                                    >(&mut __map) {
+                                m_numSyncPoints = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isCyclic => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isCyclic) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isCyclic",
+                                        ),
+                                    );
+                                }
+                                m_isCyclic = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isMirrored => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isMirrored) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isMirrored",
+                                        ),
+                                    );
+                                }
+                                m_isMirrored = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_isAdditive => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_isAdditive) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isAdditive",
+                                        ),
+                                    );
+                                }
+                                m_isAdditive = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -658,71 +658,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_isAdditive = match m_isAdditive {
+                    let m_syncPoints = match m_syncPoints {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isAdditive",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_isMirrored = match m_isMirrored {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "isMirrored",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_isCyclic = match m_isCyclic {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("isCyclic"),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numSyncPoints = match m_numSyncPoints {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numSyncPoints",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_playbackSpeed = match m_playbackSpeed {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "playbackSpeed",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_localTime = match m_localTime {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "localTime",
+                                    "syncPoints",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -740,13 +682,71 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_syncPoints = match m_syncPoints {
+                    let m_localTime = match m_localTime {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "syncPoints",
+                                    "localTime",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_playbackSpeed = match m_playbackSpeed {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "playbackSpeed",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numSyncPoints = match m_numSyncPoints {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numSyncPoints",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isCyclic = match m_isCyclic {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("isCyclic"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isMirrored = match m_isMirrored {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isMirrored",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_isAdditive = match m_isAdditive {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isAdditive",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

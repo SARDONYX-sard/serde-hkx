@@ -90,10 +90,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_initSkinTransform,
-                m_bindPose,
-                m_nodeNames,
                 m_mesh,
+                m_nodeNames,
+                m_bindPose,
+                m_initSkinTransform,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -117,10 +117,10 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "initSkinTransform" => Ok(__Field::m_initSkinTransform),
-                        "bindPose" => Ok(__Field::m_bindPose),
-                        "nodeNames" => Ok(__Field::m_nodeNames),
                         "mesh" => Ok(__Field::m_mesh),
+                        "nodeNames" => Ok(__Field::m_nodeNames),
+                        "bindPose" => Ok(__Field::m_bindPose),
+                        "initSkinTransform" => Ok(__Field::m_initSkinTransform),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -293,12 +293,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_initSkinTransform: _serde::__private::Option<Matrix4> = _serde::__private::None;
-                    let mut m_bindPose: _serde::__private::Option<Vec<Matrix4>> = _serde::__private::None;
+                    let mut m_mesh: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_nodeNames: _serde::__private::Option<
                         Vec<StringPtr<'de>>,
                     > = _serde::__private::None;
-                    let mut m_mesh: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_bindPose: _serde::__private::Option<Vec<Matrix4>> = _serde::__private::None;
+                    let mut m_initSkinTransform: _serde::__private::Option<Matrix4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -308,47 +308,19 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_initSkinTransform => {
+                            __Field::m_mesh => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_initSkinTransform,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_mesh) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "initSkinTransform",
-                                        ),
+                                        <__A::Error as _serde::de::Error>::duplicate_field("mesh"),
                                     );
                                 }
-                                m_initSkinTransform = _serde::__private::Some(
-                                    match __A::next_value::<Matrix4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_bindPose => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_bindPose) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "bindPose",
-                                        ),
-                                    );
-                                }
-                                m_bindPose = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Matrix4>>(&mut __map) {
+                                m_mesh = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -382,19 +354,47 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_mesh => {
+                            __Field::m_bindPose => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_mesh) {
+                                if _serde::__private::Option::is_some(&m_bindPose) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field("mesh"),
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bindPose",
+                                        ),
                                     );
                                 }
-                                m_mesh = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_bindPose = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Matrix4>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_initSkinTransform => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_initSkinTransform,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "initSkinTransform",
+                                        ),
+                                    );
+                                }
+                                m_initSkinTransform = _serde::__private::Some(
+                                    match __A::next_value::<Matrix4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -407,24 +407,12 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_initSkinTransform = match m_initSkinTransform {
+                    let m_mesh = match m_mesh {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "initSkinTransform",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_bindPose = match m_bindPose {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("bindPose"),
+                                <__A::Error as _serde::de::Error>::missing_field("mesh"),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
@@ -441,12 +429,24 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_mesh = match m_mesh {
+                    let m_bindPose = match m_bindPose {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field("mesh"),
+                                <__A::Error as _serde::de::Error>::missing_field("bindPose"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_initSkinTransform = match m_initSkinTransform {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "initSkinTransform",
+                                ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
                         }

@@ -86,9 +86,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_collisionThreshold,
-                m_collisionSpinDamping,
                 m_normalSpinDamping,
+                m_collisionSpinDamping,
+                m_collisionThreshold,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -112,9 +112,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "collisionThreshold" => Ok(__Field::m_collisionThreshold),
-                        "collisionSpinDamping" => Ok(__Field::m_collisionSpinDamping),
                         "normalSpinDamping" => Ok(__Field::m_normalSpinDamping),
+                        "collisionSpinDamping" => Ok(__Field::m_collisionSpinDamping),
+                        "collisionThreshold" => Ok(__Field::m_collisionThreshold),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -270,9 +270,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_collisionThreshold: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_collisionSpinDamping: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_normalSpinDamping: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_collisionSpinDamping: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_collisionThreshold: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -282,22 +282,22 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_collisionThreshold => {
+                            __Field::m_normalSpinDamping => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_collisionThreshold,
+                                    &m_normalSpinDamping,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "collisionThreshold",
+                                            "normalSpinDamping",
                                         ),
                                     );
                                 }
-                                m_collisionThreshold = _serde::__private::Some(
+                                m_normalSpinDamping = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -334,22 +334,22 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_normalSpinDamping => {
+                            __Field::m_collisionThreshold => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_normalSpinDamping,
+                                    &m_collisionThreshold,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "normalSpinDamping",
+                                            "collisionThreshold",
                                         ),
                                     );
                                 }
-                                m_normalSpinDamping = _serde::__private::Some(
+                                m_collisionThreshold = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -363,13 +363,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_collisionThreshold = match m_collisionThreshold {
+                    let m_normalSpinDamping = match m_normalSpinDamping {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "collisionThreshold",
+                                    "normalSpinDamping",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -387,13 +387,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_normalSpinDamping = match m_normalSpinDamping {
+                    let m_collisionThreshold = match m_collisionThreshold {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "normalSpinDamping",
+                                    "collisionThreshold",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

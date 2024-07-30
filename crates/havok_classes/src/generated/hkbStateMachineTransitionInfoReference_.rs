@@ -75,9 +75,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_stateMachineId,
-                m_transitionIndex,
                 m_fromStateIndex,
+                m_transitionIndex,
+                m_stateMachineId,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -101,9 +101,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "stateMachineId" => Ok(__Field::m_stateMachineId),
-                        "transitionIndex" => Ok(__Field::m_transitionIndex),
                         "fromStateIndex" => Ok(__Field::m_fromStateIndex),
+                        "transitionIndex" => Ok(__Field::m_transitionIndex),
+                        "stateMachineId" => Ok(__Field::m_stateMachineId),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -252,9 +252,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_stateMachineId: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_transitionIndex: _serde::__private::Option<i16> = _serde::__private::None;
                     let mut m_fromStateIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_transitionIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_stateMachineId: _serde::__private::Option<i16> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -264,20 +264,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_stateMachineId => {
+                            __Field::m_fromStateIndex => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_stateMachineId) {
+                                if _serde::__private::Option::is_some(&m_fromStateIndex) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "stateMachineId",
+                                            "fromStateIndex",
                                         ),
                                     );
                                 }
-                                m_stateMachineId = _serde::__private::Some(
+                                m_fromStateIndex = _serde::__private::Some(
                                     match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -312,20 +312,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_fromStateIndex => {
+                            __Field::m_stateMachineId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_fromStateIndex) {
+                                if _serde::__private::Option::is_some(&m_stateMachineId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "fromStateIndex",
+                                            "stateMachineId",
                                         ),
                                     );
                                 }
-                                m_fromStateIndex = _serde::__private::Some(
+                                m_stateMachineId = _serde::__private::Some(
                                     match __A::next_value::<i16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -339,13 +339,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_stateMachineId = match m_stateMachineId {
+                    let m_fromStateIndex = match m_fromStateIndex {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "stateMachineId",
+                                    "fromStateIndex",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -363,13 +363,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_fromStateIndex = match m_fromStateIndex {
+                    let m_stateMachineId = match m_stateMachineId {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "fromStateIndex",
+                                    "stateMachineId",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

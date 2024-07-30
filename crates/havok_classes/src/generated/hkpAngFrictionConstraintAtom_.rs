@@ -86,10 +86,10 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_maxFrictionTorque,
-                m_numFrictionAxes,
-                m_firstFrictionAxis,
                 m_isEnabled,
+                m_firstFrictionAxis,
+                m_numFrictionAxes,
+                m_maxFrictionTorque,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -114,10 +114,10 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "maxFrictionTorque" => Ok(__Field::m_maxFrictionTorque),
-                        "numFrictionAxes" => Ok(__Field::m_numFrictionAxes),
-                        "firstFrictionAxis" => Ok(__Field::m_firstFrictionAxis),
                         "isEnabled" => Ok(__Field::m_isEnabled),
+                        "firstFrictionAxis" => Ok(__Field::m_firstFrictionAxis),
+                        "numFrictionAxes" => Ok(__Field::m_numFrictionAxes),
+                        "maxFrictionTorque" => Ok(__Field::m_maxFrictionTorque),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -301,10 +301,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_maxFrictionTorque: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_numFrictionAxes: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_firstFrictionAxis: _serde::__private::Option<u8> = _serde::__private::None;
                     let mut m_isEnabled: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_firstFrictionAxis: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_numFrictionAxes: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_maxFrictionTorque: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -336,46 +336,20 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_maxFrictionTorque => {
+                            __Field::m_isEnabled => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_maxFrictionTorque,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_isEnabled) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "maxFrictionTorque",
+                                            "isEnabled",
                                         ),
                                     );
                                 }
-                                m_maxFrictionTorque = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numFrictionAxes => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_numFrictionAxes) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numFrictionAxes",
-                                        ),
-                                    );
-                                }
-                                m_numFrictionAxes = _serde::__private::Some(
+                                m_isEnabled = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -412,21 +386,47 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_isEnabled => {
+                            __Field::m_numFrictionAxes => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_isEnabled) {
+                                if _serde::__private::Option::is_some(&m_numFrictionAxes) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "isEnabled",
+                                            "numFrictionAxes",
                                         ),
                                     );
                                 }
-                                m_isEnabled = _serde::__private::Some(
+                                m_numFrictionAxes = _serde::__private::Some(
                                     match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxFrictionTorque => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxFrictionTorque,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxFrictionTorque",
+                                        ),
+                                    );
+                                }
+                                m_maxFrictionTorque = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -449,25 +449,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_maxFrictionTorque = match m_maxFrictionTorque {
+                    let m_isEnabled = match m_isEnabled {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "maxFrictionTorque",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_numFrictionAxes = match m_numFrictionAxes {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numFrictionAxes",
+                                    "isEnabled",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -485,13 +473,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_isEnabled = match m_isEnabled {
+                    let m_numFrictionAxes = match m_numFrictionAxes {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "isEnabled",
+                                    "numFrictionAxes",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxFrictionTorque = match m_maxFrictionTorque {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxFrictionTorque",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

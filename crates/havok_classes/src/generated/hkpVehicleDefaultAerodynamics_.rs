@@ -96,11 +96,11 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_extraGravityws,
-                m_liftCoefficient,
-                m_dragCoefficient,
-                m_frontalArea,
                 m_airDensity,
+                m_frontalArea,
+                m_dragCoefficient,
+                m_liftCoefficient,
+                m_extraGravityws,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -124,11 +124,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "extraGravityws" => Ok(__Field::m_extraGravityws),
-                        "liftCoefficient" => Ok(__Field::m_liftCoefficient),
-                        "dragCoefficient" => Ok(__Field::m_dragCoefficient),
-                        "frontalArea" => Ok(__Field::m_frontalArea),
                         "airDensity" => Ok(__Field::m_airDensity),
+                        "frontalArea" => Ok(__Field::m_frontalArea),
+                        "dragCoefficient" => Ok(__Field::m_dragCoefficient),
+                        "liftCoefficient" => Ok(__Field::m_liftCoefficient),
+                        "extraGravityws" => Ok(__Field::m_extraGravityws),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -336,11 +336,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_extraGravityws: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_liftCoefficient: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_dragCoefficient: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_frontalArea: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_airDensity: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_frontalArea: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_dragCoefficient: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_liftCoefficient: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_extraGravityws: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -350,68 +350,20 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_extraGravityws => {
+                            __Field::m_airDensity => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_extraGravityws) {
+                                if _serde::__private::Option::is_some(&m_airDensity) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "extraGravityws",
+                                            "airDensity",
                                         ),
                                     );
                                 }
-                                m_extraGravityws = _serde::__private::Some(
-                                    match __A::next_value::<Vector4>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_liftCoefficient => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_liftCoefficient) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "liftCoefficient",
-                                        ),
-                                    );
-                                }
-                                m_liftCoefficient = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_dragCoefficient => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_dragCoefficient) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "dragCoefficient",
-                                        ),
-                                    );
-                                }
-                                m_dragCoefficient = _serde::__private::Some(
+                                m_airDensity = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -446,21 +398,69 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_airDensity => {
+                            __Field::m_dragCoefficient => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_airDensity) {
+                                if _serde::__private::Option::is_some(&m_dragCoefficient) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "airDensity",
+                                            "dragCoefficient",
                                         ),
                                     );
                                 }
-                                m_airDensity = _serde::__private::Some(
+                                m_dragCoefficient = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_liftCoefficient => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_liftCoefficient) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "liftCoefficient",
+                                        ),
+                                    );
+                                }
+                                m_liftCoefficient = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_extraGravityws => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_extraGravityws) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "extraGravityws",
+                                        ),
+                                    );
+                                }
+                                m_extraGravityws = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -473,37 +473,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_extraGravityws = match m_extraGravityws {
+                    let m_airDensity = match m_airDensity {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "extraGravityws",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_liftCoefficient = match m_liftCoefficient {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "liftCoefficient",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_dragCoefficient = match m_dragCoefficient {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "dragCoefficient",
+                                    "airDensity",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -521,13 +497,37 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_airDensity = match m_airDensity {
+                    let m_dragCoefficient = match m_dragCoefficient {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "airDensity",
+                                    "dragCoefficient",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_liftCoefficient = match m_liftCoefficient {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "liftCoefficient",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_extraGravityws = match m_extraGravityws {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "extraGravityws",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

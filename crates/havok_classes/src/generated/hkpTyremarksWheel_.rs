@@ -83,9 +83,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_tyremarkPoints,
-                m_numPoints,
                 m_currentPosition,
+                m_numPoints,
+                m_tyremarkPoints,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -109,9 +109,9 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "tyremarkPoints" => Ok(__Field::m_tyremarkPoints),
-                        "numPoints" => Ok(__Field::m_numPoints),
                         "currentPosition" => Ok(__Field::m_currentPosition),
+                        "numPoints" => Ok(__Field::m_numPoints),
+                        "tyremarkPoints" => Ok(__Field::m_tyremarkPoints),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -261,11 +261,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_currentPosition: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numPoints: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_tyremarkPoints: _serde::__private::Option<
                         Vec<hkpTyremarkPoint>,
                     > = _serde::__private::None;
-                    let mut m_numPoints: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_currentPosition: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -275,21 +275,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_tyremarkPoints => {
+                            __Field::m_currentPosition => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_tyremarkPoints) {
+                                if _serde::__private::Option::is_some(&m_currentPosition) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "tyremarkPoints",
+                                            "currentPosition",
                                         ),
                                     );
                                 }
-                                m_tyremarkPoints = _serde::__private::Some(
-                                    match __A::next_value::<Vec<hkpTyremarkPoint>>(&mut __map) {
+                                m_currentPosition = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -323,21 +323,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_currentPosition => {
+                            __Field::m_tyremarkPoints => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_currentPosition) {
+                                if _serde::__private::Option::is_some(&m_tyremarkPoints) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "currentPosition",
+                                            "tyremarkPoints",
                                         ),
                                     );
                                 }
-                                m_currentPosition = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_tyremarkPoints = _serde::__private::Some(
+                                    match __A::next_value::<Vec<hkpTyremarkPoint>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -350,13 +350,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_tyremarkPoints = match m_tyremarkPoints {
+                    let m_currentPosition = match m_currentPosition {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "tyremarkPoints",
+                                    "currentPosition",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -374,13 +374,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_currentPosition = match m_currentPosition {
+                    let m_tyremarkPoints = match m_tyremarkPoints {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "currentPosition",
+                                    "tyremarkPoints",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

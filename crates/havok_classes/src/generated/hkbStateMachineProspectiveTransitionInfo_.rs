@@ -86,9 +86,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_toStateId,
-                m_transitionInfoReferenceForTE,
                 m_transitionInfoReference,
+                m_transitionInfoReferenceForTE,
+                m_toStateId,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -112,13 +112,13 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "toStateId" => Ok(__Field::m_toStateId),
-                        "transitionInfoReferenceForTE" => {
-                            Ok(__Field::m_transitionInfoReferenceForTE)
-                        }
                         "transitionInfoReference" => {
                             Ok(__Field::m_transitionInfoReference)
                         }
+                        "transitionInfoReferenceForTE" => {
+                            Ok(__Field::m_transitionInfoReferenceForTE)
+                        }
+                        "toStateId" => Ok(__Field::m_toStateId),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -279,13 +279,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_transitionInfoReferenceForTE: _serde::__private::Option<
-                        hkbStateMachineTransitionInfoReference,
-                    > = _serde::__private::None;
                     let mut m_transitionInfoReference: _serde::__private::Option<
                         hkbStateMachineTransitionInfoReference,
                     > = _serde::__private::None;
+                    let mut m_transitionInfoReferenceForTE: _serde::__private::Option<
+                        hkbStateMachineTransitionInfoReference,
+                    > = _serde::__private::None;
+                    let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -295,21 +295,25 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_toStateId => {
+                            __Field::m_transitionInfoReference => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_toStateId) {
+                                if _serde::__private::Option::is_some(
+                                    &m_transitionInfoReference,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "toStateId",
+                                            "transitionInfoReference",
                                         ),
                                     );
                                 }
-                                m_toStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                m_transitionInfoReference = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkbStateMachineTransitionInfoReference,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -347,25 +351,21 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_transitionInfoReference => {
+                            __Field::m_toStateId => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_transitionInfoReference,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_toStateId) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "transitionInfoReference",
+                                            "toStateId",
                                         ),
                                     );
                                 }
-                                m_transitionInfoReference = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkbStateMachineTransitionInfoReference,
-                                    >(&mut __map) {
+                                m_toStateId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -378,13 +378,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_toStateId = match m_toStateId {
+                    let m_transitionInfoReference = match m_transitionInfoReference {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "toStateId",
+                                    "transitionInfoReference",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -402,13 +402,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_transitionInfoReference = match m_transitionInfoReference {
+                    let m_toStateId = match m_toStateId {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "transitionInfoReference",
+                                    "toStateId",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

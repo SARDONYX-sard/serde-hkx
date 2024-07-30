@@ -90,10 +90,10 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_wasInAbutRangeLastFrame,
-                m_isDelayedTransitionReturnToPreviousState,
-                m_timeDelayed,
                 m_delayedTransition,
+                m_timeDelayed,
+                m_isDelayedTransitionReturnToPreviousState,
+                m_wasInAbutRangeLastFrame,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -117,14 +117,14 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "wasInAbutRangeLastFrame" => {
-                            Ok(__Field::m_wasInAbutRangeLastFrame)
-                        }
+                        "delayedTransition" => Ok(__Field::m_delayedTransition),
+                        "timeDelayed" => Ok(__Field::m_timeDelayed),
                         "isDelayedTransitionReturnToPreviousState" => {
                             Ok(__Field::m_isDelayedTransitionReturnToPreviousState)
                         }
-                        "timeDelayed" => Ok(__Field::m_timeDelayed),
-                        "delayedTransition" => Ok(__Field::m_delayedTransition),
+                        "wasInAbutRangeLastFrame" => {
+                            Ok(__Field::m_wasInAbutRangeLastFrame)
+                        }
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -315,14 +315,14 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_wasInAbutRangeLastFrame: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_isDelayedTransitionReturnToPreviousState: _serde::__private::Option<
-                        bool,
-                    > = _serde::__private::None;
-                    let mut m_timeDelayed: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_delayedTransition: _serde::__private::Option<
                         hkbStateMachineProspectiveTransitionInfo,
                     > = _serde::__private::None;
+                    let mut m_timeDelayed: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_isDelayedTransitionReturnToPreviousState: _serde::__private::Option<
+                        bool,
+                    > = _serde::__private::None;
+                    let mut m_wasInAbutRangeLastFrame: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -332,23 +332,49 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_wasInAbutRangeLastFrame => {
+                            __Field::m_delayedTransition => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_wasInAbutRangeLastFrame,
+                                    &m_delayedTransition,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "wasInAbutRangeLastFrame",
+                                            "delayedTransition",
                                         ),
                                     );
                                 }
-                                m_wasInAbutRangeLastFrame = _serde::__private::Some(
-                                    match __A::next_value::<bool>(&mut __map) {
+                                m_delayedTransition = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        hkbStateMachineProspectiveTransitionInfo,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_timeDelayed => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_timeDelayed) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "timeDelayed",
+                                        ),
+                                    );
+                                }
+                                m_timeDelayed = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -384,49 +410,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_timeDelayed => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_timeDelayed) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "timeDelayed",
-                                        ),
-                                    );
-                                }
-                                m_timeDelayed = _serde::__private::Some(
-                                    match __A::next_value::<f32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_delayedTransition => {
+                            __Field::m_wasInAbutRangeLastFrame => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(
-                                    &m_delayedTransition,
+                                    &m_wasInAbutRangeLastFrame,
                                 ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "delayedTransition",
+                                            "wasInAbutRangeLastFrame",
                                         ),
                                     );
                                 }
-                                m_delayedTransition = _serde::__private::Some(
-                                    match __A::next_value::<
-                                        hkbStateMachineProspectiveTransitionInfo,
-                                    >(&mut __map) {
+                                m_wasInAbutRangeLastFrame = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -439,25 +439,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_wasInAbutRangeLastFrame = match m_wasInAbutRangeLastFrame {
+                    let m_delayedTransition = match m_delayedTransition {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "wasInAbutRangeLastFrame",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
-                    let m_isDelayedTransitionReturnToPreviousState = match m_isDelayedTransitionReturnToPreviousState {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "isDelayedTransitionReturnToPreviousState",
+                                    "delayedTransition",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -475,13 +463,25 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_delayedTransition = match m_delayedTransition {
+                    let m_isDelayedTransitionReturnToPreviousState = match m_isDelayedTransitionReturnToPreviousState {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "delayedTransition",
+                                    "isDelayedTransitionReturnToPreviousState",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wasInAbutRangeLastFrame = match m_wasInAbutRangeLastFrame {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wasInAbutRangeLastFrame",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

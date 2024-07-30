@@ -85,9 +85,9 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_rigidBodyFromDisplayObjectTransform,
-                m_displayObjectPtr,
                 m_rigidBody,
+                m_displayObjectPtr,
+                m_rigidBodyFromDisplayObjectTransform,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -111,11 +111,11 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
+                        "rigidBody" => Ok(__Field::m_rigidBody),
+                        "displayObjectPtr" => Ok(__Field::m_displayObjectPtr),
                         "rigidBodyFromDisplayObjectTransform" => {
                             Ok(__Field::m_rigidBodyFromDisplayObjectTransform)
                         }
-                        "displayObjectPtr" => Ok(__Field::m_displayObjectPtr),
-                        "rigidBody" => Ok(__Field::m_rigidBody),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -268,11 +268,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let mut m_rigidBody: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_displayObjectPtr: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_rigidBodyFromDisplayObjectTransform: _serde::__private::Option<
                         Matrix4,
                     > = _serde::__private::None;
-                    let mut m_displayObjectPtr: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_rigidBody: _serde::__private::Option<Pointer> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -282,23 +282,21 @@ const _: () = {
                         __key
                     } {
                         match __key {
-                            __Field::m_rigidBodyFromDisplayObjectTransform => {
+                            __Field::m_rigidBody => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(
-                                    &m_rigidBodyFromDisplayObjectTransform,
-                                ) {
+                                if _serde::__private::Option::is_some(&m_rigidBody) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rigidBodyFromDisplayObjectTransform",
+                                            "rigidBody",
                                         ),
                                     );
                                 }
-                                m_rigidBodyFromDisplayObjectTransform = _serde::__private::Some(
-                                    match __A::next_value::<Matrix4>(&mut __map) {
+                                m_rigidBody = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -332,21 +330,23 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_rigidBody => {
+                            __Field::m_rigidBodyFromDisplayObjectTransform => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
-                                if _serde::__private::Option::is_some(&m_rigidBody) {
+                                if _serde::__private::Option::is_some(
+                                    &m_rigidBodyFromDisplayObjectTransform,
+                                ) {
                                     #[cfg(feature = "ignore_duplicates")] continue;
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "rigidBody",
+                                            "rigidBodyFromDisplayObjectTransform",
                                         ),
                                     );
                                 }
-                                m_rigidBody = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                m_rigidBodyFromDisplayObjectTransform = _serde::__private::Some(
+                                    match __A::next_value::<Matrix4>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -359,13 +359,13 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    let m_rigidBodyFromDisplayObjectTransform = match m_rigidBodyFromDisplayObjectTransform {
+                    let m_rigidBody = match m_rigidBody {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "rigidBodyFromDisplayObjectTransform",
+                                    "rigidBody",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
@@ -383,13 +383,13 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_rigidBody = match m_rigidBody {
+                    let m_rigidBodyFromDisplayObjectTransform = match m_rigidBodyFromDisplayObjectTransform {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             #[cfg(feature = "strict")]
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
-                                    "rigidBody",
+                                    "rigidBodyFromDisplayObjectTransform",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

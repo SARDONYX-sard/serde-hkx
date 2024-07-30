@@ -69,8 +69,8 @@ const _: () = {
         {
             #[allow(non_camel_case_types)]
             enum __Field {
-                m_reindexedShapeKey,
                 m_origShapeKey,
+                m_reindexedShapeKey,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -94,8 +94,8 @@ const _: () = {
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        "reindexedShapeKey" => Ok(__Field::m_reindexedShapeKey),
                         "origShapeKey" => Ok(__Field::m_origShapeKey),
+                        "reindexedShapeKey" => Ok(__Field::m_reindexedShapeKey),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -215,8 +215,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_reindexedShapeKey: _serde::__private::Option<u32> = _serde::__private::None;
                     let mut m_origShapeKey: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_reindexedShapeKey: _serde::__private::Option<u32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -226,6 +226,30 @@ const _: () = {
                         __key
                     } {
                         match __key {
+                            __Field::m_origShapeKey => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_origShapeKey) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "origShapeKey",
+                                        ),
+                                    );
+                                }
+                                m_origShapeKey = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             __Field::m_reindexedShapeKey => {
                                 #[cfg(
                                     any(feature = "strict", feature = "ignore_duplicates")
@@ -252,45 +276,9 @@ const _: () = {
                                     },
                                 );
                             }
-                            __Field::m_origShapeKey => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(&m_origShapeKey) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "origShapeKey",
-                                        ),
-                                    );
-                                }
-                                m_origShapeKey = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
                             _ => {}
                         }
                     }
-                    let m_reindexedShapeKey = match m_reindexedShapeKey {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "reindexedShapeKey",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_origShapeKey = match m_origShapeKey {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -298,6 +286,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "origShapeKey",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_reindexedShapeKey = match m_reindexedShapeKey {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "reindexedShapeKey",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()

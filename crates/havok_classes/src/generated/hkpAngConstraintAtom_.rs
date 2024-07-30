@@ -75,8 +75,8 @@ const _: () = {
             #[allow(non_camel_case_types)]
             enum __Field {
                 m_type,
-                m_numConstrainedAxes,
                 m_firstConstrainedAxis,
+                m_numConstrainedAxes,
                 __ignore,
             }
             struct __FieldVisitor;
@@ -101,8 +101,8 @@ const _: () = {
                 {
                     match __value {
                         "type" => Ok(__Field::m_type),
-                        "numConstrainedAxes" => Ok(__Field::m_numConstrainedAxes),
                         "firstConstrainedAxis" => Ok(__Field::m_firstConstrainedAxis),
+                        "numConstrainedAxes" => Ok(__Field::m_numConstrainedAxes),
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -226,8 +226,8 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_numConstrainedAxes: _serde::__private::Option<u8> = _serde::__private::None;
                     let mut m_firstConstrainedAxis: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_numConstrainedAxes: _serde::__private::Option<u8> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         #[cfg(not(feature = "strict"))]
                         let __key = __A::next_key::<__Field>(&mut __map)
@@ -250,32 +250,6 @@ const _: () = {
                                 }
                                 m_type = _serde::__private::Some(
                                     match __A::next_value::<AtomType>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
-                                        _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
-                                            return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
-                                        }
-                                    },
-                                );
-                            }
-                            __Field::m_numConstrainedAxes => {
-                                #[cfg(
-                                    any(feature = "strict", feature = "ignore_duplicates")
-                                )]
-                                if _serde::__private::Option::is_some(
-                                    &m_numConstrainedAxes,
-                                ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(
-                                        <__A::Error as _serde::de::Error>::duplicate_field(
-                                            "numConstrainedAxes",
-                                        ),
-                                    );
-                                }
-                                m_numConstrainedAxes = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             #[cfg(feature = "strict")]
@@ -311,6 +285,32 @@ const _: () = {
                                     },
                                 );
                             }
+                            __Field::m_numConstrainedAxes => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_numConstrainedAxes,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numConstrainedAxes",
+                                        ),
+                                    );
+                                }
+                                m_numConstrainedAxes = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
                             _ => {}
                         }
                     }
@@ -324,18 +324,6 @@ const _: () = {
                             #[cfg(not(feature = "strict"))] Default::default()
                         }
                     };
-                    let m_numConstrainedAxes = match m_numConstrainedAxes {
-                        _serde::__private::Some(__field) => __field,
-                        _serde::__private::None => {
-                            #[cfg(feature = "strict")]
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::missing_field(
-                                    "numConstrainedAxes",
-                                ),
-                            );
-                            #[cfg(not(feature = "strict"))] Default::default()
-                        }
-                    };
                     let m_firstConstrainedAxis = match m_firstConstrainedAxis {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
@@ -343,6 +331,18 @@ const _: () = {
                             return _serde::__private::Err(
                                 <__A::Error as _serde::de::Error>::missing_field(
                                     "firstConstrainedAxis",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numConstrainedAxes = match m_numConstrainedAxes {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numConstrainedAxes",
                                 ),
                             );
                             #[cfg(not(feature = "strict"))] Default::default()
