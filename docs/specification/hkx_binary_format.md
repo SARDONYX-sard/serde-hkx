@@ -88,7 +88,7 @@ The `hkRootLevelContainer` is present in most hkx files, but not always as far a
   The same signature is used in C++ class inheritance in some cases, and it is dangerous to judge a class by its signature.
   It is better to use the class name to identify the class, since the class name itself is never covered by the signature.
 
-| Field                     | Description                                                 | Size (bytes)    | Offset (bytes)  |
+| Field                     | Description(e.g. Little Endian Signature)                   | Size (bytes)    | Offset (bytes)  |
 | ------------------------- | ----------------------------------------------------------- | --------------- | --------------- |
 | signature/class_name pair | `0x75585EF6` + `0x09` + `hkClass\0`(8bytes)                 | 13              | 208             |
 | signature/class_name pair | `0x5C7EA4C2` + `0x09` + `hkClassMember\0`(14bytes)          | 19              | 227             |
@@ -147,8 +147,8 @@ Here, it is a key/value pair where 'the current location where the binary data i
       ///  Index Section ID
       ///
       /// # Examples
-      /// - 0: `__class_names__`
-      /// - 1: `__type__`
+      /// - 0: `__classnames__`
+      /// - 1: `__types__`
       /// - 2: `__data__`
       pub dst_section_index: u32,
       /// Location information needed when referencing class pointer, etc.
@@ -176,8 +176,8 @@ Here, it is a key/value pair where 'the current location where the binary data i
       ///  Index Section ID
       ///
       /// # Examples
-      /// - 0: `__class_names__`
-      /// - 1: `__type__`
+      /// - 0: `__classnames__`
+      /// - 1: `__types__`
       /// - 2: `__data__`
       pub section_index: u32,
       /// Havok Class name start position in `__class_name__` section.

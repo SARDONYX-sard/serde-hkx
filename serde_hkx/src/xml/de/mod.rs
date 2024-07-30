@@ -759,8 +759,7 @@ mod tests {
             }
         }
 
-        let xml =
-            &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
+        let xml = include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
         tracing::debug!("{:#?}", from_file::<Vec<Classes>>(xml));
 
         let actual = from_file::<indexmap::IndexMap<usize, Classes>>(xml);

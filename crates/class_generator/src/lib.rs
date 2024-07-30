@@ -93,11 +93,11 @@ pub fn get_inherited_members<'a>(
 ) -> Vec<&'a cpp_info::Member<'a>> {
     // Cache variables
     let mut current_class_name = class_name;
-    let mut inherited_class = Vec::new();
+    let mut members = Vec::new();
 
     // Get all parents
     while let Some(class) = classes_map.get(current_class_name) {
-        inherited_class.extend(&class.members);
+        members.push(class.members.as_slice());
 
         if let Some(parent_name) = &class.parent {
             current_class_name = parent_name;
@@ -106,8 +106,16 @@ pub fn get_inherited_members<'a>(
         }
     }
 
-    inherited_class.reverse(); // This is because binary reads must be read from the most root parent class.
-    inherited_class
+    members.reverse(); // This is because binary reads must be read from the most root parent class.
+
+    // NOTE:
+    // If we just reverse a flattened `member`, the fields will also be in reverse order,
+    // so it is necessary to split the `member` into two.
+    let mut all_members = Vec::new();
+    for member in members {
+        all_members.extend(member)
+    }
+    all_members
 }
 
 #[cfg(test)]
