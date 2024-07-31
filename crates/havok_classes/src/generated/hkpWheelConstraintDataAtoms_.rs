@@ -65,6 +65,18 @@ const _: () = {
         fn signature(&self) -> _serde::__private::Signature {
             _serde::__private::Signature::new(0x1188cbe1)
         }
+        #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
+        fn deps_indexes(&self) -> Vec<usize> {
+            let mut v = Vec::new();
+            v.extend(self.m_suspensionBase.deps_indexes());
+            v.extend(self.m_lin0Limit.deps_indexes());
+            v.extend(self.m_lin0Soft.deps_indexes());
+            v.extend(self.m_lin1.deps_indexes());
+            v.extend(self.m_lin2.deps_indexes());
+            v.extend(self.m_steeringBase.deps_indexes());
+            v.extend(self.m_2dAng.deps_indexes());
+            v
+        }
     }
     impl _serde::Serialize for hkpWheelConstraintDataAtoms {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
@@ -447,9 +459,7 @@ const _: () = {
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );
@@ -473,9 +483,7 @@ const _: () = {
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );
@@ -499,9 +507,7 @@ const _: () = {
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );
@@ -521,9 +527,7 @@ const _: () = {
                                     match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );
@@ -543,9 +547,7 @@ const _: () = {
                                     match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );
@@ -569,9 +571,7 @@ const _: () = {
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );
@@ -593,9 +593,7 @@ const _: () = {
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );

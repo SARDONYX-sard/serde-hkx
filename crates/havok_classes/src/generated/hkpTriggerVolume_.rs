@@ -52,6 +52,20 @@ const _: () = {
         fn signature(&self) -> _serde::__private::Signature {
             _serde::__private::Signature::new(0xa29a8d1a)
         }
+        #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
+        fn deps_indexes(&self) -> Vec<usize> {
+            let mut v = Vec::new();
+            v.extend(self.m_overlappingBodies.iter().map(|ptr| ptr.get()));
+            v.extend(
+                self
+                    .m_eventQueue
+                    .iter()
+                    .flat_map(|class| class.deps_indexes())
+                    .collect::<Vec<usize>>(),
+            );
+            v.push(self.m_triggerBody.get());
+            v
+        }
     }
     impl _serde::Serialize for hkpTriggerVolume {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
@@ -349,9 +363,7 @@ const _: () = {
                                     match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );
@@ -375,9 +387,7 @@ const _: () = {
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );
@@ -399,9 +409,7 @@ const _: () = {
                                     match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );
@@ -423,9 +431,7 @@ const _: () = {
                                     match __A::next_value::<u32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );

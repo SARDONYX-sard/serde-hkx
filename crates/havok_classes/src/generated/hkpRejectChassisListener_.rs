@@ -38,6 +38,12 @@ const _: () = {
         fn signature(&self) -> _serde::__private::Signature {
             _serde::__private::Signature::new(0xc4fa16c9)
         }
+        #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
+        fn deps_indexes(&self) -> Vec<usize> {
+            let mut v = Vec::new();
+            v.push(self.m_chassis.get());
+            v
+        }
     }
     impl _serde::Serialize for hkpRejectChassisListener {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>

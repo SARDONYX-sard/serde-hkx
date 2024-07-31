@@ -35,6 +35,11 @@ const _: () = {
         fn signature(&self) -> _serde::__private::Signature {
             _serde::__private::Signature::new(0x255d8164)
         }
+        #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
+        fn deps_indexes(&self) -> Vec<usize> {
+            let mut v = Vec::new();
+            v
+        }
     }
     impl _serde::Serialize for hkLinkAttribute {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
@@ -193,9 +198,7 @@ const _: () = {
                                     match __A::next_value::<Link>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );

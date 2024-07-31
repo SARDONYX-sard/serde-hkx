@@ -89,6 +89,20 @@ const _: () = {
         fn signature(&self) -> _serde::__private::Signature {
             _serde::__private::Signature::new(0xe0c4d4a7)
         }
+        #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
+        fn deps_indexes(&self) -> Vec<usize> {
+            let mut v = Vec::new();
+            v.push(self.m_character.get());
+            v.push(self.m_behavior.get());
+            v.push(self.m_nodeToIndexMap.get());
+            v.push(self.m_eventQueue.get());
+            v.push(self.m_sharedEventQueue.get());
+            v.push(self.m_generatorOutputListener.get());
+            v.push(self.m_world.get());
+            v.push(self.m_attachmentManager.get());
+            v.push(self.m_animationCache.get());
+            v
+        }
     }
     impl _serde::Serialize for hkbContext {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
@@ -543,9 +557,7 @@ const _: () = {
                                     match __A::next_value::<Pointer>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
-                                            #[cfg(feature = "strict")]
                                             return _serde::__private::Err(__err);
-                                            #[cfg(not(feature = "strict"))] Default::default()
                                         }
                                     },
                                 );

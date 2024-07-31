@@ -42,6 +42,13 @@ const _: () = {
         fn signature(&self) -> _serde::__private::Signature {
             _serde::__private::Signature::new(0x7358f5da)
         }
+        #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
+        fn deps_indexes(&self) -> Vec<usize> {
+            let mut v = Vec::new();
+            v.push(self.m_nestedStateMachine.get());
+            v.push(self.m_eventIdMap.get());
+            v
+        }
     }
     impl _serde::Serialize for hkbStateMachineNestedStateMachineData {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
