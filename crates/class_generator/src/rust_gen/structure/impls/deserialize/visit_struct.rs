@@ -68,10 +68,7 @@ pub fn gen(class: &Class, classes_map: &ClassMap) -> TokenStream {
                     match __A::next_value::<#field_type>(&mut __map) {
                         _serde::__private::Ok(__val) => __val,
                         _serde::__private::Err(__err) => {
-                            #[cfg(feature = "strict")]
                             return _serde::__private::Err(__err);
-                            #[cfg(not(feature = "strict"))]
-                            #default_value // If not, fall back to the default value.
                         }
                     },
                 );

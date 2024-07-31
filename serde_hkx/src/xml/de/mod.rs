@@ -111,18 +111,24 @@ pub fn from_str_with_opt<'a, T>(de: XmlDeserializer<'a>) -> Result<T>
 where
     T: Deserialize<'a>,
 {
-    let mut deserializer = de;
-    tri!(deserializer.parse_next(winnow::token::take_until(0.., "<hkobject")));
-    let t = tri!(T::deserialize(&mut deserializer));
-    tri!(deserializer.parse_next(opt(end_tag("hksection"))));
-    tri!(deserializer.parse_next(opt(end_tag("hkpackfile"))));
+    let mut de = de;
+    tri!(de
+        .parse_next(winnow::token::take_until(0.., "<hkobject"))
+        .map_err(|err| de.to_readable_err(err)));
+    let t = tri!(T::deserialize(&mut de).map_err(|err| de.to_readable_err(err)));
+    tri!(de
+        .parse_next(opt(end_tag("hksection")))
+        .map_err(|err| de.to_readable_err(err)));
+    tri!(de
+        .parse_next(opt(end_tag("hkpackfile")))
+        .map_err(|err| de.to_readable_err(err)));
 
-    if deserializer.input.is_empty() {
+    if de.input.is_empty() {
         Ok(t)
     } else {
-        Err(Error::TrailingCharacters {
-            remain: deserializer.input.to_string(),
-        })
+        Err(de.to_readable_err(Error::TrailingCharacters {
+            remain: de.input.to_string(),
+        }))
     }
 }
 
@@ -152,13 +158,7 @@ impl<'de> XmlDeserializer<'de> {
     ) -> Result<O> {
         let res = parser
             .parse_next(&mut self.input)
-            .map_err(|err| Error::ReadableError {
-                source: ReadableError::from_context(
-                    err,
-                    self.original,
-                    self.original.len() - self.input.len(),
-                ),
-            })?;
+            .map_err(|err| Error::ContextError { err })?;
         Ok(res)
     }
 
@@ -171,13 +171,7 @@ impl<'de> XmlDeserializer<'de> {
     ) -> Result<O> {
         let (_, res) = parser
             .parse_peek(self.input)
-            .map_err(|err| Error::ReadableError {
-                source: ReadableError::from_context(
-                    err,
-                    self.original,
-                    self.original.len() - self.input.len(),
-                ),
-            })?;
+            .map_err(|err| Error::ContextError { err })?;
         Ok(res)
     }
 
@@ -186,20 +180,22 @@ impl<'de> XmlDeserializer<'de> {
     /// # Why is this necessary?
     /// Because Visitor errors that occur within each `Deserialize` implementation cannot indicate the error location in XML.
     #[cold]
-    fn to_readable_err<T>(&self, result: Result<T>) -> Result<T> {
-        match result {
-            Ok(value) => Ok(value),
-            Err(err) => match err {
-                Error::ReadableError { .. } => Err(err),
-                _ => Err(Error::ReadableError {
-                    source: ReadableError::from_display(
-                        err,
-                        self.original,
-                        self.original.len() - self.input.len(),
-                    ),
-                }),
-            },
-        }
+    fn to_readable_err(&self, err: Error) -> Error {
+        let readable = match err {
+            Error::ContextError { err } => ReadableError::from_context(
+                err,
+                self.original,
+                self.original.len() - self.input.len(),
+            ),
+            Error::ReadableError { source } => source,
+            err => ReadableError::from_display(
+                err,
+                self.original,
+                self.original.len() - self.input.len(),
+            ),
+        };
+
+        Error::ReadableError { source: readable }
     }
 }
 
@@ -234,7 +230,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         let key = tri!(self.parse_next(attr_string()));
-
         #[cfg(feature = "tracing")]
         tracing::debug!(key);
 
@@ -440,8 +435,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let result = visitor.visit_enum(EnumDeserializer::new(self));
-        self.to_readable_err(result)
+        visitor.visit_enum(EnumDeserializer::new(self))
     }
 
     /// # Example of XML to be parsed
@@ -469,7 +463,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
             None
         } else {
             let (ptr_name, class_name, _signature) = tri!(self.parse_next(class_start_tag()));
-            #[cfg(feature = "tracing")]
             tracing::debug!("ptr_name={ptr_name}, class_name={class_name}, Signature={_signature}");
 
             if name != class_name {
@@ -478,14 +471,14 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
                     expected: class_name.to_string(),
                 });
             };
-            self.class_index = Some(ptr_name.get()); // For `HashMap`'s seq key.
             self.in_struct = true;
+            self.class_index = Some(ptr_name.get()); // For `HashMap`'s seq key.
             Some(ptr_name)
         };
 
+        tracing::debug!("{:?}", _fields);
         let value = tri!(visitor.visit_struct(MapDeserializer::new(self, ptr_name, name,)));
         tri!(self.parse_next(end_tag("hkobject")));
-        self.in_struct = false;
         Ok(value)
     }
 
@@ -523,8 +516,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         let s = tri!(self.parse_next(string()));
-        let result = visitor.visit_stringptr(StringPtr::from_option(Some(s)));
-        self.to_readable_err(result)
+        visitor.visit_stringptr(StringPtr::from_option(Some(s)))
     }
 
     fn deserialize_half<V>(self, visitor: V) -> Result<V::Value, Self::Error>
@@ -700,8 +692,27 @@ mod tests {
 
     #[test]
     fn test_deserialize_class() {
-        use havok_classes::{hkRootLevelContainer, hkRootLevelContainerNamedVariant};
+        use havok_classes::{hkRootLevelContainer, hkRootLevelContainerNamedVariant, hkaSkeleton};
         // use crate::mocks::{hkRootLevelContainer, hkRootLevelContainerNamedVariant};
+
+        let xml = r###"
+		<hkobject name="#0122" class="hkaSkeleton" signature="0x366e8220">
+			<hkparam name="name">NPC Root [Root]</hkparam>
+			<hkparam name="parentIndices" numelements="52">
+				-1 0 1 2 3 4 5 6 4 8 9 1 1 9 13 6
+				15 10 17 7 19 4 21 10 7 4 4 23 27 28 23 30
+				31 24 33 34 24 36 37 23 39 40 24 42 43 22 22 22
+				22 4 23 24
+			</hkparam>
+			<hkparam name="bones" numelements="52">
+				<hkobject>
+					<hkparam name="name">NPC Root [Root]</hkparam>
+					<hkparam name="lockTranslation">fals</hkparam>
+				</hkobject>
+			</hkparam>
+		</hkobject>
+"###;
+        assert!(from_str::<hkaSkeleton>(xml).is_err());
 
         let xml = r###"
 		<hkobject name="#0008" class="hkRootLevelContainer" signature="0x2772c11e">
@@ -714,15 +725,9 @@ mod tests {
 			</hkparam>
 		</hkobject>
 "###;
-
-        let res = match from_str::<hkRootLevelContainer>(xml) {
-            Ok(res) => res,
-            Err(err) => panic!("{err}"),
-        };
-
         assert_eq!(
-            res,
-            hkRootLevelContainer {
+            from_str::<hkRootLevelContainer>(xml),
+            Ok(hkRootLevelContainer {
                 __ptr: Some(8.into()),
                 m_namedVariants: vec![hkRootLevelContainerNamedVariant {
                     __ptr: None,
@@ -730,7 +735,7 @@ mod tests {
                     m_className: "hkbProjectData".into(),
                     m_variant: Pointer::new(10),
                 }],
-            }
+            })
         );
     }
 
@@ -740,11 +745,8 @@ mod tests {
         quick_tracing::init(test = "deserialize_classes_from_xml")
     )]
     fn should_deserialize_classes_from_xml() {
-        use crate::mocks::constructors::external_defaultmale::new_defaultmale;
+        use crate::mocks::new_defaultmale;
         use havok_classes::Classes;
-        //
-        // use crate::mocks::constructors::defaultmale::new_defaultmale;
-        // use crate::mocks::Classes;
 
         fn from_file<'a, T>(xml: &'a str) -> T
         where

@@ -14,6 +14,7 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let hex_signature = str2lit(&class.signature.to_string());
     let class_name = syn::Ident::new(name, proc_macro2::Span::call_site());
     let (fields, pointed_writers) = impl_serialize_fields(class, class_map);
+    let deps_class_indexes = deps_class_indexes_token(&class.name, class_map);
     let lifetime = match class.has_string {
         true => quote! { <'a> },
         false => quote! {},
@@ -32,6 +33,13 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
                 #[inline]
                 fn signature(&self) -> _serde::__private::Signature {
                     _serde::__private::Signature::new(#hex_signature)
+                }
+
+                #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
+                fn deps_indexes(&self) -> Vec<usize> {
+                    let mut v = Vec::new();
+                    #(#deps_class_indexes;)*
+                    v
                 }
             }
 
@@ -208,4 +216,55 @@ fn impl_serialize_self_fields(
     };
 
     (serialize_calls, ptr_after_write_fields)
+}
+
+fn deps_class_indexes_token(class_name: &str, classes_map: &ClassMap) -> Vec<TokenStream> {
+    let mut deps_class_indexes = Vec::new();
+    let inherited_class = get_inherited_class(class_name, classes_map);
+    let mut parent_depth = inherited_class.len();
+    for class in &inherited_class {
+        parent_depth -= 1;
+
+        for member in &class.members {
+            let push_code = match member.vtype {
+                // pointer array
+                _ if (member.vtype == TypeKind::Pointer && member.arrsize > 0)
+                    || member.vsubtype == TypeKind::Pointer =>
+                {
+                    let parent_ident = n_time_parent_ident(parent_depth);
+                    let member_name = to_rust_field_ident(&member.name);
+                    quote! {  v.extend(self #parent_ident.#member_name.iter().map(|ptr| ptr.get())) }
+                }
+
+                // struct array(get ptr of fields)
+                _ if (member.vtype == TypeKind::Struct && member.arrsize > 0)
+                    || member.vtype == TypeKind::Array && member.vsubtype == TypeKind::Struct =>
+                {
+                    let parent_ident = n_time_parent_ident(parent_depth);
+                    let member_name = to_rust_field_ident(&member.name);
+                    quote! {
+                        v.extend(self #parent_ident.#member_name.iter().flat_map(|class| class.deps_indexes()).collect::<Vec<usize>>())
+                    }
+                }
+
+                // struct(get ptr of fields)
+                _ if member.vtype == TypeKind::Struct => {
+                    let parent_ident = n_time_parent_ident(parent_depth);
+                    let member_name = to_rust_field_ident(&member.name);
+                    quote! {  v.extend(self #parent_ident.#member_name.deps_indexes()) }
+                }
+
+                TypeKind::Pointer => {
+                    let parent_ident = n_time_parent_ident(parent_depth);
+                    let member_name = to_rust_field_ident(&member.name);
+                    quote! { v.push(self #parent_ident.#member_name.get()) }
+                }
+
+                _ => continue,
+            };
+            deps_class_indexes.push(push_code);
+        }
+    }
+
+    deps_class_indexes
 }

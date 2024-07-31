@@ -588,26 +588,11 @@ impl<'a> SerializeFlags for &'a mut XmlSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::mocks::classes::*;
-
-    #[test]
-    #[cfg_attr(feature = "tracing", quick_tracing::try_init)]
-    fn test_serialize_types_all() -> Result<()> {
-        let all_types_class = AllTypesTestClass {
-            __ptr: Some(Pointer::new(11)),
-        };
-        let mut classes = indexmap::IndexMap::new();
-        classes.insert(11, Classes::AllTypesTestClass(all_types_class));
-
-        tracing::trace!("\n{}", tri!(to_string(&classes, 11)));
-        Ok(())
-    }
 
     #[ignore = "No error on local PC Windows, but for some reason error occurs on GitHub Actions Windows"]
     #[test]
     fn test_serialize_defaultmale() -> Result<()> {
-        use crate::mocks::constructors::external_defaultmale::new_defaultmale;
-        // use crate::mocks::constructors::defaultmale::new_defaultmale;
+        use crate::mocks::new_defaultmale;
 
         let mut classes = new_defaultmale();
 

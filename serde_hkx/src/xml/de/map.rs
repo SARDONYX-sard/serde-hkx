@@ -79,7 +79,11 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         // HACK: If the `strict` feature is disabled, fall back to the default value
         // if there is an error retrieving the value in the `havok_classes` crate, so check
         // for `>` here and omit the implementation of the `/>` shorthand notation.
-        tri!(self.de.parse_next(field_start_close_tag())); // Parse `>` or ` numelements="3">`
+        let _len = tri!(self.de.parse_next(field_start_close_tag())); // Parse `>` or ` numelements="3">`
+        #[cfg(feature = "tracing")]
+        if let Some(numelements) = _len {
+            tracing::debug!(numelements);
+        }
 
         let value = tri!(seed.deserialize(&mut *self.de));
         tri!(self.de.parse_next(end_tag("hkparam")));

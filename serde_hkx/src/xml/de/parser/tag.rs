@@ -20,6 +20,7 @@ pub fn start_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError
         _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("start tag"))
+    .context(StrContext::Label(tag))
 }
 
 /// Parses the end tag `</tag>`

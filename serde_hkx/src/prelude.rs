@@ -6,6 +6,7 @@ pub use crate::bytes::{
     },
     ser::{to_bytes, to_bytes_with_opt, ByteSerializer},
 };
+pub use crate::sort::HavokSort;
 pub use crate::xml::{
     de::{
         from_partial_str, from_partial_str_with_opt, from_str, from_str_peek, from_str_with_opt,
@@ -13,7 +14,6 @@ pub use crate::xml::{
     },
     ser::{to_string, to_string_with_opt, XmlSerializer},
 };
-
 pub use havok_serde::{
     de::{self, Deserialize, Deserializer, Error as _, MapAccess, Visitor},
     ser::{self, Error as _, Serialize, SerializeFlags, SerializeStruct, Serializer},

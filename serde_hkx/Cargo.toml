@@ -22,6 +22,7 @@ indexmap = "2.2.6"
 rhexdump = "0.2.0"                                                             # hexdump display for binary error repoting
 snafu = "0.8.2"                                                                # Define all error patterns(with backtrace)
 static_assertions = "1.1.0"
+topo_sort = { version = "0.4.0", features = ["indexmap"] }
 tracing = { version = "0.1.40", optional = true }
 winnow = { version = "0.6.8", features = ["simd"] }                            # Parser conbinator
 

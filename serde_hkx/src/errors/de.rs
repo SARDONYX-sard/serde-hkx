@@ -45,6 +45,12 @@ pub enum Error {
         expected: String,
     },
 
+    /// Parser combinator Error
+    #[snafu(display("{err}"))]
+    ContextError {
+        err: winnow::error::ErrMode<winnow::error::ContextError>,
+    },
+
     /// Human readable XML parsing error
     #[snafu(transparent)]
     ReadableError {

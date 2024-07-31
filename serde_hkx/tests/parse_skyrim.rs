@@ -1,6 +1,8 @@
 use havok_classes::Classes;
 use pretty_assertions::assert_eq;
-use serde_hkx::{bytes::serde::hkx_header::HkxHeader, from_bytes, from_str, to_bytes, to_string};
+use serde_hkx::{
+    bytes::serde::hkx_header::HkxHeader, from_bytes, from_str, to_bytes, to_string, HavokSort,
+};
 use std::path::Path;
 
 #[allow(clippy::enum_variant_names)]
@@ -28,22 +30,32 @@ async fn should_parse_one_file() -> Result<()> {
     // let path = "./tests/data/meshes/interface/intperkline01.hkx";
     // let path = "./tests/data/meshes/actors/ambient/chicken/chickenproject.hkx";
     // let path = "./tests/data/meshes/actors/character/characters/defaultmale.hkx";
-
     // parse_to_xml(path).await.unwrap();
-    //
-    let xml = include_str!("./defaultmale.xml");
-    tokio::fs::write("./output.hkx", xml_to_bytes(xml)?).await?;
+
+    // let xml = include_str!("../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
+    let xml = include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
+    let bytes = match xml_to_bytes(xml) {
+        Ok(bytes) => bytes,
+        Err(err) => panic!("{err}"),
+    };
+    // tokio::fs::write("./output.hkx", xml_to_bytes(xml)?).await?;
+
+    let expected = include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx");
+    assert_eq!(
+        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(&bytes),
+        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(expected),
+    );
+    tracing::debug!(
+        "bytes = \n{}",
+        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(&bytes),
+    );
     Ok(())
-    // parse_to_xml(path).await
 }
 
 fn xml_to_bytes(xml: &str) -> Result<Vec<u8>> {
-    let mut classes: ClassMap = match from_str(xml) {
-        Ok(s) => s,
-        Err(err) => panic!("{err}"),
-    };
-    classes.sort_keys();
-    tracing::debug!("classes = {classes:#?}");
+    let mut classes: ClassMap = from_str(xml)?;
+    classes.sort_for_bytes()?;
+    tracing::debug!("sorted_classes = {classes:#?}");
     Ok(to_bytes(&classes, &HkxHeader::new_skyrim_se())?)
 }
 
@@ -88,10 +100,8 @@ async fn parse_to_xml(path: impl AsRef<Path>) -> Result<()> {
     let path = path.as_ref();
     let bytes = std::fs::read(path)?;
 
+    // Verify bytes.
     let mut classes = from_bytes::<ClassMap>(&bytes)?;
-
-    // hkRootContainer" is processed last.
-    classes.sort_keys();
     assert_eq!(
         rhexdump::hexdump::RhexdumpString::new()
             .hexdump_bytes(to_bytes(&classes, &HkxHeader::new_skyrim_se())?),
@@ -99,14 +109,7 @@ async fn parse_to_xml(path: impl AsRef<Path>) -> Result<()> {
         "path = {path:?}"
     );
 
-    let mut top_ptr = None;
-    if !classes.is_empty() {
-        if let Some((first_key, first_value)) = classes.shift_remove_index(0) {
-            classes.insert(first_key, first_value);
-            top_ptr = Some(first_key);
-        }
-    }
-
+    // Create output path
     let mut out_path = path.to_path_buf();
     let _ = out_path.set_extension("xml");
     let out_path = out_path
@@ -114,10 +117,16 @@ async fn parse_to_xml(path: impl AsRef<Path>) -> Result<()> {
         .replace("./tests/data", "./tests/output/xml");
     let out_path = Path::new(&out_path);
 
-    tokio::fs::create_dir_all(out_path.parent().unwrap()).await?;
-    let xml = to_string(&classes, top_ptr.unwrap_or_default())?;
+    // Write XML
+    if let Some(parent) = out_path.parent() {
+        tokio::fs::create_dir_all(parent).await?;
+    }
+    classes.sort_for_xml()?;
+    let top_ptr = classes.keys().min().copied().unwrap_or_default();
+    let xml = to_string(&classes, top_ptr)?;
     tokio::fs::write(out_path, &xml).await?;
 
+    // Verify ast
     let mut classes_from_xml: ClassMap = from_str(&xml)?;
     classes_from_xml.sort_keys();
     assert_eq!(classes_from_xml, classes, "path = {path:?}");

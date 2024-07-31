@@ -18,16 +18,12 @@ use winnow::combinator::alt;
 pub struct SeqDeserializer<'a, 'de: 'a> {
     /// Deserializer
     de: &'a mut XmlDeserializer<'de>,
-    /// Flag to determine if primitives are space-separated when parsing.
-    ///
-    /// Currently, this flag is not used for anything other than primitives.
-    first: bool,
 }
 
 impl<'a, 'de> SeqDeserializer<'a, 'de> {
     /// Create a new seq deserializer
     pub fn new(de: &'a mut XmlDeserializer<'de>) -> Self {
-        Self { de, first: true }
+        Self { de }
     }
 }
 
@@ -61,7 +57,6 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
         };
-        self.first = false;
 
         seed.deserialize(&mut *self.de).map(Some) // Deserialize an array element.
     }
@@ -80,7 +75,6 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         {
             return Ok(None);
         };
-        self.first = false;
 
         seed.deserialize(&mut *self.de).map(Some) // Deserialize an array element.
     }
@@ -133,7 +127,6 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
         };
-        self.first = false;
 
         tri!(self.de.parse_next(start_tag("hkcstring")));
         let ret = seed.deserialize(&mut *self.de).map(Some)?;

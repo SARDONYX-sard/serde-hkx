@@ -41,6 +41,8 @@ impl<'a, 'de> ClassIndexAccess<'de> for ClassIndexMapDeserializer<'a, 'de> {
     where
         V: DeserializeSeed<'de>,
     {
-        seed.deserialize(&mut *self.de)
+        let value = seed.deserialize(&mut *self.de);
+        self.de.in_struct = false;
+        value
     }
 }

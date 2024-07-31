@@ -873,7 +873,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::mocks::{classes::*, enums::EventMode, flags::FlagValues};
     use pretty_assertions::assert_eq;
 
     fn partial_parse_assert<'a, T>(s: BytesStream<'a>, expected: T)
@@ -891,6 +890,7 @@ mod tests {
 
     #[test]
     fn test_deserialize_primitive() {
+        use havok_classes::{hkClassMember_::FlagValues, EventMode};
         partial_parse_assert(&[128, 0], FlagValues::ALIGN_8);
         partial_parse_assert(&[0], EventMode::EVENT_MODE_DEFAULT);
     }
@@ -946,6 +946,8 @@ mod tests {
     #[test]
     #[quick_tracing::init]
     fn test_deserialize_class() {
+        use havok_classes::{hkBaseObject, hkReferencedObject};
+
         partial_parse_assert(
             &[
                 0, 0, 0, 0, 0, 0, 0, 0, // hkBaseObject
@@ -969,7 +971,6 @@ mod tests {
     )]
     fn test_deserialize_class_index() {
         use havok_classes::Classes;
-        // use crate::mocks::Classes;
 
         fn from_file<'a, T>(bytes: &'a [u8]) -> Result<T>
         where

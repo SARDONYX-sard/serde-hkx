@@ -87,7 +87,9 @@ pub fn vector4<'a>() -> impl Parser<&'a str, Vector4, ContextError> {
 #[inline]
 pub fn quaternion<'a>() -> impl Parser<&'a str, Quaternion, ContextError> {
     move |input: &mut &'a str| {
-        let Vector4 { x, y, z, w } = tri!(vector4().parse_next(input));
+        let Vector4 { x, y, z, w } = tri!(vector4()
+            .context(StrContext::Label("Quaternion"))
+            .parse_next(input));
         Ok(Quaternion { x, y, z, scaler: w })
     }
 }
@@ -112,9 +114,9 @@ pub fn rotation<'a>() -> impl Parser<&'a str, Rotation, ContextError> {
 
 pub fn qstransform<'a>() -> impl Parser<&'a str, QsTransform, ContextError> {
     seq!(QsTransform {
-        transition: vector4().context(StrContext::Label("transition")),
+        transition: vector3().context(StrContext::Label("transition")),
         quaternion: quaternion().context(StrContext::Label("quaternion")),
-        scale: vector4().context(StrContext::Label("scale")),
+        scale: vector3().context(StrContext::Label("scale")),
     })
     .context(StrContext::Label("QsTransform"))
 }
@@ -132,7 +134,7 @@ pub fn matrix4<'a>() -> impl Parser<&'a str, Matrix4, ContextError> {
 pub fn transform<'a>() -> impl Parser<&'a str, Transform, ContextError> {
     seq!(Transform {
         rotation: rotation().context(StrContext::Label("rotation")),
-        transition: vector4().context(StrContext::Label("transition")),
+        transition: vector3().context(StrContext::Label("transition")),
     })
     .context(StrContext::Label("Transform"))
 }

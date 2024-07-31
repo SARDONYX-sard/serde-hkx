@@ -516,7 +516,12 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         class_meta: Option<(Pointer, Signature)>,
     ) -> Result<Self::SerializeStruct, Self::Error> {
         #[cfg(feature = "tracing")]
-        tracing::debug!("serialize struct {name}({:?})", class_meta);
+        match class_meta {
+            Some((ptr, sig)) => {
+                tracing::debug!("serialize struct {name}(index = {ptr}, signature = {sig})")
+            }
+            None => tracing::debug!("serialize struct {name}(index & signature are None)"),
+        };
 
         if let Some((ptr, _)) = class_meta {
             let virtual_src = self.relative_position()?;
@@ -889,13 +894,8 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::bytes::serde::hkx_header::HkxHeader;
-
-    use crate::mocks::constructors::external_defaultmale::new_defaultmale;
+    use crate::mocks::new_defaultmale;
     use havok_classes::Classes;
-    //
-    // use crate::mocks::constructors::defaultmale::new_defaultmale;
-    // use crate::mocks::Classes;
 
     #[test]
     #[cfg_attr(feature = "tracing", quick_tracing::try_init(test = "serialize_bytes"))]

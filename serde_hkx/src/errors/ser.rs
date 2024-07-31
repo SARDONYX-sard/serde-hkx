@@ -89,6 +89,15 @@ pub enum Error {
         #[snafu(implicit)]
         location: snafu::Location,
     },
+
+    /// The state machine in behavior is topologically sorted circularly referenced.
+    #[snafu(display(
+        "The state machine in behavior is topologically sorted circularly referenced."
+    ))]
+    UnexpectedCyclicSort {
+        #[snafu(implicit)]
+        location: snafu::Location,
+    },
 }
 
 impl havok_serde::ser::Error for Error {

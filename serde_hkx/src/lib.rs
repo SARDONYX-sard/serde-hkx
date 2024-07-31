@@ -1,6 +1,7 @@
 pub mod bytes;
 pub mod errors;
 pub mod prelude;
+mod sort;
 pub mod xml;
 
 #[cfg(test)]
@@ -44,5 +45,6 @@ pub(crate) use tri;
 
 pub use bytes::de::from_bytes;
 pub use bytes::ser::to_bytes;
+pub use sort::HavokSort;
 pub use xml::de::from_str;
 pub use xml::ser::to_string;

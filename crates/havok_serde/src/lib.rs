@@ -96,4 +96,7 @@ pub trait HavokClass {
     fn name(&self) -> &'static str;
     /// Get signature.
     fn signature(&self) -> Signature;
+
+    /// Get dependencies class of indexes to do topological sort.
+    fn deps_indexes(&self) -> Vec<usize>;
 }

@@ -73,6 +73,13 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> String {
                         #(#enum_match_variants(class) => class.signature(),)*
                     }
                 }
+
+                fn deps_indexes(&self) -> Vec<usize> {
+                    match &self {
+                        Classes::SwapDummy => panic!("The dummy class is used only for sorting, so being called name is not a good use of the API."),
+                        #(#enum_match_variants(class) => class.deps_indexes(),)*
+                    }
+                }
             }
 
             impl<'a> _serde::Serialize for Classes<'a> {
