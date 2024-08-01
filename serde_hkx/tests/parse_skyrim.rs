@@ -38,7 +38,7 @@ async fn should_parse_one_file() -> Result<()> {
         Ok(bytes) => bytes,
         Err(err) => panic!("{err}"),
     };
-    // tokio::fs::write("./output.hkx", xml_to_bytes(xml)?).await?;
+    tokio::fs::write("./output.hkx", xml_to_bytes(xml)?).await?;
 
     let expected = include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx");
     assert_eq!(

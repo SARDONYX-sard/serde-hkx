@@ -1,7 +1,5 @@
 //! Provides a method that can be used to sort bytes and XML to serialize.
 
-use crate::errors::ser::UnexpectedCyclicSortSnafu;
-
 /// Trait that provides a method that can be used to sort bytes and XML to serialize
 pub trait HavokSort {
     type Error;
@@ -32,45 +30,56 @@ where
 {
     type Error = crate::errors::ser::Error;
 
-    #[inline]
     fn sort_for_bytes(&mut self) -> Result<(), Self::Error> {
-        let min_key = self.keys().min();
-        let is_official_index_rule = min_key.is_some() && min_key != Some(&1);
-
-        if is_official_index_rule {
-            crate::tri!(self.sort_for_xml());
-            // Now they are in order of dependency, but with binary data, it is necessary to serialize
-            // from the root of the dependency. Therefore, we reverse it.
-            self.reverse();
-        }
-        Ok(())
-    }
-
-    fn sort_for_xml(&mut self) -> Result<(), Self::Error> {
         if self.is_empty() {
             return Ok(());
         }
 
-        let mut topo_sort = topo_sort::TopoSort::with_capacity(self.len());
-        for (&index, class) in self.iter() {
-            let deps_indexes = class.deps_indexes();
-            tracing::debug!("index = {index}, deps_indexes = {deps_indexes:?}");
-            topo_sort.insert(index, deps_indexes);
+        let mut sorted_keys = Vec::new();
+        if let Some((&root_key, root_class)) =
+            self.keys().min().and_then(|min| self.get_key_value(min))
+        {
+            collect_deps(self, root_key, root_class, &mut sorted_keys);
         }
 
+        #[cfg(feature = "tracing")]
+        tracing::debug!("sorted_keys = {sorted_keys:?}");
         let mut sorted_classes = indexmap::IndexMap::with_capacity(self.len());
-        for result in &topo_sort {
-            match result {
-                Ok((index, _)) => {
-                    if let Some(class) = self.swap_remove(index) {
-                        sorted_classes.insert(*index, class);
-                    }
-                }
-                Err(_) => return UnexpectedCyclicSortSnafu.fail(),
+        for index in &sorted_keys {
+            if let Some(class) = self.swap_remove(index) {
+                sorted_classes.insert(*index, class);
             }
         }
 
         *self = sorted_classes;
         Ok(())
+    }
+
+    fn sort_for_xml(&mut self) -> Result<(), Self::Error> {
+        Ok(())
+    }
+}
+
+fn collect_deps<V>(
+    classes: &indexmap::IndexMap<usize, V>,
+    key: usize,
+    class: &V,
+    sorted: &mut Vec<usize>,
+) where
+    V: havok_serde::HavokClass,
+{
+    if sorted.contains(&key) {
+        return;
+    }
+
+    sorted.push(key);
+    let deps = class.deps_indexes();
+    #[cfg(feature = "tracing")]
+    tracing::debug!("index = {key}, deps_indexes = {deps:?}");
+
+    for dep_key in deps {
+        if let Some(dep_class) = classes.get(&dep_key) {
+            collect_deps(classes, dep_key, dep_class, sorted);
+        }
     }
 }
