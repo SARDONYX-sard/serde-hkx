@@ -22,3 +22,6 @@ mod lib {
     pub use core::fmt;
     pub use core::str::FromStr;
 }
+
+/// Unicode null
+pub const NULL_STR: &str = "\u{2400}";

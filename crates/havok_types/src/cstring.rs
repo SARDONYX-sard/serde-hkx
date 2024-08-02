@@ -1,4 +1,4 @@
-use crate::{lib::*, StringPtr};
+use crate::{lib::*, StringPtr, NULL_STR};
 
 /// - binary data(.hkx): null-terminated string
 /// - XML: `&str`
@@ -68,7 +68,7 @@ impl<'a> CString<'a> {
     pub fn should_write_binary(&self) -> bool {
         match self.get_ref() {
             Some(s) => {
-                if s.is_empty() || s == "\u{2400}" {
+                if s.is_empty() || s == NULL_STR {
                     return false;
                 };
                 true
@@ -80,7 +80,7 @@ impl<'a> CString<'a> {
 
 impl fmt::Display for CString<'_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let s = self.inner.as_ref().map(|s| s.as_ref()).unwrap_or("");
+        let s = self.inner.as_ref().map(|s| s.as_ref()).unwrap_or(NULL_STR);
         write!(f, "{s}")
     }
 }

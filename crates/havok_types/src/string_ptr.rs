@@ -1,4 +1,4 @@
-use crate::lib::*;
+use crate::{lib::*, NULL_STR};
 
 /// - binary data(.hkx): null-terminated string
 /// - XML: `&str`
@@ -68,7 +68,7 @@ impl<'a> StringPtr<'a> {
 
 impl fmt::Display for StringPtr<'_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let s = self.inner.as_ref().map(|s| s.as_ref()).unwrap_or("");
+        let s = self.inner.as_ref().map(|s| s.as_ref()).unwrap_or(NULL_STR);
         write!(f, "{s}")
     }
 }
