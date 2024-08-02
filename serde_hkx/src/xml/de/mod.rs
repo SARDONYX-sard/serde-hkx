@@ -458,12 +458,17 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         let ptr_name = if self.in_struct {
+            #[cfg(feature = "tracing")]
+            tracing::trace!("Parsed class=\"{name}\": <hkobject>");
             // When a struct is present in the field of struct, the name and signature attributes are not present.
             tri!(self.parse_next(start_tag("hkobject")));
             None
         } else {
             let (ptr_name, class_name, _signature) = tri!(self.parse_next(class_start_tag()));
-            tracing::debug!("ptr_name={ptr_name}, class_name={class_name}, Signature={_signature}");
+            #[cfg(feature = "tracing")]
+            tracing::trace!(
+                "Parsed: <hkobject name=\"{ptr_name}\" class=\"{class_name}\" signature=\"{_signature}\">"
+            );
 
             if name != class_name {
                 return Err(Error::MismatchClassName {
@@ -475,8 +480,9 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
             self.class_index = Some(ptr_name.get()); // For `HashMap`'s seq key.
             Some(ptr_name)
         };
+        #[cfg(feature = "tracing")]
+        tracing::trace!("fields: {_fields:?}");
 
-        tracing::debug!("{:?}", _fields);
         let value = tri!(visitor.visit_struct(MapDeserializer::new(self, ptr_name, name,)));
         tri!(self.parse_next(end_tag("hkobject")));
         Ok(value)
@@ -495,12 +501,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         let s = tri!(self.parse_next(string())); // take until `</`
-        if s == "\u{2400}" {
-            // Unicode null is null
-            visitor.visit_stringptr(StringPtr::from_option(None))
-        } else {
-            visitor.visit_stringptr(StringPtr::from_option(Some(s)))
-        }
+        let s = if s == "\u{2400}" { None } else { Some(s) }; // NOTE: Unicode null to null ptr.
+        visitor.visit_cstring(CString::from_option(s))
     }
 
     #[inline]
@@ -532,12 +534,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         let s = tri!(self.parse_next(string())); // take until `</`
-        if s == "\u{2400}" {
-            // Unicode null is null
-            visitor.visit_stringptr(StringPtr::from_option(None))
-        } else {
-            visitor.visit_stringptr(StringPtr::from_option(Some(s)))
-        }
+        let s = if s == "\u{2400}" { None } else { Some(s) }; // NOTE: Unicode null to null ptr.
+        visitor.visit_stringptr(StringPtr::from_option(s))
     }
 }
 

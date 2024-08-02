@@ -2,13 +2,14 @@
 mod sub_ser;
 mod trait_impls;
 
-use crate::{lib::*, tri};
+use crate::bytes::serde::section_header::DATA_SECTION_HEADER_TAG;
+use crate::lib::*;
 
 use self::trait_impls::Align as _;
 use crate::bytes::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
-    Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
+    MissingLocalFixupSnafu, Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
 };
 use byteorder::{BigEndian, LittleEndian, WriteBytesExt as _};
 use havok_serde::ser::{Error as _, Serialize, Serializer};
@@ -67,17 +68,11 @@ where
     // 1/5: root header
     serializer.output.write_all(&header.to_bytes())?;
 
-    // 2/5: Section headers
-    let section_offset = header.section_offset;
-    if serializer.is_little_endian {
-        SectionHeader::write_classnames::<LittleEndian>(&mut serializer.output, section_offset)?;
-        SectionHeader::write_types::<LittleEndian>(&mut serializer.output, section_offset)?;
-    } else {
-        SectionHeader::write_classnames::<BigEndian>(&mut serializer.output, section_offset)?;
-        SectionHeader::write_types::<BigEndian>(&mut serializer.output, section_offset)?;
-    };
-    // Fixups are written after the data is actually written to the class data.
-    let data_fixups_start = SectionHeader::write_data(&mut serializer.output)?;
+    // 2/5: Get Section headers positions.(because the values of the fixups are not yet known.)
+    let classnames_header_start = 64 + header.padding_size() as u64; // 64: Root header size
+    let types_header_start = classnames_header_start + 48; // next `SectionHeader`(size 48bytes) position.
+    let data_header_start = types_header_start + 48;
+    serializer.output.set_position(data_header_start + 48);
 
     // 3/5: section contents
     // - `__classnames__` section
@@ -101,41 +96,51 @@ where
     let (local_offset, global_offset, virtual_offset) = serializer.write_data_fixups()?; // Write local, global and virtual fixups
     let exports_offset = serializer.relative_position()?; // This is where the exports_offset is finally obtained.
 
+    // 5/5 Write remain offsets for `__types__` & `__data__` section header.
+    let abs_data_start = serializer.abs_data_offset;
+    let data_section_header = SectionHeader {
+        section_tag: DATA_SECTION_HEADER_TAG,
+        section_tag_separator: 0xff,
+        absolute_data_start: abs_data_start,
+        local_fixups_offset: local_offset,
+        global_fixups_offset: global_offset,
+        virtual_fixups_offset: virtual_offset,
+        exports_offset,
+        imports_offset: exports_offset,
+        end_offset: exports_offset,
+    };
     #[cfg(feature = "tracing")]
-    {
-        let abs = serializer.abs_data_offset;
-        let l_offset = abs + local_offset;
-        let g_offset = abs + global_offset;
-        let v_offset = abs + virtual_offset;
-        let e_offset = abs + exports_offset;
-        tracing::trace!(
-            r#"
-Offsets:
-  absolute data start: {abs:#02X}
-         local fixups: {local_offset:#02X}
-        global fixups: {global_offset:#02X}
-       virtual fixups: {virtual_offset:#02X}
-  exports/imports/end: {exports_offset:#02X}
+    tracing::trace!("data_section_header = {data_section_header}");
 
-        abs +   local: {l_offset:#02X}
-        abs +  global: {g_offset:#02X}
-        abs + virtual: {v_offset:#02X}
-        abs + exports: {e_offset:#02X}
-        abs + imports: {e_offset:#02X}
-        abs +     end: {e_offset:#02X}
-"#,
-        );
-    }
-
-    // 5/5 Write remain Fixup offsets for `__data__` section header.
-    serializer.output.set_position(data_fixups_start); // Move back to fixup_offset of `__data__` section header.
-    tri!(serializer.serialize_uint32(serializer.abs_data_offset));
-    tri!(serializer.serialize_uint32(local_offset));
-    tri!(serializer.serialize_uint32(global_offset));
-    tri!(serializer.serialize_uint32(virtual_offset));
-    tri!(serializer.serialize_uint32(exports_offset));
-    tri!(serializer.serialize_uint32(exports_offset)); // imports offset
-    tri!(serializer.serialize_uint32(exports_offset)); // end offset
+    serializer.output.set_position(classnames_header_start);
+    let section_offset = header.section_offset;
+    if serializer.is_little_endian {
+        // `__classnames__` header`
+        SectionHeader::write_classnames::<LittleEndian>(
+            &mut serializer.output,
+            section_offset,
+            abs_data_start,
+        )?;
+        // `__types__` header`
+        serializer.output.set_position(types_header_start);
+        SectionHeader::write_types::<LittleEndian>(&mut serializer.output, abs_data_start)?;
+        // `__data__` header`
+        serializer.output.set_position(data_header_start);
+        data_section_header.write_bytes::<LittleEndian>(&mut serializer.output)?;
+    } else {
+        // `__classnames__` header`
+        SectionHeader::write_classnames::<BigEndian>(
+            &mut serializer.output,
+            section_offset,
+            abs_data_start,
+        )?;
+        // `__types__` header`
+        serializer.output.set_position(types_header_start);
+        SectionHeader::write_types::<BigEndian>(&mut serializer.output, abs_data_start)?;
+        // `__data__` header`
+        serializer.output.set_position(data_header_start);
+        data_section_header.write_bytes::<BigEndian>(&mut serializer.output)?;
+    };
 
     Ok(serializer.output.into_inner())
 }
@@ -249,7 +254,11 @@ impl ByteSerializer {
         match self.local_fixups_name_src.get(key) {
             Some(local_src) => {
                 #[cfg(feature = "tracing")]
-                tracing::trace!(key, local_src, local_dst);
+                {
+                    let src_abs = self.abs_data_offset + local_src;
+                    let dst_abs = self.abs_data_offset + local_dst;
+                    tracing::trace!("local_fixup of {key}: src({local_src}/abs: {src_abs:#x}), dst({local_dst}/abs: {dst_abs:#x})");
+                }
 
                 self.local_fixups.write_local_fixups(
                     *local_src,
@@ -272,22 +281,22 @@ impl ByteSerializer {
     /// When dst is known, src is already known and can be written.
     fn write_iter_local_fixup_pair(&mut self, index: usize, local_dst: u32) -> Result<()> {
         match self.local_fixups_iter_src.get(index) {
-            Some(local_src) => {
+            Some(&local_src) => {
                 #[cfg(feature = "tracing")]
-                tracing::trace!(index, local_src, local_dst);
+                {
+                    let src_abs = self.abs_data_offset + local_src;
+                    let dst_abs = self.abs_data_offset + local_dst;
+                    tracing::trace!("local_fixup_iter of {index}th: src({local_src}/abs: {src_abs:#x}), dst({local_dst}/abs: {dst_abs:#x})");
+                }
 
                 self.local_fixups.write_local_fixups(
-                    *local_src,
+                    local_src,
                     local_dst,
                     self.is_little_endian,
                 )?;
                 Ok(())
             }
-            None => {
-                #[cfg(feature = "tracing")]
-                tracing::debug!("Skip because there is no corresponding `local_fixup.src`. iterator ({index}th) -> dst({local_dst})");
-                Ok(())
-            }
+            None => MissingLocalFixupSnafu { dst: local_dst }.fail(),
         }
     }
 
@@ -519,7 +528,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
             Some((ptr, sig)) => {
                 tracing::debug!("serialize struct {name}(index = {ptr}, signature = {sig})")
             }
-            None => tracing::debug!("serialize struct {name}(index & signature are None)"),
+            None => tracing::debug!("serialize struct {name}(A class within a field.)"),
         };
 
         if let Some((ptr, _)) = class_meta {

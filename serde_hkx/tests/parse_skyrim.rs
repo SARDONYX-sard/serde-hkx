@@ -36,19 +36,22 @@ async fn should_parse_one_file() -> Result<()> {
     let xml = include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
     let bytes = match xml_to_bytes(xml) {
         Ok(bytes) => bytes,
-        Err(err) => panic!("{err}"),
+        Err(err) => {
+            tracing::error!("{err}");
+            panic!("{err}")
+        }
     };
-    tokio::fs::write("./output.hkx", xml_to_bytes(xml)?).await?;
+    tracing::debug!(
+        "output bytes = \n{}",
+        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(&bytes),
+    );
 
     let expected = include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx");
     assert_eq!(
         rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(&bytes),
         rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(expected),
     );
-    tracing::debug!(
-        "bytes = \n{}",
-        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(&bytes),
-    );
+
     Ok(())
 }
 

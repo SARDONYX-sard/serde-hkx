@@ -1,10 +1,5 @@
-use std::io::Write;
-
 use super::super::ByteSerializer;
-use crate::{
-    bytes::ser::trait_impls::Align as _,
-    errors::ser::{Error, Result},
-};
+use crate::errors::ser::{Error, Result};
 use havok_serde::{
     ser::{SerializeSeq, Serializer as _},
     Serialize,
@@ -49,44 +44,34 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
 
     #[inline]
     fn serialize_cstring_element(&mut self, value: &CString) -> Result<()> {
-        let iter_src = self.relative_position()?;
-        self.local_fixups_iter_src.push(iter_src);
-        self.serialize_ulong(0)?; // ptr size
-
-        // At this point, the data pointed to by the pointer is written to the temporary save
-        // area. (Merged into output at the end of the array.
-        if self.str_array_buf.is_none() {
-            self.str_array_buf = Some(Vec::new());
-        }
+        if value.should_write_binary() {
+            let iter_src = self.relative_position()?;
+            self.local_fixups_iter_src.push(iter_src);
+            self.serialize_ulong(0)?; // ptr size
+            #[cfg(feature = "tracing")]
+            tracing::debug!("local_fixup_iter_src = {iter_src}");
+        };
         value.serialize(&mut **self)
     }
 
     #[inline]
     fn serialize_stringptr_element(&mut self, value: &StringPtr) -> Result<()> {
-        let iter_src = self.relative_position()?;
-        self.local_fixups_iter_src.push(iter_src);
-        self.serialize_ulong(0)?; // ptr size
+        if value.should_write_binary() {
+            let iter_src = self.relative_position()?;
+            self.local_fixups_iter_src.push(iter_src);
+            self.serialize_ulong(0)?; // ptr size
+            #[cfg(feature = "tracing")]
+            tracing::debug!("local_fixup_iter_src = {iter_src}");
+        };
 
-        // At this point, the data pointed to by the pointer is written to the temporary save
-        // area. (Merged into output at the end of the array.
-        if self.str_array_buf.is_none() {
-            self.str_array_buf = Some(Vec::new());
-        }
         value.serialize(&mut **self)
     }
 
-    /// In Byte Serializer, [`SerializeSeq`] is called only when writing the data pointed to by the pointer.
-    /// When the data has been written, if it is a StringPtr, the actual state of the data must be written here.
+    // NOTE: If we write with `Seq` `end`, we will not be able to use `SerializeStruct` to write
+    //       the pointer destination at the end of writing the field if there
+    //       is an `Array<String>` in the `Array<Class>`.
+    #[inline]
     fn end(self) -> Result<()> {
-        if let Some(strings) = self.str_array_buf.take() {
-            for (index, string) in strings.iter().enumerate() {
-                self.write_iter_local_fixup_pair(index, self.relative_position()?)?;
-
-                self.output.write_all(string.as_bytes_with_nul())?;
-                self.output.zero_fill_align(16)?;
-            }
-        };
-        self.local_fixups_iter_src.clear();
         Ok(())
     }
 }

@@ -42,6 +42,14 @@ pub enum Error {
         location: snafu::Location,
     },
 
+    #[snafu(display("Missing src fixup for dst: {dst}"))]
+    MissingLocalFixup {
+        dst: u32,
+        /// error location
+        #[snafu(implicit)]
+        location: snafu::Location,
+    },
+
     #[snafu(display("Missing global fixup class: {ptr}"))]
     MissingGlobalFixupClass {
         /// missing global fixup class ptr(e.g. #0050)

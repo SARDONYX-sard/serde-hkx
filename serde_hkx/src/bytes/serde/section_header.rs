@@ -4,7 +4,7 @@
 use crate::{lib::*, tri};
 
 use byteorder::{ByteOrder, WriteBytesExt};
-use std::io::{self, Cursor, Write as _};
+use std::io;
 use winnow::{
     binary::{self, Endianness},
     error::{ContextError, StrContext, StrContextValue::*},
@@ -82,6 +82,8 @@ pub struct SectionHeader {
 }
 static_assertions::assert_eq_size!(SectionHeader, [u8; 48]); // Must be 48bytes.
 
+pub const DATA_SECTION_HEADER_TAG: [u8; 19] = *b"__data__\0\0\0\0\0\0\0\0\0\0\0";
+
 impl SectionHeader {
     pub fn from_bytes<'a>(endian: Endianness) -> impl Parser<&'a [u8], Self, ContextError> {
         move |bytes: &mut &[u8]| {
@@ -114,15 +116,30 @@ impl SectionHeader {
         }
     }
 
+    /// Write section header to writer.
+    pub fn write_bytes<O>(&self, mut writer: impl WriteBytesExt) -> io::Result<()>
+    where
+        O: ByteOrder,
+    {
+        writer.write_all(&self.section_tag)?;
+        writer.write_u8(self.section_tag_separator)?;
+        writer.write_u32::<O>(self.absolute_data_start)?;
+        writer.write_u32::<O>(self.local_fixups_offset)?;
+        writer.write_u32::<O>(self.global_fixups_offset)?;
+        writer.write_u32::<O>(self.virtual_fixups_offset)?;
+        writer.write_u32::<O>(self.exports_offset)?;
+        writer.write_u32::<O>(self.imports_offset)?;
+        writer.write_u32::<O>(self.end_offset)?;
+        Ok(())
+    }
+
     /// Create new `__classnames__` section header
     ///
     /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
-    ///
-    /// # Tips
-    /// Here, some data values are determined by taking advantage of the fact that the section header is of fixed length size for the sake of speed.
     pub fn write_classnames<O>(
         mut writer: impl WriteBytesExt,
         section_offset: i16,
+        section_end_abs: u32,
     ) -> io::Result<()>
     where
         O: ByteOrder,
@@ -135,8 +152,7 @@ impl SectionHeader {
         const ABSOLUTE_CLASSNAMES_OFFSET: u32 = 0xd0;
         writer.write_u32::<O>(ABSOLUTE_CLASSNAMES_OFFSET + section_offset)?; // write absolute_data_start
 
-        // Fixup does not exist in `classnames` section, the same data is written.
-        let fixups_offset = 0x90 + section_offset;
+        let fixups_offset = section_end_abs - 0xd0;
         writer.write_u32::<O>(fixups_offset)?; // local_fixups_offset
         writer.write_u32::<O>(fixups_offset)?; // global_fixups_offset
         writer.write_u32::<O>(fixups_offset)?; // virtual_fixups_offset
@@ -149,47 +165,21 @@ impl SectionHeader {
     ///
     /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
     ///
-    /// # Tips
-    /// Here, some data values are determined by taking advantage of the fact that the section header is of fixed length size for the sake of speed.
-    pub fn write_types<O>(mut writer: impl WriteBytesExt, section_offset: i16) -> io::Result<()>
+    /// # Return
+    /// `absolute_data_start`
+    ///
+    /// # Why do you return the write position of `absolute_data_offset`?
+    /// The `absolute_data_offset` is found (basically, depending on the header settings) just before the `__data__` section begins.
+    ///
+    /// It is not yet known at this point when the types section header is written, so the position is returned so that it can be written later.
+    pub fn write_types<O>(mut writer: impl WriteBytesExt, abs_offset: u32) -> io::Result<()>
     where
         O: ByteOrder,
     {
         writer.write_all(b"__types__\0\0\0\0\0\0\0\0\0\0\xff")?; // with separator(0xff)
-
-        ///? INFO:
-        /// The fact that the header size is fixed indicates that abs is 0x160 or greater.
-        /// But this is shifted in the increasing direction when section_offset is present.
-        const ABSOLUTE_DATA_OFFSET: u32 = 0x160;
-        let section_offset = match section_offset {
-            i16::MIN..=0_i16 => 0,
-            1.. => section_offset as u32,
-        };
-        writer.write_u32::<O>(ABSOLUTE_DATA_OFFSET + section_offset)?; // write absolute_data_start
+        writer.write_u32::<O>(abs_offset)?; // same as `__data__` section's `absolute_data_offset`
         tri!(writer.write_all([0u8; 24].as_slice())); // Fixup does not exist in `types` section, always 0.
         Ok(())
-    }
-
-    /// Create new `__data__` section header
-    ///
-    /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
-    ///
-    /// # Return
-    /// (Starting point where fixup_offsets, `absolute_data_start`)
-    ///
-    /// At this point the fixups have not yet been written correctly. (They are occupied by 0).
-    ///
-    /// The reason for this is that the fixups offsets is unknown at the time the `section_header` is written.
-    /// so when you finish writing `__data__` section and the offset is known, use that start position to write it.
-    ///
-    /// # Tips
-    /// Here, some data values are determined by taking advantage of the fact that the section header is of fixed length size for the sake of speed.
-    pub fn write_data(writer: &mut Cursor<Vec<u8>>) -> io::Result<u64> {
-        writer.write_all(b"__data__\0\0\0\0\0\0\0\0\0\0\0\xff")?; // with separator(0xff)
-        let fixup_offset_start = writer.position();
-        // The fixups offset in the data section is temporarily set to 0 because it will be known after the data section is written.
-        writer.write_all([0u8; 28].as_slice())?;
-        Ok(fixup_offset_start) // Return index for later writing.
     }
 }
 
@@ -250,9 +240,9 @@ mod tests {
     use std::io::Cursor;
 
     #[test]
-    fn test_write_classnames() {
+    fn test_write_classnames() -> io::Result<()> {
         let mut buffer = Cursor::new(Vec::new());
-        SectionHeader::write_classnames::<LittleEndian>(&mut buffer, 0).unwrap();
+        SectionHeader::write_classnames::<LittleEndian>(&mut buffer, 0, 0x160)?;
         let written = buffer.into_inner();
 
         #[rustfmt::skip]
@@ -269,13 +259,15 @@ mod tests {
             0x90, 0x00, 0x00, 0x00, // end_offset
         ];
         assert_eq!(&written, CLASSNAMES_SECTION_HEADER.as_slice());
+        Ok(())
     }
 
     #[test]
-    fn test_write_types() {
+    fn test_write_types() -> io::Result<()> {
         let mut buffer = Cursor::new(Vec::new());
-        SectionHeader::write_types::<LittleEndian>(&mut buffer, 0).unwrap();
+        SectionHeader::write_types::<LittleEndian>(&mut buffer, 0x160)?;
         let written = buffer.into_inner();
+
         #[rustfmt::skip]
         const TYPES_SECTION_HEADER: [u8; 48] = [
             // __types__\0\0\0\0\0\0\0\0\0\0: [u8; 19]
@@ -292,12 +284,24 @@ mod tests {
             0x00, 0x00, 0x00, 0x00, // end_offset
         ];
         assert_eq!(&written, TYPES_SECTION_HEADER.as_slice());
+        Ok(())
     }
 
     #[test]
-    fn test_write_data() {
+    fn test_write_data() -> io::Result<()> {
         let mut buffer = Cursor::new(Vec::new());
-        SectionHeader::write_data(&mut buffer).unwrap();
+        SectionHeader {
+            section_tag: DATA_SECTION_HEADER_TAG,
+            section_tag_separator: 0xff,
+            absolute_data_start: 0x160,
+            local_fixups_offset: 0x170,
+            global_fixups_offset: 0x1C0,
+            virtual_fixups_offset: 0x1E0,
+            exports_offset: 0x210,
+            imports_offset: 0x210,
+            end_offset: 0x210,
+        }
+        .write_bytes::<LittleEndian>(&mut buffer)?;
         let written = buffer.into_inner();
 
         #[rustfmt::skip]
@@ -307,15 +311,16 @@ mod tests {
             0xff, // separator
             // # Fixups
             // These are pending because the location cannot be determined without actually writing the data.
-            0x00, 0x00, 0x00, 0x00, // absolute_data_start
-            0x00, 0x00, 0x00, 0x00, // local_fixups_offset
-            0x00, 0x00, 0x00, 0x00, // global_fixups_offset
-            0x00, 0x00, 0x00, 0x00, // virtual_fixups_offset
-            0x00, 0x00, 0x00, 0x00, // exports_offset
-            0x00, 0x00, 0x00, 0x00, // imports_offset
-            0x00, 0x00, 0x00, 0x00, // end_offset
+            0x60, 0x01, 0x00, 0x00, // absolute_data_start
+            0x70, 0x01, 0x00, 0x00, // local_fixups_offset
+            0xC0, 0x01, 0x00, 0x00, // global_fixups_offset
+            0xE0, 0x01, 0x00, 0x00, // virtual_fixups_offset
+            0x10, 0x02, 0x00, 0x00, // exports_offset
+            0x10, 0x02, 0x00, 0x00, // imports_offset
+            0x10, 0x02, 0x00, 0x00, // end_offset
         ];
         assert_eq!(&written, DATA_SECTION_HEADER.as_slice());
+        Ok(())
     }
 
     #[test]
