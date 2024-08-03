@@ -51,3 +51,41 @@ impl QsTransform {
         bytes
     }
 }
+
+#[test]
+fn should_write_bytes() {
+    assert_eq!(
+        QsTransform {
+            transition: Vector4::default(),
+            quaternion: Quaternion {
+                x: 0.0,
+                y: -0.0,
+                z: -0.0,
+                scaler: -1.0
+            },
+            scale: Vector4 {
+                x: 1.0,
+                y: 1.0,
+                z: 1.0,
+                w: 0.0
+            }
+        }
+        .to_le_bytes(),
+        [
+            0, 0, 0, 0, //
+            0, 0, 0, 0, //
+            0, 0, 0, 0, //
+            0, 0, 0, 0, //
+            //
+            0, 0, 0, 0, //
+            0, 0, 0, 128, //
+            0, 0, 0, 128, //
+            0, 0, 128, 191, //
+            //
+            0, 0, 128, 63, //
+            0, 0, 128, 63, //
+            0, 0, 128, 63, //
+            0, 0, 0, 0, //
+        ]
+    );
+}

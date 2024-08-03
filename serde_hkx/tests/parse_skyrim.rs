@@ -49,7 +49,7 @@ async fn should_parse_one_file() -> Result<()> {
     let expected_hex_dump = hexdump_string(expected);
 
     use similar::{ChangeTag, TextDiff};
-    let diff = TextDiff::from_lines(&actual_hex_dump, &expected_hex_dump);
+    let diff = TextDiff::from_lines(&expected_hex_dump, &actual_hex_dump);
     let mut output_diff = String::new();
     for change in diff.iter_all_changes() {
         let sign = match change.tag() {
@@ -61,7 +61,7 @@ async fn should_parse_one_file() -> Result<()> {
     }
     tracing::debug!("output bytes = \n{output_diff}");
 
-    assert_eq!(actual_hex_dump, expected_hex_dump,);
+    assert_eq!(actual_hex_dump, expected_hex_dump);
     Ok(())
 }
 

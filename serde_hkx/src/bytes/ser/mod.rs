@@ -9,7 +9,7 @@ use self::trait_impls::Align as _;
 use crate::bytes::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
-    MissingLocalFixupSnafu, Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
+    Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
 };
 use byteorder::{BigEndian, LittleEndian, WriteBytesExt as _};
 use havok_serde::ser::{Error as _, Serialize, Serializer};
@@ -23,7 +23,8 @@ use snafu::ensure;
 use std::borrow::Cow;
 use std::collections::HashMap;
 use std::io::{Cursor, Write};
-use trait_impls::{ClassNamesWriter as _, ClassStartsMap, LocalFixupsWriter as _};
+use sub_ser::structs::StructSerializer;
+use trait_impls::{ClassNamesWriter as _, ClassStartsMap};
 
 /// To hkx binary file data.
 pub fn to_bytes<K, V>(value: &IndexMap<K, V>, header: &HkxHeader) -> Result<Vec<u8>>
@@ -161,9 +162,6 @@ pub struct ByteSerializer {
     abs_data_offset: u32,
 
     // ---- local fixup information
-    /// - key: struct field name
-    /// - value: local_fixup.src (i.e., the start position where the pointer size is written)
-    local_fixups_name_src: HashMap<&'static str, u32>,
     /// Temporary standby location in local_fixup.src for iterators such as `Array<CString>`, `Array<StringPtr>`.
     ///
     /// A separate temporary save location is reserved in consideration of the possibility that it may be covered by the name of `field`.
@@ -243,61 +241,6 @@ impl ByteSerializer {
         );
 
         Ok(position - self.abs_data_offset)
-    }
-
-    /// Write a pair of local_fixups to the temporary local_fixups buffer
-    ///
-    /// # Info
-    /// When dst is known, src is already known and can be written.
-    /// # Note
-    fn write_local_fixup_pair(&mut self, key: &str, local_dst: u32) -> Result<()> {
-        match self.local_fixups_name_src.get(key) {
-            Some(local_src) => {
-                #[cfg(feature = "tracing")]
-                {
-                    let src_abs = self.abs_data_offset + local_src;
-                    let dst_abs = self.abs_data_offset + local_dst;
-                    tracing::trace!("local_fixup of {key}: src({local_src}/abs: {src_abs:#x}), dst({local_dst}/abs: {dst_abs:#x})");
-                }
-
-                self.local_fixups.write_local_fixups(
-                    *local_src,
-                    local_dst,
-                    self.is_little_endian,
-                )?;
-                Ok(())
-            }
-            None => {
-                #[cfg(feature = "tracing")]
-                tracing::debug!("Skip because there is no corresponding `local_fixup.src`. {key} -> dst({local_dst})");
-                Ok(())
-            }
-        }
-    }
-
-    /// Write a pair of local_fixups to the temporary local_fixups buffer
-    ///
-    /// # Info
-    /// When dst is known, src is already known and can be written.
-    fn write_iter_local_fixup_pair(&mut self, index: usize, local_dst: u32) -> Result<()> {
-        match self.local_fixups_iter_src.get(index) {
-            Some(&local_src) => {
-                #[cfg(feature = "tracing")]
-                {
-                    let src_abs = self.abs_data_offset + local_src;
-                    let dst_abs = self.abs_data_offset + local_dst;
-                    tracing::trace!("local_fixup_iter of {index}th: src({local_src}/abs: {src_abs:#x}), dst({local_dst}/abs: {dst_abs:#x})");
-                }
-
-                self.local_fixups.write_local_fixups(
-                    local_src,
-                    local_dst,
-                    self.is_little_endian,
-                )?;
-                Ok(())
-            }
-            None => MissingLocalFixupSnafu { dst: local_dst }.fail(),
-        }
     }
 
     /// Write `global_fixups` of data section bytes to writer.
@@ -429,6 +372,8 @@ macro_rules! impl_serialize_primitive {
 macro_rules! impl_serialize_math {
     ($method:ident, $value_type:ty) => {
         fn $method(self, v: &$value_type) -> Result<Self::Ok, Self::Error> {
+            #[cfg(feature = "tracing")]
+            tracing::debug!("serialize math {v}({:#x})", self.output.position());
             match self.is_little_endian {
                 true => self.output.write(v.to_le_bytes().as_slice()),
                 false => self.output.write(v.to_be_bytes().as_slice()),
@@ -443,7 +388,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     type Error = Error;
 
     type SerializeSeq = Self;
-    type SerializeStruct = Self;
+    type SerializeStruct = StructSerializer<'a>;
     type SerializeFlags = Self;
 
     #[inline]
@@ -536,7 +481,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
             self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // For global_fixups
             self.write_virtual_fixups_pair(name, virtual_src)?; // Ok, `virtual_fixup` is known.
         }
-        Ok(self)
+        Ok(Self::SerializeStruct::new(self))
     }
 
     #[inline]
