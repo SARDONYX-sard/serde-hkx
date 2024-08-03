@@ -1,0 +1,72 @@
+{
+  "name": "hkMemoryResourceContainer",
+  "version": 1,
+  "signature": "0x4762f92a",
+  "size_x86": 40,
+  "size_x86_64": 64,
+  "parent": "hkResourceContainer",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": true,
+  "members": [
+    {
+      "name": "name",
+      "has_string": true,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "parent",
+      "class_ref": "hkMemoryResourceContainer",
+      "has_string": false,
+      "ctype": "struct hkMemoryResourceContainer*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "resourceHandles",
+      "class_ref": "hkMemoryResourceHandle",
+      "has_string": false,
+      "ctype": "hkArray<hkMemoryResourceHandle*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "children",
+      "class_ref": "hkMemoryResourceContainer",
+      "has_string": false,
+      "ctype": "hkArray<hkMemoryResourceContainer*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "offset_x86": 28,
+      "offset_x86_64": 48,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

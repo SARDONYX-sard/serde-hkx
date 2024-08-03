@@ -1,0 +1,11 @@
+{
+  "name": "hkpCollidableCollidableFilter",
+  "version": 0,
+  "signature": "0xe0708a00",
+  "size_x86": 4,
+  "size_x86_64": 8,
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": []
+}

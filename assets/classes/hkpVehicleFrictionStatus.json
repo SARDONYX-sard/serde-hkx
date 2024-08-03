@@ -1,0 +1,27 @@
+{
+  "name": "hkpVehicleFrictionStatus",
+  "version": 0,
+  "signature": "0x1c076a84",
+  "size_x86": 72,
+  "size_x86_64": 72,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "axis",
+      "class_ref": "hkpVehicleFrictionStatusAxisStatus",
+      "has_string": false,
+      "ctype": "struct hkpVehicleFrictionStatusAxisStatus[2]",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 36,
+      "type_size_x86_64": 72,
+      "arrsize": 2,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

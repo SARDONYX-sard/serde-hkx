@@ -1,0 +1,55 @@
+{
+  "name": "hkpLinFrictionConstraintAtom",
+  "version": 0,
+  "signature": "0x3e94ef7c",
+  "size_x86": 8,
+  "size_x86_64": 8,
+  "parent": "hkpConstraintAtom",
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "isEnabled",
+      "has_string": false,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "frictionAxis",
+      "has_string": false,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 3,
+      "offset_x86_64": 3,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxFrictionForce",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

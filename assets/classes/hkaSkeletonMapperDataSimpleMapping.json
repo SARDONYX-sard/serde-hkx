@@ -1,0 +1,54 @@
+{
+  "name": "hkaSkeletonMapperDataSimpleMapping",
+  "version": 0,
+  "signature": "0x3405deca",
+  "size_x86": 64,
+  "size_x86_64": 64,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "boneA",
+      "has_string": false,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "boneB",
+      "has_string": false,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "aFromBTransform",
+      "has_string": false,
+      "ctype": "hkQsTransform",
+      "vtype": "TYPE_QSTRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "type_size_x86": 48,
+      "type_size_x86_64": 48,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

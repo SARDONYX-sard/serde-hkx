@@ -1,0 +1,55 @@
+{
+  "name": "hkpGroupFilter",
+  "version": 0,
+  "signature": "0x65ee88e4",
+  "size_x86": 256,
+  "size_x86_64": 272,
+  "parent": "hkpCollisionFilter",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "nextFreeSystemGroup",
+      "has_string": false,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 72,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "collisionLookupTable",
+      "has_string": false,
+      "ctype": "hkUint32[32]",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 52,
+      "offset_x86_64": 76,
+      "type_size_x86": 128,
+      "type_size_x86_64": 128,
+      "arrsize": 32,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pad256",
+      "has_string": false,
+      "ctype": "hkVector4[4]",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 192,
+      "offset_x86_64": 208,
+      "type_size_x86": 64,
+      "type_size_x86_64": 64,
+      "arrsize": 4,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

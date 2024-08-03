@@ -1,0 +1,41 @@
+{
+  "name": "hkxMeshUserChannelInfo",
+  "version": 0,
+  "signature": "0x270724a5",
+  "size_x86": 28,
+  "size_x86_64": 48,
+  "parent": "hkxAttributeHolder",
+  "parent_has_string": true,
+  "vtable": true,
+  "has_string": true,
+  "members": [
+    {
+      "name": "name",
+      "has_string": true,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "className",
+      "has_string": true,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

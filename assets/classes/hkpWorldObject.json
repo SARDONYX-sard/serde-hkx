@@ -1,0 +1,160 @@
+{
+  "name": "hkpWorldObject",
+  "version": 0,
+  "signature": "0x49fb6f2e",
+  "size_x86": 140,
+  "size_x86_64": 208,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": true,
+  "enums": [
+    {
+      "name": "MtChecks",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "MULTI_THREADING_CHECKS_ENABLE",
+          "value": 0
+        },
+        {
+          "name": "MULTI_THREADING_CHECKS_IGNORE",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "BroadPhaseType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "BROAD_PHASE_INVALID",
+          "value": 0
+        },
+        {
+          "name": "BROAD_PHASE_ENTITY",
+          "value": 1
+        },
+        {
+          "name": "BROAD_PHASE_PHANTOM",
+          "value": 2
+        },
+        {
+          "name": "BROAD_PHASE_BORDER",
+          "value": 3
+        },
+        {
+          "name": "BROAD_PHASE_MAX_ID",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "world",
+      "has_string": false,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "userData",
+      "has_string": false,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "collidable",
+      "class_ref": "hkpLinkedCollidable",
+      "has_string": false,
+      "ctype": "struct hkpLinkedCollidable",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 92,
+      "type_size_x86_64": 128,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "multiThreadCheck",
+      "class_ref": "hkMultiThreadCheck",
+      "has_string": false,
+      "ctype": "struct hkMultiThreadCheck",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 108,
+      "offset_x86_64": 160,
+      "type_size_x86": 12,
+      "type_size_x86_64": 12,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "name",
+      "has_string": true,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 120,
+      "offset_x86_64": 176,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "properties",
+      "class_ref": "hkpProperty",
+      "has_string": false,
+      "ctype": "hkArray<struct hkpProperty>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 124,
+      "offset_x86_64": 184,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "treeData",
+      "has_string": false,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 136,
+      "offset_x86_64": 200,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

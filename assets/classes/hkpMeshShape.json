@@ -1,0 +1,163 @@
+{
+  "name": "hkpMeshShape",
+  "version": 0,
+  "signature": "0x3bf12c0f",
+  "size_x86": 96,
+  "size_x86_64": 128,
+  "parent": "hkpShapeCollection",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "MeshShapeIndexStridingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "INDICES_INVALID",
+          "value": 0
+        },
+        {
+          "name": "INDICES_INT16",
+          "value": 1
+        },
+        {
+          "name": "INDICES_INT32",
+          "value": 2
+        },
+        {
+          "name": "INDICES_MAX_ID",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "MeshShapeMaterialIndexStridingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "MATERIAL_INDICES_INVALID",
+          "value": 0
+        },
+        {
+          "name": "MATERIAL_INDICES_INT8",
+          "value": 1
+        },
+        {
+          "name": "MATERIAL_INDICES_INT16",
+          "value": 2
+        },
+        {
+          "name": "MATERIAL_INDICES_MAX_ID",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "scaling",
+      "has_string": false,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numBitsForSubpartIndex",
+      "has_string": false,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 64,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "subparts",
+      "class_ref": "hkpMeshShapeSubpart",
+      "has_string": false,
+      "ctype": "hkArray<struct hkpMeshShapeSubpart>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 52,
+      "offset_x86_64": 72,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "weldingInfo",
+      "has_string": false,
+      "ctype": "hkArray<hkUint16>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT16",
+      "offset_x86": 64,
+      "offset_x86_64": 88,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "weldingType",
+      "enum_ref": "WeldingType",
+      "has_string": false,
+      "ctype": "enum WeldingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 76,
+      "offset_x86_64": 104,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 6
+    },
+    {
+      "name": "radius",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 80,
+      "offset_x86_64": 108,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pad",
+      "has_string": false,
+      "ctype": "hkInt32[3]",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 84,
+      "offset_x86_64": 112,
+      "type_size_x86": 12,
+      "type_size_x86_64": 12,
+      "arrsize": 3,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

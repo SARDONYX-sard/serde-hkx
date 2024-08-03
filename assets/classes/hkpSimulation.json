@@ -1,0 +1,199 @@
+{
+  "name": "hkpSimulation",
+  "version": 0,
+  "signature": "0x97aba922",
+  "size_x86": 44,
+  "size_x86_64": 64,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "FindContacts",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FIND_CONTACTS_DEFAULT",
+          "value": 0
+        },
+        {
+          "name": "FIND_CONTACTS_EXTRA",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "ResetCollisionInformation",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "RESET_TOI",
+          "value": 1
+        },
+        {
+          "name": "RESET_TIM",
+          "value": 2
+        },
+        {
+          "name": "RESET_AABB",
+          "value": 4
+        },
+        {
+          "name": "RESET_ALL",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "LastProcessingStep",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "INTEGRATE",
+          "value": 0
+        },
+        {
+          "name": "COLLIDE",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "determinismCheckFrameCounter",
+      "has_string": false,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "world",
+      "class_ref": "hkpWorld",
+      "has_string": false,
+      "ctype": "struct hkpWorld*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "lastProcessingStep",
+      "enum_ref": "LastProcessingStep",
+      "has_string": false,
+      "ctype": "enum LastProcessingStep",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "currentTime",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 20,
+      "offset_x86_64": 36,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "currentPsiTime",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "physicsDeltaTime",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 28,
+      "offset_x86_64": 44,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "simulateUntilTime",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "frameMarkerPsiSnap",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 36,
+      "offset_x86_64": 52,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "previousStepResult",
+      "has_string": false,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 40,
+      "offset_x86_64": 56,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

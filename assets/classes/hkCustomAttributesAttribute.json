@@ -1,0 +1,40 @@
+{
+  "name": "hkCustomAttributesAttribute",
+  "version": 0,
+  "signature": "0x1388d601",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": true,
+  "members": [
+    {
+      "name": "name",
+      "has_string": true,
+      "ctype": "char*",
+      "vtype": "TYPE_CSTRING",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "value",
+      "has_string": false,
+      "ctype": "hkVariant",
+      "vtype": "TYPE_VARIANT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "type_size_x86": 8,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

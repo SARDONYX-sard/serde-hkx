@@ -1,0 +1,129 @@
+{
+  "name": "hkbNode",
+  "version": 1,
+  "signature": "0x6d26f61d",
+  "size_x86": 40,
+  "size_x86_64": 72,
+  "parent": "hkbBindable",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": true,
+  "enums": [
+    {
+      "name": "GetChildrenFlagBits",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAG_ACTIVE_ONLY",
+          "value": 1
+        },
+        {
+          "name": "FLAG_GENERATORS_ONLY",
+          "value": 2
+        },
+        {
+          "name": "FLAG_IGNORE_REFERENCED_BEHAVIORS",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "CloneState",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "CLONE_STATE_DEFAULT",
+          "value": 0
+        },
+        {
+          "name": "CLONE_STATE_TEMPLATE",
+          "value": 1
+        },
+        {
+          "name": "CLONE_STATE_CLONE",
+          "value": 2
+        },
+        {
+          "name": "CLONE_STATE_SHARABLE",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "userData",
+      "has_string": false,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 28,
+      "offset_x86_64": 48,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "name",
+      "has_string": true,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 32,
+      "offset_x86_64": 56,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "id",
+      "has_string": false,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 36,
+      "offset_x86_64": 64,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "cloneState",
+      "has_string": false,
+      "ctype": "enum unknown",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "offset_x86": 38,
+      "offset_x86_64": 66,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "padNode",
+      "has_string": false,
+      "ctype": "hkBool[1]",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 39,
+      "offset_x86_64": 67,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 1,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

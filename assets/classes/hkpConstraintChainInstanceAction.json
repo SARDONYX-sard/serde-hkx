@@ -1,0 +1,28 @@
+{
+  "name": "hkpConstraintChainInstanceAction",
+  "version": 0,
+  "signature": "0xc3971189",
+  "size_x86": 28,
+  "size_x86_64": 56,
+  "parent": "hkpAction",
+  "parent_has_string": true,
+  "vtable": true,
+  "has_string": true,
+  "members": [
+    {
+      "name": "constraintInstance",
+      "class_ref": "hkpConstraintChainInstance",
+      "has_string": false,
+      "ctype": "struct hkpConstraintChainInstance*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|NOT_OWNED",
+      "default": 0
+    }
+  ]
+}

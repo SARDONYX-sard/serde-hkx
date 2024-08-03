@@ -1,0 +1,54 @@
+{
+  "name": "hkpStiffSpringChainDataConstraintInfo",
+  "version": 0,
+  "signature": "0xc624a180",
+  "size_x86": 48,
+  "size_x86_64": 48,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "pivotInA",
+      "has_string": false,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pivotInB",
+      "has_string": false,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "springLength",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "name": "hkxLight",
+  "version": 1,
+  "signature": "0x81c86d42",
+  "size_x86": 64,
+  "size_x86_64": 80,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "LightType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "POINT_LIGHT",
+          "value": 0
+        },
+        {
+          "name": "DIRECTIONAL_LIGHT",
+          "value": 1
+        },
+        {
+          "name": "SPOT_LIGHT",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "type",
+      "enum_ref": "LightType",
+      "has_string": false,
+      "ctype": "enum LightType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "position",
+      "has_string": false,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "direction",
+      "has_string": false,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "color",
+      "has_string": false,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 64,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "angle",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 52,
+      "offset_x86_64": 68,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

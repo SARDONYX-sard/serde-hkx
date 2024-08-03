@@ -1,0 +1,55 @@
+{
+  "name": "hkpVelocityConstraintMotor",
+  "version": 0,
+  "signature": "0xfca2fcc3",
+  "size_x86": 32,
+  "size_x86_64": 48,
+  "parent": "hkpLimitedForceConstraintMotor",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "tau",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "velocityTarget",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 24,
+      "offset_x86_64": 36,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "useVelocityTargetFromConstraintTargets",
+      "has_string": false,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 28,
+      "offset_x86_64": 40,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

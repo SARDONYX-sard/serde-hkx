@@ -1,0 +1,41 @@
+{
+  "name": "hkpStorageSampledHeightFieldShape",
+  "version": 0,
+  "signature": "0x15ff414b",
+  "size_x86": 112,
+  "size_x86_64": 144,
+  "parent": "hkpSampledHeightFieldShape",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "storage",
+      "has_string": false,
+      "ctype": "hkArray<hkReal>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_REAL",
+      "offset_x86": 96,
+      "offset_x86_64": 112,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "triangleFlip",
+      "has_string": false,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 108,
+      "offset_x86_64": 128,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

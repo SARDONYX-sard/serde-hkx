@@ -1,0 +1,41 @@
+{
+  "name": "hkpSetLocalRotationsConstraintAtom",
+  "version": 0,
+  "signature": "0xf81db8e",
+  "size_x86": 112,
+  "size_x86_64": 112,
+  "parent": "hkpConstraintAtom",
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "rotationA",
+      "has_string": false,
+      "ctype": "hkRotation",
+      "vtype": "TYPE_ROTATION",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "type_size_x86": 48,
+      "type_size_x86_64": 48,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rotationB",
+      "has_string": false,
+      "ctype": "hkRotation",
+      "vtype": "TYPE_ROTATION",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 64,
+      "offset_x86_64": 64,
+      "type_size_x86": 48,
+      "type_size_x86_64": 48,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

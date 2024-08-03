@@ -1,0 +1,69 @@
+{
+  "name": "hkbBehaviorGraphStringData",
+  "version": 1,
+  "signature": "0xc713064e",
+  "size_x86": 56,
+  "size_x86_64": 80,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": true,
+  "members": [
+    {
+      "name": "eventNames",
+      "has_string": true,
+      "ctype": "hkArray<hkStringPtr>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRINGPTR",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "attributeNames",
+      "has_string": true,
+      "ctype": "hkArray<hkStringPtr>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRINGPTR",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "variableNames",
+      "has_string": true,
+      "ctype": "hkArray<hkStringPtr>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRINGPTR",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "characterPropertyNames",
+      "has_string": true,
+      "ctype": "hkArray<hkStringPtr>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRINGPTR",
+      "offset_x86": 44,
+      "offset_x86_64": 64,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

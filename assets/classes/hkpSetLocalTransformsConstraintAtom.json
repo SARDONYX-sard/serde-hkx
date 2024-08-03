@@ -1,0 +1,41 @@
+{
+  "name": "hkpSetLocalTransformsConstraintAtom",
+  "version": 0,
+  "signature": "0x6e2a5198",
+  "size_x86": 144,
+  "size_x86_64": 144,
+  "parent": "hkpConstraintAtom",
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "transformA",
+      "has_string": false,
+      "ctype": "hkTransform",
+      "vtype": "TYPE_TRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "type_size_x86": 64,
+      "type_size_x86_64": 64,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transformB",
+      "has_string": false,
+      "ctype": "hkTransform",
+      "vtype": "TYPE_TRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 80,
+      "offset_x86_64": 80,
+      "type_size_x86": 64,
+      "type_size_x86_64": 64,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

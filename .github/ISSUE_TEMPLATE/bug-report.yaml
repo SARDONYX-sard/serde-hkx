@@ -1,0 +1,46 @@
+---
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: version
+    attributes:
+      label: Version
+      description: What version of our software are you running?
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: unexpected-behavior
+    attributes:
+      label: Reproducible errors
+      description: May I ask you to tell us about the unexpected behavior?
+      placeholder: "Example: Reproducible error codes, their description."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: May I ask you to tell us about the behavior you expect?
+      # yamllint disable-line rule:line-length
+      placeholder: "Example: Reflects the level specification of the logger in the GUI."
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      # yamllint disable-line rule:line-length
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: Shell

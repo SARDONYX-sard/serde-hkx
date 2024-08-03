@@ -1,0 +1,41 @@
+{
+  "name": "hkaSkeletonLocalFrameOnBone",
+  "version": 0,
+  "signature": "0x52e8043",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "localFrame",
+      "class_ref": "hkLocalFrame",
+      "has_string": false,
+      "ctype": "struct hkLocalFrame*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "boneIndex",
+      "has_string": false,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "name": "hkaQuantizedAnimation",
+  "version": 0,
+  "signature": "0x3920f053",
+  "size_x86": 60,
+  "size_x86_64": 88,
+  "parent": "hkaAnimation",
+  "parent_has_string": true,
+  "vtable": true,
+  "has_string": true,
+  "members": [
+    {
+      "name": "data",
+      "has_string": false,
+      "ctype": "hkArray<hkUint8>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 40,
+      "offset_x86_64": 56,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "endian",
+      "has_string": false,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 52,
+      "offset_x86_64": 72,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "skeleton",
+      "has_string": false,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 56,
+      "offset_x86_64": 80,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

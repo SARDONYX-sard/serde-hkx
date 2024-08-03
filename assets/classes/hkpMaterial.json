@@ -1,0 +1,99 @@
+{
+  "name": "hkpMaterial",
+  "version": 2,
+  "signature": "0x33be6570",
+  "size_x86": 12,
+  "size_x86_64": 12,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "ResponseType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "RESPONSE_INVALID",
+          "value": 0
+        },
+        {
+          "name": "RESPONSE_SIMPLE_CONTACT",
+          "value": 1
+        },
+        {
+          "name": "RESPONSE_REPORTING",
+          "value": 2
+        },
+        {
+          "name": "RESPONSE_NONE",
+          "value": 3
+        },
+        {
+          "name": "RESPONSE_MAX_ID",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "responseType",
+      "enum_ref": "ResponseType",
+      "has_string": false,
+      "ctype": "enum ResponseType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rollingFrictionMultiplier",
+      "has_string": false,
+      "ctype": "hkHalf",
+      "vtype": "TYPE_HALF",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 10000000
+    },
+    {
+      "name": "friction",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "restitution",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+name: Build & Test(Cargo)
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: "*"
+env:
+  CARGO_TERM_COLOR: always
+  APP_NAME: cvhkx
+
+jobs:
+  lint:
+    strategy:
+      matrix:
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.3
+        with:
+          prefix-key: cargo-debug-${{ matrix.platform }}
+
+      - name: Check format
+        run: cargo fmt --all -- --check
+      - name: Lint Check
+        run: cargo clippy --workspace -- -D warnings
+
+      # The action only supports Linux.
+      - name: Check license, dependencies
+        if: runner.os == 'Linux'
+        uses: EmbarkStudios/cargo-deny-action@v2.0.0
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.3
+        with:
+          prefix-key: cargo-debug-${{ matrix.platform }}
+      - name: Test
+        run: cargo test --workspace
+
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.3
+        with:
+          prefix-key: cargo-release-${{ matrix.platform }}
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Make outputs dir
+        run: mkdir -p ./build
+      - name: Compress outputs(Windows)
+        shell: pwsh
+        if: runner.os == 'Windows'
+        run: |
+          Move-Item -Path ./target/release/${{ env.APP_NAME }}.exe -Destination './build'
+
+      - name: Compress outputs(MacOS)
+        shell: bash
+        if: runner.os == 'macOS'
+        run: |
+          mv ./target/release/${{ env.APP_NAME }} ./build
+      - name: Compress outputs(Linux)
+        shell: bash
+        if: runner.os == 'Linux'
+        run: |
+          mv ./target/release/${{ env.APP_NAME }} ./build
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.3.5
+        with:
+          name: serde-hkx-cli-${{runner.os}}
+          path: |
+            ./build/

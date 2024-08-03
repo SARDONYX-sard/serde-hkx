@@ -1,0 +1,12 @@
+{
+  "name": "hkpPhantomCallbackShape",
+  "version": 0,
+  "signature": "0xe7eca7eb",
+  "size_x86": 16,
+  "size_x86_64": 32,
+  "parent": "hkpShape",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": []
+}

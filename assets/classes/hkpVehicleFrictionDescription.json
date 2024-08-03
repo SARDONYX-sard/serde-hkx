@@ -1,0 +1,55 @@
+{
+  "name": "hkpVehicleFrictionDescription",
+  "version": 0,
+  "signature": "0x1034549a",
+  "size_x86": 208,
+  "size_x86_64": 208,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "wheelDistance",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "chassisMassInv",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "axleDescr",
+      "class_ref": "hkpVehicleFrictionDescriptionAxisDescription",
+      "has_string": false,
+      "ctype": "struct hkpVehicleFrictionDescriptionAxisDescription[2]",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "type_size_x86": 100,
+      "type_size_x86_64": 200,
+      "arrsize": 2,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

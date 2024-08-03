@@ -1,0 +1,70 @@
+{
+  "name": "hkbGetHandleOnBoneModifier",
+  "version": 0,
+  "signature": "0x50c34a17",
+  "size_x86": 56,
+  "size_x86_64": 104,
+  "parent": "hkbModifier",
+  "parent_has_string": true,
+  "vtable": true,
+  "has_string": true,
+  "members": [
+    {
+      "name": "handleOut",
+      "class_ref": "hkbHandle",
+      "has_string": false,
+      "ctype": "struct hkbHandle*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "localFrameName",
+      "has_string": true,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 88,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "ragdollBoneIndex",
+      "has_string": false,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 52,
+      "offset_x86_64": 96,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "animationBoneIndex",
+      "has_string": false,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 54,
+      "offset_x86_64": 98,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "hkpStorageMeshShape",
+  "version": 0,
+  "signature": "0xbefd8b39",
+  "size_x86": 112,
+  "size_x86_64": 144,
+  "parent": "hkpMeshShape",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "storage",
+      "class_ref": "hkpStorageMeshShapeSubpartStorage",
+      "has_string": false,
+      "ctype": "hkArray<hkpStorageMeshShapeSubpartStorage*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "offset_x86": 96,
+      "offset_x86_64": 128,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

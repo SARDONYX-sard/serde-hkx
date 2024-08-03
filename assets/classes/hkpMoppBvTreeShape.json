@@ -1,0 +1,42 @@
+{
+  "name": "hkpMoppBvTreeShape",
+  "version": 0,
+  "signature": "0x90b29d39",
+  "size_x86": 64,
+  "size_x86_64": 112,
+  "parent": "hkMoppBvTreeShapeBase",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "child",
+      "class_ref": "hkpSingleShapeContainer",
+      "has_string": false,
+      "ctype": "struct hkpSingleShapeContainer",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "type_size_x86": 8,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "childSize",
+      "has_string": false,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 56,
+      "offset_x86_64": 96,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

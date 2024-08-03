@@ -1,0 +1,94 @@
+{
+  "name": "hkxMaterialEffect",
+  "version": 1,
+  "signature": "0x1d39f925",
+  "size_x86": 28,
+  "size_x86_64": 48,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": true,
+  "enums": [
+    {
+      "name": "EffectType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "EFFECT_TYPE_INVALID",
+          "value": 0
+        },
+        {
+          "name": "EFFECT_TYPE_UNKNOWN",
+          "value": 1
+        },
+        {
+          "name": "EFFECT_TYPE_HLSL_FX_INLINE",
+          "value": 2
+        },
+        {
+          "name": "EFFECT_TYPE_CG_FX_INLINE",
+          "value": 3
+        },
+        {
+          "name": "EFFECT_TYPE_HLSL_FX_FILENAME",
+          "value": 4
+        },
+        {
+          "name": "EFFECT_TYPE_CG_FX_FILENAME",
+          "value": 5
+        },
+        {
+          "name": "EFFECT_TYPE_MAX_ID",
+          "value": 6
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "name",
+      "has_string": true,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "type",
+      "enum_ref": "EffectType",
+      "has_string": false,
+      "ctype": "enum EffectType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "data",
+      "has_string": false,
+      "ctype": "hkArray<hkUint8>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

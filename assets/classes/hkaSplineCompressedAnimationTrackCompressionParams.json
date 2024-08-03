@@ -1,0 +1,234 @@
+{
+  "name": "hkaSplineCompressedAnimationTrackCompressionParams",
+  "version": 0,
+  "signature": "0x42e878d3",
+  "size_x86": 28,
+  "size_x86_64": 28,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "RotationQuantization",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "POLAR32",
+          "value": 0
+        },
+        {
+          "name": "THREECOMP40",
+          "value": 1
+        },
+        {
+          "name": "THREECOMP48",
+          "value": 2
+        },
+        {
+          "name": "THREECOMP24",
+          "value": 3
+        },
+        {
+          "name": "STRAIGHT16",
+          "value": 4
+        },
+        {
+          "name": "UNCOMPRESSED",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "ScalarQuantization",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "BITS8",
+          "value": 0
+        },
+        {
+          "name": "BITS16",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "rotationTolerance",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "translationTolerance",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "scaleTolerance",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "floatingTolerance",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 12,
+      "offset_x86_64": 12,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rotationDegree",
+      "has_string": false,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "translationDegree",
+      "has_string": false,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 18,
+      "offset_x86_64": 18,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "scaleDegree",
+      "has_string": false,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 20,
+      "offset_x86_64": 20,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "floatingDegree",
+      "has_string": false,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 22,
+      "offset_x86_64": 22,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rotationQuantizationType",
+      "enum_ref": "RotationQuantization",
+      "has_string": false,
+      "ctype": "enum RotationQuantization",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 24,
+      "offset_x86_64": 24,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "translationQuantizationType",
+      "enum_ref": "ScalarQuantization",
+      "has_string": false,
+      "ctype": "enum ScalarQuantization",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 25,
+      "offset_x86_64": 25,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "scaleQuantizationType",
+      "enum_ref": "ScalarQuantization",
+      "has_string": false,
+      "ctype": "enum ScalarQuantization",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 26,
+      "offset_x86_64": 26,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "floatQuantizationType",
+      "enum_ref": "ScalarQuantization",
+      "has_string": false,
+      "ctype": "enum ScalarQuantization",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 27,
+      "offset_x86_64": 27,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

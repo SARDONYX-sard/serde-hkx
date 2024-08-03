@@ -1,0 +1,12 @@
+# misc
+.DS_Store
+*.pem
+**/logs/
+
+# Rust build cache
+**/target
+
+**/logs/
+
+**/serde_hkx/tests/data/
+**/serde_hkx/tests/output/

@@ -1,0 +1,125 @@
+{
+  "name": "hkpCollidable",
+  "version": 0,
+  "signature": "0x9a0e42a5",
+  "size_x86": 80,
+  "size_x86_64": 112,
+  "parent": "hkpCdBody",
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "ForceCollideOntoPpuReasons",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FORCE_PPU_USER_REQUEST",
+          "value": 1
+        },
+        {
+          "name": "FORCE_PPU_SHAPE_REQUEST",
+          "value": 2
+        },
+        {
+          "name": "FORCE_PPU_MODIFIER_REQUEST",
+          "value": 4
+        },
+        {
+          "name": "FORCE_PPU_SHAPE_UNCHECKED",
+          "value": 8
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "ownerOffset",
+      "has_string": false,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "forceCollideOntoPpu",
+      "has_string": false,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 17,
+      "offset_x86_64": 33,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "shapeSizeOnSpu",
+      "has_string": false,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 18,
+      "offset_x86_64": 34,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "broadPhaseHandle",
+      "class_ref": "hkpTypedBroadPhaseHandle",
+      "has_string": false,
+      "ctype": "struct hkpTypedBroadPhaseHandle",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 20,
+      "offset_x86_64": 36,
+      "type_size_x86": 12,
+      "type_size_x86_64": 12,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "boundingVolumeData",
+      "class_ref": "hkpCollidableBoundingVolumeData",
+      "has_string": false,
+      "ctype": "struct hkpCollidableBoundingVolumeData",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "type_size_x86": 44,
+      "type_size_x86_64": 56,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "allowedPenetrationDepth",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 76,
+      "offset_x86_64": 104,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

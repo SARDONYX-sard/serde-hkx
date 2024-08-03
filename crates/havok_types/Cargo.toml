@@ -1,0 +1,27 @@
+[package]
+name = "havok_types"
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+half = "2.4.1"
+parse-display = { workspace = true }               # Display derive
+parse_int = { workspace = true }
+serde = { workspace = true, optional = true }      # Implement (De)Serializer
+serde_with = { workspace = true, optional = true }
+static_assertions = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true } # To make diffs color and easy to read on test
+serde_json = { workspace = true }        # To read and write Json files
+
+[features]
+default = []
+serde = ["dep:serde", "dep:serde_with"]

@@ -1,0 +1,297 @@
+{
+  "name": "hkpConstraintInstance",
+  "version": 1,
+  "signature": "0x34eba5f",
+  "size_x86": 56,
+  "size_x86_64": 112,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": true,
+  "enums": [
+    {
+      "name": "ConstraintPriority",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "PRIORITY_INVALID",
+          "value": 0
+        },
+        {
+          "name": "PRIORITY_PSI",
+          "value": 1
+        },
+        {
+          "name": "PRIORITY_SIMPLIFIED_TOI_UNUSED",
+          "value": 2
+        },
+        {
+          "name": "PRIORITY_TOI",
+          "value": 3
+        },
+        {
+          "name": "PRIORITY_TOI_HIGHER",
+          "value": 4
+        },
+        {
+          "name": "PRIORITY_TOI_FORCED",
+          "value": 5
+        },
+        {
+          "name": "NUM_PRIORITIES",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "InstanceType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "TYPE_NORMAL",
+          "value": 0
+        },
+        {
+          "name": "TYPE_CHAIN",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "AddReferences",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "DO_NOT_ADD_REFERENCES",
+          "value": 0
+        },
+        {
+          "name": "DO_ADD_REFERENCES",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "CloningMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "CLONE_SHALLOW_IF_NOT_CONSTRAINED_TO_WORLD",
+          "value": 0
+        },
+        {
+          "name": "CLONE_DATAS_WITH_MOTORS",
+          "value": 1
+        },
+        {
+          "name": "CLONE_FORCE_SHALLOW",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "OnDestructionRemapInfo",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ON_DESTRUCTION_REMAP",
+          "value": 0
+        },
+        {
+          "name": "ON_DESTRUCTION_REMOVE",
+          "value": 1
+        },
+        {
+          "name": "ON_DESTRUCTION_RESET_REMOVE",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "owner",
+      "has_string": false,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "data",
+      "class_ref": "hkpConstraintData",
+      "has_string": false,
+      "ctype": "struct hkpConstraintData*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "constraintModifiers",
+      "class_ref": "hkpModifierConstraintAtom",
+      "has_string": false,
+      "ctype": "struct hkpModifierConstraintAtom*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "entities",
+      "class_ref": "hkpEntity",
+      "has_string": false,
+      "ctype": "struct hkpEntity*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "type_size_x86": 8,
+      "type_size_x86_64": 16,
+      "arrsize": 2,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "priority",
+      "enum_ref": "ConstraintPriority",
+      "has_string": false,
+      "ctype": "enum ConstraintPriority",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 28,
+      "offset_x86_64": 56,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wantRuntime",
+      "has_string": false,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 29,
+      "offset_x86_64": 57,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "destructionRemapInfo",
+      "enum_ref": "OnDestructionRemapInfo",
+      "has_string": false,
+      "ctype": "enum OnDestructionRemapInfo",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 30,
+      "offset_x86_64": 58,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "listeners",
+      "class_ref": "hkpConstraintInstanceSmallArraySerializeOverrideType",
+      "has_string": false,
+      "ctype": "struct hkpConstraintInstanceSmallArraySerializeOverrideType",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 32,
+      "offset_x86_64": 64,
+      "type_size_x86": 8,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "name",
+      "has_string": true,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 40,
+      "offset_x86_64": 80,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "userData",
+      "has_string": false,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 44,
+      "offset_x86_64": 88,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "internal",
+      "has_string": false,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 96,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "uid",
+      "has_string": false,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 52,
+      "offset_x86_64": 104,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

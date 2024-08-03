@@ -1,0 +1,175 @@
+{
+  "name": "hkbTwistModifier",
+  "version": 1,
+  "signature": "0xb6b76b32",
+  "size_x86": 112,
+  "size_x86_64": 144,
+  "parent": "hkbModifier",
+  "parent_has_string": true,
+  "vtable": true,
+  "has_string": true,
+  "enums": [
+    {
+      "name": "SetAngleMethod",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "LINEAR",
+          "value": 0
+        },
+        {
+          "name": "RAMPED",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "RotationAxisCoordinates",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ROTATION_AXIS_IN_MODEL_COORDINATES",
+          "value": 0
+        },
+        {
+          "name": "ROTATION_AXIS_IN_LOCAL_COORDINATES",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "axisOfRotation",
+      "has_string": false,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "twistAngle",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "startBoneIndex",
+      "has_string": false,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 68,
+      "offset_x86_64": 100,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "endBoneIndex",
+      "has_string": false,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 70,
+      "offset_x86_64": 102,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "setAngleMethod",
+      "enum_ref": "SetAngleMethod",
+      "has_string": false,
+      "ctype": "enum SetAngleMethod",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "offset_x86": 72,
+      "offset_x86_64": 104,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rotationAxisCoordinates",
+      "enum_ref": "RotationAxisCoordinates",
+      "has_string": false,
+      "ctype": "enum RotationAxisCoordinates",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "offset_x86": 73,
+      "offset_x86_64": 105,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isAdditive",
+      "has_string": false,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 74,
+      "offset_x86_64": 106,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "boneChainIndices",
+      "has_string": false,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 76,
+      "offset_x86_64": 112,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "parentBoneIndices",
+      "has_string": false,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 88,
+      "offset_x86_64": 128,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

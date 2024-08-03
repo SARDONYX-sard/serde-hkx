@@ -1,0 +1,116 @@
+{
+  "name": "hkpPointToPathConstraintData",
+  "version": 0,
+  "signature": "0x8e7cb5da",
+  "size_x86": 176,
+  "size_x86_64": 192,
+  "parent": "hkpConstraintData",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "OrientationConstraintType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "CONSTRAIN_ORIENTATION_INVALID",
+          "value": 0
+        },
+        {
+          "name": "CONSTRAIN_ORIENTATION_NONE",
+          "value": 1
+        },
+        {
+          "name": "CONSTRAIN_ORIENTATION_ALLOW_SPIN",
+          "value": 2
+        },
+        {
+          "name": "CONSTRAIN_ORIENTATION_TO_PATH",
+          "value": 3
+        },
+        {
+          "name": "CONSTRAIN_ORIENTATION_MAX_ID",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "atoms",
+      "class_ref": "hkpBridgeAtoms",
+      "has_string": false,
+      "ctype": "struct hkpBridgeAtoms",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "type_size_x86": 12,
+      "type_size_x86_64": 24,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "path",
+      "class_ref": "hkpParametricCurve",
+      "has_string": false,
+      "ctype": "struct hkpParametricCurve*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxFrictionForce",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 28,
+      "offset_x86_64": 56,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "angularConstrainedDOF",
+      "enum_ref": "OrientationConstraintType",
+      "has_string": false,
+      "ctype": "enum OrientationConstraintType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "offset_x86": 32,
+      "offset_x86_64": 60,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transform_OS_KS",
+      "has_string": false,
+      "ctype": "hkTransform[2]",
+      "vtype": "TYPE_TRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 64,
+      "type_size_x86": 128,
+      "type_size_x86_64": 128,
+      "arrsize": 2,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

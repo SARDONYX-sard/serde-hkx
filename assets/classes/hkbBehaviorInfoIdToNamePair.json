@@ -1,0 +1,115 @@
+{
+  "name": "hkbBehaviorInfoIdToNamePair",
+  "version": 0,
+  "signature": "0x35a0439a",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": true,
+  "enums": [
+    {
+      "name": "ToolNodeType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "NODE_TYPE_UNKNOWN",
+          "value": 0
+        },
+        {
+          "name": "NODE_TYPE_STATE_MACHINE",
+          "value": 1
+        },
+        {
+          "name": "NODE_TYPE_CLIP",
+          "value": 2
+        },
+        {
+          "name": "NODE_TYPE_BLEND",
+          "value": 3
+        },
+        {
+          "name": "NODE_TYPE_MODIFIER",
+          "value": 4
+        },
+        {
+          "name": "NODE_TYPE_GENERATOR",
+          "value": 5
+        },
+        {
+          "name": "NODE_TYPE_MODIFIER_GENERATOR",
+          "value": 6
+        },
+        {
+          "name": "NODE_TYPE_TRANSITION_EFFECT",
+          "value": 7
+        },
+        {
+          "name": "NODE_TYPE_BEHAVIOR_FILE_REFERENCE",
+          "value": 8
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "behaviorName",
+      "has_string": true,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "nodeName",
+      "has_string": true,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "toolType",
+      "enum_ref": "ToolNodeType",
+      "has_string": false,
+      "ctype": "enum ToolNodeType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "id",
+      "has_string": false,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 10,
+      "offset_x86_64": 18,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

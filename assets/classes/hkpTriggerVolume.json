@@ -1,0 +1,122 @@
+{
+  "name": "hkpTriggerVolume",
+  "version": 0,
+  "signature": "0xa29a8d1a",
+  "size_x86": 52,
+  "size_x86_64": 88,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "EventType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ENTERED_EVENT",
+          "value": 1
+        },
+        {
+          "name": "LEFT_EVENT",
+          "value": 2
+        },
+        {
+          "name": "ENTERED_AND_LEFT_EVENT",
+          "value": 3
+        },
+        {
+          "name": "TRIGGER_BODY_LEFT_EVENT",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "Operation",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT32",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ADDED_OP",
+          "value": 0
+        },
+        {
+          "name": "REMOVED_OP",
+          "value": 1
+        },
+        {
+          "name": "CONTACT_OP",
+          "value": 2
+        },
+        {
+          "name": "TOI_OP",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "overlappingBodies",
+      "class_ref": "hkpRigidBody",
+      "has_string": false,
+      "ctype": "hkArray<hkpRigidBody*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "eventQueue",
+      "class_ref": "hkpTriggerVolumeEventInfo",
+      "has_string": false,
+      "ctype": "hkArray<struct hkpTriggerVolumeEventInfo>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 32,
+      "offset_x86_64": 56,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "triggerBody",
+      "class_ref": "hkpRigidBody",
+      "has_string": false,
+      "ctype": "struct hkpRigidBody*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 44,
+      "offset_x86_64": 72,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "sequenceNumber",
+      "has_string": false,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

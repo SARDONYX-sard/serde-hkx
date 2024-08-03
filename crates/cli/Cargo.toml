@@ -1,0 +1,40 @@
+[package]
+name = "cli_converter"
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[[bin]]
+name = "cvhkx"
+path = "./src/main.rs"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.86"
+clap = { version = "4.5.13", features = ["derive"] } # For CLI
+encoding_rs_io = "0.1"
+indexmap = { workspace = true }
+jwalk = { workspace = true } # To enumarate json class files
+parse-display = { workspace = true } # Display derive
+snafu = { workspace = true } # Define all error patterns(with backtrace)
+tokio = { workspace = true, features = [
+  "fs",
+  "macros",
+  "rt",
+  "rt-multi-thread",
+  "time",
+] }
+tracing = { workspace = true }
+tracing-subscriber = "0.3.18"
+
+# workspace members
+havok_classes = { workspace = true, features = ["ignore_duplicates"] }
+serde_hkx = { path = "../../serde_hkx", features = ["tracing"] }
+
+[features]
+default = ["color"]
+color = []

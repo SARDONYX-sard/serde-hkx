@@ -1,0 +1,43 @@
+{
+  "name": "hkbKeyframeBonesModifier",
+  "version": 3,
+  "signature": "0x95f66629",
+  "size_x86": 60,
+  "size_x86_64": 104,
+  "parent": "hkbModifier",
+  "parent_has_string": true,
+  "vtable": true,
+  "has_string": true,
+  "members": [
+    {
+      "name": "keyframeInfo",
+      "class_ref": "hkbKeyframeBonesModifierKeyframeInfo",
+      "has_string": false,
+      "ctype": "hkArray<struct hkbKeyframeBonesModifierKeyframeInfo>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "keyframedBonesList",
+      "class_ref": "hkbBoneIndexArray",
+      "has_string": false,
+      "ctype": "struct hkbBoneIndexArray*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 56,
+      "offset_x86_64": 96,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

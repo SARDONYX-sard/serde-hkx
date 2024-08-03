@@ -1,0 +1,28 @@
+{
+  "name": "hkpPulleyConstraintData",
+  "version": 0,
+  "signature": "0x972058ed",
+  "size_x86": 128,
+  "size_x86_64": 144,
+  "parent": "hkpConstraintData",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "atoms",
+      "class_ref": "hkpPulleyConstraintDataAtoms",
+      "has_string": false,
+      "ctype": "struct hkpPulleyConstraintDataAtoms",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 112,
+      "type_size_x86_64": 112,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    }
+  ]
+}

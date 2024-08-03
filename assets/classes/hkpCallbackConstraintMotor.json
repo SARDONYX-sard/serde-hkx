@@ -1,0 +1,114 @@
+{
+  "name": "hkpCallbackConstraintMotor",
+  "version": 0,
+  "signature": "0xafcd79ad",
+  "size_x86": 40,
+  "size_x86_64": 72,
+  "parent": "hkpLimitedForceConstraintMotor",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "CallbackType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT32",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "CALLBACK_MOTOR_TYPE_HAVOK_DEMO_SPRING_DAMPER",
+          "value": 0
+        },
+        {
+          "name": "CALLBACK_MOTOR_TYPE_USER_0",
+          "value": 1
+        },
+        {
+          "name": "CALLBACK_MOTOR_TYPE_USER_1",
+          "value": 2
+        },
+        {
+          "name": "CALLBACK_MOTOR_TYPE_USER_2",
+          "value": 3
+        },
+        {
+          "name": "CALLBACK_MOTOR_TYPE_USER_3",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "callbackFunc",
+      "has_string": false,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "callbackType",
+      "enum_ref": "CallbackType",
+      "has_string": false,
+      "ctype": "enum CallbackType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT32",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "userData0",
+      "has_string": false,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 28,
+      "offset_x86_64": 48,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "userData1",
+      "has_string": false,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 32,
+      "offset_x86_64": 56,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "userData2",
+      "has_string": false,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 36,
+      "offset_x86_64": 64,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

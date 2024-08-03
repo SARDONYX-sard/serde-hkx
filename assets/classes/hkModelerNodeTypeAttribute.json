@@ -1,0 +1,45 @@
+{
+  "name": "hkModelerNodeTypeAttribute",
+  "version": 0,
+  "signature": "0x338c092f",
+  "size_x86": 1,
+  "size_x86_64": 1,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "ModelerType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "DEFAULT",
+          "value": 0
+        },
+        {
+          "name": "LOCATOR",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "type",
+      "enum_ref": "ModelerType",
+      "has_string": false,
+      "ctype": "enum ModelerType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

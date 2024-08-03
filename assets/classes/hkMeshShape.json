@@ -1,0 +1,30 @@
+{
+  "name": "hkMeshShape",
+  "version": 0,
+  "signature": "0x9117d62e",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "AccessFlags",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ACCESS_INDICES",
+          "value": 1
+        },
+        {
+          "name": "ACCESS_VERTEX_BUFFER",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": []
+}

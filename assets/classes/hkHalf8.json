@@ -1,0 +1,26 @@
+{
+  "name": "hkHalf8",
+  "version": 1,
+  "signature": "0x7684dc80",
+  "size_x86": 16,
+  "size_x86_64": 16,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "quad",
+      "has_string": false,
+      "ctype": "hkHalf[8]",
+      "vtype": "TYPE_HALF",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 8,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    }
+  ]
+}

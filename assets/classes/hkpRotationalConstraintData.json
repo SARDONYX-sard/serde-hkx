@@ -1,0 +1,28 @@
+{
+  "name": "hkpRotationalConstraintData",
+  "version": 0,
+  "signature": "0x74867d9e",
+  "size_x86": 144,
+  "size_x86_64": 160,
+  "parent": "hkpConstraintData",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "atoms",
+      "class_ref": "hkpRotationalConstraintDataAtoms",
+      "has_string": false,
+      "ctype": "struct hkpRotationalConstraintDataAtoms",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 128,
+      "type_size_x86_64": 128,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    }
+  ]
+}

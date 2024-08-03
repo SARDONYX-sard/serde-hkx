@@ -1,0 +1,147 @@
+{
+  "name": "hkaSkeletonMapperData",
+  "version": 1,
+  "signature": "0x95687ea0",
+  "size_x86": 112,
+  "size_x86_64": 128,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "MappingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT32",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "HK_RAGDOLL_MAPPING",
+          "value": 0
+        },
+        {
+          "name": "HK_RETARGETING_MAPPING",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "skeletonA",
+      "class_ref": "hkaSkeleton",
+      "has_string": false,
+      "ctype": "struct hkaSkeleton*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "skeletonB",
+      "class_ref": "hkaSkeleton",
+      "has_string": false,
+      "ctype": "struct hkaSkeleton*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "simpleMappings",
+      "class_ref": "hkaSkeletonMapperDataSimpleMapping",
+      "has_string": false,
+      "ctype": "hkArray<struct hkaSkeletonMapperDataSimpleMapping>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "chainMappings",
+      "class_ref": "hkaSkeletonMapperDataChainMapping",
+      "has_string": false,
+      "ctype": "hkArray<struct hkaSkeletonMapperDataChainMapping>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "unmappedBones",
+      "has_string": false,
+      "ctype": "hkArray<hkInt16>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_INT16",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "extractedMotionMapping",
+      "has_string": false,
+      "ctype": "hkQsTransform",
+      "vtype": "TYPE_QSTRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 64,
+      "type_size_x86": 48,
+      "type_size_x86_64": 48,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "keepUnmappedLocal",
+      "has_string": false,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 96,
+      "offset_x86_64": 112,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "mappingType",
+      "enum_ref": "MappingType",
+      "has_string": false,
+      "ctype": "enum MappingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT32",
+      "offset_x86": 100,
+      "offset_x86_64": 116,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

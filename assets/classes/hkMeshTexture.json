@@ -1,0 +1,122 @@
+{
+  "name": "hkMeshTexture",
+  "version": 0,
+  "signature": "0xc9887918",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "Format",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "Unknown",
+          "value": 0
+        },
+        {
+          "name": "PNG",
+          "value": 1
+        },
+        {
+          "name": "TGA",
+          "value": 2
+        },
+        {
+          "name": "BMP",
+          "value": 3
+        },
+        {
+          "name": "DDS",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "FilterMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "POINT",
+          "value": 0
+        },
+        {
+          "name": "LINEAR",
+          "value": 1
+        },
+        {
+          "name": "ANISOTROPIC",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "TextureUsageType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "UNKNOWN",
+          "value": 0
+        },
+        {
+          "name": "DIFFUSE",
+          "value": 1
+        },
+        {
+          "name": "REFLECTION",
+          "value": 2
+        },
+        {
+          "name": "BUMP",
+          "value": 3
+        },
+        {
+          "name": "NORMAL",
+          "value": 4
+        },
+        {
+          "name": "DISPLACEMENT",
+          "value": 5
+        },
+        {
+          "name": "SPECULAR",
+          "value": 6
+        },
+        {
+          "name": "SPECULARANDGLOSS",
+          "value": 7
+        },
+        {
+          "name": "OPACITY",
+          "value": 8
+        },
+        {
+          "name": "EMISSIVE",
+          "value": 9
+        },
+        {
+          "name": "REFRACTION",
+          "value": 10
+        },
+        {
+          "name": "GLOSS",
+          "value": 11
+        },
+        {
+          "name": "NOTEXPORTED",
+          "value": 12
+        }
+      ]
+    }
+  ],
+  "members": []
+}

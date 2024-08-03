@@ -1,0 +1,12 @@
+{
+  "name": "hkbEventProperty",
+  "version": 1,
+  "signature": "0xdb38a15",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "parent": "hkbEventBase",
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": []
+}

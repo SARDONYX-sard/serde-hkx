@@ -1,0 +1,27 @@
+{
+  "name": "hkpMountedBallGun",
+  "version": 0,
+  "signature": "0x6791ffce",
+  "size_x86": 112,
+  "size_x86_64": 128,
+  "parent": "hkpBallGun",
+  "parent_has_string": true,
+  "vtable": true,
+  "has_string": true,
+  "members": [
+    {
+      "name": "position",
+      "has_string": false,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 96,
+      "offset_x86_64": 112,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

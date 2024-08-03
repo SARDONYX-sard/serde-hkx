@@ -1,0 +1,77 @@
+{
+  "name": "hkpWeldingUtility",
+  "version": 0,
+  "signature": "0xb2b41feb",
+  "size_x86": 1,
+  "size_x86_64": 1,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "WeldingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "WELDING_TYPE_ANTICLOCKWISE",
+          "value": 0
+        },
+        {
+          "name": "WELDING_TYPE_CLOCKWISE",
+          "value": 4
+        },
+        {
+          "name": "WELDING_TYPE_TWO_SIDED",
+          "value": 5
+        },
+        {
+          "name": "WELDING_TYPE_NONE",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "SectorType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ACCEPT_0",
+          "value": 1
+        },
+        {
+          "name": "SNAP_0",
+          "value": 0
+        },
+        {
+          "name": "REJECT",
+          "value": 2
+        },
+        {
+          "name": "SNAP_1",
+          "value": 4
+        },
+        {
+          "name": "ACCEPT_1",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "NumAngles",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "NUM_ANGLES",
+          "value": 31
+        }
+      ]
+    }
+  ],
+  "members": []
+}

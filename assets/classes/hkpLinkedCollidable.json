@@ -1,0 +1,27 @@
+{
+  "name": "hkpLinkedCollidable",
+  "version": 0,
+  "signature": "0xe1a81497",
+  "size_x86": 92,
+  "size_x86_64": 128,
+  "parent": "hkpCollidable",
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "collisionEntries",
+      "has_string": false,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

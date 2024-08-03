@@ -1,0 +1,28 @@
+{
+  "name": "hkpConstrainedSystemFilter",
+  "version": 0,
+  "signature": "0x20a447fe",
+  "size_x86": 56,
+  "size_x86_64": 88,
+  "parent": "hkpCollisionFilter",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "otherFilter",
+      "class_ref": "hkpCollisionFilter",
+      "has_string": false,
+      "ctype": "struct hkpCollisionFilter*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 52,
+      "offset_x86_64": 80,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+[workspace.package]
+authors = ["SARDONYX"]
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+description = "Havok(ver. hk_2010.2.0-r1) Animation (De)Serialization library."
+repository = "https://github.com/SARDONYX-sard/serde-hkx"                       # NOTE: Without it, CLI & CI build will error.
+rust-version = "1.79"                                                           # For count_bytes method
+edition = "2021"
+
+[workspace]
+members = [
+  "crates/class_generator",
+  "crates/cli",
+  "crates/havok_classes",
+  "crates/havok_serde",
+  "crates/havok_types",
+  "crates/havok_types_derive",
+  "crates/havok_types_derive/src/proc_macros",
+  "crates/inheritance_tree_gen",
+  "serde_hkx",
+]
+default-members = ["crates/cli"]
+resolver = "2"
+
+[workspace.dependencies]
+bitflags = "2.4"                                               # To generate flags type
+educe = "0.6.0"
+indexmap = "2.2.6"
+jwalk = { version = "0.8" }                                    # To enumarate json class files
+num-derive = "0.4"                                             # To serialize Enum & Flags
+num-traits = "0.2"                                             # To serialize Enum & Flags
+parse-display = "0.9.0"                                        # Display derive
+parse_int = { version = "0.6" }
+proc-macro2 = { version = "1.0.82", default-features = false }
+quote = { version = "1.0.36", default-features = false }
+serde = { version = "1.0", features = ["derive"] }             # Implement (De)Serializer
+serde_json = { version = "1.0.116" }                           # To read and write Json files
+serde_with = "3.8.1"                                           # Serde utility
+snafu = "0.8.2"                                                # Define all error patterns(with backtrace)
+static_assertions = "1.1.0"
+syn = { version = "2.0.63", default-features = false }
+tokio = { version = "1.37.0" }
+tracing = { version = "0.1.40" }
+
+# workspace members
+havok_classes = { path = "./crates/havok_classes", default-features = false }
+havok_serde = { path = "./crates/havok_serde" }
+havok_types = { path = "./crates/havok_types" }
+havok_types_derive = { path = "./crates/havok_types_derive" }
+
+# dev-dependencies
+pretty_assertions = "1.4"                                    # Color diff assertion
+quick_tracing = { version = "0.1.5", features = ["derive"] }
+
+[profile.release]
+lto = "thin"

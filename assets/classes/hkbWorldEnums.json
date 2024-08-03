@@ -1,0 +1,53 @@
+{
+  "name": "hkbWorldEnums",
+  "version": 0,
+  "signature": "0x25640b46",
+  "size_x86": 1,
+  "size_x86_64": 1,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "SimulationState",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "SIMULATION_STATE_PLAY",
+          "value": 0
+        },
+        {
+          "name": "SIMULATION_STATE_PAUSE",
+          "value": 1
+        },
+        {
+          "name": "SIMULATION_STATE_STEP",
+          "value": 2
+        },
+        {
+          "name": "SIMULATION_STATE_STOP",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "AccumulateMotionState",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ACCUMULATE_MOTION",
+          "value": 0
+        },
+        {
+          "name": "DO_NOT_ACCUMULATE_MOTION",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": []
+}

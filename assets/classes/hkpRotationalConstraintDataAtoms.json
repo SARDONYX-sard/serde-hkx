@@ -1,0 +1,42 @@
+{
+  "name": "hkpRotationalConstraintDataAtoms",
+  "version": 0,
+  "signature": "0xa0c64586",
+  "size_x86": 128,
+  "size_x86_64": 128,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "rotations",
+      "class_ref": "hkpSetLocalRotationsConstraintAtom",
+      "has_string": false,
+      "ctype": "struct hkpSetLocalRotationsConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 112,
+      "type_size_x86_64": 112,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "ang",
+      "class_ref": "hkpAngConstraintAtom",
+      "has_string": false,
+      "ctype": "struct hkpAngConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 112,
+      "offset_x86_64": 112,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "hkaSkeletonMapper",
+  "version": 0,
+  "signature": "0x12df42a5",
+  "size_x86": 128,
+  "size_x86_64": 144,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "ConstraintSource",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "NO_CONSTRAINTS",
+          "value": 0
+        },
+        {
+          "name": "REFERENCE_POSE",
+          "value": 1
+        },
+        {
+          "name": "CURRENT_POSE",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "mapping",
+      "class_ref": "hkaSkeletonMapperData",
+      "has_string": false,
+      "ctype": "struct hkaSkeletonMapperData",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "type_size_x86": 112,
+      "type_size_x86_64": 128,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

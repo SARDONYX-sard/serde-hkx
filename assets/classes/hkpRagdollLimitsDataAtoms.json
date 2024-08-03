@@ -1,0 +1,94 @@
+{
+  "name": "hkpRagdollLimitsDataAtoms",
+  "version": 0,
+  "signature": "0x82b894c3",
+  "size_x86": 176,
+  "size_x86_64": 176,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "Axis",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "AXIS_TWIST",
+          "value": 0
+        },
+        {
+          "name": "AXIS_PLANES",
+          "value": 1
+        },
+        {
+          "name": "AXIS_CROSS_PRODUCT",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "rotations",
+      "class_ref": "hkpSetLocalRotationsConstraintAtom",
+      "has_string": false,
+      "ctype": "struct hkpSetLocalRotationsConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 112,
+      "type_size_x86_64": 112,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "twistLimit",
+      "class_ref": "hkpTwistLimitConstraintAtom",
+      "has_string": false,
+      "ctype": "struct hkpTwistLimitConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 112,
+      "offset_x86_64": 112,
+      "type_size_x86": 20,
+      "type_size_x86_64": 20,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "coneLimit",
+      "class_ref": "hkpConeLimitConstraintAtom",
+      "has_string": false,
+      "ctype": "struct hkpConeLimitConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 132,
+      "offset_x86_64": 132,
+      "type_size_x86": 20,
+      "type_size_x86_64": 20,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "planesLimit",
+      "class_ref": "hkpConeLimitConstraintAtom",
+      "has_string": false,
+      "ctype": "struct hkpConeLimitConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 152,
+      "offset_x86_64": 152,
+      "type_size_x86": 20,
+      "type_size_x86_64": 20,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "hkpCharacterMotion",
+  "version": 0,
+  "signature": "0xbafa2bb7",
+  "size_x86": 288,
+  "size_x86_64": 320,
+  "parent": "hkpMotion",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": []
+}

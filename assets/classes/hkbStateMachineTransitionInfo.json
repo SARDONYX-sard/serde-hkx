@@ -1,0 +1,243 @@
+{
+  "name": "hkbStateMachineTransitionInfo",
+  "version": 1,
+  "signature": "0xcdec8025",
+  "size_x86": 60,
+  "size_x86_64": 72,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "TransitionFlags",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_INT16",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAG_USE_TRIGGER_INTERVAL",
+          "value": 1
+        },
+        {
+          "name": "FLAG_USE_INITIATE_INTERVAL",
+          "value": 2
+        },
+        {
+          "name": "FLAG_UNINTERRUPTIBLE_WHILE_PLAYING",
+          "value": 4
+        },
+        {
+          "name": "FLAG_UNINTERRUPTIBLE_WHILE_DELAYED",
+          "value": 8
+        },
+        {
+          "name": "FLAG_DELAY_STATE_CHANGE",
+          "value": 16
+        },
+        {
+          "name": "FLAG_DISABLED",
+          "value": 32
+        },
+        {
+          "name": "FLAG_DISALLOW_RETURN_TO_PREVIOUS_STATE",
+          "value": 64
+        },
+        {
+          "name": "FLAG_DISALLOW_RANDOM_TRANSITION",
+          "value": 128
+        },
+        {
+          "name": "FLAG_DISABLE_CONDITION",
+          "value": 256
+        },
+        {
+          "name": "FLAG_ALLOW_SELF_TRANSITION_BY_TRANSITION_FROM_ANY_STATE",
+          "value": 512
+        },
+        {
+          "name": "FLAG_IS_GLOBAL_WILDCARD",
+          "value": 1024
+        },
+        {
+          "name": "FLAG_IS_LOCAL_WILDCARD",
+          "value": 2048
+        },
+        {
+          "name": "FLAG_FROM_NESTED_STATE_ID_IS_VALID",
+          "value": 4096
+        },
+        {
+          "name": "FLAG_TO_NESTED_STATE_ID_IS_VALID",
+          "value": 8192
+        },
+        {
+          "name": "FLAG_ABUT_AT_END_OF_FROM_GENERATOR",
+          "value": 16384
+        }
+      ]
+    },
+    {
+      "name": "InternalFlagBits",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAG_INTERNAL_IN_TRIGGER_INTERVAL",
+          "value": 1
+        },
+        {
+          "name": "FLAG_INTERNAL_IN_INITIATE_INTERVAL",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "triggerInterval",
+      "class_ref": "hkbStateMachineTimeInterval",
+      "has_string": false,
+      "ctype": "struct hkbStateMachineTimeInterval",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "initiateInterval",
+      "class_ref": "hkbStateMachineTimeInterval",
+      "has_string": false,
+      "ctype": "struct hkbStateMachineTimeInterval",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transition",
+      "class_ref": "hkbTransitionEffect",
+      "has_string": false,
+      "ctype": "struct hkbTransitionEffect*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "condition",
+      "class_ref": "hkbCondition",
+      "has_string": false,
+      "ctype": "struct hkbCondition*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 36,
+      "offset_x86_64": 40,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "eventId",
+      "has_string": false,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 40,
+      "offset_x86_64": 48,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "toStateId",
+      "has_string": false,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 44,
+      "offset_x86_64": 52,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fromNestedStateId",
+      "has_string": false,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 56,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "toNestedStateId",
+      "has_string": false,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 52,
+      "offset_x86_64": 60,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "priority",
+      "has_string": false,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 56,
+      "offset_x86_64": 64,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "enum_ref": "TransitionFlags",
+      "has_string": false,
+      "ctype": "flags TransitionFlags",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_INT16",
+      "offset_x86": 58,
+      "offset_x86_64": 66,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+[package]
+name = "havok_types_derive_proc_macros"
+edition.workspace = true
+authors.workspace = true
+description = "Internal library so that proc_macro depends on the 3rd_party library and the user does not have to install that dependent library."
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+proc-macro = true
+path = "mod.rs"
+
+[dependencies]
+proc-macro2 = { workspace = true }
+quote = { workspace = true }
+syn = { workspace = true }

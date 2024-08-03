@@ -1,0 +1,26 @@
+{
+  "name": "hkMeshBoneIndexMapping",
+  "version": 0,
+  "signature": "0x48aceb75",
+  "size_x86": 12,
+  "size_x86_64": 16,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "mapping",
+      "has_string": false,
+      "ctype": "hkArray<hkInt16>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_INT16",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

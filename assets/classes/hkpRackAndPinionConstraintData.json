@@ -1,0 +1,46 @@
+{
+  "name": "hkpRackAndPinionConstraintData",
+  "version": 0,
+  "signature": "0xd180ebe0",
+  "size_x86": 176,
+  "size_x86_64": 192,
+  "parent": "hkpConstraintData",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "Type",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "TYPE_RACK_AND_PINION",
+          "value": 0
+        },
+        {
+          "name": "TYPE_SCREW",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "atoms",
+      "class_ref": "hkpRackAndPinionConstraintDataAtoms",
+      "has_string": false,
+      "ctype": "struct hkpRackAndPinionConstraintDataAtoms",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 160,
+      "type_size_x86_64": 160,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    }
+  ]
+}

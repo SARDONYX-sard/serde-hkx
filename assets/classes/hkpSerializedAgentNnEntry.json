@@ -1,0 +1,265 @@
+{
+  "name": "hkpSerializedAgentNnEntry",
+  "version": 0,
+  "signature": "0x49ec7de3",
+  "size_x86": 320,
+  "size_x86_64": 368,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "SerializedAgentType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "INVALID_AGENT_TYPE",
+          "value": 0
+        },
+        {
+          "name": "BOX_BOX_AGENT3",
+          "value": 1
+        },
+        {
+          "name": "CAPSULE_TRIANGLE_AGENT3",
+          "value": 2
+        },
+        {
+          "name": "PRED_GSK_AGENT3",
+          "value": 3
+        },
+        {
+          "name": "PRED_GSK_CYLINDER_AGENT3",
+          "value": 4
+        },
+        {
+          "name": "CONVEX_LIST_AGENT3",
+          "value": 5
+        },
+        {
+          "name": "LIST_AGENT3",
+          "value": 6
+        },
+        {
+          "name": "BV_TREE_AGENT3",
+          "value": 7
+        },
+        {
+          "name": "COLLECTION_COLLECTION_AGENT3",
+          "value": 8
+        },
+        {
+          "name": "COLLECTION_AGENT3",
+          "value": 9
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "bodyA",
+      "class_ref": "hkpEntity",
+      "has_string": false,
+      "ctype": "struct hkpEntity*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bodyB",
+      "class_ref": "hkpEntity",
+      "has_string": false,
+      "ctype": "struct hkpEntity*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bodyAId",
+      "has_string": false,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bodyBId",
+      "has_string": false,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "useEntityIds",
+      "has_string": false,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "agentType",
+      "enum_ref": "SerializedAgentType",
+      "has_string": false,
+      "ctype": "enum SerializedAgentType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "offset_x86": 25,
+      "offset_x86_64": 49,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "atom",
+      "class_ref": "hkpSimpleContactConstraintAtom",
+      "has_string": false,
+      "ctype": "struct hkpSimpleContactConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 32,
+      "offset_x86_64": 64,
+      "type_size_x86": 48,
+      "type_size_x86_64": 48,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "propertiesStream",
+      "has_string": false,
+      "ctype": "hkArray<hkUint8>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contactPoints",
+      "class_ref": "hkContactPoint",
+      "has_string": false,
+      "ctype": "hkArray<struct hkContactPoint>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 92,
+      "offset_x86_64": 128,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "cpIdMgr",
+      "has_string": false,
+      "ctype": "hkArray<hkUint8>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 104,
+      "offset_x86_64": 144,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "nnEntryData",
+      "has_string": false,
+      "ctype": "hkUint8[160]",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 116,
+      "offset_x86_64": 160,
+      "type_size_x86": 160,
+      "type_size_x86_64": 160,
+      "arrsize": 160,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "trackInfo",
+      "class_ref": "hkpSerializedTrack1nInfo",
+      "has_string": false,
+      "ctype": "struct hkpSerializedTrack1nInfo",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 276,
+      "offset_x86_64": 320,
+      "type_size_x86": 24,
+      "type_size_x86_64": 32,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "endianCheckBuffer",
+      "has_string": false,
+      "ctype": "hkUint8[4]",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 300,
+      "offset_x86_64": 352,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 4,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "version",
+      "has_string": false,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 304,
+      "offset_x86_64": 356,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

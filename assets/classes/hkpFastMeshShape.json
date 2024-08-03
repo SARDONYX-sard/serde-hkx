@@ -1,0 +1,12 @@
+{
+  "name": "hkpFastMeshShape",
+  "version": 0,
+  "signature": "0x3d3da311",
+  "size_x86": 96,
+  "size_x86_64": 128,
+  "parent": "hkpMeshShape",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": []
+}

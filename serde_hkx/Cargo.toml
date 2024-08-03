@@ -1,0 +1,60 @@
+[package]
+name = "serde_hkx"
+authors.workspace = true
+version.workspace = true
+license.workspace = true
+description.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+edition.workspace = true
+
+
+[dependencies]
+annotate-snippets = "0.11.4"                        # Error reporting display
+byteorder = "1.5.0"
+educe = { workspace = true }
+html-escape = "0.2.13"
+indexmap = { workspace = true }
+snafu = { workspace = true }                        # Define all error patterns(with backtrace)
+static_assertions = { workspace = true }
+tracing = { workspace = true, optional = true }
+winnow = { version = "0.6.8", features = ["simd"] } # Parser conbinator
+
+# workspace members
+havok_classes = { workspace = true }
+havok_serde = { workspace = true, features = ["indexmap"] }
+havok_types = { workspace = true }
+havok_types_derive = { workspace = true }                   # To impl `Default`&`FromStr` for Bitflags
+
+[dev-dependencies]
+bitflags = { workspace = true } # To generate flags type
+jwalk = { workspace = true } # To enumarate json class files
+num-derive = { workspace = true } # enum to number(mock)
+num-traits = { workspace = true } # enum to number(mock)
+pretty_assertions = { workspace = true } # To make diffs color and easy to read on test
+quick_tracing = { workspace = true }
+similar = "2.6.0" # create diff
+tokio = { workspace = true, features = [
+  "fs",
+  "io-util",
+  "macros",
+  "rt",
+  "rt-multi-thread",
+] } # multi thread async
+tracing = { workspace = true }
+zerocopy = { version = "0.7.34" } # To(As)Bytes
+
+[features]
+default = ["ignore_duplicates", "tracing"]
+
+# Use tracing logging.(We may need `tracing-subscriber` crate too.)
+tracing = ["dep:tracing"]
+
+# Derive `serde`
+serde = ["havok_types/serde"]
+
+# Strictly check for the presence of values.
+# For example, forbitten missing fields, duplicate fields, an error is made. (but not the original behavior).
+strict = ["havok_classes/strict"]
+# When reading partial XML in Nemesis, you may want to ignore duplicates because the original comes a second time. This is used in that case.
+ignore_duplicates = ["havok_classes/ignore_duplicates"]

@@ -1,0 +1,124 @@
+{
+  "name": "hkbAuxiliaryNodeInfo",
+  "version": 1,
+  "signature": "0xca0888ca",
+  "size_x86": 28,
+  "size_x86_64": 48,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": true,
+  "enums": [
+    {
+      "name": "NodeType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "NODE_TYPE_UNKNOWN",
+          "value": 0
+        },
+        {
+          "name": "NODE_TYPE_NODE",
+          "value": 1
+        },
+        {
+          "name": "NODE_TYPE_TRANSITION",
+          "value": 2
+        },
+        {
+          "name": "NODE_TYPE_WILDCARD_TRANSITION",
+          "value": 3
+        },
+        {
+          "name": "NODE_TYPE_STATE",
+          "value": 4
+        },
+        {
+          "name": "NODE_TYPE_STATE_MACHINE",
+          "value": 5
+        },
+        {
+          "name": "NODE_TYPE_MODIFIER_GENERATOR",
+          "value": 6
+        },
+        {
+          "name": "NODE_TYPE_MODIFIER",
+          "value": 7
+        },
+        {
+          "name": "NODE_TYPE_CLIP",
+          "value": 8
+        },
+        {
+          "name": "NODE_TYPE_BLEND",
+          "value": 9
+        },
+        {
+          "name": "NODE_TYPE_TRANSITION_EFFECT",
+          "value": 10
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "type",
+      "enum_ref": "NodeType",
+      "has_string": false,
+      "ctype": "enum NodeType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "depth",
+      "has_string": false,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 9,
+      "offset_x86_64": 17,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "referenceBehaviorName",
+      "has_string": true,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "selfTransitionNames",
+      "has_string": true,
+      "ctype": "hkArray<hkStringPtr>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRINGPTR",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

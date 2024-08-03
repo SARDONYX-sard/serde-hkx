@@ -1,0 +1,43 @@
+{
+  "name": "hkpBvShape",
+  "version": 0,
+  "signature": "0x286eb64c",
+  "size_x86": 28,
+  "size_x86_64": 56,
+  "parent": "hkpShape",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "boundingVolumeShape",
+      "class_ref": "hkpShape",
+      "has_string": false,
+      "ctype": "struct hkpShape*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "childShape",
+      "class_ref": "hkpSingleShapeContainer",
+      "has_string": false,
+      "ctype": "struct hkpSingleShapeContainer",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "type_size_x86": 8,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

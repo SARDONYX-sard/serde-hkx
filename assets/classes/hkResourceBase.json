@@ -1,0 +1,30 @@
+{
+  "name": "hkResourceBase",
+  "version": 0,
+  "signature": "0x660d7cac",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "Type",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "TYPE_RESOURCE",
+          "value": 0
+        },
+        {
+          "name": "TYPE_CONTAINER",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": []
+}

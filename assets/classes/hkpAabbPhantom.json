@@ -1,0 +1,56 @@
+{
+  "name": "hkpAabbPhantom",
+  "version": 0,
+  "signature": "0x2c5189dd",
+  "size_x86": 224,
+  "size_x86_64": 304,
+  "parent": "hkpPhantom",
+  "parent_has_string": true,
+  "vtable": true,
+  "has_string": true,
+  "members": [
+    {
+      "name": "aabb",
+      "class_ref": "hkAabb",
+      "has_string": false,
+      "ctype": "struct hkAabb",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 176,
+      "offset_x86_64": 240,
+      "type_size_x86": 32,
+      "type_size_x86_64": 32,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "overlappingCollidables",
+      "has_string": false,
+      "ctype": "hkArray<void*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "offset_x86": 208,
+      "offset_x86_64": 272,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "orderDirty",
+      "has_string": false,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 220,
+      "offset_x86_64": 288,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

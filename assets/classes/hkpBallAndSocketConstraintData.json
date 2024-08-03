@@ -1,0 +1,28 @@
+{
+  "name": "hkpBallAndSocketConstraintData",
+  "version": 0,
+  "signature": "0x5a6954d9",
+  "size_x86": 96,
+  "size_x86_64": 112,
+  "parent": "hkpConstraintData",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "atoms",
+      "class_ref": "hkpBallAndSocketConstraintDataAtoms",
+      "has_string": false,
+      "ctype": "struct hkpBallAndSocketConstraintDataAtoms",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 80,
+      "type_size_x86_64": 80,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    }
+  ]
+}

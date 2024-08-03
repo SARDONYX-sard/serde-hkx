@@ -1,0 +1,230 @@
+{
+  "name": "hkbBlendingTransitionEffect",
+  "version": 1,
+  "signature": "0xfd8584fe",
+  "size_x86": 88,
+  "size_x86_64": 144,
+  "parent": "hkbTransitionEffect",
+  "parent_has_string": true,
+  "vtable": true,
+  "has_string": true,
+  "enums": [
+    {
+      "name": "FlagBits",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_UINT16",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAG_NONE",
+          "value": 0
+        },
+        {
+          "name": "FLAG_IGNORE_FROM_WORLD_FROM_MODEL",
+          "value": 1
+        },
+        {
+          "name": "FLAG_SYNC",
+          "value": 2
+        },
+        {
+          "name": "FLAG_IGNORE_TO_WORLD_FROM_MODEL",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "EndMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "END_MODE_NONE",
+          "value": 0
+        },
+        {
+          "name": "END_MODE_TRANSITION_UNTIL_END_OF_FROM_GENERATOR",
+          "value": 1
+        },
+        {
+          "name": "END_MODE_CAP_DURATION_AT_END_OF_FROM_GENERATOR",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "duration",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "toGeneratorStartTimeFraction",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 84,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "enum_ref": "FlagBits",
+      "has_string": false,
+      "ctype": "flags FlagBits",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_UINT16",
+      "offset_x86": 52,
+      "offset_x86_64": 88,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "endMode",
+      "enum_ref": "EndMode",
+      "has_string": false,
+      "ctype": "enum EndMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "offset_x86": 54,
+      "offset_x86_64": 90,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "blendCurve",
+      "enum_ref": "BlendCurve",
+      "has_string": false,
+      "ctype": "enum BlendCurve",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "offset_x86": 55,
+      "offset_x86_64": 91,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fromGenerator",
+      "has_string": false,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 56,
+      "offset_x86_64": 96,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "toGenerator",
+      "has_string": false,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 60,
+      "offset_x86_64": 104,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "characterPoseAtBeginningOfTransition",
+      "has_string": false,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 64,
+      "offset_x86_64": 112,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "timeRemaining",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 76,
+      "offset_x86_64": 128,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "timeInTransition",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 80,
+      "offset_x86_64": 132,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "applySelfTransition",
+      "has_string": false,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 84,
+      "offset_x86_64": 136,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "initializeCharacterPose",
+      "has_string": false,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 85,
+      "offset_x86_64": 137,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "hkpMultiRayShape",
+  "version": 0,
+  "signature": "0xea2e7ec9",
+  "size_x86": 32,
+  "size_x86_64": 56,
+  "parent": "hkpShape",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "rays",
+      "class_ref": "hkpMultiRayShapeRay",
+      "has_string": false,
+      "ctype": "hkArray<struct hkpMultiRayShapeRay>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rayPenetrationDistance",
+      "has_string": false,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 28,
+      "offset_x86_64": 48,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

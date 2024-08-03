@@ -1,0 +1,72 @@
+{
+  "name": "hkaRagdollInstance",
+  "version": 0,
+  "signature": "0x154948e8",
+  "size_x86": 48,
+  "size_x86_64": 72,
+  "parent": "hkReferencedObject",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "rigidBodies",
+      "class_ref": "hkpRigidBody",
+      "has_string": false,
+      "ctype": "hkArray<hkpRigidBody*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "constraints",
+      "class_ref": "hkpConstraintInstance",
+      "has_string": false,
+      "ctype": "hkArray<hkpConstraintInstance*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "boneToRigidBodyMap",
+      "has_string": false,
+      "ctype": "hkArray<hkInt32>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_INT32",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "skeleton",
+      "class_ref": "hkaSkeleton",
+      "has_string": false,
+      "ctype": "struct hkaSkeleton*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 44,
+      "offset_x86_64": 64,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "name": "hkpConstraintAtom",
+  "version": 0,
+  "signature": "0x59d67ef6",
+  "size_x86": 2,
+  "size_x86_64": 2,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "enums": [
+    {
+      "name": "AtomType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT16",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "TYPE_INVALID",
+          "value": 0
+        },
+        {
+          "name": "TYPE_BRIDGE",
+          "value": 1
+        },
+        {
+          "name": "TYPE_SET_LOCAL_TRANSFORMS",
+          "value": 2
+        },
+        {
+          "name": "TYPE_SET_LOCAL_TRANSLATIONS",
+          "value": 3
+        },
+        {
+          "name": "TYPE_SET_LOCAL_ROTATIONS",
+          "value": 4
+        },
+        {
+          "name": "TYPE_BALL_SOCKET",
+          "value": 5
+        },
+        {
+          "name": "TYPE_STIFF_SPRING",
+          "value": 6
+        },
+        {
+          "name": "TYPE_LIN",
+          "value": 7
+        },
+        {
+          "name": "TYPE_LIN_SOFT",
+          "value": 8
+        },
+        {
+          "name": "TYPE_LIN_LIMIT",
+          "value": 9
+        },
+        {
+          "name": "TYPE_LIN_FRICTION",
+          "value": 10
+        },
+        {
+          "name": "TYPE_LIN_MOTOR",
+          "value": 11
+        },
+        {
+          "name": "TYPE_2D_ANG",
+          "value": 12
+        },
+        {
+          "name": "TYPE_ANG",
+          "value": 13
+        },
+        {
+          "name": "TYPE_ANG_LIMIT",
+          "value": 14
+        },
+        {
+          "name": "TYPE_TWIST_LIMIT",
+          "value": 15
+        },
+        {
+          "name": "TYPE_CONE_LIMIT",
+          "value": 16
+        },
+        {
+          "name": "TYPE_ANG_FRICTION",
+          "value": 17
+        },
+        {
+          "name": "TYPE_ANG_MOTOR",
+          "value": 18
+        },
+        {
+          "name": "TYPE_RAGDOLL_MOTOR",
+          "value": 19
+        },
+        {
+          "name": "TYPE_PULLEY",
+          "value": 20
+        },
+        {
+          "name": "TYPE_RACK_AND_PINION",
+          "value": 21
+        },
+        {
+          "name": "TYPE_COG_WHEEL",
+          "value": 22
+        },
+        {
+          "name": "TYPE_SETUP_STABILIZATION",
+          "value": 23
+        },
+        {
+          "name": "TYPE_OVERWRITE_PIVOT",
+          "value": 24
+        },
+        {
+          "name": "TYPE_CONTACT",
+          "value": 25
+        },
+        {
+          "name": "TYPE_MODIFIER_SOFT_CONTACT",
+          "value": 26
+        },
+        {
+          "name": "TYPE_MODIFIER_MASS_CHANGER",
+          "value": 27
+        },
+        {
+          "name": "TYPE_MODIFIER_VISCOUS_SURFACE",
+          "value": 28
+        },
+        {
+          "name": "TYPE_MODIFIER_MOVING_SURFACE",
+          "value": 29
+        },
+        {
+          "name": "TYPE_MODIFIER_IGNORE_CONSTRAINT",
+          "value": 30
+        },
+        {
+          "name": "TYPE_MODIFIER_CENTER_OF_MASS_CHANGER",
+          "value": 31
+        },
+        {
+          "name": "TYPE_MAX",
+          "value": 32
+        }
+      ]
+    },
+    {
+      "name": "CallbackRequest",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "CALLBACK_REQUEST_NONE",
+          "value": 0
+        },
+        {
+          "name": "CALLBACK_REQUEST_NEW_CONTACT_POINT",
+          "value": 1
+        },
+        {
+          "name": "CALLBACK_REQUEST_SETUP_PPU_ONLY",
+          "value": 2
+        },
+        {
+          "name": "CALLBACK_REQUEST_SETUP_CALLBACK",
+          "value": 4
+        },
+        {
+          "name": "CALLBACK_REQUEST_CONTACT_POINT_CALLBACK",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "name": "SolvingMethod",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "METHOD_STABILIZED",
+          "value": 0
+        },
+        {
+          "name": "METHOD_OLD",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "type",
+      "enum_ref": "AtomType",
+      "has_string": false,
+      "ctype": "enum AtomType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT16",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

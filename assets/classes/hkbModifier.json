@@ -1,0 +1,41 @@
+{
+  "name": "hkbModifier",
+  "version": 0,
+  "signature": "0x96ec5ced",
+  "size_x86": 44,
+  "size_x86_64": 80,
+  "parent": "hkbNode",
+  "parent_has_string": true,
+  "vtable": true,
+  "has_string": true,
+  "members": [
+    {
+      "name": "enable",
+      "has_string": false,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 40,
+      "offset_x86_64": 72,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "padModifier",
+      "has_string": false,
+      "ctype": "hkBool[3]",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 41,
+      "offset_x86_64": 73,
+      "type_size_x86": 3,
+      "type_size_x86_64": 3,
+      "arrsize": 3,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

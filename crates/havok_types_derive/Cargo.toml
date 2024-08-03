@@ -1,0 +1,17 @@
+[package]
+name = "havok_types_derive"
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+parse_int = { workspace = true } # proc macro internal use
+
+[dependencies.havok_types_derive_proc_macros]
+path = "./src/proc_macros"

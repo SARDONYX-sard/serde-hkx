@@ -1,0 +1,43 @@
+{
+  "name": "hkpConstraintChainInstance",
+  "version": 0,
+  "signature": "0x7a490753",
+  "size_x86": 72,
+  "size_x86_64": 136,
+  "parent": "hkpConstraintInstance",
+  "parent_has_string": true,
+  "vtable": true,
+  "has_string": true,
+  "members": [
+    {
+      "name": "chainedEntities",
+      "class_ref": "hkpEntity",
+      "has_string": false,
+      "ctype": "hkArray<hkpEntity*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "offset_x86": 56,
+      "offset_x86_64": 112,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "action",
+      "class_ref": "hkpConstraintChainInstanceAction",
+      "has_string": false,
+      "ctype": "struct hkpConstraintChainInstanceAction*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 68,
+      "offset_x86_64": 128,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

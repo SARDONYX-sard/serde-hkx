@@ -1,0 +1,57 @@
+{
+  "name": "hkpVehicleRayCastWheelCollide",
+  "version": 1,
+  "signature": "0x41efd9e3",
+  "size_x86": 36,
+  "size_x86_64": 64,
+  "parent": "hkpVehicleWheelCollide",
+  "parent_has_string": false,
+  "vtable": true,
+  "has_string": false,
+  "members": [
+    {
+      "name": "wheelCollisionFilterInfo",
+      "has_string": false,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "phantom",
+      "class_ref": "hkpAabbPhantom",
+      "has_string": false,
+      "ctype": "struct hkpAabbPhantom*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rejectRayChassisListener",
+      "class_ref": "hkpRejectChassisListener",
+      "has_string": false,
+      "ctype": "struct hkpRejectChassisListener",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "type_size_x86": 16,
+      "type_size_x86_64": 24,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}
