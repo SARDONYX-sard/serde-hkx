@@ -3,7 +3,8 @@ pub mod de;
 pub mod ser;
 pub mod serde;
 
-pub fn hexdump_string(data: &[u8]) -> String {
+pub fn hexdump_string(data: impl AsRef<[u8]>) -> String {
+    let data = data.as_ref();
     let mut result = String::new();
     let mut offset = 0;
 
