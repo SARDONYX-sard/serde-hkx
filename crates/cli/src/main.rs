@@ -1,4 +1,6 @@
 mod cli;
+#[cfg(feature = "color")]
+mod color;
 mod error;
 mod logger;
 

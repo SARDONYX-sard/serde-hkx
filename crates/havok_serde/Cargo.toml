@@ -9,8 +9,8 @@ rust-version.workspace = true
 edition.workspace = true
 
 [dependencies]
-havok_types = { path = "../havok_types" }
-indexmap = { version = "2.2.6", optional = true }
+havok_types = { workspace = true }
+indexmap = { workspace = true, optional = true }
 
 [features]
 default = ["std"]

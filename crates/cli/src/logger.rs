@@ -2,7 +2,7 @@ use std::fs::File;
 use std::path::Path;
 use tracing::level_filters::LevelFilter;
 
-#[derive(Debug, clap::ArgEnum, Clone, Copy, parse_display::Display, parse_display::FromStr)]
+#[derive(Debug, clap::ValueEnum, Clone, Copy, parse_display::Display, parse_display::FromStr)]
 pub enum LogLevel {
     #[display("trace")]
     Trace,

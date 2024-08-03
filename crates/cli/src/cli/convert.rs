@@ -36,7 +36,7 @@ pub(crate) struct Convert {
 
 type ClassMap<'a> = indexmap::IndexMap<usize, Classes<'a>>;
 
-#[derive(Debug, clap::ArgEnum, Clone, Copy, parse_display::Display)]
+#[derive(Debug, clap::ValueEnum, Clone, Copy, parse_display::Display)]
 pub enum Format {
     #[display("xml")]
     Xml,

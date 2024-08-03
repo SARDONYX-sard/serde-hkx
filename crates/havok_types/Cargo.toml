@@ -12,17 +12,15 @@ version.workspace = true
 
 [dependencies]
 half = "2.4.1"
-parse-display = "0.9.0" # Display derive
-parse_int = { version = "0.6" }
-serde = { version = "1.0", features = [
-  "derive",
-], optional = true } # Implement (De)Serializer
-serde_with = { version = "3.8.1", optional = true }
-static_assertions = "1.1.0"
+parse-display = { workspace = true }               # Display derive
+parse_int = { workspace = true }
+serde = { workspace = true, optional = true }      # Implement (De)Serializer
+serde_with = { workspace = true, optional = true }
+static_assertions = { workspace = true }
 
 [dev-dependencies]
-pretty_assertions = "1.4"            # To make diffs color and easy to read on test
-serde_json = { version = "1.0.116" } # To read and write Json files
+pretty_assertions = { workspace = true } # To make diffs color and easy to read on test
+serde_json = { workspace = true }        # To read and write Json files
 
 [features]
 default = []

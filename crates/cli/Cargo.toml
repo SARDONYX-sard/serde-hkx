@@ -15,21 +15,26 @@ path = "./src/main.rs"
 
 [dependencies]
 anyhow = "1.0.86"
-# NOTE: clap uses v3.2.23, the last successfully built version, because color mode was erased in v4
-clap = { version = "3.2.23", features = ["derive"] } # For CLI
+clap = { version = "4.5.13", features = ["derive"] } # For CLI
 encoding_rs_io = "0.1"
-havok_classes = { path = "../havok_classes", features = ["ignore_duplicates"] }
-indexmap = "2.2.6"
-jwalk = { version = "0.8" } # To enumarate json class files
-parse-display = "0.9.0" # Display derive
-serde_hkx = { path = "../../serde_hkx", features = ["tracing"] }
-snafu = "0.8.2" # Define all error patterns(with backtrace)
-tokio = { version = "1.37.0", features = [
+indexmap = { workspace = true }
+jwalk = { workspace = true } # To enumarate json class files
+parse-display = { workspace = true } # Display derive
+snafu = { workspace = true } # Define all error patterns(with backtrace)
+tokio = { workspace = true, features = [
   "fs",
   "macros",
   "rt",
   "rt-multi-thread",
   "time",
 ] }
-tracing = { version = "0.1.40" }
+tracing = { workspace = true }
 tracing-subscriber = "0.3.18"
+
+# workspace members
+havok_classes = { workspace = true, features = ["ignore_duplicates"] }
+serde_hkx = { path = "../../serde_hkx", features = ["tracing"] }
+
+[features]
+default = ["color"]
+color = []

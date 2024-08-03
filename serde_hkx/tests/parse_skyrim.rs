@@ -1,7 +1,8 @@
 use havok_classes::Classes;
 use pretty_assertions::assert_eq;
 use serde_hkx::{
-    bytes::serde::hkx_header::HkxHeader, from_bytes, from_str, to_bytes, to_string, HavokSort,
+    bytes::{hexdump_string, serde::hkx_header::HkxHeader},
+    from_bytes, from_str, to_bytes, to_string, HavokSort,
 };
 use std::path::Path;
 
@@ -34,30 +35,39 @@ async fn should_parse_one_file() -> Result<()> {
 
     // let xml = include_str!("../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
     let xml = include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
-    let bytes = match xml_to_bytes(xml) {
+
+    let actual = match xml_to_bytes(xml) {
         Ok(bytes) => bytes,
         Err(err) => {
             tracing::error!("{err}");
             panic!("{err}")
         }
     };
-    tracing::debug!(
-        "output bytes = \n{}",
-        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(&bytes),
-    );
-
     let expected = include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx");
-    assert_eq!(
-        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(&bytes),
-        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(expected),
-    );
 
+    let actual_hex_dump = hexdump_string(&actual);
+    let expected_hex_dump = hexdump_string(expected);
+
+    use similar::{ChangeTag, TextDiff};
+    let diff = TextDiff::from_lines(&actual_hex_dump, &expected_hex_dump);
+    let mut output_diff = String::new();
+    for change in diff.iter_all_changes() {
+        let sign = match change.tag() {
+            ChangeTag::Delete => "-",
+            ChangeTag::Insert => "+",
+            ChangeTag::Equal => " ",
+        };
+        output_diff += &format!("{sign}{change}");
+    }
+    tracing::debug!("output bytes = \n{output_diff}");
+
+    assert_eq!(actual_hex_dump, expected_hex_dump,);
     Ok(())
 }
 
 fn xml_to_bytes(xml: &str) -> Result<Vec<u8>> {
     let mut classes: ClassMap = from_str(xml)?;
-    classes.sort_for_bytes()?;
+    classes.sort_for_bytes();
     tracing::debug!("sorted_classes = {classes:#?}");
     Ok(to_bytes(&classes, &HkxHeader::new_skyrim_se())?)
 }
@@ -101,14 +111,13 @@ type ClassMap<'a> = indexmap::IndexMap<usize, Classes<'a>>;
 
 async fn parse_to_xml(path: impl AsRef<Path>) -> Result<()> {
     let path = path.as_ref();
-    let bytes = std::fs::read(path)?;
+    let expected_bytes = std::fs::read(path)?;
 
     // Verify bytes.
-    let mut classes = from_bytes::<ClassMap>(&bytes)?;
+    let mut classes = from_bytes::<ClassMap>(&expected_bytes)?;
     assert_eq!(
-        rhexdump::hexdump::RhexdumpString::new()
-            .hexdump_bytes(to_bytes(&classes, &HkxHeader::new_skyrim_se())?),
-        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(&bytes),
+        hexdump_string(&to_bytes(&classes, &HkxHeader::new_skyrim_se())?),
+        hexdump_string(&expected_bytes),
         "path = {path:?}"
     );
 

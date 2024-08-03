@@ -1,4 +1,4 @@
-name: Cargo Lint & Test
+name: Build & Test(Cargo)
 
 on:
   push:
@@ -10,6 +10,42 @@ env:
   APP_NAME: cvhkx
 
 jobs:
+  lint:
+    strategy:
+      matrix:
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.3
+        with:
+          prefix-key: cargo-debug-${{ matrix.platform }}
+
+      - name: Check format
+        run: cargo fmt --all -- --check
+      - name: Lint Check
+        run: cargo clippy --workspace -- -D warnings
+
+      - name: Check license, dependencies
+        uses: EmbarkStudios/cargo-deny-action@v2.0.0
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.3
+        with:
+          prefix-key: cargo-debug-${{ matrix.platform }}
+      - name: Test
+        run: cargo test --workspace
+
   build:
     strategy:
       fail-fast: false
@@ -18,21 +54,13 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.7
       - name: Rust cache
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@v2.7.3
         with:
-          prefix-key: cargo-${{ matrix.platform }}
+          prefix-key: cargo-release-${{ matrix.platform }}
 
-      - name: Format Check
-        run: cargo fmt --all -- --check
-      - name: Lint Check
-        run: cargo clippy --workspace -- -D warnings
-
-      - name: Test
-        run: cargo test --workspace
-
-      - name: Run build
+      - name: Build
         run: cargo build --release
 
       - name: Make outputs dir
@@ -55,8 +83,7 @@ jobs:
           mv ./target/release/${{ env.APP_NAME }} ./build
 
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v4.3.4
-
+        uses: actions/upload-artifact@v4.3.5
         with:
           name: serde-hkx-cli-${{runner.os}}
           path: |

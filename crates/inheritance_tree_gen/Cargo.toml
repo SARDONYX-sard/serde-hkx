@@ -12,8 +12,8 @@ version.workspace = true
 
 [dependencies]
 class_generator = { path = "../class_generator" }
-jwalk = { version = "0.8" }                       # To enumarate json class files
-serde_json = { version = "1.0.116" }              # To read and write Json files
+jwalk = { workspace = true }                      # To enumarate json class files
+serde_json = { workspace = true }                 # To read and write Json files
 
 [dev-dependencies]
-pretty_assertions = "1.4" # To make diffs color and easy to read on test
+pretty_assertions = { workspace = true } # To make diffs color and easy to read on test

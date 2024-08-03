@@ -11,20 +11,18 @@ version.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bitflags = "2.4"                                                # To generate flags type
+bitflags = { workspace = true }                     # To generate flags type
 derive-new = "0.6"
-havok_types = { path = "../havok_types", features = ["serde"] }
-havok_types_derive = { path = "../havok_types_derive" }
-indexmap = "2.2"                                                # To cache class
-jwalk = { version = "0.8" }                                     # To enumarate json class files
-num-derive = "0.4"                                              # TypeKind extension
-num-traits = "0.2"                                              # TypeKind extension
-parse-display = "0.9.0"                                         # Derive Display
-serde = { version = "1.0", features = ["derive"] }              # Implement (De)Serializer
-serde_json = { version = "1.0.116" }                            # To read and write Json files
-serde_with = "3.8.1"                                            # Serde utility
-snafu = "0.8.2"                                                 # Define all error patterns(with backtrace)
-tracing = "0.1"                                                 # Logger
+indexmap = { workspace = true }
+jwalk = { workspace = true }                        # To enumarate json class files
+num-derive = { workspace = true }                   # TypeKind extension
+num-traits = { workspace = true }                   # TypeKind extension
+parse-display = { workspace = true }                # Derive Display
+serde = { workspace = true, features = ["derive"] } # Implement (De)Serializer
+serde_json = { workspace = true }                   # To read and write Json files
+serde_with = { workspace = true }                   # Serde utility
+snafu = { workspace = true }                        # Define all error patterns(with backtrace)
+tracing = { workspace = true }                      # Logger
 
 prettyplease = "0.2.20"
 proc-macro2 = { workspace = true }
@@ -37,8 +35,10 @@ syn = { workspace = true, features = [
   "printing",
 ] }
 
+# workspace members
+havok_types = { workspace = true, features = ["serde"] }
+havok_types_derive = { workspace = true }
+
 [dev-dependencies]
-pretty_assertions = "1.4" # To make diffs color and easy to read on test
-quick_tracing = { version = "0.1.5", features = [
-  "derive",
-] } # quick tracing subscriber
+pretty_assertions = { workspace = true } # To make diffs color and easy to read on test
+quick_tracing = { workspace = true }     # quick tracing subscriber

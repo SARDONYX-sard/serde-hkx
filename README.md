@@ -1,5 +1,15 @@
 # Havok Animation Serialize/Deserialize library
 
+## GPL violation
+
+GPL tainted because `rhexdump` crate was GPL.
+
+Next, license check and dependency check by `cargo-deny` are performed to repel GPL.
+
+The last commit eliminates all GPL dependencies.
+
+But since the git object contains the GPL, we rewrite the history completely after eliminating the GPL code at the end of this, just in case.
+
 ## Usage
 
 - Cargo.toml

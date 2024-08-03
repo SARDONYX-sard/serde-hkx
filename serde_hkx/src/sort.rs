@@ -15,7 +15,7 @@ pub trait HavokSort {
     ///
     /// # Errors
     /// Error when using circular references. (Behavior is a state machine, so if it is correct, it should not be circular.)
-    fn sort_for_bytes(&mut self) -> Result<(), Self::Error>;
+    fn sort_for_bytes(&mut self);
 
     /// Sort by dependent class for XML serialization.
     ///
@@ -30,9 +30,9 @@ where
 {
     type Error = crate::errors::ser::Error;
 
-    fn sort_for_bytes(&mut self) -> Result<(), Self::Error> {
+    fn sort_for_bytes(&mut self) {
         if self.is_empty() {
-            return Ok(());
+            return;
         }
 
         let mut sorted_keys = Vec::new();
@@ -52,7 +52,6 @@ where
         }
 
         *self = sorted_classes;
-        Ok(())
     }
 
     fn sort_for_xml(&mut self) -> Result<(), Self::Error> {
@@ -60,6 +59,7 @@ where
     }
 }
 
+/// Create an acyclic directed graph from the order of fields in the root to the tail branch (class of dependencies).
 fn collect_deps<V>(
     classes: &indexmap::IndexMap<usize, V>,
     key: usize,

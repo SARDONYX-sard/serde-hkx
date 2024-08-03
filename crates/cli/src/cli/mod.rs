@@ -2,6 +2,8 @@ mod commands;
 mod convert;
 
 use crate::cli::commands::Commands;
+#[cfg(feature = "color")]
+use crate::color::get_styles;
 use crate::init_tracing;
 use std::str::FromStr;
 use tracing::Level;
@@ -9,6 +11,9 @@ use tracing::Level;
 /// Converter CLI version
 #[derive(Debug, clap::Parser)]
 #[clap(about)]
+#[cfg_attr(feature = "color",
+command(styles=get_styles())
+)]
 pub(crate) struct Cli {
     #[clap(subcommand)]
     command: Commands,

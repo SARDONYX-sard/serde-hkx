@@ -19,6 +19,7 @@ use self::parser::{
     BytesStream,
 };
 use self::seq::SeqDeserializer;
+use super::hexdump_string;
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::{
     de::{Error, Result},
@@ -26,7 +27,6 @@ use crate::errors::{
 };
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
-use rhexdump::hexdump;
 use winnow::binary::Endianness;
 use winnow::error::{StrContext, StrContextValue};
 use winnow::{binary, Parser};
@@ -213,7 +213,7 @@ impl<'de> BytesDeserializer<'de> {
             .map_err(|err| Error::ReadableError {
                 source: ReadableError::from_context(
                     err,
-                    &hexdump::RhexdumpString::new().hexdump_bytes(self.input),
+                    &hexdump_string(self.input),
                     to_hexdump_pos(self.current_position),
                 ),
             })?;
@@ -234,7 +234,7 @@ impl<'de> BytesDeserializer<'de> {
                 .map_err(|err| Error::ReadableError {
                     source: ReadableError::from_context(
                         err,
-                        &hexdump::RhexdumpString::new().hexdump_bytes(self.input),
+                        &hexdump_string(self.input),
                         to_hexdump_pos(self.current_position),
                     ),
                 })?;
@@ -251,7 +251,7 @@ impl<'de> BytesDeserializer<'de> {
             Err(err) => match err {
                 Error::ReadableError { .. } => Err(err),
                 _ => {
-                    let input = &hexdump::RhexdumpString::new().hexdump_bytes(self.input);
+                    let input = &hexdump_string(self.input);
                     let err_pos = to_hexdump_pos(self.current_position);
                     Err(Error::ReadableError {
                         source: ReadableError::from_display(err, input, err_pos),
