@@ -43,7 +43,11 @@ async fn should_parse_one_file() -> Result<()> {
             panic!("{err}")
         }
     };
-    let expected = include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx");
+    // let expected = include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx");
+    // let expected =
+    //     include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x86_reconverted.hkx");
+    let expected =
+        include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx");
 
     let actual_hex_dump = hexdump_string(&actual);
     let expected_hex_dump = hexdump_string(expected);

@@ -131,10 +131,27 @@ pub fn matrix4<'a>() -> impl Parser<&'a str, Matrix4, ContextError> {
     .context(StrContext::Label("Matrix4"))
 }
 
+/// # Why is the w(of transition) in transform 1.0?
+/// Must be 1.0 for affine conversion.
+/// ```txt
+/// [
+///  // Rotation
+///  [1, 0, 0, tx],
+///  [0, 1, 0, ty],
+///  [0, 0, 1, tz],
+///
+///  [0, 0, 0,  1], // transition
+/// ]
+/// ```
 pub fn transform<'a>() -> impl Parser<&'a str, Transform, ContextError> {
     seq!(Transform {
         rotation: rotation().context(StrContext::Label("rotation")),
-        transition: vector3().context(StrContext::Label("transition")),
+        transition: vector3()
+            .context(StrContext::Label("transition"))
+            .map(|mut vec4| {
+                vec4.w = 1.0; // To affine conversion.
+                vec4
+            }),
     })
     .context(StrContext::Label("Transform"))
 }
