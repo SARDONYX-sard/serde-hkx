@@ -468,6 +468,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         };
 
         if let Some((ptr, _)) = class_meta {
+            self.output.zero_fill_align(16)?; // Make sure `virtual_fixup.src`(each Class) is `align16`.
             let virtual_src = self.relative_position()?;
             self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // For global_fixups
             self.write_virtual_fixups_pair(name, virtual_src)?; // Ok, `virtual_fixup` is known.
