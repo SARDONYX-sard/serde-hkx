@@ -9,7 +9,7 @@ use self::trait_impls::{Align as _, ClassNamesWriter, ClassStartsMap};
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
-    Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
+    OverflowSubtractAbsSnafu, Result, UnsupportedPtrSizeSnafu,
 };
 use byteorder::{BigEndian, LittleEndian, WriteBytesExt as _};
 use havok_serde::ser::{Serialize, Serializer};
@@ -85,6 +85,7 @@ where
     value.serialize(&mut serializer)?;
 
     // 4/5: Write fixups_offsets of `__data__` section header.
+    serializer.output.zero_fill_align(16)?; // Always make the start of fixups a multiple of 16.
     let (local_offset, global_offset, virtual_offset) = serializer.write_data_fixups()?; // Write local, global and virtual fixups
     let exports_offset = serializer.relative_position()?; // This is where the exports_offset is finally obtained.
 
@@ -223,11 +224,12 @@ impl ByteSerializer {
     #[inline]
     fn relative_position(&self) -> Result<u32> {
         let position = self.output.position() as u32;
+        let abs_data_offset = self.abs_data_offset;
         ensure!(
-            position >= self.abs_data_offset,
-            SubAbsOverflowSnafu {
+            position >= abs_data_offset,
+            OverflowSubtractAbsSnafu {
                 position,
-                abs_data_offset: self.abs_data_offset
+                abs_data_offset
             }
         );
 
@@ -349,6 +351,7 @@ impl ByteSerializer {
 /// Endianness and a common write process that takes into account whether the array is being serialized or not.
 macro_rules! impl_serialize_primitive {
     ($method:ident, $value_type:ty, $write:ident) => {
+        #[inline]
         fn $method(self, v: $value_type) -> Result<Self::Ok, Self::Error> {
             match self.is_little_endian {
                 true => self.output.$write::<LittleEndian>(v),

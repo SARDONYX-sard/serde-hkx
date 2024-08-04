@@ -15,7 +15,7 @@ pub enum Error {
     #[snafu(display(
         "Only 0 (big) or 1 (little) can be specified for the header endian. But got {invalid}"
     ))]
-    InvalidEndianError {
+    InvalidEndian {
         invalid: u8,
         /// error location
         #[snafu(implicit)]
@@ -24,7 +24,7 @@ pub enum Error {
 
     /// The only supported pointer sizes are 4 and 8. But got {invalid}
     #[snafu(display("The only supported pointer sizes are 4 and 8. But got {invalid}"))]
-    UnsupportedPtrSizeError {
+    UnsupportedPtrSize {
         invalid: u8,
         /// error location
         #[snafu(implicit)]
@@ -34,7 +34,7 @@ pub enum Error {
     /// Relative position cannot be obtained because abs is larger than {position}.
     /// This indicates that the value of `absolute_data_offset` in the header is wrong.
     #[snafu(display("Relative position cannot be obtained because abs is larger than {position}. This indicates that the value of `absolute_data_offset`({abs_data_offset}) in the header is wrong."))]
-    SubAbsOverflowError {
+    OverflowSubtractAbs {
         position: u64,
         abs_data_offset: u32,
         /// error location
@@ -89,6 +89,7 @@ pub enum Error {
         location: snafu::Location,
     },
 
+    /// std io error.
     #[snafu(transparent)]
     IoError {
         /// I/O Error

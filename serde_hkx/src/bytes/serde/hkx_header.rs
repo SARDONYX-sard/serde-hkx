@@ -186,61 +186,60 @@ impl HkxHeader {
         }
     }
 
-    /// To bytes
+    /// Convert to bytes.
     ///
-    /// # Panics
-    /// When `self.endian` is other than 0 or 1
+    /// # Note
+    /// If `self.endian` is 0, the data is converted to binary data as little endian, otherwise as big endian.
     pub fn to_bytes(&self) -> [u8; 64] {
-        let mut result = [0; 64];
+        let mut buffer = [0; 64];
 
         match self.endian {
             0 => {
-                result[..4].copy_from_slice(&self.magic0.to_be_bytes());
-                result[4..8].copy_from_slice(&self.magic1.to_be_bytes());
-                result[8..12].copy_from_slice(&self.user_tag.to_be_bytes());
-                result[12..16].copy_from_slice(&self.file_version.to_be_bytes());
-                result[16] = self.pointer_size;
-                result[17] = self.endian;
-                result[18] = self.padding_option;
-                result[19] = self.base_class;
-                result[20..24].copy_from_slice(&self.section_count.to_be_bytes());
-                result[24..28].copy_from_slice(&self.contents_section_index.to_be_bytes());
-                result[28..32].copy_from_slice(&self.contents_section_offset.to_be_bytes());
-                result[32..36]
+                buffer[..4].copy_from_slice(&self.magic0.to_be_bytes());
+                buffer[4..8].copy_from_slice(&self.magic1.to_be_bytes());
+                buffer[8..12].copy_from_slice(&self.user_tag.to_be_bytes());
+                buffer[12..16].copy_from_slice(&self.file_version.to_be_bytes());
+                buffer[16] = self.pointer_size;
+                buffer[17] = self.endian;
+                buffer[18] = self.padding_option;
+                buffer[19] = self.base_class;
+                buffer[20..24].copy_from_slice(&self.section_count.to_be_bytes());
+                buffer[24..28].copy_from_slice(&self.contents_section_index.to_be_bytes());
+                buffer[28..32].copy_from_slice(&self.contents_section_offset.to_be_bytes());
+                buffer[32..36]
                     .copy_from_slice(&self.contents_class_name_section_index.to_be_bytes());
-                result[36..40]
+                buffer[36..40]
                     .copy_from_slice(&self.contents_class_name_section_offset.to_be_bytes());
-                result[40..55].copy_from_slice(self.contents_version_string.as_slice());
-                result[55] = self.contents_version_string_separator;
-                result[56..60].copy_from_slice(&self.flags.to_be_bytes());
-                result[60..62].copy_from_slice(&self.max_predicate.to_be_bytes());
-                result[62..64].copy_from_slice(&self.section_offset.to_be_bytes());
-                result
+                buffer[40..55].copy_from_slice(self.contents_version_string.as_slice());
+                buffer[55] = self.contents_version_string_separator;
+                buffer[56..60].copy_from_slice(&self.flags.to_be_bytes());
+                buffer[60..62].copy_from_slice(&self.max_predicate.to_be_bytes());
+                buffer[62..64].copy_from_slice(&self.section_offset.to_be_bytes());
+                buffer
             }
-            1 => {
-                result[..4].copy_from_slice(&self.magic0.to_le_bytes());
-                result[4..8].copy_from_slice(&self.magic1.to_le_bytes());
-                result[8..12].copy_from_slice(&self.user_tag.to_le_bytes());
-                result[12..16].copy_from_slice(&self.file_version.to_le_bytes());
-                result[16] = self.pointer_size;
-                result[17] = self.endian;
-                result[18] = self.padding_option;
-                result[19] = self.base_class;
-                result[20..24].copy_from_slice(&self.section_count.to_le_bytes());
-                result[24..28].copy_from_slice(&self.contents_section_index.to_le_bytes());
-                result[28..32].copy_from_slice(&self.contents_section_offset.to_le_bytes());
-                result[32..36]
+            _ => {
+                buffer[..4].copy_from_slice(&self.magic0.to_le_bytes());
+                buffer[4..8].copy_from_slice(&self.magic1.to_le_bytes());
+                buffer[8..12].copy_from_slice(&self.user_tag.to_le_bytes());
+                buffer[12..16].copy_from_slice(&self.file_version.to_le_bytes());
+                buffer[16] = self.pointer_size;
+                buffer[17] = self.endian;
+                buffer[18] = self.padding_option;
+                buffer[19] = self.base_class;
+                buffer[20..24].copy_from_slice(&self.section_count.to_le_bytes());
+                buffer[24..28].copy_from_slice(&self.contents_section_index.to_le_bytes());
+                buffer[28..32].copy_from_slice(&self.contents_section_offset.to_le_bytes());
+                buffer[32..36]
                     .copy_from_slice(&self.contents_class_name_section_index.to_le_bytes());
-                result[36..40]
+                buffer[36..40]
                     .copy_from_slice(&self.contents_class_name_section_offset.to_le_bytes());
-                result[40..55].copy_from_slice(self.contents_version_string.as_slice());
-                result[55] = self.contents_version_string_separator;
-                result[56..60].copy_from_slice(&self.flags.to_le_bytes());
-                result[60..62].copy_from_slice(&self.max_predicate.to_le_bytes());
-                result[62..64].copy_from_slice(&self.section_offset.to_le_bytes());
-                result
+                buffer[40..55].copy_from_slice(self.contents_version_string.as_slice());
+                buffer[55] = self.contents_version_string_separator;
+                buffer[56..60].copy_from_slice(&self.flags.to_le_bytes());
+                buffer[60..62].copy_from_slice(&self.max_predicate.to_le_bytes());
+                buffer[62..64].copy_from_slice(&self.section_offset.to_le_bytes());
+                buffer
             }
-            _ => panic!("Invalid endianness. Expected 0 or 1"),
         }
     }
 
