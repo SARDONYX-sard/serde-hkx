@@ -2,18 +2,17 @@
 mod sub_ser;
 mod trait_impls;
 
-use crate::bytes::serde::section_header::DATA_SECTION_HEADER_TAG;
 use crate::lib::*;
 
-use self::trait_impls::Align as _;
-use crate::bytes::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
+use self::sub_ser::structs::StructSerializer;
+use self::trait_impls::{Align as _, ClassNamesWriter, ClassStartsMap};
+use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
     Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
 };
 use byteorder::{BigEndian, LittleEndian, WriteBytesExt as _};
-use havok_serde::ser::{Error as _, Serialize, Serializer};
-use havok_serde::HavokClass;
+use havok_serde::ser::{Serialize, Serializer};
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
     StringPtr, Transform, Variant, Vector4,
@@ -22,14 +21,12 @@ use indexmap::IndexMap;
 use snafu::ensure;
 use std::borrow::Cow;
 use std::collections::HashMap;
-use std::io::{Cursor, Write};
-use sub_ser::structs::StructSerializer;
-use trait_impls::{ClassNamesWriter as _, ClassStartsMap};
+use std::io::{Cursor, Write as _};
 
 /// To hkx binary file data.
-pub fn to_bytes<K, V>(value: &IndexMap<K, V>, header: &HkxHeader) -> Result<Vec<u8>>
+pub fn to_bytes<V>(value: &V, header: &HkxHeader) -> Result<Vec<u8>>
 where
-    V: Serialize + HavokClass,
+    V: Serialize + ClassNamesWriter,
 {
     to_bytes_with_opt(
         value,
@@ -56,13 +53,9 @@ where
 /// This serializer assumes the following.
 /// - `contents_class_name_section_index`: It is always assumed to be 0.
 /// - `contents_section_index`: It is always assumed to be 2.
-pub fn to_bytes_with_opt<K, V>(
-    value: &IndexMap<K, V>,
-    header: &HkxHeader,
-    ser: ByteSerializer,
-) -> Result<Vec<u8>>
+pub fn to_bytes_with_opt<V>(value: &V, header: &HkxHeader, ser: ByteSerializer) -> Result<Vec<u8>>
 where
-    V: Serialize + HavokClass,
+    V: Serialize + ClassNamesWriter,
 {
     let mut serializer = ser;
 
@@ -78,13 +71,11 @@ where
     // 3/5: section contents
     // - `__classnames__` section
     if serializer.is_little_endian {
-        serializer.class_starts = serializer
-            .output
-            .write_classnames_section::<LittleEndian, K, V>(value)?;
+        serializer.class_starts =
+            value.write_classnames_section::<LittleEndian>(&mut serializer.output)?;
     } else {
-        serializer.class_starts = serializer
-            .output
-            .write_classnames_section::<BigEndian, K, V>(value)?;
+        serializer.class_starts =
+            value.write_classnames_section::<BigEndian>(&mut serializer.output)?;
     };
     #[cfg(feature = "tracing")]
     tracing::trace!("class_starts: {:#?}", serializer.class_starts);
@@ -100,7 +91,7 @@ where
     // 5/5 Write remain offsets for `__types__` & `__data__` section header.
     let abs_data_start = serializer.abs_data_offset;
     let data_section_header = SectionHeader {
-        section_tag: DATA_SECTION_HEADER_TAG,
+        section_tag: SectionHeader::DATA_SECTION_HEADER_TAG,
         section_tag_separator: 0xff,
         absolute_data_start: abs_data_start,
         local_fixups_offset: local_offset,
@@ -304,11 +295,11 @@ impl ByteSerializer {
                         .write_u32::<BigEndian>(*class_name_offset)?;
                     // dst(virtual_fixup.dst)
                 }
-            }
+            };
+            Ok(())
         } else {
-            return MissingClassInClassnamesSectionSnafu { class_name }.fail();
+            MissingClassInClassnamesSectionSnafu { class_name }.fail()
         }
-        Ok(())
     }
 
     /// Write all(`local`, `global` and `virtual`) fixups of data section.
@@ -340,7 +331,7 @@ impl ByteSerializer {
     fn serialize_cow(&mut self, v: &Option<Cow<'_, str>>) -> Result<()> {
         // Skip if `Option::None`(null pointer).
         if let Some(v) = v {
-            let c_string = std::ffi::CString::new(v.as_bytes()).map_err(Error::custom)?;
+            let c_string = std::ffi::CString::new(v.as_bytes())?;
             match self.str_array_buf {
                 Some(ref mut array_buf) => array_buf.push(c_string),
                 None => {
@@ -523,20 +514,13 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{bytes::hexdump_string, mocks::new_defaultmale};
-    use havok_classes::Classes;
+    use crate::{bytes::hexdump_string, mocks::new_defaultmale, HavokSort as _};
 
     #[test]
     #[cfg_attr(feature = "tracing", quick_tracing::try_init(test = "serialize_bytes"))]
     fn test_serialize() -> Result<()> {
         let mut classes = new_defaultmale();
-
-        // For binary writing, the youngest pointer index must be first after sorting in reverse order.
-        // Usually a shift operation is required, but a dummy and a swap can speed up the process.
-        classes.insert(usize::MAX, Classes::SwapDummy);
-        classes.sort_by(|k_1, _v_1, k_2, _v_2| k_2.cmp(k_1)); // Reverse order
-        classes.swap_indices(0, classes.len() - 1);
-        let _ = classes.pop();
+        classes.sort_for_bytes();
         tracing::debug!("{classes:#?}");
 
         let bytes = to_bytes(&classes, &HkxHeader::new_skyrim_se())?;

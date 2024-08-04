@@ -52,7 +52,7 @@ pub struct SectionHeader {
     ///
     /// - Calculation formula
     ///
-    ///   Hkx header 64bytes + 48bytes * 3 sections = 208bytes == `0xD0`
+    ///   Hkx header 64bytes + 48bytes * 3 sections = 208bytes == `0xD0`(`__classnames__` section abs)
     pub absolute_data_start: u32,
     /// Offset from absolute offset to local fixup map.
     pub local_fixups_offset: u32,
@@ -82,9 +82,10 @@ pub struct SectionHeader {
 }
 static_assertions::assert_eq_size!(SectionHeader, [u8; 48]); // Must be 48bytes.
 
-pub const DATA_SECTION_HEADER_TAG: [u8; 19] = *b"__data__\0\0\0\0\0\0\0\0\0\0\0";
-
 impl SectionHeader {
+    /// `*b"__data__\0\0\0\0\0\0\0\0\0\0\0"`
+    pub const DATA_SECTION_HEADER_TAG: [u8; 19] = *b"__data__\0\0\0\0\0\0\0\0\0\0\0";
+
     pub fn from_bytes<'a>(endian: Endianness) -> impl Parser<&'a [u8], Self, ContextError> {
         move |bytes: &mut &[u8]| {
             {
@@ -291,7 +292,7 @@ mod tests {
     fn test_write_data() -> io::Result<()> {
         let mut buffer = Cursor::new(Vec::new());
         SectionHeader {
-            section_tag: DATA_SECTION_HEADER_TAG,
+            section_tag: SectionHeader::DATA_SECTION_HEADER_TAG,
             section_tag_separator: 0xff,
             absolute_data_start: 0x160,
             local_fixups_offset: 0x170,
