@@ -32,12 +32,6 @@ impl<'a> StructSerializer<'a> {
     fn write_iter_local_fixups(&mut self) -> Result<()> {
         // NOTE: The strings contained in the classes are written after serialization of all classes in the array is completed.
         if let Some(strings) = self.ser.str_array_buf.take() {
-            #[cfg(feature = "tracing")]
-            tracing::debug!(
-                "local_fixups_iter_src = {:?}",
-                self.ser.local_fixups_iter_src
-            );
-
             // NOTE: avoid ownership errors by using `zip(self.local_fixups_iter_src)` and accessing with index.
             for (index, string) in strings.iter().enumerate() {
                 let local_dst = self.ser.relative_position()?;
@@ -104,6 +98,23 @@ impl<'a> StructSerializer<'a> {
             None => MissingLocalFixupSnafu { dst: local_dst }.fail(),
         }
     }
+
+    /// Write `T` of `T* m_data`.(`CString` & `StringPtr`)
+    fn serialize_string<V>(&mut self, key: &'static str, value: &V) -> Result<()>
+    where
+        V: Serialize,
+    {
+        // NOTE: This indicates that when it is a class array, the write position is not yet determined even here
+        // (because class arrays write the pointed data after all their array serialization is complete),
+        // so it is temporarily written to `str_array_buf`, otherwise it is written in place This is indicated by the following.
+        if self.ser.str_array_buf.is_none() {
+            self.ser.output.zero_fill_align(16)?; // NOTE: The field string is written after align16.
+            let str_dst = self.ser.relative_position()?;
+            self.write_local_fixup_pair(key, str_dst)?;
+            self.ser.output.zero_fill_align(16)?;
+        }
+        value.serialize(&mut *self.ser)
+    }
 }
 
 impl<'a> SerializeStruct for StructSerializer<'a> {
@@ -125,11 +136,11 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
             let str_start = self.ser.relative_position()?;
             if self.ser.str_array_buf.is_some() {
                 #[cfg(feature = "tracing")]
-                tracing::trace!("Add local_fixup.src: {str_start}({value})");
+                tracing::trace!("Add local_fixup_iter_src: {str_start}({value})");
                 self.ser.local_fixups_iter_src.push(str_start)
             } else {
                 #[cfg(feature = "tracing")]
-                tracing::trace!("Add local_fixup_iter.src: {str_start}({value})");
+                tracing::trace!("Add local_fixup_name_src: {str_start}({value})");
                 self.local_fixups_name_src.insert(key, str_start);
             };
         } else {
@@ -161,11 +172,11 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
             let str_start = self.ser.relative_position()?;
             if self.ser.str_array_buf.is_some() {
                 #[cfg(feature = "tracing")]
-                tracing::trace!("Add local_fixup.src: {str_start}({value})");
+                tracing::trace!("Add local_fixup_iter_src: {str_start}({value})");
                 self.ser.local_fixups_iter_src.push(str_start)
             } else {
                 #[cfg(feature = "tracing")]
-                tracing::trace!("Add local_fixup_iter.src: {str_start}({value})");
+                tracing::trace!("Add local_fixup_name_src: {str_start}({value})");
                 self.local_fixups_name_src.insert(key, str_start);
             };
         } else {
@@ -215,39 +226,14 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
         value.serialize(&mut *self.ser)
     }
 
-    /// Write `T` of `T* m_data`.
     #[inline]
-    fn serialize_cstring_field(
-        &mut self,
-        key: &'static str,
-        value: &CString,
-    ) -> Result<(), Self::Error> {
-        // NOTE: This indicates that when it is a class array, the write position is not yet determined even here
-        // (because class arrays write the pointed data after all their array serialization is complete),
-        // so it is temporarily written to `str_array_buf`, otherwise it is written in place This is indicated by the following.
-        if self.ser.str_array_buf.is_none() {
-            let str_dst = self.ser.relative_position()?;
-            self.write_local_fixup_pair(key, str_dst)?;
-        }
-        value.serialize(&mut *self.ser)
+    fn serialize_cstring_field(&mut self, key: &'static str, value: &CString) -> Result<()> {
+        self.serialize_string(key, value)
     }
 
-    /// Write `T` of `T* m_data`.
     #[inline]
-    fn serialize_stringptr_field(
-        &mut self,
-        key: &'static str,
-        value: &StringPtr,
-    ) -> Result<(), Self::Error> {
-        // NOTE: This indicates that when it is a class array, the write position is not yet determined even here
-        // (because class arrays write the pointed data after all their array serialization is complete),
-        // so it is temporarily written to `str_array_buf`, otherwise it is written in place This is indicated by the following.
-        if self.ser.str_array_buf.is_none() {
-            let str_dst = self.ser.relative_position()?;
-            self.write_local_fixup_pair(key, str_dst)?;
-            self.ser.output.zero_fill_align(16)?;
-        }
-        value.serialize(&mut *self.ser)
+    fn serialize_stringptr_field(&mut self, key: &'static str, value: &StringPtr) -> Result<()> {
+        self.serialize_string(key, value)
     }
 
     #[inline]
@@ -331,34 +317,21 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
     where
         T: ?Sized + AsRef<[u8]>,
     {
-        match self.ser.is_x86 {
-            true => {
-                if x86_pads.as_ref().is_empty() {
-                    return Ok(());
-                };
-                #[cfg(feature = "tracing")]
-                tracing::trace!(
-                    "padding: {} -> current position: {:#x}",
-                    x86_pads.as_ref().len(),
-                    self.ser.output.position(),
-                );
+        let pads = match self.ser.is_x86 {
+            true => x86_pads.as_ref(),
+            false => x64_pads.as_ref(),
+        };
 
-                self.ser.output.write(x86_pads.as_ref())
-            }
-            false => {
-                if x64_pads.as_ref().is_empty() {
-                    return Ok(());
-                };
-                #[cfg(feature = "tracing")]
-                tracing::trace!(
-                    "padding: {} -> current position: {:#x}",
-                    x64_pads.as_ref().len(),
-                    self.ser.output.position(),
-                );
-
-                self.ser.output.write(x64_pads.as_ref())
-            }
-        }?;
+        if pads.is_empty() {
+            return Ok(());
+        };
+        self.ser.output.write_all(pads)?;
+        #[cfg(feature = "tracing")]
+        {
+            let pads_len = pads.len();
+            let current_position = self.ser.output.position();
+            tracing::trace!("padding: {pads_len} -> current position: {current_position:#x}");
+        }
         Ok(())
     }
 

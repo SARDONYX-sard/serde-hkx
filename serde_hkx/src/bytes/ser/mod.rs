@@ -139,6 +139,9 @@ where
 }
 
 /// Binary data serializer
+///
+/// # Note
+/// - All of these fixups are from the `__data__` section.
 #[derive(Debug, Default)]
 pub struct ByteSerializer {
     /// Endianness of serialization target
@@ -170,12 +173,9 @@ pub struct ByteSerializer {
 
     // ---- Global fixup information
     /// A map that holds the src of global_fixups until the dst of virtual_fixups is known.
-    /// - key: Unique class pointer.(e.g. XML: #0050 -> 50)
-    /// - value: Starting point of the binary for which the pointer class write is requested.
-    ///
-    /// # Note
-    /// These are fixups of the data section.
-    global_fixups_ptr_src: IndexMap<Pointer, u32>,
+    /// -   key: Starting point of the binary for which the pointer class write is requested.
+    /// - value: Unique class pointer.(e.g. XML: #0050 -> 50)
+    global_fixups_ptr_src: IndexMap<u32, Pointer>,
     /// The `global_fixup.dst` == `virtual_fixup.src`.
     ///
     /// Therefore, the write start position must be retained.
@@ -184,7 +184,8 @@ pub struct ByteSerializer {
     /// - value: Starting point where Havok Class binary data is written.
     ///
     /// # Note
-    /// All of these fixups are from the DATA SECTION.
+    /// - This is used as a key since no duplicate ptr is required at the same relative position.
+    ///   The ptr may be shared-referenced and cannot be keyed.
     virtual_fixups_ptr_src: HashMap<Pointer, u32>,
 
     // ---- Virtual fixup information
@@ -244,28 +245,29 @@ impl ByteSerializer {
     /// # Note
     /// `global_fixup.dst` == `virtual_fixup.src`
     fn write_global_fixups(&mut self) -> Result<()> {
-        for (ptr, g_src) in &self.global_fixups_ptr_src {
-            if let Some(g_dst) = self.virtual_fixups_ptr_src.get(ptr) {
+        for (&src, ptr) in &self.global_fixups_ptr_src {
+            if let Some(&dst) = self.virtual_fixups_ptr_src.get(ptr) {
                 #[cfg(feature = "tracing")]
-                tracing::debug!("[global_fixups] src: {g_src}, dst: {g_dst}");
+                {
+                    let src_abs = self.abs_data_offset + src;
+                    let dst_abs = self.abs_data_offset + dst;
+                    tracing::debug!(
+                        "[global_fixups]({:#x}) src({src}/{src_abs:#x}) -> {ptr} dst({dst}/{dst_abs:#x})",
+                        self.output.position()
+                    );
+                }
 
-                match self.is_little_endian {
-                    true => {
-                        self.output.write_u32::<LittleEndian>(*g_src)?; // src
-                        self.output.write_u32::<LittleEndian>(2)?; // dst_section_index
-                        self.output.write_u32::<LittleEndian>(*g_dst)?; // dst(virtual_fixup.dst)
-                    }
-                    false => {
-                        self.output.write_u32::<BigEndian>(*g_src)?; // src
-                        self.output.write_u32::<BigEndian>(2)?; // dst_section_index
-                        self.output.write_u32::<BigEndian>(*g_dst)?; // dst(virtual_fixup.dst)
-                    }
+                if self.is_little_endian {
+                    self.output.write_u32::<LittleEndian>(src)?; // src
+                    self.output.write_u32::<LittleEndian>(2)?; // dst_section_index
+                    self.output.write_u32::<LittleEndian>(dst)?; // dst(virtual_fixup.dst)
+                } else {
+                    self.output.write_u32::<BigEndian>(src)?; // src
+                    self.output.write_u32::<BigEndian>(2)?; // dst_section_index
+                    self.output.write_u32::<BigEndian>(dst)?; // dst(virtual_fixup.dst)
                 }
             } else {
-                return MissingGlobalFixupClassSnafu {
-                    ptr: ptr.to_string(),
-                }
-                .fail();
+                return MissingGlobalFixupClassSnafu { ptr: *ptr }.fail();
             }
         }
         Ok(())
@@ -366,8 +368,6 @@ macro_rules! impl_serialize_primitive {
 macro_rules! impl_serialize_math {
     ($method:ident, $value_type:ty) => {
         fn $method(self, v: &$value_type) -> Result<Self::Ok, Self::Error> {
-            #[cfg(feature = "tracing")]
-            tracing::debug!("serialize math {v}({:#x})", self.output.position());
             match self.is_little_endian {
                 true => self.output.write(v.to_le_bytes().as_slice()),
                 false => self.output.write(v.to_be_bytes().as_slice()),
@@ -438,7 +438,12 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         if !ptr.is_null() {
             // Write global_fixup src(write start) position.
             let start = self.relative_position()?;
-            self.global_fixups_ptr_src.insert(ptr, start);
+            #[cfg(feature = "tracing")]
+            tracing::debug!(
+                "Insert `global_fixup.src`({:#x}): {ptr}",
+                self.output.position()
+            );
+            self.global_fixups_ptr_src.insert(start, ptr);
         } else {
             #[cfg(feature = "tracing")]
             tracing::debug!("Skip global_fixup.src writing, because it's null ptr.");
@@ -462,19 +467,22 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         name: &'static str,
         class_meta: Option<(Pointer, Signature)>,
     ) -> Result<Self::SerializeStruct, Self::Error> {
-        #[cfg(feature = "tracing")]
-        match class_meta {
-            Some((ptr, sig)) => {
-                tracing::debug!("serialize struct {name}(index = {ptr}, signature = {sig})")
-            }
-            None => tracing::debug!("serialize struct {name}(A class within a field.)"),
-        };
-
-        if let Some((ptr, _)) = class_meta {
+        #[allow(clippy::needless_else)]
+        if let Some((ptr, _sig)) = class_meta {
             self.output.zero_fill_align(16)?; // Make sure `virtual_fixup.src`(each Class) is `align16`.
+
+            #[cfg(feature = "tracing")]
+            tracing::debug!(
+                "serialize struct {name}(index = {ptr}, signature = {_sig}, abs_position = {:#x})",
+                self.output.position()
+            );
+
             let virtual_src = self.relative_position()?;
-            self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // For global_fixups
             self.write_virtual_fixups_pair(name, virtual_src)?; // Ok, `virtual_fixup` is known.
+            self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // Backup to write `global_fixups`
+        } else {
+            #[cfg(feature = "tracing")]
+            tracing::debug!("serialize struct {name}(A class within a field.)")
         }
         Ok(Self::SerializeStruct::new(self))
     }

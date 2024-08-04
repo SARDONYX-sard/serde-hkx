@@ -967,17 +967,18 @@ mod tests {
     #[test]
     #[cfg_attr(
         feature = "tracing",
-        quick_tracing::init(test = "deserialize_classes_from_bytes")
+        quick_tracing::init(test = "deserialize_classes_from_bytes", stdio = false)
     )]
     fn test_deserialize_class_index() {
+        use crate::mocks::new_defaultmale;
         use havok_classes::Classes;
 
-        fn from_file<'a, T>(bytes: &'a [u8]) -> Result<T>
+        fn from_file<'a, T>(bytes: &'a [u8]) -> T
         where
             T: Deserialize<'a>,
         {
             match from_bytes::<T>(bytes) {
-                Ok(res) => Ok(res),
+                Ok(res) => res,
                 Err(err) => {
                     tracing::error!("{err}");
                     panic!("{err}")
@@ -986,10 +987,8 @@ mod tests {
         }
 
         let bytes = include_bytes!("../../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx");
-        tracing::debug!("{:#?}", from_file::<Vec<Classes>>(bytes).unwrap());
-        tracing::debug!(
-            "{:#?}",
-            from_file::<indexmap::IndexMap<usize, Classes>>(bytes).unwrap()
-        );
+        let actual = from_file::<indexmap::IndexMap<usize, Classes>>(bytes);
+        let expected = new_defaultmale();
+        pretty_assertions::assert_eq!(actual, expected);
     }
 }

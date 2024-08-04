@@ -1,5 +1,6 @@
 //! Serialize error
 use crate::lib::*;
+use havok_types::Pointer;
 
 /// Serialize error
 #[derive(Debug, snafu::Snafu)]
@@ -53,7 +54,7 @@ pub enum Error {
     #[snafu(display("Missing global fixup class: {ptr}"))]
     MissingGlobalFixupClass {
         /// missing global fixup class ptr(e.g. #0050)
-        ptr: String,
+        ptr: Pointer,
         /// error location
         #[snafu(implicit)]
         location: snafu::Location,

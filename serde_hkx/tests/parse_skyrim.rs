@@ -28,52 +28,59 @@ type Result<T> = core::result::Result<T, ConvertError>;
 #[ignore = "Because it is impossible to test without a set of files in the game."]
 #[quick_tracing::init(test = "should_parse_one_file", stdio = false)]
 async fn should_parse_one_file() -> Result<()> {
-    // let path = "./tests/data/meshes/interface/intperkline01.hkx";
-    // let path = "./tests/data/meshes/actors/ambient/chicken/chickenproject.hkx";
-    // let path = "./tests/data/meshes/actors/character/characters/defaultmale.hkx";
-    // parse_to_xml(path).await.unwrap();
-
     // let xml = include_str!("../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
     let xml = include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
+    // let expected = include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx");
+    // let expected = include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x86_reconverted.hkx");
+    let expected =
+        include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx");
 
-    let actual = match xml_to_bytes(xml) {
+    let result = || -> Result<Vec<u8>> {
+        let mut actual_classes: ClassMap = from_str(xml)?;
+        actual_classes.sort_for_bytes();
+        Ok(to_bytes(&actual_classes, &HkxHeader::new_skyrim_se())?)
+    };
+
+    let actual = match result() {
         Ok(bytes) => bytes,
         Err(err) => {
             tracing::error!("{err}");
             panic!("{err}")
         }
     };
-    // let expected = include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx");
-    // let expected =
-    //     include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x86_reconverted.hkx");
-    let expected =
-        include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx");
 
-    let actual_hex_dump = hexdump_string(&actual);
-    let expected_hex_dump = hexdump_string(expected);
-
-    use similar::{ChangeTag, TextDiff};
-    let diff = TextDiff::from_lines(&expected_hex_dump, &actual_hex_dump);
-    let mut output_diff = String::new();
-    for change in diff.iter_all_changes() {
-        let sign = match change.tag() {
-            ChangeTag::Delete => "-",
-            ChangeTag::Insert => "+",
-            ChangeTag::Equal => " ",
-        };
-        output_diff += &format!("{sign}{change}");
+    {
+        let actual_classes: ClassMap = from_bytes(&actual)?;
+        let expected_classes: ClassMap = from_bytes(expected)?;
+        let map_diff = diff(
+            format!("{expected_classes:#?}"),
+            format!("{actual_classes:#?}"),
+        );
+        tracing::debug!("map_diff = \n{map_diff}");
     }
-    tracing::debug!("output bytes = \n{output_diff}");
 
-    assert_eq!(actual_hex_dump, expected_hex_dump);
+    {
+        let actual_hex_dump = hexdump_string(&actual);
+        let expected_hex_dump = hexdump_string(expected);
+        let hexdump_diff = diff(&expected_hex_dump, &actual_hex_dump);
+        tracing::debug!("hexdump_diff = \n{hexdump_diff}");
+        assert_eq!(actual_hex_dump, expected_hex_dump);
+    }
     Ok(())
 }
 
-fn xml_to_bytes(xml: &str) -> Result<Vec<u8>> {
-    let mut classes: ClassMap = from_str(xml)?;
-    classes.sort_for_bytes();
-    tracing::debug!("sorted_classes = {classes:#?}");
-    Ok(to_bytes(&classes, &HkxHeader::new_skyrim_se())?)
+fn diff(old: impl AsRef<str>, new: impl AsRef<str>) -> String {
+    let diff = similar::TextDiff::from_lines(old.as_ref(), new.as_ref());
+    let mut output_diff = String::new();
+    for change in diff.iter_all_changes() {
+        let sign = match change.tag() {
+            similar::ChangeTag::Delete => "-",
+            similar::ChangeTag::Insert => "+",
+            similar::ChangeTag::Equal => " ",
+        };
+        output_diff += &format!("{sign}{change}");
+    }
+    output_diff
 }
 
 #[tokio::test]
