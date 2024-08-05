@@ -2,6 +2,7 @@ pub mod bytes;
 pub mod errors;
 pub mod prelude;
 mod sort;
+pub mod tree;
 pub mod xml;
 
 #[cfg(test)]

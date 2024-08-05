@@ -1,18 +1,22 @@
 mod color;
 mod convert;
-mod help;
+mod tree;
 
 #[cfg(feature = "color")]
 use self::color::get_styles;
 use crate::{error::Result, logger::LogLevel};
 use clap::CommandFactory as _;
+use havok_classes::Classes;
+
+pub type ClassMap<'a> = indexmap::IndexMap<usize, Classes<'a>>;
 
 pub(crate) async fn run(args: Cli) -> Result<()> {
+    crate::logger::init(args.log_file, args.log_level, args.stdout)?;
     match args.command {
         Commands::Convert(sub_args) => {
-            crate::logger::init(args.log_file, args.log_level, args.stdout)?;
             convert::convert(&sub_args.input, sub_args.output, sub_args.format).await
         }
+        Commands::Tree(sub_args) => tree::print(sub_args.input).await,
         Commands::Completions { shell } => {
             shell.generate(&mut Cli::command(), &mut std::io::stdout());
             Ok(())
@@ -43,10 +47,15 @@ pub(crate) struct Cli {
 #[clap(version, about)]
 pub(crate) enum Commands {
     /// Convert hkx <-> xml
-    #[clap(arg_required_else_help = true, after_long_help = help::AFTER_HELP)]
+    #[clap(arg_required_else_help = true, after_long_help = convert::EXAMPLES)]
     Convert(convert::Convert),
 
+    /// Show dependency tree from havok behavior state machine (hkx/xml file)
+    #[clap(arg_required_else_help = true, after_long_help = tree::EXAMPLES)]
+    Tree(tree::Tree),
+
     /// Generate shell completions
+    #[clap(arg_required_else_help = true)]
     Completions {
         /// The shell to generate the completions for
         #[arg(value_enum)]

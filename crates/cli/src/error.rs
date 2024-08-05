@@ -1,8 +1,10 @@
 #[allow(clippy::enum_variant_names)]
 #[derive(Debug, snafu::Snafu)]
 pub enum ConvertError {
-    /// Unknown extension of file: {path}
-    #[snafu(display("Unknown extension of file: {path}"))]
+    /// The only supported extension is `.hkx` or `.xml`. But this path is neither: {path}.
+    #[snafu(display(
+        "The only supported extension is `.hkx` or `.xml`. But this path is neither: {path}."
+    ))]
     UnknownExtension { path: String },
 
     #[snafu(transparent)]
