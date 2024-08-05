@@ -1,5 +1,5 @@
 use super::ClassMap;
-use crate::error::{ConvertError, Result};
+use crate::error::{Error, Result};
 use serde_hkx::{from_bytes, from_str, tree};
 use std::{ffi::OsStr, io::Read as _, path::Path};
 use tokio::fs;
@@ -53,7 +53,7 @@ where
         Ok(classes.tree_for_bytes()) // TODO: implement `tree_for_xml`
                                      //
     } else {
-        return Err(ConvertError::UnknownExtension {
+        return Err(Error::UnknownExtension {
             path: input.to_string_lossy().to_string(),
         });
     }

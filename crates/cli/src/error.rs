@@ -1,11 +1,15 @@
+/// Cli error
 #[allow(clippy::enum_variant_names)]
 #[derive(Debug, snafu::Snafu)]
-pub enum ConvertError {
+pub enum Error {
     /// The only supported extension is `.hkx` or `.xml`. But this path is neither: {path}.
     #[snafu(display(
         "The only supported extension is `.hkx` or `.xml`. But this path is neither: {path}."
     ))]
     UnknownExtension { path: String },
+
+    #[snafu(display("Invalid format: {unknown_fmt}"))]
+    InvalidOutputFormat { unknown_fmt: String },
 
     #[snafu(transparent)]
     DeError {
@@ -29,6 +33,9 @@ pub enum ConvertError {
     TracingError {
         source: tracing::subscriber::SetGlobalDefaultError,
     },
+
+    #[snafu(transparent)]
+    FailedThreadJoin { source: tokio::task::JoinError },
 }
 
-pub type Result<T> = core::result::Result<T, ConvertError>;
+pub type Result<T> = core::result::Result<T, Error>;

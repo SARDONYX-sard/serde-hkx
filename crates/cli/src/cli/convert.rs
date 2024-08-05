@@ -1,4 +1,4 @@
-use crate::error::{ConvertError, Result};
+use crate::error::{Error, Result};
 use havok_classes::Classes;
 use serde_hkx::{
     bytes::serde::hkx_header::HkxHeader, from_bytes, from_str, to_bytes, to_string, HavokSort,
@@ -52,7 +52,7 @@ pub enum Format {
 }
 
 impl core::str::FromStr for Format {
-    type Err = String;
+    type Err = Error;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
         Ok(if s.eq_ignore_ascii_case("xml") {
@@ -62,13 +62,15 @@ impl core::str::FromStr for Format {
         } else if s.eq_ignore_ascii_case("amd64") {
             Self::Amd64
         } else {
-            return Err("Invalid format: {s}".to_string());
+            return Err(Error::InvalidOutputFormat {
+                unknown_fmt: s.to_string(),
+            });
         })
     }
 }
 
 /// Convert dir or file(hkx, xml).
-pub async fn convert<I, O>(input: O, output: Option<I>, format: Format) -> Result<()>
+pub async fn convert<I, O>(input: I, output: Option<O>, format: Format) -> Result<()>
 where
     I: AsRef<Path>,
     O: AsRef<Path>,
@@ -126,9 +128,7 @@ where
     }
 
     for task_handle in task_handles {
-        if let Err(err) = task_handle.await {
-            panic!("{err}")
-        };
+        task_handle.await??;
     }
     Ok(())
 }
@@ -157,7 +157,7 @@ where
         decoder.read_to_string(&mut xml)?;
         from_str(&xml)?
     } else {
-        return Err(ConvertError::UnknownExtension {
+        return Err(Error::UnknownExtension {
             path: input.to_string_lossy().to_string(),
         });
     };
