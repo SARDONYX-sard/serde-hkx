@@ -285,8 +285,8 @@ impl HkxHeader {
     /// - section count: 3(`__classnames__`, `__type__`, `__data__`)
     /// - content section index: 2. In zero-based index, `data` section means the third section.
     /// - content class name section offset: 0x4B
-    /// - max predicate: -1 (This mean is None)
-    /// - section offset: -1 (This mean is None)
+    /// - max predicate: -1 (Always `0xff 0xff` in ver. hk2010)
+    /// - section offset: -1 (Always `0xff 0xff` in ver. hk2010)
     pub const fn new_skyrim_se() -> Self {
         Self {
             magic0: i32::from_le_bytes([0x57, 0xE0, 0xE0, 0x57]),
@@ -310,9 +310,21 @@ impl HkxHeader {
         }
     }
 
-    /// Almost the same as SkyrimSE, only the ptr size is different, 4 instead of 8.
+    /// Create a new `HkXHeader` instance with default values for Skyrim Legendary Edition.
     ///
-    /// This means that the ptr size is 32 bits, or 4 bytes, for a 32-bit application.
+    /// # Features
+    /// Almost the same as SkyrimSE, only the `pointer_size` is different, 4 instead of 8.
+    /// This means that the `pointer_size` is 32 bits(4 bytes), for a 32-bit application.
+    ///
+    /// - file version: 8
+    /// - pointer size: 4 bytes(32bit)
+    /// - endian: 1(little endian)
+    /// - base class: 1
+    /// - section count: 3(`__classnames__`, `__type__`, `__data__`)
+    /// - content section index: 2. In zero-based index, `data` section means the third section.
+    /// - content class name section offset: 0x4B
+    /// - max predicate: -1 (Always `0xff 0xff` in ver. hk2010)
+    /// - section offset: -1 (Always `0xff 0xff` in ver. hk2010)
     pub const fn new_skyrim_le() -> Self {
         let mut le_header = Self::new_skyrim_se();
         le_header.pointer_size = 4;

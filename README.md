@@ -1,4 +1,4 @@
-# Havok Animation Serialize/Deserialize library
+# Havok behavior Serialize/Deserialize library
 
 ## Usage
 
@@ -11,7 +11,10 @@ havok_types = { git = "https://github.com/SARDONYX-sard/serde-hkx" }
 serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx" }
 ```
 
-See [tests](./serde_hkx/tests/parse_skyrim.rs)
+Examples
+
+- [Tests](./serde_hkx/tests/parse_skyrim.rs)
+- [Convert(in cli)](./crates/cli/src/cli/convert.rs)
 
 ## Manufacturing process
 

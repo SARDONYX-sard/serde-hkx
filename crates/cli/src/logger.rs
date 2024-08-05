@@ -1,8 +1,10 @@
+use crate::error::Result;
 use std::fs::File;
 use std::path::Path;
-use tracing::level_filters::LevelFilter;
+use tracing::Level;
 
-#[derive(Debug, clap::ValueEnum, Clone, Copy, parse_display::Display, parse_display::FromStr)]
+/// Log level.
+#[derive(Debug, clap::ValueEnum, Clone, Copy, Default, PartialEq, Eq, parse_display::Display)]
 pub enum LogLevel {
     #[display("trace")]
     Trace,
@@ -12,16 +14,55 @@ pub enum LogLevel {
     Info,
     #[display("warn")]
     Warn,
+    #[default]
     #[display("error")]
     Error,
 }
 
-/// Init logger.
-pub(crate) fn init_tracing(
-    log_path: Option<impl AsRef<Path>>,
-    filter: impl Into<LevelFilter>,
-    with_stdout: bool,
-) -> anyhow::Result<()> {
+impl From<LogLevel> for Level {
+    fn from(value: LogLevel) -> Self {
+        match value {
+            LogLevel::Trace => Level::TRACE,
+            LogLevel::Debug => Level::DEBUG,
+            LogLevel::Info => Level::INFO,
+            LogLevel::Warn => Level::WARN,
+            LogLevel::Error => Level::ERROR,
+        }
+    }
+}
+
+impl core::str::FromStr for LogLevel {
+    type Err = String;
+
+    fn from_str(s: &str) -> core::result::Result<Self, Self::Err> {
+        Ok(if s.eq_ignore_ascii_case("trace") {
+            Self::Trace
+        } else if s.eq_ignore_ascii_case("debug") {
+            Self::Debug
+        } else if s.eq_ignore_ascii_case("info") {
+            Self::Info
+        } else if s.eq_ignore_ascii_case("warn") {
+            Self::Warn
+        } else if s.eq_ignore_ascii_case("error") {
+            Self::Error
+        } else {
+            return Err("Invalid log level: {s}".to_string());
+        })
+    }
+}
+
+/// Initialize loggers globally.
+///
+/// # Note
+/// - This will live until the end of the program.
+///
+/// # Panics
+/// Panics if called twice.
+pub(crate) fn init<P, L>(log_path: Option<P>, filter: L, with_stdout: bool) -> Result<()>
+where
+    P: AsRef<Path>,
+    L: Into<Level>,
+{
     use tracing_subscriber::{fmt, layer::SubscriberExt};
 
     if let Some(log_parent) = log_path.as_ref().and_then(|p| p.as_ref().parent()) {

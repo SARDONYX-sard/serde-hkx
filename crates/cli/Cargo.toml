@@ -1,22 +1,23 @@
 [package]
 name = "cli_converter"
-edition.workspace = true
 authors.workspace = true
-description.workspace = true
+version.workspace = true
+description = "Havok Behavior (De)Serialization Converter(ver. hk_2010.2.0-r1)"
 license.workspace = true
 repository.workspace = true
 rust-version.workspace = true
-version.workspace = true
+edition.workspace = true
 
 [[bin]]
-name = "cvhkx"
+name = "hkxc"
 path = "./src/main.rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-anyhow = "1.0.86"
 clap = { version = "4.5.13", features = ["derive"] } # For CLI
-encoding_rs_io = "0.1"
+clap_complete_command = "0.6.1" # Generate auto complition
+color-print = "0.3.6" # To color example help
+encoding_rs_io = "0.1.7"
 indexmap = { workspace = true }
 jwalk = { workspace = true } # To enumarate json class files
 parse-display = { workspace = true } # Display derive

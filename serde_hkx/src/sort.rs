@@ -19,9 +19,12 @@ pub trait HavokSort {
 
     /// Sort by dependent class for XML serialization.
     ///
+    /// # Return
+    /// top ptr
+    ///
     /// # Errors
     /// Error when using circular references. (Behavior is a state machine, so if it is correct, it should not be circular.)
-    fn sort_for_xml(&mut self) -> Result<(), Self::Error>;
+    fn sort_for_xml(&mut self) -> Result<usize, Self::Error>;
 }
 
 impl<V> HavokSort for indexmap::IndexMap<usize, V>
@@ -54,8 +57,17 @@ where
         *self = sorted_classes;
     }
 
-    fn sort_for_xml(&mut self) -> Result<(), Self::Error> {
-        Ok(())
+    fn sort_for_xml(&mut self) -> Result<usize, Self::Error> {
+        if self.is_empty() {
+            Ok(0)
+        } else if let Some((first_key, first_value)) = self.shift_remove_index(0) {
+            self.insert(first_key, first_value);
+            Ok(first_key)
+        } else {
+            Err(crate::errors::ser::Error::Message {
+                msg: "Missing top pointer.".to_owned(),
+            })
+        }
     }
 }
 
