@@ -6,6 +6,7 @@ pub use crate::bytes::{
     },
     ser::{to_bytes, to_bytes_with_opt, ByteSerializer},
 };
+pub use crate::errors::SerdeHkxError;
 pub use crate::sort::HavokSort;
 pub use crate::xml::{
     de::{
@@ -20,3 +21,7 @@ pub use havok_serde::{
     HavokClass,
 };
 pub use havok_types::*;
+
+/// - key: class index(e.g. `#0001`)
+/// - value: class
+pub type ClassMap<'a> = indexmap::IndexMap<usize, havok_classes::Classes<'a>>;

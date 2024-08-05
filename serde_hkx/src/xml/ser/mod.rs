@@ -351,23 +351,19 @@ impl<'a> havok_serde::ser::SerializeSeq for &'a mut XmlSerializer {
         if index == 0 {
             self.indent();
         };
-
         tri!(value.serialize(&mut **self));
-        self.output += " ";
 
-        // Align the closing tag of `</hkparam>` by breaking the line at the end of the output,
-        // regardless of whether it is every 16 or not.
         if index + 1 == len {
+            // Align the closing tag of `</hkparam>` by breaking the line at the end of the output,
+            // regardless of whether it is every 16 or not.
             self.output.push('\n');
             return Ok(());
-        }
-
-        // After 16 outputs, indent and make 16 columns.
-        if (index + 1) % 16 == 0 {
-            self.output.push('\n');
+        } else if (index + 1) % 16 == 0 {
+            self.output.push('\n'); // After 16 outputs, indent and make 16 columns.
             self.indent();
+        } else {
+            self.output.push(' '); // add space each element.
         }
-
         Ok(())
     }
 

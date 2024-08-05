@@ -7,7 +7,7 @@ on:
     branches: "*"
 env:
   CARGO_TERM_COLOR: always
-  APP_NAME: cvhkx
+  APP_NAME: hkxc
 
 jobs:
   lint:

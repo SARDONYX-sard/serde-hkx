@@ -1,39 +1,30 @@
-use havok_classes::Classes;
 use pretty_assertions::assert_eq;
 use serde_hkx::{
     bytes::{hexdump_string, serde::hkx_header::HkxHeader},
-    from_bytes, from_str, to_bytes, to_string, HavokSort,
+    errors::SerdeHkxError,
+    from_bytes, from_str,
+    prelude::ClassMap,
+    to_bytes, to_string, HavokSort,
 };
 use std::path::Path;
 
-#[allow(clippy::enum_variant_names)]
-#[derive(Debug, snafu::Snafu)]
-enum ConvertError {
-    #[snafu(transparent)]
-    DeError {
-        source: serde_hkx::errors::de::Error,
-    },
-    #[snafu(transparent)]
-    SerError {
-        source: serde_hkx::errors::ser::Error,
-    },
-
-    #[snafu(transparent)]
-    IoError { source: std::io::Error },
-}
-
-type Result<T> = core::result::Result<T, ConvertError>;
+type Result<T> = core::result::Result<T, SerdeHkxError>;
 
 #[tokio::test]
 #[ignore = "Because it is impossible to test without a set of files in the game."]
 #[quick_tracing::init(test = "should_parse_one_file", stdio = false)]
 async fn should_parse_one_file() -> Result<()> {
-    // let xml = include_str!("../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
-    let xml = include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
-    // let expected = include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx");
-    // let expected = include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x86_reconverted.hkx");
-    let expected =
-        include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx");
+    let xml = {
+        // include_str!("../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
+        include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
+    };
+
+    let expected = {
+        // include_bytes!("../../docs/handson_hex_dump/defaultmale/defaultmale.hkx")
+        // include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx")
+        // include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x86_reconverted.hkx")
+        include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx")
+    };
 
     let result = || -> Result<Vec<u8>> {
         let mut actual_classes: ClassMap = from_str(xml)?;
@@ -85,6 +76,42 @@ fn diff(old: impl AsRef<str>, new: impl AsRef<str>) -> String {
 
 #[tokio::test]
 #[ignore = "Because it is impossible to test without a set of files in the game."]
+#[quick_tracing::init(test = "should_parse_to_xml", stdio = false)]
+async fn should_parse_to_xml() -> Result<()> {
+    let bytes = {
+        // include_bytes!("../../docs/handson_hex_dump/defaultmale/defaultmale.hkx")
+        // include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx")
+        include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx")
+    };
+
+    let expected = {
+        // include_str!("../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
+        include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
+    };
+
+    let result = || {
+        let mut actual_classes: ClassMap = from_bytes(bytes)?;
+        let top_ptr = actual_classes.sort_for_xml()?;
+        Result::Ok(to_string(&actual_classes, top_ptr)?)
+    };
+
+    let actual = match result() {
+        Ok(xml) => xml,
+        Err(err) => {
+            tracing::error!("{err}");
+            panic!("{err}")
+        }
+    };
+
+    {
+        let map_diff = diff(expected, actual);
+        tracing::debug!("map_diff = \n{map_diff}");
+    }
+    Ok(())
+}
+
+#[tokio::test]
+#[ignore = "Because it is impossible to test without a set of files in the game."]
 // #[quick_tracing::init(test = "from_bytes_skyrim_se_all_files", stdio = false)]
 #[quick_tracing::init]
 async fn test() -> std::io::Result<()> {
@@ -117,8 +144,6 @@ async fn test() -> std::io::Result<()> {
     }
     Ok(())
 }
-
-type ClassMap<'a> = indexmap::IndexMap<usize, Classes<'a>>;
 
 async fn parse_to_xml(path: impl AsRef<Path>) -> Result<()> {
     let path = path.as_ref();
