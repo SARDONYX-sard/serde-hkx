@@ -316,12 +316,7 @@ const _: () = {
                     let mut m_isInitialVelocityAdded: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_isTouchingGround: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
-                        #[cfg(not(feature = "strict"))]
-                        let __key = __A::next_key::<__Field>(&mut __map)
-                            .unwrap_or(Some(__Field::__ignore));
-                        #[cfg(feature = "strict")]
-                        let __key = __A::next_key::<__Field>(&mut __map)?;
-                        __key
+                        __A::next_key::<__Field>(&mut __map)?
                     } {
                         match __key {
                             __Field::m_gravity => {
@@ -329,7 +324,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_gravity) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -351,7 +350,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_timestep) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -375,7 +378,11 @@ const _: () = {
                                 if _serde::__private::Option::is_some(
                                     &m_isInitialVelocityAdded,
                                 ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -397,7 +404,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_isTouchingGround) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -414,7 +425,7 @@ const _: () = {
                                     },
                                 );
                             }
-                            _ => {}
+                            _ => __A::skip_value(&mut __map)?,
                         }
                     }
                     let m_gravity = match m_gravity {

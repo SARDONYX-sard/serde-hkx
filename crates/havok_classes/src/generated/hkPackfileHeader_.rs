@@ -631,12 +631,7 @@ const _: () = {
                     let mut m_flags: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_pad: _serde::__private::Option<[i32; 1usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
-                        #[cfg(not(feature = "strict"))]
-                        let __key = __A::next_key::<__Field>(&mut __map)
-                            .unwrap_or(Some(__Field::__ignore));
-                        #[cfg(feature = "strict")]
-                        let __key = __A::next_key::<__Field>(&mut __map)?;
-                        __key
+                        __A::next_key::<__Field>(&mut __map)?
                     } {
                         match __key {
                             __Field::m_magic => {
@@ -644,7 +639,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_magic) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field("magic"),
@@ -664,7 +663,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_userTag) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -686,7 +689,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_fileVersion) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -708,7 +715,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_layoutRules) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -730,7 +741,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_numSections) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -754,7 +769,11 @@ const _: () = {
                                 if _serde::__private::Option::is_some(
                                     &m_contentsSectionIndex,
                                 ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -778,7 +797,11 @@ const _: () = {
                                 if _serde::__private::Option::is_some(
                                     &m_contentsSectionOffset,
                                 ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -802,7 +825,11 @@ const _: () = {
                                 if _serde::__private::Option::is_some(
                                     &m_contentsClassNameSectionIndex,
                                 ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -826,7 +853,11 @@ const _: () = {
                                 if _serde::__private::Option::is_some(
                                     &m_contentsClassNameSectionOffset,
                                 ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -848,7 +879,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_contentsVersion) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -870,7 +905,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_flags) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field("flags"),
@@ -890,7 +929,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_pad) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field("pad"),
@@ -905,7 +948,7 @@ const _: () = {
                                     },
                                 );
                             }
-                            _ => {}
+                            _ => __A::skip_value(&mut __map)?,
                         }
                     }
                     let m_magic = match m_magic {

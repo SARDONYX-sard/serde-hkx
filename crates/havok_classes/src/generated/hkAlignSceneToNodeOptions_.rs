@@ -503,12 +503,7 @@ const _: () = {
                     let mut m_keyframe: _serde::__private::Option<i32> = _serde::__private::None;
                     let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
-                        #[cfg(not(feature = "strict"))]
-                        let __key = __A::next_key::<__Field>(&mut __map)
-                            .unwrap_or(Some(__Field::__ignore));
-                        #[cfg(feature = "strict")]
-                        let __key = __A::next_key::<__Field>(&mut __map)?;
-                        __key
+                        __A::next_key::<__Field>(&mut __map)?
                     } {
                         match __key {
                             __Field::m_invert => {
@@ -516,7 +511,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_invert) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field("invert"),
@@ -538,7 +537,11 @@ const _: () = {
                                 if _serde::__private::Option::is_some(
                                     &m_transformPositionX,
                                 ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -562,7 +565,11 @@ const _: () = {
                                 if _serde::__private::Option::is_some(
                                     &m_transformPositionY,
                                 ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -586,7 +593,11 @@ const _: () = {
                                 if _serde::__private::Option::is_some(
                                     &m_transformPositionZ,
                                 ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -610,7 +621,11 @@ const _: () = {
                                 if _serde::__private::Option::is_some(
                                     &m_transformRotation,
                                 ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -632,7 +647,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_transformScale) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -654,7 +673,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_transformSkew) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -676,7 +699,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_keyframe) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -698,7 +725,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_nodeName) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -715,7 +746,7 @@ const _: () = {
                                     },
                                 );
                             }
-                            _ => {}
+                            _ => __A::skip_value(&mut __map)?,
                         }
                     }
                     let m_invert = match m_invert {

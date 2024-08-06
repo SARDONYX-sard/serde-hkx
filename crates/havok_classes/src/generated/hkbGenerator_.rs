@@ -192,12 +192,7 @@ const _: () = {
                     let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
-                        #[cfg(not(feature = "strict"))]
-                        let __key = __A::next_key::<__Field>(&mut __map)
-                            .unwrap_or(Some(__Field::__ignore));
-                        #[cfg(feature = "strict")]
-                        let __key = __A::next_key::<__Field>(&mut __map)?;
-                        __key
+                        __A::next_key::<__Field>(&mut __map)?
                     } {
                         match __key {
                             __Field::m_variableBindingSet => {
@@ -207,7 +202,11 @@ const _: () = {
                                 if _serde::__private::Option::is_some(
                                     &m_variableBindingSet,
                                 ) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -229,7 +228,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_userData) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
@@ -251,7 +254,11 @@ const _: () = {
                                     any(feature = "strict", feature = "ignore_duplicates")
                                 )]
                                 if _serde::__private::Option::is_some(&m_name) {
-                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    {
+                                        __A::skip_value(&mut __map)?;
+                                        continue;
+                                    }
                                     #[cfg(feature = "strict")]
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field("name"),
@@ -266,7 +273,7 @@ const _: () = {
                                     },
                                 );
                             }
-                            _ => {}
+                            _ => __A::skip_value(&mut __map)?,
                         }
                     }
                     let m_variableBindingSet = match m_variableBindingSet {

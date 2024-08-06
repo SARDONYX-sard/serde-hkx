@@ -198,15 +198,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     while let _serde::__private::Some(__key) = {
-                        #[cfg(not(feature = "strict"))]
-                        let __key = __A::next_key::<__Field>(&mut __map)
-                            .unwrap_or(Some(__Field::__ignore));
-                        #[cfg(feature = "strict")]
-                        let __key = __A::next_key::<__Field>(&mut __map)?;
-                        __key
+                        __A::next_key::<__Field>(&mut __map)?
                     } {
                         match __key {
-                            _ => {}
+                            _ => __A::skip_value(&mut __map)?,
                         }
                     }
                     let __ptr = None;
