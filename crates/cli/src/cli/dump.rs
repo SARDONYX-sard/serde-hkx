@@ -1,5 +1,6 @@
-use crate::error::Result;
+use crate::error::{FailedReadFileSnafu, Result};
 use serde_hkx::bytes::hexdump_string;
+use snafu::ResultExt as _;
 use std::path::Path;
 use tokio::fs;
 
@@ -30,7 +31,10 @@ where
     I: AsRef<Path>,
     O: AsRef<Path>,
 {
-    let hexdump = hexdump_string(fs::read(input).await?); // NOTE: With newline.
+    let input = input.as_ref();
+    let hexdump = hexdump_string(fs::read(input).await.context(FailedReadFileSnafu {
+        path: input.to_path_buf(),
+    })?); // NOTE: With newline.
     match output {
         Some(output) => fs::write(output, &hexdump).await?,
         None => print!("{hexdump}"),

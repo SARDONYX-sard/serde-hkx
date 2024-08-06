@@ -16,7 +16,7 @@ pub enum Error {
     InvalidOutputFormat { unknown_fmt: String },
 
     /// Failed to read file from
-    #[snafu(display("Failed to read file from {}", path.display()))]
+    #[snafu(display("{source}: {}", path.display()))]
     FailedReadFile { source: io::Error, path: PathBuf },
 
     /// Deserialize error

@@ -1,6 +1,7 @@
 use super::ClassMap;
-use crate::error::{Error, Result};
+use crate::error::{Error, FailedReadFileSnafu, Result};
 use serde_hkx::{from_bytes, from_str, tree};
+use snafu::ResultExt as _;
 use std::{ffi::OsStr, io::Read as _, path::Path};
 use tokio::fs;
 use tree::HavokTree as _;
@@ -50,7 +51,9 @@ where
 {
     let input = input.as_ref();
     let extension = input.extension();
-    let bytes = fs::read(input).await?;
+    let bytes = fs::read(input).await.context(FailedReadFileSnafu {
+        path: input.to_path_buf(),
+    })?;
     let mut xml = String::new();
 
     if extension == Some(OsStr::new("hkx")) {
