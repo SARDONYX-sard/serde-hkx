@@ -62,7 +62,7 @@ where
         let mut classes: ClassMap = from_str(&xml)?;
         Ok(classes.tree_for_bytes()) // TODO: implement `tree_for_xml`
     } else {
-        return Err(Error::UnknownExtension {
+        return Err(Error::UnsupportedExtension {
             path: input.to_string_lossy().to_string(),
         });
     }

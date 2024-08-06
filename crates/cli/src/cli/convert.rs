@@ -1,10 +1,10 @@
-use crate::error::{Error, Result};
-use havok_classes::Classes;
+use super::ClassMap;
+use crate::error::{Error, FailedReadFileSnafu, Result};
 use serde_hkx::{
     bytes::serde::hkx_header::HkxHeader, from_bytes, from_str, to_bytes, to_string, HavokSort,
 };
+use snafu::ResultExt as _;
 use std::{
-    ffi::OsStr,
     io::{self, Read},
     path::Path,
 };
@@ -44,10 +44,13 @@ pub(crate) struct Args {
 
 #[derive(Debug, clap::ValueEnum, Clone, Copy, parse_display::Display)]
 pub enum Format {
+    /// XML
     #[display("xml")]
     Xml,
+    /// 32bit
     #[display("win32")]
     Win32,
+    /// 64bit
     #[display("amd64")]
     Amd64,
 }
@@ -66,6 +69,17 @@ where
             }
         } else {
             Format::Amd64
+        }
+    }
+}
+
+impl Format {
+    /// Return the file extension corresponding to the format.
+    const fn as_extension(&self) -> &str {
+        match *self {
+            Format::Xml => "xml",
+            Format::Win32 => "hkx",
+            Format::Amd64 => "hkx",
         }
     }
 }
@@ -115,24 +129,31 @@ where
     I: AsRef<Path>,
     O: AsRef<Path>,
 {
-    let target_ext = format.to_string();
+    let input_dir = input_dir.as_ref();
 
     let mut task_handles: Vec<tokio::task::JoinHandle<Result<()>>> = Vec::new();
     for path in jwalk::WalkDir::new(input_dir) {
         let path = path?.path();
         let path = path.as_path();
-        if !path.is_file() && path.extension() != Some(std::ffi::OsStr::new(&target_ext)) {
+        if !path.is_file() {
             continue;
         }
 
+        if let Some(ext) = path.extension() {
+            let ext = ext.to_string_lossy();
+            match ext.as_ref() {
+                "hkx" | "xml" => {}
+                _ => continue,
+            }
+        }
         let input = path.to_path_buf();
+
         // If output_dir is specified, make it the root dir to maintain the hierarchy and output.
         let output = match output_dir.as_ref() {
-            Some(output_root) => {
-                let root_name = input.iter().next().unwrap_or_default();
-                let relative_path = input.strip_prefix(root_name)?;
-                let output = output_root.as_ref().join(relative_path);
-                fs::create_dir_all(&output).await?;
+            Some(output_dir) => {
+                let relative_path = input.strip_prefix(input_dir)?;
+                let mut output = output_dir.as_ref().join(relative_path);
+                output.set_extension(format.as_extension());
                 Some(output)
             }
             None => None,
@@ -163,20 +184,33 @@ where
 {
     let input = input.as_ref();
     let extension = input.extension();
-    let bytes = fs::read(input).await?;
+    let bytes = fs::read(input).await.context(FailedReadFileSnafu {
+        path: input.to_path_buf(),
+    })?;
     let mut xml = String::new(); // To avoid ownership errors, declare it here, but since it is a 0-allocation, there is no problem.
 
-    /// (ptr index, class)
-    type ClassMap<'a> = indexmap::IndexMap<usize, Classes<'a>>;
-
-    let mut classes: ClassMap = if extension == Some(OsStr::new("hkx")) {
-        from_bytes(&bytes)?
-    } else if extension == Some(OsStr::new("xml")) {
-        let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
-        decoder.read_to_string(&mut xml)?;
-        from_str(&xml)?
+    let mut classes: ClassMap = if let Some(ext) = extension {
+        let ascii_lowercase = &ext.to_ascii_lowercase();
+        let ext = ascii_lowercase.to_string_lossy();
+        match ext.as_ref() {
+            "hkx" => from_bytes(&bytes)?,
+            "xml" => {
+                let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
+                decoder
+                    .read_to_string(&mut xml)
+                    .context(FailedReadFileSnafu {
+                        path: input.to_path_buf(),
+                    })?;
+                from_str(&xml)?
+            }
+            _ => {
+                return Err(Error::UnsupportedExtension {
+                    path: input.to_string_lossy().to_string(),
+                })
+            }
+        }
     } else {
-        return Err(Error::UnknownExtension {
+        return Err(Error::UnsupportedExtension {
             path: input.to_string_lossy().to_string(),
         });
     };
@@ -195,7 +229,7 @@ where
                 });
 
             if let Some(parent) = output.parent() {
-                tokio::fs::create_dir_all(parent).await?;
+                fs::create_dir_all(parent).await?;
             }
             fs::write(output, xml).await?;
         }
@@ -215,12 +249,12 @@ where
                     output.set_extension("hkx");
                     output
                 });
+
+            if let Some(parent) = output.parent() {
+                fs::create_dir_all(parent).await?;
+            }
             fs::write(&output, binary_data).await?;
-            tracing::info!(
-                "Converted {} -> {}",
-                input.to_string_lossy(),
-                output.to_string_lossy()
-            );
+            tracing::info!("Converted {} -> {}", input.display(), output.display());
         }
     }
 

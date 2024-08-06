@@ -1,16 +1,23 @@
+use std::{io, path::PathBuf};
+
 /// Cli error
 #[allow(clippy::enum_variant_names)]
 #[derive(Debug, snafu::Snafu)]
+#[snafu(visibility(pub))]
 pub enum Error {
     /// The only supported extension is `.hkx` or `.xml`. But this path is neither: {path}.
     #[snafu(display(
         "The only supported extension is `.hkx` or `.xml`. But this path is neither: {path}."
     ))]
-    UnknownExtension { path: String },
+    UnsupportedExtension { path: String },
 
     /// Invalid format: {unknown_fmt}
     #[snafu(display("Invalid format: {unknown_fmt}"))]
     InvalidOutputFormat { unknown_fmt: String },
+
+    /// Failed to read file from
+    #[snafu(display("Failed to read file from {}", path.display()))]
+    FailedReadFile { source: io::Error, path: PathBuf },
 
     /// Deserialize error
     #[snafu(transparent)]
