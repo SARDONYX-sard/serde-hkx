@@ -28,7 +28,8 @@ pub const EXAMPLES: &str = color_print::cstr!(
 );
 
 #[derive(Debug, clap::Args)]
-pub(crate) struct Convert {
+#[clap(arg_required_else_help = true, after_long_help = EXAMPLES)]
+pub(crate) struct Args {
     /// Path containing the hkx/xml file/directory
     #[clap(short, long)]
     pub input: String,
@@ -37,7 +38,7 @@ pub(crate) struct Convert {
     pub output: Option<String>,
 
     /// File format to output
-    #[clap(short = 'v', long)]
+    #[clap(short = 'v', long, ignore_case = true)]
     pub format: Format,
 }
 
@@ -49,6 +50,24 @@ pub enum Format {
     Win32,
     #[display("amd64")]
     Amd64,
+}
+
+impl<P> From<P> for Format
+where
+    P: AsRef<Path>,
+{
+    fn from(path: P) -> Self {
+        if let Some(extension) = path.as_ref().extension() {
+            let extension = extension.to_ascii_lowercase();
+            match extension.to_string_lossy().as_ref() {
+                "hkx" => Format::Xml,
+                "xml" => Format::Amd64,
+                _ => Format::Amd64,
+            }
+        } else {
+            Format::Amd64
+        }
+    }
 }
 
 impl core::str::FromStr for Format {

@@ -1,10 +1,11 @@
 use crate::error::Result;
+use parse_display::{Display, FromStr};
 use std::fs::File;
 use std::path::Path;
 use tracing::Level;
 
 /// Log level.
-#[derive(Debug, clap::ValueEnum, Clone, Copy, Default, PartialEq, Eq, parse_display::Display)]
+#[derive(Debug, clap::ValueEnum, Clone, Copy, Default, PartialEq, Eq, Display, FromStr)]
 pub enum LogLevel {
     #[display("trace")]
     Trace,
@@ -28,26 +29,6 @@ impl From<LogLevel> for Level {
             LogLevel::Warn => Level::WARN,
             LogLevel::Error => Level::ERROR,
         }
-    }
-}
-
-impl core::str::FromStr for LogLevel {
-    type Err = String;
-
-    fn from_str(s: &str) -> core::result::Result<Self, Self::Err> {
-        Ok(if s.eq_ignore_ascii_case("trace") {
-            Self::Trace
-        } else if s.eq_ignore_ascii_case("debug") {
-            Self::Debug
-        } else if s.eq_ignore_ascii_case("info") {
-            Self::Info
-        } else if s.eq_ignore_ascii_case("warn") {
-            Self::Warn
-        } else if s.eq_ignore_ascii_case("error") {
-            Self::Error
-        } else {
-            return Err("Invalid log level: {s}".to_string());
-        })
     }
 }
 
@@ -102,7 +83,10 @@ where
         }
     } else if let Some(log_path) = log_path {
         let log_file = File::create(log_path.as_ref())?;
-        subscriber_builder.with_writer(log_file).init();
+        subscriber_builder
+            .with_writer(log_file)
+            .with_ansi(false)
+            .init();
     }
 
     Ok(())

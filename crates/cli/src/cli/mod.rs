@@ -5,39 +5,71 @@ mod tree;
 
 #[cfg(feature = "color")]
 use self::color::get_styles;
-use crate::{error::Result, logger::LogLevel};
+use crate::{
+    error::{Error, Result},
+    logger::LogLevel,
+};
 use clap::CommandFactory as _;
 use havok_classes::Classes;
+use std::{
+    io,
+    path::{Path, PathBuf},
+};
 
 pub type ClassMap<'a> = indexmap::IndexMap<usize, Classes<'a>>;
 
 pub(crate) async fn run(args: Args) -> Result<()> {
     crate::logger::init(args.log_file, args.log_level, args.stdout)?;
 
-    match args.command {
-        Commands::Convert(args) => convert::convert(&args.input, args.output, args.format).await,
-        Commands::Tree(args) => tree::output(args.input, args.output).await,
-        Commands::Dump(args) => dump::output(args.input, args.output).await,
-        Commands::Completions { shell } => {
-            shell.generate(&mut Args::command(), &mut std::io::stdout());
-            Ok(())
+    if let Some(input) = args.input {
+        let input = input.as_path();
+        return convert::convert::<&Path, PathBuf>(input, None, input.into()).await;
+    }
+
+    if let Some(command) = args.command {
+        match command {
+            Commands::Convert(args) => {
+                convert::convert(&args.input, args.output, args.format).await
+            }
+            Commands::Tree(args) => tree::output(args.input, args.output).await,
+            Commands::Dump(args) => dump::output(args.input, args.output).await,
+            Commands::Completions { shell } => {
+                shell.generate(&mut Args::command(), &mut std::io::stdout());
+                Ok(())
+            }
         }
+    } else {
+        Args::command().print_long_help()?;
+        pub const ERR_MSG: &str = color_print::cstr!(
+            r#"
+<red>error:</red> '<red>hkxc</red>' requires a subcommand or hkx/xml path.
+For more information, try '<cyan!>--help</cyan!>'.
+"#
+        );
+        Err(Error::IoError {
+            source: io::Error::new(io::ErrorKind::InvalidInput, ERR_MSG),
+        })
     }
 }
 
 /// CLI command arguments
 #[derive(Debug, clap::Parser)]
 #[clap(version, about, author)]
-#[cfg_attr(feature = "color", command(styles=get_styles()))]
+#[cfg_attr(feature = "color", clap(styles=get_styles()))]
+#[clap(arg_required_else_help = true, args_conflicts_with_subcommands = true, after_long_help = convert::EXAMPLES)]
 pub(crate) struct Args {
+    /// Path for hkx <-> xml conversion by drag-and-drop. Create converted file on the spot.
+    pub input: Option<PathBuf>,
+
     #[clap(subcommand)]
-    command: Commands,
+    command: Option<Commands>,
 
     // --logger (Global options)
     #[clap(global = true, long, display_order = 100)]
     /// ON/OFF whether logging is also output to standard output
     pub stdout: bool,
-    #[clap(global = true, long, default_value = "error", display_order = 101)]
+    #[clap(global = true, long, display_order = 101)]
+    #[clap(ignore_case = true, default_value = "error")]
     /// Log level to be recorded in logger
     pub log_level: LogLevel,
     #[clap(global = true, long, display_order = 102)]
@@ -46,19 +78,15 @@ pub(crate) struct Args {
 }
 
 #[derive(Debug, clap::Parser)]
-#[clap(version, about)]
 pub(crate) enum Commands {
     /// Convert hkx <-> xml
-    #[clap(arg_required_else_help = true, after_long_help = convert::EXAMPLES)]
-    Convert(convert::Convert),
+    Convert(convert::Args),
 
     /// Show dependency tree from havok behavior state machine (hkx/xml file)
-    #[clap(arg_required_else_help = true, after_long_help = tree::EXAMPLES)]
-    Tree(tree::Tree),
+    Tree(tree::Args),
 
     /// Dump binary data in hexadecimal
-    #[clap(arg_required_else_help = true, after_long_help = dump::EXAMPLES)]
-    Dump(dump::Dump),
+    Dump(dump::Args),
 
     /// Generate shell completions
     #[clap(arg_required_else_help = true)]

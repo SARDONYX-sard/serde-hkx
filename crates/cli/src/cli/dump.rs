@@ -15,7 +15,8 @@ pub const EXAMPLES: &str = color_print::cstr!(
 );
 
 #[derive(Debug, clap::Args)]
-pub(crate) struct Dump {
+#[clap(arg_required_else_help = true, after_long_help = EXAMPLES)]
+pub(crate) struct Args {
     /// hkx file path
     pub input: String,
     /// If specified, write to a file (If not specified, stdout)
