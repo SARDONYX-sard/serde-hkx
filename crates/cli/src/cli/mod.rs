@@ -58,7 +58,7 @@ For more information, try '<cyan!>--help</cyan!>'.
 #[cfg_attr(feature = "color", clap(styles=get_styles()))]
 #[clap(arg_required_else_help = true, args_conflicts_with_subcommands = true, after_long_help = convert::EXAMPLES)]
 pub(crate) struct Args {
-    /// Path for hkx <-> xml conversion by drag-and-drop. Create converted file on the spot.
+    /// The path of the target for drag and drop hkx <-> xml conversion (The converted file will be created in the same location)
     pub input: Option<PathBuf>,
 
     #[clap(subcommand)]
