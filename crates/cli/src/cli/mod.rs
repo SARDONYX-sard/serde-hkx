@@ -66,7 +66,7 @@ pub(crate) struct Args {
 
     // --logger (Global options)
     #[clap(global = true, long, display_order = 100)]
-    /// ON/OFF whether logging is also output to standard output
+    /// Enable standard output of the log
     pub stdout: bool,
     #[clap(global = true, long, display_order = 101)]
     #[clap(ignore_case = true, default_value = "error")]
