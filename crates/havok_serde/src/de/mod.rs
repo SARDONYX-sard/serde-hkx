@@ -1380,6 +1380,13 @@ pub trait MapAccess<'de> {
     where
         V: DeserializeSeed<'de>;
 
+    /// `Deserialize` implementations should typically use
+    /// `MapAccess::skip_value` instead.
+    ///
+    /// # Primary use.
+    /// Clean up after the XML tag when unwanted items come in.
+    fn skip_value_seed(&mut self) -> Result<(), Self::Error>;
+
     /// Deserialize C++ inherited parent fields(for bytes method)
     ///
     /// This returns a `Ok(value)` for the next value in the map.
@@ -1441,6 +1448,15 @@ pub trait MapAccess<'de> {
         V: Deserialize<'de>,
     {
         self.next_value_seed(PhantomData)
+    }
+
+    /// This returns a `Ok(())` for the skip value in the map.
+    ///
+    /// # Primary use.
+    /// Clean up after the XML tag when unwanted items come in.
+    #[inline]
+    fn skip_value(&mut self) -> Result<(), Self::Error> {
+        self.skip_value_seed()
     }
 
     /// Deserialize C++ inherited parent fields(for bytes method)
@@ -1505,6 +1521,11 @@ where
     }
 
     #[inline]
+    fn skip_value_seed(&mut self) -> Result<(), Self::Error> {
+        (**self).skip_value_seed()
+    }
+
+    #[inline]
     fn parent_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
     where
         V: DeserializeSeed<'de>,
@@ -1547,6 +1568,11 @@ where
     where
         V: Deserialize<'de>,
     {
+        (**self).next_value()
+    }
+
+    #[inline]
+    fn skip_value(&mut self) -> Result<(), Self::Error> {
         (**self).next_value()
     }
 

@@ -1,6 +1,9 @@
 //! Deserializing each field element in an `Struct`
 
-use crate::tri;
+use crate::{
+    tri,
+    xml::de::parser::{delimited_multispace0_comment, delimited_with_multispace0},
+};
 
 use super::{
     parser::tag::{end_tag, field_start_close_tag, field_start_open_tag},
@@ -9,6 +12,7 @@ use super::{
 use crate::errors::de::{Error, Result};
 use havok_serde::de::{DeserializeSeed, MapAccess};
 use havok_types::Pointer;
+use winnow::{combinator::alt, token::take_until, Parser as _};
 
 /// A structure for deserializing each element in an `Struct`.
 ///
@@ -68,7 +72,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         }
 
         tri!(self.de.parse_next(field_start_open_tag(self.class_name))); // Parse `<hkparam name=`
-        seed.deserialize(&mut *self.de).map(Some) // Parse `"string"`
+        seed.deserialize(&mut *self.de).map(Some) // Parse `"field_name"`
     }
 
     // Parse e.g. `>(0.000000 0.000000 1.000000 0.000000)</hkparam>`
@@ -88,6 +92,31 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         let value = tri!(seed.deserialize(&mut *self.de));
         tri!(self.de.parse_next(end_tag("hkparam")));
         Ok(value)
+    }
+
+    // If an unknown `<hkparam>` exists and `next_value` is not called , `/>` or `</hkparam>` must be skipped.
+    fn skip_value_seed(&mut self) -> std::result::Result<(), Self::Error> {
+        let (_num, _value) = tri!(self.de.parse_next(alt((
+            winnow::seq! {
+                field_start_close_tag(), // Parse `>` or ` numelements="3">`
+                take_until(0.., "<"),    // take any value
+                _: end_tag("hkparam")       // </hkparam>
+            },
+            // Self closing tag
+            winnow::seq! {
+                _: delimited_with_multispace0("/"),
+                _: delimited_multispace0_comment(">")
+            }
+            .map(|_| (None, "")),
+        ))));
+        #[cfg(feature = "tracing")]
+        {
+            let numelements = _num
+                .map(|num| format!("numelements = \"{num:?}\" "))
+                .unwrap_or_default();
+            tracing::debug!("`Skip `{numelements}>{_value}</hkparam>`.",);
+        }
+        Ok(())
     }
 
     #[cold]

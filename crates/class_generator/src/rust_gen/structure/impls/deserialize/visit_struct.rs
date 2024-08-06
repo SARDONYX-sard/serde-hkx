@@ -58,7 +58,10 @@ pub fn gen(class: &Class, classes_map: &ClassMap) -> TokenStream {
                 #[cfg(any(feature = "strict", feature = "ignore_duplicates"))]
                 if _serde::__private::Option::is_some(&#field_ident) {
                     #[cfg(feature = "ignore_duplicates")]
-                    continue;
+                    {
+                        __A::skip_value(&mut __map)?;
+                        continue;
+                    }
                     #[cfg(feature = "strict")]
                     return _serde::__private::Err(
                         <__A::Error as _serde::de::Error>::duplicate_field(#name),
@@ -102,16 +105,10 @@ pub fn gen(class: &Class, classes_map: &ClassMap) -> TokenStream {
             {
                 #(#first_recv_fields)*
 
-                while let _serde::__private::Some(__key) = {
-                    #[cfg(not(feature = "strict"))]
-                    let __key = __A::next_key::<__Field>(&mut __map).unwrap_or(Some(__Field::__ignore));
-                    #[cfg(feature = "strict")]
-                    let __key = __A::next_key::<__Field>(&mut __map)?;
-                    __key
-                } {
+                while let _serde::__private::Some(__key) = { __A::next_key::<__Field>(&mut __map)? } {
                     match __key {
                         #(#visit_fields_matcher)*
-                        _ => {}
+                        _ => __A::skip_value(&mut __map)?,
                     }
                 }
                 #(#last_recv_fields)*

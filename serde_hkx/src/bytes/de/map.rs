@@ -95,6 +95,12 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         seed.deserialize(&mut *self.de)
     }
 
+    /// This method is now only used for XML.
+    #[inline]
+    fn skip_value_seed(&mut self) -> std::result::Result<(), Self::Error> {
+        Ok(())
+    }
+
     // Do the same thing as `next_value`, but separate them so that the current field name
     // to be deserialized is logged correctly.
     //

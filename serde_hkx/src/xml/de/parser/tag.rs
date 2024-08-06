@@ -84,7 +84,7 @@ pub fn field_start_open_tag<'a>(
     )))
 }
 
-/// Parses the field of class start closing tag `>`
+/// Parses the field of class start closing tag `>` or `numelements="0">`
 pub fn field_start_close_tag<'a>() -> impl Parser<&'a str, Option<u64>, ContextError> {
     seq!(
         winnow::combinator::opt(
