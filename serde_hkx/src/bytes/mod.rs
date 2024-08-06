@@ -3,6 +3,7 @@ pub mod de;
 pub mod ser;
 pub mod serde;
 
+/// Dump binary data in hexadecimal.
 pub fn hexdump_string(data: impl AsRef<[u8]>) -> String {
     let data = data.as_ref();
     let mut result = String::new();

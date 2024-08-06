@@ -2,7 +2,7 @@
 name = "cli_converter"
 authors.workspace = true
 version.workspace = true
-description = "Havok Behavior (De)Serialization Converter(ver. hk_2010.2.0-r1)"
+description = "Havok Behavior (De)Serialization CLI(for ver. hk_2010.2.0-r1)"
 license.workspace = true
 repository.workspace = true
 rust-version.workspace = true

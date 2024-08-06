@@ -1,5 +1,6 @@
 mod color;
 mod convert;
+mod dump;
 mod tree;
 
 #[cfg(feature = "color")]
@@ -10,24 +11,25 @@ use havok_classes::Classes;
 
 pub type ClassMap<'a> = indexmap::IndexMap<usize, Classes<'a>>;
 
-pub(crate) async fn run(args: Cli) -> Result<()> {
+pub(crate) async fn run(args: Args) -> Result<()> {
     crate::logger::init(args.log_file, args.log_level, args.stdout)?;
+
     match args.command {
-        Commands::Convert(sub_args) => {
-            convert::convert(&sub_args.input, sub_args.output, sub_args.format).await
-        }
-        Commands::Tree(sub_args) => tree::print(sub_args.input).await,
+        Commands::Convert(args) => convert::convert(&args.input, args.output, args.format).await,
+        Commands::Tree(args) => tree::output(args.input, args.output).await,
+        Commands::Dump(args) => dump::output(args.input, args.output).await,
         Commands::Completions { shell } => {
-            shell.generate(&mut Cli::command(), &mut std::io::stdout());
+            shell.generate(&mut Args::command(), &mut std::io::stdout());
             Ok(())
         }
     }
 }
 
+/// CLI command arguments
 #[derive(Debug, clap::Parser)]
 #[clap(version, about, author)]
 #[cfg_attr(feature = "color", command(styles=get_styles()))]
-pub(crate) struct Cli {
+pub(crate) struct Args {
     #[clap(subcommand)]
     command: Commands,
 
@@ -53,6 +55,10 @@ pub(crate) enum Commands {
     /// Show dependency tree from havok behavior state machine (hkx/xml file)
     #[clap(arg_required_else_help = true, after_long_help = tree::EXAMPLES)]
     Tree(tree::Tree),
+
+    /// Dump binary data in hexadecimal
+    #[clap(arg_required_else_help = true, after_long_help = dump::EXAMPLES)]
+    Dump(dump::Dump),
 
     /// Generate shell completions
     #[clap(arg_required_else_help = true)]

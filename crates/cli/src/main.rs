@@ -3,7 +3,7 @@ mod cli;
 mod error;
 mod logger;
 
-use crate::cli::Cli;
+use crate::cli::Args;
 use clap::Parser;
 use std::process::exit;
 use tokio::time::Instant;
@@ -12,7 +12,7 @@ use tokio::time::Instant;
 async fn main() {
     let start = Instant::now();
 
-    match cli::run(Cli::parse()).await {
+    match cli::run(Args::parse()).await {
         Ok(()) => {
             let elapsed = start.elapsed();
             let time = (elapsed.as_secs(), elapsed.subsec_millis());
