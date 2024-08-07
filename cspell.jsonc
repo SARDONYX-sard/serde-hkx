@@ -79,6 +79,8 @@
     "vsubtype",
     "vtable",
     "vtype",
+    "windres",
+    "winres",
     "xmmintrin",
     "zerocopy"
   ],

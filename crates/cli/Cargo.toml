@@ -36,6 +36,10 @@ tracing-subscriber = "0.3.18"
 havok_classes = { workspace = true, features = ["ignore_duplicates"] }
 serde_hkx = { path = "../../serde_hkx", features = ["tracing"] }
 
+[build-dependencies]
+winres = "0.1.12" # Meta information can be added to the exe.
+
+
 [features]
 default = ["color"]
 color = []

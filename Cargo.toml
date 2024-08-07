@@ -29,7 +29,7 @@ indexmap = "2.2.6"
 jwalk = { version = "0.8" }                                    # To enumarate json class files
 num-derive = "0.4"                                             # To serialize Enum & Flags
 num-traits = "0.2"                                             # To serialize Enum & Flags
-parse-display = "0.9.0"                                        # Display derive
+parse-display = "0.10.0"                                       # Display derive
 parse_int = { version = "0.6" }
 proc-macro2 = { version = "1.0.82", default-features = false }
 quote = { version = "1.0.36", default-features = false }
