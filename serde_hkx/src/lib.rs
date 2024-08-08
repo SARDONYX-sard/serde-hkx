@@ -6,7 +6,7 @@ pub mod tree;
 pub mod xml;
 
 #[cfg(test)]
-pub mod mocks;
+pub(crate) mod tests;
 
 /// A facade around all the types we need from the `std`, `core`, and `alloc`
 /// crates. This avoids elaborate import wrangling having to happen in every
@@ -17,13 +17,12 @@ mod lib {
     }
 
     pub use self::core::f32;
+    pub use self::core::fmt;
+    pub use self::core::fmt::Display;
     pub use self::core::ops::AddAssign;
     pub use self::core::ops::MulAssign;
     pub use self::core::ops::Range;
     pub use self::core::str;
-
-    pub use self::core::fmt;
-    pub use self::core::fmt::Display;
     pub use self::core::str::FromStr;
 
     pub use std::string::{String, ToString};
@@ -44,8 +43,8 @@ macro_rules! tri {
 }
 pub(crate) use tri;
 
-pub use bytes::de::from_bytes;
-pub use bytes::ser::to_bytes;
-pub use sort::HavokSort;
-pub use xml::de::from_str;
-pub use xml::ser::to_string;
+pub use crate::bytes::de::from_bytes;
+pub use crate::bytes::ser::to_bytes;
+pub use crate::sort::HavokSort;
+pub use crate::xml::de::from_str;
+pub use crate::xml::ser::to_string;

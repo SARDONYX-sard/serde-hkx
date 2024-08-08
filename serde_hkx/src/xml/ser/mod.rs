@@ -588,7 +588,7 @@ mod tests {
     #[ignore = "No error on local PC Windows, but for some reason error occurs on GitHub Actions Windows"]
     #[test]
     fn test_serialize_defaultmale() -> Result<()> {
-        use crate::mocks::new_defaultmale;
+        use crate::tests::mocks::new_defaultmale;
 
         let mut classes = new_defaultmale();
 

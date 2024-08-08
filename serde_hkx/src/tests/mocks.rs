@@ -1,11 +1,5 @@
-/// Reduce the burden of individual imports by importing a set of types needed to create a havok class structure here.
-pub use crate::lib::*;
+//! Reduce the burden of individual imports by importing a set of types needed to create a havok class structure here.
 use havok_classes::*;
-pub use havok_serde::{
-    de::{self, Deserialize, Deserializer, MapAccess, Visitor},
-    ser::{Error as _, Serialize, SerializeFlags, SerializeStruct, Serializer},
-    HavokClass,
-};
 pub use havok_types::*;
 use indexmap::IndexMap;
 
@@ -49,6 +43,7 @@ pub fn new_defaultmale<'a>() -> IndexMap<usize, Classes<'a>> {
     classes
 }
 
+#[allow(unused)]
 pub fn new_defaultmale_vec<'a>() -> Vec<Classes<'a>> {
     let hkb_project_string_data = hkbProjectStringData {
         __ptr: Some(9.into()),

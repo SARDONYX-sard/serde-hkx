@@ -1123,7 +1123,6 @@ dependencies = [
  "havok_classes",
  "havok_serde",
  "havok_types",
- "havok_types_derive",
  "html-escape",
  "indexmap 2.2.6",
  "jwalk",

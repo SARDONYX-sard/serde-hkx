@@ -8,5 +8,5 @@
 
 **/logs/
 
-**/serde_hkx/tests/data/
-**/serde_hkx/tests/output/
+**/serde_hkx/src/tests/data/
+**/serde_hkx/src/tests/output/

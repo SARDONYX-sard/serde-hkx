@@ -1,11 +1,11 @@
-use pretty_assertions::assert_eq;
-use serde_hkx::{
+use crate::{
     bytes::{hexdump, serde::hkx_header::HkxHeader},
     errors::SerdeHkxError,
     from_bytes, from_str,
-    prelude::ClassMap,
+    tests::ClassMap,
     to_bytes, to_string, HavokSort,
 };
+use pretty_assertions::assert_eq;
 use std::path::Path;
 
 type Result<T> = core::result::Result<T, SerdeHkxError>;
@@ -16,14 +16,14 @@ type Result<T> = core::result::Result<T, SerdeHkxError>;
 async fn should_parse_one_file() -> Result<()> {
     let xml = {
         // include_str!("../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
-        include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
+        include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
     };
 
     let expected = {
         // include_bytes!("../../docs/handson_hex_dump/defaultmale/defaultmale.hkx")
         // include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx")
         // include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x86_reconverted.hkx")
-        include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx")
+        include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx")
     };
 
     let result = || -> Result<Vec<u8>> {
@@ -79,14 +79,14 @@ fn diff(old: impl AsRef<str>, new: impl AsRef<str>) -> String {
 #[quick_tracing::init(test = "should_parse_to_xml", stdio = false)]
 async fn should_parse_to_xml() -> Result<()> {
     let bytes = {
-        // include_bytes!("../../docs/handson_hex_dump/defaultmale/defaultmale.hkx")
-        // include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx")
-        include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx")
+        // include_bytes!("../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx")
+        // include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx")
+        include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx")
     };
 
     let expected = {
         // include_str!("../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
-        include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
+        include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
     };
 
     let result = || {
@@ -115,9 +115,11 @@ async fn should_parse_to_xml() -> Result<()> {
 // #[quick_tracing::init(test = "from_bytes_skyrim_se_all_files", stdio = false)]
 #[quick_tracing::init]
 async fn test() -> std::io::Result<()> {
-    let mut task_handles: Vec<tokio::task::JoinHandle<Result<()>>> = Vec::new();
+    let repo_root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("..");
+    let test_path = repo_root.join("tests").join("data");
 
-    for path in jwalk::WalkDir::new("./tests/data") {
+    let mut task_handles: Vec<tokio::task::JoinHandle<Result<()>>> = Vec::new();
+    for path in jwalk::WalkDir::new(test_path) {
         let path = path?.path();
         let path = path.as_path();
         if !path.is_file() && path.extension() != Some(std::ffi::OsStr::new("hkx")) {

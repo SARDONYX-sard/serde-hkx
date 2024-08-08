@@ -526,7 +526,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{bytes::hexdump, mocks::new_defaultmale, HavokSort as _};
+    use crate::{bytes::hexdump, tests::mocks::new_defaultmale, HavokSort as _};
 
     #[test]
     #[cfg_attr(feature = "tracing", quick_tracing::try_init(test = "serialize_bytes"))]

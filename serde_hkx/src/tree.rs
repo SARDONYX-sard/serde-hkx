@@ -193,9 +193,10 @@ where
 #[test]
 #[quick_tracing::init]
 fn should_create_tree() {
-    let s = include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
-    let mut classes: crate::prelude::ClassMap = crate::from_str(s).unwrap();
+    use crate::tests::ClassMap;
 
+    let s = include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
+    let mut classes: ClassMap = crate::from_str(s).unwrap();
     let tree = classes.tree_for_bytes();
     tracing::debug!("tree =\n{tree}");
 }

@@ -1,7 +1,5 @@
-use serde_hkx::{
-    from_str,
-    prelude::{ClassMap, HavokClass},
-};
+use crate::{errors::SerdeHkxError, from_str, tests::ClassMap};
+use havok_serde::HavokClass as _;
 
 /// Output markdown mermaids from Behavior's state machine.
 pub fn gen_mermaid_from(classes: ClassMap) -> String {
@@ -28,12 +26,12 @@ flowchart LR
 }
 
 #[test]
-fn should_gen_inheritance_tree() -> Result<(), serde_hkx::errors::SerdeHkxError> {
+fn should_gen_inheritance_tree() -> Result<(), SerdeHkxError> {
     let repo_root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("..");
     let out_path = repo_root.join("logs").join("deps.md");
 
     let classes = from_str(include_str!(
-        "../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml"
+        "../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml"
     ))?;
 
     let markdown = gen_mermaid_from(classes);

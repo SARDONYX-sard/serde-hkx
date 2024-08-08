@@ -21,10 +21,8 @@ tracing = { workspace = true, optional = true }
 winnow = { version = "0.6.8", features = ["simd"] } # Parser conbinator
 
 # workspace members
-havok_classes = { workspace = true }
 havok_serde = { workspace = true, features = ["indexmap"] }
 havok_types = { workspace = true }
-havok_types_derive = { workspace = true }                   # To impl `Default`&`FromStr` for Bitflags
 
 [dev-dependencies]
 bitflags = { workspace = true } # To generate flags type
@@ -43,6 +41,9 @@ tokio = { workspace = true, features = [
 ] } # multi thread async
 tracing = { workspace = true }
 zerocopy = { version = "0.7.34" } # To(As)Bytes
+
+# workspace members
+havok_classes = { workspace = true }
 
 [features]
 default = ["ignore_duplicates", "tracing"]

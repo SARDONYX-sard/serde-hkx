@@ -743,7 +743,7 @@ mod tests {
         quick_tracing::init(test = "deserialize_classes_from_xml")
     )]
     fn should_deserialize_classes_from_xml() {
-        use crate::mocks::new_defaultmale;
+        use crate::tests::mocks::new_defaultmale;
         use havok_classes::Classes;
 
         fn from_file<'a, T>(xml: &'a str) -> T
