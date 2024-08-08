@@ -32,7 +32,13 @@ pub(crate) async fn run(args: Args) -> Result<()> {
                 convert::convert(&args.input, args.output, args.format).await
             }
             Commands::Tree(args) => tree::output(args.input, args.output).await,
-            Commands::Dump(args) => dump::output(args.input, args.output).await,
+            Commands::Dump(args) => {
+                if args.reserve {
+                    dump::to_bytes(args.input, args.output).await
+                } else {
+                    dump::to_string(args.input, args.output).await
+                }
+            }
             Commands::Completions { shell } => {
                 shell.generate(&mut Args::command(), &mut std::io::stdout());
                 Ok(())

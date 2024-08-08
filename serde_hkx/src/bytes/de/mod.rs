@@ -19,7 +19,7 @@ use self::parser::{
     BytesStream,
 };
 use self::seq::SeqDeserializer;
-use super::hexdump_string;
+use super::hexdump;
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::{
     de::{Error, Result},
@@ -204,16 +204,16 @@ impl<'de> BytesDeserializer<'de> {
     /// Parse by argument parser.
     ///
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
-    fn parse_peek<O>(
-        &mut self,
-        mut parser: impl Parser<BytesStream<'de>, O, winnow::error::ContextError>,
-    ) -> Result<O> {
+    fn parse_peek<O, P>(&mut self, mut parser: P) -> Result<O>
+    where
+        P: Parser<BytesStream<'de>, O, winnow::error::ContextError>,
+    {
         let (_, res) = parser
             .parse_peek(&self.input[self.current_position..])
             .map_err(|err| Error::ReadableError {
                 source: ReadableError::from_context(
                     err,
-                    &hexdump_string(self.input),
+                    &hexdump::to_string(self.input),
                     to_hexdump_pos(self.current_position),
                 ),
             })?;
@@ -223,18 +223,17 @@ impl<'de> BytesDeserializer<'de> {
     /// Parse by argument parser.
     ///
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
-    fn parse_range<O>(
-        &mut self,
-        mut parser: impl Parser<BytesStream<'de>, O, winnow::error::ContextError>,
-        range: Range<usize>,
-    ) -> Result<O> {
+    fn parse_range<O, P>(&mut self, mut parser: P, range: Range<usize>) -> Result<O>
+    where
+        P: Parser<BytesStream<'de>, O, winnow::error::ContextError>,
+    {
         let (_, res) =
             parser
                 .parse_peek(&self.input[range])
                 .map_err(|err| Error::ReadableError {
                     source: ReadableError::from_context(
                         err,
-                        &hexdump_string(self.input),
+                        &hexdump::to_string(self.input),
                         to_hexdump_pos(self.current_position),
                     ),
                 })?;
@@ -251,7 +250,7 @@ impl<'de> BytesDeserializer<'de> {
             Err(err) => match err {
                 Error::ReadableError { .. } => Err(err),
                 _ => {
-                    let input = &hexdump_string(self.input);
+                    let input = &hexdump::to_string(self.input);
                     let err_pos = to_hexdump_pos(self.current_position);
                     Err(Error::ReadableError {
                         source: ReadableError::from_display(err, input, err_pos),

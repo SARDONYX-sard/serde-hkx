@@ -526,7 +526,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{bytes::hexdump_string, mocks::new_defaultmale, HavokSort as _};
+    use crate::{bytes::hexdump, mocks::new_defaultmale, HavokSort as _};
 
     #[test]
     #[cfg_attr(feature = "tracing", quick_tracing::try_init(test = "serialize_bytes"))]
@@ -536,10 +536,10 @@ mod tests {
         tracing::debug!("{classes:#?}");
 
         let bytes = to_bytes(&classes, &HkxHeader::new_skyrim_se())?;
-        let actual = hexdump_string(&bytes);
+        let actual = hexdump::to_string(&bytes);
         tracing::debug!("\n{actual}");
 
-        let expected = hexdump_string(include_bytes!(
+        let expected = hexdump::to_string(include_bytes!(
             "../../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx"
         ));
         pretty_assertions::assert_eq!(actual, expected);

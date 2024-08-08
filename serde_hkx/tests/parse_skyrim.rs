@@ -1,6 +1,6 @@
 use pretty_assertions::assert_eq;
 use serde_hkx::{
-    bytes::{hexdump_string, serde::hkx_header::HkxHeader},
+    bytes::{hexdump, serde::hkx_header::HkxHeader},
     errors::SerdeHkxError,
     from_bytes, from_str,
     prelude::ClassMap,
@@ -51,8 +51,8 @@ async fn should_parse_one_file() -> Result<()> {
     }
 
     {
-        let actual_hex_dump = hexdump_string(&actual);
-        let expected_hex_dump = hexdump_string(expected);
+        let actual_hex_dump = hexdump::to_string(&actual);
+        let expected_hex_dump = hexdump::to_string(expected);
         let hexdump_diff = diff(&expected_hex_dump, &actual_hex_dump);
         tracing::debug!("hexdump_diff = \n{hexdump_diff}");
         assert_eq!(actual_hex_dump, expected_hex_dump);
@@ -152,8 +152,8 @@ async fn parse_to_xml(path: impl AsRef<Path>) -> Result<()> {
     // Verify bytes.
     let mut classes = from_bytes::<ClassMap>(&expected_bytes)?;
     assert_eq!(
-        hexdump_string(&to_bytes(&classes, &HkxHeader::new_skyrim_se())?),
-        hexdump_string(&expected_bytes),
+        hexdump::to_string(&to_bytes(&classes, &HkxHeader::new_skyrim_se())?),
+        hexdump::to_string(&expected_bytes),
         "path = {path:?}"
     );
 

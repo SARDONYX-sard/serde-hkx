@@ -19,6 +19,9 @@ pub enum Error {
     #[snafu(display("{source}: {}", path.display()))]
     FailedReadFile { source: io::Error, path: PathBuf },
 
+    #[snafu(display("Use `-o [FILE]` option. (Unable to write bytes to stdout.)"))]
+    InvalidStdout,
+
     /// Deserialize error
     #[snafu(transparent)]
     DeError {
