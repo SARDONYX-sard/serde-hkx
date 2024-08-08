@@ -6,7 +6,7 @@ use super::delimited_with_multispace0;
 use havok_types::*;
 use std::borrow::Cow;
 use winnow::ascii::{digit1, multispace0, Caseless};
-use winnow::combinator::{alt, preceded, seq};
+use winnow::combinator::{alt, opt, preceded, seq};
 use winnow::error::{ContextError, StrContext, StrContextValue};
 use winnow::token::take_until;
 use winnow::Parser;
@@ -62,7 +62,7 @@ pub fn real<'a>() -> impl Parser<&'a str, f32, ContextError> {
 /// ```
 pub fn vector4<'a>() -> impl Parser<&'a str, Vector4, ContextError> {
     seq!(Vector4 {
-        _: delimited_with_multispace0("("),
+        _: opt(delimited_with_multispace0("(")),
         x: real().context(StrContext::Label("x")),
         _: multispace0,
         y: real().context(StrContext::Label("y")),
@@ -70,7 +70,7 @@ pub fn vector4<'a>() -> impl Parser<&'a str, Vector4, ContextError> {
         z: real().context(StrContext::Label("z")),
         _: multispace0,
         w: real().context(StrContext::Label("w")),
-        _: delimited_with_multispace0(")"),
+        _: opt(delimited_with_multispace0(")")),
     })
     .context(StrContext::Label("Vector4"))
 }
@@ -206,13 +206,13 @@ fn vector3<'a>() -> impl Parser<&'a str, Vector4, ContextError> {
 
     move |input: &mut &'a str| {
         let Vector3 { x, y, z } = tri!(seq!(Vector3 {
-            _: delimited_with_multispace0("("),
+            _: opt(delimited_with_multispace0("(")),
             x: real().context(StrContext::Label("x")),
             _: multispace0,
             y: real().context(StrContext::Label("y")),
             _: multispace0,
             z: real().context(StrContext::Label("z")),
-            _: delimited_with_multispace0(")"),
+            _: opt(delimited_with_multispace0(")")),
         })
         .context(StrContext::Label("Vector3"))
         .parse_next(input));
@@ -240,7 +240,12 @@ mod tests {
         assert_eq!(
             vector4().parse("(-0.000000 0.000000 -0.000000 1.000000)"),
             Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0))
-        )
+        );
+
+        assert_eq!(
+            vector4().parse("-0.000000 0.000000 -0.000000 1.000000"),
+            Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0))
+        );
     }
 
     #[test]

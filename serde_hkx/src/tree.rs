@@ -28,6 +28,7 @@ impl Node {
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn print_node(
     nodes: &IndexMap<usize, Node>,
     idx: usize,
@@ -35,8 +36,35 @@ fn print_node(
     visited: &mut HashMap<usize, usize>,
     last_children: &mut Vec<bool>,
     result: &mut String,
+    path: &mut Vec<usize>,
     already_visited: &mut HashMap<usize, bool>,
 ) {
+    if path.contains(&idx) {
+        // Cycle detected
+        let cycle_start = path.iter().position(|&x| x == idx).unwrap();
+        let cycle_path: Vec<String> = path[cycle_start..]
+            .iter()
+            .map(|&i| nodes[&i].name.clone())
+            .collect();
+
+        result.push_str(&format!(
+            "{}\\_Cycle Start(Invalid state transition): {}\n",
+            "| ".repeat(depth + 2),
+            nodes[&idx].name,
+        ));
+
+        for node_name in cycle_path.iter().skip(1) {
+            result.push_str(&format!("{}|-- {}\n", "| ".repeat(depth + 2), node_name));
+        }
+
+        result.push_str(&format!(
+            "{}    \\_Cycle End: {}\n",
+            "| ".repeat(depth + 2),
+            nodes[&idx].name,
+        ));
+        return;
+    }
+
     let visit_count = visited.entry(idx).or_insert(0);
     *visit_count += 1;
 
@@ -85,7 +113,10 @@ fn print_node(
         ));
     }
 
-    // print visited tree dependencies.
+    // Add the current node to the path
+    path.push(idx);
+
+    // Print visited tree dependencies
     if let Some(node) = nodes.get(&idx) {
         for (i, &dep) in node.deps.iter().enumerate() {
             last_children.push(i == node.deps.len() - 1);
@@ -96,11 +127,15 @@ fn print_node(
                 visited,
                 last_children,
                 result,
+                path,
                 already_visited,
             );
             last_children.pop();
         }
     }
+
+    // Remove the current node from the path after processing
+    path.pop();
 }
 
 impl<V> HavokTree for IndexMap<usize, V>
@@ -130,6 +165,7 @@ where
         let mut visited = HashMap::new();
         let mut result = String::new();
         let mut already_visited = HashMap::new();
+        let mut path = Vec::new();
         for &key in nodes.keys() {
             if !already_visited.contains_key(&key) {
                 print_node(
@@ -139,6 +175,7 @@ where
                     &mut visited,
                     &mut vec![],
                     &mut result,
+                    &mut path,
                     &mut already_visited,
                 );
             }
@@ -156,10 +193,8 @@ where
 #[test]
 #[quick_tracing::init]
 fn should_create_tree() {
-    let mut classes: crate::prelude::ClassMap = crate::from_str(include_str!(
-        "../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml"
-    ))
-    .unwrap();
+    let s = include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
+    let mut classes: crate::prelude::ClassMap = crate::from_str(s).unwrap();
 
     let tree = classes.tree_for_bytes();
     tracing::debug!("tree =\n{tree}");
