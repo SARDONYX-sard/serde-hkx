@@ -1,3 +1,4 @@
+//! Show dependency tree from havok behavior state machine (hkx/xml file)
 use super::ClassMap;
 use crate::error::{Error, FailedReadFileSnafu, Result};
 use serde_hkx::{from_bytes, from_str, tree};

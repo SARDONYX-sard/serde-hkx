@@ -1,3 +1,4 @@
+//! Dump binary data in hexadecimal
 use crate::error::{Error, FailedReadFileSnafu, Result};
 use serde_hkx::bytes::hexdump;
 use snafu::ResultExt as _;

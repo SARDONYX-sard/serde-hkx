@@ -1,5 +1,6 @@
 mod color;
 mod convert;
+mod diff;
 mod dump;
 mod tree;
 
@@ -26,20 +27,21 @@ pub(crate) async fn run(args: Args) -> Result<()> {
         return convert::convert::<&Path, PathBuf>(input, None, input.into()).await;
     }
 
-    if let Some(command) = args.command {
+    if let Some(command) = args.subcommand {
         match command {
-            Commands::Convert(args) => {
+            SubCommands::Convert(args) => {
                 convert::convert(&args.input, args.output, args.format).await
             }
-            Commands::Tree(args) => tree::output(args.input, args.output).await,
-            Commands::Dump(args) => {
+            SubCommands::Tree(args) => tree::output(args.input, args.output).await,
+            SubCommands::Dump(args) => {
                 if args.reserve {
                     dump::to_bytes(args.input, args.output).await
                 } else {
                     dump::to_string(args.input, args.output).await
                 }
             }
-            Commands::Completions { shell } => {
+            SubCommands::Diff(args) => diff::exec(args.old, args.new, args.output).await,
+            SubCommands::Completions { shell } => {
                 shell.generate(&mut Args::command(), &mut std::io::stdout());
                 Ok(())
             }
@@ -68,7 +70,7 @@ pub(crate) struct Args {
     pub input: Option<PathBuf>,
 
     #[clap(subcommand)]
-    command: Option<Commands>,
+    subcommand: Option<SubCommands>,
 
     // --logger (Global options)
     #[clap(global = true, long, display_order = 100)]
@@ -84,7 +86,7 @@ pub(crate) struct Args {
 }
 
 #[derive(Debug, clap::Parser)]
-pub(crate) enum Commands {
+pub(crate) enum SubCommands {
     /// Convert hkx <-> xml
     Convert(convert::Args),
 
@@ -93,6 +95,9 @@ pub(crate) enum Commands {
 
     /// Dump binary data in hexadecimal
     Dump(dump::Args),
+
+    /// Show diff between two files.
+    Diff(diff::Args),
 
     /// Generate shell completions
     #[clap(arg_required_else_help = true)]

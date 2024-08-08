@@ -33,7 +33,7 @@ num-derive = { workspace = true } # enum to number(mock)
 num-traits = { workspace = true } # enum to number(mock)
 pretty_assertions = { workspace = true } # To make diffs color and easy to read on test
 quick_tracing = { workspace = true }
-similar = "2.6.0" # create diff
+similar = { workspace = true } # Create diff
 tokio = { workspace = true, features = [
   "fs",
   "io-util",

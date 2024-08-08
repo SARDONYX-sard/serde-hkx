@@ -291,6 +291,7 @@ dependencies = [
  "jwalk",
  "parse-display",
  "serde_hkx",
+ "similar",
  "snafu",
  "tokio",
  "tracing",

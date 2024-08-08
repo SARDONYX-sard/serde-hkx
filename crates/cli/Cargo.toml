@@ -21,6 +21,7 @@ encoding_rs_io = "0.1.7"
 indexmap = { workspace = true }
 jwalk = { workspace = true } # To enumarate json class files
 parse-display = { workspace = true } # Display derive
+similar = { workspace = true } # Create diff
 snafu = { workspace = true } # Define all error patterns(with backtrace)
 tokio = { workspace = true, features = [
   "fs",

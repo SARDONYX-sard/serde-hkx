@@ -1,4 +1,5 @@
 mod cli;
+pub mod encode_string;
 #[cfg(feature = "color")]
 mod error;
 mod logger;

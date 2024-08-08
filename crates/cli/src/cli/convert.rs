@@ -1,3 +1,4 @@
+//! Convert hkx <-> xml
 use super::ClassMap;
 use crate::error::{Error, FailedReadFileSnafu, Result};
 use serde_hkx::{
