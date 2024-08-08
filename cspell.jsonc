@@ -6,6 +6,7 @@
     "bitflags",
     "byteorder",
     "Caseless",
+    "cformat",
     "classnames",
     "classversion",
     "Collidable",

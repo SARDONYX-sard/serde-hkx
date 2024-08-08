@@ -1,5 +1,5 @@
-use crate::encode_string::EncodeRead as _;
 use crate::error::Result;
+use crate::read_ext::ReadExt as _;
 use std::path::Path;
 use tokio::fs;
 

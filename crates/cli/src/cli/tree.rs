@@ -1,11 +1,11 @@
 //! Show dependency tree from havok behavior state machine (hkx/xml file)
 use super::ClassMap;
-use crate::error::{Error, FailedReadFileSnafu, Result};
-use serde_hkx::{from_bytes, from_str, tree};
-use snafu::ResultExt as _;
+use crate::{
+    error::{Error, Result},
+    read_ext::ReadExt,
+};
+use serde_hkx::{from_bytes, from_str, tree::HavokTree as _};
 use std::{ffi::OsStr, io::Read as _, path::Path};
-use tokio::fs;
-use tree::HavokTree as _;
 
 /// ANSI color representation command examples.
 pub const EXAMPLES: &str = color_print::cstr!(
@@ -52,9 +52,7 @@ where
 {
     let input = input.as_ref();
     let extension = input.extension();
-    let bytes = fs::read(input).await.context(FailedReadFileSnafu {
-        path: input.to_path_buf(),
-    })?;
+    let bytes = input.read_bytes().await?;
     let mut xml = String::new();
 
     if extension == Some(OsStr::new("hkx")) {

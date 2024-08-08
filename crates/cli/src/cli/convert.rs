@@ -1,6 +1,9 @@
 //! Convert hkx <-> xml
 use super::ClassMap;
-use crate::error::{Error, FailedReadFileSnafu, Result};
+use crate::{
+    error::{Error, FailedReadFileSnafu, Result},
+    read_ext::ReadExt as _,
+};
 use serde_hkx::{
     bytes::serde::hkx_header::HkxHeader, from_bytes, from_str, to_bytes, to_string, HavokSort,
 };
@@ -85,24 +88,6 @@ impl Format {
     }
 }
 
-impl core::str::FromStr for Format {
-    type Err = Error;
-
-    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
-        Ok(if s.eq_ignore_ascii_case("xml") {
-            Self::Xml
-        } else if s.eq_ignore_ascii_case("win32") {
-            Self::Win32
-        } else if s.eq_ignore_ascii_case("amd64") {
-            Self::Amd64
-        } else {
-            return Err(Error::InvalidOutputFormat {
-                unknown_fmt: s.to_string(),
-            });
-        })
-    }
-}
-
 /// Convert dir or file(hkx, xml).
 pub async fn convert<I, O>(input: I, output: Option<O>, format: Format) -> Result<()>
 where
@@ -184,10 +169,8 @@ where
     O: AsRef<Path>,
 {
     let input = input.as_ref();
+    let bytes = input.read_bytes().await?;
     let extension = input.extension();
-    let bytes = fs::read(input).await.context(FailedReadFileSnafu {
-        path: input.to_path_buf(),
-    })?;
     let mut xml = String::new(); // To avoid ownership errors, declare it here, but since it is a 0-allocation, there is no problem.
 
     let mut classes: ClassMap = if let Some(ext) = extension {

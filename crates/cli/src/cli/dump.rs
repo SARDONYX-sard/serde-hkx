@@ -1,7 +1,9 @@
 //! Dump binary data in hexadecimal
-use crate::error::{Error, FailedReadFileSnafu, Result};
+use crate::{
+    error::{Error, Result},
+    read_ext::ReadExt as _,
+};
 use serde_hkx::bytes::hexdump;
-use snafu::ResultExt as _;
 use std::path::Path;
 use tokio::fs;
 
@@ -22,7 +24,7 @@ pub const EXAMPLES: &str = color_print::cstr!(
 #[derive(Debug, clap::Args)]
 #[clap(arg_required_else_help = true, after_long_help = EXAMPLES)]
 pub(crate) struct Args {
-    /// hkx file path/utf8 hexdump file path(when --reverse is enabled)
+    /// hkx file path/hexdump file path(When use `--reverse`)
     pub input: String,
     /// If specified, write to a file (If not specified, stdout)
     #[clap(short, long)]
@@ -43,12 +45,7 @@ where
 {
     match output {
         Some(output) => {
-            let input = input.as_ref();
-            let bytes = hexdump::to_bytes(&fs::read_to_string(input).await.context(
-                FailedReadFileSnafu {
-                    path: input.to_path_buf(),
-                },
-            )?);
+            let bytes = hexdump::to_bytes(&input.read_any_string().await?);
             fs::write(output, &bytes).await?
         }
         None => return Err(Error::InvalidStdout),
@@ -62,10 +59,7 @@ where
     I: AsRef<Path>,
     O: AsRef<Path>,
 {
-    let input = input.as_ref();
-    let hexdump = hexdump::to_string(fs::read(input).await.context(FailedReadFileSnafu {
-        path: input.to_path_buf(),
-    })?); // NOTE: With newline.
+    let hexdump = hexdump::to_string(input.read_bytes().await?); // NOTE: With newline.
     match output {
         Some(output) => fs::write(output, &hexdump).await?,
         None => print!("{hexdump}"),

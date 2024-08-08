@@ -1,5 +1,5 @@
 mod cli;
-pub mod encode_string;
+pub mod read_ext;
 #[cfg(feature = "color")]
 mod error;
 mod logger;
