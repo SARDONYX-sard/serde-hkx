@@ -1,8 +1,8 @@
 mod cli;
-pub mod read_ext;
 #[cfg(feature = "color")]
 mod error;
 mod logger;
+pub mod read_ext;
 
 use crate::cli::Args;
 use clap::Parser;
