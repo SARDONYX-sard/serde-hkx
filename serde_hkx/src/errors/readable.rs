@@ -29,7 +29,10 @@ impl ReadableError {
     }
 
     /// Constructs [`Self`] from parse error & input.
-    pub fn from_context(error: ErrMode<ContextError>, input: &str, err_pos: usize) -> Self {
+    pub fn from_context<T>(error: ErrMode<ContextError>, input: T, err_pos: usize) -> Self
+    where
+        T: core::fmt::Display,
+    {
         let (labels, message) = error
             .map(|ctx_err| {
                 let mut labels = String::new();
@@ -66,9 +69,10 @@ impl ReadableError {
         }
     }
 
-    pub fn from_display<T>(message: T, input: &str, err_pos: usize) -> Self
+    pub fn from_display<T, U>(message: T, input: U, err_pos: usize) -> Self
     where
         T: core::fmt::Display,
+        U: core::fmt::Display,
     {
         let input = input.to_string();
         let start = err_pos;

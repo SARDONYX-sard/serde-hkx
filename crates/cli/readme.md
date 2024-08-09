@@ -1,7 +1,5 @@
 # CLI
 
-Note that the exe name of this CLI may change in the future.
-
 ## Examples
 
 ```shell

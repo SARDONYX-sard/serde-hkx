@@ -19,7 +19,7 @@ use self::parser::{
     BytesStream,
 };
 use self::seq::SeqDeserializer;
-use super::hexdump;
+use super::hexdump::{self, to_hexdump_pos};
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::{
     de::{Error, Result},
@@ -116,12 +116,13 @@ pub fn from_partial_bytes_with_opt<'a, T>(de: BytesDeserializer<'a>) -> Result<T
 where
     T: Deserialize<'a>,
 {
-    let mut deserializer = de;
-    let t = T::deserialize(&mut deserializer)?;
-    if deserializer.input[deserializer.current_position..].is_empty() {
+    let mut de = de;
+    let t = tri!(T::deserialize(&mut de).map_err(|err| de.to_readable_err(err)));
+
+    if de.input[de.current_position..].is_empty() {
         Ok(t)
     } else {
-        deserializer.to_readable_err(Err(Error::TrailingBytes))
+        Err(de.to_readable_err(Error::TrailingBytes))
     }
 }
 
@@ -139,62 +140,36 @@ pub fn from_bytes_with_opt<'a, T>(de: BytesDeserializer<'a>) -> Result<T>
 where
     T: Deserialize<'a>,
 {
-    let mut deserializer = de;
+    let mut de = de;
 
     // 1. Deserialize root file header.
-    let header = tri!(deserializer.parse_peek(HkxHeader::from_bytes()));
-    deserializer.current_position += 64;
-
-    deserializer.is_x86 = header.pointer_size == 4;
-    deserializer.endian = header.endian();
+    let header = tri!(de
+        .parse_peek(HkxHeader::from_bytes())
+        .map_err(|err| de.to_readable_err(err)));
+    de.current_position += 64; // Advance the position by the header size.
+    de.is_x86 = header.pointer_size == 4;
+    de.endian = header.endian();
 
     // 2. Deserialize the fixups in the classnames and data sections.
-    tri!(deserializer.set_section_header_and_fixups(
-        header.contents_class_name_section_index,
-        header.contents_section_index,
-        header.section_count
-    ));
+    tri!(de
+        .set_section_header_and_fixups(
+            header.contents_class_name_section_index,
+            header.contents_section_index,
+            header.section_count,
+        )
+        .map_err(|err| de.to_readable_err(err)));
 
     // 3. Parse `__classnames__` section.
-    let classnames_abs = deserializer.classnames_header.absolute_data_start as usize;
-    let data_abs = deserializer.data_header.absolute_data_start as usize;
-    let classnames_section_range = classnames_abs..data_abs; // FIXME: assumption that `classnames_abs` < `data_abs`
-    deserializer.classnames = tri!(deserializer.parse_range(
-        classnames_section(deserializer.endian, 0),
-        classnames_section_range,
-    ));
+    let classnames_abs = de.classnames_header.absolute_data_start as usize;
+    let data_abs = de.data_header.absolute_data_start as usize;
+    let classnames_section_range = classnames_abs..data_abs; // FIXME: Assumption that `classnames_abs` < `data_abs`
+    de.classnames = tri!(de
+        .parse_range(classnames_section(de.endian, 0), classnames_section_range)
+        .map_err(|err| de.to_readable_err(err)));
 
     // 4. Parse `__data__` section.
-    deserializer.current_position = data_abs; // move to data section start
-    T::deserialize(&mut deserializer)
-}
-
-/// Calculates the position in the hexdump output where the byte at the given
-/// binary error position will appear.
-///
-/// The hexdump format for reference:
-/// ```txt
-/// 00000000: 4865 6c6c 6f20 576f 726c 6421 0a                  Hello World!
-/// ```
-/// In this format:
-/// - The first 8 characters are the offset (`00000000`).
-/// - The next 2 characters are a colon and a space (`: `).
-/// - The next 48 characters are the hexadecimal representation of the 16 bytes of data (`4865 6c6c 6f20 576f 726c 6421 0a`).
-/// - The last 16 characters are the ASCII representation of the 16 bytes of data (`Hello World!`).
-///
-/// Each line represents 16 bytes of the binary data.
-const fn to_hexdump_pos(bytes_pos: usize) -> usize {
-    const HEXDUMP_OFFSET: usize = 10;
-    const BYTES_PER_LINE: usize = 16;
-    const HEX_GROUP_SIZE: usize = 3;
-    const ASCII_OFFSET: usize = 18;
-
-    let line_number = bytes_pos / BYTES_PER_LINE;
-    let line_offset = bytes_pos % BYTES_PER_LINE;
-
-    HEXDUMP_OFFSET
-        + (line_offset * HEX_GROUP_SIZE)
-        + line_number * (HEXDUMP_OFFSET + (BYTES_PER_LINE * HEX_GROUP_SIZE) + ASCII_OFFSET)
+    de.current_position = data_abs; // move to data section start
+    T::deserialize(&mut de).map_err(|err| de.to_readable_err(err))
 }
 
 // SERDE IS NOT A PARSING LIBRARY. This impl block defines a few basic parsing
@@ -210,54 +185,37 @@ impl<'de> BytesDeserializer<'de> {
     {
         let (_, res) = parser
             .parse_peek(&self.input[self.current_position..])
-            .map_err(|err| Error::ReadableError {
-                source: ReadableError::from_context(
-                    err,
-                    &hexdump::to_string(self.input),
-                    to_hexdump_pos(self.current_position),
-                ),
-            })?;
+            .map_err(|err| Error::ContextError { err })?;
         Ok(res)
     }
 
     /// Parse by argument parser.
     ///
-    /// If an error occurs, it is converted to [`ReadableError`] and returned.
+    /// If an error occurs, it is converted to [`Error::ContextError`] and returned.
     fn parse_range<O, P>(&mut self, mut parser: P, range: Range<usize>) -> Result<O>
     where
         P: Parser<BytesStream<'de>, O, winnow::error::ContextError>,
     {
-        let (_, res) =
-            parser
-                .parse_peek(&self.input[range])
-                .map_err(|err| Error::ReadableError {
-                    source: ReadableError::from_context(
-                        err,
-                        &hexdump::to_string(self.input),
-                        to_hexdump_pos(self.current_position),
-                    ),
-                })?;
+        let (_, res) = parser
+            .parse_peek(&self.input[range])
+            .map_err(|err| Error::ContextError { err })?;
         Ok(res)
     }
 
     /// Convert Visitor errors to position-assigned errors.
     ///
     /// # Why is this necessary?
-    /// Because Visitor errors that occur within each `Deserialize` implementation cannot indicate the error location in XML.
-    fn to_readable_err<T>(&self, result: Result<T>) -> Result<T> {
-        match result {
-            Ok(value) => Ok(value),
-            Err(err) => match err {
-                Error::ReadableError { .. } => Err(err),
-                _ => {
-                    let input = &hexdump::to_string(self.input);
-                    let err_pos = to_hexdump_pos(self.current_position);
-                    Err(Error::ReadableError {
-                        source: ReadableError::from_display(err, input, err_pos),
-                    })
-                }
-            },
-        }
+    /// Because Visitor errors that occur within each `Deserialize` implementation cannot indicate the error location in bytes.
+    #[cold]
+    fn to_readable_err(&self, err: Error) -> Error {
+        let input = hexdump::to_string(self.input);
+        let err_pos = to_hexdump_pos(self.current_position);
+        let readable = match err {
+            Error::ContextError { err } => ReadableError::from_context(err, input, err_pos),
+            Error::ReadableError { source } => source,
+            err => ReadableError::from_display(err, input, err_pos),
+        };
+        Error::ReadableError { source: readable }
     }
 
     /// Deserialize the fixups in the `classnames` and `data` sections, relying on the information in the root header.
@@ -379,10 +337,10 @@ impl<'de> BytesDeserializer<'de> {
     }
 
     /// Jump current position(`local_fixup.src`) to dst, then parse, and back to current position.
-    fn parse_local_fixup<O>(
-        &mut self,
-        parser: impl Parser<BytesStream<'de>, O, winnow::error::ContextError>,
-    ) -> Result<Option<O>> {
+    fn parse_local_fixup<O, P>(&mut self, parser: P) -> Result<Option<O>>
+    where
+        P: Parser<BytesStream<'de>, O, winnow::error::ContextError>,
+    {
         let backup_position = self.current_position();
         self.current_position = match self.get_local_fixup_dst().ok() {
             Some(dst) => dst,
@@ -726,7 +684,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
             visitor.visit_array(SeqDeserializer::new(self, 0))
         } else {
             // The specification requires that the ptr data position be extracted before parsing meta information such as `ptr_size`.
-            let pointed_data_position = tri!(self.to_readable_err(self.get_local_fixup_dst()));
+            let pointed_data_position = tri!(self.get_local_fixup_dst());
             self.current_position += if self.is_x86 { 12 } else { 16 }; // NOTE: If we move position before asking for local_fixup, we will not get key correctly.
             let backup_position = self.current_position;
 
@@ -769,8 +727,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let result = visitor.visit_enum(EnumDeserializer::new(self));
-        self.to_readable_err(result)
+        visitor.visit_enum(EnumDeserializer::new(self))
     }
 
     #[inline]
@@ -829,7 +786,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let result = match size {
+        match size {
             ReadEnumSize::Int8 => self.deserialize_int8(visitor),
             ReadEnumSize::Int16 => self.deserialize_int16(visitor),
             ReadEnumSize::Int32 => self.deserialize_int32(visitor),
@@ -838,8 +795,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
             ReadEnumSize::Uint16 => self.deserialize_uint16(visitor),
             ReadEnumSize::Uint32 => self.deserialize_uint32(visitor),
             ReadEnumSize::Uint64 => self.deserialize_uint64(visitor),
-        };
-        self.to_readable_err(result)
+        }
     }
 
     #[inline]
