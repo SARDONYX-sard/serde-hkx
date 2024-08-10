@@ -59,12 +59,22 @@ pub enum Format {
     Amd64,
 }
 
-impl<P> From<P> for Format
-where
-    P: AsRef<Path>,
-{
-    fn from(path: P) -> Self {
-        if let Some(extension) = path.as_ref().extension() {
+impl Format {
+    /// Return the file extension corresponding to the format.
+    const fn as_extension(&self) -> &str {
+        match *self {
+            Format::Xml => "xml",
+            Format::Win32 => "hkx",
+            Format::Amd64 => "hkx",
+        }
+    }
+
+    /// Return output format from input path.
+    pub fn from_input<P>(input: P) -> Self
+    where
+        P: AsRef<Path>,
+    {
+        if let Some(extension) = input.as_ref().extension() {
             let extension = extension.to_ascii_lowercase();
             match extension.to_string_lossy().as_ref() {
                 "hkx" => Format::Xml,
@@ -73,17 +83,6 @@ where
             }
         } else {
             Format::Amd64
-        }
-    }
-}
-
-impl Format {
-    /// Return the file extension corresponding to the format.
-    const fn as_extension(&self) -> &str {
-        match *self {
-            Format::Xml => "xml",
-            Format::Win32 => "hkx",
-            Format::Amd64 => "hkx",
         }
     }
 }

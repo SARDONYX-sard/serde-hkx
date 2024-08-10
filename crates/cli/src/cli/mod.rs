@@ -11,6 +11,7 @@ use crate::{
     logger::LogLevel,
 };
 use clap::CommandFactory as _;
+use convert::Format;
 use havok_classes::Classes;
 use std::{
     io,
@@ -24,7 +25,7 @@ pub(crate) async fn run(args: Args) -> Result<()> {
 
     if let Some(input) = args.input {
         let input = input.as_path();
-        return convert::convert::<&Path, PathBuf>(input, None, input.into()).await;
+        return convert::convert::<&Path, PathBuf>(input, None, Format::from_input(input)).await;
     }
 
     if let Some(command) = args.subcommand {
