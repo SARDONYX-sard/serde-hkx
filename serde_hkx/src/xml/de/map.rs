@@ -102,8 +102,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
                 take_until(0.., "<"),    // take any value
                 _: end_tag("hkparam")       // </hkparam>
             },
-            // Self closing tag
-            winnow::seq! {
+            winnow::seq! { // Self closing tag
                 _: delimited_with_multispace0("/"),
                 _: delimited_multispace0_comment(">")
             }
@@ -112,9 +111,9 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         #[cfg(feature = "tracing")]
         {
             let numelements = _num
-                .map(|num| format!("numelements = \"{num:?}\" "))
+                .map(|n| format!("numelements=\"{n}\""))
                 .unwrap_or_default();
-            tracing::debug!("`Skip `{numelements}>{_value}</hkparam>`.",);
+            tracing::debug!("`Skip `{numelements}>{_value}</hkparam>`.");
         }
         Ok(())
     }
