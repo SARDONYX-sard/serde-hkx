@@ -101,7 +101,7 @@ where
     } else {
         return Err(io::Error::new(
             io::ErrorKind::NotFound,
-            format!("The path does not exist: {}", input.to_string_lossy()),
+            format!("The path does not exist: {}", input.display()),
         ))?;
     }
 
@@ -146,7 +146,7 @@ where
 
         task_handles.push(tokio::spawn(async move {
             convert_file(&input, output, format).await.map_err(|err| {
-                tracing::error!("Error occurred path: {input:?}");
+                tracing::error!("Error occurred path: {}", input.display());
                 err
             })
         }));
