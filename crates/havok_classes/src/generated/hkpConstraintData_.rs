@@ -24,7 +24,7 @@ pub struct hkpConstraintData {
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
-    pub m_userData: u64,
+    pub m_userData: Ulong,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -141,7 +141,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     for i in 0..1usize {
                         match i {
                             0usize => {
@@ -153,7 +153,7 @@ const _: () = {
                                     );
                                 }
                                 m_userData = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -186,7 +186,7 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -209,7 +209,7 @@ const _: () = {
                                     );
                                 }
                                 m_userData = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
