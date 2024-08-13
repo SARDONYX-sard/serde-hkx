@@ -1,6 +1,6 @@
 [workspace.package]
 authors = ["SARDONYX"]
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT OR Apache-2.0"
 description = "Havok Behavior (De)Serialization Library(ver. hk_2010.2.0-r1)"
 repository = "https://github.com/SARDONYX-sard/serde-hkx"                     # NOTE: Without it, CLI & CI build will error.
