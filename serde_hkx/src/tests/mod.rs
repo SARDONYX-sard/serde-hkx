@@ -1,6 +1,6 @@
 mod mermaid;
 pub(crate) mod mocks;
-mod parse_skyrim;
+mod verify;
 
 /// - key: class index(e.g. `#0001`)
 /// - value: class
