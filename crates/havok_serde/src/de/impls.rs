@@ -84,6 +84,40 @@ impl_deserialize!(Pointer, visit_pointer, deserialize_pointer);
 
 ////////////////////////////////////////////////////////////////////////////////
 
+impl<'de> Deserialize<'de> for Ulong {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        struct InnerVisitor;
+        impl<'a> Visitor<'a> for InnerVisitor {
+            type Value = Ulong;
+
+            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                formatter.write_str("Ulong")
+            }
+
+            fn visit_uint32<E>(self, v: u32) -> Result<Self::Value, E>
+            where
+                E: Error,
+            {
+                Ok(Ulong::new(v as u64))
+            }
+
+            fn visit_uint64<E>(self, v: u64) -> Result<Self::Value, E>
+            where
+                E: Error,
+            {
+                Ok(Ulong::new(v))
+            }
+        }
+
+        Ok(tri!(deserializer.deserialize_ulong(InnerVisitor)))
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 impl<'de: 'a, 'a> Deserialize<'de> for CString<'a> {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
@@ -309,7 +343,7 @@ macro_rules! seq_vec_impl {
 }
 
 seq_vec_impl!(
-    (), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f16, f32, Pointer
+    (), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f16, f32, Pointer, Ulong
     => next_primitive_element, next_primitive_element_seed
 );
 seq_vec_impl!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => next_math_element, next_math_element_seed);
@@ -503,7 +537,7 @@ macro_rules! array_impls {
     }
 }
 
-array_impls!((), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f16, f32, Pointer => next_primitive_element, next_primitive_element_seed);
+array_impls!((), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f16, f32, Pointer, Ulong => next_primitive_element, next_primitive_element_seed);
 array_impls!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => next_math_element, next_math_element_seed);
 
 impl<'de, T, const N: usize> Visitor<'de> for ArrayVisitor<[T; N]>

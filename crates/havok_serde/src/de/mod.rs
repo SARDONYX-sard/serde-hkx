@@ -19,7 +19,7 @@ mod size_hint;
 
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, StringPtr,
-    Transform, Variant, Vector4,
+    Transform, Ulong, Variant, Vector4,
 };
 
 use crate::lib::*;
@@ -265,7 +265,7 @@ pub enum Unexpected<'a> {
     CString(CString<'a>),
 
     /// - C++ type: `hkUlong` (`unsigned long`), defined to always be the same size as a pointer
-    Ulong(u64),
+    Ulong(Ulong),
 
     /// - C++ type: `hkFlags<ENUM, SizeType>` - 8,16,32 bits of named values.
     Flags,
@@ -611,12 +611,12 @@ pub trait Deserializer<'de>: Sized {
     where
         V: Visitor<'de>;
 
-    /// Deserialize an `u64` value.
+    /// Deserialize an `i64` value.
     fn deserialize_int64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
 
-    /// Deserialize an `i64` value.
+    /// Deserialize an `u64` value.
     fn deserialize_uint64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
@@ -1081,7 +1081,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a u64.
     ///
     /// The default implementation fails with a type error.
-    fn visit_ulong<E>(self, v: u64) -> Result<Self::Value, E>
+    fn visit_ulong<E>(self, v: Ulong) -> Result<Self::Value, E>
     where
         E: Error,
     {

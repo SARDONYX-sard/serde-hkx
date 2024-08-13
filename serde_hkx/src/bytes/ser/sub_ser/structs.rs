@@ -4,7 +4,7 @@ use super::super::ByteSerializer;
 use crate::bytes::ser::trait_impls::{Align as _, LocalFixupsWriter as _};
 use crate::errors::ser::{Error, MissingLocalFixupSnafu, Result};
 use havok_serde::ser::{Serialize, SerializeStruct, Serializer};
-use havok_types::{CString, StringPtr};
+use havok_types::{CString, StringPtr, Ulong};
 use std::collections::HashMap;
 use std::io::Write;
 
@@ -149,7 +149,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
         };
 
         // Write meta fields
-        self.ser.serialize_ulong(0) // ptr size
+        self.ser.serialize_ulong(Ulong::new(0)) // ptr size
     }
 
     /// In the binary serialization of hkx, we are at this stage writing each field of the structure.
@@ -185,7 +185,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
         };
 
         // Write meta fields
-        self.ser.serialize_ulong(0) // ptr size
+        self.ser.serialize_ulong(Ulong::new(0)) // ptr size
     }
 
     /// In the binary serialization of hkx, we are at this stage writing each field of the structure.
@@ -211,7 +211,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
 
         // Write Array meta field
         let size = value.as_ref().len() as u32;
-        self.ser.serialize_ulong(0)?; // ptr size
+        self.ser.serialize_ulong(Ulong::new(0))?; // ptr size
         self.ser.serialize_uint32(size)?; // array size
         self.ser.serialize_uint32(size | 1 << 31) // Capacity(same as size) | Owned flag(32nd bit)
     }

@@ -18,7 +18,7 @@ mod impls;
 
 use havok_types::{
     f16, variant::Variant, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation,
-    Signature, StringPtr, Transform, Vector4,
+    Signature, StringPtr, Transform, Ulong, Vector4,
 };
 
 #[cfg(feature = "std")]
@@ -217,7 +217,7 @@ pub trait Serializer {
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `ULong`(pointer size(u32 or u64)) value.
-    fn serialize_ulong(self, v: u64) -> Result<Self::Ok, Self::Error>;
+    fn serialize_ulong(self, v: Ulong) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `enum` or `Flags` value.
     fn serialize_enum_flags(self) -> Result<Self::SerializeFlags, Self::Error>;

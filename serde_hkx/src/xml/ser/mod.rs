@@ -6,7 +6,7 @@ use havok_serde::ser::{Serialize, SerializeFlags, SerializeStruct, Serializer};
 use havok_types::variant::Variant;
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
-    StringPtr, Transform, Vector4,
+    StringPtr, Transform, Ulong, Vector4,
 };
 
 #[derive(Debug)]
@@ -274,7 +274,7 @@ impl<'a> Serializer for &'a mut XmlSerializer {
     }
 
     #[inline]
-    fn serialize_ulong(self, v: u64) -> Result<Self::Ok> {
+    fn serialize_ulong(self, v: Ulong) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
