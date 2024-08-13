@@ -15,7 +15,7 @@ use byteorder::{BigEndian, LittleEndian, WriteBytesExt as _};
 use havok_serde::ser::{Serialize, Serializer};
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
-    StringPtr, Transform, Variant, Vector4,
+    StringPtr, Transform, Ulong, Variant, Vector4,
 };
 use indexmap::IndexMap;
 use snafu::ensure;
@@ -448,7 +448,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
             #[cfg(feature = "tracing")]
             tracing::debug!("Skip global_fixup.src writing, because it's null ptr.");
         };
-        self.serialize_ulong(0_u64)
+        self.serialize_ulong(Ulong::new(0))
     }
 
     #[inline]
@@ -498,10 +498,10 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         self.serialize_cow(v.get_ref())
     }
 
-    fn serialize_ulong(self, v: u64) -> Result<Self::Ok, Self::Error> {
+    fn serialize_ulong(self, v: Ulong) -> Result<Self::Ok, Self::Error> {
         match self.is_x86 {
-            true => self.serialize_uint32(v as u32),
-            false => self.serialize_uint64(v),
+            true => self.serialize_uint32(v.get() as u32),
+            false => self.serialize_uint64(v.get()),
         }
     }
 

@@ -127,7 +127,6 @@ where
 }
 
 /// Analyze as binary data of one file in order from hkx header.
-#[inline]
 pub fn from_bytes<'a, T>(bytes: &'a [u8]) -> Result<T>
 where
     T: Deserialize<'a>,
@@ -357,7 +356,6 @@ impl<'de> BytesDeserializer<'de> {
     ///
     /// # Errors
     /// Error if the value of ptr to skip is not 0.
-    #[inline]
     fn skip_ptr_size(&mut self) -> Result<()> {
         if self.is_x86 {
             tri!(
@@ -429,7 +427,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     }
 
     // Deserialize one class.
-    #[inline]
     fn deserialize_class_index<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -445,7 +442,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         visitor.visit_void(())
     }
 
-    #[inline]
     fn deserialize_bool<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -455,7 +451,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_char<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -467,7 +462,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_int8<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -479,7 +473,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_uint8<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -491,7 +484,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_int16<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -504,7 +496,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_uint16<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -517,7 +508,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_int32<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -530,7 +520,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_uint32<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -543,7 +532,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_int64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -556,7 +544,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_uint64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -569,7 +556,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_real<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -583,7 +569,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_vector4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -593,7 +578,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_quaternion<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -603,7 +587,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_matrix3<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -613,7 +596,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_rotation<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -623,7 +605,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_qstransform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -633,7 +614,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_matrix4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -643,7 +623,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_transform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -653,7 +632,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
-    #[inline]
     fn deserialize_pointer<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -661,7 +639,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         visitor.visit_pointer(tri!(self.get_class_index_ptr()))
     }
 
-    #[inline]
     fn deserialize_array<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -717,7 +694,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         visitor.visit_array(SeqDeserializer::new(self, size))
     }
 
-    #[inline]
     fn deserialize_enum<V>(
         self,
         _name: &'static str,
@@ -730,7 +706,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         visitor.visit_enum(EnumDeserializer::new(self))
     }
 
-    #[inline]
     fn deserialize_struct<V>(
         self,
         _name: &'static str,
@@ -744,7 +719,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     }
 
     /// TODO: binary representation of Variant is unknown.
-    #[inline]
     fn deserialize_variant<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -798,7 +772,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         }
     }
 
-    #[inline]
     fn deserialize_half<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,

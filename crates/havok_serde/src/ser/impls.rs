@@ -6,7 +6,7 @@ use crate::lib::*;
 use super::{Serialize, Serializer};
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, StringPtr,
-    Transform, Variant, Vector4,
+    Transform, Ulong, Variant, Vector4,
 };
 
 macro_rules! impl_serialize {
@@ -60,6 +60,7 @@ impl_serialize!(Transform, serialize_transform);
 
 impl_serialize!(Variant, serialize_variant);
 impl_serialize!(*Pointer, serialize_pointer);
+impl_serialize!(*Ulong, serialize_ulong);
 
 impl Serialize for &str {
     #[inline]
@@ -125,7 +126,7 @@ macro_rules! impl_serialize_with_index_array {
 }
 
 impl_serialize_with_index_array!(
-  (), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f16, f32, Pointer
+  (), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f16, f32, Pointer, Ulong
   => serialize_primitive_element
 );
 

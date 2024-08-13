@@ -4,7 +4,7 @@ use havok_serde::{
     ser::{SerializeSeq, Serializer as _},
     Serialize,
 };
-use havok_types::{CString, StringPtr};
+use havok_types::{CString, StringPtr, Ulong};
 
 impl<'a> SerializeSeq for &'a mut ByteSerializer {
     type Ok = ();
@@ -47,7 +47,7 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
         if value.should_write_binary() {
             let iter_src = self.relative_position()?;
             self.local_fixups_iter_src.push(iter_src);
-            self.serialize_ulong(0)?; // ptr size
+            self.serialize_ulong(Ulong::new(0))?; // ptr size
             #[cfg(feature = "tracing")]
             tracing::debug!("local_fixup_iter_src = {iter_src}");
         };
@@ -59,7 +59,7 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
         if value.should_write_binary() {
             let iter_src = self.relative_position()?;
             self.local_fixups_iter_src.push(iter_src);
-            self.serialize_ulong(0)?; // ptr size
+            self.serialize_ulong(Ulong::new(0))?; // ptr size
             #[cfg(feature = "tracing")]
             tracing::debug!("local_fixup_iter_src = {iter_src}");
         };

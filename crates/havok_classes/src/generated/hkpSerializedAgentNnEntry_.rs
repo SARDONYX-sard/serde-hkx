@@ -34,12 +34,12 @@ pub struct hkpSerializedAgentNnEntry {
     /// - name: `bodyAId`(ctype: `hkUlong`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
-    pub m_bodyAId: u64,
+    pub m_bodyAId: Ulong,
     /// # C++ Info
     /// - name: `bodyBId`(ctype: `hkUlong`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
-    pub m_bodyBId: u64,
+    pub m_bodyBId: Ulong,
     /// # C++ Info
     /// - name: `useEntityIds`(ctype: `hkBool`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
@@ -280,8 +280,8 @@ const _: () = {
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_bodyA: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_bodyB: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_bodyAId: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_bodyBId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_bodyAId: _serde::__private::Option<Ulong> = _serde::__private::None;
+                    let mut m_bodyBId: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_useEntityIds: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_agentType: _serde::__private::Option<
                         SerializedAgentType,
@@ -343,7 +343,7 @@ const _: () = {
                                     );
                                 }
                                 m_bodyAId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -360,7 +360,7 @@ const _: () = {
                                     );
                                 }
                                 m_bodyBId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -702,8 +702,8 @@ const _: () = {
                 {
                     let mut m_bodyA: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_bodyB: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_bodyAId: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_bodyBId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_bodyAId: _serde::__private::Option<Ulong> = _serde::__private::None;
+                    let mut m_bodyBId: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_useEntityIds: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_agentType: _serde::__private::Option<
                         SerializedAgentType,
@@ -794,7 +794,7 @@ const _: () = {
                                     );
                                 }
                                 m_bodyAId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -820,7 +820,7 @@ const _: () = {
                                     );
                                 }
                                 m_bodyBId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);

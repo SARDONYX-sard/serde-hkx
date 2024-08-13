@@ -6,7 +6,7 @@ use havok_serde::ser::{Serialize, SerializeFlags, SerializeStruct, Serializer};
 use havok_types::variant::Variant;
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
-    StringPtr, Transform, Vector4,
+    StringPtr, Transform, Ulong, Vector4,
 };
 
 #[derive(Debug)]
@@ -103,13 +103,11 @@ impl<'a> Serializer for &'a mut XmlSerializer {
         Ok(())
     }
 
-    #[inline]
     fn serialize_bool(self, v: bool) -> Result<Self::Ok> {
         self.output += if v { "true" } else { "false" };
         Ok(())
     }
 
-    #[inline]
     fn serialize_char(self, v: char) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
@@ -145,61 +143,51 @@ impl<'a> Serializer for &'a mut XmlSerializer {
         self.serialize_uint64(v as u64)
     }
 
-    #[inline]
     fn serialize_int64(self, v: i64) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
-    #[inline]
     fn serialize_uint64(self, v: u64) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
-    #[inline]
     fn serialize_real(self, v: f32) -> Result<Self::Ok> {
         self.output += &format!("{v:.06}");
         Ok(())
     }
 
-    #[inline]
     fn serialize_vector4(self, v: &Vector4) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
-    #[inline]
     fn serialize_quaternion(self, v: &Quaternion) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
-    #[inline]
     fn serialize_matrix3(self, v: &Matrix3) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
-    #[inline]
     fn serialize_rotation(self, v: &Rotation) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
-    #[inline]
     fn serialize_qstransform(self, v: &QsTransform) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
-    #[inline]
     fn serialize_matrix4(self, v: &Matrix4) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
-    #[inline]
     fn serialize_transform(self, v: &Transform) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
@@ -257,7 +245,6 @@ impl<'a> Serializer for &'a mut XmlSerializer {
     }
 
     /// FIXME: Unclear XML representation
-    #[inline]
     fn serialize_variant(self, v: &Variant) -> Result<Self::Ok> {
         tri!(self.serialize_pointer(v.object));
         self.serialize_pointer(v.class)
@@ -273,8 +260,7 @@ impl<'a> Serializer for &'a mut XmlSerializer {
         Ok(())
     }
 
-    #[inline]
-    fn serialize_ulong(self, v: u64) -> Result<Self::Ok> {
+    fn serialize_ulong(self, v: Ulong) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
@@ -284,7 +270,6 @@ impl<'a> Serializer for &'a mut XmlSerializer {
         Ok(self)
     }
 
-    #[inline]
     fn serialize_half(self, v: f16) -> Result<Self::Ok> {
         self.output += &format!("{v:.06}");
         Ok(())
@@ -303,7 +288,6 @@ impl<'a> Serializer for &'a mut XmlSerializer {
 
 impl XmlSerializer {
     /// Do indentation by `self.depth`.
-    #[inline]
     fn indent(&mut self) {
         match self.depth {
             // Heap alloc optimizations

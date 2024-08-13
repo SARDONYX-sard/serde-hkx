@@ -190,7 +190,7 @@ fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {
         // TypeKind::HomogeneousArray => todo!(),
         TypeKind::Variant => quote!(Variant),
         TypeKind::CString => quote!(CString<'de>),
-        TypeKind::Ulong => quote!(u64),
+        TypeKind::Ulong => quote!(Ulong),
         // TypeKind::Flags => todo!(),
         TypeKind::Half => quote!(f16),
         TypeKind::StringPtr => quote!(StringPtr<'de>),

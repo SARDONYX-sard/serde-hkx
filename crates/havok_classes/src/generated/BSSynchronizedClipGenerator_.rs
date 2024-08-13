@@ -941,7 +941,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_pClipGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_SyncAnimPrefix: _serde::__private::Option<CString<'de>> = _serde::__private::None;
@@ -1004,7 +1004,7 @@ const _: () = {
                                     );
                                 }
                                 m_userData = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);

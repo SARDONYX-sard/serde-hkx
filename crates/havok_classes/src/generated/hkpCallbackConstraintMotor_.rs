@@ -35,17 +35,17 @@ pub struct hkpCallbackConstraintMotor {
     /// - name: `userData0`(ctype: `hkUlong`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
-    pub m_userData0: u64,
+    pub m_userData0: Ulong,
     /// # C++ Info
     /// - name: `userData1`(ctype: `hkUlong`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
-    pub m_userData1: u64,
+    pub m_userData1: Ulong,
     /// # C++ Info
     /// - name: `userData2`(ctype: `hkUlong`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
-    pub m_userData2: u64,
+    pub m_userData2: Ulong,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -195,9 +195,9 @@ const _: () = {
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_callbackFunc: _serde::__private::Option<Pointer> = _serde::__private::None;
                     let mut m_callbackType: _serde::__private::Option<CallbackType> = _serde::__private::None;
-                    let mut m_userData0: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_userData1: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_userData2: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_userData0: _serde::__private::Option<Ulong> = _serde::__private::None;
+                    let mut m_userData1: _serde::__private::Option<Ulong> = _serde::__private::None;
+                    let mut m_userData2: _serde::__private::Option<Ulong> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
                             0usize => {
@@ -244,7 +244,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_userData0 = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -261,7 +261,7 @@ const _: () = {
                                     );
                                 }
                                 m_userData1 = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -278,7 +278,7 @@ const _: () = {
                                     );
                                 }
                                 m_userData2 = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -361,9 +361,9 @@ const _: () = {
                     let mut m_minForce: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxForce: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_callbackType: _serde::__private::Option<CallbackType> = _serde::__private::None;
-                    let mut m_userData0: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_userData1: _serde::__private::Option<u64> = _serde::__private::None;
-                    let mut m_userData2: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_userData0: _serde::__private::Option<Ulong> = _serde::__private::None;
+                    let mut m_userData1: _serde::__private::Option<Ulong> = _serde::__private::None;
+                    let mut m_userData2: _serde::__private::Option<Ulong> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -488,7 +488,7 @@ const _: () = {
                                     );
                                 }
                                 m_userData0 = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -514,7 +514,7 @@ const _: () = {
                                     );
                                 }
                                 m_userData1 = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -540,7 +540,7 @@ const _: () = {
                                     );
                                 }
                                 m_userData2 = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<Ulong>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
