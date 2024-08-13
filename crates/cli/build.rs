@@ -14,7 +14,7 @@ fn main() {
             res.set_windres_path("/usr/bin/x86_64-w64-mingw32-windres");
         }
 
-        res.set("ProductName", "hkxc")
+        res.set("ProductName", env!("CARGO_PKG_NAME"))
             .set("FileDescription", env!("CARGO_PKG_DESCRIPTION"))
             .set("CompanyName", env!("CARGO_PKG_AUTHORS"))
             .set("LegalCopyright", env!("CARGO_PKG_AUTHORS"))

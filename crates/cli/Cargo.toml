@@ -1,16 +1,13 @@
 [package]
-name = "cli_converter"
+name = "hkxc"
+description = "Havok Behavior (De)Serialization CLI(for ver. hk_2010.2.0-r1)"
 authors.workspace = true
 version.workspace = true
-description = "Havok Behavior (De)Serialization CLI(for ver. hk_2010.2.0-r1)"
 license.workspace = true
 repository.workspace = true
 rust-version.workspace = true
 edition.workspace = true
 
-[[bin]]
-name = "hkxc"
-path = "./src/main.rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]

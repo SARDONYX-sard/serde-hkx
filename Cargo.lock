@@ -279,27 +279,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "cli_converter"
-version = "0.1.1"
-dependencies = [
- "clap",
- "clap_complete_command",
- "color-print",
- "encoding_rs_io",
- "havok_classes",
- "indexmap 2.2.6",
- "jwalk",
- "parse-display",
- "serde_hkx",
- "similar",
- "snafu",
- "tokio",
- "tracing",
- "tracing-subscriber",
- "winres",
-]
-
-[[package]]
 name = "color-print"
 version = "0.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -680,6 +659,27 @@ name = "hex"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
+
+[[package]]
+name = "hkxc"
+version = "0.1.1"
+dependencies = [
+ "clap",
+ "clap_complete_command",
+ "color-print",
+ "encoding_rs_io",
+ "havok_classes",
+ "indexmap 2.2.6",
+ "jwalk",
+ "parse-display",
+ "serde_hkx",
+ "similar",
+ "snafu",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+ "winres",
+]
 
 [[package]]
 name = "html-escape"
