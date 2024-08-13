@@ -89,13 +89,13 @@ async fn should_parse_to_xml() -> Result<()> {
         include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
     };
 
-    let result = || {
+    let xml_to_bytes = || {
         let mut actual_classes: ClassMap = from_bytes(bytes)?;
         let top_ptr = actual_classes.sort_for_xml()?;
         Result::Ok(to_string(&actual_classes, top_ptr)?)
     };
 
-    let actual = match result() {
+    let actual = match xml_to_bytes() {
         Ok(xml) => xml,
         Err(err) => {
             tracing::error!("{err}");
@@ -150,36 +150,42 @@ async fn test() -> std::io::Result<()> {
 async fn parse_to_xml(path: impl AsRef<Path>) -> Result<()> {
     let path = path.as_ref();
     let expected_bytes = std::fs::read(path)?;
+    let mut classes = from_bytes::<ClassMap>(&expected_bytes)?;
 
     // Verify bytes.
-    let mut classes = from_bytes::<ClassMap>(&expected_bytes)?;
     assert_eq!(
         hexdump::to_string(&to_bytes(&classes, &HkxHeader::new_skyrim_se())?),
         hexdump::to_string(&expected_bytes),
         "path = {path:?}"
     );
 
-    // Create output path
-    let mut out_path = path.to_path_buf();
-    let _ = out_path.set_extension("xml");
-    let out_path = out_path
-        .to_string_lossy()
-        .replace("./tests/data", "./tests/output/xml");
-    let out_path = Path::new(&out_path);
-
     // Write XML
-    if let Some(parent) = out_path.parent() {
-        tokio::fs::create_dir_all(parent).await?;
-    }
-    classes.sort_for_xml()?;
-    let top_ptr = classes.keys().min().copied().unwrap_or_default();
-    let xml = to_string(&classes, top_ptr)?;
-    tokio::fs::write(out_path, &xml).await?;
+    let xml = {
+        // Create output path
+        let mut out_path = path.to_path_buf();
+        let _ = out_path.set_extension("xml");
+        let out_path = out_path
+            .to_string_lossy()
+            .replace("./tests/data", "./tests/output/xml");
+        let out_path = Path::new(&out_path);
+
+        if let Some(parent) = out_path.parent() {
+            tokio::fs::create_dir_all(parent).await?;
+        }
+        classes.sort_for_xml()?;
+        let top_ptr = classes.keys().min().copied().unwrap_or_default();
+
+        let xml = to_string(&classes, top_ptr)?;
+        tokio::fs::write(out_path, &xml).await?;
+        xml
+    };
 
     // Verify ast
-    let mut classes_from_xml: ClassMap = from_str(&xml)?;
-    classes_from_xml.sort_keys();
-    assert_eq!(classes_from_xml, classes, "path = {path:?}");
+    {
+        let mut classes_from_xml: ClassMap = from_str(&xml)?;
+        classes_from_xml.sort_keys();
+        assert_eq!(classes_from_xml, classes, "path = {path:?}");
+    }
 
     Ok(())
 }
