@@ -22,16 +22,18 @@ pub enum Error {
     #[snafu(display("Use `-o [FILE]` option. (Unable to write bytes to stdout.)"))]
     InvalidStdout,
 
-    /// Deserialize error
-    #[snafu(transparent)]
-    DeError {
-        source: serde_hkx::errors::de::Error,
+    /// Serialize error
+    #[snafu(display("{}:\n {source}", input.display()))]
+    SerError {
+        input: PathBuf,
+        source: serde_hkx::errors::ser::Error,
     },
 
-    /// Serialize error
-    #[snafu(transparent)]
-    SerError {
-        source: serde_hkx::errors::ser::Error,
+    /// Deserialize error
+    #[snafu(display("{}:\n {source}", input.display()))]
+    DeError {
+        input: PathBuf,
+        source: serde_hkx::errors::de::Error,
     },
 
     /// Standard io error
@@ -56,4 +58,4 @@ pub enum Error {
     FailedThreadJoin { source: tokio::task::JoinError },
 }
 
-pub type Result<T> = core::result::Result<T, Error>;
+pub type Result<T, E = Error> = core::result::Result<T, E>;

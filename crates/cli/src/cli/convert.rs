@@ -1,7 +1,7 @@
 //! Convert hkx <-> xml
 use super::ClassMap;
 use crate::{
-    error::{Error, FailedReadFileSnafu, Result},
+    error::{DeSnafu, Error, FailedReadFileSnafu, Result, SerSnafu},
     read_ext::ReadExt as _,
 };
 use serde_hkx::{
@@ -116,7 +116,7 @@ where
 {
     let input_dir = input_dir.as_ref();
 
-    let mut task_handles: Vec<tokio::task::JoinHandle<Result<()>>> = Vec::new();
+    let mut task_handles: Vec<tokio::task::JoinHandle<_>> = Vec::new();
     for path in jwalk::WalkDir::new(input_dir) {
         let path = path?.path();
         let path = path.as_path();
@@ -145,10 +145,7 @@ where
         };
 
         task_handles.push(tokio::spawn(async move {
-            convert_file(&input, output, format).await.map_err(|err| {
-                tracing::error!("Error occurred path: {}", input.display());
-                err
-            })
+            convert_file(&input, output, format).await
         }));
     }
 
@@ -176,7 +173,9 @@ where
         let ascii_lowercase = &ext.to_ascii_lowercase();
         let ext = ascii_lowercase.to_string_lossy();
         match ext.as_ref() {
-            "hkx" => from_bytes(&bytes)?,
+            "hkx" => from_bytes(&bytes).context(DeSnafu {
+                input: input.to_path_buf(),
+            })?,
             "xml" => {
                 let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
                 decoder
@@ -184,7 +183,9 @@ where
                     .context(FailedReadFileSnafu {
                         path: input.to_path_buf(),
                     })?;
-                from_str(&xml)?
+                from_str(&xml).context(DeSnafu {
+                    input: input.to_path_buf(),
+                })?
             }
             _ => {
                 return Err(Error::UnsupportedExtension {
@@ -200,8 +201,12 @@ where
 
     match format {
         Format::Xml => {
-            let top_ptr = classes.sort_for_xml()?;
-            let xml = to_string(&classes, top_ptr)?;
+            let top_ptr = classes.sort_for_xml().context(SerSnafu {
+                input: input.to_path_buf(),
+            })?;
+            let xml = to_string(&classes, top_ptr).context(SerSnafu {
+                input: input.to_path_buf(),
+            })?;
 
             let output = output
                 .map(|output| output.as_ref().to_path_buf())
@@ -223,7 +228,10 @@ where
                 Format::Win32 => to_bytes(&classes, &HkxHeader::new_skyrim_le()),
                 Format::Amd64 => to_bytes(&classes, &HkxHeader::new_skyrim_se()),
                 Format::Xml => unreachable!(),
-            }?;
+            }
+            .context(SerSnafu {
+                input: input.to_path_buf(),
+            })?;
 
             let output = output
                 .map(|output| output.as_ref().to_path_buf())

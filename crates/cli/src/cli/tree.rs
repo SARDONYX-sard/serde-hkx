@@ -1,10 +1,11 @@
 //! Show dependency tree from havok behavior state machine (hkx/xml file)
 use super::ClassMap;
 use crate::{
-    error::{Error, Result},
+    error::{DeSnafu, Error, Result},
     read_ext::ReadExt,
 };
 use serde_hkx::{from_bytes, from_str, tree::HavokTree as _};
+use snafu::ResultExt as _;
 use std::{ffi::OsStr, io::Read as _, path::Path};
 
 /// ANSI color representation command examples.
@@ -56,12 +57,16 @@ where
     let mut xml = String::new();
 
     if extension == Some(OsStr::new("hkx")) {
-        let mut classes: ClassMap = from_bytes(&bytes)?;
+        let mut classes: ClassMap = from_bytes(&bytes).context(DeSnafu {
+            input: input.to_path_buf(),
+        })?;
         Ok(classes.tree_for_bytes())
     } else if extension == Some(OsStr::new("xml")) {
         let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
         decoder.read_to_string(&mut xml)?;
-        let mut classes: ClassMap = from_str(&xml)?;
+        let mut classes: ClassMap = from_str(&xml).context(DeSnafu {
+            input: input.to_path_buf(),
+        })?;
         Ok(classes.tree_for_bytes()) // TODO: implement `tree_for_xml`
     } else {
         return Err(Error::UnsupportedExtension {
