@@ -20,6 +20,7 @@ pub struct MapDeserializer<'a, 'de: 'a> {
 
 impl<'a, 'de> MapDeserializer<'a, 'de> {
     /// Create a new map deserializer
+    #[inline]
     pub fn new(de: &'a mut BytesDeserializer<'de>, fields: &'static [&'static str]) -> Self {
         Self {
             de,
@@ -37,7 +38,6 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         self.de.takable_class_index.take()
     }
 
-    #[inline]
     fn pad(&mut self, x86_pad: usize, x64_pad: usize) -> Result<(), Self::Error> {
         let pad = if self.de.is_x86 { x86_pad } else { x64_pad };
 

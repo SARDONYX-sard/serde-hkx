@@ -252,7 +252,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_void(())
     }
 
-    #[inline]
     fn deserialize_bool<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -269,7 +268,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_char(ch)
     }
 
-    #[inline]
     fn deserialize_int8<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -277,7 +275,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_int8(tri!(self.parse_next(dec_int)))
     }
 
-    #[inline]
     fn deserialize_uint8<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -285,7 +282,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_uint8(tri!(self.parse_next(dec_uint)))
     }
 
-    #[inline]
     fn deserialize_int16<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -293,7 +289,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_int16(tri!(self.parse_next(dec_int)))
     }
 
-    #[inline]
     fn deserialize_uint16<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -301,7 +296,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_uint16(tri!(self.parse_next(dec_uint)))
     }
 
-    #[inline]
     fn deserialize_int32<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -309,7 +303,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_int32(tri!(self.parse_next(dec_int)))
     }
 
-    #[inline]
     fn deserialize_uint32<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -317,7 +310,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_uint32(tri!(self.parse_next(dec_uint)))
     }
 
-    #[inline]
     fn deserialize_int64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -325,7 +317,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_int64(tri!(self.parse_next(dec_int)))
     }
 
-    #[inline]
     fn deserialize_uint64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -333,7 +324,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_uint64(tri!(self.parse_next(dec_uint)))
     }
 
-    #[inline]
     fn deserialize_real<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,

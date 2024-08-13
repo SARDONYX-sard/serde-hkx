@@ -23,6 +23,7 @@ pub struct ClassIndexMapDeserializer<'a, 'de: 'a> {
 
 impl<'a, 'de> ClassIndexMapDeserializer<'a, 'de> {
     /// Create a new map deserializer
+    #[inline]
     pub fn new(de: &'a mut XmlDeserializer<'de>) -> Self {
         Self { de }
     }
