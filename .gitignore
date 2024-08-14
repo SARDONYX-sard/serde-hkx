@@ -6,7 +6,6 @@
 # Rust build cache
 **/target
 
-**/logs/
-
-**/serde_hkx/src/tests/data/
-**/serde_hkx/src/tests/output/
+# Tests
+**/tests/input/
+**/tests/output/
