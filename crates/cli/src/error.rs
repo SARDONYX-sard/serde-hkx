@@ -6,10 +6,8 @@ use std::{io, path::PathBuf};
 #[snafu(visibility(pub))]
 pub enum Error {
     /// The only supported extension is `.hkx` or `.xml`. But this path is neither: {path}.
-    #[snafu(display(
-        "The only supported extension is `.hkx` or `.xml`. But this path is neither: {path}."
-    ))]
-    UnsupportedExtension { path: String },
+    #[snafu(display("The only supported extension is `.hkx` or `.xml`. But this path is neither: {}.", path.display()))]
+    UnsupportedExtension { path: PathBuf },
 
     /// Invalid format: {unknown_fmt}
     #[snafu(display("Invalid format: {unknown_fmt}"))]

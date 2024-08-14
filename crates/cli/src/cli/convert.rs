@@ -10,7 +10,7 @@ use serde_hkx::{
 use snafu::ResultExt as _;
 use std::{
     io::{self, Read},
-    path::Path,
+    path::{Path, PathBuf},
 };
 use tokio::fs;
 
@@ -36,10 +36,10 @@ pub const EXAMPLES: &str = color_print::cstr!(
 pub(crate) struct Args {
     /// Path containing the hkx/xml file/directory
     #[clap(short, long)]
-    pub input: String,
+    pub input: PathBuf,
     /// Output path
     #[clap(short, long)]
-    pub output: Option<String>,
+    pub output: Option<PathBuf>,
 
     /// File format to output
     #[clap(short = 'v', long, ignore_case = true)]
@@ -170,32 +170,28 @@ where
     let mut xml = String::new(); // To avoid ownership errors, declare it here, but since it is a 0-allocation, there is no problem.
 
     let mut classes: ClassMap = if let Some(ext) = extension {
-        let ascii_lowercase = &ext.to_ascii_lowercase();
-        let ext = ascii_lowercase.to_string_lossy();
-        match ext.as_ref() {
-            "hkx" => from_bytes(&bytes).context(DeSnafu {
+        if ext.eq_ignore_ascii_case("hkx") {
+            from_bytes(&bytes).context(DeSnafu {
                 input: input.to_path_buf(),
-            })?,
-            "xml" => {
-                let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
-                decoder
-                    .read_to_string(&mut xml)
-                    .context(FailedReadFileSnafu {
-                        path: input.to_path_buf(),
-                    })?;
-                from_str(&xml).context(DeSnafu {
-                    input: input.to_path_buf(),
-                })?
-            }
-            _ => {
-                return Err(Error::UnsupportedExtension {
-                    path: input.to_string_lossy().to_string(),
-                })
-            }
+            })?
+        } else if ext.eq_ignore_ascii_case("xml") {
+            let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
+            decoder
+                .read_to_string(&mut xml)
+                .context(FailedReadFileSnafu {
+                    path: input.to_path_buf(),
+                })?;
+            from_str(&xml).context(DeSnafu {
+                input: input.to_path_buf(),
+            })?
+        } else {
+            return Err(Error::UnsupportedExtension {
+                path: input.to_path_buf(),
+            });
         }
     } else {
         return Err(Error::UnsupportedExtension {
-            path: input.to_string_lossy().to_string(),
+            path: input.to_path_buf(),
         });
     };
 

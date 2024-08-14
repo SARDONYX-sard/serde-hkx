@@ -83,7 +83,7 @@ pub(crate) struct Args {
     pub log_level: LogLevel,
     #[clap(global = true, long, display_order = 102)]
     /// Output path of log file
-    pub log_file: Option<String>,
+    pub log_file: Option<PathBuf>,
 }
 
 #[derive(Debug, clap::Parser)]

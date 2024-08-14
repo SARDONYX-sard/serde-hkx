@@ -6,7 +6,10 @@ use crate::{
 };
 use serde_hkx::{from_bytes, from_str, tree::HavokTree as _};
 use snafu::ResultExt as _;
-use std::{ffi::OsStr, io::Read as _, path::Path};
+use std::{
+    io::Read as _,
+    path::{Path, PathBuf},
+};
 
 /// ANSI color representation command examples.
 pub const EXAMPLES: &str = color_print::cstr!(
@@ -26,10 +29,10 @@ pub const EXAMPLES: &str = color_print::cstr!(
 #[clap(arg_required_else_help = true, after_long_help = EXAMPLES)]
 pub(crate) struct Args {
     /// hkx/xml file path
-    pub input: String,
+    pub input: PathBuf,
     /// If specified, write to a file (If not specified, stdout)
     #[clap(short, long)]
-    pub output: Option<String>,
+    pub output: Option<PathBuf>,
 }
 
 /// Output tree to stdout/file.
@@ -56,21 +59,29 @@ where
     let bytes = input.read_bytes().await?;
     let mut xml = String::new();
 
-    if extension == Some(OsStr::new("hkx")) {
-        let mut classes: ClassMap = from_bytes(&bytes).context(DeSnafu {
-            input: input.to_path_buf(),
-        })?;
-        Ok(classes.tree_for_bytes())
-    } else if extension == Some(OsStr::new("xml")) {
-        let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
-        decoder.read_to_string(&mut xml)?;
-        let mut classes: ClassMap = from_str(&xml).context(DeSnafu {
-            input: input.to_path_buf(),
-        })?;
-        Ok(classes.tree_for_bytes()) // TODO: implement `tree_for_xml`
+    if let Some(extension) = extension {
+        if extension.eq_ignore_ascii_case("hkx") {
+            let mut classes: ClassMap = from_bytes(&bytes).context(DeSnafu {
+                input: input.to_path_buf(),
+            })?;
+            Ok(classes.tree_for_bytes())
+            //
+        } else if extension.eq_ignore_ascii_case("xml") {
+            let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
+            decoder.read_to_string(&mut xml)?;
+            let mut classes: ClassMap = from_str(&xml).context(DeSnafu {
+                input: input.to_path_buf(),
+            })?;
+            Ok(classes.tree_for_bytes())
+            //
+        } else {
+            Err(Error::UnsupportedExtension {
+                path: input.to_path_buf(),
+            })
+        }
     } else {
-        return Err(Error::UnsupportedExtension {
-            path: input.to_string_lossy().to_string(),
-        });
+        Err(Error::UnsupportedExtension {
+            path: input.to_path_buf(),
+        })
     }
 }

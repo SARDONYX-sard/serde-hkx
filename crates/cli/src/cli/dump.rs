@@ -4,7 +4,7 @@ use crate::{
     read_ext::ReadExt as _,
 };
 use serde_hkx::bytes::hexdump;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use tokio::fs;
 
 /// ANSI color representation command examples.
@@ -25,12 +25,12 @@ pub const EXAMPLES: &str = color_print::cstr!(
 #[clap(arg_required_else_help = true, after_long_help = EXAMPLES)]
 pub(crate) struct Args {
     /// hkx file path/hexdump file path(When use `--reverse`)
-    pub input: String,
+    pub input: PathBuf,
     /// If specified, write to a file (If not specified, stdout)
     #[clap(short, long)]
     #[clap(long_help = "Output path to write a file.
 NOTE: Bytes cannot be written to stdout, so always use `-o` to specify the output when use `--reverse`.")]
-    pub output: Option<String>,
+    pub output: Option<PathBuf>,
 
     /// Reverse conversion from hexdump to bytes
     #[clap(short, long)]

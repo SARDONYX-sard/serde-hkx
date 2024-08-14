@@ -1,6 +1,6 @@
 use crate::error::Result;
 use crate::read_ext::ReadExt as _;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use tokio::fs;
 
 /// ANSI color representation command examples.
@@ -18,13 +18,13 @@ pub const EXAMPLES: &str = color_print::cstr!(
 #[clap(arg_required_else_help = true, after_long_help = EXAMPLES)]
 pub(crate) struct Args {
     /// old path
-    pub old: String,
+    pub old: PathBuf,
     /// new path
-    pub new: String,
+    pub new: PathBuf,
 
     /// If specified, write to a file (If not specified, stdout)
     #[clap(short, long)]
-    pub output: Option<String>,
+    pub output: Option<PathBuf>,
 }
 
 /// Show diff between two files.
