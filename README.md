@@ -13,7 +13,7 @@ serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx" }
 
 Examples
 
-- [Tests](./serde_hkx/src/tests/parse_skyrim.rs)
+- [Tests](./serde_hkx/src/tests/verify.rs)
 - [Convert(in cli)](./crates/cli/src/cli/convert.rs)
 
 ## Manufacturing process
