@@ -198,19 +198,21 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
+        let value = value.as_ref();
+
         #[cfg(feature = "tracing")]
         tracing::trace!(
             "serialize Array field({:#x}): {key}",
             self.ser.output.position()
         );
-        if !value.as_ref().is_empty() {
+        if !value.is_empty() {
             // Ptr type need to pointing data position(local.dst).
             let array_start = self.ser.relative_position()?;
             self.local_fixups_name_src.insert(key, array_start);
         };
 
         // Write Array meta field
-        let size = value.as_ref().len() as u32;
+        let size = value.len() as u32;
         self.ser.serialize_ulong(Ulong::new(0))?; // ptr size
         self.ser.serialize_uint32(size)?; // array size
         self.ser.serialize_uint32(size | 1 << 31) // Capacity(same as size) | Owned flag(32nd bit)
