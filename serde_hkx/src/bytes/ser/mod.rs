@@ -13,10 +13,7 @@ use crate::errors::ser::{
 };
 use byteorder::{BigEndian, LittleEndian, WriteBytesExt as _};
 use havok_serde::ser::{Serialize, Serializer};
-use havok_types::{
-    f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
-    StringPtr, Transform, Ulong, Variant, Vector4,
-};
+use havok_types::*;
 use indexmap::IndexMap;
 use snafu::ensure;
 use std::borrow::Cow;
@@ -61,6 +58,8 @@ where
 
     // 1/5: root header
     serializer.output.write_all(&header.to_bytes())?;
+    serializer.contents_class_name_section_index = header.contents_class_name_section_index;
+    serializer.contents_section_index = header.contents_section_index;
 
     // 2/5: Get Section headers positions.(because the values of the fixups are not yet known.)
     let classnames_header_start = 64 + header.padding_size() as u64; // 64: Root header size
@@ -187,6 +186,10 @@ pub struct ByteSerializer {
     /// - This is used as a key since no duplicate ptr is required at the same relative position.
     ///   The ptr may be shared-referenced and cannot be keyed.
     virtual_fixups_ptr_src: HashMap<Pointer, u32>,
+    /// Index of the contents section.(To write `global_fixups` index)
+    ///
+    /// It is usually `2` and refers to the index of `__data__`.
+    contents_section_index: i32,
 
     // ---- Virtual fixup information
     /// C++ Class constructor positions map binary temporally buffer.
@@ -199,6 +202,10 @@ pub struct ByteSerializer {
     /// - key: class name
     /// - value: class name start position
     class_starts: ClassStartsMap,
+    /// Index of the contents class name section.(To write virtual fixups index)
+    ///
+    /// It is usually `0` and refers to the index of `__classnames__`.
+    contents_class_name_section_index: i32,
 
     /// Used only when writing `Array<StringPtr>` or `Array<CString>`.
     ///
@@ -252,18 +259,20 @@ impl ByteSerializer {
                     let src_abs = self.abs_data_offset + src;
                     let dst_abs = self.abs_data_offset + dst;
                     tracing::debug!(
-                        "[global_fixups]({:#x}) src({src}/{src_abs:#x}) -> {ptr} dst({dst}/{dst_abs:#x})",
+                        "[global_fixups]({:#x}) src({src}:{src:#x}/abs {src_abs:#x}) -> {ptr} dst({dst}:{dst:#x}/abs: {dst_abs:#x})",
                         self.output.position()
                     );
                 }
 
                 if self.is_little_endian {
                     self.output.write_u32::<LittleEndian>(src)?; // src
-                    self.output.write_u32::<LittleEndian>(2)?; // dst_section_index
+                    self.output
+                        .write_i32::<LittleEndian>(self.contents_section_index)?; // dst_section_index
                     self.output.write_u32::<LittleEndian>(dst)?; // dst(virtual_fixup.dst)
                 } else {
                     self.output.write_u32::<BigEndian>(src)?; // src
-                    self.output.write_u32::<BigEndian>(2)?; // dst_section_index
+                    self.output
+                        .write_i32::<BigEndian>(self.contents_section_index)?; // dst_section_index
                     self.output.write_u32::<BigEndian>(dst)?; // dst(virtual_fixup.dst)
                 }
             } else {
@@ -287,17 +296,17 @@ impl ByteSerializer {
             match self.is_little_endian {
                 true => {
                     self.virtual_fixups.write_u32::<LittleEndian>(virtual_src)?; // src
-                    self.virtual_fixups.write_u32::<LittleEndian>(0)?; // dst_section_index, `__classnames__` section is 0
                     self.virtual_fixups
-                        .write_u32::<LittleEndian>(*class_name_offset)?;
-                    // dst(virtual_fixup.dst)
+                        .write_i32::<LittleEndian>(self.contents_class_name_section_index)?; // dst_section_index, `__classnames__` section is 0
+                    self.virtual_fixups
+                        .write_u32::<LittleEndian>(*class_name_offset)?; // dst(virtual_fixup.dst)
                 }
                 false => {
                     self.virtual_fixups.write_u32::<BigEndian>(virtual_src)?; // src
-                    self.virtual_fixups.write_u32::<BigEndian>(0)?; // dst_section_index, `__classnames__` section is 0
                     self.virtual_fixups
-                        .write_u32::<BigEndian>(*class_name_offset)?;
-                    // dst(virtual_fixup.dst)
+                        .write_i32::<BigEndian>(self.contents_class_name_section_index)?; // dst_section_index, `__classnames__` section is 0
+                    self.virtual_fixups
+                        .write_u32::<BigEndian>(*class_name_offset)?; // dst(virtual_fixup.dst)
                 }
             };
             Ok(())
@@ -440,7 +449,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
             let start = self.relative_position()?;
             #[cfg(feature = "tracing")]
             tracing::debug!(
-                "Insert `global_fixup.src`({:#x}): {ptr}",
+                "Insert `global_fixup.src`({start}:{start:#x}/abs {:#x}): {ptr}",
                 self.output.position()
             );
             self.global_fixups_ptr_src.insert(start, ptr);
@@ -498,6 +507,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         self.serialize_cow(v.get_ref())
     }
 
+    #[inline]
     fn serialize_ulong(self, v: Ulong) -> Result<Self::Ok, Self::Error> {
         match self.is_x86 {
             true => self.serialize_uint32(v.get() as u32),

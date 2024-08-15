@@ -63,7 +63,7 @@ fn assert_bytes(xml: &str, expected_bytes: &[u8]) -> Result<()> {
     {
         let actual_hex_dump = hexdump::to_string(&actual_bytes);
         let expected_hex_dump = hexdump::to_string(expected_bytes);
-        let hexdump_diff = diff(&expected_hex_dump, &actual_hex_dump);
+        let hexdump_diff = diff(&actual_hex_dump, &expected_hex_dump);
         tracing::debug!("hexdump_diff = \n{hexdump_diff}");
         assert_eq!(actual_hex_dump, expected_hex_dump);
     }
@@ -110,7 +110,7 @@ async fn should_reproduce_xml() -> Result<()> {
             panic!("{err}")
         }
     };
-    let xml_diff = diff(expected, actual);
+    let xml_diff = diff(actual, expected);
     tracing::debug!("map_diff = \n{xml_diff}");
 
     Ok(())
@@ -121,8 +121,8 @@ fn diff(old: impl AsRef<str>, new: impl AsRef<str>) -> String {
     let mut output_diff = String::new();
     for change in diff.iter_all_changes() {
         let sign = match change.tag() {
-            similar::ChangeTag::Delete => "-",
-            similar::ChangeTag::Insert => "+",
+            similar::ChangeTag::Delete => "<",
+            similar::ChangeTag::Insert => ">",
             similar::ChangeTag::Equal => " ",
         };
         output_diff += &format!("{sign}{change}");
