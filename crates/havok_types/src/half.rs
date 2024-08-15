@@ -76,6 +76,6 @@ fn test_half() {
 
     let half = f16::from_f32(0.049805);
     assert_eq!(half.to_le_bytes(), [0x4c, 0x3d]);
-    assert_eq!(half.to_f32(), 0.049805);
+    assert_eq!(half.to_f32(), 0.049804688); // Precision is lost.
     assert_eq!(half.to_string(), "0.049805");
 }
