@@ -512,7 +512,13 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
     #[inline]
     fn serialize_half(self, v: f16) -> Result<Self::Ok, Self::Error> {
-        self.serialize_uint16(v.to_bits())
+        let bytes = if self.is_little_endian {
+            v.to_le_bytes()
+        } else {
+            v.to_be_bytes()
+        };
+        self.output.write_all(&bytes)?;
+        Ok(())
     }
 
     /// In the binary serialization of hkx, this is the actual data writing process beyond
