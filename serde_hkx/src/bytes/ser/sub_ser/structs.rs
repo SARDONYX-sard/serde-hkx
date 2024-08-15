@@ -264,14 +264,16 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
+        if value.as_ref().is_empty() {
+            return Ok(());
+        }
+
         // The data pointed to by the Array pointer (`T* m_data`) must first be aligned 16 bytes before it is written.
         self.ser.output.zero_fill_align(16)?;
 
-        if !value.as_ref().is_empty() {
-            // The actual data location, i.e., the data position pointed to by ptr. It is local_fixup.dst.
-            let array_dst = self.ser.relative_position()?;
-            self.write_local_fixup_pair(key, array_dst)?;
-        }
+        // The actual data location, i.e., the data position pointed to by ptr. It is local_fixup.dst.
+        let array_dst = self.ser.relative_position()?;
+        self.write_local_fixup_pair(key, array_dst)?;
 
         // NOTE: Please note the following!
         // - To avoid the malfunction of using `str_array_buf` when it is not a class array as a field, Vec is initialized here, where the array field processing is performed.
