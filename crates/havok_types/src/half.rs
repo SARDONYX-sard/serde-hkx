@@ -70,12 +70,17 @@ impl fmt::Debug for f16 {
 #[test]
 fn test_half() {
     let half = f16::from_f32(1.0);
+    assert_eq!(f16::from_le_bytes([0x80, 0x3f]), f16::from_f32(1.0));
+    assert_eq!(f16::from_be_bytes([0x3f, 0x80]), f16::from_f32(1.0));
+
     assert_eq!(half.to_le_bytes(), [0x80, 0x3f]);
+    assert_eq!(half.to_be_bytes(), [0x3f, 0x80]);
     assert_eq!(half.to_f32(), 1.0);
     assert_eq!(half.to_string(), "1.000000");
 
     let half = f16::from_f32(0.049805);
     assert_eq!(half.to_le_bytes(), [0x4c, 0x3d]);
+    assert_eq!(half.to_be_bytes(), [0x3d, 0x4c]);
     assert_eq!(half.to_f32(), 0.049804688); // Precision is lost.
     assert_eq!(half.to_string(), "0.049805");
 }

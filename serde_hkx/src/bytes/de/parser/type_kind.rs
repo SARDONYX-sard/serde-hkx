@@ -262,7 +262,7 @@ mod tests {
             Ok(f16::from_f32(1.0))
         );
         assert_eq!(
-            half(Endianness::Big).parse(&[0x3f, 0xf0]),
+            half(Endianness::Big).parse(&[0x3f, 0x80]),
             Ok(f16::from_f32(1.0))
         );
     }
