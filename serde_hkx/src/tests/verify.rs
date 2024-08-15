@@ -6,36 +6,67 @@ use crate::{
     to_bytes, to_string, HavokSort,
 };
 use pretty_assertions::assert_eq;
+use winnow::Parser;
 
 type Result<T> = core::result::Result<T, SerdeHkxError>;
 
-#[tokio::test]
+#[test]
 #[ignore = "Because it can't be fully reproduced yet"]
-#[quick_tracing::try_init(test = "should_reproduce_bytes", stdio = false)]
-async fn should_reproduce_bytes() -> Result<()> {
+#[quick_tracing::init(test = "should_reproduce_x64_bytes", stdio = false)]
+fn should_reproduce_x64_bytes() {
     let xml = {
-        // include_str!("../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
+        // include_str!("../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
         include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
     };
     let expected_bytes = {
-        // include_bytes!("../../docs/handson_hex_dump/defaultmale/defaultmale.hkx")
-        // include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx")
-        // include_bytes!("../../docs/handson_hex_dump/wisp_skeleton/skeleton_x86_reconverted.hkx")
+        // include_bytes!("../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx")
+        // include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx")
         include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx")
     };
 
-    let actual_bytes = {
-        let xml_to_bytes = || -> Result<Vec<u8>> {
-            let mut actual_classes: ClassMap = from_str(xml)?;
-            actual_classes.sort_for_bytes();
-            Ok(to_bytes(&actual_classes, &HkxHeader::new_skyrim_se())?)
-        };
-
-        xml_to_bytes().map_err(|err| {
+    match assert_bytes(xml, expected_bytes) {
+        Ok(bytes) => bytes,
+        Err(err) => {
             tracing::error!("{err}");
-            err
-        })?
+            panic!("{err}")
+        }
+    }
+}
+
+#[test]
+#[ignore = "Because it can't be fully reproduced yet"]
+#[quick_tracing::init(test = "should_reproduce_x86_bytes", stdio = false)]
+fn should_reproduce_x86_bytes() {
+    let xml = include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
+    let expected_bytes =
+        include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton_x86_reconverted.hkx");
+
+    match assert_bytes(xml, expected_bytes) {
+        Ok(bytes) => bytes,
+        Err(err) => {
+            tracing::error!("{err}");
+            panic!("{err}")
+        }
+    }
+}
+
+fn assert_bytes(xml: &str, expected_bytes: &[u8]) -> Result<()> {
+    let actual_bytes = {
+        let mut actual_classes: ClassMap = from_str(xml)?;
+        actual_classes.sort_for_bytes();
+
+        let (_remain, header) = HkxHeader::from_bytes().parse_peek(expected_bytes).unwrap();
+        to_bytes(&actual_classes, &header)?
     };
+
+    // Assert hexdump
+    {
+        let actual_hex_dump = hexdump::to_string(&actual_bytes);
+        let expected_hex_dump = hexdump::to_string(expected_bytes);
+        let hexdump_diff = diff(&expected_hex_dump, &actual_hex_dump);
+        tracing::debug!("hexdump_diff = \n{hexdump_diff}");
+        assert_eq!(actual_hex_dump, expected_hex_dump);
+    }
 
     // Ast diff
     {
@@ -46,15 +77,6 @@ async fn should_reproduce_bytes() -> Result<()> {
             format!("{actual_classes:#?}"),
         );
         tracing::debug!("ast_diff = \n{ast_diff}");
-    }
-
-    // Assert hexdump
-    {
-        let actual_hex_dump = hexdump::to_string(&actual_bytes);
-        let expected_hex_dump = hexdump::to_string(expected_bytes);
-        let hexdump_diff = diff(&expected_hex_dump, &actual_hex_dump);
-        tracing::debug!("hexdump_diff = \n{hexdump_diff}");
-        assert_eq!(actual_hex_dump, expected_hex_dump);
     }
 
     Ok(())
@@ -71,7 +93,7 @@ async fn should_reproduce_xml() -> Result<()> {
     };
 
     let expected = {
-        // include_str!("../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
+        // include_str!("../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
         include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
     };
 

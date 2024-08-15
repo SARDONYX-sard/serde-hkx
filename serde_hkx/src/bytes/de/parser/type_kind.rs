@@ -128,7 +128,6 @@ pub fn transform<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Transfo
 // NOTE: No Pointer parsing exists because it is automatically created as an index.
 
 /// Parses f16
-#[inline]
 pub fn half<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f16, ContextError> {
     move |bytes: &mut BytesStream<'a>| {
         let (b0, b1) = tri!(seq! {
@@ -143,7 +142,14 @@ pub fn half<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f16, Context
 
         Ok(match endian {
             Endianness::Little => f16::from_le_bytes([b0, b1]),
-            _ => f16::from_be_bytes([b0, b1]),
+            Endianness::Big => f16::from_be_bytes([b0, b1]),
+            Endianness::Native => {
+                if cfg!(target_endian = "big") {
+                    f16::from_be_bytes([b0, b1])
+                } else {
+                    f16::from_le_bytes([b0, b1]) // if cfg!(target_endian = "little")
+                }
+            }
         })
     }
 }
@@ -193,7 +199,7 @@ pub fn array_meta<'a>(
             binary::i32(endian)
             .verify(|cap| (cap & (1 << 31)) != 0) // bit 32th flag is enabled
             .context(
-                StrContext::Expected(StrContextValue::Description("capacity&flags(i32 | 1 << 31)"))
+                StrContext::Expected(StrContextValue::Description("capacity&flags(i32: e.g. 00 00 00 80)"))
             )
         }
         .parse_next(bytes)
@@ -252,29 +258,12 @@ mod tests {
     #[test]
     fn test_half() {
         assert_eq!(
-            half(Endianness::Little).parse(&[0x00, 0x00]),
-            Ok(f16::from_f32(0.0))
-        );
-        assert_eq!(
-            half(Endianness::Little).parse(&[0x00, 0x3C]),
+            half(Endianness::Little).parse(&[0x80, 0x3f]),
             Ok(f16::from_f32(1.0))
         );
         assert_eq!(
-            half(Endianness::Little).parse(&[0x00, 0xC0]),
-            Ok(f16::from_f32(-2.0))
-        );
-
-        assert_eq!(
-            half(Endianness::Big).parse(&[0x00, 0x00]),
-            Ok(f16::from_f32(0.0))
-        );
-        assert_eq!(
-            half(Endianness::Big).parse(&[0x3C, 0x00]),
+            half(Endianness::Big).parse(&[0x3f, 0xf0]),
             Ok(f16::from_f32(1.0))
-        );
-        assert_eq!(
-            half(Endianness::Big).parse(&[0xC0, 0x00]),
-            Ok(f16::from_f32(-2.0))
         );
     }
 

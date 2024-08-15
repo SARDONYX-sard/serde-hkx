@@ -1,13 +1,12 @@
 //! All havok types definitions.
 pub mod cstring;
+pub mod half;
 pub mod math;
 pub mod pointer;
 pub mod signature;
 pub mod string_ptr;
 pub mod ulong;
 pub mod variant;
-#[doc(hidden)]
-pub use half;
 
 pub use cstring::*;
 pub use half::f16;
@@ -22,6 +21,7 @@ mod lib {
     pub use std::borrow::Cow;
 
     pub use core::fmt;
+    pub use core::fmt::Debug;
     pub use core::str::FromStr;
 }
 
