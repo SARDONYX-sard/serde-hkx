@@ -121,6 +121,85 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
     type Ok = ();
     type Error = Error;
 
+    #[inline]
+    fn serialize_field<T>(&mut self, _key: &'static str, value: &T) -> Result<()>
+    where
+        T: ?Sized + Serialize,
+    {
+        #[cfg(feature = "tracing")]
+        tracing::trace!("serialize field({:#x}): {_key}", self.ser.output.position());
+        value.serialize(&mut *self.ser)
+    }
+
+    /// Even if it is skipped on XML, it is not skipped because it exists in binary data.
+    #[inline]
+    fn skip_field<T>(&mut self, _key: &'static str, value: &T) -> Result<()>
+    where
+        T: ?Sized + Serialize,
+    {
+        #[cfg(feature = "tracing")]
+        tracing::trace!("serialize field({:#x}): {_key}", self.ser.output.position());
+        value.serialize(&mut *self.ser)
+    }
+
+    fn pad_field<T>(&mut self, x86_pads: &T, x64_pads: &T) -> Result<()>
+    where
+        T: ?Sized + AsRef<[u8]>,
+    {
+        let pads = match self.ser.is_x86 {
+            true => x86_pads.as_ref(),
+            false => x64_pads.as_ref(),
+        };
+
+        if pads.is_empty() {
+            return Ok(());
+        };
+        self.ser.output.write_all(pads)?;
+        #[cfg(feature = "tracing")]
+        {
+            let pads_len = pads.len();
+            let current_position = self.ser.output.position();
+            tracing::trace!("padding: {pads_len} -> current position: {current_position:#x}");
+        }
+        Ok(())
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Fixed Array
+
+    #[inline]
+    fn serialize_fixed_array_field<V, T>(&mut self, _key: &'static str, value: V) -> Result<()>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        #[cfg(feature = "tracing")]
+        tracing::trace!(
+            "serialize FixedArray field({:#x}): {_key}",
+            self.ser.output.position()
+        );
+
+        // At this point, the data pointed to by the pointer is written to the temporary save
+        // area. (Merged into output at the end of the array.
+        if self.ser.str_array_buf.is_none() {
+            self.ser.str_array_buf = Some(Vec::new());
+        }
+        tri!(value.serialize(&mut *self.ser));
+        self.write_iter_local_fixups()
+    }
+
+    #[inline]
+    fn skip_fixed_array_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        self.serialize_fixed_array_field(key, value)
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CString
+
     fn serialize_cstring_meta_field(
         &mut self,
         key: &'static str,
@@ -151,6 +230,20 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
         // Write meta fields
         self.ser.serialize_ulong(Ulong::new(0)) // ptr size
     }
+
+    /// This skip is for XML. Binary data must be written as usual.
+    #[inline]
+    fn skip_cstring_meta_field(&mut self, key: &'static str, value: &CString) -> Result<()> {
+        self.serialize_cstring_meta_field(key, value)
+    }
+
+    #[inline]
+    fn serialize_cstring_field(&mut self, key: &'static str, value: &CString) -> Result<()> {
+        self.serialize_string(key, value)
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // StringPtr
 
     /// In the binary serialization of hkx, we are at this stage writing each field of the structure.
     /// ptr type writes only the size of C++ `StringPtr` here, since the data pointed to by the pointer
@@ -188,6 +281,20 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
         self.ser.serialize_ulong(Ulong::new(0)) // ptr size
     }
 
+    /// This skip is for XML. Binary data must be written as usual.
+    #[inline]
+    fn skip_stringptr_meta_field(&mut self, key: &'static str, value: &StringPtr) -> Result<()> {
+        self.serialize_stringptr_meta_field(key, value)
+    }
+
+    #[inline]
+    fn serialize_stringptr_field(&mut self, key: &'static str, value: &StringPtr) -> Result<()> {
+        self.serialize_string(key, value)
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Array
+
     /// In the binary serialization of hkx, we are at this stage writing each field of the structure.
     /// ptr type writes only the size of C++ `Array` here, since the data pointed to by the pointer
     /// will be written later.
@@ -219,44 +326,12 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
     }
 
     #[inline]
-    fn serialize_field<T>(&mut self, _key: &'static str, value: &T) -> Result<()>
-    where
-        T: ?Sized + Serialize,
-    {
-        #[cfg(feature = "tracing")]
-        tracing::trace!("serialize field({:#x}): {_key}", self.ser.output.position());
-        value.serialize(&mut *self.ser)
-    }
-
-    #[inline]
-    fn serialize_cstring_field(&mut self, key: &'static str, value: &CString) -> Result<()> {
-        self.serialize_string(key, value)
-    }
-
-    #[inline]
-    fn serialize_stringptr_field(&mut self, key: &'static str, value: &StringPtr) -> Result<()> {
-        self.serialize_string(key, value)
-    }
-
-    #[inline]
-    fn serialize_fixed_array_field<V, T>(&mut self, _key: &'static str, value: V) -> Result<()>
+    fn skip_array_meta_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
     where
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
-        #[cfg(feature = "tracing")]
-        tracing::trace!(
-            "serialize FixedArray field({:#x}): {_key}",
-            self.ser.output.position()
-        );
-
-        // At this point, the data pointed to by the pointer is written to the temporary save
-        // area. (Merged into output at the end of the array.
-        if self.ser.str_array_buf.is_none() {
-            self.ser.str_array_buf = Some(Vec::new());
-        }
-        tri!(value.serialize(&mut *self.ser));
-        self.write_iter_local_fixups()
+        self.serialize_array_meta_field(key, value)
     }
 
     fn serialize_array_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
@@ -285,59 +360,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
         self.write_iter_local_fixups()
     }
 
-    /// Even if it is skipped on XML, it is not skipped because it exists in binary data.
-    #[inline]
-    fn skip_field<T>(&mut self, _key: &'static str, value: &T) -> Result<()>
-    where
-        T: ?Sized + Serialize,
-    {
-        #[cfg(feature = "tracing")]
-        tracing::trace!("serialize field({:#x}): {_key}", self.ser.output.position());
-        value.serialize(&mut *self.ser)
-    }
-
-    /// This skip is for XML. Binary data must be written as usual.
-    #[inline]
-    fn skip_cstring_meta_field(&mut self, key: &'static str, value: &CString) -> Result<()> {
-        self.serialize_cstring_meta_field(key, value)
-    }
-
-    /// This skip is for XML. Binary data must be written as usual.
-    #[inline]
-    fn skip_stringptr_meta_field(&mut self, key: &'static str, value: &StringPtr) -> Result<()> {
-        self.serialize_stringptr_meta_field(key, value)
-    }
-
-    #[inline]
-    fn skip_array_meta_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
-    where
-        V: AsRef<[T]> + Serialize,
-        T: Serialize,
-    {
-        self.serialize_array_meta_field(key, value)
-    }
-
-    fn pad_field<T>(&mut self, x86_pads: &T, x64_pads: &T) -> Result<()>
-    where
-        T: ?Sized + AsRef<[u8]>,
-    {
-        let pads = match self.ser.is_x86 {
-            true => x86_pads.as_ref(),
-            false => x64_pads.as_ref(),
-        };
-
-        if pads.is_empty() {
-            return Ok(());
-        };
-        self.ser.output.write_all(pads)?;
-        #[cfg(feature = "tracing")]
-        {
-            let pads_len = pads.len();
-            let current_position = self.ser.output.position();
-            tracing::trace!("padding: {pads_len} -> current position: {current_position:#x}");
-        }
-        Ok(())
-    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     #[inline]
     fn end(self) -> Result<()> {

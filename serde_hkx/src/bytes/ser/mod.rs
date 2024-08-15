@@ -441,7 +441,8 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     impl_serialize_math!(serialize_qstransform, QsTransform);
     impl_serialize_math!(serialize_transform, Transform);
 
-    /// Pointer(Name attribute on XML) does not exist in bytes data(`.hkx`).
+    // Register data to be written to global_fixups.
+    // Until the data in virtual_fixups is determined (until all C++ classes are written), temporarily write to `IndexMap` as the value of dst is unknown.
     fn serialize_pointer(self, ptr: Pointer) -> Result<Self::Ok, Self::Error> {
         #[allow(clippy::needless_else)]
         if !ptr.is_null() {
