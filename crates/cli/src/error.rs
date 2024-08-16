@@ -9,9 +9,9 @@ pub enum Error {
     #[snafu(display("The only supported extension is `.hkx` or `.xml`. But this path is neither: {}.", path.display()))]
     UnsupportedExtension { path: PathBuf },
 
-    /// Invalid format: {unknown_fmt}
-    #[snafu(display("Invalid format: {unknown_fmt}"))]
-    InvalidOutputFormat { unknown_fmt: String },
+    /// This path has a missing extension.: {path}.
+    #[snafu(display("This path has a missing extension.: {}.", path.display()))]
+    MissingExtension { path: PathBuf },
 
     /// Failed to read file from
     #[snafu(display("{source}: {}", path.display()))]

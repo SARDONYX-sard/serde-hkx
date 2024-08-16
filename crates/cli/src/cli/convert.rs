@@ -190,7 +190,7 @@ where
             });
         }
     } else {
-        return Err(Error::UnsupportedExtension {
+        return Err(Error::MissingExtension {
             path: input.to_path_buf(),
         });
     };
