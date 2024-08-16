@@ -21,9 +21,9 @@ pub const EXAMPLES: &str = color_print::cstr!(
 #[derive(Debug, clap::Args)]
 #[clap(arg_required_else_help = true, after_long_help = EXAMPLES)]
 pub(crate) struct Args {
-    /// old path
+    /// Old path
     pub old: PathBuf,
-    /// new path
+    /// New path
     pub new: PathBuf,
 
     /// If specified, write to a file (If not specified, stdout)

@@ -97,8 +97,7 @@ pub(crate) enum SubCommands {
     /// Dump binary data in hexadecimal
     Dump(dump::Args),
 
-    /// Show diff between two files
-    /// In the case of hkx, it is automatically converted to hexdump
+    /// Show diff between two files.(In the case of `.hkx`, it is automatically converted to hexdump)
     Diff(diff::Args),
 
     /// Generate shell completions
