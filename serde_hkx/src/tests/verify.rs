@@ -24,12 +24,9 @@ fn should_reproduce_x64_bytes() {
         include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx")
     };
 
-    match assert_bytes(xml, expected_bytes) {
-        Ok(bytes) => bytes,
-        Err(err) => {
-            tracing::error!("{err}");
-            panic!("{err}")
-        }
+    if let Err(err) = assert_bytes(xml, expected_bytes) {
+        tracing::error!("{err}");
+        panic!("{err}")
     }
 }
 
@@ -41,12 +38,9 @@ fn should_reproduce_x86_bytes() {
     let expected_bytes =
         include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton_x86_reconverted.hkx");
 
-    match assert_bytes(xml, expected_bytes) {
-        Ok(bytes) => bytes,
-        Err(err) => {
-            tracing::error!("{err}");
-            panic!("{err}")
-        }
+    if let Err(err) = assert_bytes(xml, expected_bytes) {
+        tracing::error!("{err}");
+        panic!("{err}")
     }
 }
 
