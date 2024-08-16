@@ -165,39 +165,6 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Fixed Array
-
-    #[inline]
-    fn serialize_fixed_array_field<V, T>(&mut self, _key: &'static str, value: V) -> Result<()>
-    where
-        V: AsRef<[T]> + Serialize,
-        T: Serialize,
-    {
-        #[cfg(feature = "tracing")]
-        tracing::trace!(
-            "serialize FixedArray field({:#x}): {_key}",
-            self.ser.output.position()
-        );
-
-        // At this point, the data pointed to by the pointer is written to the temporary save
-        // area. (Merged into output at the end of the array.
-        if self.ser.str_array_buf.is_none() {
-            self.ser.str_array_buf = Some(Vec::new());
-        }
-        tri!(value.serialize(&mut *self.ser));
-        self.write_iter_local_fixups()
-    }
-
-    #[inline]
-    fn skip_fixed_array_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
-    where
-        V: AsRef<[T]> + Serialize,
-        T: Serialize,
-    {
-        self.serialize_fixed_array_field(key, value)
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CString
 
     fn serialize_cstring_meta_field(
@@ -290,6 +257,39 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
     #[inline]
     fn serialize_stringptr_field(&mut self, key: &'static str, value: &StringPtr) -> Result<()> {
         self.serialize_string(key, value)
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Fixed Array
+
+    #[inline]
+    fn serialize_fixed_array_field<V, T>(&mut self, _key: &'static str, value: V) -> Result<()>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        #[cfg(feature = "tracing")]
+        tracing::trace!(
+            "serialize FixedArray field({:#x}): {_key}",
+            self.ser.output.position()
+        );
+
+        // At this point, the data pointed to by the pointer is written to the temporary save
+        // area. (Merged into output at the end of the array.
+        if self.ser.str_array_buf.is_none() {
+            self.ser.str_array_buf = Some(Vec::new());
+        }
+        tri!(value.serialize(&mut *self.ser));
+        self.write_iter_local_fixups()
+    }
+
+    #[inline]
+    fn skip_fixed_array_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        self.serialize_fixed_array_field(key, value)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

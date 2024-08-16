@@ -326,37 +326,6 @@ pub trait SerializeStruct {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Fixed Array
-
-    /// Serialize a struct field for fixed array.
-    /// -   XML: add `numelements` attribute to `hkparam` and write array contents.(same as `hkArray`)
-    /// - Bytes: write each bytes.
-    fn serialize_fixed_array_field<V, T>(
-        &mut self,
-        key: &'static str,
-        value: V,
-    ) -> Result<(), Self::Error>
-    where
-        V: AsRef<[T]> + Serialize,
-        T: Serialize;
-
-    /// Serialize a struct field for fixed array.
-    /// -   XML: add `numelements` attribute to `hkparam` and write array contents.(same as `hkArray`)
-    /// - Bytes: write each bytes.
-    #[inline]
-    fn skip_fixed_array_field<V, T>(
-        &mut self,
-        key: &'static str,
-        value: V,
-    ) -> Result<(), Self::Error>
-    where
-        V: AsRef<[T]> + Serialize,
-        T: Serialize,
-    {
-        self.skip_field(key, &value)
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CString
 
     /// Serialize a struct field for `CString`.
@@ -440,6 +409,37 @@ pub trait SerializeStruct {
     ) -> Result<(), Self::Error> {
         let _ = (key, value);
         Ok(())
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Fixed Array
+
+    /// Serialize a struct field for fixed array.
+    /// -   XML: add `numelements` attribute to `hkparam` and write array contents.(same as `hkArray`)
+    /// - Bytes: write each bytes.
+    fn serialize_fixed_array_field<V, T>(
+        &mut self,
+        key: &'static str,
+        value: V,
+    ) -> Result<(), Self::Error>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize;
+
+    /// Serialize a struct field for fixed array.
+    /// -   XML: add `numelements` attribute to `hkparam` and write array contents.(same as `hkArray`)
+    /// - Bytes: write each bytes.
+    #[inline]
+    fn skip_fixed_array_field<V, T>(
+        &mut self,
+        key: &'static str,
+        value: V,
+    ) -> Result<(), Self::Error>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        self.skip_field(key, &value)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
