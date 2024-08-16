@@ -183,7 +183,10 @@ const _: () = {
             serializer
                 .skip_field("cloneState", &self.parent.parent.parent.m_cloneState)?;
             serializer
-                .skip_field("padNode", &self.parent.parent.parent.m_padNode.as_slice())?;
+                .skip_fixed_array_field(
+                    "padNode",
+                    self.parent.parent.parent.m_padNode.as_slice(),
+                )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
                 .serialize_field(

@@ -171,7 +171,7 @@ fn impl_serialize_self_fields(
             1.. => {
                 if flags.has_skip_serializing() {
                     serialize_calls
-                        .push(quote! { serializer.#meta_method(#cpp_field_key, &self #parent_ident.#rust_field_name.as_slice())?; })
+                        .push(quote! { serializer.skip_fixed_array_field(#cpp_field_key, self #parent_ident.#rust_field_name.as_slice())?; })
                 } else {
                     serialize_calls
                         .push(quote! { serializer.serialize_fixed_array_field(#cpp_field_key, self #parent_ident.#rust_field_name.as_slice())?; });
@@ -181,9 +181,13 @@ fn impl_serialize_self_fields(
 
         // For `Array`, `CString` or `StringPtr`.(Not use `[StringPtr; 4]`)
         if let Some(pointed_method) = pointed_method {
-            ptr_after_write_fields.push(
-                quote! { serializer.#pointed_method(#cpp_field_key, &self #parent_ident.#rust_field_name)?; },
-            );
+            if *arrsize == 0 {
+                ptr_after_write_fields.push(
+                    quote! { serializer.#pointed_method(#cpp_field_key, &self #parent_ident.#rust_field_name)?; },
+                );
+            } else {
+                panic!("Does not support fixed arrays of pointer types.");
+            }
         };
     }
 

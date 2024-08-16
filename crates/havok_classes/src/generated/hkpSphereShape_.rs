@@ -72,7 +72,7 @@ const _: () = {
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("radius", &self.parent.m_radius)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.skip_field("pad16", &self.m_pad16.as_slice())?;
+            serializer.skip_fixed_array_field("pad16", self.m_pad16.as_slice())?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.end()
         }

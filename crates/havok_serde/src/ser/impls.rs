@@ -121,14 +121,11 @@ macro_rules! impl_serialize_with_index_array {
                 seq.end()
             }
         }
-      )*
+        )*
     };
 }
 
-impl_serialize_with_index_array!(
-  (), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f16, f32, Pointer, Ulong
-  => serialize_primitive_element
-);
+impl_serialize_with_index_array!((), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f16, f32, Pointer, Ulong => serialize_primitive_element);
 
 macro_rules! impl_serialize_vec {
     ($($ty:ty),+ $(,)? => $fn_name:tt) => {
@@ -168,7 +165,7 @@ macro_rules! impl_serialize_vec {
                 seq.end()
             }
         }
-      )*
+        )*
     };
 }
 
@@ -215,33 +212,36 @@ impl<T: Serialize + crate::HavokClass> Serialize for &[T] {
 }
 
 #[cfg(feature = "indexmap")]
-impl<K, V> Serialize for &indexmap::IndexMap<K, V>
-where
-    V: Serialize + crate::HavokClass,
-{
-    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        use super::SerializeSeq;
+const _: () = {
+    use indexmap::IndexMap;
 
-        let mut seq = tri!(serializer.serialize_array(Some(self.len())));
-        for (_index, element) in self.iter() {
-            tri!(seq.serialize_class_element(element));
+    impl<K, V> Serialize for &IndexMap<K, V>
+    where
+        V: Serialize + crate::HavokClass,
+    {
+        fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+            use super::SerializeSeq;
+
+            let mut seq = tri!(serializer.serialize_array(Some(self.len())));
+            for (_index, element) in self.iter() {
+                tri!(seq.serialize_class_element(element));
+            }
+            seq.end()
         }
-        seq.end()
     }
-}
 
-#[cfg(feature = "indexmap")]
-impl<K, V> Serialize for indexmap::IndexMap<K, V>
-where
-    V: Serialize + crate::HavokClass,
-{
-    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        use super::SerializeSeq;
+    impl<K, V> Serialize for IndexMap<K, V>
+    where
+        V: Serialize + crate::HavokClass,
+    {
+        fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+            use super::SerializeSeq;
 
-        let mut seq = tri!(serializer.serialize_array(Some(self.len())));
-        for (_index, element) in self.iter() {
-            tri!(seq.serialize_class_element(element));
+            let mut seq = tri!(serializer.serialize_array(Some(self.len())));
+            for (_index, element) in self.iter() {
+                tri!(seq.serialize_class_element(element));
+            }
+            seq.end()
         }
-        seq.end()
     }
-}
+};

@@ -1,5 +1,8 @@
 use super::super::ByteSerializer;
-use crate::errors::ser::{Error, Result};
+use crate::{
+    errors::ser::{Error, Result},
+    tri,
+};
 use havok_serde::{
     ser::{SerializeSeq, Serializer as _},
     Serialize,
@@ -45,26 +48,33 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
     #[inline]
     fn serialize_cstring_element(&mut self, value: &CString) -> Result<()> {
         if value.should_write_binary() {
-            let iter_src = self.relative_position()?;
-            self.local_fixups_iter_src.push(iter_src);
-            self.serialize_ulong(Ulong::new(0))?; // ptr size
+            let iter_src = tri!(self.relative_position());
             #[cfg(feature = "tracing")]
             tracing::debug!("local_fixup_iter_src = {iter_src}");
-        };
-        value.serialize(&mut **self)
+            self.local_fixups_iter_src.push(iter_src);
+
+            tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
+            value.serialize(&mut **self) // Serialize pointed data.
+        } else {
+            tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
+            Ok(())
+        }
     }
 
     #[inline]
     fn serialize_stringptr_element(&mut self, value: &StringPtr) -> Result<()> {
         if value.should_write_binary() {
-            let iter_src = self.relative_position()?;
-            self.local_fixups_iter_src.push(iter_src);
-            self.serialize_ulong(Ulong::new(0))?; // ptr size
+            let iter_src = tri!(self.relative_position());
             #[cfg(feature = "tracing")]
             tracing::debug!("local_fixup_iter_src = {iter_src}");
-        };
+            self.local_fixups_iter_src.push(iter_src);
 
-        value.serialize(&mut **self)
+            tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
+            value.serialize(&mut **self) // Serialize pointed data.
+        } else {
+            tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
+            Ok(())
+        }
     }
 
     // NOTE: If we write with `Seq` `end`, we will not be able to use `SerializeStruct` to write

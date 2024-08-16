@@ -92,10 +92,12 @@ const _: () = {
             serializer.serialize_stringptr_meta_field("name", &self.parent.m_name)?;
             serializer.skip_field("id", &self.parent.m_id)?;
             serializer.skip_field("cloneState", &self.parent.m_cloneState)?;
-            serializer.skip_field("padNode", &self.parent.m_padNode.as_slice())?;
+            serializer
+                .skip_fixed_array_field("padNode", self.parent.m_padNode.as_slice())?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("enable", &self.m_enable)?;
-            serializer.skip_field("padModifier", &self.m_padModifier.as_slice())?;
+            serializer
+                .skip_fixed_array_field("padModifier", self.m_padModifier.as_slice())?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
                 .serialize_array_field(

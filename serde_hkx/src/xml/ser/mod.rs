@@ -2,7 +2,7 @@
 use crate::{lib::*, tri};
 
 use crate::errors::ser::{Error, Result};
-use havok_serde::ser::{Serialize, SerializeFlags, SerializeStruct, Serializer};
+use havok_serde::ser::{Serialize, SerializeFlags, SerializeSeq, SerializeStruct, Serializer};
 use havok_types::variant::Variant;
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
@@ -310,7 +310,7 @@ impl XmlSerializer {
     }
 }
 
-impl<'a> havok_serde::ser::SerializeSeq for &'a mut XmlSerializer {
+impl<'a> SerializeSeq for &'a mut XmlSerializer {
     type Ok = ();
     type Error = Error;
 
