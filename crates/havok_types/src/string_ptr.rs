@@ -18,6 +18,7 @@ pub struct StringPtr<'a> {
 
 impl<'a> StringPtr<'a> {
     /// Create a new `StringPtr`
+    #[inline]
     pub const fn new(inner: Option<Cow<'a, str>>) -> Self {
         Self { inner }
     }

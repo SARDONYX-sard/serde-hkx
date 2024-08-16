@@ -14,6 +14,7 @@ pub struct Variant {
 
 impl Variant {
     /// Creates a new `Variant`
+    #[inline]
     pub const fn new(object: Pointer, class: Pointer) -> Self {
         Self { object, class }
     }

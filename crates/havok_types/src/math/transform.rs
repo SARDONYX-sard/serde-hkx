@@ -24,6 +24,7 @@ static_assertions::assert_eq_size!(Transform, [u8; 64]);
 
 impl Transform {
     /// Create a new `Transform`
+    #[inline]
     pub const fn new(rotation: Rotation, transition: Vector4) -> Self {
         Self {
             rotation,

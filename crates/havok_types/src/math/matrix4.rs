@@ -26,6 +26,7 @@ static_assertions::assert_eq_size!(Matrix4, [u8; 64]);
 
 impl Matrix4 {
     /// Creates a new `Matrix4`
+    #[inline]
     pub const fn new(x: Vector4, y: Vector4, z: Vector4, w: Vector4) -> Self {
         Self { x, y, z, w }
     }

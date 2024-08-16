@@ -27,6 +27,7 @@ pub struct QsTransform {
 
 impl QsTransform {
     /// Creates a new `QsTransform`
+    #[inline]
     pub const fn new(transition: Vector4, quaternion: Quaternion, scale: Vector4) -> Self {
         Self {
             transition,

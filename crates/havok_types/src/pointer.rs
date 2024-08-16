@@ -44,6 +44,7 @@ pub struct Pointer(usize);
 
 impl Pointer {
     /// Creates a new `Pointer`
+    #[inline]
     pub const fn new(ptr: usize) -> Self {
         Self(ptr)
     }

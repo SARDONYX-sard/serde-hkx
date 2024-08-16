@@ -17,6 +17,7 @@ pub struct Ulong(u64);
 
 impl Ulong {
     /// Creates a new `Ulong`
+    #[inline]
     pub const fn new(num: u64) -> Self {
         Self(num)
     }

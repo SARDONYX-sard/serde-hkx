@@ -22,6 +22,7 @@ pub struct CString<'a> {
 
 impl<'a> CString<'a> {
     /// Create a new `CString`
+    #[inline]
     pub const fn new(inner: Option<Cow<'a, str>>) -> Self {
         Self { inner }
     }

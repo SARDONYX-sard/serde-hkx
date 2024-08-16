@@ -35,6 +35,7 @@ pub struct Signature(u32);
 
 impl Signature {
     /// Creates a new `Signature`
+    #[inline]
     pub const fn new(sig: u32) -> Self {
         Self(sig)
     }

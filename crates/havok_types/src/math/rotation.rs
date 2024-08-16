@@ -39,6 +39,7 @@ static_assertions::assert_eq_size!(Rotation, [u8; 48]);
 
 impl Rotation {
     /// Creates a new `Rotation`
+    #[inline]
     pub const fn new(x: Vector4, y: Vector4, z: Vector4) -> Self {
         Self { x, y, z }
     }
