@@ -895,7 +895,7 @@ mod tests {
     #[test]
     #[cfg_attr(
         feature = "tracing",
-        quick_tracing::init(test = "deserialize_classes_from_bytes", stdio = false)
+        quick_tracing::init(test = "deserialize_hkx_bytes", stdio = false)
     )]
     fn test_deserialize_class_index() {
         use havok_classes::Classes;
