@@ -2,22 +2,22 @@
 mod sub_ser;
 mod trait_impls;
 
-use crate::lib::*;
+use crate::{lib::*, tri};
 
 use self::sub_ser::structs::StructSerializer;
 use self::trait_impls::{Align as _, ClassNamesWriter, ClassStartsMap};
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
-    OverflowSubtractAbsSnafu, Result, UnsupportedPtrSizeSnafu,
+    Result, UnsupportedPtrSizeSnafu,
 };
-use byteorder::{BigEndian, LittleEndian, WriteBytesExt as _};
+use byteorder::{BigEndian, ByteOrder, LittleEndian, WriteBytesExt as _};
 use havok_serde::ser::{Serialize, Serializer};
 use havok_types::*;
 use indexmap::IndexMap;
-use snafu::ensure;
 use std::borrow::Cow;
 use std::collections::HashMap;
+use std::ffi::CString as StdCString;
 use std::io::{Cursor, Write as _};
 
 /// To hkx binary file data.
@@ -106,32 +106,21 @@ where
 
     serializer.output.set_position(classnames_header_start);
     let section_offset = header.section_offset;
+
     if serializer.is_little_endian {
-        // `__classnames__` header`
-        SectionHeader::write_classnames::<LittleEndian>(
-            &mut serializer.output,
+        tri!(serializer.write_section_headers::<LittleEndian>(
             section_offset,
-            abs_data_start,
-        )?;
-        // `__types__` header`
-        serializer.output.set_position(types_header_start);
-        SectionHeader::write_types::<LittleEndian>(&mut serializer.output, abs_data_start)?;
-        // `__data__` header`
-        serializer.output.set_position(data_header_start);
-        data_section_header.write_bytes::<LittleEndian>(&mut serializer.output)?;
+            types_header_start,
+            data_header_start,
+            &data_section_header,
+        ));
     } else {
-        // `__classnames__` header`
-        SectionHeader::write_classnames::<BigEndian>(
-            &mut serializer.output,
+        tri!(serializer.write_section_headers::<BigEndian>(
             section_offset,
-            abs_data_start,
-        )?;
-        // `__types__` header`
-        serializer.output.set_position(types_header_start);
-        SectionHeader::write_types::<BigEndian>(&mut serializer.output, abs_data_start)?;
-        // `__data__` header`
-        serializer.output.set_position(data_header_start);
-        data_section_header.write_bytes::<BigEndian>(&mut serializer.output)?;
+            types_header_start,
+            data_header_start,
+            &data_section_header,
+        ));
     };
 
     Ok(serializer.output.into_inner())
@@ -224,7 +213,7 @@ pub struct ByteSerializer {
     /// 1. Write the meta(0 of Ptr size) of `StringPtr`.
     /// 2. Write the string of StringPtr.
     /// 3. Align(16-byte)
-    str_array_buf: Option<Vec<std::ffi::CString>>,
+    str_array_buf: Option<Vec<StdCString>>,
 }
 
 impl ByteSerializer {
@@ -233,15 +222,12 @@ impl ByteSerializer {
     fn relative_position(&self) -> Result<u32> {
         let position = self.output.position() as u32;
         let abs_data_offset = self.abs_data_offset;
-        ensure!(
-            position >= abs_data_offset,
-            OverflowSubtractAbsSnafu {
+        position
+            .checked_sub(abs_data_offset)
+            .ok_or(Error::OverflowSubtractAbs {
                 position,
-                abs_data_offset
-            }
-        );
-
-        Ok(position - self.abs_data_offset)
+                abs_data_offset,
+            })
     }
 
     /// Write `global_fixups` of data section bytes to writer.
@@ -340,11 +326,38 @@ impl ByteSerializer {
         Ok((local_offset, global_offset, virtual_offset))
     }
 
+    /// Write all section headers.
+    #[inline]
+    fn write_section_headers<B>(
+        &mut self,
+        section_offset: i16,
+        types_header_start: u64,
+        data_header_start: u64,
+        data_section_header: &SectionHeader,
+    ) -> Result<()>
+    where
+        B: ByteOrder,
+    {
+        // `__classnames__` header`
+        SectionHeader::write_classnames::<B>(
+            &mut self.output,
+            section_offset,
+            self.abs_data_offset,
+        )?;
+        // `__types__` header`
+        self.output.set_position(types_header_start);
+        SectionHeader::write_types::<B>(&mut self.output, self.abs_data_offset)?;
+        // `__data__` header`
+        self.output.set_position(data_header_start);
+        data_section_header.write_bytes::<B>(&mut self.output)?;
+        Ok(())
+    }
+
     /// Write the internal data pointed to by the pointer of `CString` or `StringPtr`.
     fn serialize_cow(&mut self, v: &Option<Cow<'_, str>>) -> Result<()> {
         // Skip if `Option::None`(null pointer).
         if let Some(v) = v {
-            let c_string = std::ffi::CString::new(v.as_bytes())?;
+            let c_string = StdCString::new(v.as_bytes())?;
             match self.str_array_buf {
                 Some(ref mut array_buf) => array_buf.push(c_string),
                 None => {
