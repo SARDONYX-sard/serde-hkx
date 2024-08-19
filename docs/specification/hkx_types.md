@@ -812,6 +812,8 @@ class hkFlags {
 ### `Half`(`hkHalf`)
 
 - Represents a 16-bit floating-point number
+- It does not follow IEE and the upper 16 bits are extracted from the float and stored.
+- [Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=e9285a3ba173bc837b5e0f171bce59e8)
 
 ```cpp
 /**
