@@ -41,7 +41,9 @@ pub(crate) async fn run(args: Args) -> Result<()> {
                     dump::to_string(args.input, args.output).await
                 }
             }
-            SubCommands::Diff(args) => diff::exec(args.old, args.new, args.output).await,
+            SubCommands::Diff(args) => {
+                diff::exec(args.old, args.new, args.output, args.color).await
+            }
             SubCommands::Completions { shell } => {
                 shell.generate(&mut Args::command(), &mut std::io::stdout());
                 Ok(())

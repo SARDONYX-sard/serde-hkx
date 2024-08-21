@@ -26,13 +26,17 @@ pub(crate) struct Args {
     /// New path
     pub new: PathBuf,
 
+    /// Output with ANSI color (For standard output)
+    #[clap(long)]
+    pub color: bool,
+
     /// If specified, write to a file (If not specified, stdout)
     #[clap(short, long)]
     pub output: Option<PathBuf>,
 }
 
 /// Show diff between two files.
-pub async fn exec<I1, I2, O>(old: I1, new: I2, output: Option<O>) -> Result<()>
+pub async fn exec<I1, I2, O>(old: I1, new: I2, output: Option<O>, use_color: bool) -> Result<()>
 where
     I1: AsRef<Path>,
     I2: AsRef<Path>,
@@ -41,7 +45,7 @@ where
     let old_str = read_any_to_string(old).await?;
     let new_str = read_any_to_string(new).await?;
 
-    let diff_str = diff(old_str, new_str);
+    let diff_str = diff(old_str, new_str, use_color);
     match output {
         Some(output) => fs::write(output, &diff_str).await?,
         None => print!("{diff_str}"),
@@ -72,16 +76,31 @@ where
     }
 }
 
-fn diff(old: impl AsRef<str>, new: impl AsRef<str>) -> String {
-    let diff = similar::TextDiff::from_lines(old.as_ref(), new.as_ref());
+fn diff(old: impl AsRef<str>, new: impl AsRef<str>, color: bool) -> String {
     let mut output_diff = String::new();
+
+    let diff = similar::TextDiff::from_lines(old.as_ref(), new.as_ref());
     for change in diff.iter_all_changes() {
-        let sign = match change.tag() {
-            similar::ChangeTag::Delete => "-",
-            similar::ChangeTag::Insert => "+",
-            similar::ChangeTag::Equal => " ",
+        let (sign, end) = if color {
+            const DELETE: &str = "\u{1b}[31m-"; // 31 is red
+            const INSERT: &str = "\u{1b}[32m+"; // 32 is green
+            const RESET_COLOR: &str = "\u{1b}[39m";
+
+            let sign = match change.tag() {
+                similar::ChangeTag::Delete => DELETE,
+                similar::ChangeTag::Insert => INSERT,
+                similar::ChangeTag::Equal => " ",
+            };
+            (sign, RESET_COLOR)
+        } else {
+            let sign = match change.tag() {
+                similar::ChangeTag::Delete => "-",
+                similar::ChangeTag::Insert => "+",
+                similar::ChangeTag::Equal => " ",
+            };
+            (sign, "")
         };
-        output_diff += &format!("{sign}{change}");
+        output_diff += &color_print::cformat!("{sign}{change}{end}");
     }
     output_diff
 }
