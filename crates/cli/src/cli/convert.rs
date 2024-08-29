@@ -9,6 +9,7 @@ use serde_hkx::{
 };
 use snafu::ResultExt as _;
 use std::{
+    borrow::Cow,
     io::{self, Read},
     path::{Path, PathBuf},
 };
@@ -205,11 +206,12 @@ where
             })?;
 
             let output = output
-                .map(|output| output.as_ref().to_path_buf())
+                .as_ref()
+                .map(|output| Cow::Borrowed(output.as_ref()))
                 .unwrap_or({
                     let mut output = input.to_path_buf();
                     output.set_extension("xml");
-                    output
+                    Cow::Owned(output)
                 });
 
             if let Some(parent) = output.parent() {
@@ -230,11 +232,12 @@ where
             })?;
 
             let output = output
-                .map(|output| output.as_ref().to_path_buf())
+                .as_ref()
+                .map(|output| Cow::Borrowed(output.as_ref()))
                 .unwrap_or({
                     let mut output = input.to_path_buf();
                     output.set_extension("hkx");
-                    output
+                    Cow::Owned(output)
                 });
 
             if let Some(parent) = output.parent() {
