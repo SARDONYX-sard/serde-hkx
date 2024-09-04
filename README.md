@@ -8,7 +8,7 @@ The following functions can be attempted using the CLI.
 
 - 32bit to 64bit (reverse) conversion of hkx.
 - XML to 32bit/64bit hkx (reverse) conversion.
-- Display of hkx/XML state machine fiber tree.
+- Display of hkx/XML state machine dependency tree.
 - Output logs that make it possible to determine the binary data location of hkx.
 - hexdump the binary data of hkx.
 - Display data differences between two hkx/XML.
