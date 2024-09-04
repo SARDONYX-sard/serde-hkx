@@ -1,6 +1,18 @@
 # Havok behavior Serialize/Deserialize library
 
-## Usage
+## Usage(For user)
+
+[CLI release page](https://github.com/SARDONYX-sard/serde-hkx/releases)
+The following functions can be attempted using the CLI.
+
+- 32bit to 64bit (reverse) conversion of hkx.
+- XML to 32bit/64bit hkx (reverse) conversion.
+- Display of hkx/XML state machine fiber tree.
+- Output logs that make it possible to determine the binary data location of hkx.
+- hexdump the binary data of hkx.
+- Display data differences between two hkx/XML.
+
+## Usage(As library)
 
 - Cargo.toml
 
@@ -16,11 +28,9 @@ Examples
 - [Tests](./serde_hkx/src/tests/verify.rs)
 - [Convert(in cli)](./crates/cli/src/cli/convert.rs)
 
-## Manufacturing process
+## Try implementations
 
 The only way to find out if it is possible or not is to try it out.
-
-### Try implementations
 
 - [x] Try to implement Serializer to design.
   - [x] XML
@@ -32,19 +42,12 @@ The only way to find out if it is possible or not is to try it out.
 
 - [x] Generate Classes
 
-- [ ] Modify the code based on the test data. <- Working in progress
+- [x] Testing the API & CI.
+- [ ] Modify the code based on the test data. <- (Finally, only global_fixup order issues...)
 
-### Implementations
-
-- [ ] Analyze and document binary and XML read/write specifications for hkx files. (To avoid design omissions in the API.)
-- [ ] Design the API. (To design an ideal API to prevent turnaround)
-- [ ] Implement the API.
-- [ ] Testing the API & CI.
-
-## This repository has completely removed GPL-dependent code and its history
-
-Previous GPL-tainted versions can be found at the following links.
-
-- [0.0.0-prev-gpl-history](https://github.com/SARDONYX-sard/serde-hkx/releases/tag/0.0.0-prev-gpl-history)
+## About the GPL old version
 
 GPL-dependent code (`rhexdump` crate) has been removed, and the GPL usage history has been completely removed.
+Previous GPL-tainted versions can be found at the following links.
+
+- [Prev GPL History(ver. 0.0.0)](https://github.com/SARDONYX-sard/serde-hkx/releases/tag/0.0.0-prev-gpl-history)
