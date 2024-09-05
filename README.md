@@ -13,7 +13,7 @@ The following functions can be attempted using the CLI.
 - hexdump the binary data of hkx.
 - Display data differences between two hkx/XML.
 
-## Usage(As library)
+## Usage(As a library)
 
 - Cargo.toml
 
