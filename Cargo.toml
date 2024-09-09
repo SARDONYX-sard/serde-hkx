@@ -52,3 +52,8 @@ havok_types_derive = { path = "./crates/havok_types_derive" }
 # dev-dependencies
 pretty_assertions = "1.4"                                    # Color diff assertion
 quick_tracing = { version = "0.1.5", features = ["derive"] }
+
+[profile.release]
+lto = "thin"
+strip = "debuginfo"
+
