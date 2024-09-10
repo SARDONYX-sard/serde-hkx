@@ -48,7 +48,7 @@ impl f16 {
         self.to_bits().to_le_bytes()
     }
 
-    /// Return the memory representation of this integer as a byte array in little-endian byte order.
+    /// Return the memory representation of this integer as a byte array in big-endian byte order.
     #[inline]
     pub const fn to_be_bytes(self) -> [u8; 2] {
         self.to_bits().to_be_bytes()
