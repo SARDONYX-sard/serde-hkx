@@ -174,7 +174,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
     ) -> Result<(), Self::Error> {
         #[cfg(feature = "tracing")]
         tracing::trace!(
-            "Serialize `CString` field({:#x}): {key}({value})",
+            "Serialize `CString` field({:#x}): {key}(\"{value}\")",
             self.ser.output.position()
         );
 
@@ -182,11 +182,11 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
             let str_start = self.ser.relative_position()?;
             if self.ser.str_array_buf.is_some() {
                 #[cfg(feature = "tracing")]
-                tracing::trace!("Add local_fixup_iter_src: {str_start}({value})");
+                tracing::trace!("Add local_fixup_iter_src: {str_start}");
                 self.ser.local_fixups_iter_src.push(str_start)
             } else {
                 #[cfg(feature = "tracing")]
-                tracing::trace!("Add local_fixup_name_src: {str_start}({value})");
+                tracing::trace!("Add local_fixup_name_src: {str_start}");
                 self.local_fixups_name_src.insert(key, str_start);
             };
         } else {
@@ -232,11 +232,11 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
             let str_start = self.ser.relative_position()?;
             if self.ser.str_array_buf.is_some() {
                 #[cfg(feature = "tracing")]
-                tracing::trace!("Add local_fixup_iter_src: {str_start}({value})");
+                tracing::trace!("Add local_fixup_iter_src: {str_start}");
                 self.ser.local_fixups_iter_src.push(str_start)
             } else {
                 #[cfg(feature = "tracing")]
-                tracing::trace!("Add local_fixup_name_src: {str_start}({value})");
+                tracing::trace!("Add local_fixup_name_src: {str_start}");
                 self.local_fixups_name_src.insert(key, str_start);
             };
         } else {
