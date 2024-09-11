@@ -1,13 +1,7 @@
 use super::super::ByteSerializer;
-use crate::{
-    errors::ser::{Error, Result},
-    tri,
-};
-use havok_serde::{
-    ser::{SerializeSeq, Serializer as _},
-    Serialize,
-};
-use havok_types::{CString, StringPtr, Ulong};
+use crate::errors::ser::{Error, Result};
+use havok_serde::{ser::SerializeSeq, Serialize};
+use havok_types::{CString, StringPtr};
 
 impl<'a> SerializeSeq for &'a mut ByteSerializer {
     type Ok = ();
@@ -47,39 +41,14 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
 
     #[inline]
     fn serialize_cstring_element(&mut self, value: &CString) -> Result<()> {
-        if value.should_write_binary() {
-            let iter_src = tri!(self.relative_position());
-            #[cfg(feature = "tracing")]
-            tracing::debug!("local_fixup_iter_src = {iter_src}");
-            self.local_fixups_iter_src.push(iter_src);
-
-            tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
-            value.serialize(&mut **self) // Serialize pointed data.
-        } else {
-            tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
-            Ok(())
-        }
+        value.serialize(&mut **self)
     }
 
     #[inline]
     fn serialize_stringptr_element(&mut self, value: &StringPtr) -> Result<()> {
-        if value.should_write_binary() {
-            let iter_src = tri!(self.relative_position());
-            #[cfg(feature = "tracing")]
-            tracing::debug!("local_fixup_iter_src = {iter_src}");
-            self.local_fixups_iter_src.push(iter_src);
-
-            tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
-            value.serialize(&mut **self) // Serialize pointed data.
-        } else {
-            tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
-            Ok(())
-        }
+        value.serialize(&mut **self)
     }
 
-    // NOTE: If we write with `Seq` `end`, we will not be able to use `SerializeStruct` to write
-    //       the pointer destination at the end of writing the field if there
-    //       is an `Array<String>` in the `Array<Class>`.
     #[inline]
     fn end(self) -> Result<()> {
         Ok(())

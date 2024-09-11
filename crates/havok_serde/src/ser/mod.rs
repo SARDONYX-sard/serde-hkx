@@ -198,10 +198,13 @@ pub trait Serializer {
     fn serialize_array(self, len: Option<usize>) -> Result<Self::SerializeSeq, Self::Error>;
 
     /// Serialize an `Struct` value.
+    ///
+    /// sizes: C++ class size (x86, x86_64)
     fn serialize_struct(
         self,
         name: &'static str,
         class_meta: Option<(Pointer, Signature)>,
+        sizes: (u64, u64),
     ) -> Result<Self::SerializeStruct, Self::Error>;
 
     /// Serialize an `Variant` value.
@@ -275,6 +278,23 @@ pub trait SerializeSeq {
     fn end(self) -> Result<Self::Ok, Self::Error>;
 }
 
+/// Used for writing binary data in Array. (To write after the pointer type data)
+/// - `array_size` = `size of the pointer type` * `array len`
+pub enum TypeSize {
+    /// C++ Class size
+    Struct {
+        /// x86 class size
+        size_x86: u64,
+        /// x86_64 class size
+        size_x86_64: u64,
+    },
+    /// ptr size
+    String,
+    /// No size calculation is required for NonPtr.
+    /// This is an option for types other than `StringPtr`, `CString`, and `Struct`.
+    NonPtr,
+}
+
 /// Returned from `Serializer::serialize_struct`.
 ///
 /// The [example data format] presented on the website demonstrates an
@@ -326,92 +346,6 @@ pub trait SerializeStruct {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // CString
-
-    /// Serialize a struct field for `CString`.
-    /// -   XML: Same as `serialize_field`.
-    /// - Bytes: Alloc ptr size -> Write String after write all struct fields.
-    ///
-    /// # Reason for method separation
-    /// In Bytes(hkx), this method is separated because the write position of an `Array` and a single `StringPtr` are different.
-    fn serialize_cstring_meta_field(
-        &mut self,
-        key: &'static str,
-        value: &CString,
-    ) -> Result<(), Self::Error>;
-
-    /// Process for fields with `SERIALIZE_IGNORED` flag.
-    /// -   XML: Replaced by a comment and the actual data is not displayed.
-    /// - Bytes: Serialize ptr size of string ptr.
-    ///
-    /// The default implementation same as `skip_field`
-    #[inline]
-    fn skip_cstring_meta_field(
-        &mut self,
-        key: &'static str,
-        value: &CString,
-    ) -> Result<(), Self::Error> {
-        self.skip_field(key, value)
-    }
-
-    /// - XML: Do nothing (because writing has already finished at the meta stage)
-    /// - Bytes: Writes the data to which the pointer points if not null
-    ///
-    /// The default implementation does nothing.
-    #[inline]
-    fn serialize_cstring_field(
-        &mut self,
-        key: &'static str,
-        value: &CString,
-    ) -> Result<(), Self::Error> {
-        let _ = (key, value);
-        Ok(())
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // StringPtr
-
-    /// Serialize a struct field for `StringPtr`.
-    /// -   XML: Same as `serialize_field`.
-    /// - Bytes: Alloc ptr size -> Write String after write all struct fields.
-    ///
-    /// # Reason for method separation
-    /// In Bytes(hkx), this method is separated because the write position of an `Array` and a single `StringPtr` are different.
-    fn serialize_stringptr_meta_field(
-        &mut self,
-        key: &'static str,
-        value: &StringPtr,
-    ) -> Result<(), Self::Error>;
-
-    /// Process for fields with `SERIALIZE_IGNORED` flag.
-    /// -   XML: Replaced by a comment and the actual data is not displayed.
-    /// - Bytes: Serialize ptr size of string ptr.
-    ///
-    /// The default implementation same as `skip_field`
-    #[inline]
-    fn skip_stringptr_meta_field(
-        &mut self,
-        key: &'static str,
-        value: &StringPtr,
-    ) -> Result<(), Self::Error> {
-        self.skip_field(key, value)
-    }
-
-    /// - XML: Do nothing (because writing has already finished at the meta stage)
-    /// - Bytes: Writes the data to which the pointer points if not null
-    ///
-    /// The default implementation does nothing.
-    #[inline]
-    fn serialize_stringptr_field(
-        &mut self,
-        key: &'static str,
-        value: &StringPtr,
-    ) -> Result<(), Self::Error> {
-        let _ = (key, value);
-        Ok(())
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Fixed Array
 
     /// Serialize a struct field for fixed array.
@@ -421,24 +355,27 @@ pub trait SerializeStruct {
         &mut self,
         key: &'static str,
         value: V,
+        size: TypeSize,
     ) -> Result<(), Self::Error>
     where
         V: AsRef<[T]> + Serialize,
         T: Serialize;
 
-    /// Serialize a struct field for fixed array.
-    /// -   XML: add `numelements` attribute to `hkparam` and write array contents.(same as `hkArray`)
-    /// - Bytes: write each bytes.
+    /// Process for fields with `SERIALIZE_IGNORED` flag.
+    ///
+    /// The default implementation same as `skip_field`
     #[inline]
     fn skip_fixed_array_field<V, T>(
         &mut self,
         key: &'static str,
         value: V,
+        size: TypeSize,
     ) -> Result<(), Self::Error>
     where
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
+        let _ = size;
         self.skip_field(key, &value)
     }
 
@@ -447,50 +384,38 @@ pub trait SerializeStruct {
 
     /// Serialize a struct field for array.
     /// -   XML: add `numelements` attribute to `hkparam` and write vec contents.
-    /// - Bytes: Alloc meta(ptr size + size + capAndFlags) bytes. (x86: 12, x64: 16)
-    fn serialize_array_meta_field<V, T>(
-        &mut self,
-        key: &'static str,
-        value: V,
-    ) -> Result<(), Self::Error>
-    where
-        V: AsRef<[T]> + Serialize,
-        T: Serialize;
-
-    /// Process for fields with `SERIALIZE_IGNORED` flag.
-    /// -   XML: Replaced by a comment and the actual data is not displayed.
-    /// - Bytes: Serialize Array meta(ptr size, size and capAndFlags).
-    ///
-    /// The default implementation same as `skip_field`
-    #[inline]
-    fn skip_array_meta_field<V, T>(
-        &mut self,
-        key: &'static str,
-        value: V,
-    ) -> Result<(), Self::Error>
-    where
-        V: AsRef<[T]> + Serialize,
-        T: Serialize,
-    {
-        self.skip_field(key, &value)
-    }
-
-    /// - XML: Do nothing (because writing has already finished at the meta stage)
-    /// - Bytes: Writes the data to which the pointer points.
-    ///
-    /// The default implementation does nothing.
+    /// - Bytes: Alloc meta(ptr size + size + capAndFlags) bytes. (x86: 12, x64: 16) & Serialize pointed data.
     #[inline]
     fn serialize_array_field<V, T>(
         &mut self,
         key: &'static str,
         value: V,
+        size: TypeSize,
     ) -> Result<(), Self::Error>
     where
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
-        let _ = (key, value);
+        let _ = (key, value, size);
         Ok(())
+    }
+
+    /// Process for fields with `SERIALIZE_IGNORED` flag.
+    ///
+    /// The default implementation same as `skip_field`
+    #[inline]
+    fn skip_array_field<V, T>(
+        &mut self,
+        key: &'static str,
+        value: V,
+        size: TypeSize,
+    ) -> Result<(), Self::Error>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        let _ = size;
+        self.skip_field(key, &value)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

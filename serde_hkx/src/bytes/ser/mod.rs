@@ -2,10 +2,10 @@
 mod sub_ser;
 mod trait_impls;
 
-use crate::{lib::*, tri};
+use crate::{align, lib::*, tri};
 
 use self::sub_ser::structs::StructSerializer;
-use self::trait_impls::{Align as _, ClassNamesWriter, ClassStartsMap};
+use self::trait_impls::{Align as _, ClassNamesWriter, ClassStartsMap, LocalFixupsWriter as _};
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
@@ -81,6 +81,7 @@ where
 
     // - `__data__` section
     serializer.abs_data_offset = header.padding_size() + serializer.output.position() as u32;
+    serializer.current_last_pos = serializer.abs_data_offset as u64;
     value.serialize(&mut serializer)?;
 
     // 4/5: Write fixups_offsets of `__data__` section header.
@@ -145,10 +146,8 @@ pub struct ByteSerializer {
     abs_data_offset: u32,
 
     // ---- local fixup information
-    /// Temporary standby location in local_fixup.src for iterators such as `Array<CString>`, `Array<StringPtr>`.
-    ///
-    /// A separate temporary save location is reserved in consideration of the possibility that it may be covered by the name of `field`.
-    local_fixups_iter_src: Vec<u32>,
+    /// The position to which the pointer returns after writing the end of the pointer.
+    nested_pos: Vec<u64>,
     /// Coordination information to associate a pointer of a pointer type of a field in a class with the data location to which it points.
     ///
     /// # Note
@@ -196,24 +195,9 @@ pub struct ByteSerializer {
     /// It is usually `0` and refers to the index of `__classnames__`.
     contents_class_name_section_index: i32,
 
-    /// Used only when writing `Array<StringPtr>` or `Array<CString>`.
-    ///
-    /// # Details
-    /// During serialization of [`SerializeSeq`], that is, during processing of an array, this will be [`Some`].
-    /// Most write problems are eliminated thanks to the separation of ptr-type meta byte writes and pointer-pointed data writes.
-    ///
-    /// The exception is `Array<StringPtr>`.
-    /// This is a pointer type with a pointer type inside.
-    ///
-    /// each `StringPtr` of `Array<StringPtr>` writing steps:
-    ///
-    /// First, Align(16-byte) once.
-    ///
-    /// Next Foreach `StringPtr`:
-    /// 1. Write the meta(0 of Ptr size) of `StringPtr`.
-    /// 2. Write the string of StringPtr.
-    /// 3. Align(16-byte)
-    str_array_buf: Option<Vec<StdCString>>,
+    // ----------------------------------------------------------------
+    /// each Root class ptr pointed data position.
+    current_last_pos: u64,
 }
 
 impl ByteSerializer {
@@ -353,20 +337,63 @@ impl ByteSerializer {
         Ok(())
     }
 
+    /// The data position pointed to by ptr.
+    /// And return destination position.
+    #[inline]
+    fn goto_local_dst(&mut self) -> Result<u32> {
+        let dest_abs_pos = tri!(match self.nested_pos.last() {
+            Some(&pos) => Ok(pos),
+            None => Err(Error::Message {
+                msg: "Missing nested position".to_string(),
+            }),
+        });
+        self.output.set_position(dest_abs_pos);
+        self.relative_position()
+    }
+
+    /// Write a pair of local_fixups.
+    #[inline]
+    fn write_local_fixup_pair(&mut self, local_src: u32, local_dst: u32) -> Result<()> {
+        #[cfg(feature = "tracing")]
+        {
+            let src_abs = self.abs_data_offset + local_src;
+            let dst_abs = self.abs_data_offset + local_dst;
+            tracing::debug!(
+                "[local_fixup] src({local_src}/abs: {src_abs:#x}), dst({local_dst}/abs: {dst_abs:#x})"
+            );
+        }
+        self.local_fixups
+            .write_local_fixups(local_src, local_dst, self.is_little_endian)?;
+        Ok(())
+    }
+
     /// Write the internal data pointed to by the pointer of `CString` or `StringPtr`.
     fn serialize_cow(&mut self, v: &Option<Cow<'_, str>>) -> Result<()> {
+        #[cfg(feature = "tracing")]
+        tracing::trace!("nested_pos:({:#x?})", self.nested_pos);
+
         // Skip if `Option::None`(null pointer).
         if let Some(v) = v {
+            let ptr_start = self.relative_position()?;
+            tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
+            let current_ser_pos = self.output.position();
+            #[cfg(feature = "tracing")]
+            tracing::trace!("Serialize `CString`/`StringPtr` ({current_ser_pos:#x}): (\"{v}\")",);
+
+            // local dst
+            let pointed_pos = tri!(self.goto_local_dst());
+            tri!(self.write_local_fixup_pair(ptr_start, pointed_pos));
             let c_string = StdCString::new(v.as_bytes())?;
-            match self.str_array_buf {
-                Some(ref mut array_buf) => array_buf.push(c_string),
-                None => {
-                    // If it is not a StringPtr inside an Array, it must be written here because the pointers are
-                    // not nested and there is no additional overhead.
-                    let _ = self.output.write(c_string.as_bytes_with_nul())?;
-                    self.output.zero_fill_align(16)?;
-                }
+            let _ = self.output.write(c_string.as_bytes_with_nul())?;
+            self.output.zero_fill_align(16)?;
+
+            if let Some(last) = self.nested_pos.last_mut() {
+                *last = self.output.position();
             };
+            self.current_last_pos = self.output.position();
+            self.output.set_position(current_ser_pos); // back to previous position.
+        } else {
+            tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
         };
         Ok(())
     }
@@ -489,9 +516,12 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         self,
         name: &'static str,
         class_meta: Option<(Pointer, Signature)>,
+        sizes: (u64, u64),
     ) -> Result<Self::SerializeStruct, Self::Error> {
+        let size = if self.is_x86 { sizes.0 } else { sizes.1 };
+
         #[allow(clippy::needless_else)]
-        if let Some((ptr, _sig)) = class_meta {
+        let is_root = if let Some((ptr, _sig)) = class_meta {
             self.output.zero_fill_align(16)?; // Make sure `virtual_fixup.src`(each Class) is `align16`.
 
             #[cfg(feature = "tracing")]
@@ -503,11 +533,21 @@ impl<'a> Serializer for &'a mut ByteSerializer {
             let virtual_src = self.relative_position()?;
             self.write_virtual_fixups_pair(name, virtual_src)?; // Ok, `virtual_fixup` is known.
             self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // Backup to write `global_fixups`
+
+            // The data pointed to by the pointer (`T* m_data`) must first be aligned 16 bytes before it is written.
+            self.current_last_pos = self.current_last_pos + align!(size, 16u64);
+            self.nested_pos.push(self.current_last_pos);
+            true
         } else {
+            self.nested_pos.push(self.output.position() + size);
             #[cfg(feature = "tracing")]
-            tracing::debug!("serialize struct {name}(A class within a field.)")
-        }
-        Ok(Self::SerializeStruct::new(self))
+            tracing::debug!("serialize struct {name}(A class within a field.)");
+            false
+        };
+
+        #[cfg(feature = "tracing")]
+        tracing::trace!("nested_pos:({:#x?})", self.nested_pos);
+        Ok(Self::SerializeStruct::new(self, is_root))
     }
 
     #[inline]

@@ -39,7 +39,7 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> String {
             /// Reduce the burden of individual imports by importing a set of types needed to create a havok class structure here.
             mod class_requires {
                 pub use havok_serde::{
-                    ser::{Error as _, SerializeFlags, SerializeStruct, Serializer},
+                    ser::{Error as _, SerializeFlags, SerializeStruct, Serializer, TypeSize},
                     de::{self, Error as _, Deserializer},
                     HavokClass,
                 };

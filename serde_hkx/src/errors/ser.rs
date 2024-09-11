@@ -37,14 +37,6 @@ pub enum Error {
     #[snafu(display("Relative position cannot be obtained because abs is larger than {position}. This indicates that the value of `absolute_data_offset`({abs_data_offset}) in the header is wrong."))]
     OverflowSubtractAbs { position: u32, abs_data_offset: u32 },
 
-    #[snafu(display("Missing src fixup for dst: {dst}"))]
-    MissingLocalFixup {
-        dst: u32,
-        /// error location
-        #[snafu(implicit)]
-        location: snafu::Location,
-    },
-
     #[snafu(display("Missing global fixup class: {ptr}"))]
     MissingGlobalFixupClass {
         /// missing global fixup class ptr(e.g. #0050)

@@ -12,8 +12,9 @@ use quote::quote;
 pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let name = class.name.as_ref();
     let hex_signature = str2lit(&class.signature.to_string());
+    let (size_x86, size_x64) = (class.size_x86 as u64, class.size_x86_64 as u64);
     let class_name = syn::Ident::new(name, proc_macro2::Span::call_site());
-    let (fields, pointed_writers) = impl_serialize_fields(class, class_map);
+    let fields = impl_serialize_fields(class, class_map);
     let deps_class_indexes = deps_class_indexes_token(&class.name, class_map);
     let lifetime = match class.has_string {
         true => quote! { <'a> },
@@ -48,9 +49,8 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
                     where S: _serde::ser::Serializer
                 {
                     let class_meta = self.__ptr.map(|name| (name, _serde::__private::Signature::new(#hex_signature)));
-                    let mut serializer = __serializer.serialize_struct(#name, class_meta)?;
+                    let mut serializer = __serializer.serialize_struct(#name, class_meta, (#size_x86, #size_x64))?;
                     #(#fields)*
-                    #(#pointed_writers)*
                     serializer.end()
                 }
         }
@@ -58,13 +58,8 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     }
 }
 
-fn impl_serialize_fields(
-    class: &Class,
-    class_map: &ClassMap,
-) -> (Vec<TokenStream>, Vec<TokenStream>) {
+fn impl_serialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream> {
     let mut serialize_calls = Vec::new();
-    // The ptr type must serialize the data pointed to by ptr after serializing all fields. This is an array for that purpose.
-    let mut ptr_after_write_fields = Vec::new();
     let mut x86_current_offset = 0;
     let mut x64_current_offset = 0;
 
@@ -73,23 +68,23 @@ fn impl_serialize_fields(
 
     for class in all_class {
         parent_depth -= 1;
-        let (meta_fields, ptr_fields) = impl_serialize_self_fields(
+        let meta_fields = impl_serialize_self_fields(
             &class.members,
             class.size_x86,
             class.size_x86_64,
             &mut x86_current_offset,
             &mut x64_current_offset,
             parent_depth,
+            class_map,
         );
         serialize_calls.extend(meta_fields);
-        ptr_after_write_fields.extend(ptr_fields);
     }
 
-    (serialize_calls, ptr_after_write_fields)
+    serialize_calls
 }
 
 /// # Returns
-/// (serialize_method_calls, serialize_ptr_pointed_data_method_calls)
+/// serialize_method_calls
 fn impl_serialize_self_fields(
     members: &[Member],
     x86_size: u32,
@@ -97,15 +92,16 @@ fn impl_serialize_self_fields(
     x86_current_offset: &mut u32,
     x64_current_offset: &mut u32,
     parent_depth: usize,
-) -> (Vec<TokenStream>, Vec<TokenStream>) {
+    class_map: &ClassMap,
+) -> Vec<TokenStream> {
     let mut serialize_calls = Vec::new();
-    // The ptr type must serialize the data pointed to by ptr after serializing all fields. This is an array for that purpose.
-    let mut ptr_after_write_fields = Vec::new();
 
     for member in members {
         let Member {
             name,
             vtype,
+            vsubtype,
+            class_ref,
             offset_x86,
             offset_x86_64,
             type_size_x86,
@@ -133,60 +129,100 @@ fn impl_serialize_self_fields(
         *x64_current_offset += type_size_x86_64;
 
         use TypeKind::*;
-        let (meta_method, pointed_method) = match vtype {
-            Array => {
-                let meta_method = match flags.has_skip_serializing() {
-                    true => quote! { skip_array_meta_field },
-                    false => quote! { serialize_array_meta_field },
-                };
-                (meta_method, Some(quote! { serialize_array_field }))
-            }
-            CString => {
-                let meta_method = match flags.has_skip_serializing() {
-                    true => quote! { skip_cstring_meta_field },
-                    false => quote! { serialize_cstring_meta_field },
-                };
-                (meta_method, Some(quote! { serialize_cstring_field }))
-            }
-            StringPtr => {
-                let meta_method = match flags.has_skip_serializing() {
-                    true => quote! { skip_stringptr_meta_field },
-                    false => quote! { serialize_stringptr_meta_field },
-                };
-                (meta_method, Some(quote! { serialize_stringptr_field }))
-            }
-            _ => match flags.has_skip_serializing() {
-                true => (quote! { skip_field }, None),
-                false => (quote! { serialize_field }, None),
-            },
-        };
-
         let cpp_field_key = &name;
         let rust_field_name = to_rust_field_ident(name);
         let parent_ident = n_time_parent_ident(parent_depth);
 
         match arrsize {
-            0 => serialize_calls
-                    .push(quote! { serializer.#meta_method(#cpp_field_key, &self #parent_ident.#rust_field_name)?; }),
-            1.. => {
-                if flags.has_skip_serializing() {
-                    serialize_calls
-                        .push(quote! { serializer.skip_fixed_array_field(#cpp_field_key, self #parent_ident.#rust_field_name.as_slice())?; })
-                } else {
-                    serialize_calls
-                        .push(quote! { serializer.serialize_fixed_array_field(#cpp_field_key, self #parent_ident.#rust_field_name.as_slice())?; });
+            0 => {
+                match vtype {
+                    Array => {
+                        let ser_method = match flags.has_skip_serializing() {
+                            true => quote! { skip_array_field },
+                            false => quote! { serialize_array_field },
+                        };
+
+                        match vsubtype {
+                            Struct => {
+                                let (x86_size, x64_size) = {
+                                    let class_name = class_ref.as_ref().unwrap().as_ref();
+                                    let class = class_map.get(class_name).unwrap();
+                                    (class.size_x86 as u64, class.size_x86_64 as u64)
+                                };
+                                serialize_calls.push(quote! {
+                                    serializer.#ser_method(
+                                        #cpp_field_key,
+                                        &self #parent_ident.#rust_field_name,
+                                        TypeSize::Struct {
+                                            size_x86: #x86_size,
+                                            size_x86_64: #x64_size,
+                                    })?;
+                                });
+                            }
+                            CString | StringPtr => {
+                                serialize_calls.push(quote! {
+                                    serializer.#ser_method(#cpp_field_key, &self #parent_ident.#rust_field_name, TypeSize::String)?;
+                                });
+                            }
+                            _ => {
+                                serialize_calls.push(quote! {
+                                    serializer.#ser_method(#cpp_field_key, &self #parent_ident.#rust_field_name, TypeSize::NonPtr)?;
+                                });
+                            }
+                        };
+                    }
+                    _ => {
+                        let ser_method = match flags.has_skip_serializing() {
+                            true => quote! { skip_field },
+                            false => quote! { serialize_field },
+                        };
+                        serialize_calls.push(quote! { serializer.#ser_method(#cpp_field_key, &self #parent_ident.#rust_field_name)?; });
+                    }
                 };
             }
-        };
+            1.. => {
+                let ser_method = match flags.has_skip_serializing() {
+                    true => quote! { skip_fixed_array_field },
+                    false => quote! { serialize_fixed_array_field },
+                };
 
-        // For `Array`, `CString` or `StringPtr`.(Not use `[StringPtr; 4]`)
-        if let Some(pointed_method) = pointed_method {
-            if *arrsize == 0 {
-                ptr_after_write_fields.push(
-                    quote! { serializer.#pointed_method(#cpp_field_key, &self #parent_ident.#rust_field_name)?; },
-                );
-            } else {
-                panic!("Does not support fixed arrays of pointer types.");
+                match vsubtype {
+                    Struct => {
+                        let (x86_size, x64_size) = {
+                            let class_name = class_ref.as_ref().unwrap().as_ref();
+                            let class = class_map.get(class_name).unwrap();
+                            (class.size_x86 as u64, class.size_x86_64 as u64)
+                        };
+                        serialize_calls.push(quote! {
+                            serializer.#ser_method(
+                                #cpp_field_key,
+                                self #parent_ident.#rust_field_name.as_slice(),
+                                TypeSize::Struct {
+                                    size_x86: #x86_size,
+                                    size_x86_64: #x64_size,
+                                }
+                            )?;
+                        });
+                    }
+                    CString | StringPtr => {
+                        serialize_calls.push(quote! {
+                            serializer.#ser_method(
+                                #cpp_field_key,
+                                self #parent_ident.#rust_field_name.as_slice(),
+                                TypeSize::String,
+                            )?;
+                        });
+                    }
+                    _ => {
+                        serialize_calls.push(quote! {
+                            serializer.#ser_method(
+                                #cpp_field_key,
+                                self #parent_ident.#rust_field_name.as_slice(),
+                                TypeSize::NonPtr,
+                            )?;
+                        });
+                    }
+                };
             }
         };
     }
@@ -219,7 +255,7 @@ fn impl_serialize_self_fields(
         *x64_current_offset = x64_size;
     };
 
-    (serialize_calls, ptr_after_write_fields)
+    serialize_calls
 }
 
 fn deps_class_indexes_token(class_name: &str, classes_map: &ClassMap) -> Vec<TokenStream> {

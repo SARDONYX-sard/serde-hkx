@@ -7,6 +7,7 @@ pub trait LocalFixupsWriter {
 }
 
 impl LocalFixupsWriter for Vec<u8> {
+    #[inline]
     fn write_local_fixups(&mut self, src: u32, dst: u32, is_little_endian: bool) -> io::Result<()> {
         match is_little_endian {
             true => {
