@@ -7,5 +7,4 @@
 **/target
 
 # Tests
-**/tests/input/
-**/tests/output/
+/tests/
