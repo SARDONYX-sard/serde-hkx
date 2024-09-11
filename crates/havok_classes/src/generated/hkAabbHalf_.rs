@@ -55,9 +55,19 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x1d716a17)));
             let mut serializer = __serializer
-                .serialize_struct("hkAabbHalf", class_meta)?;
-            serializer.serialize_fixed_array_field("data", self.m_data.as_slice())?;
-            serializer.serialize_fixed_array_field("extras", self.m_extras.as_slice())?;
+                .serialize_struct("hkAabbHalf", class_meta, (16u64, 16u64))?;
+            serializer
+                .serialize_fixed_array_field(
+                    "data",
+                    self.m_data.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_fixed_array_field(
+                    "extras",
+                    self.m_extras.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

@@ -132,7 +132,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x300d6808)));
             let mut serializer = __serializer
-                .serialize_struct("hkbCharacterData", class_meta)?;
+                .serialize_struct("hkbCharacterData", class_meta, (144u64, 176u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -147,12 +147,20 @@ const _: () = {
             serializer.serialize_field("modelForwardMS", &self.m_modelForwardMS)?;
             serializer.serialize_field("modelRightMS", &self.m_modelRightMS)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "characterPropertyInfos",
                     &self.m_characterPropertyInfos,
+                    TypeSize::Struct {
+                        size_x86: 6u64,
+                        size_x86_64: 6u64,
+                    },
                 )?;
             serializer
-                .serialize_array_meta_field("numBonesPerLod", &self.m_numBonesPerLod)?;
+                .serialize_array_field(
+                    "numBonesPerLod",
+                    &self.m_numBonesPerLod,
+                    TypeSize::NonPtr,
+                )?;
             serializer
                 .serialize_field(
                     "characterPropertyValues",
@@ -167,12 +175,6 @@ const _: () = {
             serializer.skip_field("numHands", &self.m_numHands)?;
             serializer.skip_field("numFloatSlots", &self.m_numFloatSlots)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 0usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "characterPropertyInfos",
-                    &self.m_characterPropertyInfos,
-                )?;
-            serializer.serialize_array_field("numBonesPerLod", &self.m_numBonesPerLod)?;
             serializer.end()
         }
     }

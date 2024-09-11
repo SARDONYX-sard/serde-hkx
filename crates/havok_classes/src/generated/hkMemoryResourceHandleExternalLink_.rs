@@ -55,11 +55,13 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x3144d17c)));
             let mut serializer = __serializer
-                .serialize_struct("hkMemoryResourceHandleExternalLink", class_meta)?;
-            serializer.serialize_stringptr_meta_field("memberName", &self.m_memberName)?;
-            serializer.serialize_stringptr_meta_field("externalId", &self.m_externalId)?;
-            serializer.serialize_stringptr_field("memberName", &self.m_memberName)?;
-            serializer.serialize_stringptr_field("externalId", &self.m_externalId)?;
+                .serialize_struct(
+                    "hkMemoryResourceHandleExternalLink",
+                    class_meta,
+                    (8u64, 16u64),
+                )?;
+            serializer.serialize_field("memberName", &self.m_memberName)?;
+            serializer.serialize_field("externalId", &self.m_externalId)?;
             serializer.end()
         }
     }

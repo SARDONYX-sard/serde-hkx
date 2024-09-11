@@ -80,7 +80,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf170356b)));
             let mut serializer = __serializer
-                .serialize_struct("hkpStiffSpringChainData", class_meta)?;
+                .serialize_struct(
+                    "hkpStiffSpringChainData",
+                    class_meta,
+                    (48u64, 80u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -95,12 +99,19 @@ const _: () = {
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
             serializer.serialize_field("atoms", &self.m_atoms)?;
-            serializer.serialize_array_meta_field("infos", &self.m_infos)?;
+            serializer
+                .serialize_array_field(
+                    "infos",
+                    &self.m_infos,
+                    TypeSize::Struct {
+                        size_x86: 48u64,
+                        size_x86_64: 48u64,
+                    },
+                )?;
             serializer.serialize_field("tau", &self.m_tau)?;
             serializer.serialize_field("damping", &self.m_damping)?;
             serializer.serialize_field("cfm", &self.m_cfm)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_field("infos", &self.m_infos)?;
             serializer.end()
         }
     }

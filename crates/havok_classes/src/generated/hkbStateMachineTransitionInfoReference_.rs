@@ -60,7 +60,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x9810c2d0)));
             let mut serializer = __serializer
-                .serialize_struct("hkbStateMachineTransitionInfoReference", class_meta)?;
+                .serialize_struct(
+                    "hkbStateMachineTransitionInfoReference",
+                    class_meta,
+                    (6u64, 6u64),
+                )?;
             serializer.serialize_field("fromStateIndex", &self.m_fromStateIndex)?;
             serializer.serialize_field("transitionIndex", &self.m_transitionIndex)?;
             serializer.serialize_field("stateMachineId", &self.m_stateMachineId)?;

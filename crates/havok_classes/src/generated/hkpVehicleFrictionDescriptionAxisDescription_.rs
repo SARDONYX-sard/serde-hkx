@@ -98,11 +98,13 @@ const _: () = {
                 .serialize_struct(
                     "hkpVehicleFrictionDescriptionAxisDescription",
                     class_meta,
+                    (100u64, 100u64),
                 )?;
             serializer
                 .serialize_fixed_array_field(
                     "frictionCircleYtab",
                     self.m_frictionCircleYtab.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("xStep", &self.m_xStep)?;
             serializer.serialize_field("xStart", &self.m_xStart)?;

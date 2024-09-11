@@ -120,44 +120,55 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x5f673ddd)));
-            let mut serializer = __serializer.serialize_struct("hkxScene", class_meta)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkxScene", class_meta, (176u64, 224u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_meta_field("modeller", &self.m_modeller)?;
-            serializer.serialize_stringptr_meta_field("asset", &self.m_asset)?;
+            serializer.serialize_field("modeller", &self.m_modeller)?;
+            serializer.serialize_field("asset", &self.m_asset)?;
             serializer.serialize_field("sceneLength", &self.m_sceneLength)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("rootNode", &self.m_rootNode)?;
             serializer
-                .serialize_array_meta_field("selectionSets", &self.m_selectionSets)?;
-            serializer.serialize_array_meta_field("cameras", &self.m_cameras)?;
-            serializer.serialize_array_meta_field("lights", &self.m_lights)?;
-            serializer.serialize_array_meta_field("meshes", &self.m_meshes)?;
-            serializer.serialize_array_meta_field("materials", &self.m_materials)?;
+                .serialize_array_field(
+                    "selectionSets",
+                    &self.m_selectionSets,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_meta_field("inplaceTextures", &self.m_inplaceTextures)?;
+                .serialize_array_field("cameras", &self.m_cameras, TypeSize::NonPtr)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field("lights", &self.m_lights, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field("meshes", &self.m_meshes, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field(
+                    "materials",
+                    &self.m_materials,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "inplaceTextures",
+                    &self.m_inplaceTextures,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
                     "externalTextures",
                     &self.m_externalTextures,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_array_meta_field("skinBindings", &self.m_skinBindings)?;
+            serializer
+                .serialize_array_field(
+                    "skinBindings",
+                    &self.m_skinBindings,
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("appliedTransform", &self.m_appliedTransform)?;
-            serializer.serialize_stringptr_field("modeller", &self.m_modeller)?;
-            serializer.serialize_stringptr_field("asset", &self.m_asset)?;
-            serializer.serialize_array_field("selectionSets", &self.m_selectionSets)?;
-            serializer.serialize_array_field("cameras", &self.m_cameras)?;
-            serializer.serialize_array_field("lights", &self.m_lights)?;
-            serializer.serialize_array_field("meshes", &self.m_meshes)?;
-            serializer.serialize_array_field("materials", &self.m_materials)?;
-            serializer
-                .serialize_array_field("inplaceTextures", &self.m_inplaceTextures)?;
-            serializer
-                .serialize_array_field("externalTextures", &self.m_externalTextures)?;
-            serializer.serialize_array_field("skinBindings", &self.m_skinBindings)?;
             serializer.end()
         }
     }

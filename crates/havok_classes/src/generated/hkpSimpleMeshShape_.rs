@@ -79,7 +79,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x16b3c811)));
             let mut serializer = __serializer
-                .serialize_struct("hkpSimpleMeshShape", class_meta)?;
+                .serialize_struct("hkpSimpleMeshShape", class_meta, (68u64, 104u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -99,17 +99,26 @@ const _: () = {
             serializer.serialize_field("disableWelding", &self.parent.m_disableWelding)?;
             serializer.serialize_field("collectionType", &self.parent.m_collectionType)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 6usize].as_slice())?;
-            serializer.serialize_array_meta_field("vertices", &self.m_vertices)?;
-            serializer.serialize_array_meta_field("triangles", &self.m_triangles)?;
             serializer
-                .serialize_array_meta_field("materialIndices", &self.m_materialIndices)?;
+                .serialize_array_field("vertices", &self.m_vertices, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field(
+                    "triangles",
+                    &self.m_triangles,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
+                    "materialIndices",
+                    &self.m_materialIndices,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("radius", &self.m_radius)?;
             serializer.serialize_field("weldingType", &self.m_weldingType)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
-            serializer.serialize_array_field("vertices", &self.m_vertices)?;
-            serializer.serialize_array_field("triangles", &self.m_triangles)?;
-            serializer
-                .serialize_array_field("materialIndices", &self.m_materialIndices)?;
             serializer.end()
         }
     }

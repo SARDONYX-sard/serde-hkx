@@ -61,7 +61,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xfa6facb2)));
             let mut serializer = __serializer
-                .serialize_struct("hkxMaterialTextureStage", class_meta)?;
+                .serialize_struct(
+                    "hkxMaterialTextureStage",
+                    class_meta,
+                    (12u64, 16u64),
+                )?;
             serializer.serialize_field("texture", &self.m_texture)?;
             serializer.serialize_field("usageHint", &self.m_usageHint)?;
             serializer.serialize_field("tcoordChannel", &self.m_tcoordChannel)?;

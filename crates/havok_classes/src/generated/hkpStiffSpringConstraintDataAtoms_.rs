@@ -57,7 +57,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x207eb376)));
             let mut serializer = __serializer
-                .serialize_struct("hkpStiffSpringConstraintDataAtoms", class_meta)?;
+                .serialize_struct(
+                    "hkpStiffSpringConstraintDataAtoms",
+                    class_meta,
+                    (64u64, 64u64),
+                )?;
             serializer.serialize_field("pivots", &self.m_pivots)?;
             serializer.serialize_field("spring", &self.m_spring)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;

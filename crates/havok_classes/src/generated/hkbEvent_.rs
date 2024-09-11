@@ -54,7 +54,8 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x3e0fd810)));
-            let mut serializer = __serializer.serialize_struct("hkbEvent", class_meta)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkbEvent", class_meta, (12u64, 24u64))?;
             serializer.serialize_field("id", &self.parent.m_id)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("payload", &self.parent.m_payload)?;

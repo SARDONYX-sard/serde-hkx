@@ -96,29 +96,54 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x366e8220)));
             let mut serializer = __serializer
-                .serialize_struct("hkaSkeleton", class_meta)?;
+                .serialize_struct("hkaSkeleton", class_meta, (84u64, 120u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer
-                .serialize_array_meta_field("parentIndices", &self.m_parentIndices)?;
-            serializer.serialize_array_meta_field("bones", &self.m_bones)?;
+                .serialize_array_field(
+                    "parentIndices",
+                    &self.m_parentIndices,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_meta_field("referencePose", &self.m_referencePose)?;
+                .serialize_array_field(
+                    "bones",
+                    &self.m_bones,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer
-                .serialize_array_meta_field("referenceFloats", &self.m_referenceFloats)?;
-            serializer.serialize_array_meta_field("floatSlots", &self.m_floatSlots)?;
-            serializer.serialize_array_meta_field("localFrames", &self.m_localFrames)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
-            serializer.serialize_array_field("parentIndices", &self.m_parentIndices)?;
-            serializer.serialize_array_field("bones", &self.m_bones)?;
-            serializer.serialize_array_field("referencePose", &self.m_referencePose)?;
+                .serialize_array_field(
+                    "referencePose",
+                    &self.m_referencePose,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_field("referenceFloats", &self.m_referenceFloats)?;
-            serializer.serialize_array_field("floatSlots", &self.m_floatSlots)?;
-            serializer.serialize_array_field("localFrames", &self.m_localFrames)?;
+                .serialize_array_field(
+                    "referenceFloats",
+                    &self.m_referenceFloats,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "floatSlots",
+                    &self.m_floatSlots,
+                    TypeSize::String,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "localFrames",
+                    &self.m_localFrames,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.end()
         }
     }

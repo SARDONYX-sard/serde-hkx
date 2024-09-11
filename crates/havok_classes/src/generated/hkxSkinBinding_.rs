@@ -68,18 +68,22 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x5a93f338)));
             let mut serializer = __serializer
-                .serialize_struct("hkxSkinBinding", class_meta)?;
+                .serialize_struct("hkxSkinBinding", class_meta, (112u64, 128u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("mesh", &self.m_mesh)?;
-            serializer.serialize_array_meta_field("nodeNames", &self.m_nodeNames)?;
-            serializer.serialize_array_meta_field("bindPose", &self.m_bindPose)?;
+            serializer
+                .serialize_array_field(
+                    "nodeNames",
+                    &self.m_nodeNames,
+                    TypeSize::String,
+                )?;
+            serializer
+                .serialize_array_field("bindPose", &self.m_bindPose, TypeSize::NonPtr)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("initSkinTransform", &self.m_initSkinTransform)?;
-            serializer.serialize_array_field("nodeNames", &self.m_nodeNames)?;
-            serializer.serialize_array_field("bindPose", &self.m_bindPose)?;
             serializer.end()
         }
     }

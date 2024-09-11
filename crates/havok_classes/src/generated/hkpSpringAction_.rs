@@ -91,7 +91,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x88fc09fa)));
             let mut serializer = __serializer
-                .serialize_struct("hkpSpringAction", class_meta)?;
+                .serialize_struct("hkpSpringAction", class_meta, (96u64, 128u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -107,8 +107,7 @@ const _: () = {
             serializer.skip_field("world", &self.parent.parent.m_world)?;
             serializer.skip_field("island", &self.parent.parent.m_island)?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.serialize_field("entityA", &self.parent.m_entityA)?;
             serializer.serialize_field("entityB", &self.parent.m_entityB)?;
             serializer.serialize_field("lastForce", &self.m_lastForce)?;
@@ -120,7 +119,6 @@ const _: () = {
             serializer.serialize_field("onCompression", &self.m_onCompression)?;
             serializer.serialize_field("onExtension", &self.m_onExtension)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 2usize].as_slice())?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
             serializer.end()
         }
     }

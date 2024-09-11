@@ -130,7 +130,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x177114a2)));
             let mut serializer = __serializer
-                .serialize_struct("hkpExtendedMeshShape", class_meta)?;
+                .serialize_struct("hkpExtendedMeshShape", class_meta, (240u64, 336u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -166,13 +166,29 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "trianglesSubparts",
                     &self.m_trianglesSubparts,
+                    TypeSize::Struct {
+                        size_x86: 112u64,
+                        size_x86_64: 160u64,
+                    },
                 )?;
             serializer
-                .serialize_array_meta_field("shapesSubparts", &self.m_shapesSubparts)?;
-            serializer.serialize_array_meta_field("weldingInfo", &self.m_weldingInfo)?;
+                .serialize_array_field(
+                    "shapesSubparts",
+                    &self.m_shapesSubparts,
+                    TypeSize::Struct {
+                        size_x86: 64u64,
+                        size_x86_64: 96u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
+                    "weldingInfo",
+                    &self.m_weldingInfo,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("weldingType", &self.m_weldingType)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
             serializer
@@ -185,10 +201,6 @@ const _: () = {
             serializer.serialize_field("triangleRadius", &self.m_triangleRadius)?;
             serializer.skip_field("padding", &self.m_padding)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 12usize].as_slice())?;
-            serializer
-                .serialize_array_field("trianglesSubparts", &self.m_trianglesSubparts)?;
-            serializer.serialize_array_field("shapesSubparts", &self.m_shapesSubparts)?;
-            serializer.serialize_array_field("weldingInfo", &self.m_weldingInfo)?;
             serializer.end()
         }
     }

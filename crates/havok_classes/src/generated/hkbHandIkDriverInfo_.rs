@@ -64,15 +64,22 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc299090a)));
             let mut serializer = __serializer
-                .serialize_struct("hkbHandIkDriverInfo", class_meta)?;
+                .serialize_struct("hkbHandIkDriverInfo", class_meta, (24u64, 40u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("hands", &self.m_hands)?;
+            serializer
+                .serialize_array_field(
+                    "hands",
+                    &self.m_hands,
+                    TypeSize::Struct {
+                        size_x86: 96u64,
+                        size_x86_64: 96u64,
+                    },
+                )?;
             serializer.serialize_field("fadeInOutCurve", &self.m_fadeInOutCurve)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_array_field("hands", &self.m_hands)?;
             serializer.end()
         }
     }

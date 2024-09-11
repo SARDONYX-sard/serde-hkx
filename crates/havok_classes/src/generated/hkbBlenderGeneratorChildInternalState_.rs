@@ -55,7 +55,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xff7327c0)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBlenderGeneratorChildInternalState", class_meta)?;
+                .serialize_struct(
+                    "hkbBlenderGeneratorChildInternalState",
+                    class_meta,
+                    (2u64, 2u64),
+                )?;
             serializer.serialize_field("isActive", &self.m_isActive)?;
             serializer.serialize_field("syncNextFrame", &self.m_syncNextFrame)?;
             serializer.end()

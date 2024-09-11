@@ -113,7 +113,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x9a040f03)));
             let mut serializer = __serializer
-                .serialize_struct("hkbDampingModifier", class_meta)?;
+                .serialize_struct("hkbDampingModifier", class_meta, (160u64, 192u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -132,9 +132,10 @@ const _: () = {
                     &self.parent.parent.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.parent.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field(
@@ -143,14 +144,14 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.skip_field("id", &self.parent.parent.m_id)?;
             serializer.skip_field("cloneState", &self.parent.parent.m_cloneState)?;
             serializer
                 .skip_fixed_array_field(
                     "padNode",
                     self.parent.parent.m_padNode.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("enable", &self.parent.m_enable)?;
@@ -158,6 +159,7 @@ const _: () = {
                 .skip_fixed_array_field(
                     "padModifier",
                     self.parent.m_padModifier.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("kP", &self.m_kP)?;
@@ -178,12 +180,6 @@ const _: () = {
             serializer.serialize_field("errorSum", &self.m_errorSum)?;
             serializer.serialize_field("previousError", &self.m_previousError)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.parent.parent.m_cachedBindables,
-                )?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
             serializer.end()
         }
     }

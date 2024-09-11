@@ -72,7 +72,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x2eda84f8)));
             let mut serializer = __serializer
-                .serialize_struct("hkbCharacterSteppedInfo", class_meta)?;
+                .serialize_struct(
+                    "hkbCharacterSteppedInfo",
+                    class_meta,
+                    (112u64, 112u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -82,19 +86,18 @@ const _: () = {
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("worldFromModel", &self.m_worldFromModel)?;
             serializer
-                .serialize_array_meta_field("poseModelSpace", &self.m_poseModelSpace)?;
-            serializer
-                .serialize_array_meta_field(
-                    "rigidAttachmentTransforms",
-                    &self.m_rigidAttachmentTransforms,
+                .serialize_array_field(
+                    "poseModelSpace",
+                    &self.m_poseModelSpace,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
-            serializer.serialize_array_field("poseModelSpace", &self.m_poseModelSpace)?;
             serializer
                 .serialize_array_field(
                     "rigidAttachmentTransforms",
                     &self.m_rigidAttachmentTransforms,
+                    TypeSize::NonPtr,
                 )?;
+            serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.end()
         }
     }

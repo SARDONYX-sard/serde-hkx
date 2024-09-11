@@ -61,7 +61,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xeb60f431)));
             let mut serializer = __serializer
-                .serialize_struct("hkpTriggerVolumeEventInfo", class_meta)?;
+                .serialize_struct(
+                    "hkpTriggerVolumeEventInfo",
+                    class_meta,
+                    (16u64, 24u64),
+                )?;
             serializer.serialize_field("sortValue", &self.m_sortValue)?;
             serializer.serialize_field("body", &self.m_body)?;
             serializer.serialize_field("operation", &self.m_operation)?;

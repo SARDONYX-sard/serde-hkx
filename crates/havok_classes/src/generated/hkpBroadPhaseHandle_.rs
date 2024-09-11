@@ -51,7 +51,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x940569dc)));
             let mut serializer = __serializer
-                .serialize_struct("hkpBroadPhaseHandle", class_meta)?;
+                .serialize_struct("hkpBroadPhaseHandle", class_meta, (4u64, 4u64))?;
             serializer.skip_field("id", &self.m_id)?;
             serializer.end()
         }

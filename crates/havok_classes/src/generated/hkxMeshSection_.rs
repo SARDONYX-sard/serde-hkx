@@ -71,17 +71,25 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe2286cf8)));
             let mut serializer = __serializer
-                .serialize_struct("hkxMeshSection", class_meta)?;
+                .serialize_struct("hkxMeshSection", class_meta, (40u64, 64u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("vertexBuffer", &self.m_vertexBuffer)?;
-            serializer.serialize_array_meta_field("indexBuffers", &self.m_indexBuffers)?;
+            serializer
+                .serialize_array_field(
+                    "indexBuffers",
+                    &self.m_indexBuffers,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("material", &self.m_material)?;
-            serializer.serialize_array_meta_field("userChannels", &self.m_userChannels)?;
-            serializer.serialize_array_field("indexBuffers", &self.m_indexBuffers)?;
-            serializer.serialize_array_field("userChannels", &self.m_userChannels)?;
+            serializer
+                .serialize_array_field(
+                    "userChannels",
+                    &self.m_userChannels,
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

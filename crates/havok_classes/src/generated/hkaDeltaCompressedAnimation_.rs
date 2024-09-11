@@ -127,7 +127,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x90a68d40)));
             let mut serializer = __serializer
-                .serialize_struct("hkaDeltaCompressedAnimation", class_meta)?;
+                .serialize_struct(
+                    "hkaDeltaCompressedAnimation",
+                    class_meta,
+                    (120u64, 144u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -149,9 +153,13 @@ const _: () = {
             serializer
                 .serialize_field("extractedMotion", &self.parent.m_extractedMotion)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "annotationTracks",
                     &self.parent.m_annotationTracks,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 24u64,
+                    },
                 )?;
             serializer.serialize_field("numberOfPoses", &self.m_numberOfPoses)?;
             serializer.serialize_field("blockSize", &self.m_blockSize)?;
@@ -175,13 +183,12 @@ const _: () = {
             serializer.serialize_field("totalBlockSize", &self.m_totalBlockSize)?;
             serializer.serialize_field("lastBlockSize", &self.m_lastBlockSize)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("dataBuffer", &self.m_dataBuffer)?;
             serializer
                 .serialize_array_field(
-                    "annotationTracks",
-                    &self.parent.m_annotationTracks,
+                    "dataBuffer",
+                    &self.m_dataBuffer,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_array_field("dataBuffer", &self.m_dataBuffer)?;
             serializer.end()
         }
     }

@@ -106,7 +106,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xd72b8d17)));
             let mut serializer = __serializer
-                .serialize_struct("hkbHandIkControlData", class_meta)?;
+                .serialize_struct("hkbHandIkControlData", class_meta, (80u64, 96u64))?;
             serializer.serialize_field("targetPosition", &self.m_targetPosition)?;
             serializer.serialize_field("targetRotation", &self.m_targetRotation)?;
             serializer.serialize_field("targetNormal", &self.m_targetNormal)?;

@@ -61,7 +61,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xcf071a1b)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPoweredChainMapperLinkInfo", class_meta)?;
+                .serialize_struct(
+                    "hkpPoweredChainMapperLinkInfo",
+                    class_meta,
+                    (12u64, 16u64),
+                )?;
             serializer.serialize_field("firstTargetIdx", &self.m_firstTargetIdx)?;
             serializer.serialize_field("numTargets", &self.m_numTargets)?;
             serializer.serialize_field("limitConstraint", &self.m_limitConstraint)?;

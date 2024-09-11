@@ -105,7 +105,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa681b7f0)));
             let mut serializer = __serializer
-                .serialize_struct("hkbFootIkGains", class_meta)?;
+                .serialize_struct("hkbFootIkGains", class_meta, (48u64, 48u64))?;
             serializer.serialize_field("onOffGain", &self.m_onOffGain)?;
             serializer
                 .serialize_field("groundAscendingGain", &self.m_groundAscendingGain)?;

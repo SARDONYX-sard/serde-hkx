@@ -61,7 +61,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x90b29d39)));
             let mut serializer = __serializer
-                .serialize_struct("hkpMoppBvTreeShape", class_meta)?;
+                .serialize_struct("hkpMoppBvTreeShape", class_meta, (64u64, 112u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(

@@ -88,7 +88,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa2e50753)));
             let mut serializer = __serializer
-                .serialize_struct("hkMemoryMeshVertexBuffer", class_meta)?;
+                .serialize_struct(
+                    "hkMemoryMeshVertexBuffer",
+                    class_meta,
+                    (424u64, 440u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -100,9 +104,11 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "elementOffsets",
                     self.m_elementOffsets.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("memory", &self.m_memory)?;
+            serializer
+                .serialize_array_field("memory", &self.m_memory, TypeSize::NonPtr)?;
             serializer.serialize_field("vertexStride", &self.m_vertexStride)?;
             serializer.serialize_field("locked", &self.m_locked)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
@@ -110,7 +116,6 @@ const _: () = {
             serializer.serialize_field("isBigEndian", &self.m_isBigEndian)?;
             serializer.serialize_field("isSharable", &self.m_isSharable)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 2usize].as_slice())?;
-            serializer.serialize_array_field("memory", &self.m_memory)?;
             serializer.end()
         }
     }

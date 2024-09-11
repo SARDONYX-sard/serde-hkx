@@ -59,6 +59,7 @@ const _: () = {
                 .serialize_struct(
                     "hkpSerializedDisplayRbTransformsDisplayTransformPair",
                     class_meta,
+                    (80u64, 80u64),
                 )?;
             serializer.serialize_field("rb", &self.m_rb)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 8usize].as_slice())?;

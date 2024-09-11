@@ -61,7 +61,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf33d3eea)));
             let mut serializer = __serializer
-                .serialize_struct("BSBoneSwitchGenerator", class_meta)?;
+                .serialize_struct("BSBoneSwitchGenerator", class_meta, (64u64, 112u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -80,9 +80,10 @@ const _: () = {
                     &self.parent.parent.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.parent.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field(
@@ -91,27 +92,25 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.skip_field("id", &self.parent.parent.m_id)?;
             serializer.skip_field("cloneState", &self.parent.parent.m_cloneState)?;
             serializer
                 .skip_fixed_array_field(
                     "padNode",
                     self.parent.parent.m_padNode.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("pDefaultGenerator", &self.m_pDefaultGenerator)?;
-            serializer.serialize_array_meta_field("ChildrenA", &self.m_ChildrenA)?;
-            serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.parent.parent.m_cachedBindables,
+                    "ChildrenA",
+                    &self.m_ChildrenA,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
-            serializer.serialize_array_field("ChildrenA", &self.m_ChildrenA)?;
+            serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.end()
         }
     }

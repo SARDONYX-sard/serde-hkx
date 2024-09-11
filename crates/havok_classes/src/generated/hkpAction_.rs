@@ -70,7 +70,8 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xbdf70a51)));
-            let mut serializer = __serializer.serialize_struct("hkpAction", class_meta)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkpAction", class_meta, (24u64, 48u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -78,8 +79,7 @@ const _: () = {
             serializer.skip_field("world", &self.m_world)?;
             serializer.skip_field("island", &self.m_island)?;
             serializer.serialize_field("userData", &self.m_userData)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.end()
         }
     }

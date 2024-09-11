@@ -85,7 +85,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe18b74b9)));
             let mut serializer = __serializer
-                .serialize_struct("hkbSetBehaviorCommand", class_meta)?;
+                .serialize_struct("hkbSetBehaviorCommand", class_meta, (48u64, 72u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -94,9 +94,10 @@ const _: () = {
             serializer.serialize_field("behavior", &self.m_behavior)?;
             serializer.serialize_field("rootGenerator", &self.m_rootGenerator)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "referencedBehaviors",
                     &self.m_referencedBehaviors,
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("startStateIndex", &self.m_startStateIndex)?;
             serializer
@@ -104,11 +105,6 @@ const _: () = {
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
             serializer.serialize_field("padding", &self.m_padding)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "referencedBehaviors",
-                    &self.m_referencedBehaviors,
-                )?;
             serializer.end()
         }
     }

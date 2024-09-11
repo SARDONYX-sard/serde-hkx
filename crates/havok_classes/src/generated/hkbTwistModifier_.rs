@@ -95,7 +95,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xb6b76b32)));
             let mut serializer = __serializer
-                .serialize_struct("hkbTwistModifier", class_meta)?;
+                .serialize_struct("hkbTwistModifier", class_meta, (112u64, 144u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -114,9 +114,10 @@ const _: () = {
                     &self.parent.parent.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.parent.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field(
@@ -125,14 +126,14 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.skip_field("id", &self.parent.parent.m_id)?;
             serializer.skip_field("cloneState", &self.parent.parent.m_cloneState)?;
             serializer
                 .skip_fixed_array_field(
                     "padNode",
                     self.parent.parent.m_padNode.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("enable", &self.parent.m_enable)?;
@@ -140,6 +141,7 @@ const _: () = {
                 .skip_fixed_array_field(
                     "padModifier",
                     self.parent.m_padModifier.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 0usize].as_slice())?;
@@ -156,20 +158,18 @@ const _: () = {
             serializer.serialize_field("isAdditive", &self.m_isAdditive)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 5usize].as_slice())?;
             serializer
-                .skip_array_meta_field("boneChainIndices", &self.m_boneChainIndices)?;
-            serializer
-                .skip_array_meta_field("parentBoneIndices", &self.m_parentBoneIndices)?;
-            serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 0usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.parent.parent.m_cachedBindables,
+                .skip_array_field(
+                    "boneChainIndices",
+                    &self.m_boneChainIndices,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
             serializer
-                .serialize_array_field("boneChainIndices", &self.m_boneChainIndices)?;
-            serializer
-                .serialize_array_field("parentBoneIndices", &self.m_parentBoneIndices)?;
+                .skip_array_field(
+                    "parentBoneIndices",
+                    &self.m_parentBoneIndices,
+                    TypeSize::NonPtr,
+                )?;
+            serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.end()
         }
     }

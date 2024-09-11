@@ -72,12 +72,17 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x626e55a)));
             let mut serializer = __serializer
-                .serialize_struct("hkpAgent1nSector", class_meta)?;
+                .serialize_struct("hkpAgent1nSector", class_meta, (512u64, 512u64))?;
             serializer.serialize_field("bytesAllocated", &self.m_bytesAllocated)?;
             serializer.serialize_field("pad0", &self.m_pad0)?;
             serializer.serialize_field("pad1", &self.m_pad1)?;
             serializer.serialize_field("pad2", &self.m_pad2)?;
-            serializer.serialize_fixed_array_field("data", self.m_data.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "data",
+                    self.m_data.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

@@ -75,7 +75,8 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x6d26f61d)));
-            let mut serializer = __serializer.serialize_struct("hkbNode", class_meta)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkbNode", class_meta, (40u64, 72u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -88,25 +89,25 @@ const _: () = {
                     &self.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field("areBindablesCached", &self.parent.m_areBindablesCached)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.serialize_field("userData", &self.m_userData)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.skip_field("id", &self.m_id)?;
             serializer.skip_field("cloneState", &self.m_cloneState)?;
-            serializer.skip_fixed_array_field("padNode", self.m_padNode.as_slice())?;
-            serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.m_cachedBindables,
+                .skip_fixed_array_field(
+                    "padNode",
+                    self.m_padNode.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
+            serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.end()
         }
     }

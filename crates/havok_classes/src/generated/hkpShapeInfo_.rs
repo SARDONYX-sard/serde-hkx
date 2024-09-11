@@ -78,7 +78,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xea7f1d08)));
             let mut serializer = __serializer
-                .serialize_struct("hkpShapeInfo", class_meta)?;
+                .serialize_struct("hkpShapeInfo", class_meta, (112u64, 128u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -93,15 +93,19 @@ const _: () = {
                 .serialize_field("hkdShapesCollected", &self.m_hkdShapesCollected)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 6usize].as_slice())?;
             serializer
-                .serialize_array_meta_field("childShapeNames", &self.m_childShapeNames)?;
+                .serialize_array_field(
+                    "childShapeNames",
+                    &self.m_childShapeNames,
+                    TypeSize::String,
+                )?;
             serializer
-                .serialize_array_meta_field("childTransforms", &self.m_childTransforms)?;
+                .serialize_array_field(
+                    "childTransforms",
+                    &self.m_childTransforms,
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("transform", &self.m_transform)?;
-            serializer
-                .serialize_array_field("childShapeNames", &self.m_childShapeNames)?;
-            serializer
-                .serialize_array_field("childTransforms", &self.m_childTransforms)?;
             serializer.end()
         }
     }

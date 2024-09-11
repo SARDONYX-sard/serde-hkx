@@ -57,7 +57,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x5cbfcf4a)));
             let mut serializer = __serializer
-                .serialize_struct("hkpSetLocalTranslationsConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpSetLocalTranslationsConstraintAtom",
+                    class_meta,
+                    (48u64, 48u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.pad_field([0u8; 14usize].as_slice(), [0u8; 14usize].as_slice())?;
             serializer.serialize_field("translationA", &self.m_translationA)?;

@@ -75,7 +75,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xcbfc95a4)));
             let mut serializer = __serializer
-                .serialize_struct("hkpCompressedMeshShapeBigTriangle", class_meta)?;
+                .serialize_struct(
+                    "hkpCompressedMeshShapeBigTriangle",
+                    class_meta,
+                    (16u64, 16u64),
+                )?;
             serializer.serialize_field("a", &self.m_a)?;
             serializer.serialize_field("b", &self.m_b)?;
             serializer.serialize_field("c", &self.m_c)?;

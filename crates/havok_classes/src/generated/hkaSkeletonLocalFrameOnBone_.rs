@@ -56,7 +56,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x52e8043)));
             let mut serializer = __serializer
-                .serialize_struct("hkaSkeletonLocalFrameOnBone", class_meta)?;
+                .serialize_struct(
+                    "hkaSkeletonLocalFrameOnBone",
+                    class_meta,
+                    (8u64, 16u64),
+                )?;
             serializer.serialize_field("localFrame", &self.m_localFrame)?;
             serializer.serialize_field("boneIndex", &self.m_boneIndex)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;

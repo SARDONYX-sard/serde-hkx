@@ -55,20 +55,17 @@ const _: () = {
                 .serialize_struct(
                     "hkbEventsFromRangeModifierInternalState",
                     class_meta,
+                    (20u64, 32u64),
                 )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
-                    "wasActiveInPreviousFrame",
-                    &self.m_wasActiveInPreviousFrame,
-                )?;
-            serializer
                 .serialize_array_field(
                     "wasActiveInPreviousFrame",
                     &self.m_wasActiveInPreviousFrame,
+                    TypeSize::NonPtr,
                 )?;
             serializer.end()
         }

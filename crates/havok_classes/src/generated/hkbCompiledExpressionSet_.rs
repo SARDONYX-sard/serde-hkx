@@ -69,25 +69,32 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x3a7d76cc)));
             let mut serializer = __serializer
-                .serialize_struct("hkbCompiledExpressionSet", class_meta)?;
+                .serialize_struct(
+                    "hkbCompiledExpressionSet",
+                    class_meta,
+                    (36u64, 56u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("rpn", &self.m_rpn)?;
             serializer
-                .serialize_array_meta_field(
-                    "expressionToRpnIndex",
-                    &self.m_expressionToRpnIndex,
+                .serialize_array_field(
+                    "rpn",
+                    &self.m_rpn,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 8u64,
+                    },
                 )?;
-            serializer.serialize_field("numExpressions", &self.m_numExpressions)?;
-            serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_array_field("rpn", &self.m_rpn)?;
             serializer
                 .serialize_array_field(
                     "expressionToRpnIndex",
                     &self.m_expressionToRpnIndex,
+                    TypeSize::NonPtr,
                 )?;
+            serializer.serialize_field("numExpressions", &self.m_numExpressions)?;
+            serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.end()
         }
     }

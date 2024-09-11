@@ -71,7 +71,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x9e17091a)));
             let mut serializer = __serializer
-                .serialize_struct("hkbFootIkControlsModifierLeg", class_meta)?;
+                .serialize_struct(
+                    "hkbFootIkControlsModifierLeg",
+                    class_meta,
+                    (32u64, 48u64),
+                )?;
             serializer.serialize_field("groundPosition", &self.m_groundPosition)?;
             serializer.serialize_field("ungroundedEvent", &self.m_ungroundedEvent)?;
             serializer.serialize_field("verticalError", &self.m_verticalError)?;

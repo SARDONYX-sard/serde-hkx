@@ -65,7 +65,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf204b155)));
             let mut serializer = __serializer
-                .serialize_struct("hkpExtendedMeshShapeShapesSubpart", class_meta)?;
+                .serialize_struct(
+                    "hkpExtendedMeshShapeShapesSubpart",
+                    class_meta,
+                    (64u64, 96u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer
                 .serialize_field(
@@ -85,11 +89,15 @@ const _: () = {
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.skip_field("materialBase", &self.parent.m_materialBase)?;
             serializer.serialize_field("userData", &self.parent.m_userData)?;
-            serializer.serialize_array_meta_field("childShapes", &self.m_childShapes)?;
+            serializer
+                .serialize_array_field(
+                    "childShapes",
+                    &self.m_childShapes,
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("rotation", &self.m_rotation)?;
             serializer.serialize_field("translation", &self.m_translation)?;
-            serializer.serialize_array_field("childShapes", &self.m_childShapes)?;
             serializer.end()
         }
     }

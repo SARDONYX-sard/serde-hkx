@@ -68,6 +68,7 @@ const _: () = {
                 .serialize_struct(
                     "hkaQuantizedAnimationTrackCompressionParams",
                     class_meta,
+                    (16u64, 16u64),
                 )?;
             serializer.serialize_field("rotationTolerance", &self.m_rotationTolerance)?;
             serializer

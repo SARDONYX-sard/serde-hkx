@@ -90,7 +90,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf4608207)));
             let mut serializer = __serializer
-                .serialize_struct("hkpExtendedMeshShapeSubpart", class_meta)?;
+                .serialize_struct(
+                    "hkpExtendedMeshShapeSubpart",
+                    class_meta,
+                    (20u64, 40u64),
+                )?;
             serializer.serialize_field("type", &self.m_type)?;
             serializer
                 .serialize_field(

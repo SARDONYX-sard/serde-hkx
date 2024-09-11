@@ -72,7 +72,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe70e4dfa)));
             let mut serializer = __serializer
-                .serialize_struct("hkpBallSocketConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpBallSocketConstraintAtom",
+                    class_meta,
+                    (16u64, 16u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.serialize_field("solvingMethod", &self.m_solvingMethod)?;
             serializer.serialize_field("bodiesToNotify", &self.m_bodiesToNotify)?;

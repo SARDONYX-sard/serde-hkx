@@ -51,7 +51,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xde152a4d)));
             let mut serializer = __serializer
-                .serialize_struct("hkpBridgeAtoms", class_meta)?;
+                .serialize_struct("hkpBridgeAtoms", class_meta, (12u64, 24u64))?;
             serializer.serialize_field("bridgeAtom", &self.m_bridgeAtom)?;
             serializer.end()
         }

@@ -63,6 +63,7 @@ const _: () = {
                 .serialize_struct(
                     "hkpVehicleDefaultBrakeWheelBrakingProperties",
                     class_meta,
+                    (12u64, 12u64),
                 )?;
             serializer.serialize_field("maxBreakingTorque", &self.m_maxBreakingTorque)?;
             serializer

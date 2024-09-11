@@ -58,7 +58,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x26a196c5)));
             let mut serializer = __serializer
-                .serialize_struct("hkbMessageLog", class_meta)?;
+                .serialize_struct("hkbMessageLog", class_meta, (8u64, 16u64))?;
             serializer.skip_field("messages", &self.m_messages)?;
             serializer.skip_field("maxMessages", &self.m_maxMessages)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;

@@ -100,23 +100,47 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xd72b6fd0)));
             let mut serializer = __serializer
-                .serialize_struct("hkxVertexBufferVertexData", class_meta)?;
-            serializer.serialize_array_meta_field("vectorData", &self.m_vectorData)?;
-            serializer.serialize_array_meta_field("floatData", &self.m_floatData)?;
-            serializer.serialize_array_meta_field("uint32Data", &self.m_uint32Data)?;
-            serializer.serialize_array_meta_field("uint16Data", &self.m_uint16Data)?;
-            serializer.serialize_array_meta_field("uint8Data", &self.m_uint8Data)?;
+                .serialize_struct(
+                    "hkxVertexBufferVertexData",
+                    class_meta,
+                    (84u64, 104u64),
+                )?;
+            serializer
+                .serialize_array_field(
+                    "vectorData",
+                    &self.m_vectorData,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "floatData",
+                    &self.m_floatData,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "uint32Data",
+                    &self.m_uint32Data,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "uint16Data",
+                    &self.m_uint16Data,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "uint8Data",
+                    &self.m_uint8Data,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("numVerts", &self.m_numVerts)?;
             serializer.serialize_field("vectorStride", &self.m_vectorStride)?;
             serializer.serialize_field("floatStride", &self.m_floatStride)?;
             serializer.serialize_field("uint32Stride", &self.m_uint32Stride)?;
             serializer.serialize_field("uint16Stride", &self.m_uint16Stride)?;
             serializer.serialize_field("uint8Stride", &self.m_uint8Stride)?;
-            serializer.serialize_array_field("vectorData", &self.m_vectorData)?;
-            serializer.serialize_array_field("floatData", &self.m_floatData)?;
-            serializer.serialize_array_field("uint32Data", &self.m_uint32Data)?;
-            serializer.serialize_array_field("uint16Data", &self.m_uint16Data)?;
-            serializer.serialize_array_field("uint8Data", &self.m_uint8Data)?;
             serializer.end()
         }
     }

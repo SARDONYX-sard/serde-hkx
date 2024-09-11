@@ -74,21 +74,35 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xb743a578)));
             let mut serializer = __serializer
-                .serialize_struct("hkMemoryMeshShape", class_meta)?;
+                .serialize_struct("hkMemoryMeshShape", class_meta, (48u64, 72u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
             serializer
                 .skip_field("referenceCount", &self.parent.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("sections", &self.m_sections)?;
-            serializer.serialize_array_meta_field("indices16", &self.m_indices16)?;
-            serializer.serialize_array_meta_field("indices32", &self.m_indices32)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
-            serializer.serialize_array_field("sections", &self.m_sections)?;
-            serializer.serialize_array_field("indices16", &self.m_indices16)?;
-            serializer.serialize_array_field("indices32", &self.m_indices32)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
+            serializer
+                .serialize_array_field(
+                    "sections",
+                    &self.m_sections,
+                    TypeSize::Struct {
+                        size_x86: 32u64,
+                        size_x86_64: 48u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
+                    "indices16",
+                    &self.m_indices16,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "indices32",
+                    &self.m_indices32,
+                    TypeSize::NonPtr,
+                )?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.end()
         }
     }

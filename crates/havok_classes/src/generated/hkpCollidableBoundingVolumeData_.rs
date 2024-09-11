@@ -101,19 +101,35 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xb5f0e6b1)));
             let mut serializer = __serializer
-                .serialize_struct("hkpCollidableBoundingVolumeData", class_meta)?;
-            serializer.serialize_fixed_array_field("min", self.m_min.as_slice())?;
+                .serialize_struct(
+                    "hkpCollidableBoundingVolumeData",
+                    class_meta,
+                    (44u64, 56u64),
+                )?;
+            serializer
+                .serialize_fixed_array_field(
+                    "min",
+                    self.m_min.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer
                 .serialize_fixed_array_field(
                     "expansionMin",
                     self.m_expansionMin.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("expansionShift", &self.m_expansionShift)?;
-            serializer.serialize_fixed_array_field("max", self.m_max.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "max",
+                    self.m_max.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer
                 .serialize_fixed_array_field(
                     "expansionMax",
                     self.m_expansionMax.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("padding", &self.m_padding)?;
             serializer.skip_field("numChildShapeAabbs", &self.m_numChildShapeAabbs)?;

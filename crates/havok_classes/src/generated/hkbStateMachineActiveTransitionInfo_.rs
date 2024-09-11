@@ -85,7 +85,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xbb90d54f)));
             let mut serializer = __serializer
-                .serialize_struct("hkbStateMachineActiveTransitionInfo", class_meta)?;
+                .serialize_struct(
+                    "hkbStateMachineActiveTransitionInfo",
+                    class_meta,
+                    (32u64, 40u64),
+                )?;
             serializer.skip_field("transitionEffect", &self.m_transitionEffect)?;
             serializer
                 .serialize_field(

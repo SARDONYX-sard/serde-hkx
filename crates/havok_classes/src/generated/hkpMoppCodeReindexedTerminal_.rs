@@ -55,7 +55,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x6ed8ac06)));
             let mut serializer = __serializer
-                .serialize_struct("hkpMoppCodeReindexedTerminal", class_meta)?;
+                .serialize_struct(
+                    "hkpMoppCodeReindexedTerminal",
+                    class_meta,
+                    (8u64, 8u64),
+                )?;
             serializer.serialize_field("origShapeKey", &self.m_origShapeKey)?;
             serializer.serialize_field("reindexedShapeKey", &self.m_reindexedShapeKey)?;
             serializer.end()

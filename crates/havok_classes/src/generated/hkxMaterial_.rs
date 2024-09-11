@@ -116,7 +116,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x2954537a)));
             let mut serializer = __serializer
-                .serialize_struct("hkxMaterial", class_meta)?;
+                .serialize_struct("hkxMaterial", class_meta, (144u64, 176u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -124,30 +124,46 @@ const _: () = {
                 .skip_field("referenceCount", &self.parent.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "attributeGroups",
                     &self.parent.m_attributeGroups,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 24u64,
+                    },
                 )?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
-            serializer.serialize_array_meta_field("stages", &self.m_stages)?;
+            serializer.serialize_field("name", &self.m_name)?;
+            serializer
+                .serialize_array_field(
+                    "stages",
+                    &self.m_stages,
+                    TypeSize::Struct {
+                        size_x86: 12u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("diffuseColor", &self.m_diffuseColor)?;
             serializer.serialize_field("ambientColor", &self.m_ambientColor)?;
             serializer.serialize_field("specularColor", &self.m_specularColor)?;
             serializer.serialize_field("emissiveColor", &self.m_emissiveColor)?;
-            serializer.serialize_array_meta_field("subMaterials", &self.m_subMaterials)?;
-            serializer.serialize_field("extraData", &self.m_extraData)?;
-            serializer.serialize_array_meta_field("properties", &self.m_properties)?;
-            serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .serialize_array_field(
-                    "attributeGroups",
-                    &self.parent.m_attributeGroups,
+                    "subMaterials",
+                    &self.m_subMaterials,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
-            serializer.serialize_array_field("stages", &self.m_stages)?;
-            serializer.serialize_array_field("subMaterials", &self.m_subMaterials)?;
-            serializer.serialize_array_field("properties", &self.m_properties)?;
+            serializer.serialize_field("extraData", &self.m_extraData)?;
+            serializer
+                .serialize_array_field(
+                    "properties",
+                    &self.m_properties,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 8u64,
+                    },
+                )?;
+            serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.end()
         }
     }

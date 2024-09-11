@@ -55,6 +55,7 @@ const _: () = {
                 .serialize_struct(
                     "hkbRotateCharacterModifierInternalState",
                     class_meta,
+                    (12u64, 24u64),
                 )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;

@@ -66,7 +66,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xfb56b692)));
             let mut serializer = __serializer
-                .serialize_struct("hkbSenseHandleModifierRange", class_meta)?;
+                .serialize_struct(
+                    "hkbSenseHandleModifierRange",
+                    class_meta,
+                    (20u64, 32u64),
+                )?;
             serializer.serialize_field("event", &self.m_event)?;
             serializer.serialize_field("minDistance", &self.m_minDistance)?;
             serializer.serialize_field("maxDistance", &self.m_maxDistance)?;

@@ -121,7 +121,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x792ee0bb)));
             let mut serializer = __serializer
-                .serialize_struct("hkaSplineCompressedAnimation", class_meta)?;
+                .serialize_struct(
+                    "hkaSplineCompressedAnimation",
+                    class_meta,
+                    (132u64, 176u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -143,9 +147,13 @@ const _: () = {
             serializer
                 .serialize_field("extractedMotion", &self.parent.m_extractedMotion)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "annotationTracks",
                     &self.parent.m_annotationTracks,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 24u64,
+                    },
                 )?;
             serializer.serialize_field("numFrames", &self.m_numFrames)?;
             serializer.serialize_field("numBlocks", &self.m_numBlocks)?;
@@ -160,33 +168,33 @@ const _: () = {
                 .serialize_field("blockInverseDuration", &self.m_blockInverseDuration)?;
             serializer.serialize_field("frameDuration", &self.m_frameDuration)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("blockOffsets", &self.m_blockOffsets)?;
-            serializer
-                .serialize_array_meta_field(
-                    "floatBlockOffsets",
-                    &self.m_floatBlockOffsets,
-                )?;
-            serializer
-                .serialize_array_meta_field(
-                    "transformOffsets",
-                    &self.m_transformOffsets,
-                )?;
-            serializer.serialize_array_meta_field("floatOffsets", &self.m_floatOffsets)?;
-            serializer.serialize_array_meta_field("data", &self.m_data)?;
-            serializer.serialize_field("endian", &self.m_endian)?;
-            serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
                 .serialize_array_field(
-                    "annotationTracks",
-                    &self.parent.m_annotationTracks,
+                    "blockOffsets",
+                    &self.m_blockOffsets,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_array_field("blockOffsets", &self.m_blockOffsets)?;
             serializer
-                .serialize_array_field("floatBlockOffsets", &self.m_floatBlockOffsets)?;
+                .serialize_array_field(
+                    "floatBlockOffsets",
+                    &self.m_floatBlockOffsets,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_field("transformOffsets", &self.m_transformOffsets)?;
-            serializer.serialize_array_field("floatOffsets", &self.m_floatOffsets)?;
-            serializer.serialize_array_field("data", &self.m_data)?;
+                .serialize_array_field(
+                    "transformOffsets",
+                    &self.m_transformOffsets,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "floatOffsets",
+                    &self.m_floatOffsets,
+                    TypeSize::NonPtr,
+                )?;
+            serializer.serialize_array_field("data", &self.m_data, TypeSize::NonPtr)?;
+            serializer.serialize_field("endian", &self.m_endian)?;
+            serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.end()
         }
     }

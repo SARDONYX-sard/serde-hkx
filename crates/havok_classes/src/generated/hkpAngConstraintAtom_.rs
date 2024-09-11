@@ -57,7 +57,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x35bb3cd0)));
             let mut serializer = __serializer
-                .serialize_struct("hkpAngConstraintAtom", class_meta)?;
+                .serialize_struct("hkpAngConstraintAtom", class_meta, (4u64, 4u64))?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer
                 .serialize_field("firstConstrainedAxis", &self.m_firstConstrainedAxis)?;

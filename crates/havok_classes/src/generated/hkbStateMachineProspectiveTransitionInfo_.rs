@@ -65,6 +65,7 @@ const _: () = {
                 .serialize_struct(
                     "hkbStateMachineProspectiveTransitionInfo",
                     class_meta,
+                    (16u64, 16u64),
                 )?;
             serializer
                 .serialize_field(

@@ -57,9 +57,16 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x2df6313d)));
             let mut serializer = __serializer
-                .serialize_struct("hkxVertexDescription", class_meta)?;
-            serializer.serialize_array_meta_field("decls", &self.m_decls)?;
-            serializer.serialize_array_field("decls", &self.m_decls)?;
+                .serialize_struct("hkxVertexDescription", class_meta, (12u64, 16u64))?;
+            serializer
+                .serialize_array_field(
+                    "decls",
+                    &self.m_decls,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.end()
         }
     }

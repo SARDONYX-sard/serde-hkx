@@ -70,7 +70,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x2dc0ec6a)));
             let mut serializer = __serializer
-                .serialize_struct("hkpReorientAction", class_meta)?;
+                .serialize_struct("hkpReorientAction", class_meta, (80u64, 112u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -86,8 +86,7 @@ const _: () = {
             serializer.skip_field("world", &self.parent.parent.m_world)?;
             serializer.skip_field("island", &self.parent.parent.m_island)?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.serialize_field("entity", &self.parent.m_entity)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("rotationAxis", &self.m_rotationAxis)?;
@@ -95,7 +94,6 @@ const _: () = {
             serializer.serialize_field("strength", &self.m_strength)?;
             serializer.serialize_field("damping", &self.m_damping)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
             serializer.end()
         }
     }

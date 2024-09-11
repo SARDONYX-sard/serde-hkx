@@ -50,9 +50,9 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x48aceb75)));
             let mut serializer = __serializer
-                .serialize_struct("hkMeshBoneIndexMapping", class_meta)?;
-            serializer.serialize_array_meta_field("mapping", &self.m_mapping)?;
-            serializer.serialize_array_field("mapping", &self.m_mapping)?;
+                .serialize_struct("hkMeshBoneIndexMapping", class_meta, (12u64, 16u64))?;
+            serializer
+                .serialize_array_field("mapping", &self.m_mapping, TypeSize::NonPtr)?;
             serializer.end()
         }
     }

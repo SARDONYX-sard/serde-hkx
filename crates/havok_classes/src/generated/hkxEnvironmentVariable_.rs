@@ -55,11 +55,9 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa6815115)));
             let mut serializer = __serializer
-                .serialize_struct("hkxEnvironmentVariable", class_meta)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
-            serializer.serialize_stringptr_meta_field("value", &self.m_value)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
-            serializer.serialize_stringptr_field("value", &self.m_value)?;
+                .serialize_struct("hkxEnvironmentVariable", class_meta, (8u64, 16u64))?;
+            serializer.serialize_field("name", &self.m_name)?;
+            serializer.serialize_field("value", &self.m_value)?;
             serializer.end()
         }
     }

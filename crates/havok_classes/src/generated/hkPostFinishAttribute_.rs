@@ -52,7 +52,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x903abb2c)));
             let mut serializer = __serializer
-                .serialize_struct("hkPostFinishAttribute", class_meta)?;
+                .serialize_struct("hkPostFinishAttribute", class_meta, (4u64, 8u64))?;
             serializer.skip_field("postFinishFunction", &self.m_postFinishFunction)?;
             serializer.end()
         }

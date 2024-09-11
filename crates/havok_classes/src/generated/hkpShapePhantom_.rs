@@ -68,7 +68,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xcb22fbcd)));
             let mut serializer = __serializer
-                .serialize_struct("hkpShapePhantom", class_meta)?;
+                .serialize_struct("hkpShapePhantom", class_meta, (352u64, 416u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -90,39 +90,31 @@ const _: () = {
                     &self.parent.parent.m_multiThreadCheck,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
-            serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "properties",
                     &self.parent.parent.m_properties,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 16u64,
+                    },
                 )?;
             serializer.skip_field("treeData", &self.parent.parent.m_treeData)?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "overlapListeners",
                     &self.parent.m_overlapListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "phantomListeners",
                     &self.parent.m_phantomListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("motionState", &self.m_motionState)?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
-            serializer
-                .serialize_array_field("properties", &self.parent.parent.m_properties)?;
-            serializer
-                .serialize_array_field(
-                    "overlapListeners",
-                    &self.parent.m_overlapListeners,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "phantomListeners",
-                    &self.parent.m_phantomListeners,
-                )?;
             serializer.end()
         }
     }

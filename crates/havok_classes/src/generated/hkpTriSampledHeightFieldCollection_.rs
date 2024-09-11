@@ -74,7 +74,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc291ddde)));
             let mut serializer = __serializer
-                .serialize_struct("hkpTriSampledHeightFieldCollection", class_meta)?;
+                .serialize_struct(
+                    "hkpTriSampledHeightFieldCollection",
+                    class_meta,
+                    (64u64, 96u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -97,9 +101,13 @@ const _: () = {
             serializer.serialize_field("heightfield", &self.m_heightfield)?;
             serializer.skip_field("childSize", &self.m_childSize)?;
             serializer.serialize_field("radius", &self.m_radius)?;
-            serializer.serialize_array_meta_field("weldingInfo", &self.m_weldingInfo)?;
+            serializer
+                .serialize_array_field(
+                    "weldingInfo",
+                    &self.m_weldingInfo,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("triangleExtrusion", &self.m_triangleExtrusion)?;
-            serializer.serialize_array_field("weldingInfo", &self.m_weldingInfo)?;
             serializer.end()
         }
     }

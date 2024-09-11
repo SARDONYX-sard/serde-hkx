@@ -59,13 +59,24 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe397b11e)));
             let mut serializer = __serializer
-                .serialize_struct("hkbStateMachineTransitionInfoArray", class_meta)?;
+                .serialize_struct(
+                    "hkbStateMachineTransitionInfoArray",
+                    class_meta,
+                    (20u64, 32u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("transitions", &self.m_transitions)?;
-            serializer.serialize_array_field("transitions", &self.m_transitions)?;
+            serializer
+                .serialize_array_field(
+                    "transitions",
+                    &self.m_transitions,
+                    TypeSize::Struct {
+                        size_x86: 60u64,
+                        size_x86_64: 72u64,
+                    },
+                )?;
             serializer.end()
         }
     }

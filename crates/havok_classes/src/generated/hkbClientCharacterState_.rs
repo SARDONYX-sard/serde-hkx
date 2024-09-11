@@ -148,41 +148,55 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa2624c97)));
             let mut serializer = __serializer
-                .serialize_struct("hkbClientCharacterState", class_meta)?;
+                .serialize_struct(
+                    "hkbClientCharacterState",
+                    class_meta,
+                    (208u64, 272u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "deformableSkinIds",
                     &self.m_deformableSkinIds,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_array_meta_field("rigidSkinIds", &self.m_rigidSkinIds)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
+                    "rigidSkinIds",
+                    &self.m_rigidSkinIds,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
                     "externalEventIds",
                     &self.m_externalEventIds,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .serialize_array_meta_field("auxiliaryInfo", &self.m_auxiliaryInfo)?;
+                .serialize_array_field(
+                    "auxiliaryInfo",
+                    &self.m_auxiliaryInfo,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_meta_field("activeEventIds", &self.m_activeEventIds)?;
+                .serialize_array_field(
+                    "activeEventIds",
+                    &self.m_activeEventIds,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "activeVariableIds",
                     &self.m_activeVariableIds,
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("characterId", &self.m_characterId)?;
-            serializer
-                .serialize_stringptr_meta_field("instanceName", &self.m_instanceName)?;
-            serializer
-                .serialize_stringptr_meta_field("templateName", &self.m_templateName)?;
-            serializer
-                .serialize_stringptr_meta_field(
-                    "fullPathToProject",
-                    &self.m_fullPathToProject,
-                )?;
+            serializer.serialize_field("instanceName", &self.m_instanceName)?;
+            serializer.serialize_field("templateName", &self.m_templateName)?;
+            serializer.serialize_field("fullPathToProject", &self.m_fullPathToProject)?;
             serializer.serialize_field("behaviorData", &self.m_behaviorData)?;
             serializer
                 .serialize_field(
@@ -205,35 +219,18 @@ const _: () = {
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("worldFromModel", &self.m_worldFromModel)?;
             serializer
-                .serialize_array_meta_field("poseModelSpace", &self.m_poseModelSpace)?;
-            serializer
-                .serialize_array_meta_field(
-                    "rigidAttachmentTransforms",
-                    &self.m_rigidAttachmentTransforms,
+                .serialize_array_field(
+                    "poseModelSpace",
+                    &self.m_poseModelSpace,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
-            serializer
-                .serialize_array_field("deformableSkinIds", &self.m_deformableSkinIds)?;
-            serializer.serialize_array_field("rigidSkinIds", &self.m_rigidSkinIds)?;
-            serializer
-                .serialize_array_field("externalEventIds", &self.m_externalEventIds)?;
-            serializer.serialize_array_field("auxiliaryInfo", &self.m_auxiliaryInfo)?;
-            serializer.serialize_array_field("activeEventIds", &self.m_activeEventIds)?;
-            serializer
-                .serialize_array_field("activeVariableIds", &self.m_activeVariableIds)?;
-            serializer.serialize_stringptr_field("instanceName", &self.m_instanceName)?;
-            serializer.serialize_stringptr_field("templateName", &self.m_templateName)?;
-            serializer
-                .serialize_stringptr_field(
-                    "fullPathToProject",
-                    &self.m_fullPathToProject,
-                )?;
-            serializer.serialize_array_field("poseModelSpace", &self.m_poseModelSpace)?;
             serializer
                 .serialize_array_field(
                     "rigidAttachmentTransforms",
                     &self.m_rigidAttachmentTransforms,
+                    TypeSize::NonPtr,
                 )?;
+            serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.end()
         }
     }

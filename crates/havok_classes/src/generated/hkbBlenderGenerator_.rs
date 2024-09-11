@@ -137,7 +137,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x22df7147)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBlenderGenerator", class_meta)?;
+                .serialize_struct("hkbBlenderGenerator", class_meta, (116u64, 160u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -156,9 +156,10 @@ const _: () = {
                     &self.parent.parent.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.parent.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field(
@@ -167,14 +168,14 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.skip_field("id", &self.parent.parent.m_id)?;
             serializer.skip_field("cloneState", &self.parent.parent.m_cloneState)?;
             serializer
                 .skip_fixed_array_field(
                     "padNode",
                     self.parent.parent.m_padNode.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
@@ -201,13 +202,20 @@ const _: () = {
             serializer.serialize_field("flags", &self.m_flags)?;
             serializer.serialize_field("subtractLastChild", &self.m_subtractLastChild)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
-            serializer.serialize_array_meta_field("children", &self.m_children)?;
             serializer
-                .skip_array_meta_field(
+                .serialize_array_field("children", &self.m_children, TypeSize::NonPtr)?;
+            serializer
+                .skip_array_field(
                     "childrenInternalStates",
                     &self.m_childrenInternalStates,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.skip_array_meta_field("sortedChildren", &self.m_sortedChildren)?;
+            serializer
+                .skip_array_field(
+                    "sortedChildren",
+                    &self.m_sortedChildren,
+                    TypeSize::NonPtr,
+                )?;
             serializer.skip_field("endIntervalWeight", &self.m_endIntervalWeight)?;
             serializer.skip_field("numActiveChildren", &self.m_numActiveChildren)?;
             serializer.skip_field("beginIntervalIndex", &self.m_beginIntervalIndex)?;
@@ -215,19 +223,6 @@ const _: () = {
             serializer.skip_field("initSync", &self.m_initSync)?;
             serializer.skip_field("doSubtractiveBlend", &self.m_doSubtractiveBlend)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 2usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.parent.parent.m_cachedBindables,
-                )?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
-            serializer.serialize_array_field("children", &self.m_children)?;
-            serializer
-                .serialize_array_field(
-                    "childrenInternalStates",
-                    &self.m_childrenInternalStates,
-                )?;
-            serializer.serialize_array_field("sortedChildren", &self.m_sortedChildren)?;
             serializer.end()
         }
     }

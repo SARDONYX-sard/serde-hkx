@@ -65,6 +65,7 @@ const _: () = {
                 .serialize_struct(
                     "hkpEntitySmallArraySerializeOverrideType",
                     class_meta,
+                    (8u64, 16u64),
                 )?;
             serializer.skip_field("data", &self.m_data)?;
             serializer.serialize_field("size", &self.m_size)?;

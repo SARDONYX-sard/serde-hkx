@@ -125,7 +125,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xde3ab602)));
             let mut serializer = __serializer
-                .serialize_struct("hkMultipleVertexBuffer", class_meta)?;
+                .serialize_struct(
+                    "hkMultipleVertexBuffer",
+                    class_meta,
+                    (324u64, 352u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -135,13 +139,32 @@ const _: () = {
             serializer.serialize_field("vertexFormat", &self.m_vertexFormat)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field("lockedElements", &self.m_lockedElements)?;
+                .serialize_array_field(
+                    "lockedElements",
+                    &self.m_lockedElements,
+                    TypeSize::Struct {
+                        size_x86: 7u64,
+                        size_x86_64: 7u64,
+                    },
+                )?;
             serializer.serialize_field("lockedBuffer", &self.m_lockedBuffer)?;
-            serializer.serialize_array_meta_field("elementInfos", &self.m_elementInfos)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
+                    "elementInfos",
+                    &self.m_elementInfos,
+                    TypeSize::Struct {
+                        size_x86: 2u64,
+                        size_x86_64: 2u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
                     "vertexBufferInfos",
                     &self.m_vertexBufferInfos,
+                    TypeSize::Struct {
+                        size_x86: 12u64,
+                        size_x86_64: 24u64,
+                    },
                 )?;
             serializer.serialize_field("numVertices", &self.m_numVertices)?;
             serializer.serialize_field("isLocked", &self.m_isLocked)?;
@@ -152,10 +175,6 @@ const _: () = {
             serializer
                 .serialize_field("constructionComplete", &self.m_constructionComplete)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
-            serializer.serialize_array_field("lockedElements", &self.m_lockedElements)?;
-            serializer.serialize_array_field("elementInfos", &self.m_elementInfos)?;
-            serializer
-                .serialize_array_field("vertexBufferInfos", &self.m_vertexBufferInfos)?;
             serializer.end()
         }
     }

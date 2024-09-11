@@ -50,9 +50,8 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xedb6b8f7)));
             let mut serializer = __serializer
-                .serialize_struct("hkReflectedFileAttribute", class_meta)?;
-            serializer.serialize_cstring_meta_field("value", &self.m_value)?;
-            serializer.serialize_cstring_field("value", &self.m_value)?;
+                .serialize_struct("hkReflectedFileAttribute", class_meta, (4u64, 8u64))?;
+            serializer.serialize_field("value", &self.m_value)?;
             serializer.end()
         }
     }

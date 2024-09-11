@@ -55,11 +55,10 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xce6f8a6c)));
             let mut serializer = __serializer
-                .serialize_struct("hkClassEnumItem", class_meta)?;
+                .serialize_struct("hkClassEnumItem", class_meta, (8u64, 16u64))?;
             serializer.serialize_field("value", &self.m_value)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_cstring_meta_field("name", &self.m_name)?;
-            serializer.serialize_cstring_field("name", &self.m_name)?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.end()
         }
     }

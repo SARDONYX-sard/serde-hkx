@@ -73,7 +73,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x450b26e8)));
             let mut serializer = __serializer
-                .serialize_struct("hkpConvexListShape", class_meta)?;
+                .serialize_struct("hkpConvexListShape", class_meta, (80u64, 128u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -103,9 +103,13 @@ const _: () = {
             serializer.serialize_field("aabbCenter", &self.m_aabbCenter)?;
             serializer.serialize_field("useCachedAabb", &self.m_useCachedAabb)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_array_meta_field("childShapes", &self.m_childShapes)?;
+            serializer
+                .serialize_array_field(
+                    "childShapes",
+                    &self.m_childShapes,
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer.serialize_array_field("childShapes", &self.m_childShapes)?;
             serializer.end()
         }
     }

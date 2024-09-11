@@ -82,23 +82,21 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x2db6577c)));
             let mut serializer = __serializer
-                .serialize_struct("hkMemoryMeshTexture", class_meta)?;
+                .serialize_struct("hkMemoryMeshTexture", class_meta, (32u64, 48u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
             serializer
                 .skip_field("referenceCount", &self.parent.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_meta_field("filename", &self.m_filename)?;
-            serializer.serialize_array_meta_field("data", &self.m_data)?;
+            serializer.serialize_field("filename", &self.m_filename)?;
+            serializer.serialize_array_field("data", &self.m_data, TypeSize::NonPtr)?;
             serializer.serialize_field("format", &self.m_format)?;
             serializer.serialize_field("hasMipMaps", &self.m_hasMipMaps)?;
             serializer.serialize_field("filterMode", &self.m_filterMode)?;
             serializer.serialize_field("usageHint", &self.m_usageHint)?;
             serializer
                 .serialize_field("textureCoordChannel", &self.m_textureCoordChannel)?;
-            serializer.serialize_stringptr_field("filename", &self.m_filename)?;
-            serializer.serialize_array_field("data", &self.m_data)?;
             serializer.end()
         }
     }

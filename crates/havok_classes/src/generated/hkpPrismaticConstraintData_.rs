@@ -54,7 +54,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x3996c387)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPrismaticConstraintData", class_meta)?;
+                .serialize_struct(
+                    "hkpPrismaticConstraintData",
+                    class_meta,
+                    (208u64, 240u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;

@@ -95,7 +95,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x82fe40e0)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleDataWheelComponentParams", class_meta)?;
+                .serialize_struct(
+                    "hkpVehicleDataWheelComponentParams",
+                    class_meta,
+                    (40u64, 40u64),
+                )?;
             serializer.serialize_field("radius", &self.m_radius)?;
             serializer.serialize_field("mass", &self.m_mass)?;
             serializer.serialize_field("width", &self.m_width)?;

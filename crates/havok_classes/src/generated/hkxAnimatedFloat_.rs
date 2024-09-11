@@ -57,15 +57,15 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xce8b2fbd)));
             let mut serializer = __serializer
-                .serialize_struct("hkxAnimatedFloat", class_meta)?;
+                .serialize_struct("hkxAnimatedFloat", class_meta, (24u64, 40u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("floats", &self.m_floats)?;
+            serializer
+                .serialize_array_field("floats", &self.m_floats, TypeSize::NonPtr)?;
             serializer.serialize_field("hint", &self.m_hint)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_array_field("floats", &self.m_floats)?;
             serializer.end()
         }
     }

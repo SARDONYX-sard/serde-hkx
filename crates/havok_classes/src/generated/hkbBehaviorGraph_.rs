@@ -245,7 +245,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xb1218f86)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBehaviorGraph", class_meta)?;
+                .serialize_struct("hkbBehaviorGraph", class_meta, (176u64, 304u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -264,9 +264,10 @@ const _: () = {
                     &self.parent.parent.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.parent.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field(
@@ -275,28 +276,34 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.skip_field("id", &self.parent.parent.m_id)?;
             serializer.skip_field("cloneState", &self.parent.parent.m_cloneState)?;
             serializer
                 .skip_fixed_array_field(
                     "padNode",
                     self.parent.parent.m_padNode.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("variableMode", &self.m_variableMode)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.skip_array_meta_field("uniqueIdPool", &self.m_uniqueIdPool)?;
+            serializer
+                .skip_array_field(
+                    "uniqueIdPool",
+                    &self.m_uniqueIdPool,
+                    TypeSize::NonPtr,
+                )?;
             serializer
                 .skip_field(
                     "idToStateMachineTemplateMap",
                     &self.m_idToStateMachineTemplateMap,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "mirroredExternalIdMap",
                     &self.m_mirroredExternalIdMap,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field("pseudoRandomGenerator", &self.m_pseudoRandomGenerator)?;
@@ -334,11 +341,12 @@ const _: () = {
             serializer
                 .skip_field("numIntermediateOutputs", &self.m_numIntermediateOutputs)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.skip_array_meta_field("jobs", &self.m_jobs)?;
+            serializer.skip_array_field("jobs", &self.m_jobs, TypeSize::NonPtr)?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "allPartitionMemory",
                     &self.m_allPartitionMemory,
+                    TypeSize::NonPtr,
                 )?;
             serializer.skip_field("numStaticNodes", &self.m_numStaticNodes)?;
             serializer.skip_field("nextUniqueId", &self.m_nextUniqueId)?;
@@ -349,24 +357,6 @@ const _: () = {
                 .skip_field(
                     "stateOrTransitionChanged",
                     &self.m_stateOrTransitionChanged,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.parent.parent.m_cachedBindables,
-                )?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
-            serializer.serialize_array_field("uniqueIdPool", &self.m_uniqueIdPool)?;
-            serializer
-                .serialize_array_field(
-                    "mirroredExternalIdMap",
-                    &self.m_mirroredExternalIdMap,
-                )?;
-            serializer.serialize_array_field("jobs", &self.m_jobs)?;
-            serializer
-                .serialize_array_field(
-                    "allPartitionMemory",
-                    &self.m_allPartitionMemory,
                 )?;
             serializer.end()
         }

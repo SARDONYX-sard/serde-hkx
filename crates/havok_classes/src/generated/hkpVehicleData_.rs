@@ -150,7 +150,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x173feb43)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleData", class_meta)?;
+                .serialize_struct("hkpVehicleData", class_meta, (416u64, 416u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -197,11 +197,20 @@ const _: () = {
                     &self.m_maxFrictionSolverMassRatio,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("wheelParams", &self.m_wheelParams)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
+                    "wheelParams",
+                    &self.m_wheelParams,
+                    TypeSize::Struct {
+                        size_x86: 40u64,
+                        size_x86_64: 40u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
                     "numWheelsPerAxle",
                     &self.m_numWheelsPerAxle,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .serialize_field("frictionDescription", &self.m_frictionDescription)?;
@@ -214,9 +223,6 @@ const _: () = {
             serializer
                 .serialize_field("alreadyInitialised", &self.m_alreadyInitialised)?;
             serializer.pad_field([0u8; 15usize].as_slice(), [0u8; 15usize].as_slice())?;
-            serializer.serialize_array_field("wheelParams", &self.m_wheelParams)?;
-            serializer
-                .serialize_array_field("numWheelsPerAxle", &self.m_numWheelsPerAxle)?;
             serializer.end()
         }
     }

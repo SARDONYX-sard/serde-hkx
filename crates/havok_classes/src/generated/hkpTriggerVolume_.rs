@@ -76,24 +76,30 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa29a8d1a)));
             let mut serializer = __serializer
-                .serialize_struct("hkpTriggerVolume", class_meta)?;
+                .serialize_struct("hkpTriggerVolume", class_meta, (52u64, 88u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 24usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "overlappingBodies",
                     &self.m_overlappingBodies,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_array_meta_field("eventQueue", &self.m_eventQueue)?;
+            serializer
+                .serialize_array_field(
+                    "eventQueue",
+                    &self.m_eventQueue,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 24u64,
+                    },
+                )?;
             serializer.serialize_field("triggerBody", &self.m_triggerBody)?;
             serializer.serialize_field("sequenceNumber", &self.m_sequenceNumber)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer
-                .serialize_array_field("overlappingBodies", &self.m_overlappingBodies)?;
-            serializer.serialize_array_field("eventQueue", &self.m_eventQueue)?;
             serializer.end()
         }
     }

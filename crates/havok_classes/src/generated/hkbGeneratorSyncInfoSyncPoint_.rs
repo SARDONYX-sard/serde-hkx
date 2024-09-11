@@ -55,7 +55,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xb597cf92)));
             let mut serializer = __serializer
-                .serialize_struct("hkbGeneratorSyncInfoSyncPoint", class_meta)?;
+                .serialize_struct(
+                    "hkbGeneratorSyncInfoSyncPoint",
+                    class_meta,
+                    (8u64, 8u64),
+                )?;
             serializer.serialize_field("id", &self.m_id)?;
             serializer.serialize_field("time", &self.m_time)?;
             serializer.end()

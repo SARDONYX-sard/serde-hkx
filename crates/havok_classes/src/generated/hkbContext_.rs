@@ -113,7 +113,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe0c4d4a7)));
             let mut serializer = __serializer
-                .serialize_struct("hkbContext", class_meta)?;
+                .serialize_struct("hkbContext", class_meta, (40u64, 80u64))?;
             serializer.skip_field("character", &self.m_character)?;
             serializer.skip_field("behavior", &self.m_behavior)?;
             serializer.skip_field("nodeToIndexMap", &self.m_nodeToIndexMap)?;

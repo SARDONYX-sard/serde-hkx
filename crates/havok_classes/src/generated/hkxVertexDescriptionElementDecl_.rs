@@ -70,7 +70,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x483a429b)));
             let mut serializer = __serializer
-                .serialize_struct("hkxVertexDescriptionElementDecl", class_meta)?;
+                .serialize_struct(
+                    "hkxVertexDescriptionElementDecl",
+                    class_meta,
+                    (16u64, 16u64),
+                )?;
             serializer.serialize_field("byteOffset", &self.m_byteOffset)?;
             serializer.serialize_field("type", &self.m_type)?;
             serializer.serialize_field("usage", &self.m_usage)?;

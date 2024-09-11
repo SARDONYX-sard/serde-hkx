@@ -61,7 +61,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x9ce308e9)));
             let mut serializer = __serializer
-                .serialize_struct("hkpProperty", class_meta)?;
+                .serialize_struct("hkpProperty", class_meta, (16u64, 16u64))?;
             serializer.serialize_field("key", &self.m_key)?;
             serializer.serialize_field("alignmentPadding", &self.m_alignmentPadding)?;
             serializer.serialize_field("value", &self.m_value)?;

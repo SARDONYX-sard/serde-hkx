@@ -85,7 +85,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa6fa7e88)));
             let mut serializer = __serializer
-                .serialize_struct("hkaAnimation", class_meta)?;
+                .serialize_struct("hkaAnimation", class_meta, (40u64, 56u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -101,12 +101,14 @@ const _: () = {
                 .serialize_field("numberOfFloatTracks", &self.m_numberOfFloatTracks)?;
             serializer.serialize_field("extractedMotion", &self.m_extractedMotion)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "annotationTracks",
                     &self.m_annotationTracks,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 24u64,
+                    },
                 )?;
-            serializer
-                .serialize_array_field("annotationTracks", &self.m_annotationTracks)?;
             serializer.end()
         }
     }

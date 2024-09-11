@@ -72,7 +72,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x75f8d805)));
             let mut serializer = __serializer
-                .serialize_struct("hkpRigidBody", class_meta)?;
+                .serialize_struct("hkpRigidBody", class_meta, (544u64, 720u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -94,12 +94,15 @@ const _: () = {
                     &self.parent.parent.m_multiThreadCheck,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
-            serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "properties",
                     &self.parent.parent.m_properties,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 16u64,
+                    },
                 )?;
             serializer.skip_field("treeData", &self.parent.parent.m_treeData)?;
             serializer.serialize_field("material", &self.parent.m_material)?;
@@ -123,14 +126,16 @@ const _: () = {
             serializer
                 .skip_field("constraintsMaster", &self.parent.m_constraintsMaster)?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "constraintsSlave",
                     &self.parent.m_constraintsSlave,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "constraintRuntime",
                     &self.parent.m_constraintRuntime,
+                    TypeSize::NonPtr,
                 )?;
             serializer.skip_field("simulationIsland", &self.parent.m_simulationIsland)?;
             serializer
@@ -160,19 +165,6 @@ const _: () = {
                 .skip_field("extendedListeners", &self.parent.m_extendedListeners)?;
             serializer.serialize_field("npData", &self.parent.m_npData)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 12usize].as_slice())?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
-            serializer
-                .serialize_array_field("properties", &self.parent.parent.m_properties)?;
-            serializer
-                .serialize_array_field(
-                    "constraintsSlave",
-                    &self.parent.m_constraintsSlave,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "constraintRuntime",
-                    &self.parent.m_constraintRuntime,
-                )?;
             serializer.end()
         }
     }

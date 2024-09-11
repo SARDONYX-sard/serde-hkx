@@ -62,7 +62,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x8f0411c8)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleDefaultSteering", class_meta)?;
+                .serialize_struct(
+                    "hkpVehicleDefaultSteering",
+                    class_meta,
+                    (28u64, 40u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -76,8 +80,11 @@ const _: () = {
                     &self.m_maxSpeedFullSteeringAngle,
                 )?;
             serializer
-                .serialize_array_meta_field("doesWheelSteer", &self.m_doesWheelSteer)?;
-            serializer.serialize_array_field("doesWheelSteer", &self.m_doesWheelSteer)?;
+                .serialize_array_field(
+                    "doesWheelSteer",
+                    &self.m_doesWheelSteer,
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

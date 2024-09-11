@@ -69,7 +69,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x58e1e585)));
             let mut serializer = __serializer
-                .serialize_struct("hkpTriSampledHeightFieldBvTreeShape", class_meta)?;
+                .serialize_struct(
+                    "hkpTriSampledHeightFieldBvTreeShape",
+                    class_meta,
+                    (48u64, 80u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -95,7 +99,11 @@ const _: () = {
                     &self.m_wantAabbRejectionTest,
                 )?;
             serializer
-                .serialize_fixed_array_field("padding", self.m_padding.as_slice())?;
+                .serialize_fixed_array_field(
+                    "padding",
+                    self.m_padding.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.end()
         }

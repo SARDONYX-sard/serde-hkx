@@ -67,7 +67,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x94a08848)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPulleyConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpPulleyConstraintAtom",
+                    class_meta,
+                    (64u64, 64u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.pad_field([0u8; 14usize].as_slice(), [0u8; 14usize].as_slice())?;
             serializer

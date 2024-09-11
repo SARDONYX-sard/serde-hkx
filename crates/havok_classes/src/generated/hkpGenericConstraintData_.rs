@@ -59,7 +59,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xfa824640)));
             let mut serializer = __serializer
-                .serialize_struct("hkpGenericConstraintData", class_meta)?;
+                .serialize_struct(
+                    "hkpGenericConstraintData",
+                    class_meta,
+                    (88u64, 128u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;

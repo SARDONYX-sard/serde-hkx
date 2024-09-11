@@ -105,14 +105,20 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x79f9ffda)));
             let mut serializer = __serializer
-                .serialize_struct("hkPackfileHeader", class_meta)?;
-            serializer.serialize_fixed_array_field("magic", self.m_magic.as_slice())?;
+                .serialize_struct("hkPackfileHeader", class_meta, (64u64, 64u64))?;
+            serializer
+                .serialize_fixed_array_field(
+                    "magic",
+                    self.m_magic.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("userTag", &self.m_userTag)?;
             serializer.serialize_field("fileVersion", &self.m_fileVersion)?;
             serializer
                 .serialize_fixed_array_field(
                     "layoutRules",
                     self.m_layoutRules.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("numSections", &self.m_numSections)?;
             serializer
@@ -136,9 +142,15 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "contentsVersion",
                     self.m_contentsVersion.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("flags", &self.m_flags)?;
-            serializer.serialize_fixed_array_field("pad", self.m_pad.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "pad",
+                    self.m_pad.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

@@ -81,7 +81,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x29efee59)));
             let mut serializer = __serializer
-                .serialize_struct("BSLookAtModifierBoneData", class_meta)?;
+                .serialize_struct(
+                    "BSLookAtModifierBoneData",
+                    class_meta,
+                    (64u64, 64u64),
+                )?;
             serializer.serialize_field("index", &self.m_index)?;
             serializer.pad_field([0u8; 14usize].as_slice(), [0u8; 14usize].as_slice())?;
             serializer.serialize_field("fwdAxisLS", &self.m_fwdAxisLS)?;

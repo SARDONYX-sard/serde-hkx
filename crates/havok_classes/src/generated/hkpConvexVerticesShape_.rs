@@ -99,7 +99,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x28726ad8)));
             let mut serializer = __serializer
-                .serialize_struct("hkpConvexVerticesShape", class_meta)?;
+                .serialize_struct(
+                    "hkpConvexVerticesShape",
+                    class_meta,
+                    (112u64, 144u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -122,18 +126,26 @@ const _: () = {
             serializer.serialize_field("aabbHalfExtents", &self.m_aabbHalfExtents)?;
             serializer.serialize_field("aabbCenter", &self.m_aabbCenter)?;
             serializer
-                .serialize_array_meta_field("rotatedVertices", &self.m_rotatedVertices)?;
+                .serialize_array_field(
+                    "rotatedVertices",
+                    &self.m_rotatedVertices,
+                    TypeSize::Struct {
+                        size_x86: 48u64,
+                        size_x86_64: 48u64,
+                    },
+                )?;
             serializer.serialize_field("numVertices", &self.m_numVertices)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.skip_field("externalObject", &self.m_externalObject)?;
             serializer.skip_field("getFaceNormals", &self.m_getFaceNormals)?;
             serializer
-                .serialize_array_meta_field("planeEquations", &self.m_planeEquations)?;
+                .serialize_array_field(
+                    "planeEquations",
+                    &self.m_planeEquations,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("connectivity", &self.m_connectivity)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
-            serializer
-                .serialize_array_field("rotatedVertices", &self.m_rotatedVertices)?;
-            serializer.serialize_array_field("planeEquations", &self.m_planeEquations)?;
             serializer.end()
         }
     }

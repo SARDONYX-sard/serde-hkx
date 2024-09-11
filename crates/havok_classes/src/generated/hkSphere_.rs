@@ -49,7 +49,8 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x143dff99)));
-            let mut serializer = __serializer.serialize_struct("hkSphere", class_meta)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkSphere", class_meta, (16u64, 16u64))?;
             serializer.serialize_field("pos", &self.m_pos)?;
             serializer.end()
         }

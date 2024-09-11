@@ -52,20 +52,14 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x5ab50487)));
             let mut serializer = __serializer
-                .serialize_struct("hkbStringCondition", class_meta)?;
+                .serialize_struct("hkbStringCondition", class_meta, (12u64, 24u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
             serializer
                 .skip_field("referenceCount", &self.parent.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer
-                .serialize_stringptr_meta_field(
-                    "conditionString",
-                    &self.m_conditionString,
-                )?;
-            serializer
-                .serialize_stringptr_field("conditionString", &self.m_conditionString)?;
+            serializer.serialize_field("conditionString", &self.m_conditionString)?;
             serializer.end()
         }
     }

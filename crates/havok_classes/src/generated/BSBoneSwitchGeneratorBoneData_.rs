@@ -61,7 +61,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc1215be6)));
             let mut serializer = __serializer
-                .serialize_struct("BSBoneSwitchGeneratorBoneData", class_meta)?;
+                .serialize_struct(
+                    "BSBoneSwitchGeneratorBoneData",
+                    class_meta,
+                    (48u64, 64u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -74,9 +78,10 @@ const _: () = {
                     &self.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field("areBindablesCached", &self.parent.m_areBindablesCached)?;
@@ -85,11 +90,6 @@ const _: () = {
             serializer.serialize_field("pGenerator", &self.m_pGenerator)?;
             serializer.serialize_field("spBoneWeight", &self.m_spBoneWeight)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.m_cachedBindables,
-                )?;
             serializer.end()
         }
     }

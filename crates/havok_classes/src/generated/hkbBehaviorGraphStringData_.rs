@@ -67,28 +67,38 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc713064e)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBehaviorGraphStringData", class_meta)?;
+                .serialize_struct(
+                    "hkbBehaviorGraphStringData",
+                    class_meta,
+                    (56u64, 80u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("eventNames", &self.m_eventNames)?;
             serializer
-                .serialize_array_meta_field("attributeNames", &self.m_attributeNames)?;
-            serializer
-                .serialize_array_meta_field("variableNames", &self.m_variableNames)?;
-            serializer
-                .serialize_array_meta_field(
-                    "characterPropertyNames",
-                    &self.m_characterPropertyNames,
+                .serialize_array_field(
+                    "eventNames",
+                    &self.m_eventNames,
+                    TypeSize::String,
                 )?;
-            serializer.serialize_array_field("eventNames", &self.m_eventNames)?;
-            serializer.serialize_array_field("attributeNames", &self.m_attributeNames)?;
-            serializer.serialize_array_field("variableNames", &self.m_variableNames)?;
+            serializer
+                .serialize_array_field(
+                    "attributeNames",
+                    &self.m_attributeNames,
+                    TypeSize::String,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "variableNames",
+                    &self.m_variableNames,
+                    TypeSize::String,
+                )?;
             serializer
                 .serialize_array_field(
                     "characterPropertyNames",
                     &self.m_characterPropertyNames,
+                    TypeSize::String,
                 )?;
             serializer.end()
         }

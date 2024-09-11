@@ -55,7 +55,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xbb708bbd)));
             let mut serializer = __serializer
-                .serialize_struct("hkbRealVariableSequencedDataSample", class_meta)?;
+                .serialize_struct(
+                    "hkbRealVariableSequencedDataSample",
+                    class_meta,
+                    (8u64, 8u64),
+                )?;
             serializer.serialize_field("time", &self.m_time)?;
             serializer.serialize_field("value", &self.m_value)?;
             serializer.end()

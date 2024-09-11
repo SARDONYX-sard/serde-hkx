@@ -94,8 +94,8 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x5c7ea4c2)));
             let mut serializer = __serializer
-                .serialize_struct("hkClassMember", class_meta)?;
-            serializer.serialize_cstring_meta_field("name", &self.m_name)?;
+                .serialize_struct("hkClassMember", class_meta, (24u64, 40u64))?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.serialize_field("class", &self.m_class)?;
             serializer.serialize_field("enum", &self.m_enum)?;
             serializer.serialize_field("type", &self.m_type)?;
@@ -104,7 +104,6 @@ const _: () = {
             serializer.serialize_field("flags", &self.m_flags)?;
             serializer.serialize_field("offset", &self.m_offset)?;
             serializer.skip_field("attributes", &self.m_attributes)?;
-            serializer.serialize_cstring_field("name", &self.m_name)?;
             serializer.end()
         }
     }

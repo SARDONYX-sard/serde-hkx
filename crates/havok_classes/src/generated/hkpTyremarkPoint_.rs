@@ -55,7 +55,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x6bb7c5e8)));
             let mut serializer = __serializer
-                .serialize_struct("hkpTyremarkPoint", class_meta)?;
+                .serialize_struct("hkpTyremarkPoint", class_meta, (32u64, 32u64))?;
             serializer.serialize_field("pointLeft", &self.m_pointLeft)?;
             serializer.serialize_field("pointRight", &self.m_pointRight)?;
             serializer.end()

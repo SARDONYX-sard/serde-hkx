@@ -62,7 +62,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x2ca3e906)));
             let mut serializer = __serializer
-                .serialize_struct("hkpStorageExtendedMeshShapeMaterial", class_meta)?;
+                .serialize_struct(
+                    "hkpStorageExtendedMeshShapeMaterial",
+                    class_meta,
+                    (12u64, 16u64),
+                )?;
             serializer.serialize_field("filterInfo", &self.parent.m_filterInfo)?;
             serializer.serialize_field("restitution", &self.m_restitution)?;
             serializer.serialize_field("friction", &self.m_friction)?;

@@ -50,7 +50,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x5874eed4)));
             let mut serializer = __serializer
-                .serialize_struct("hkbEventInfo", class_meta)?;
+                .serialize_struct("hkbEventInfo", class_meta, (4u64, 4u64))?;
             serializer.serialize_field("flags", &self.m_flags)?;
             serializer.end()
         }

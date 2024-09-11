@@ -65,7 +65,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x2c1432d7)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBindable", class_meta)?;
+                .serialize_struct("hkbBindable", class_meta, (28u64, 48u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -73,11 +73,13 @@ const _: () = {
             serializer
                 .serialize_field("variableBindingSet", &self.m_variableBindingSet)?;
             serializer
-                .skip_array_meta_field("cachedBindables", &self.m_cachedBindables)?;
+                .skip_array_field(
+                    "cachedBindables",
+                    &self.m_cachedBindables,
+                    TypeSize::NonPtr,
+                )?;
             serializer.skip_field("areBindablesCached", &self.m_areBindablesCached)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer
-                .serialize_array_field("cachedBindables", &self.m_cachedBindables)?;
             serializer.end()
         }
     }

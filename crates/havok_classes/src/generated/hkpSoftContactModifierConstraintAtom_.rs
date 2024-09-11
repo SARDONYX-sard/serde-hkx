@@ -58,7 +58,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xecb34e27)));
             let mut serializer = __serializer
-                .serialize_struct("hkpSoftContactModifierConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpSoftContactModifierConstraintAtom",
+                    class_meta,
+                    (48u64, 64u64),
+                )?;
             serializer.serialize_field("type", &self.parent.parent.m_type)?;
             serializer.pad_field([0u8; 14usize].as_slice(), [0u8; 14usize].as_slice())?;
             serializer
@@ -66,7 +70,12 @@ const _: () = {
             serializer.serialize_field("childSize", &self.parent.m_childSize)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("child", &self.parent.m_child)?;
-            serializer.serialize_fixed_array_field("pad", self.parent.m_pad.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "pad",
+                    self.parent.m_pad.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("tau", &self.m_tau)?;
             serializer.serialize_field("maxAcceleration", &self.m_maxAcceleration)?;

@@ -52,7 +52,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf8f74f85)));
             let mut serializer = __serializer
-                .serialize_struct("hkpConvexShape", class_meta)?;
+                .serialize_struct("hkpConvexShape", class_meta, (20u64, 40u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(

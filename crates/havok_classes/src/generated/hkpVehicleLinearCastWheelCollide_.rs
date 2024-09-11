@@ -80,7 +80,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc59399d0)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleLinearCastWheelCollide", class_meta)?;
+                .serialize_struct(
+                    "hkpVehicleLinearCastWheelCollide",
+                    class_meta,
+                    (52u64, 80u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -96,7 +100,15 @@ const _: () = {
                     &self.m_wheelCollisionFilterInfo,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("wheelStates", &self.m_wheelStates)?;
+            serializer
+                .serialize_array_field(
+                    "wheelStates",
+                    &self.m_wheelStates,
+                    TypeSize::Struct {
+                        size_x86: 96u64,
+                        size_x86_64: 96u64,
+                    },
+                )?;
             serializer
                 .serialize_field(
                     "rejectChassisListener",
@@ -106,7 +118,6 @@ const _: () = {
                 .serialize_field("maxExtraPenetration", &self.m_maxExtraPenetration)?;
             serializer
                 .serialize_field("startPointTolerance", &self.m_startPointTolerance)?;
-            serializer.serialize_array_field("wheelStates", &self.m_wheelStates)?;
             serializer.end()
         }
     }

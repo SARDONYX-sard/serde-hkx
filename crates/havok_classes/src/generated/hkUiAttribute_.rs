@@ -85,28 +85,18 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xeb6e96e3)));
             let mut serializer = __serializer
-                .serialize_struct("hkUiAttribute", class_meta)?;
+                .serialize_struct("hkUiAttribute", class_meta, (20u64, 40u64))?;
             serializer.serialize_field("visible", &self.m_visible)?;
             serializer.serialize_field("hideInModeler", &self.m_hideInModeler)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 6usize].as_slice())?;
-            serializer.serialize_cstring_meta_field("label", &self.m_label)?;
-            serializer.serialize_cstring_meta_field("group", &self.m_group)?;
+            serializer.serialize_field("label", &self.m_label)?;
+            serializer.serialize_field("group", &self.m_group)?;
             serializer
-                .serialize_cstring_meta_field(
-                    "hideBaseClassMembers",
-                    &self.m_hideBaseClassMembers,
-                )?;
+                .serialize_field("hideBaseClassMembers", &self.m_hideBaseClassMembers)?;
             serializer.serialize_field("endGroup", &self.m_endGroup)?;
             serializer.serialize_field("endGroup2", &self.m_endGroup2)?;
             serializer.serialize_field("advanced", &self.m_advanced)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 5usize].as_slice())?;
-            serializer.serialize_cstring_field("label", &self.m_label)?;
-            serializer.serialize_cstring_field("group", &self.m_group)?;
-            serializer
-                .serialize_cstring_field(
-                    "hideBaseClassMembers",
-                    &self.m_hideBaseClassMembers,
-                )?;
             serializer.end()
         }
     }

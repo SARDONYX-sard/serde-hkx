@@ -71,7 +71,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x4762f92a)));
             let mut serializer = __serializer
-                .serialize_struct("hkMemoryResourceContainer", class_meta)?;
+                .serialize_struct(
+                    "hkMemoryResourceContainer",
+                    class_meta,
+                    (40u64, 64u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -84,15 +88,16 @@ const _: () = {
                     &self.parent.parent.parent.m_referenceCount,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.skip_field("parent", &self.m_parent)?;
             serializer
-                .serialize_array_meta_field("resourceHandles", &self.m_resourceHandles)?;
-            serializer.serialize_array_meta_field("children", &self.m_children)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
+                .serialize_array_field(
+                    "resourceHandles",
+                    &self.m_resourceHandles,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_field("resourceHandles", &self.m_resourceHandles)?;
-            serializer.serialize_array_field("children", &self.m_children)?;
+                .serialize_array_field("children", &self.m_children, TypeSize::NonPtr)?;
             serializer.end()
         }
     }

@@ -130,7 +130,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x49ec7de3)));
             let mut serializer = __serializer
-                .serialize_struct("hkpSerializedAgentNnEntry", class_meta)?;
+                .serialize_struct(
+                    "hkpSerializedAgentNnEntry",
+                    class_meta,
+                    (320u64, 368u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -144,30 +148,37 @@ const _: () = {
             serializer.pad_field([0u8; 6usize].as_slice(), [0u8; 14usize].as_slice())?;
             serializer.serialize_field("atom", &self.m_atom)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "propertiesStream",
                     &self.m_propertiesStream,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .serialize_array_meta_field("contactPoints", &self.m_contactPoints)?;
-            serializer.serialize_array_meta_field("cpIdMgr", &self.m_cpIdMgr)?;
+                .serialize_array_field(
+                    "contactPoints",
+                    &self.m_contactPoints,
+                    TypeSize::Struct {
+                        size_x86: 32u64,
+                        size_x86_64: 32u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field("cpIdMgr", &self.m_cpIdMgr, TypeSize::NonPtr)?;
             serializer
                 .serialize_fixed_array_field(
                     "nnEntryData",
                     self.m_nnEntryData.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("trackInfo", &self.m_trackInfo)?;
             serializer
                 .serialize_fixed_array_field(
                     "endianCheckBuffer",
                     self.m_endianCheckBuffer.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("version", &self.m_version)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer
-                .serialize_array_field("propertiesStream", &self.m_propertiesStream)?;
-            serializer.serialize_array_field("contactPoints", &self.m_contactPoints)?;
-            serializer.serialize_array_field("cpIdMgr", &self.m_cpIdMgr)?;
             serializer.end()
         }
     }

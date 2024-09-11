@@ -96,7 +96,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x5797386e)));
             let mut serializer = __serializer
-                .serialize_struct("hkMotionState", class_meta)?;
+                .serialize_struct("hkMotionState", class_meta, (176u64, 176u64))?;
             serializer.serialize_field("transform", &self.m_transform)?;
             serializer.serialize_field("sweptTransform", &self.m_sweptTransform)?;
             serializer.serialize_field("deltaAngle", &self.m_deltaAngle)?;

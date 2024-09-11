@@ -57,7 +57,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x85fb0b80)));
             let mut serializer = __serializer
-                .serialize_struct("hkbDelayedModifierInternalState", class_meta)?;
+                .serialize_struct(
+                    "hkbDelayedModifierInternalState",
+                    class_meta,
+                    (16u64, 24u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;

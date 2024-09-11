@@ -75,7 +75,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa528f7cf)));
             let mut serializer = __serializer
-                .serialize_struct("hkaSkeletonMapperDataChainMapping", class_meta)?;
+                .serialize_struct(
+                    "hkaSkeletonMapperDataChainMapping",
+                    class_meta,
+                    (112u64, 112u64),
+                )?;
             serializer.serialize_field("startBoneA", &self.m_startBoneA)?;
             serializer.serialize_field("endBoneA", &self.m_endBoneA)?;
             serializer.serialize_field("startBoneB", &self.m_startBoneB)?;

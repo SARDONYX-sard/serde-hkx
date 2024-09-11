@@ -70,6 +70,7 @@ const _: () = {
                 .serialize_struct(
                     "hkpVehicleLinearCastWheelCollideWheelState",
                     class_meta,
+                    (96u64, 96u64),
                 )?;
             serializer.serialize_field("phantom", &self.m_phantom)?;
             serializer.serialize_field("shape", &self.m_shape)?;

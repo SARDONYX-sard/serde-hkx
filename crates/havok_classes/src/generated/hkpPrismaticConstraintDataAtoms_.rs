@@ -87,7 +87,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x7f516137)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPrismaticConstraintDataAtoms", class_meta)?;
+                .serialize_struct(
+                    "hkpPrismaticConstraintDataAtoms",
+                    class_meta,
+                    (192u64, 208u64),
+                )?;
             serializer.serialize_field("transforms", &self.m_transforms)?;
             serializer.serialize_field("motor", &self.m_motor)?;
             serializer.serialize_field("friction", &self.m_friction)?;

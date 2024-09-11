@@ -65,6 +65,7 @@ const _: () = {
                 .serialize_struct(
                     "hkpPairCollisionFilterMapPairFilterKeyOverrideType",
                     class_meta,
+                    (12u64, 16u64),
                 )?;
             serializer.skip_field("elem", &self.m_elem)?;
             serializer.serialize_field("numElems", &self.m_numElems)?;

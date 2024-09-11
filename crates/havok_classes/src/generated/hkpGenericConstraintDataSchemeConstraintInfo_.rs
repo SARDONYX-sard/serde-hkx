@@ -68,6 +68,7 @@ const _: () = {
                 .serialize_struct(
                     "hkpGenericConstraintDataSchemeConstraintInfo",
                     class_meta,
+                    (16u64, 16u64),
                 )?;
             serializer.serialize_field("maxSizeOfSchema", &self.m_maxSizeOfSchema)?;
             serializer.serialize_field("sizeOfSchemas", &self.m_sizeOfSchemas)?;

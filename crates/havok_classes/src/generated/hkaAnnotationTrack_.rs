@@ -62,11 +62,17 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xd4114fdd)));
             let mut serializer = __serializer
-                .serialize_struct("hkaAnnotationTrack", class_meta)?;
-            serializer.serialize_stringptr_meta_field("trackName", &self.m_trackName)?;
-            serializer.serialize_array_meta_field("annotations", &self.m_annotations)?;
-            serializer.serialize_stringptr_field("trackName", &self.m_trackName)?;
-            serializer.serialize_array_field("annotations", &self.m_annotations)?;
+                .serialize_struct("hkaAnnotationTrack", class_meta, (16u64, 24u64))?;
+            serializer.serialize_field("trackName", &self.m_trackName)?;
+            serializer
+                .serialize_array_field(
+                    "annotations",
+                    &self.m_annotations,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.end()
         }
     }

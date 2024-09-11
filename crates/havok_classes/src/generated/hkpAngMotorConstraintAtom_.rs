@@ -83,7 +83,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x81f087ff)));
             let mut serializer = __serializer
-                .serialize_struct("hkpAngMotorConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpAngMotorConstraintAtom",
+                    class_meta,
+                    (20u64, 24u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.serialize_field("isEnabled", &self.m_isEnabled)?;
             serializer.serialize_field("motorAxis", &self.m_motorAxis)?;

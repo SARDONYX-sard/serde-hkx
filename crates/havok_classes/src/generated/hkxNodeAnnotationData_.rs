@@ -55,12 +55,10 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x433dee92)));
             let mut serializer = __serializer
-                .serialize_struct("hkxNodeAnnotationData", class_meta)?;
+                .serialize_struct("hkxNodeAnnotationData", class_meta, (8u64, 16u64))?;
             serializer.serialize_field("time", &self.m_time)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer
-                .serialize_stringptr_meta_field("description", &self.m_description)?;
-            serializer.serialize_stringptr_field("description", &self.m_description)?;
+            serializer.serialize_field("description", &self.m_description)?;
             serializer.end()
         }
     }

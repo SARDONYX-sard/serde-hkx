@@ -93,7 +93,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xeed76b00)));
             let mut serializer = __serializer
-                .serialize_struct("hkpRagdollConstraintDataAtoms", class_meta)?;
+                .serialize_struct(
+                    "hkpRagdollConstraintDataAtoms",
+                    class_meta,
+                    (336u64, 352u64),
+                )?;
             serializer.serialize_field("transforms", &self.m_transforms)?;
             serializer
                 .serialize_field("setupStabilization", &self.m_setupStabilization)?;

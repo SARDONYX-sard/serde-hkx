@@ -73,19 +73,20 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc5160b64)));
             let mut serializer = __serializer
-                .serialize_struct("hkbSetNodePropertyCommand", class_meta)?;
+                .serialize_struct(
+                    "hkbSetNodePropertyCommand",
+                    class_meta,
+                    (32u64, 48u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("characterId", &self.m_characterId)?;
-            serializer.serialize_stringptr_meta_field("nodeName", &self.m_nodeName)?;
-            serializer
-                .serialize_stringptr_meta_field("propertyName", &self.m_propertyName)?;
+            serializer.serialize_field("nodeName", &self.m_nodeName)?;
+            serializer.serialize_field("propertyName", &self.m_propertyName)?;
             serializer.serialize_field("propertyValue", &self.m_propertyValue)?;
             serializer.serialize_field("padding", &self.m_padding)?;
-            serializer.serialize_stringptr_field("nodeName", &self.m_nodeName)?;
-            serializer.serialize_stringptr_field("propertyName", &self.m_propertyName)?;
             serializer.end()
         }
     }

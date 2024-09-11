@@ -65,7 +65,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x7a490753)));
             let mut serializer = __serializer
-                .serialize_struct("hkpConstraintChainInstance", class_meta)?;
+                .serialize_struct(
+                    "hkpConstraintChainInstance",
+                    class_meta,
+                    (72u64, 136u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -83,6 +87,10 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "entities",
                     self.parent.m_entities.as_slice(),
+                    TypeSize::Struct {
+                        size_x86: 544u64,
+                        size_x86_64: 720u64,
+                    },
                 )?;
             serializer.serialize_field("priority", &self.parent.m_priority)?;
             serializer.serialize_field("wantRuntime", &self.parent.m_wantRuntime)?;
@@ -93,17 +101,18 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 5usize].as_slice())?;
             serializer.skip_field("listeners", &self.parent.m_listeners)?;
-            serializer.serialize_stringptr_meta_field("name", &self.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.m_name)?;
             serializer.serialize_field("userData", &self.parent.m_userData)?;
             serializer.skip_field("internal", &self.parent.m_internal)?;
             serializer.skip_field("uid", &self.parent.m_uid)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field("chainedEntities", &self.m_chainedEntities)?;
+                .serialize_array_field(
+                    "chainedEntities",
+                    &self.m_chainedEntities,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("action", &self.m_action)?;
-            serializer.serialize_stringptr_field("name", &self.parent.m_name)?;
-            serializer
-                .serialize_array_field("chainedEntities", &self.m_chainedEntities)?;
             serializer.end()
         }
     }

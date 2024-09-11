@@ -138,7 +138,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x43182ca3)));
             let mut serializer = __serializer
-                .serialize_struct("hkbSequence", class_meta)?;
+                .serialize_struct("hkbSequence", class_meta, (168u64, 248u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -157,9 +157,10 @@ const _: () = {
                     &self.parent.parent.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.parent.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field(
@@ -168,14 +169,14 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.skip_field("id", &self.parent.parent.m_id)?;
             serializer.skip_field("cloneState", &self.parent.parent.m_cloneState)?;
             serializer
                 .skip_fixed_array_field(
                     "padNode",
                     self.parent.parent.m_padNode.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("enable", &self.parent.m_enable)?;
@@ -183,27 +184,32 @@ const _: () = {
                 .skip_fixed_array_field(
                     "padModifier",
                     self.parent.m_padModifier.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "eventSequencedData",
                     &self.m_eventSequencedData,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "realVariableSequencedData",
                     &self.m_realVariableSequencedData,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "boolVariableSequencedData",
                     &self.m_boolVariableSequencedData,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "intVariableSequencedData",
                     &self.m_intVariableSequencedData,
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("enableEventId", &self.m_enableEventId)?;
             serializer.serialize_field("disableEventId", &self.m_disableEventId)?;
@@ -211,48 +217,32 @@ const _: () = {
             serializer.skip_field("variableIdMap", &self.m_variableIdMap)?;
             serializer.skip_field("eventIdMap", &self.m_eventIdMap)?;
             serializer
-                .skip_array_meta_field("nextSampleEvents", &self.m_nextSampleEvents)?;
+                .skip_array_field(
+                    "nextSampleEvents",
+                    &self.m_nextSampleEvents,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .skip_array_meta_field("nextSampleReals", &self.m_nextSampleReals)?;
+                .skip_array_field(
+                    "nextSampleReals",
+                    &self.m_nextSampleReals,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .skip_array_meta_field("nextSampleBools", &self.m_nextSampleBools)?;
-            serializer.skip_array_meta_field("nextSampleInts", &self.m_nextSampleInts)?;
+                .skip_array_field(
+                    "nextSampleBools",
+                    &self.m_nextSampleBools,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .skip_array_field(
+                    "nextSampleInts",
+                    &self.m_nextSampleInts,
+                    TypeSize::NonPtr,
+                )?;
             serializer.skip_field("time", &self.m_time)?;
             serializer.skip_field("isEnabled", &self.m_isEnabled)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.parent.parent.m_cachedBindables,
-                )?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
-            serializer
-                .serialize_array_field(
-                    "eventSequencedData",
-                    &self.m_eventSequencedData,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "realVariableSequencedData",
-                    &self.m_realVariableSequencedData,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "boolVariableSequencedData",
-                    &self.m_boolVariableSequencedData,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "intVariableSequencedData",
-                    &self.m_intVariableSequencedData,
-                )?;
-            serializer
-                .serialize_array_field("nextSampleEvents", &self.m_nextSampleEvents)?;
-            serializer
-                .serialize_array_field("nextSampleReals", &self.m_nextSampleReals)?;
-            serializer
-                .serialize_array_field("nextSampleBools", &self.m_nextSampleBools)?;
-            serializer.serialize_array_field("nextSampleInts", &self.m_nextSampleInts)?;
             serializer.end()
         }
     }

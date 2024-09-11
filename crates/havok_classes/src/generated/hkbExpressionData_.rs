@@ -77,8 +77,8 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x6740042a)));
             let mut serializer = __serializer
-                .serialize_struct("hkbExpressionData", class_meta)?;
-            serializer.serialize_stringptr_meta_field("expression", &self.m_expression)?;
+                .serialize_struct("hkbExpressionData", class_meta, (16u64, 24u64))?;
+            serializer.serialize_field("expression", &self.m_expression)?;
             serializer
                 .serialize_field(
                     "assignmentVariableIndex",
@@ -91,7 +91,6 @@ const _: () = {
             serializer
                 .skip_field("wasTrueInPreviousFrame", &self.m_wasTrueInPreviousFrame)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 5usize].as_slice())?;
-            serializer.serialize_stringptr_field("expression", &self.m_expression)?;
             serializer.end()
         }
     }

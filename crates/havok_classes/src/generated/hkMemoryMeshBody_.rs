@@ -75,7 +75,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x94a620a8)));
             let mut serializer = __serializer
-                .serialize_struct("hkMemoryMeshBody", class_meta)?;
+                .serialize_struct("hkMemoryMeshBody", class_meta, (112u64, 128u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -87,11 +87,13 @@ const _: () = {
             serializer.serialize_field("transformSet", &self.m_transformSet)?;
             serializer.serialize_field("shape", &self.m_shape)?;
             serializer
-                .serialize_array_meta_field("vertexBuffers", &self.m_vertexBuffers)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
+                .serialize_array_field(
+                    "vertexBuffers",
+                    &self.m_vertexBuffers,
+                    TypeSize::NonPtr,
+                )?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer.serialize_array_field("vertexBuffers", &self.m_vertexBuffers)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
             serializer.end()
         }
     }

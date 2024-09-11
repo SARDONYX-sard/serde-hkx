@@ -63,7 +63,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x3d0433d6)));
             let mut serializer = __serializer
-                .serialize_struct("hkpTyremarksInfo", class_meta)?;
+                .serialize_struct("hkpTyremarksInfo", class_meta, (28u64, 40u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -71,8 +71,11 @@ const _: () = {
             serializer.serialize_field("minTyremarkEnergy", &self.m_minTyremarkEnergy)?;
             serializer.serialize_field("maxTyremarkEnergy", &self.m_maxTyremarkEnergy)?;
             serializer
-                .serialize_array_meta_field("tyremarksWheel", &self.m_tyremarksWheel)?;
-            serializer.serialize_array_field("tyremarksWheel", &self.m_tyremarksWheel)?;
+                .serialize_array_field(
+                    "tyremarksWheel",
+                    &self.m_tyremarksWheel,
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

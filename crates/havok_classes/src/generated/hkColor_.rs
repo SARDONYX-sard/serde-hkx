@@ -44,7 +44,8 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x106b96ce)));
-            let mut serializer = __serializer.serialize_struct("hkColor", class_meta)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkColor", class_meta, (1u64, 1u64))?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
             serializer.end()
         }

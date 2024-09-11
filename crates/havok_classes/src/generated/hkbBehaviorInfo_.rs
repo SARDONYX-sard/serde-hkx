@@ -70,7 +70,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf7645395)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBehaviorInfo", class_meta)?;
+                .serialize_struct("hkbBehaviorInfo", class_meta, (32u64, 48u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -78,8 +78,14 @@ const _: () = {
             serializer.serialize_field("characterId", &self.m_characterId)?;
             serializer.serialize_field("data", &self.m_data)?;
             serializer
-                .serialize_array_meta_field("idToNamePairs", &self.m_idToNamePairs)?;
-            serializer.serialize_array_field("idToNamePairs", &self.m_idToNamePairs)?;
+                .serialize_array_field(
+                    "idToNamePairs",
+                    &self.m_idToNamePairs,
+                    TypeSize::Struct {
+                        size_x86: 12u64,
+                        size_x86_64: 24u64,
+                    },
+                )?;
             serializer.end()
         }
     }

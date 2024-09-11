@@ -54,11 +54,11 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x35912f8a)));
-            let mut serializer = __serializer.serialize_struct("hkaBone", class_meta)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkaBone", class_meta, (8u64, 16u64))?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.serialize_field("lockTranslation", &self.m_lockTranslation)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
             serializer.end()
         }
     }

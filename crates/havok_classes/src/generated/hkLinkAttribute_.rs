@@ -50,7 +50,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x255d8164)));
             let mut serializer = __serializer
-                .serialize_struct("hkLinkAttribute", class_meta)?;
+                .serialize_struct("hkLinkAttribute", class_meta, (1u64, 1u64))?;
             serializer.serialize_field("type", &self.m_type)?;
             serializer.end()
         }

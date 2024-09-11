@@ -69,14 +69,23 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xb13fef1f)));
             let mut serializer = __serializer
-                .serialize_struct("hkpModifierConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpModifierConstraintAtom",
+                    class_meta,
+                    (32u64, 48u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.pad_field([0u8; 14usize].as_slice(), [0u8; 14usize].as_slice())?;
             serializer.serialize_field("modifierAtomSize", &self.m_modifierAtomSize)?;
             serializer.serialize_field("childSize", &self.m_childSize)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("child", &self.m_child)?;
-            serializer.serialize_fixed_array_field("pad", self.m_pad.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "pad",
+                    self.m_pad.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.end()
         }

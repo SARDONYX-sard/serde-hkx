@@ -62,13 +62,21 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf05d137e)));
             let mut serializer = __serializer
-                .serialize_struct("hkpSetupStabilizationAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpSetupStabilizationAtom",
+                    class_meta,
+                    (16u64, 16u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.serialize_field("enabled", &self.m_enabled)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
             serializer.serialize_field("maxAngle", &self.m_maxAngle)?;
             serializer
-                .serialize_fixed_array_field("padding", self.m_padding.as_slice())?;
+                .serialize_fixed_array_field(
+                    "padding",
+                    self.m_padding.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

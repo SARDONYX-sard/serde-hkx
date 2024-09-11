@@ -67,7 +67,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf313aa80)));
             let mut serializer = __serializer
-                .serialize_struct("hkpAngFrictionConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpAngFrictionConstraintAtom",
+                    class_meta,
+                    (12u64, 12u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.serialize_field("isEnabled", &self.m_isEnabled)?;
             serializer.serialize_field("firstFrictionAxis", &self.m_firstFrictionAxis)?;

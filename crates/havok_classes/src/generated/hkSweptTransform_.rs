@@ -70,7 +70,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xb4e5770)));
             let mut serializer = __serializer
-                .serialize_struct("hkSweptTransform", class_meta)?;
+                .serialize_struct("hkSweptTransform", class_meta, (80u64, 80u64))?;
             serializer.serialize_field("centerOfMass0", &self.m_centerOfMass0)?;
             serializer.serialize_field("centerOfMass1", &self.m_centerOfMass1)?;
             serializer.serialize_field("rotation0", &self.m_rotation0)?;

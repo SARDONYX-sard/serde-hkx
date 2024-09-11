@@ -48,7 +48,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc03af40d)));
             let mut serializer = __serializer
-                .serialize_struct("hkpMultithreadedVehicleManager", class_meta)?;
+                .serialize_struct(
+                    "hkpMultithreadedVehicleManager",
+                    class_meta,
+                    (20u64, 32u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -56,14 +60,10 @@ const _: () = {
                 .skip_field("referenceCount", &self.parent.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
-                    "registeredVehicles",
-                    &self.parent.m_registeredVehicles,
-                )?;
-            serializer
                 .serialize_array_field(
                     "registeredVehicles",
                     &self.parent.m_registeredVehicles,
+                    TypeSize::NonPtr,
                 )?;
             serializer.end()
         }

@@ -98,6 +98,7 @@ const _: () = {
                 .serialize_struct(
                     "hkaWaveletCompressedAnimationCompressionParams",
                     class_meta,
+                    (36u64, 36u64),
                 )?;
             serializer.serialize_field("quantizationBits", &self.m_quantizationBits)?;
             serializer.serialize_field("blockSize", &self.m_blockSize)?;

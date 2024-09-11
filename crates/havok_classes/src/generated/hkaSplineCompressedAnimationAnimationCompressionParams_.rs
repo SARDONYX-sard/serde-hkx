@@ -58,6 +58,7 @@ const _: () = {
                 .serialize_struct(
                     "hkaSplineCompressedAnimationAnimationCompressionParams",
                     class_meta,
+                    (4u64, 4u64),
                 )?;
             serializer.serialize_field("maxFramesPerBlock", &self.m_maxFramesPerBlock)?;
             serializer

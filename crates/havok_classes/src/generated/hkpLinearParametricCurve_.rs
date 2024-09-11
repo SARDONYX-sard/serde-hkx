@@ -72,7 +72,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xd7b3be03)));
             let mut serializer = __serializer
-                .serialize_struct("hkpLinearParametricCurve", class_meta)?;
+                .serialize_struct(
+                    "hkpLinearParametricCurve",
+                    class_meta,
+                    (64u64, 80u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -87,11 +91,11 @@ const _: () = {
                     "dirNotParallelToTangentAlongWholePath",
                     &self.m_dirNotParallelToTangentAlongWholePath,
                 )?;
-            serializer.serialize_array_meta_field("points", &self.m_points)?;
-            serializer.serialize_array_meta_field("distance", &self.m_distance)?;
+            serializer
+                .serialize_array_field("points", &self.m_points, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field("distance", &self.m_distance, TypeSize::NonPtr)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
-            serializer.serialize_array_field("points", &self.m_points)?;
-            serializer.serialize_array_field("distance", &self.m_distance)?;
             serializer.end()
         }
     }

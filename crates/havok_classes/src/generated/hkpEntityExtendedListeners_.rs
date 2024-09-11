@@ -59,7 +59,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf557023c)));
             let mut serializer = __serializer
-                .serialize_struct("hkpEntityExtendedListeners", class_meta)?;
+                .serialize_struct(
+                    "hkpEntityExtendedListeners",
+                    class_meta,
+                    (16u64, 32u64),
+                )?;
             serializer.skip_field("activationListeners", &self.m_activationListeners)?;
             serializer.skip_field("entityListeners", &self.m_entityListeners)?;
             serializer.end()

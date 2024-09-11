@@ -66,7 +66,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x26d5499)));
             let mut serializer = __serializer
-                .serialize_struct("hkbStateMachineDelayedTransitionInfo", class_meta)?;
+                .serialize_struct(
+                    "hkbStateMachineDelayedTransitionInfo",
+                    class_meta,
+                    (24u64, 24u64),
+                )?;
             serializer.serialize_field("delayedTransition", &self.m_delayedTransition)?;
             serializer.serialize_field("timeDelayed", &self.m_timeDelayed)?;
             serializer

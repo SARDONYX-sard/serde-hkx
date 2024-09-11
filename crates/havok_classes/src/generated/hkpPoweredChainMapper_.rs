@@ -77,17 +77,31 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x7a77ef5)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPoweredChainMapper", class_meta)?;
+                .serialize_struct("hkpPoweredChainMapper", class_meta, (44u64, 64u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("links", &self.m_links)?;
-            serializer.serialize_array_meta_field("targets", &self.m_targets)?;
-            serializer.serialize_array_meta_field("chains", &self.m_chains)?;
-            serializer.serialize_array_field("links", &self.m_links)?;
-            serializer.serialize_array_field("targets", &self.m_targets)?;
-            serializer.serialize_array_field("chains", &self.m_chains)?;
+            serializer
+                .serialize_array_field(
+                    "links",
+                    &self.m_links,
+                    TypeSize::Struct {
+                        size_x86: 12u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
+                    "targets",
+                    &self.m_targets,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field("chains", &self.m_chains, TypeSize::NonPtr)?;
             serializer.end()
         }
     }

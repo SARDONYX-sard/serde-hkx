@@ -45,7 +45,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe0708a00)));
             let mut serializer = __serializer
-                .serialize_struct("hkpRayShapeCollectionFilter", class_meta)?;
+                .serialize_struct(
+                    "hkpRayShapeCollectionFilter",
+                    class_meta,
+                    (4u64, 8u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.end()
         }

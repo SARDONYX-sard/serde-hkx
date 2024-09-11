@@ -84,7 +84,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa1937cbd)));
             let mut serializer = __serializer
-                .serialize_struct("hkpListShape", class_meta)?;
+                .serialize_struct("hkpListShape", class_meta, (112u64, 144u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -104,7 +104,15 @@ const _: () = {
             serializer.serialize_field("disableWelding", &self.parent.m_disableWelding)?;
             serializer.serialize_field("collectionType", &self.parent.m_collectionType)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 6usize].as_slice())?;
-            serializer.serialize_array_meta_field("childInfo", &self.m_childInfo)?;
+            serializer
+                .serialize_array_field(
+                    "childInfo",
+                    &self.m_childInfo,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 32u64,
+                    },
+                )?;
             serializer.serialize_field("flags", &self.m_flags)?;
             serializer
                 .serialize_field("numDisabledChildren", &self.m_numDisabledChildren)?;
@@ -115,8 +123,8 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "enabledChildren",
                     self.m_enabledChildren.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_array_field("childInfo", &self.m_childInfo)?;
             serializer.end()
         }
     }

@@ -111,7 +111,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x224b18d1)));
             let mut serializer = __serializer
-                .serialize_struct("hkbFootIkDriverInfoLeg", class_meta)?;
+                .serialize_struct("hkbFootIkDriverInfoLeg", class_meta, (96u64, 96u64))?;
             serializer.skip_field("prevAnkleRotLS", &self.m_prevAnkleRotLS)?;
             serializer.serialize_field("kneeAxisLS", &self.m_kneeAxisLS)?;
             serializer.serialize_field("footEndLS", &self.m_footEndLS)?;

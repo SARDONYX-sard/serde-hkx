@@ -90,7 +90,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe70e2bb4)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleFrictionStatusAxisStatus", class_meta)?;
+                .serialize_struct(
+                    "hkpVehicleFrictionStatusAxisStatus",
+                    class_meta,
+                    (36u64, 36u64),
+                )?;
             serializer
                 .serialize_field(
                     "forward_slip_velocity",

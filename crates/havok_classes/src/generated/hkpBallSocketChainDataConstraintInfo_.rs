@@ -55,7 +55,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc9cbedf2)));
             let mut serializer = __serializer
-                .serialize_struct("hkpBallSocketChainDataConstraintInfo", class_meta)?;
+                .serialize_struct(
+                    "hkpBallSocketChainDataConstraintInfo",
+                    class_meta,
+                    (32u64, 32u64),
+                )?;
             serializer.serialize_field("pivotInA", &self.m_pivotInA)?;
             serializer.serialize_field("pivotInB", &self.m_pivotInB)?;
             serializer.end()

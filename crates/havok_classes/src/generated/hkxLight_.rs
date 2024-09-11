@@ -71,7 +71,8 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x81c86d42)));
-            let mut serializer = __serializer.serialize_struct("hkxLight", class_meta)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkxLight", class_meta, (64u64, 80u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;

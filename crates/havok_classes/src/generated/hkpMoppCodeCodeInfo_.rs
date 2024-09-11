@@ -50,7 +50,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xd8fdbb08)));
             let mut serializer = __serializer
-                .serialize_struct("hkpMoppCodeCodeInfo", class_meta)?;
+                .serialize_struct("hkpMoppCodeCodeInfo", class_meta, (16u64, 16u64))?;
             serializer.serialize_field("offset", &self.m_offset)?;
             serializer.end()
         }

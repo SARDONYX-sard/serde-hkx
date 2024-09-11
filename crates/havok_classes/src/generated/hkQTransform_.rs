@@ -55,7 +55,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x471a21ee)));
             let mut serializer = __serializer
-                .serialize_struct("hkQTransform", class_meta)?;
+                .serialize_struct("hkQTransform", class_meta, (32u64, 32u64))?;
             serializer.serialize_field("rotation", &self.m_rotation)?;
             serializer.serialize_field("translation", &self.m_translation)?;
             serializer.end()

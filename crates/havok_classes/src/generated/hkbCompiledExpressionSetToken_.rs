@@ -60,7 +60,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc6aaccc8)));
             let mut serializer = __serializer
-                .serialize_struct("hkbCompiledExpressionSetToken", class_meta)?;
+                .serialize_struct(
+                    "hkbCompiledExpressionSetToken",
+                    class_meta,
+                    (8u64, 8u64),
+                )?;
             serializer.serialize_field("data", &self.m_data)?;
             serializer.serialize_field("type", &self.m_type)?;
             serializer.serialize_field("operator", &self.m_operator)?;

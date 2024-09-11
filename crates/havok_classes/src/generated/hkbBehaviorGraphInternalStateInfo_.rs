@@ -74,7 +74,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x645f898b)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBehaviorGraphInternalStateInfo", class_meta)?;
+                .serialize_struct(
+                    "hkbBehaviorGraphInternalStateInfo",
+                    class_meta,
+                    (56u64, 80u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -82,22 +86,23 @@ const _: () = {
             serializer.serialize_field("characterId", &self.m_characterId)?;
             serializer.serialize_field("internalState", &self.m_internalState)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "auxiliaryNodeInfo",
                     &self.m_auxiliaryNodeInfo,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .serialize_array_meta_field("activeEventIds", &self.m_activeEventIds)?;
+                .serialize_array_field(
+                    "activeEventIds",
+                    &self.m_activeEventIds,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "activeVariableIds",
                     &self.m_activeVariableIds,
+                    TypeSize::NonPtr,
                 )?;
-            serializer
-                .serialize_array_field("auxiliaryNodeInfo", &self.m_auxiliaryNodeInfo)?;
-            serializer.serialize_array_field("activeEventIds", &self.m_activeEventIds)?;
-            serializer
-                .serialize_array_field("activeVariableIds", &self.m_activeVariableIds)?;
             serializer.end()
         }
     }

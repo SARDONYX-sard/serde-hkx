@@ -78,6 +78,7 @@ const _: () = {
                 .serialize_struct(
                     "hkaWaveletCompressedAnimationQuantizationFormat",
                     class_meta,
+                    (20u64, 20u64),
                 )?;
             serializer.serialize_field("maxBitWidth", &self.m_maxBitWidth)?;
             serializer.serialize_field("preserved", &self.m_preserved)?;

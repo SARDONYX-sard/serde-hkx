@@ -61,7 +61,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x6b8a15fc)));
             let mut serializer = __serializer
-                .serialize_struct("BSIStateManagerModifierBSiStateData", class_meta)?;
+                .serialize_struct(
+                    "BSIStateManagerModifierBSiStateData",
+                    class_meta,
+                    (12u64, 16u64),
+                )?;
             serializer.serialize_field("pStateMachine", &self.m_pStateMachine)?;
             serializer.serialize_field("StateID", &self.m_StateID)?;
             serializer.serialize_field("iStateToSetAs", &self.m_iStateToSetAs)?;

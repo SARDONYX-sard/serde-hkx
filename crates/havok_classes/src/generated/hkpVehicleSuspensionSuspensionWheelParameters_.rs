@@ -63,6 +63,7 @@ const _: () = {
                 .serialize_struct(
                     "hkpVehicleSuspensionSuspensionWheelParameters",
                     class_meta,
+                    (48u64, 48u64),
                 )?;
             serializer
                 .serialize_field(

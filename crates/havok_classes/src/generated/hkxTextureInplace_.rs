@@ -67,28 +67,21 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xd45841d6)));
             let mut serializer = __serializer
-                .serialize_struct("hkxTextureInplace", class_meta)?;
+                .serialize_struct("hkxTextureInplace", class_meta, (32u64, 56u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_fixed_array_field("fileType", self.m_fileType.as_slice())?;
+                .serialize_fixed_array_field(
+                    "fileType",
+                    self.m_fileType.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("data", &self.m_data)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
-            serializer
-                .serialize_stringptr_meta_field(
-                    "originalFilename",
-                    &self.m_originalFilename,
-                )?;
-            serializer.serialize_array_field("data", &self.m_data)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
-            serializer
-                .serialize_stringptr_field(
-                    "originalFilename",
-                    &self.m_originalFilename,
-                )?;
+            serializer.serialize_array_field("data", &self.m_data, TypeSize::NonPtr)?;
+            serializer.serialize_field("name", &self.m_name)?;
+            serializer.serialize_field("originalFilename", &self.m_originalFilename)?;
             serializer.end()
         }
     }

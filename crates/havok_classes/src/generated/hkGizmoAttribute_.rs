@@ -60,13 +60,12 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x23aadfb6)));
             let mut serializer = __serializer
-                .serialize_struct("hkGizmoAttribute", class_meta)?;
+                .serialize_struct("hkGizmoAttribute", class_meta, (12u64, 24u64))?;
             serializer.serialize_field("visible", &self.m_visible)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_cstring_meta_field("label", &self.m_label)?;
+            serializer.serialize_field("label", &self.m_label)?;
             serializer.serialize_field("type", &self.m_type)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_cstring_field("label", &self.m_label)?;
             serializer.end()
         }
     }

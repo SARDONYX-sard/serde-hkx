@@ -65,7 +65,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x72deb7a6)));
             let mut serializer = __serializer
-                .serialize_struct("hkbKeyframeBonesModifierKeyframeInfo", class_meta)?;
+                .serialize_struct(
+                    "hkbKeyframeBonesModifierKeyframeInfo",
+                    class_meta,
+                    (48u64, 48u64),
+                )?;
             serializer.serialize_field("keyframedPosition", &self.m_keyframedPosition)?;
             serializer.serialize_field("keyframedRotation", &self.m_keyframedRotation)?;
             serializer.serialize_field("boneIndex", &self.m_boneIndex)?;
