@@ -63,13 +63,15 @@ pub fn to_bytes(hexdump: &str) -> Vec<u8> {
 /// binary error position will appear.
 ///
 /// The hexdump format for reference:
+///
 /// ```txt
-/// 00000000: 4865 6c6c 6f20 576f 726c 6421 0a                  Hello World!
+/// 00000000: 48 65 6c 6c 6f 20 57 6f 72 6c 64 21 0a                  Hello World!
 /// ```
+///
 /// In this format:
 /// - The first 8 characters are the offset (`00000000`).
 /// - The next 2 characters are a colon and a space (`: `).
-/// - The next 48 characters are the hexadecimal representation of the 16 bytes of data (`4865 6c6c 6f20 576f 726c 6421 0a`).
+/// - The next 48 characters are the hexadecimal representation of the 16 bytes of data(`48 65 6c 6c 6f 20 57 6f 72 6c 64 21 0a`).
 /// - The last 16 characters are the ASCII representation of the 16 bytes of data (`Hello World!`).
 ///
 /// Each line represents 16 bytes of the binary data.
