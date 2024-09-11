@@ -114,10 +114,10 @@ where
     let mut de = de;
 
     tri!(de
-        .parse_next(winnow::token::take_until(
+        .parse_next(opt(winnow::token::take_until(
             0..,
             "<hksection name=\"__data__\">"
-        ))
+        )))
         .map_err(|err| de.to_readable_err(err)));
     tri!(de
         .parse_next(winnow::token::take_until(0.., "<hkobject"))
