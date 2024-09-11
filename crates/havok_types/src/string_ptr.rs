@@ -31,14 +31,14 @@ impl<'a> StringPtr<'a> {
 
     /// Get inner ref.
     #[inline]
-    pub fn get_ref(&self) -> &Option<Cow<'a, str>> {
+    pub const fn get_ref(&self) -> &Option<Cow<'a, str>> {
         &self.inner
     }
 
     /// Cast [`str`] with non copying.
     #[allow(clippy::should_implement_trait)]
     #[inline]
-    pub fn from_str(s: &'a str) -> Self {
+    pub const fn from_str(s: &'a str) -> Self {
         Self {
             inner: Some(Cow::Borrowed(s)),
         }
@@ -46,7 +46,7 @@ impl<'a> StringPtr<'a> {
 
     /// Inner to [`Self`]
     #[inline]
-    pub fn from_option(s: Option<Cow<'a, str>>) -> Self {
+    pub const fn from_option(s: Option<Cow<'a, str>>) -> Self {
         Self { inner: s }
     }
 
@@ -54,7 +54,7 @@ impl<'a> StringPtr<'a> {
     ///
     /// This indicates that no binary data was present.
     #[inline]
-    pub fn is_null(&self) -> bool {
+    pub const fn is_null(&self) -> bool {
         self.get_ref().is_none()
     }
 
