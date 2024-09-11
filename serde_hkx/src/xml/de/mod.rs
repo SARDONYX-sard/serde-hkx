@@ -112,6 +112,13 @@ where
     T: Deserialize<'a>,
 {
     let mut de = de;
+
+    tri!(de
+        .parse_next(winnow::token::take_until(
+            0..,
+            "<hksection name=\"__data__\">"
+        ))
+        .map_err(|err| de.to_readable_err(err)));
     tri!(de
         .parse_next(winnow::token::take_until(0.., "<hkobject"))
         .map_err(|err| de.to_readable_err(err)));
