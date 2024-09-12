@@ -90,8 +90,12 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x7798b7db)));
             let mut serializer = __serializer
-                .serialize_struct("hkMonitorStreamFrameInfo", class_meta)?;
-            serializer.serialize_stringptr_meta_field("heading", &self.m_heading)?;
+                .serialize_struct(
+                    "hkMonitorStreamFrameInfo",
+                    class_meta,
+                    (36u64, 40u64),
+                )?;
+            serializer.serialize_field("heading", &self.m_heading)?;
             serializer.serialize_field("indexOfTimer0", &self.m_indexOfTimer0)?;
             serializer.serialize_field("indexOfTimer1", &self.m_indexOfTimer1)?;
             serializer
@@ -101,7 +105,6 @@ const _: () = {
             serializer.serialize_field("threadId", &self.m_threadId)?;
             serializer.serialize_field("frameStreamStart", &self.m_frameStreamStart)?;
             serializer.serialize_field("frameStreamEnd", &self.m_frameStreamEnd)?;
-            serializer.serialize_stringptr_field("heading", &self.m_heading)?;
             serializer.end()
         }
     }

@@ -115,7 +115,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x39de637e)));
             let mut serializer = __serializer
-                .serialize_struct("hkbProxyModifierProxyInfo", class_meta)?;
+                .serialize_struct(
+                    "hkbProxyModifierProxyInfo",
+                    class_meta,
+                    (80u64, 80u64),
+                )?;
             serializer.serialize_field("dynamicFriction", &self.m_dynamicFriction)?;
             serializer.serialize_field("staticFriction", &self.m_staticFriction)?;
             serializer

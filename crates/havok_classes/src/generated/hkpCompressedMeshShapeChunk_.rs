@@ -85,20 +85,32 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x5d0d67bd)));
             let mut serializer = __serializer
-                .serialize_struct("hkpCompressedMeshShapeChunk", class_meta)?;
+                .serialize_struct(
+                    "hkpCompressedMeshShapeChunk",
+                    class_meta,
+                    (80u64, 96u64),
+                )?;
             serializer.serialize_field("offset", &self.m_offset)?;
-            serializer.serialize_array_meta_field("vertices", &self.m_vertices)?;
-            serializer.serialize_array_meta_field("indices", &self.m_indices)?;
-            serializer.serialize_array_meta_field("stripLengths", &self.m_stripLengths)?;
-            serializer.serialize_array_meta_field("weldingInfo", &self.m_weldingInfo)?;
+            serializer
+                .serialize_array_field("vertices", &self.m_vertices, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field("indices", &self.m_indices, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field(
+                    "stripLengths",
+                    &self.m_stripLengths,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "weldingInfo",
+                    &self.m_weldingInfo,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("materialInfo", &self.m_materialInfo)?;
             serializer.serialize_field("reference", &self.m_reference)?;
             serializer.serialize_field("transformIndex", &self.m_transformIndex)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer.serialize_array_field("vertices", &self.m_vertices)?;
-            serializer.serialize_array_field("indices", &self.m_indices)?;
-            serializer.serialize_array_field("stripLengths", &self.m_stripLengths)?;
-            serializer.serialize_array_field("weldingInfo", &self.m_weldingInfo)?;
             serializer.end()
         }
     }

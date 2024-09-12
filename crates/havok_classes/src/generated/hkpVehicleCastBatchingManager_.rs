@@ -53,7 +53,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x53340a9)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleCastBatchingManager", class_meta)?;
+                .serialize_struct(
+                    "hkpVehicleCastBatchingManager",
+                    class_meta,
+                    (24u64, 40u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -61,17 +65,13 @@ const _: () = {
                 .skip_field("referenceCount", &self.parent.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
-                    "registeredVehicles",
-                    &self.parent.m_registeredVehicles,
-                )?;
-            serializer.serialize_field("totalNumWheels", &self.m_totalNumWheels)?;
-            serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 6usize].as_slice())?;
-            serializer
                 .serialize_array_field(
                     "registeredVehicles",
                     &self.parent.m_registeredVehicles,
+                    TypeSize::NonPtr,
                 )?;
+            serializer.serialize_field("totalNumWheels", &self.m_totalNumWheels)?;
+            serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 6usize].as_slice())?;
             serializer.end()
         }
     }

@@ -57,7 +57,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa58a9659)));
             let mut serializer = __serializer
-                .serialize_struct("hkpRackAndPinionConstraintDataAtoms", class_meta)?;
+                .serialize_struct(
+                    "hkpRackAndPinionConstraintDataAtoms",
+                    class_meta,
+                    (160u64, 160u64),
+                )?;
             serializer.serialize_field("transforms", &self.m_transforms)?;
             serializer.serialize_field("rackAndPinion", &self.m_rackAndPinion)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 4usize].as_slice())?;

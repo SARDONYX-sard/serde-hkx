@@ -62,11 +62,18 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x98dd8bdc)));
             let mut serializer = __serializer
-                .serialize_struct("hkGeometry", class_meta)?;
-            serializer.serialize_array_meta_field("vertices", &self.m_vertices)?;
-            serializer.serialize_array_meta_field("triangles", &self.m_triangles)?;
-            serializer.serialize_array_field("vertices", &self.m_vertices)?;
-            serializer.serialize_array_field("triangles", &self.m_triangles)?;
+                .serialize_struct("hkGeometry", class_meta, (24u64, 32u64))?;
+            serializer
+                .serialize_array_field("vertices", &self.m_vertices, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field(
+                    "triangles",
+                    &self.m_triangles,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.end()
         }
     }

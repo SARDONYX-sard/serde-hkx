@@ -62,7 +62,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa14caba6)));
             let mut serializer = __serializer
-                .serialize_struct("hkbLookAtModifierInternalState", class_meta)?;
+                .serialize_struct(
+                    "hkbLookAtModifierInternalState",
+                    class_meta,
+                    (48u64, 48u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;

@@ -90,11 +90,16 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf2a92154)));
             let mut serializer = __serializer
-                .serialize_struct("hkPackfileSectionHeader", class_meta)?;
+                .serialize_struct(
+                    "hkPackfileSectionHeader",
+                    class_meta,
+                    (48u64, 48u64),
+                )?;
             serializer
                 .serialize_fixed_array_field(
                     "sectionTag",
                     self.m_sectionTag.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("nullByte", &self.m_nullByte)?;
             serializer.serialize_field("absoluteDataStart", &self.m_absoluteDataStart)?;

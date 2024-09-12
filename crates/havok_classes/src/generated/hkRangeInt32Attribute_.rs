@@ -65,7 +65,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x4846be29)));
             let mut serializer = __serializer
-                .serialize_struct("hkRangeInt32Attribute", class_meta)?;
+                .serialize_struct("hkRangeInt32Attribute", class_meta, (16u64, 16u64))?;
             serializer.serialize_field("absmin", &self.m_absmin)?;
             serializer.serialize_field("absmax", &self.m_absmax)?;
             serializer.serialize_field("softmin", &self.m_softmin)?;

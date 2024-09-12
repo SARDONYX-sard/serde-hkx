@@ -83,7 +83,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x32a2a8a8)));
             let mut serializer = __serializer
-                .serialize_struct("hkpSimpleShapePhantom", class_meta)?;
+                .serialize_struct(
+                    "hkpSimpleShapePhantom",
+                    class_meta,
+                    (368u64, 448u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -107,52 +111,42 @@ const _: () = {
                     &self.parent.parent.parent.m_multiThreadCheck,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
+            serializer.serialize_field("name", &self.parent.parent.parent.m_name)?;
             serializer
-                .serialize_stringptr_meta_field(
-                    "name",
-                    &self.parent.parent.parent.m_name,
-                )?;
-            serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "properties",
                     &self.parent.parent.parent.m_properties,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 16u64,
+                    },
                 )?;
             serializer.skip_field("treeData", &self.parent.parent.parent.m_treeData)?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "overlapListeners",
                     &self.parent.parent.m_overlapListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "phantomListeners",
                     &self.parent.parent.m_phantomListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("motionState", &self.parent.m_motionState)?;
             serializer
-                .skip_array_meta_field("collisionDetails", &self.m_collisionDetails)?;
+                .skip_array_field(
+                    "collisionDetails",
+                    &self.m_collisionDetails,
+                    TypeSize::Struct {
+                        size_x86: 4u64,
+                        size_x86_64: 8u64,
+                    },
+                )?;
             serializer.skip_field("orderDirty", &self.m_orderDirty)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 15usize].as_slice())?;
-            serializer
-                .serialize_stringptr_field("name", &self.parent.parent.parent.m_name)?;
-            serializer
-                .serialize_array_field(
-                    "properties",
-                    &self.parent.parent.parent.m_properties,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "overlapListeners",
-                    &self.parent.parent.m_overlapListeners,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "phantomListeners",
-                    &self.parent.parent.m_phantomListeners,
-                )?;
-            serializer
-                .serialize_array_field("collisionDetails", &self.m_collisionDetails)?;
             serializer.end()
         }
     }

@@ -104,35 +104,58 @@ const _: () = {
                 .serialize_struct(
                     "hkpStorageExtendedMeshShapeMeshSubpartStorage",
                     class_meta,
+                    (104u64, 144u64),
                 )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("vertices", &self.m_vertices)?;
-            serializer.serialize_array_meta_field("indices8", &self.m_indices8)?;
-            serializer.serialize_array_meta_field("indices16", &self.m_indices16)?;
-            serializer.serialize_array_meta_field("indices32", &self.m_indices32)?;
             serializer
-                .serialize_array_meta_field("materialIndices", &self.m_materialIndices)?;
-            serializer.serialize_array_meta_field("materials", &self.m_materials)?;
+                .serialize_array_field("vertices", &self.m_vertices, TypeSize::NonPtr)?;
             serializer
-                .serialize_array_meta_field("namedMaterials", &self.m_namedMaterials)?;
+                .serialize_array_field("indices8", &self.m_indices8, TypeSize::NonPtr)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
+                    "indices16",
+                    &self.m_indices16,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "indices32",
+                    &self.m_indices32,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "materialIndices",
+                    &self.m_materialIndices,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "materials",
+                    &self.m_materials,
+                    TypeSize::Struct {
+                        size_x86: 12u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
+                    "namedMaterials",
+                    &self.m_namedMaterials,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
                     "materialIndices16",
                     &self.m_materialIndices16,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_array_field("vertices", &self.m_vertices)?;
-            serializer.serialize_array_field("indices8", &self.m_indices8)?;
-            serializer.serialize_array_field("indices16", &self.m_indices16)?;
-            serializer.serialize_array_field("indices32", &self.m_indices32)?;
-            serializer
-                .serialize_array_field("materialIndices", &self.m_materialIndices)?;
-            serializer.serialize_array_field("materials", &self.m_materials)?;
-            serializer.serialize_array_field("namedMaterials", &self.m_namedMaterials)?;
-            serializer
-                .serialize_array_field("materialIndices16", &self.m_materialIndices16)?;
             serializer.end()
         }
     }

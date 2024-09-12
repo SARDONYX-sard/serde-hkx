@@ -67,11 +67,22 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x1034549a)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleFrictionDescription", class_meta)?;
+                .serialize_struct(
+                    "hkpVehicleFrictionDescription",
+                    class_meta,
+                    (208u64, 208u64),
+                )?;
             serializer.serialize_field("wheelDistance", &self.m_wheelDistance)?;
             serializer.serialize_field("chassisMassInv", &self.m_chassisMassInv)?;
             serializer
-                .serialize_fixed_array_field("axleDescr", self.m_axleDescr.as_slice())?;
+                .serialize_fixed_array_field(
+                    "axleDescr",
+                    self.m_axleDescr.as_slice(),
+                    TypeSize::Struct {
+                        size_x86: 100u64,
+                        size_x86_64: 100u64,
+                    },
+                )?;
             serializer.pad_field([0u8; 100usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.end()
         }

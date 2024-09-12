@@ -54,7 +54,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xcbdb44aa)));
             let mut serializer = __serializer
-                .serialize_struct("hkpRagdollLimitsData", class_meta)?;
+                .serialize_struct("hkpRagdollLimitsData", class_meta, (192u64, 208u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;

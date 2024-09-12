@@ -61,7 +61,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x750edf40)));
             let mut serializer = __serializer
-                .serialize_struct("hkbClipGeneratorEcho", class_meta)?;
+                .serialize_struct("hkbClipGeneratorEcho", class_meta, (16u64, 16u64))?;
             serializer.serialize_field("offsetLocalTime", &self.m_offsetLocalTime)?;
             serializer.serialize_field("weight", &self.m_weight)?;
             serializer.serialize_field("dwdt", &self.m_dwdt)?;

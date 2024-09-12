@@ -75,7 +75,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe7f23e6d)));
             let mut serializer = __serializer
-                .serialize_struct("hkTrackerSerializableScanSnapshotBlock", class_meta)?;
+                .serialize_struct(
+                    "hkTrackerSerializableScanSnapshotBlock",
+                    class_meta,
+                    (24u64, 40u64),
+                )?;
             serializer.serialize_field("typeIndex", &self.m_typeIndex)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("start", &self.m_start)?;

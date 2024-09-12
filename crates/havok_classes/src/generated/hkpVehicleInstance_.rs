@@ -195,7 +195,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x877bb579)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleInstance", class_meta)?;
+                .serialize_struct("hkpVehicleInstance", class_meta, (212u64, 304u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -211,8 +211,7 @@ const _: () = {
             serializer.skip_field("world", &self.parent.parent.m_world)?;
             serializer.skip_field("island", &self.parent.parent.m_island)?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.serialize_field("entity", &self.parent.m_entity)?;
             serializer.serialize_field("data", &self.m_data)?;
             serializer.serialize_field("driverInput", &self.m_driverInput)?;
@@ -225,10 +224,19 @@ const _: () = {
             serializer.serialize_field("wheelCollide", &self.m_wheelCollide)?;
             serializer.serialize_field("tyreMarks", &self.m_tyreMarks)?;
             serializer.serialize_field("velocityDamper", &self.m_velocityDamper)?;
-            serializer.serialize_array_meta_field("wheelsInfo", &self.m_wheelsInfo)?;
+            serializer
+                .serialize_array_field(
+                    "wheelsInfo",
+                    &self.m_wheelsInfo,
+                    TypeSize::Struct {
+                        size_x86: 224u64,
+                        size_x86_64: 224u64,
+                    },
+                )?;
             serializer.serialize_field("frictionStatus", &self.m_frictionStatus)?;
             serializer.serialize_field("deviceStatus", &self.m_deviceStatus)?;
-            serializer.serialize_array_meta_field("isFixed", &self.m_isFixed)?;
+            serializer
+                .serialize_array_field("isFixed", &self.m_isFixed, TypeSize::NonPtr)?;
             serializer
                 .serialize_field(
                     "wheelsTimeSinceMaxPedalInput",
@@ -241,9 +249,10 @@ const _: () = {
             serializer.serialize_field("mainSteeringAngle", &self.m_mainSteeringAngle)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "wheelsSteeringAngle",
                     &self.m_wheelsSteeringAngle,
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("isReversing", &self.m_isReversing)?;
             serializer.serialize_field("currentGear", &self.m_currentGear)?;
@@ -251,14 +260,6 @@ const _: () = {
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
             serializer
                 .serialize_field("clutchDelayCountdown", &self.m_clutchDelayCountdown)?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
-            serializer.serialize_array_field("wheelsInfo", &self.m_wheelsInfo)?;
-            serializer.serialize_array_field("isFixed", &self.m_isFixed)?;
-            serializer
-                .serialize_array_field(
-                    "wheelsSteeringAngle",
-                    &self.m_wheelsSteeringAngle,
-                )?;
             serializer.end()
         }
     }

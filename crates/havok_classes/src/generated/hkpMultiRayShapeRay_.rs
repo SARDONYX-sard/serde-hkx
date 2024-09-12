@@ -55,7 +55,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xffdc0b65)));
             let mut serializer = __serializer
-                .serialize_struct("hkpMultiRayShapeRay", class_meta)?;
+                .serialize_struct("hkpMultiRayShapeRay", class_meta, (32u64, 32u64))?;
             serializer.serialize_field("start", &self.m_start)?;
             serializer.serialize_field("end", &self.m_end)?;
             serializer.end()

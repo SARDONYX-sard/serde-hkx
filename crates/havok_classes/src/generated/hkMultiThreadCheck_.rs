@@ -69,7 +69,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x11e4408b)));
             let mut serializer = __serializer
-                .serialize_struct("hkMultiThreadCheck", class_meta)?;
+                .serialize_struct("hkMultiThreadCheck", class_meta, (12u64, 12u64))?;
             serializer.skip_field("threadId", &self.m_threadId)?;
             serializer.skip_field("stackTraceId", &self.m_stackTraceId)?;
             serializer.skip_field("markCount", &self.m_markCount)?;

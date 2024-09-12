@@ -59,7 +59,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x7358f5da)));
             let mut serializer = __serializer
-                .serialize_struct("hkbStateMachineNestedStateMachineData", class_meta)?;
+                .serialize_struct(
+                    "hkbStateMachineNestedStateMachineData",
+                    class_meta,
+                    (8u64, 16u64),
+                )?;
             serializer.skip_field("nestedStateMachine", &self.m_nestedStateMachine)?;
             serializer.skip_field("eventIdMap", &self.m_eventIdMap)?;
             serializer.end()

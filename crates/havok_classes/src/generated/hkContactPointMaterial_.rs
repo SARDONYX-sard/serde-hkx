@@ -70,7 +70,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x4e32287c)));
             let mut serializer = __serializer
-                .serialize_struct("hkContactPointMaterial", class_meta)?;
+                .serialize_struct("hkContactPointMaterial", class_meta, (8u64, 16u64))?;
             serializer.serialize_field("userData", &self.m_userData)?;
             serializer.serialize_field("friction", &self.m_friction)?;
             serializer.serialize_field("restitution", &self.m_restitution)?;

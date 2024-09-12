@@ -68,7 +68,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x81147f05)));
             let mut serializer = __serializer
-                .serialize_struct("hkpEntitySpuCollisionCallback", class_meta)?;
+                .serialize_struct(
+                    "hkpEntitySpuCollisionCallback",
+                    class_meta,
+                    (8u64, 16u64),
+                )?;
             serializer.skip_field("util", &self.m_util)?;
             serializer.skip_field("capacity", &self.m_capacity)?;
             serializer.serialize_field("eventFilter", &self.m_eventFilter)?;

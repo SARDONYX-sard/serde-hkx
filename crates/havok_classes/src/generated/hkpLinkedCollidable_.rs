@@ -58,7 +58,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe1a81497)));
             let mut serializer = __serializer
-                .serialize_struct("hkpLinkedCollidable", class_meta)?;
+                .serialize_struct("hkpLinkedCollidable", class_meta, (92u64, 128u64))?;
             serializer.serialize_field("shape", &self.parent.parent.m_shape)?;
             serializer.serialize_field("shapeKey", &self.parent.parent.m_shapeKey)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
@@ -82,9 +82,11 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .skip_array_meta_field("collisionEntries", &self.m_collisionEntries)?;
-            serializer
-                .serialize_array_field("collisionEntries", &self.m_collisionEntries)?;
+                .skip_array_field(
+                    "collisionEntries",
+                    &self.m_collisionEntries,
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

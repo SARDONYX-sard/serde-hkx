@@ -101,15 +101,37 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x95687ea0)));
             let mut serializer = __serializer
-                .serialize_struct("hkaSkeletonMapperData", class_meta)?;
+                .serialize_struct(
+                    "hkaSkeletonMapperData",
+                    class_meta,
+                    (112u64, 128u64),
+                )?;
             serializer.serialize_field("skeletonA", &self.m_skeletonA)?;
             serializer.serialize_field("skeletonB", &self.m_skeletonB)?;
             serializer
-                .serialize_array_meta_field("simpleMappings", &self.m_simpleMappings)?;
+                .serialize_array_field(
+                    "simpleMappings",
+                    &self.m_simpleMappings,
+                    TypeSize::Struct {
+                        size_x86: 64u64,
+                        size_x86_64: 64u64,
+                    },
+                )?;
             serializer
-                .serialize_array_meta_field("chainMappings", &self.m_chainMappings)?;
+                .serialize_array_field(
+                    "chainMappings",
+                    &self.m_chainMappings,
+                    TypeSize::Struct {
+                        size_x86: 112u64,
+                        size_x86_64: 112u64,
+                    },
+                )?;
             serializer
-                .serialize_array_meta_field("unmappedBones", &self.m_unmappedBones)?;
+                .serialize_array_field(
+                    "unmappedBones",
+                    &self.m_unmappedBones,
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer
                 .serialize_field(
@@ -120,9 +142,6 @@ const _: () = {
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
             serializer.serialize_field("mappingType", &self.m_mappingType)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer.serialize_array_field("simpleMappings", &self.m_simpleMappings)?;
-            serializer.serialize_array_field("chainMappings", &self.m_chainMappings)?;
-            serializer.serialize_array_field("unmappedBones", &self.m_unmappedBones)?;
             serializer.end()
         }
     }

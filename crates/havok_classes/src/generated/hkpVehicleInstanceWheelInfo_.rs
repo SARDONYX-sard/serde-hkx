@@ -133,7 +133,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x99f693f0)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleInstanceWheelInfo", class_meta)?;
+                .serialize_struct(
+                    "hkpVehicleInstanceWheelInfo",
+                    class_meta,
+                    (224u64, 224u64),
+                )?;
             serializer.serialize_field("contactPoint", &self.m_contactPoint)?;
             serializer.serialize_field("contactFriction", &self.m_contactFriction)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
@@ -142,6 +146,7 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "contactShapeKey",
                     self.m_contactShapeKey.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("hardPointWs", &self.m_hardPointWs)?;

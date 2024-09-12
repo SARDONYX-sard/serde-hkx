@@ -72,19 +72,27 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc12c8197)));
             let mut serializer = __serializer
-                .serialize_struct("hkxIndexBuffer", class_meta)?;
+                .serialize_struct("hkxIndexBuffer", class_meta, (44u64, 64u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("indexType", &self.m_indexType)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_array_meta_field("indices16", &self.m_indices16)?;
-            serializer.serialize_array_meta_field("indices32", &self.m_indices32)?;
+            serializer
+                .serialize_array_field(
+                    "indices16",
+                    &self.m_indices16,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "indices32",
+                    &self.m_indices32,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("vertexBaseOffset", &self.m_vertexBaseOffset)?;
             serializer.serialize_field("length", &self.m_length)?;
-            serializer.serialize_array_field("indices16", &self.m_indices16)?;
-            serializer.serialize_array_field("indices32", &self.m_indices32)?;
             serializer.end()
         }
     }

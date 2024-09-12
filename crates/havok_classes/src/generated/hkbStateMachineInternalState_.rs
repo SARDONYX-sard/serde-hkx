@@ -116,27 +116,44 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xbd1a7502)));
             let mut serializer = __serializer
-                .serialize_struct("hkbStateMachineInternalState", class_meta)?;
+                .serialize_struct(
+                    "hkbStateMachineInternalState",
+                    class_meta,
+                    (80u64, 104u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "activeTransitions",
                     &self.m_activeTransitions,
+                    TypeSize::Struct {
+                        size_x86: 32u64,
+                        size_x86_64: 40u64,
+                    },
                 )?;
             serializer
-                .serialize_array_meta_field("transitionFlags", &self.m_transitionFlags)?;
+                .serialize_array_field(
+                    "transitionFlags",
+                    &self.m_transitionFlags,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "wildcardTransitionFlags",
                     &self.m_wildcardTransitionFlags,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "delayedTransitions",
                     &self.m_delayedTransitions,
+                    TypeSize::Struct {
+                        size_x86: 24u64,
+                        size_x86_64: 24u64,
+                    },
                 )?;
             serializer.serialize_field("timeInState", &self.m_timeInState)?;
             serializer.serialize_field("lastLocalTime", &self.m_lastLocalTime)?;
@@ -154,20 +171,6 @@ const _: () = {
                 )?;
             serializer.serialize_field("echoNextUpdate", &self.m_echoNextUpdate)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 2usize].as_slice())?;
-            serializer
-                .serialize_array_field("activeTransitions", &self.m_activeTransitions)?;
-            serializer
-                .serialize_array_field("transitionFlags", &self.m_transitionFlags)?;
-            serializer
-                .serialize_array_field(
-                    "wildcardTransitionFlags",
-                    &self.m_wildcardTransitionFlags,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "delayedTransitions",
-                    &self.m_delayedTransitions,
-                )?;
             serializer.end()
         }
     }

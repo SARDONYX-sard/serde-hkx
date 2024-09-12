@@ -50,7 +50,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc75925aa)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPropertyValue", class_meta)?;
+                .serialize_struct("hkpPropertyValue", class_meta, (8u64, 8u64))?;
             serializer.serialize_field("data", &self.m_data)?;
             serializer.end()
         }

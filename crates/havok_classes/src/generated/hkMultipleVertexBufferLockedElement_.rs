@@ -80,7 +80,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa0e22afc)));
             let mut serializer = __serializer
-                .serialize_struct("hkMultipleVertexBufferLockedElement", class_meta)?;
+                .serialize_struct(
+                    "hkMultipleVertexBufferLockedElement",
+                    class_meta,
+                    (7u64, 7u64),
+                )?;
             serializer.serialize_field("vertexBufferIndex", &self.m_vertexBufferIndex)?;
             serializer.serialize_field("elementIndex", &self.m_elementIndex)?;
             serializer.serialize_field("lockedBufferIndex", &self.m_lockedBufferIndex)?;

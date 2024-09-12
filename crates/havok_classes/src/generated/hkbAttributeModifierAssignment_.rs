@@ -55,7 +55,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x48b8ad52)));
             let mut serializer = __serializer
-                .serialize_struct("hkbAttributeModifierAssignment", class_meta)?;
+                .serialize_struct(
+                    "hkbAttributeModifierAssignment",
+                    class_meta,
+                    (8u64, 8u64),
+                )?;
             serializer.serialize_field("attributeIndex", &self.m_attributeIndex)?;
             serializer.serialize_field("attributeValue", &self.m_attributeValue)?;
             serializer.end()

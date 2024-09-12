@@ -76,12 +76,21 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf88aee25)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPoweredChainDataConstraintInfo", class_meta)?;
+                .serialize_struct(
+                    "hkpPoweredChainDataConstraintInfo",
+                    class_meta,
+                    (80u64, 96u64),
+                )?;
             serializer.serialize_field("pivotInA", &self.m_pivotInA)?;
             serializer.serialize_field("pivotInB", &self.m_pivotInB)?;
             serializer.serialize_field("aTc", &self.m_aTc)?;
             serializer.serialize_field("bTc", &self.m_bTc)?;
-            serializer.serialize_fixed_array_field("motors", self.m_motors.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "motors",
+                    self.m_motors.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("switchBodies", &self.m_switchBodies)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.end()

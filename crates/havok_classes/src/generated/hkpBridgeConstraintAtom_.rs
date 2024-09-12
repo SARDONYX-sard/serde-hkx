@@ -61,7 +61,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x87a4f31b)));
             let mut serializer = __serializer
-                .serialize_struct("hkpBridgeConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpBridgeConstraintAtom",
+                    class_meta,
+                    (12u64, 24u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 6usize].as_slice())?;
             serializer.skip_field("buildJacobianFunc", &self.m_buildJacobianFunc)?;

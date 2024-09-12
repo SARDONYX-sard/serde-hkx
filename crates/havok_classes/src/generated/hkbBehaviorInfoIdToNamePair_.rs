@@ -65,16 +65,17 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x35a0439a)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBehaviorInfoIdToNamePair", class_meta)?;
-            serializer
-                .serialize_stringptr_meta_field("behaviorName", &self.m_behaviorName)?;
-            serializer.serialize_stringptr_meta_field("nodeName", &self.m_nodeName)?;
+                .serialize_struct(
+                    "hkbBehaviorInfoIdToNamePair",
+                    class_meta,
+                    (12u64, 24u64),
+                )?;
+            serializer.serialize_field("behaviorName", &self.m_behaviorName)?;
+            serializer.serialize_field("nodeName", &self.m_nodeName)?;
             serializer.serialize_field("toolType", &self.m_toolType)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
             serializer.serialize_field("id", &self.m_id)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_field("behaviorName", &self.m_behaviorName)?;
-            serializer.serialize_stringptr_field("nodeName", &self.m_nodeName)?;
             serializer.end()
         }
     }

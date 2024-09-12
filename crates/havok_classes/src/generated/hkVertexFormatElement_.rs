@@ -75,13 +75,18 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x54867cbf)));
             let mut serializer = __serializer
-                .serialize_struct("hkVertexFormatElement", class_meta)?;
+                .serialize_struct("hkVertexFormatElement", class_meta, (8u64, 8u64))?;
             serializer.serialize_field("dataType", &self.m_dataType)?;
             serializer.serialize_field("numValues", &self.m_numValues)?;
             serializer.serialize_field("usage", &self.m_usage)?;
             serializer.serialize_field("subUsage", &self.m_subUsage)?;
             serializer.serialize_field("flags", &self.m_flags)?;
-            serializer.serialize_fixed_array_field("pad", self.m_pad.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "pad",
+                    self.m_pad.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

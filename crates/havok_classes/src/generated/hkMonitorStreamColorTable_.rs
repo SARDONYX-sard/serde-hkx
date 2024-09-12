@@ -64,15 +64,26 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x79e53e85)));
             let mut serializer = __serializer
-                .serialize_struct("hkMonitorStreamColorTable", class_meta)?;
+                .serialize_struct(
+                    "hkMonitorStreamColorTable",
+                    class_meta,
+                    (24u64, 40u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("colorPairs", &self.m_colorPairs)?;
+            serializer
+                .serialize_array_field(
+                    "colorPairs",
+                    &self.m_colorPairs,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.serialize_field("defaultColor", &self.m_defaultColor)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_field("colorPairs", &self.m_colorPairs)?;
             serializer.end()
         }
     }

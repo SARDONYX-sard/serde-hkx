@@ -70,7 +70,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xbffac086)));
             let mut serializer = __serializer
-                .serialize_struct("hkMemoryResourceHandle", class_meta)?;
+                .serialize_struct("hkMemoryResourceHandle", class_meta, (28u64, 48u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -84,10 +84,16 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("variant", &self.m_variant)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
-            serializer.serialize_array_meta_field("references", &self.m_references)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
-            serializer.serialize_array_field("references", &self.m_references)?;
+            serializer.serialize_field("name", &self.m_name)?;
+            serializer
+                .serialize_array_field(
+                    "references",
+                    &self.m_references,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.end()
         }
     }

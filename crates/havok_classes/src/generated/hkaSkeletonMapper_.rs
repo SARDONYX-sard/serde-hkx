@@ -53,7 +53,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x12df42a5)));
             let mut serializer = __serializer
-                .serialize_struct("hkaSkeletonMapper", class_meta)?;
+                .serialize_struct("hkaSkeletonMapper", class_meta, (128u64, 144u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;

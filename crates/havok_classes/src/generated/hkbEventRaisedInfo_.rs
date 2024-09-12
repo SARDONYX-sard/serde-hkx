@@ -72,19 +72,18 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc02da3)));
             let mut serializer = __serializer
-                .serialize_struct("hkbEventRaisedInfo", class_meta)?;
+                .serialize_struct("hkbEventRaisedInfo", class_meta, (32u64, 48u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("characterId", &self.m_characterId)?;
-            serializer.serialize_stringptr_meta_field("eventName", &self.m_eventName)?;
+            serializer.serialize_field("eventName", &self.m_eventName)?;
             serializer.serialize_field("raisedBySdk", &self.m_raisedBySdk)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
             serializer.serialize_field("senderId", &self.m_senderId)?;
             serializer.serialize_field("padding", &self.m_padding)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_field("eventName", &self.m_eventName)?;
             serializer.end()
         }
     }

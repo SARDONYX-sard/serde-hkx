@@ -85,7 +85,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x9a0e42a5)));
             let mut serializer = __serializer
-                .serialize_struct("hkpCollidable", class_meta)?;
+                .serialize_struct("hkpCollidable", class_meta, (80u64, 112u64))?;
             serializer.serialize_field("shape", &self.parent.m_shape)?;
             serializer.serialize_field("shapeKey", &self.parent.m_shapeKey)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;

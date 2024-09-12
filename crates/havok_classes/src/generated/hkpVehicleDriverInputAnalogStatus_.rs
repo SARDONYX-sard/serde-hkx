@@ -67,7 +67,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x2b4a5803)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleDriverInputAnalogStatus", class_meta)?;
+                .serialize_struct(
+                    "hkpVehicleDriverInputAnalogStatus",
+                    class_meta,
+                    (20u64, 32u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;

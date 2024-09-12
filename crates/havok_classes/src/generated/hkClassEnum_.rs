@@ -67,14 +67,13 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x8a3609cf)));
             let mut serializer = __serializer
-                .serialize_struct("hkClassEnum", class_meta)?;
-            serializer.serialize_cstring_meta_field("name", &self.m_name)?;
+                .serialize_struct("hkClassEnum", class_meta, (20u64, 40u64))?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.serialize_field("items", &self.m_items)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.skip_field("attributes", &self.m_attributes)?;
             serializer.serialize_field("flags", &self.m_flags)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_cstring_field("name", &self.m_name)?;
             serializer.end()
         }
     }

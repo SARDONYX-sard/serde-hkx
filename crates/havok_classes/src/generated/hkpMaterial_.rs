@@ -65,7 +65,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x33be6570)));
             let mut serializer = __serializer
-                .serialize_struct("hkpMaterial", class_meta)?;
+                .serialize_struct("hkpMaterial", class_meta, (12u64, 12u64))?;
             serializer.serialize_field("responseType", &self.m_responseType)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
             serializer

@@ -117,37 +117,56 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x824faf75)));
             let mut serializer = __serializer
-                .serialize_struct("hkaFootstepAnalysisInfo", class_meta)?;
+                .serialize_struct(
+                    "hkaFootstepAnalysisInfo",
+                    class_meta,
+                    (152u64, 208u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("name", &self.m_name)?;
-            serializer.serialize_array_meta_field("nameStrike", &self.m_nameStrike)?;
-            serializer.serialize_array_meta_field("nameLift", &self.m_nameLift)?;
-            serializer.serialize_array_meta_field("nameLock", &self.m_nameLock)?;
-            serializer.serialize_array_meta_field("nameUnlock", &self.m_nameUnlock)?;
-            serializer.serialize_array_meta_field("minPos", &self.m_minPos)?;
-            serializer.serialize_array_meta_field("maxPos", &self.m_maxPos)?;
-            serializer.serialize_array_meta_field("minVel", &self.m_minVel)?;
-            serializer.serialize_array_meta_field("maxVel", &self.m_maxVel)?;
-            serializer.serialize_array_meta_field("allBonesDown", &self.m_allBonesDown)?;
-            serializer.serialize_array_meta_field("anyBonesDown", &self.m_anyBonesDown)?;
+            serializer.serialize_array_field("name", &self.m_name, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field(
+                    "nameStrike",
+                    &self.m_nameStrike,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field("nameLift", &self.m_nameLift, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field("nameLock", &self.m_nameLock, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field(
+                    "nameUnlock",
+                    &self.m_nameUnlock,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field("minPos", &self.m_minPos, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field("maxPos", &self.m_maxPos, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field("minVel", &self.m_minVel, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field("maxVel", &self.m_maxVel, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field(
+                    "allBonesDown",
+                    &self.m_allBonesDown,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "anyBonesDown",
+                    &self.m_anyBonesDown,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("posTol", &self.m_posTol)?;
             serializer.serialize_field("velTol", &self.m_velTol)?;
             serializer.serialize_field("duration", &self.m_duration)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_field("name", &self.m_name)?;
-            serializer.serialize_array_field("nameStrike", &self.m_nameStrike)?;
-            serializer.serialize_array_field("nameLift", &self.m_nameLift)?;
-            serializer.serialize_array_field("nameLock", &self.m_nameLock)?;
-            serializer.serialize_array_field("nameUnlock", &self.m_nameUnlock)?;
-            serializer.serialize_array_field("minPos", &self.m_minPos)?;
-            serializer.serialize_array_field("maxPos", &self.m_maxPos)?;
-            serializer.serialize_array_field("minVel", &self.m_minVel)?;
-            serializer.serialize_array_field("maxVel", &self.m_maxVel)?;
-            serializer.serialize_array_field("allBonesDown", &self.m_allBonesDown)?;
-            serializer.serialize_array_field("anyBonesDown", &self.m_anyBonesDown)?;
             serializer.end()
         }
     }

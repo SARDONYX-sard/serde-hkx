@@ -65,7 +65,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa3af8783)));
             let mut serializer = __serializer
-                .serialize_struct("hkbWorldFromModelModeData", class_meta)?;
+                .serialize_struct(
+                    "hkbWorldFromModelModeData",
+                    class_meta,
+                    (8u64, 8u64),
+                )?;
             serializer.serialize_field("poseMatchingBone0", &self.m_poseMatchingBone0)?;
             serializer.serialize_field("poseMatchingBone1", &self.m_poseMatchingBone1)?;
             serializer.serialize_field("poseMatchingBone2", &self.m_poseMatchingBone2)?;

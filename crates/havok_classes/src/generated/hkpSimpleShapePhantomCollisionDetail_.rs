@@ -51,7 +51,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x98bfa6ce)));
             let mut serializer = __serializer
-                .serialize_struct("hkpSimpleShapePhantomCollisionDetail", class_meta)?;
+                .serialize_struct(
+                    "hkpSimpleShapePhantomCollisionDetail",
+                    class_meta,
+                    (4u64, 8u64),
+                )?;
             serializer.serialize_field("collidable", &self.m_collidable)?;
             serializer.end()
         }

@@ -72,24 +72,33 @@ const _: () = {
                 .serialize_struct(
                     "hkpStorageExtendedMeshShapeShapeSubpartStorage",
                     class_meta,
+                    (44u64, 64u64),
                 )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field("materialIndices", &self.m_materialIndices)?;
-            serializer.serialize_array_meta_field("materials", &self.m_materials)?;
-            serializer
-                .serialize_array_meta_field(
-                    "materialIndices16",
-                    &self.m_materialIndices16,
+                .serialize_array_field(
+                    "materialIndices",
+                    &self.m_materialIndices,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .serialize_array_field("materialIndices", &self.m_materialIndices)?;
-            serializer.serialize_array_field("materials", &self.m_materials)?;
+                .serialize_array_field(
+                    "materials",
+                    &self.m_materials,
+                    TypeSize::Struct {
+                        size_x86: 12u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer
-                .serialize_array_field("materialIndices16", &self.m_materialIndices16)?;
+                .serialize_array_field(
+                    "materialIndices16",
+                    &self.m_materialIndices16,
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

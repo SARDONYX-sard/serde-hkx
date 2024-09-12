@@ -55,7 +55,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x674bcd2d)));
             let mut serializer = __serializer
-                .serialize_struct("hkpArrayAction", class_meta)?;
+                .serialize_struct("hkpArrayAction", class_meta, (36u64, 64u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -65,10 +65,9 @@ const _: () = {
             serializer.skip_field("world", &self.parent.m_world)?;
             serializer.skip_field("island", &self.parent.m_island)?;
             serializer.serialize_field("userData", &self.parent.m_userData)?;
-            serializer.serialize_stringptr_meta_field("name", &self.parent.m_name)?;
-            serializer.serialize_array_meta_field("entities", &self.m_entities)?;
-            serializer.serialize_stringptr_field("name", &self.parent.m_name)?;
-            serializer.serialize_array_field("entities", &self.m_entities)?;
+            serializer.serialize_field("name", &self.parent.m_name)?;
+            serializer
+                .serialize_array_field("entities", &self.m_entities, TypeSize::NonPtr)?;
             serializer.end()
         }
     }

@@ -108,6 +108,7 @@ const _: () = {
                 .serialize_struct(
                     "hkaSplineCompressedAnimationTrackCompressionParams",
                     class_meta,
+                    (28u64, 28u64),
                 )?;
             serializer.serialize_field("rotationTolerance", &self.m_rotationTolerance)?;
             serializer

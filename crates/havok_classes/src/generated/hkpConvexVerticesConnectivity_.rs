@@ -57,23 +57,26 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x63d38e9c)));
             let mut serializer = __serializer
-                .serialize_struct("hkpConvexVerticesConnectivity", class_meta)?;
+                .serialize_struct(
+                    "hkpConvexVerticesConnectivity",
+                    class_meta,
+                    (32u64, 48u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field("vertexIndices", &self.m_vertexIndices)?;
-            serializer
-                .serialize_array_meta_field(
-                    "numVerticesPerFace",
-                    &self.m_numVerticesPerFace,
+                .serialize_array_field(
+                    "vertexIndices",
+                    &self.m_vertexIndices,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_array_field("vertexIndices", &self.m_vertexIndices)?;
             serializer
                 .serialize_array_field(
                     "numVerticesPerFace",
                     &self.m_numVerticesPerFace,
+                    TypeSize::NonPtr,
                 )?;
             serializer.end()
         }

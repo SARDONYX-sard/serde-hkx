@@ -57,7 +57,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x61a590fc)));
             let mut serializer = __serializer
-                .serialize_struct("hkpMultiSphereShape", class_meta)?;
+                .serialize_struct("hkpMultiSphereShape", class_meta, (160u64, 176u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -76,7 +76,11 @@ const _: () = {
             serializer.serialize_field("numSpheres", &self.m_numSpheres)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 12usize].as_slice())?;
             serializer
-                .serialize_fixed_array_field("spheres", self.m_spheres.as_slice())?;
+                .serialize_fixed_array_field(
+                    "spheres",
+                    self.m_spheres.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

@@ -57,7 +57,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x1e0bc068)));
             let mut serializer = __serializer
-                .serialize_struct("hkbRigidBodyRagdollControlData", class_meta)?;
+                .serialize_struct(
+                    "hkbRigidBodyRagdollControlData",
+                    class_meta,
+                    (64u64, 64u64),
+                )?;
             serializer
                 .serialize_field(
                     "keyFrameHierarchyControlData",

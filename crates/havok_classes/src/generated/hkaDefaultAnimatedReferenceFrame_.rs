@@ -67,7 +67,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x6d85e445)));
             let mut serializer = __serializer
-                .serialize_struct("hkaDefaultAnimatedReferenceFrame", class_meta)?;
+                .serialize_struct(
+                    "hkaDefaultAnimatedReferenceFrame",
+                    class_meta,
+                    (64u64, 80u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -80,16 +84,12 @@ const _: () = {
             serializer.serialize_field("duration", &self.m_duration)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
-                    "referenceFrameSamples",
-                    &self.m_referenceFrameSamples,
-                )?;
-            serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer
                 .serialize_array_field(
                     "referenceFrameSamples",
                     &self.m_referenceFrameSamples,
+                    TypeSize::NonPtr,
                 )?;
+            serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.end()
         }
     }

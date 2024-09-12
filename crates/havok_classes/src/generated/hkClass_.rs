@@ -99,8 +99,9 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x75585ef6)));
-            let mut serializer = __serializer.serialize_struct("hkClass", class_meta)?;
-            serializer.serialize_cstring_meta_field("name", &self.m_name)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkClass", class_meta, (48u64, 80u64))?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.serialize_field("parent", &self.m_parent)?;
             serializer.serialize_field("objectSize", &self.m_objectSize)?;
             serializer
@@ -116,7 +117,6 @@ const _: () = {
             serializer.skip_field("attributes", &self.m_attributes)?;
             serializer.serialize_field("flags", &self.m_flags)?;
             serializer.serialize_field("describedVersion", &self.m_describedVersion)?;
-            serializer.serialize_cstring_field("name", &self.m_name)?;
             serializer.end()
         }
     }

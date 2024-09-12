@@ -142,7 +142,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x9f3e3a04)));
             let mut serializer = __serializer
-                .serialize_struct("hkbFootIkModifierLeg", class_meta)?;
+                .serialize_struct("hkbFootIkModifierLeg", class_meta, (160u64, 160u64))?;
             serializer
                 .serialize_field(
                     "originalAnkleTransformMS",

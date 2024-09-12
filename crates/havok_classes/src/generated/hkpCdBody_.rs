@@ -69,7 +69,8 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x54a4b841)));
-            let mut serializer = __serializer.serialize_struct("hkpCdBody", class_meta)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkpCdBody", class_meta, (16u64, 32u64))?;
             serializer.serialize_field("shape", &self.m_shape)?;
             serializer.serialize_field("shapeKey", &self.m_shapeKey)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;

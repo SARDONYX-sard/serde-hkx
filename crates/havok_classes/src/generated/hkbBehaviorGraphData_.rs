@@ -124,33 +124,61 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x95aca5d)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBehaviorGraphData", class_meta)?;
+                .serialize_struct("hkbBehaviorGraphData", class_meta, (88u64, 128u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "attributeDefaults",
                     &self.m_attributeDefaults,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .serialize_array_meta_field("variableInfos", &self.m_variableInfos)?;
+                .serialize_array_field(
+                    "variableInfos",
+                    &self.m_variableInfos,
+                    TypeSize::Struct {
+                        size_x86: 6u64,
+                        size_x86_64: 6u64,
+                    },
+                )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "characterPropertyInfos",
                     &self.m_characterPropertyInfos,
+                    TypeSize::Struct {
+                        size_x86: 6u64,
+                        size_x86_64: 6u64,
+                    },
                 )?;
-            serializer.serialize_array_meta_field("eventInfos", &self.m_eventInfos)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
+                    "eventInfos",
+                    &self.m_eventInfos,
+                    TypeSize::Struct {
+                        size_x86: 4u64,
+                        size_x86_64: 4u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
                     "wordMinVariableValues",
                     &self.m_wordMinVariableValues,
+                    TypeSize::Struct {
+                        size_x86: 4u64,
+                        size_x86_64: 4u64,
+                    },
                 )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "wordMaxVariableValues",
                     &self.m_wordMaxVariableValues,
+                    TypeSize::Struct {
+                        size_x86: 4u64,
+                        size_x86_64: 4u64,
+                    },
                 )?;
             serializer
                 .serialize_field(
@@ -158,25 +186,6 @@ const _: () = {
                     &self.m_variableInitialValues,
                 )?;
             serializer.serialize_field("stringData", &self.m_stringData)?;
-            serializer
-                .serialize_array_field("attributeDefaults", &self.m_attributeDefaults)?;
-            serializer.serialize_array_field("variableInfos", &self.m_variableInfos)?;
-            serializer
-                .serialize_array_field(
-                    "characterPropertyInfos",
-                    &self.m_characterPropertyInfos,
-                )?;
-            serializer.serialize_array_field("eventInfos", &self.m_eventInfos)?;
-            serializer
-                .serialize_array_field(
-                    "wordMinVariableValues",
-                    &self.m_wordMinVariableValues,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "wordMaxVariableValues",
-                    &self.m_wordMaxVariableValues,
-                )?;
             serializer.end()
         }
     }

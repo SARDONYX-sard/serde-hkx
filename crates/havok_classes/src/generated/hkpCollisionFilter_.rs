@@ -62,16 +62,25 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x60960336)));
             let mut serializer = __serializer
-                .serialize_struct("hkpCollisionFilter", class_meta)?;
+                .serialize_struct("hkpCollisionFilter", class_meta, (48u64, 72u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.pad_field([0u8; 16usize].as_slice(), [0u8; 32usize].as_slice())?;
-            serializer.serialize_fixed_array_field("prepad", self.m_prepad.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "prepad",
+                    self.m_prepad.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("type", &self.m_type)?;
             serializer
-                .serialize_fixed_array_field("postpad", self.m_postpad.as_slice())?;
+                .serialize_fixed_array_field(
+                    "postpad",
+                    self.m_postpad.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

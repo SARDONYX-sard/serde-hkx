@@ -112,96 +112,69 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x655b42bc)));
             let mut serializer = __serializer
-                .serialize_struct("hkbCharacterStringData", class_meta)?;
+                .serialize_struct(
+                    "hkbCharacterStringData",
+                    class_meta,
+                    (132u64, 192u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
-                    "deformableSkinNames",
-                    &self.m_deformableSkinNames,
-                )?;
-            serializer
-                .serialize_array_meta_field("rigidSkinNames", &self.m_rigidSkinNames)?;
-            serializer
-                .serialize_array_meta_field("animationNames", &self.m_animationNames)?;
-            serializer
-                .serialize_array_meta_field(
-                    "animationFilenames",
-                    &self.m_animationFilenames,
-                )?;
-            serializer
-                .serialize_array_meta_field(
-                    "characterPropertyNames",
-                    &self.m_characterPropertyNames,
-                )?;
-            serializer
-                .serialize_array_meta_field(
-                    "retargetingSkeletonMapperFilenames",
-                    &self.m_retargetingSkeletonMapperFilenames,
-                )?;
-            serializer.serialize_array_meta_field("lodNames", &self.m_lodNames)?;
-            serializer
-                .serialize_array_meta_field(
-                    "mirroredSyncPointSubstringsA",
-                    &self.m_mirroredSyncPointSubstringsA,
-                )?;
-            serializer
-                .serialize_array_meta_field(
-                    "mirroredSyncPointSubstringsB",
-                    &self.m_mirroredSyncPointSubstringsB,
-                )?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
-            serializer.serialize_stringptr_meta_field("rigName", &self.m_rigName)?;
-            serializer
-                .serialize_stringptr_meta_field("ragdollName", &self.m_ragdollName)?;
-            serializer
-                .serialize_stringptr_meta_field(
-                    "behaviorFilename",
-                    &self.m_behaviorFilename,
-                )?;
-            serializer
                 .serialize_array_field(
                     "deformableSkinNames",
                     &self.m_deformableSkinNames,
+                    TypeSize::String,
                 )?;
-            serializer.serialize_array_field("rigidSkinNames", &self.m_rigidSkinNames)?;
-            serializer.serialize_array_field("animationNames", &self.m_animationNames)?;
+            serializer
+                .serialize_array_field(
+                    "rigidSkinNames",
+                    &self.m_rigidSkinNames,
+                    TypeSize::String,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "animationNames",
+                    &self.m_animationNames,
+                    TypeSize::String,
+                )?;
             serializer
                 .serialize_array_field(
                     "animationFilenames",
                     &self.m_animationFilenames,
+                    TypeSize::String,
                 )?;
             serializer
                 .serialize_array_field(
                     "characterPropertyNames",
                     &self.m_characterPropertyNames,
+                    TypeSize::String,
                 )?;
             serializer
                 .serialize_array_field(
                     "retargetingSkeletonMapperFilenames",
                     &self.m_retargetingSkeletonMapperFilenames,
+                    TypeSize::String,
                 )?;
-            serializer.serialize_array_field("lodNames", &self.m_lodNames)?;
+            serializer
+                .serialize_array_field("lodNames", &self.m_lodNames, TypeSize::String)?;
             serializer
                 .serialize_array_field(
                     "mirroredSyncPointSubstringsA",
                     &self.m_mirroredSyncPointSubstringsA,
+                    TypeSize::String,
                 )?;
             serializer
                 .serialize_array_field(
                     "mirroredSyncPointSubstringsB",
                     &self.m_mirroredSyncPointSubstringsB,
+                    TypeSize::String,
                 )?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
-            serializer.serialize_stringptr_field("rigName", &self.m_rigName)?;
-            serializer.serialize_stringptr_field("ragdollName", &self.m_ragdollName)?;
-            serializer
-                .serialize_stringptr_field(
-                    "behaviorFilename",
-                    &self.m_behaviorFilename,
-                )?;
+            serializer.serialize_field("name", &self.m_name)?;
+            serializer.serialize_field("rigName", &self.m_rigName)?;
+            serializer.serialize_field("ragdollName", &self.m_ragdollName)?;
+            serializer.serialize_field("behaviorFilename", &self.m_behaviorFilename)?;
             serializer.end()
         }
     }

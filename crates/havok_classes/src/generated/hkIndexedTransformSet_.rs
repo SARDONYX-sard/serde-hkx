@@ -84,29 +84,43 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x87fe6b5c)));
             let mut serializer = __serializer
-                .serialize_struct("hkIndexedTransformSet", class_meta)?;
+                .serialize_struct("hkIndexedTransformSet", class_meta, (72u64, 104u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("matrices", &self.m_matrices)?;
             serializer
-                .serialize_array_meta_field("inverseMatrices", &self.m_inverseMatrices)?;
+                .serialize_array_field("matrices", &self.m_matrices, TypeSize::NonPtr)?;
             serializer
-                .serialize_array_meta_field("matricesOrder", &self.m_matricesOrder)?;
+                .serialize_array_field(
+                    "inverseMatrices",
+                    &self.m_inverseMatrices,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_meta_field("matricesNames", &self.m_matricesNames)?;
+                .serialize_array_field(
+                    "matricesOrder",
+                    &self.m_matricesOrder,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_meta_field("indexMappings", &self.m_indexMappings)?;
+                .serialize_array_field(
+                    "matricesNames",
+                    &self.m_matricesNames,
+                    TypeSize::String,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "indexMappings",
+                    &self.m_indexMappings,
+                    TypeSize::Struct {
+                        size_x86: 12u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer
                 .serialize_field("allMatricesAreAffine", &self.m_allMatricesAreAffine)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_array_field("matrices", &self.m_matrices)?;
-            serializer
-                .serialize_array_field("inverseMatrices", &self.m_inverseMatrices)?;
-            serializer.serialize_array_field("matricesOrder", &self.m_matricesOrder)?;
-            serializer.serialize_array_field("matricesNames", &self.m_matricesNames)?;
-            serializer.serialize_array_field("indexMappings", &self.m_indexMappings)?;
             serializer.end()
         }
     }

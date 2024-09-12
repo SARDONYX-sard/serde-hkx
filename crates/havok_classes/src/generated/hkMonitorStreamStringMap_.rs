@@ -57,9 +57,20 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc4d3a8b4)));
             let mut serializer = __serializer
-                .serialize_struct("hkMonitorStreamStringMap", class_meta)?;
-            serializer.serialize_array_meta_field("map", &self.m_map)?;
-            serializer.serialize_array_field("map", &self.m_map)?;
+                .serialize_struct(
+                    "hkMonitorStreamStringMap",
+                    class_meta,
+                    (12u64, 16u64),
+                )?;
+            serializer
+                .serialize_array_field(
+                    "map",
+                    &self.m_map,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.end()
         }
     }

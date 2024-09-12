@@ -59,22 +59,22 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x8699b6eb)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBehaviorGraphInternalState", class_meta)?;
+                .serialize_struct(
+                    "hkbBehaviorGraphInternalState",
+                    class_meta,
+                    (24u64, 40u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
-                    "nodeInternalStateInfos",
-                    &self.m_nodeInternalStateInfos,
-                )?;
-            serializer.serialize_field("variableValueSet", &self.m_variableValueSet)?;
-            serializer
                 .serialize_array_field(
                     "nodeInternalStateInfos",
                     &self.m_nodeInternalStateInfos,
+                    TypeSize::NonPtr,
                 )?;
+            serializer.serialize_field("variableValueSet", &self.m_variableValueSet)?;
             serializer.end()
         }
     }

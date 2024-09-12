@@ -57,7 +57,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe5ca3677)));
             let mut serializer = __serializer
-                .serialize_struct("hkbFootIkModifierInternalLegData", class_meta)?;
+                .serialize_struct(
+                    "hkbFootIkModifierInternalLegData",
+                    class_meta,
+                    (32u64, 32u64),
+                )?;
             serializer.serialize_field("groundPosition", &self.m_groundPosition)?;
             serializer.skip_field("footIkSolver", &self.m_footIkSolver)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 8usize].as_slice())?;

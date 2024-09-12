@@ -60,7 +60,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x4abc140e)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPairCollisionFilter", class_meta)?;
+                .serialize_struct("hkpPairCollisionFilter", class_meta, (64u64, 96u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -69,12 +69,17 @@ const _: () = {
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.pad_field([0u8; 16usize].as_slice(), [0u8; 32usize].as_slice())?;
             serializer
-                .serialize_fixed_array_field("prepad", self.parent.m_prepad.as_slice())?;
+                .serialize_fixed_array_field(
+                    "prepad",
+                    self.parent.m_prepad.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer
                 .serialize_fixed_array_field(
                     "postpad",
                     self.parent.m_postpad.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.skip_field("disabledPairs", &self.m_disabledPairs)?;
             serializer.serialize_field("childFilter", &self.m_childFilter)?;

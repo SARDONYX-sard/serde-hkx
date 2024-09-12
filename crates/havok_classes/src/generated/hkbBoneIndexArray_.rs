@@ -53,7 +53,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xaa8619)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBoneIndexArray", class_meta)?;
+                .serialize_struct("hkbBoneIndexArray", class_meta, (40u64, 64u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -66,20 +66,20 @@ const _: () = {
                     &self.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field("areBindablesCached", &self.parent.m_areBindablesCached)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_array_meta_field("boneIndices", &self.m_boneIndices)?;
             serializer
                 .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.m_cachedBindables,
+                    "boneIndices",
+                    &self.m_boneIndices,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_array_field("boneIndices", &self.m_boneIndices)?;
             serializer.end()
         }
     }

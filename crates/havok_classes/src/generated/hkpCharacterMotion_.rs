@@ -49,7 +49,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xbafa2bb7)));
             let mut serializer = __serializer
-                .serialize_struct("hkpCharacterMotion", class_meta)?;
+                .serialize_struct("hkpCharacterMotion", class_meta, (288u64, 320u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -66,6 +66,7 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "deactivationNumInactiveFrames",
                     self.parent.m_deactivationNumInactiveFrames.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 10usize].as_slice())?;
             serializer.serialize_field("motionState", &self.parent.m_motionState)?;
@@ -78,11 +79,13 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "deactivationRefPosition",
                     self.parent.m_deactivationRefPosition.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .serialize_fixed_array_field(
                     "deactivationRefOrientation",
                     self.parent.m_deactivationRefOrientation.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("savedMotion", &self.parent.m_savedMotion)?;
             serializer

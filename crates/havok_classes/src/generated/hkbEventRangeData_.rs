@@ -61,7 +61,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x6cb92c76)));
             let mut serializer = __serializer
-                .serialize_struct("hkbEventRangeData", class_meta)?;
+                .serialize_struct("hkbEventRangeData", class_meta, (16u64, 32u64))?;
             serializer.serialize_field("upperBound", &self.m_upperBound)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("event", &self.m_event)?;

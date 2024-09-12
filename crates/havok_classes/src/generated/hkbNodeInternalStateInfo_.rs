@@ -74,13 +74,17 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x7db9971d)));
             let mut serializer = __serializer
-                .serialize_struct("hkbNodeInternalStateInfo", class_meta)?;
+                .serialize_struct(
+                    "hkbNodeInternalStateInfo",
+                    class_meta,
+                    (100u64, 120u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("syncInfo", &self.m_syncInfo)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.serialize_field("internalState", &self.m_internalState)?;
             serializer.serialize_field("nodeId", &self.m_nodeId)?;
             serializer
@@ -89,7 +93,6 @@ const _: () = {
                     &self.m_hasActivateBeenCalled,
                 )?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 5usize].as_slice())?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
             serializer.end()
         }
     }

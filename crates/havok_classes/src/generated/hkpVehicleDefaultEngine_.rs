@@ -97,7 +97,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x56f8ca24)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleDefaultEngine", class_meta)?;
+                .serialize_struct(
+                    "hkpVehicleDefaultEngine",
+                    class_meta,
+                    (48u64, 56u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;

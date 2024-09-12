@@ -73,44 +73,28 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x66eac971)));
             let mut serializer = __serializer
-                .serialize_struct("hkaAnimationBinding", class_meta)?;
+                .serialize_struct("hkaAnimationBinding", class_meta, (44u64, 72u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_stringptr_meta_field(
-                    "originalSkeletonName",
-                    &self.m_originalSkeletonName,
-                )?;
+                .serialize_field("originalSkeletonName", &self.m_originalSkeletonName)?;
             serializer.serialize_field("animation", &self.m_animation)?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "transformTrackToBoneIndices",
                     &self.m_transformTrackToBoneIndices,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "floatTrackToFloatSlotIndices",
                     &self.m_floatTrackToFloatSlotIndices,
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("blendHint", &self.m_blendHint)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer
-                .serialize_stringptr_field(
-                    "originalSkeletonName",
-                    &self.m_originalSkeletonName,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "transformTrackToBoneIndices",
-                    &self.m_transformTrackToBoneIndices,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "floatTrackToFloatSlotIndices",
-                    &self.m_floatTrackToFloatSlotIndices,
-                )?;
             serializer.end()
         }
     }

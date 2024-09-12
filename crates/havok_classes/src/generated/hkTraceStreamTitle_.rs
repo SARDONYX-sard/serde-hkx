@@ -50,8 +50,13 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x6a4ca82c)));
             let mut serializer = __serializer
-                .serialize_struct("hkTraceStreamTitle", class_meta)?;
-            serializer.serialize_fixed_array_field("value", self.m_value.as_slice())?;
+                .serialize_struct("hkTraceStreamTitle", class_meta, (32u64, 32u64))?;
+            serializer
+                .serialize_fixed_array_field(
+                    "value",
+                    self.m_value.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

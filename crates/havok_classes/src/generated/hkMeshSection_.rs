@@ -99,7 +99,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x1893c365)));
             let mut serializer = __serializer
-                .serialize_struct("hkMeshSection", class_meta)?;
+                .serialize_struct("hkMeshSection", class_meta, (40u64, 56u64))?;
             serializer.serialize_field("primitiveType", &self.m_primitiveType)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
             serializer.serialize_field("numPrimitives", &self.m_numPrimitives)?;

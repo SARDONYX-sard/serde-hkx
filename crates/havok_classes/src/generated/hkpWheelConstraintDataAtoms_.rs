@@ -87,7 +87,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x1188cbe1)));
             let mut serializer = __serializer
-                .serialize_struct("hkpWheelConstraintDataAtoms", class_meta)?;
+                .serialize_struct(
+                    "hkpWheelConstraintDataAtoms",
+                    class_meta,
+                    (304u64, 304u64),
+                )?;
             serializer.serialize_field("suspensionBase", &self.m_suspensionBase)?;
             serializer.serialize_field("lin0Limit", &self.m_lin0Limit)?;
             serializer.serialize_field("lin0Soft", &self.m_lin0Soft)?;

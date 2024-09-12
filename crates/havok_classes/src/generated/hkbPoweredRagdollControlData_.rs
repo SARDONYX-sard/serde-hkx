@@ -71,7 +71,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf5ba21b)));
             let mut serializer = __serializer
-                .serialize_struct("hkbPoweredRagdollControlData", class_meta)?;
+                .serialize_struct(
+                    "hkbPoweredRagdollControlData",
+                    class_meta,
+                    (32u64, 32u64),
+                )?;
             serializer.serialize_field("maxForce", &self.m_maxForce)?;
             serializer.serialize_field("tau", &self.m_tau)?;
             serializer.serialize_field("damping", &self.m_damping)?;

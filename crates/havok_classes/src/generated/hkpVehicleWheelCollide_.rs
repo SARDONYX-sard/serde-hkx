@@ -58,7 +58,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x4a50fcb)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleWheelCollide", class_meta)?;
+                .serialize_struct("hkpVehicleWheelCollide", class_meta, (12u64, 24u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;

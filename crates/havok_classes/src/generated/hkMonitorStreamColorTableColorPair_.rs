@@ -55,11 +55,14 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x738fca05)));
             let mut serializer = __serializer
-                .serialize_struct("hkMonitorStreamColorTableColorPair", class_meta)?;
-            serializer.serialize_stringptr_meta_field("colorName", &self.m_colorName)?;
+                .serialize_struct(
+                    "hkMonitorStreamColorTableColorPair",
+                    class_meta,
+                    (8u64, 16u64),
+                )?;
+            serializer.serialize_field("colorName", &self.m_colorName)?;
             serializer.serialize_field("color", &self.m_color)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_field("colorName", &self.m_colorName)?;
             serializer.end()
         }
     }

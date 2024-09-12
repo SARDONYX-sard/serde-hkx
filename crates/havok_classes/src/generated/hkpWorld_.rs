@@ -573,7 +573,8 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xaadcec37)));
-            let mut serializer = __serializer.serialize_struct("hkpWorld", class_meta)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkpWorld", class_meta, (864u64, 1072u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -584,19 +585,22 @@ const _: () = {
             serializer.skip_field("fixedIsland", &self.m_fixedIsland)?;
             serializer.serialize_field("fixedRigidBody", &self.m_fixedRigidBody)?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "activeSimulationIslands",
                     &self.m_activeSimulationIslands,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "inactiveSimulationIslands",
                     &self.m_inactiveSimulationIslands,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "dirtySimulationIslands",
                     &self.m_dirtySimulationIslands,
+                    TypeSize::NonPtr,
                 )?;
             serializer.skip_field("maintenanceMgr", &self.m_maintenanceMgr)?;
             serializer.skip_field("memoryWatchDog", &self.m_memoryWatchDog)?;
@@ -795,62 +799,92 @@ const _: () = {
             serializer.serialize_field("lastEntityUid", &self.m_lastEntityUid)?;
             serializer.serialize_field("lastIslandUid", &self.m_lastIslandUid)?;
             serializer.serialize_field("lastConstraintUid", &self.m_lastConstraintUid)?;
-            serializer.serialize_array_meta_field("phantoms", &self.m_phantoms)?;
             serializer
-                .skip_array_meta_field("actionListeners", &self.m_actionListeners)?;
+                .serialize_array_field("phantoms", &self.m_phantoms, TypeSize::NonPtr)?;
             serializer
-                .skip_array_meta_field("entityListeners", &self.m_entityListeners)?;
+                .skip_array_field(
+                    "actionListeners",
+                    &self.m_actionListeners,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .skip_array_meta_field("phantomListeners", &self.m_phantomListeners)?;
+                .skip_array_field(
+                    "entityListeners",
+                    &self.m_entityListeners,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
+                    "phantomListeners",
+                    &self.m_phantomListeners,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .skip_array_field(
                     "constraintListeners",
                     &self.m_constraintListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "worldDeletionListeners",
                     &self.m_worldDeletionListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "islandActivationListeners",
                     &self.m_islandActivationListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "worldPostSimulationListeners",
                     &self.m_worldPostSimulationListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "worldPostIntegrateListeners",
                     &self.m_worldPostIntegrateListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "worldPostCollideListeners",
                     &self.m_worldPostCollideListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "islandPostIntegrateListeners",
                     &self.m_islandPostIntegrateListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "islandPostCollideListeners",
                     &self.m_islandPostCollideListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field("contactListeners", &self.m_contactListeners)?;
+                .skip_array_field(
+                    "contactListeners",
+                    &self.m_contactListeners,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "contactImpulseLimitBreachedListeners",
                     &self.m_contactImpulseLimitBreachedListeners,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .skip_array_meta_field("worldExtensions", &self.m_worldExtensions)?;
+                .skip_array_field(
+                    "worldExtensions",
+                    &self.m_worldExtensions,
+                    TypeSize::NonPtr,
+                )?;
             serializer
                 .skip_field("violatedConstraintArray", &self.m_violatedConstraintArray)?;
             serializer.skip_field("broadPhaseBorder", &self.m_broadPhaseBorder)?;
@@ -862,6 +896,7 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "broadPhaseExtents",
                     self.m_broadPhaseExtents.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .serialize_field("broadPhaseNumMarkers", &self.m_broadPhaseNumMarkers)?;
@@ -874,77 +909,6 @@ const _: () = {
             serializer
                 .skip_field("contactPointGeneration", &self.m_contactPointGeneration)?;
             serializer.pad_field([0u8; 15usize].as_slice(), [0u8; 15usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "activeSimulationIslands",
-                    &self.m_activeSimulationIslands,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "inactiveSimulationIslands",
-                    &self.m_inactiveSimulationIslands,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "dirtySimulationIslands",
-                    &self.m_dirtySimulationIslands,
-                )?;
-            serializer.serialize_array_field("phantoms", &self.m_phantoms)?;
-            serializer
-                .serialize_array_field("actionListeners", &self.m_actionListeners)?;
-            serializer
-                .serialize_array_field("entityListeners", &self.m_entityListeners)?;
-            serializer
-                .serialize_array_field("phantomListeners", &self.m_phantomListeners)?;
-            serializer
-                .serialize_array_field(
-                    "constraintListeners",
-                    &self.m_constraintListeners,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "worldDeletionListeners",
-                    &self.m_worldDeletionListeners,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "islandActivationListeners",
-                    &self.m_islandActivationListeners,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "worldPostSimulationListeners",
-                    &self.m_worldPostSimulationListeners,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "worldPostIntegrateListeners",
-                    &self.m_worldPostIntegrateListeners,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "worldPostCollideListeners",
-                    &self.m_worldPostCollideListeners,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "islandPostIntegrateListeners",
-                    &self.m_islandPostIntegrateListeners,
-                )?;
-            serializer
-                .serialize_array_field(
-                    "islandPostCollideListeners",
-                    &self.m_islandPostCollideListeners,
-                )?;
-            serializer
-                .serialize_array_field("contactListeners", &self.m_contactListeners)?;
-            serializer
-                .serialize_array_field(
-                    "contactImpulseLimitBreachedListeners",
-                    &self.m_contactImpulseLimitBreachedListeners,
-                )?;
-            serializer
-                .serialize_array_field("worldExtensions", &self.m_worldExtensions)?;
             serializer.end()
         }
     }

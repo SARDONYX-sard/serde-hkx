@@ -57,15 +57,18 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x185da6fd)));
             let mut serializer = __serializer
-                .serialize_struct("hkxSparselyAnimatedString", class_meta)?;
+                .serialize_struct(
+                    "hkxSparselyAnimatedString",
+                    class_meta,
+                    (32u64, 48u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("strings", &self.m_strings)?;
-            serializer.serialize_array_meta_field("times", &self.m_times)?;
-            serializer.serialize_array_field("strings", &self.m_strings)?;
-            serializer.serialize_array_field("times", &self.m_times)?;
+            serializer
+                .serialize_array_field("strings", &self.m_strings, TypeSize::String)?;
+            serializer.serialize_array_field("times", &self.m_times, TypeSize::NonPtr)?;
             serializer.end()
         }
     }

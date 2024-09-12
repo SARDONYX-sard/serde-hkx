@@ -70,7 +70,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x5b6c03d9)));
             let mut serializer = __serializer
-                .serialize_struct("hkbCharacterControllerControlData", class_meta)?;
+                .serialize_struct(
+                    "hkbCharacterControllerControlData",
+                    class_meta,
+                    (32u64, 32u64),
+                )?;
             serializer.serialize_field("desiredVelocity", &self.m_desiredVelocity)?;
             serializer.serialize_field("verticalGain", &self.m_verticalGain)?;
             serializer

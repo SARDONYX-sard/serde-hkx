@@ -69,6 +69,7 @@ const _: () = {
                 .serialize_struct(
                     "hkbCharacterDataCharacterControllerInfo",
                     class_meta,
+                    (16u64, 24u64),
                 )?;
             serializer.serialize_field("capsuleHeight", &self.m_capsuleHeight)?;
             serializer.serialize_field("capsuleRadius", &self.m_capsuleRadius)?;

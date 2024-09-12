@@ -96,25 +96,58 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x875af1d9)));
             let mut serializer = __serializer
-                .serialize_struct("hkTrackerSerializableScanSnapshot", class_meta)?;
+                .serialize_struct(
+                    "hkTrackerSerializableScanSnapshot",
+                    class_meta,
+                    (92u64, 128u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("allocations", &self.m_allocations)?;
-            serializer.serialize_array_meta_field("blocks", &self.m_blocks)?;
-            serializer.serialize_array_meta_field("refs", &self.m_refs)?;
-            serializer.serialize_array_meta_field("typeNames", &self.m_typeNames)?;
-            serializer.serialize_array_meta_field("traceText", &self.m_traceText)?;
-            serializer.serialize_array_meta_field("traceAddrs", &self.m_traceAddrs)?;
-            serializer.serialize_array_meta_field("traceParents", &self.m_traceParents)?;
-            serializer.serialize_array_field("allocations", &self.m_allocations)?;
-            serializer.serialize_array_field("blocks", &self.m_blocks)?;
-            serializer.serialize_array_field("refs", &self.m_refs)?;
-            serializer.serialize_array_field("typeNames", &self.m_typeNames)?;
-            serializer.serialize_array_field("traceText", &self.m_traceText)?;
-            serializer.serialize_array_field("traceAddrs", &self.m_traceAddrs)?;
-            serializer.serialize_array_field("traceParents", &self.m_traceParents)?;
+            serializer
+                .serialize_array_field(
+                    "allocations",
+                    &self.m_allocations,
+                    TypeSize::Struct {
+                        size_x86: 12u64,
+                        size_x86_64: 24u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
+                    "blocks",
+                    &self.m_blocks,
+                    TypeSize::Struct {
+                        size_x86: 24u64,
+                        size_x86_64: 40u64,
+                    },
+                )?;
+            serializer.serialize_array_field("refs", &self.m_refs, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field(
+                    "typeNames",
+                    &self.m_typeNames,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "traceText",
+                    &self.m_traceText,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "traceAddrs",
+                    &self.m_traceAddrs,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "traceParents",
+                    &self.m_traceParents,
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

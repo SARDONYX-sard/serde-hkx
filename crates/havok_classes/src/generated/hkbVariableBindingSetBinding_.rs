@@ -108,8 +108,12 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x4d592f72)));
             let mut serializer = __serializer
-                .serialize_struct("hkbVariableBindingSetBinding", class_meta)?;
-            serializer.serialize_stringptr_meta_field("memberPath", &self.m_memberPath)?;
+                .serialize_struct(
+                    "hkbVariableBindingSetBinding",
+                    class_meta,
+                    (32u64, 40u64),
+                )?;
+            serializer.serialize_field("memberPath", &self.m_memberPath)?;
             serializer.skip_field("memberClass", &self.m_memberClass)?;
             serializer
                 .skip_field("offsetInObjectPlusOne", &self.m_offsetInObjectPlusOne)?;
@@ -122,7 +126,6 @@ const _: () = {
             serializer.skip_field("variableType", &self.m_variableType)?;
             serializer.skip_field("flags", &self.m_flags)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
-            serializer.serialize_stringptr_field("memberPath", &self.m_memberPath)?;
             serializer.end()
         }
     }

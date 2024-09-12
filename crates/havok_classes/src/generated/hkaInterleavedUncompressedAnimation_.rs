@@ -66,7 +66,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x930af031)));
             let mut serializer = __serializer
-                .serialize_struct("hkaInterleavedUncompressedAnimation", class_meta)?;
+                .serialize_struct(
+                    "hkaInterleavedUncompressedAnimation",
+                    class_meta,
+                    (64u64, 88u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -88,19 +92,22 @@ const _: () = {
             serializer
                 .serialize_field("extractedMotion", &self.parent.m_extractedMotion)?;
             serializer
-                .serialize_array_meta_field(
-                    "annotationTracks",
-                    &self.parent.m_annotationTracks,
-                )?;
-            serializer.serialize_array_meta_field("transforms", &self.m_transforms)?;
-            serializer.serialize_array_meta_field("floats", &self.m_floats)?;
-            serializer
                 .serialize_array_field(
                     "annotationTracks",
                     &self.parent.m_annotationTracks,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 24u64,
+                    },
                 )?;
-            serializer.serialize_array_field("transforms", &self.m_transforms)?;
-            serializer.serialize_array_field("floats", &self.m_floats)?;
+            serializer
+                .serialize_array_field(
+                    "transforms",
+                    &self.m_transforms,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field("floats", &self.m_floats, TypeSize::NonPtr)?;
             serializer.end()
         }
     }

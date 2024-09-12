@@ -85,7 +85,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x57b06d35)));
             let mut serializer = __serializer
-                .serialize_struct("hkpBallGun", class_meta)?;
+                .serialize_struct("hkpBallGun", class_meta, (96u64, 112u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -94,10 +94,15 @@ const _: () = {
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.skip_field("type", &self.parent.m_type)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_stringptr_meta_field("name", &self.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.m_name)?;
             serializer.serialize_field("keyboardKey", &self.parent.m_keyboardKey)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.skip_array_meta_field("listeners", &self.parent.m_listeners)?;
+            serializer
+                .skip_array_field(
+                    "listeners",
+                    &self.parent.m_listeners,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("bulletRadius", &self.m_bulletRadius)?;
             serializer.serialize_field("bulletVelocity", &self.m_bulletVelocity)?;
             serializer.serialize_field("bulletMass", &self.m_bulletMass)?;
@@ -111,8 +116,6 @@ const _: () = {
                 )?;
             serializer.skip_field("addedBodies", &self.m_addedBodies)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer.serialize_stringptr_field("name", &self.parent.m_name)?;
-            serializer.serialize_array_field("listeners", &self.parent.m_listeners)?;
             serializer.end()
         }
     }

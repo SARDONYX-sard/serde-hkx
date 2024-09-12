@@ -65,6 +65,7 @@ const _: () = {
                 .serialize_struct(
                     "hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters",
                     class_meta,
+                    (12u64, 12u64),
                 )?;
             serializer.serialize_field("strength", &self.m_strength)?;
             serializer

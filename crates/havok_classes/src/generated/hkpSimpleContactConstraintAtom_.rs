@@ -89,7 +89,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x920df11a)));
             let mut serializer = __serializer
-                .serialize_struct("hkpSimpleContactConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpSimpleContactConstraintAtom",
+                    class_meta,
+                    (48u64, 48u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.serialize_field("sizeOfAllAtoms", &self.m_sizeOfAllAtoms)?;
             serializer.serialize_field("numContactPoints", &self.m_numContactPoints)?;

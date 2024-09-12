@@ -62,11 +62,17 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x345ca95d)));
             let mut serializer = __serializer
-                .serialize_struct("hkxAttributeGroup", class_meta)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
-            serializer.serialize_array_meta_field("attributes", &self.m_attributes)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
-            serializer.serialize_array_field("attributes", &self.m_attributes)?;
+                .serialize_struct("hkxAttributeGroup", class_meta, (16u64, 24u64))?;
+            serializer.serialize_field("name", &self.m_name)?;
+            serializer
+                .serialize_array_field(
+                    "attributes",
+                    &self.m_attributes,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.end()
         }
     }

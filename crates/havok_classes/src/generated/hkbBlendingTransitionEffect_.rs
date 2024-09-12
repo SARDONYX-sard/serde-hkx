@@ -117,7 +117,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xfd8584fe)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBlendingTransitionEffect", class_meta)?;
+                .serialize_struct(
+                    "hkbBlendingTransitionEffect",
+                    class_meta,
+                    (88u64, 144u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -136,9 +140,10 @@ const _: () = {
                     &self.parent.parent.parent.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.parent.parent.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field(
@@ -148,11 +153,7 @@ const _: () = {
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer
                 .serialize_field("userData", &self.parent.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field(
-                    "name",
-                    &self.parent.parent.parent.m_name,
-                )?;
+            serializer.serialize_field("name", &self.parent.parent.parent.m_name)?;
             serializer.skip_field("id", &self.parent.parent.parent.m_id)?;
             serializer
                 .skip_field("cloneState", &self.parent.parent.parent.m_cloneState)?;
@@ -160,6 +161,7 @@ const _: () = {
                 .skip_fixed_array_field(
                     "padNode",
                     self.parent.parent.parent.m_padNode.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
@@ -183,9 +185,10 @@ const _: () = {
             serializer.skip_field("fromGenerator", &self.m_fromGenerator)?;
             serializer.skip_field("toGenerator", &self.m_toGenerator)?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "characterPoseAtBeginningOfTransition",
                     &self.m_characterPoseAtBeginningOfTransition,
+                    TypeSize::NonPtr,
                 )?;
             serializer.skip_field("timeRemaining", &self.m_timeRemaining)?;
             serializer.skip_field("timeInTransition", &self.m_timeInTransition)?;
@@ -193,18 +196,6 @@ const _: () = {
             serializer
                 .skip_field("initializeCharacterPose", &self.m_initializeCharacterPose)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 6usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.parent.parent.parent.m_cachedBindables,
-                )?;
-            serializer
-                .serialize_stringptr_field("name", &self.parent.parent.parent.m_name)?;
-            serializer
-                .serialize_array_field(
-                    "characterPoseAtBeginningOfTransition",
-                    &self.m_characterPoseAtBeginningOfTransition,
-                )?;
             serializer.end()
         }
     }

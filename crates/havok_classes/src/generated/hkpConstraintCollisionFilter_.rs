@@ -49,7 +49,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xc3b577b1)));
             let mut serializer = __serializer
-                .serialize_struct("hkpConstraintCollisionFilter", class_meta)?;
+                .serialize_struct(
+                    "hkpConstraintCollisionFilter",
+                    class_meta,
+                    (68u64, 104u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -67,12 +71,14 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "prepad",
                     self.parent.parent.m_prepad.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("type", &self.parent.parent.m_type)?;
             serializer
                 .serialize_fixed_array_field(
                     "postpad",
                     self.parent.parent.m_postpad.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.skip_field("disabledPairs", &self.parent.m_disabledPairs)?;
             serializer.serialize_field("childFilter", &self.parent.m_childFilter)?;

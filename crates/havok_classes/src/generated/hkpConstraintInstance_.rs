@@ -117,7 +117,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x34eba5f)));
             let mut serializer = __serializer
-                .serialize_struct("hkpConstraintInstance", class_meta)?;
+                .serialize_struct("hkpConstraintInstance", class_meta, (56u64, 112u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -127,19 +127,22 @@ const _: () = {
             serializer
                 .serialize_field("constraintModifiers", &self.m_constraintModifiers)?;
             serializer
-                .serialize_fixed_array_field("entities", self.m_entities.as_slice())?;
+                .serialize_fixed_array_field(
+                    "entities",
+                    self.m_entities.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("priority", &self.m_priority)?;
             serializer.serialize_field("wantRuntime", &self.m_wantRuntime)?;
             serializer
                 .serialize_field("destructionRemapInfo", &self.m_destructionRemapInfo)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 5usize].as_slice())?;
             serializer.skip_field("listeners", &self.m_listeners)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.serialize_field("userData", &self.m_userData)?;
             serializer.skip_field("internal", &self.m_internal)?;
             serializer.skip_field("uid", &self.m_uid)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
             serializer.end()
         }
     }

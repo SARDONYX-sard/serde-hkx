@@ -87,7 +87,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x54c7715b)));
             let mut serializer = __serializer
-                .serialize_struct("hkpLimitedHingeConstraintDataAtoms", class_meta)?;
+                .serialize_struct(
+                    "hkpLimitedHingeConstraintDataAtoms",
+                    class_meta,
+                    (240u64, 240u64),
+                )?;
             serializer.serialize_field("transforms", &self.m_transforms)?;
             serializer
                 .serialize_field("setupStabilization", &self.m_setupStabilization)?;

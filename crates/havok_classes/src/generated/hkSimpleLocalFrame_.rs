@@ -76,7 +76,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe758f63c)));
             let mut serializer = __serializer
-                .serialize_struct("hkSimpleLocalFrame", class_meta)?;
+                .serialize_struct("hkSimpleLocalFrame", class_meta, (112u64, 128u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -85,13 +85,12 @@ const _: () = {
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("transform", &self.m_transform)?;
-            serializer.serialize_array_meta_field("children", &self.m_children)?;
+            serializer
+                .serialize_array_field("children", &self.m_children, TypeSize::NonPtr)?;
             serializer.serialize_field("parentFrame", &self.m_parentFrame)?;
             serializer.serialize_field("group", &self.m_group)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer.serialize_array_field("children", &self.m_children)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
             serializer.end()
         }
     }

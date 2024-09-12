@@ -54,7 +54,8 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x4a948b16)));
-            let mut serializer = __serializer.serialize_struct("hkAabb", class_meta)?;
+            let mut serializer = __serializer
+                .serialize_struct("hkAabb", class_meta, (32u64, 32u64))?;
             serializer.serialize_field("min", &self.m_min)?;
             serializer.serialize_field("max", &self.m_max)?;
             serializer.end()

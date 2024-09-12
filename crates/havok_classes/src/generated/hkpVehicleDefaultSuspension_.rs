@@ -69,7 +69,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x21735a24)));
             let mut serializer = __serializer
-                .serialize_struct("hkpVehicleDefaultSuspension", class_meta)?;
+                .serialize_struct(
+                    "hkpVehicleDefaultSuspension",
+                    class_meta,
+                    (32u64, 48u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -77,15 +81,23 @@ const _: () = {
                 .skip_field("referenceCount", &self.parent.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field("wheelParams", &self.parent.m_wheelParams)?;
+                .serialize_array_field(
+                    "wheelParams",
+                    &self.parent.m_wheelParams,
+                    TypeSize::Struct {
+                        size_x86: 48u64,
+                        size_x86_64: 48u64,
+                    },
+                )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "wheelSpringParams",
                     &self.m_wheelSpringParams,
+                    TypeSize::Struct {
+                        size_x86: 12u64,
+                        size_x86_64: 12u64,
+                    },
                 )?;
-            serializer.serialize_array_field("wheelParams", &self.parent.m_wheelParams)?;
-            serializer
-                .serialize_array_field("wheelSpringParams", &self.m_wheelSpringParams)?;
             serializer.end()
         }
     }

@@ -67,7 +67,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x97b6e143)));
             let mut serializer = __serializer
-                .serialize_struct("hkpCompressedSampledHeightFieldShape", class_meta)?;
+                .serialize_struct(
+                    "hkpCompressedSampledHeightFieldShape",
+                    class_meta,
+                    (128u64, 144u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -105,13 +109,13 @@ const _: () = {
                     &self.parent.m_floatToIntOffsetFloorCorrected,
                 )?;
             serializer.serialize_field("extents", &self.parent.m_extents)?;
-            serializer.serialize_array_meta_field("storage", &self.m_storage)?;
+            serializer
+                .serialize_array_field("storage", &self.m_storage, TypeSize::NonPtr)?;
             serializer.serialize_field("triangleFlip", &self.m_triangleFlip)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
             serializer.serialize_field("offset", &self.m_offset)?;
             serializer.serialize_field("scale", &self.m_scale)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_field("storage", &self.m_storage)?;
             serializer.end()
         }
     }

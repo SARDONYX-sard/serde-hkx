@@ -156,7 +156,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x2a064d99)));
             let mut serializer = __serializer
-                .serialize_struct("hkbSenseHandleModifier", class_meta)?;
+                .serialize_struct(
+                    "hkbSenseHandleModifier",
+                    class_meta,
+                    (160u64, 224u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -175,9 +179,10 @@ const _: () = {
                     &self.parent.parent.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.parent.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field(
@@ -186,14 +191,14 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.skip_field("id", &self.parent.parent.m_id)?;
             serializer.skip_field("cloneState", &self.parent.parent.m_cloneState)?;
             serializer
                 .skip_fixed_array_field(
                     "padNode",
                     self.parent.parent.m_padNode.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("enable", &self.parent.m_enable)?;
@@ -201,24 +206,26 @@ const _: () = {
                 .skip_fixed_array_field(
                     "padModifier",
                     self.parent.m_padModifier.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.skip_field("handle", &self.m_handle)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("sensorLocalOffset", &self.m_sensorLocalOffset)?;
-            serializer.serialize_array_meta_field("ranges", &self.m_ranges)?;
+            serializer
+                .serialize_array_field(
+                    "ranges",
+                    &self.m_ranges,
+                    TypeSize::Struct {
+                        size_x86: 20u64,
+                        size_x86_64: 32u64,
+                    },
+                )?;
             serializer.serialize_field("handleOut", &self.m_handleOut)?;
             serializer.serialize_field("handleIn", &self.m_handleIn)?;
+            serializer.serialize_field("localFrameName", &self.m_localFrameName)?;
             serializer
-                .serialize_stringptr_meta_field(
-                    "localFrameName",
-                    &self.m_localFrameName,
-                )?;
-            serializer
-                .serialize_stringptr_meta_field(
-                    "sensorLocalFrameName",
-                    &self.m_sensorLocalFrameName,
-                )?;
+                .serialize_field("sensorLocalFrameName", &self.m_sensorLocalFrameName)?;
             serializer.serialize_field("minDistance", &self.m_minDistance)?;
             serializer.serialize_field("maxDistance", &self.m_maxDistance)?;
             serializer.serialize_field("distanceOut", &self.m_distanceOut)?;
@@ -253,20 +260,6 @@ const _: () = {
                     &self.m_rangeIndexForEventToSendNextUpdate,
                 )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 0usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.parent.parent.m_cachedBindables,
-                )?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
-            serializer.serialize_array_field("ranges", &self.m_ranges)?;
-            serializer
-                .serialize_stringptr_field("localFrameName", &self.m_localFrameName)?;
-            serializer
-                .serialize_stringptr_field(
-                    "sensorLocalFrameName",
-                    &self.m_sensorLocalFrameName,
-                )?;
             serializer.end()
         }
     }

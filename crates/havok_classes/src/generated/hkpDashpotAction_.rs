@@ -71,7 +71,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x50746c6e)));
             let mut serializer = __serializer
-                .serialize_struct("hkpDashpotAction", class_meta)?;
+                .serialize_struct("hkpDashpotAction", class_meta, (96u64, 128u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -87,16 +87,19 @@ const _: () = {
             serializer.skip_field("world", &self.parent.parent.m_world)?;
             serializer.skip_field("island", &self.parent.parent.m_island)?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.serialize_field("entityA", &self.parent.m_entityA)?;
             serializer.serialize_field("entityB", &self.parent.m_entityB)?;
-            serializer.serialize_fixed_array_field("point", self.m_point.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "point",
+                    self.m_point.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("strength", &self.m_strength)?;
             serializer.serialize_field("damping", &self.m_damping)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("impulse", &self.m_impulse)?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
             serializer.end()
         }
     }

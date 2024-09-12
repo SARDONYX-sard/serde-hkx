@@ -52,7 +52,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x3c99bda4)));
             let mut serializer = __serializer
-                .serialize_struct("hkbNamedIntEventPayload", class_meta)?;
+                .serialize_struct(
+                    "hkbNamedIntEventPayload",
+                    class_meta,
+                    (16u64, 32u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -65,10 +69,9 @@ const _: () = {
                     &self.parent.parent.parent.m_referenceCount,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_meta_field("name", &self.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.m_name)?;
             serializer.serialize_field("data", &self.m_data)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_field("name", &self.parent.m_name)?;
             serializer.end()
         }
     }

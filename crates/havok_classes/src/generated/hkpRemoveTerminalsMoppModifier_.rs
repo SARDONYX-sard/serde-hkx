@@ -59,15 +59,23 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x91367f03)));
             let mut serializer = __serializer
-                .serialize_struct("hkpRemoveTerminalsMoppModifier", class_meta)?;
+                .serialize_struct(
+                    "hkpRemoveTerminalsMoppModifier",
+                    class_meta,
+                    (28u64, 48u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer.serialize_array_meta_field("removeInfo", &self.m_removeInfo)?;
+            serializer
+                .serialize_array_field(
+                    "removeInfo",
+                    &self.m_removeInfo,
+                    TypeSize::NonPtr,
+                )?;
             serializer.skip_field("tempShapesToRemove", &self.m_tempShapesToRemove)?;
-            serializer.serialize_array_field("removeInfo", &self.m_removeInfo)?;
             serializer.end()
         }
     }

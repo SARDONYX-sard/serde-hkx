@@ -55,7 +55,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xd295234d)));
             let mut serializer = __serializer
-                .serialize_struct("hkxMaterialProperty", class_meta)?;
+                .serialize_struct("hkxMaterialProperty", class_meta, (8u64, 8u64))?;
             serializer.serialize_field("key", &self.m_key)?;
             serializer.serialize_field("value", &self.m_value)?;
             serializer.end()

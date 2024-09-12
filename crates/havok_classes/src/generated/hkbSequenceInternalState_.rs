@@ -77,32 +77,42 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x419b9a05)));
             let mut serializer = __serializer
-                .serialize_struct("hkbSequenceInternalState", class_meta)?;
+                .serialize_struct(
+                    "hkbSequenceInternalState",
+                    class_meta,
+                    (64u64, 88u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "nextSampleEvents",
                     &self.m_nextSampleEvents,
+                    TypeSize::NonPtr,
                 )?;
             serializer
-                .serialize_array_meta_field("nextSampleReals", &self.m_nextSampleReals)?;
+                .serialize_array_field(
+                    "nextSampleReals",
+                    &self.m_nextSampleReals,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_meta_field("nextSampleBools", &self.m_nextSampleBools)?;
+                .serialize_array_field(
+                    "nextSampleBools",
+                    &self.m_nextSampleBools,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_meta_field("nextSampleInts", &self.m_nextSampleInts)?;
+                .serialize_array_field(
+                    "nextSampleInts",
+                    &self.m_nextSampleInts,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("time", &self.m_time)?;
             serializer.serialize_field("isEnabled", &self.m_isEnabled)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
-            serializer
-                .serialize_array_field("nextSampleEvents", &self.m_nextSampleEvents)?;
-            serializer
-                .serialize_array_field("nextSampleReals", &self.m_nextSampleReals)?;
-            serializer
-                .serialize_array_field("nextSampleBools", &self.m_nextSampleBools)?;
-            serializer.serialize_array_field("nextSampleInts", &self.m_nextSampleInts)?;
             serializer.end()
         }
     }

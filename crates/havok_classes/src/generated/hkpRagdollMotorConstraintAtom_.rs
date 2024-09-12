@@ -73,7 +73,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x71013826)));
             let mut serializer = __serializer
-                .serialize_struct("hkpRagdollMotorConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpRagdollMotorConstraintAtom",
+                    class_meta,
+                    (80u64, 96u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.serialize_field("isEnabled", &self.m_isEnabled)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
@@ -85,7 +89,12 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("target_bRca", &self.m_target_bRca)?;
-            serializer.serialize_fixed_array_field("motors", self.m_motors.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "motors",
+                    self.m_motors.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.end()
         }

@@ -62,18 +62,24 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x180d900d)));
             let mut serializer = __serializer
-                .serialize_struct("hkbCharacterSkinInfo", class_meta)?;
+                .serialize_struct("hkbCharacterSkinInfo", class_meta, (40u64, 56u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("characterId", &self.m_characterId)?;
             serializer
-                .serialize_array_meta_field("deformableSkins", &self.m_deformableSkins)?;
-            serializer.serialize_array_meta_field("rigidSkins", &self.m_rigidSkins)?;
+                .serialize_array_field(
+                    "deformableSkins",
+                    &self.m_deformableSkins,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_field("deformableSkins", &self.m_deformableSkins)?;
-            serializer.serialize_array_field("rigidSkins", &self.m_rigidSkins)?;
+                .serialize_array_field(
+                    "rigidSkins",
+                    &self.m_rigidSkins,
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

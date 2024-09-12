@@ -105,7 +105,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa3d0ac71)));
             let mut serializer = __serializer
-                .serialize_struct("hkaKeyFrameHierarchyUtilityControlData", class_meta)?;
+                .serialize_struct(
+                    "hkaKeyFrameHierarchyUtilityControlData",
+                    class_meta,
+                    (48u64, 48u64),
+                )?;
             serializer.serialize_field("hierarchyGain", &self.m_hierarchyGain)?;
             serializer.serialize_field("velocityDamping", &self.m_velocityDamping)?;
             serializer.serialize_field("accelerationGain", &self.m_accelerationGain)?;

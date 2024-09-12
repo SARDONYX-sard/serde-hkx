@@ -57,7 +57,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xd0fd4bbe)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPhysicsSystemWithContacts", class_meta)?;
+                .serialize_struct(
+                    "hkpPhysicsSystemWithContacts",
+                    class_meta,
+                    (80u64, 120u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -65,22 +69,35 @@ const _: () = {
                 .skip_field("referenceCount", &self.parent.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field("rigidBodies", &self.parent.m_rigidBodies)?;
+                .serialize_array_field(
+                    "rigidBodies",
+                    &self.parent.m_rigidBodies,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .serialize_array_meta_field("constraints", &self.parent.m_constraints)?;
-            serializer.serialize_array_meta_field("actions", &self.parent.m_actions)?;
-            serializer.serialize_array_meta_field("phantoms", &self.parent.m_phantoms)?;
-            serializer.serialize_stringptr_meta_field("name", &self.parent.m_name)?;
+                .serialize_array_field(
+                    "constraints",
+                    &self.parent.m_constraints,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "actions",
+                    &self.parent.m_actions,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "phantoms",
+                    &self.parent.m_phantoms,
+                    TypeSize::NonPtr,
+                )?;
+            serializer.serialize_field("name", &self.parent.m_name)?;
             serializer.serialize_field("userData", &self.parent.m_userData)?;
             serializer.serialize_field("active", &self.parent.m_active)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_array_meta_field("contacts", &self.m_contacts)?;
-            serializer.serialize_array_field("rigidBodies", &self.parent.m_rigidBodies)?;
-            serializer.serialize_array_field("constraints", &self.parent.m_constraints)?;
-            serializer.serialize_array_field("actions", &self.parent.m_actions)?;
-            serializer.serialize_array_field("phantoms", &self.parent.m_phantoms)?;
-            serializer.serialize_stringptr_field("name", &self.parent.m_name)?;
-            serializer.serialize_array_field("contacts", &self.m_contacts)?;
+            serializer
+                .serialize_array_field("contacts", &self.m_contacts, TypeSize::NonPtr)?;
             serializer.end()
         }
     }

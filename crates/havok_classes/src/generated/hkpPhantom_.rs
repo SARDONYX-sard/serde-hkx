@@ -73,7 +73,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x9b7e6f86)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPhantom", class_meta)?;
+                .serialize_struct("hkpPhantom", class_meta, (164u64, 240u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -86,20 +86,29 @@ const _: () = {
             serializer
                 .serialize_field("multiThreadCheck", &self.parent.m_multiThreadCheck)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_meta_field("name", &self.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.m_name)?;
             serializer
-                .serialize_array_meta_field("properties", &self.parent.m_properties)?;
+                .serialize_array_field(
+                    "properties",
+                    &self.parent.m_properties,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.skip_field("treeData", &self.parent.m_treeData)?;
             serializer
-                .skip_array_meta_field("overlapListeners", &self.m_overlapListeners)?;
+                .skip_array_field(
+                    "overlapListeners",
+                    &self.m_overlapListeners,
+                    TypeSize::NonPtr,
+                )?;
             serializer
-                .skip_array_meta_field("phantomListeners", &self.m_phantomListeners)?;
-            serializer.serialize_stringptr_field("name", &self.parent.m_name)?;
-            serializer.serialize_array_field("properties", &self.parent.m_properties)?;
-            serializer
-                .serialize_array_field("overlapListeners", &self.m_overlapListeners)?;
-            serializer
-                .serialize_array_field("phantomListeners", &self.m_phantomListeners)?;
+                .skip_array_field(
+                    "phantomListeners",
+                    &self.m_phantomListeners,
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

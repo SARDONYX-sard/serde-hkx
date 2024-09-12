@@ -83,35 +83,25 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x3544e182)));
             let mut serializer = __serializer
-                .serialize_struct("hkbCharacterAddedInfo", class_meta)?;
+                .serialize_struct("hkbCharacterAddedInfo", class_meta, (96u64, 128u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("characterId", &self.m_characterId)?;
-            serializer
-                .serialize_stringptr_meta_field("instanceName", &self.m_instanceName)?;
-            serializer
-                .serialize_stringptr_meta_field("templateName", &self.m_templateName)?;
-            serializer
-                .serialize_stringptr_meta_field(
-                    "fullPathToProject",
-                    &self.m_fullPathToProject,
-                )?;
+            serializer.serialize_field("instanceName", &self.m_instanceName)?;
+            serializer.serialize_field("templateName", &self.m_templateName)?;
+            serializer.serialize_field("fullPathToProject", &self.m_fullPathToProject)?;
             serializer.serialize_field("skeleton", &self.m_skeleton)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("worldFromModel", &self.m_worldFromModel)?;
             serializer
-                .serialize_array_meta_field("poseModelSpace", &self.m_poseModelSpace)?;
-            serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 0usize].as_slice())?;
-            serializer.serialize_stringptr_field("instanceName", &self.m_instanceName)?;
-            serializer.serialize_stringptr_field("templateName", &self.m_templateName)?;
-            serializer
-                .serialize_stringptr_field(
-                    "fullPathToProject",
-                    &self.m_fullPathToProject,
+                .serialize_array_field(
+                    "poseModelSpace",
+                    &self.m_poseModelSpace,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_array_field("poseModelSpace", &self.m_poseModelSpace)?;
+            serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.end()
         }
     }

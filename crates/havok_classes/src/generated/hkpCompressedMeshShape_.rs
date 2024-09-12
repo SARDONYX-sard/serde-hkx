@@ -188,7 +188,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa62d5e6e)));
             let mut serializer = __serializer
-                .serialize_struct("hkpCompressedMeshShape", class_meta)?;
+                .serialize_struct(
+                    "hkpCompressedMeshShape",
+                    class_meta,
+                    (224u64, 304u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -216,14 +220,63 @@ const _: () = {
             serializer.serialize_field("weldingType", &self.m_weldingType)?;
             serializer.serialize_field("materialType", &self.m_materialType)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 2usize].as_slice())?;
-            serializer.serialize_array_meta_field("materials", &self.m_materials)?;
-            serializer.serialize_array_meta_field("materials16", &self.m_materials16)?;
-            serializer.serialize_array_meta_field("materials8", &self.m_materials8)?;
-            serializer.serialize_array_meta_field("transforms", &self.m_transforms)?;
-            serializer.serialize_array_meta_field("bigVertices", &self.m_bigVertices)?;
-            serializer.serialize_array_meta_field("bigTriangles", &self.m_bigTriangles)?;
-            serializer.serialize_array_meta_field("chunks", &self.m_chunks)?;
-            serializer.serialize_array_meta_field("convexPieces", &self.m_convexPieces)?;
+            serializer
+                .serialize_array_field(
+                    "materials",
+                    &self.m_materials,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "materials16",
+                    &self.m_materials16,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "materials8",
+                    &self.m_materials8,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "transforms",
+                    &self.m_transforms,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "bigVertices",
+                    &self.m_bigVertices,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "bigTriangles",
+                    &self.m_bigTriangles,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
+                    "chunks",
+                    &self.m_chunks,
+                    TypeSize::Struct {
+                        size_x86: 80u64,
+                        size_x86_64: 96u64,
+                    },
+                )?;
+            serializer
+                .serialize_array_field(
+                    "convexPieces",
+                    &self.m_convexPieces,
+                    TypeSize::Struct {
+                        size_x86: 64u64,
+                        size_x86_64: 80u64,
+                    },
+                )?;
             serializer.serialize_field("error", &self.m_error)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("bounds", &self.m_bounds)?;
@@ -238,17 +291,15 @@ const _: () = {
             serializer.serialize_field("numMaterials", &self.m_numMaterials)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field("namedMaterials", &self.m_namedMaterials)?;
+                .serialize_array_field(
+                    "namedMaterials",
+                    &self.m_namedMaterials,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 24usize].as_slice())?;
-            serializer.serialize_array_field("materials", &self.m_materials)?;
-            serializer.serialize_array_field("materials16", &self.m_materials16)?;
-            serializer.serialize_array_field("materials8", &self.m_materials8)?;
-            serializer.serialize_array_field("transforms", &self.m_transforms)?;
-            serializer.serialize_array_field("bigVertices", &self.m_bigVertices)?;
-            serializer.serialize_array_field("bigTriangles", &self.m_bigTriangles)?;
-            serializer.serialize_array_field("chunks", &self.m_chunks)?;
-            serializer.serialize_array_field("convexPieces", &self.m_convexPieces)?;
-            serializer.serialize_array_field("namedMaterials", &self.m_namedMaterials)?;
             serializer.end()
         }
     }

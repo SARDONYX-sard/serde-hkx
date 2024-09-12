@@ -69,7 +69,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x80df0f90)));
             let mut serializer = __serializer
-                .serialize_struct("hkpListShapeChildInfo", class_meta)?;
+                .serialize_struct("hkpListShapeChildInfo", class_meta, (16u64, 32u64))?;
             serializer.serialize_field("shape", &self.m_shape)?;
             serializer
                 .serialize_field("collisionFilterInfo", &self.m_collisionFilterInfo)?;

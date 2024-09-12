@@ -58,18 +58,16 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x12156ee3)));
             let mut serializer = __serializer
-                .serialize_struct("hkMemoryMeshMaterial", class_meta)?;
+                .serialize_struct("hkMemoryMeshMaterial", class_meta, (24u64, 40u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
             serializer
                 .skip_field("referenceCount", &self.parent.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
+            serializer.serialize_field("materialName", &self.m_materialName)?;
             serializer
-                .serialize_stringptr_meta_field("materialName", &self.m_materialName)?;
-            serializer.serialize_array_meta_field("textures", &self.m_textures)?;
-            serializer.serialize_stringptr_field("materialName", &self.m_materialName)?;
-            serializer.serialize_array_field("textures", &self.m_textures)?;
+                .serialize_array_field("textures", &self.m_textures, TypeSize::NonPtr)?;
             serializer.end()
         }
     }

@@ -92,7 +92,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x207cb01)));
             let mut serializer = __serializer
-                .serialize_struct("hkAlignSceneToNodeOptions", class_meta)?;
+                .serialize_struct(
+                    "hkAlignSceneToNodeOptions",
+                    class_meta,
+                    (24u64, 40u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -110,8 +114,7 @@ const _: () = {
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
             serializer.serialize_field("keyframe", &self.m_keyframe)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_meta_field("nodeName", &self.m_nodeName)?;
-            serializer.serialize_stringptr_field("nodeName", &self.m_nodeName)?;
+            serializer.serialize_field("nodeName", &self.m_nodeName)?;
             serializer.end()
         }
     }

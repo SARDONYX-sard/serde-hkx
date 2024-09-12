@@ -64,20 +64,20 @@ const _: () = {
                 .serialize_struct(
                     "hkbEvaluateExpressionModifierInternalState",
                     class_meta,
+                    (20u64, 32u64),
                 )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
-                    "internalExpressionsData",
-                    &self.m_internalExpressionsData,
-                )?;
-            serializer
                 .serialize_array_field(
                     "internalExpressionsData",
                     &self.m_internalExpressionsData,
+                    TypeSize::Struct {
+                        size_x86: 2u64,
+                        size_x86_64: 2u64,
+                    },
                 )?;
             serializer.end()
         }

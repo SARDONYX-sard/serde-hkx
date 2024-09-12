@@ -61,12 +61,14 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xb103a2cd)));
             let mut serializer = __serializer
-                .serialize_struct("hkRootLevelContainerNamedVariant", class_meta)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
-            serializer.serialize_stringptr_meta_field("className", &self.m_className)?;
+                .serialize_struct(
+                    "hkRootLevelContainerNamedVariant",
+                    class_meta,
+                    (12u64, 24u64),
+                )?;
+            serializer.serialize_field("name", &self.m_name)?;
+            serializer.serialize_field("className", &self.m_className)?;
             serializer.serialize_field("variant", &self.m_variant)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
-            serializer.serialize_stringptr_field("className", &self.m_className)?;
             serializer.end()
         }
     }

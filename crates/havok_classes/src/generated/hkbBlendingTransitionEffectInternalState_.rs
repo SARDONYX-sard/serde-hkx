@@ -75,15 +75,17 @@ const _: () = {
                 .serialize_struct(
                     "hkbBlendingTransitionEffectInternalState",
                     class_meta,
+                    (32u64, 48u64),
                 )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "characterPoseAtBeginningOfTransition",
                     &self.m_characterPoseAtBeginningOfTransition,
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("timeRemaining", &self.m_timeRemaining)?;
             serializer.serialize_field("timeInTransition", &self.m_timeInTransition)?;
@@ -95,11 +97,6 @@ const _: () = {
                     &self.m_initializeCharacterPose,
                 )?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 6usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "characterPoseAtBeginningOfTransition",
-                    &self.m_characterPoseAtBeginningOfTransition,
-                )?;
             serializer.end()
         }
     }

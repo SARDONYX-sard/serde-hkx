@@ -73,29 +73,20 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa8ccd5cf)));
             let mut serializer = __serializer
-                .serialize_struct("hkaBoneAttachment", class_meta)?;
+                .serialize_struct("hkaBoneAttachment", class_meta, (96u64, 128u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_stringptr_meta_field(
-                    "originalSkeletonName",
-                    &self.m_originalSkeletonName,
-                )?;
+                .serialize_field("originalSkeletonName", &self.m_originalSkeletonName)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .serialize_field("boneFromAttachment", &self.m_boneFromAttachment)?;
             serializer.serialize_field("attachment", &self.m_attachment)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.serialize_field("boneIndex", &self.m_boneIndex)?;
             serializer.pad_field([0u8; 6usize].as_slice(), [0u8; 14usize].as_slice())?;
-            serializer
-                .serialize_stringptr_field(
-                    "originalSkeletonName",
-                    &self.m_originalSkeletonName,
-                )?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
             serializer.end()
         }
     }

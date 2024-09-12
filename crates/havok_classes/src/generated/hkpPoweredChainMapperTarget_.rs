@@ -56,7 +56,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf651c74d)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPoweredChainMapperTarget", class_meta)?;
+                .serialize_struct(
+                    "hkpPoweredChainMapperTarget",
+                    class_meta,
+                    (8u64, 16u64),
+                )?;
             serializer.serialize_field("chain", &self.m_chain)?;
             serializer.serialize_field("infoIndex", &self.m_infoIndex)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;

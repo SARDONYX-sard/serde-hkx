@@ -70,26 +70,30 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x154948e8)));
             let mut serializer = __serializer
-                .serialize_struct("hkaRagdollInstance", class_meta)?;
+                .serialize_struct("hkaRagdollInstance", class_meta, (48u64, 72u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("rigidBodies", &self.m_rigidBodies)?;
-            serializer.serialize_array_meta_field("constraints", &self.m_constraints)?;
             serializer
-                .serialize_array_meta_field(
-                    "boneToRigidBodyMap",
-                    &self.m_boneToRigidBodyMap,
+                .serialize_array_field(
+                    "rigidBodies",
+                    &self.m_rigidBodies,
+                    TypeSize::NonPtr,
                 )?;
-            serializer.serialize_field("skeleton", &self.m_skeleton)?;
-            serializer.serialize_array_field("rigidBodies", &self.m_rigidBodies)?;
-            serializer.serialize_array_field("constraints", &self.m_constraints)?;
+            serializer
+                .serialize_array_field(
+                    "constraints",
+                    &self.m_constraints,
+                    TypeSize::NonPtr,
+                )?;
             serializer
                 .serialize_array_field(
                     "boneToRigidBodyMap",
                     &self.m_boneToRigidBodyMap,
+                    TypeSize::NonPtr,
                 )?;
+            serializer.serialize_field("skeleton", &self.m_skeleton)?;
             serializer.end()
         }
     }

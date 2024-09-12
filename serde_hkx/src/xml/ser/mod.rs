@@ -2,7 +2,9 @@
 use crate::{lib::*, tri};
 
 use crate::errors::ser::{Error, Result};
-use havok_serde::ser::{Serialize, SerializeFlags, SerializeSeq, SerializeStruct, Serializer};
+use havok_serde::ser::{
+    Serialize, SerializeFlags, SerializeSeq, SerializeStruct, Serializer, TypeSize,
+};
 use havok_types::variant::Variant;
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
@@ -221,6 +223,7 @@ impl<'a> Serializer for &'a mut XmlSerializer {
         self,
         name: &'static str,
         class_meta: Option<(Pointer, Signature)>,
+        _sizes: (u64, u64),
     ) -> Result<Self::SerializeStruct> {
         if let Some((ptr_name, sig)) = class_meta {
             self.output += "\n";
@@ -438,26 +441,13 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
         &mut self,
         key: &'static str,
         value: V,
+        size: TypeSize,
     ) -> std::result::Result<(), Self::Error>
     where
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
-        SerializeStruct::serialize_array_meta_field(self, key, value)
-    }
-
-    #[inline]
-    fn serialize_cstring_meta_field(&mut self, key: &'static str, value: &CString) -> Result<()> {
-        SerializeStruct::serialize_field(self, key, value)
-    }
-
-    #[inline]
-    fn serialize_stringptr_meta_field(
-        &mut self,
-        key: &'static str,
-        value: &StringPtr,
-    ) -> Result<()> {
-        SerializeStruct::serialize_field(self, key, value)
+        SerializeStruct::serialize_array_field(self, key, value, size)
     }
 
     /// # XML Examples
@@ -486,7 +476,12 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
     ///     (0.000000 0.000000 0.000000 0.000000)
     /// </hkparam>
     /// ```
-    fn serialize_array_meta_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
+    fn serialize_array_field<V, T>(
+        &mut self,
+        key: &'static str,
+        value: V,
+        _size: TypeSize,
+    ) -> Result<()>
     where
         V: AsRef<[T]> + Serialize,
         T: Serialize,

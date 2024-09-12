@@ -61,7 +61,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x9c72e9e3)));
             let mut serializer = __serializer
-                .serialize_struct("hkbHandIkControlsModifierHand", class_meta)?;
+                .serialize_struct(
+                    "hkbHandIkControlsModifierHand",
+                    class_meta,
+                    (96u64, 112u64),
+                )?;
             serializer.serialize_field("controlData", &self.m_controlData)?;
             serializer.serialize_field("handIndex", &self.m_handIndex)?;
             serializer.serialize_field("enable", &self.m_enable)?;

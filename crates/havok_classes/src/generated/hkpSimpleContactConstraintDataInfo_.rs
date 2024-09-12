@@ -76,7 +76,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xb59d1734)));
             let mut serializer = __serializer
-                .serialize_struct("hkpSimpleContactConstraintDataInfo", class_meta)?;
+                .serialize_struct(
+                    "hkpSimpleContactConstraintDataInfo",
+                    class_meta,
+                    (32u64, 32u64),
+                )?;
             serializer.serialize_field("flags", &self.m_flags)?;
             serializer.serialize_field("index", &self.m_index)?;
             serializer.serialize_field("internalData0", &self.m_internalData0)?;
@@ -86,7 +90,12 @@ const _: () = {
                     &self.m_rollingFrictionMultiplier,
                 )?;
             serializer.serialize_field("internalData1", &self.m_internalData1)?;
-            serializer.serialize_fixed_array_field("data", self.m_data.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "data",
+                    self.m_data.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

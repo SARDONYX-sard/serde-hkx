@@ -64,7 +64,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xea2e7ec9)));
             let mut serializer = __serializer
-                .serialize_struct("hkpMultiRayShape", class_meta)?;
+                .serialize_struct("hkpMultiRayShape", class_meta, (32u64, 56u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -74,14 +74,21 @@ const _: () = {
             serializer.serialize_field("userData", &self.parent.m_userData)?;
             serializer.skip_field("type", &self.parent.m_type)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_meta_field("rays", &self.m_rays)?;
+            serializer
+                .serialize_array_field(
+                    "rays",
+                    &self.m_rays,
+                    TypeSize::Struct {
+                        size_x86: 32u64,
+                        size_x86_64: 32u64,
+                    },
+                )?;
             serializer
                 .serialize_field(
                     "rayPenetrationDistance",
                     &self.m_rayPenetrationDistance,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_array_field("rays", &self.m_rays)?;
             serializer.end()
         }
     }

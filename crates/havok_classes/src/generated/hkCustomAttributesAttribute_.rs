@@ -55,10 +55,13 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x1388d601)));
             let mut serializer = __serializer
-                .serialize_struct("hkCustomAttributesAttribute", class_meta)?;
-            serializer.serialize_cstring_meta_field("name", &self.m_name)?;
+                .serialize_struct(
+                    "hkCustomAttributesAttribute",
+                    class_meta,
+                    (12u64, 24u64),
+                )?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.serialize_field("value", &self.m_value)?;
-            serializer.serialize_cstring_field("name", &self.m_name)?;
             serializer.end()
         }
     }

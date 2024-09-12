@@ -77,7 +77,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf2b1f399)));
             let mut serializer = __serializer
-                .serialize_struct("hkpCogWheelConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpCogWheelConstraintAtom",
+                    class_meta,
+                    (16u64, 16u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 2usize].as_slice())?;
             serializer.serialize_field("cogWheelRadiusA", &self.m_cogWheelRadiusA)?;

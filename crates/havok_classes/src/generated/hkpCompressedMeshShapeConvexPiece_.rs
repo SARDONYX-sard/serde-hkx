@@ -75,17 +75,29 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x385bb842)));
             let mut serializer = __serializer
-                .serialize_struct("hkpCompressedMeshShapeConvexPiece", class_meta)?;
+                .serialize_struct(
+                    "hkpCompressedMeshShapeConvexPiece",
+                    class_meta,
+                    (64u64, 80u64),
+                )?;
             serializer.serialize_field("offset", &self.m_offset)?;
-            serializer.serialize_array_meta_field("vertices", &self.m_vertices)?;
-            serializer.serialize_array_meta_field("faceVertices", &self.m_faceVertices)?;
-            serializer.serialize_array_meta_field("faceOffsets", &self.m_faceOffsets)?;
+            serializer
+                .serialize_array_field("vertices", &self.m_vertices, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field(
+                    "faceVertices",
+                    &self.m_faceVertices,
+                    TypeSize::NonPtr,
+                )?;
+            serializer
+                .serialize_array_field(
+                    "faceOffsets",
+                    &self.m_faceOffsets,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("reference", &self.m_reference)?;
             serializer.serialize_field("transformIndex", &self.m_transformIndex)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 12usize].as_slice())?;
-            serializer.serialize_array_field("vertices", &self.m_vertices)?;
-            serializer.serialize_array_field("faceVertices", &self.m_faceVertices)?;
-            serializer.serialize_array_field("faceOffsets", &self.m_faceOffsets)?;
             serializer.end()
         }
     }

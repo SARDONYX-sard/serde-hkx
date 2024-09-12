@@ -95,7 +95,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x49fb6f2e)));
             let mut serializer = __serializer
-                .serialize_struct("hkpWorldObject", class_meta)?;
+                .serialize_struct("hkpWorldObject", class_meta, (140u64, 208u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -105,11 +105,17 @@ const _: () = {
             serializer.serialize_field("collidable", &self.m_collidable)?;
             serializer.serialize_field("multiThreadCheck", &self.m_multiThreadCheck)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
-            serializer.serialize_array_meta_field("properties", &self.m_properties)?;
+            serializer.serialize_field("name", &self.m_name)?;
+            serializer
+                .serialize_array_field(
+                    "properties",
+                    &self.m_properties,
+                    TypeSize::Struct {
+                        size_x86: 16u64,
+                        size_x86_64: 16u64,
+                    },
+                )?;
             serializer.skip_field("treeData", &self.m_treeData)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
-            serializer.serialize_array_field("properties", &self.m_properties)?;
             serializer.end()
         }
     }

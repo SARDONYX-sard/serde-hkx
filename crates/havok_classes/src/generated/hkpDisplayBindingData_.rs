@@ -59,27 +59,22 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xdc46c906)));
             let mut serializer = __serializer
-                .serialize_struct("hkpDisplayBindingData", class_meta)?;
+                .serialize_struct("hkpDisplayBindingData", class_meta, (32u64, 48u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "rigidBodyBindings",
                     &self.m_rigidBodyBindings,
+                    TypeSize::NonPtr,
                 )?;
-            serializer
-                .serialize_array_meta_field(
-                    "physicsSystemBindings",
-                    &self.m_physicsSystemBindings,
-                )?;
-            serializer
-                .serialize_array_field("rigidBodyBindings", &self.m_rigidBodyBindings)?;
             serializer
                 .serialize_array_field(
                     "physicsSystemBindings",
                     &self.m_physicsSystemBindings,
+                    TypeSize::NonPtr,
                 )?;
             serializer.end()
         }

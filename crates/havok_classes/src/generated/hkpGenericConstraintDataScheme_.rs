@@ -75,16 +75,19 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x11fd6f6c)));
             let mut serializer = __serializer
-                .serialize_struct("hkpGenericConstraintDataScheme", class_meta)?;
+                .serialize_struct(
+                    "hkpGenericConstraintDataScheme",
+                    class_meta,
+                    (64u64, 80u64),
+                )?;
             serializer.skip_field("info", &self.m_info)?;
-            serializer.serialize_array_meta_field("data", &self.m_data)?;
-            serializer.serialize_array_meta_field("commands", &self.m_commands)?;
-            serializer.skip_array_meta_field("modifiers", &self.m_modifiers)?;
-            serializer.serialize_array_meta_field("motors", &self.m_motors)?;
-            serializer.serialize_array_field("data", &self.m_data)?;
-            serializer.serialize_array_field("commands", &self.m_commands)?;
-            serializer.serialize_array_field("modifiers", &self.m_modifiers)?;
-            serializer.serialize_array_field("motors", &self.m_motors)?;
+            serializer.serialize_array_field("data", &self.m_data, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field("commands", &self.m_commands, TypeSize::NonPtr)?;
+            serializer
+                .skip_array_field("modifiers", &self.m_modifiers, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field("motors", &self.m_motors, TypeSize::NonPtr)?;
             serializer.end()
         }
     }

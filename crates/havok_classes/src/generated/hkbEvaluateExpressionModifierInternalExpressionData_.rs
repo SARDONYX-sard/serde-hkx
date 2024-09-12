@@ -58,6 +58,7 @@ const _: () = {
                 .serialize_struct(
                     "hkbEvaluateExpressionModifierInternalExpressionData",
                     class_meta,
+                    (2u64, 2u64),
                 )?;
             serializer.serialize_field("raisedEvent", &self.m_raisedEvent)?;
             serializer

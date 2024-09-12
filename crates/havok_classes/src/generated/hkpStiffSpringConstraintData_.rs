@@ -54,7 +54,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xb98f66f4)));
             let mut serializer = __serializer
-                .serialize_struct("hkpStiffSpringConstraintData", class_meta)?;
+                .serialize_struct(
+                    "hkpStiffSpringConstraintData",
+                    class_meta,
+                    (80u64, 96u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;

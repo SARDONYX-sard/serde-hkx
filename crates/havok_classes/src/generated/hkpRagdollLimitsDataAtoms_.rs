@@ -69,7 +69,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x82b894c3)));
             let mut serializer = __serializer
-                .serialize_struct("hkpRagdollLimitsDataAtoms", class_meta)?;
+                .serialize_struct(
+                    "hkpRagdollLimitsDataAtoms",
+                    class_meta,
+                    (176u64, 176u64),
+                )?;
             serializer.serialize_field("rotations", &self.m_rotations)?;
             serializer.serialize_field("twistLimit", &self.m_twistLimit)?;
             serializer.serialize_field("coneLimit", &self.m_coneLimit)?;

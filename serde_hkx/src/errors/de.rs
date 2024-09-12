@@ -4,8 +4,7 @@ use crate::lib::*;
 /// Deserialize error
 #[derive(Debug, PartialEq, snafu::Snafu)]
 pub enum Error {
-    /// User custom error.
-    #[snafu(display("{msg}"))]
+    /// {msg}
     Message {
         /// Error message
         msg: String,

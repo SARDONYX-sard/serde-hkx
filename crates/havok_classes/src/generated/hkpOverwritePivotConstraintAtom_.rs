@@ -52,7 +52,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x1f11b467)));
             let mut serializer = __serializer
-                .serialize_struct("hkpOverwritePivotConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpOverwritePivotConstraintAtom",
+                    class_meta,
+                    (4u64, 4u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer
                 .serialize_field(

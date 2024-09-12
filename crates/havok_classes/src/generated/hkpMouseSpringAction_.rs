@@ -92,7 +92,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x6e087fd6)));
             let mut serializer = __serializer
-                .serialize_struct("hkpMouseSpringAction", class_meta)?;
+                .serialize_struct("hkpMouseSpringAction", class_meta, (96u64, 144u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -108,8 +108,7 @@ const _: () = {
             serializer.skip_field("world", &self.parent.parent.m_world)?;
             serializer.skip_field("island", &self.parent.parent.m_island)?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.serialize_field("entity", &self.parent.m_entity)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("positionInRbLocal", &self.m_positionInRbLocal)?;
@@ -121,10 +120,13 @@ const _: () = {
             serializer.serialize_field("objectDamping", &self.m_objectDamping)?;
             serializer.serialize_field("shapeKey", &self.m_shapeKey)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.skip_array_meta_field("applyCallbacks", &self.m_applyCallbacks)?;
+            serializer
+                .skip_array_field(
+                    "applyCallbacks",
+                    &self.m_applyCallbacks,
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
-            serializer.serialize_array_field("applyCallbacks", &self.m_applyCallbacks)?;
             serializer.end()
         }
     }

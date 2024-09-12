@@ -53,7 +53,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x79ab517d)));
             let mut serializer = __serializer
-                .serialize_struct("hkpMovingSurfaceModifierConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpMovingSurfaceModifierConstraintAtom",
+                    class_meta,
+                    (48u64, 64u64),
+                )?;
             serializer.serialize_field("type", &self.parent.parent.m_type)?;
             serializer.pad_field([0u8; 14usize].as_slice(), [0u8; 14usize].as_slice())?;
             serializer
@@ -61,7 +65,12 @@ const _: () = {
             serializer.serialize_field("childSize", &self.parent.m_childSize)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("child", &self.parent.m_child)?;
-            serializer.serialize_fixed_array_field("pad", self.parent.m_pad.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "pad",
+                    self.parent.m_pad.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("velocity", &self.m_velocity)?;
             serializer.end()

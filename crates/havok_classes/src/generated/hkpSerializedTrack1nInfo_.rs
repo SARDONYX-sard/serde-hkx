@@ -57,11 +57,19 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xf12d48d9)));
             let mut serializer = __serializer
-                .serialize_struct("hkpSerializedTrack1nInfo", class_meta)?;
-            serializer.serialize_array_meta_field("sectors", &self.m_sectors)?;
-            serializer.serialize_array_meta_field("subTracks", &self.m_subTracks)?;
-            serializer.serialize_array_field("sectors", &self.m_sectors)?;
-            serializer.serialize_array_field("subTracks", &self.m_subTracks)?;
+                .serialize_struct(
+                    "hkpSerializedTrack1nInfo",
+                    class_meta,
+                    (24u64, 32u64),
+                )?;
+            serializer
+                .serialize_array_field("sectors", &self.m_sectors, TypeSize::NonPtr)?;
+            serializer
+                .serialize_array_field(
+                    "subTracks",
+                    &self.m_subTracks,
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

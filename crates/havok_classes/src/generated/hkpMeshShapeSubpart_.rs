@@ -128,7 +128,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x27336e5d)));
             let mut serializer = __serializer
-                .serialize_struct("hkpMeshShapeSubpart", class_meta)?;
+                .serialize_struct("hkpMeshShapeSubpart", class_meta, (56u64, 80u64))?;
             serializer.skip_field("vertexBase", &self.m_vertexBase)?;
             serializer.serialize_field("vertexStriding", &self.m_vertexStriding)?;
             serializer.serialize_field("numVertices", &self.m_numVertices)?;

@@ -45,7 +45,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x25640b46)));
             let mut serializer = __serializer
-                .serialize_struct("hkbWorldEnums", class_meta)?;
+                .serialize_struct("hkbWorldEnums", class_meta, (1u64, 1u64))?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
             serializer.end()
         }

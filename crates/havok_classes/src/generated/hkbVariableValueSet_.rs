@@ -70,40 +70,31 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x27812d8d)));
             let mut serializer = __serializer
-                .serialize_struct("hkbVariableValueSet", class_meta)?;
+                .serialize_struct("hkbVariableValueSet", class_meta, (44u64, 64u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
-                    "wordVariableValues",
-                    &self.m_wordVariableValues,
-                )?;
-            serializer
-                .serialize_array_meta_field(
-                    "quadVariableValues",
-                    &self.m_quadVariableValues,
-                )?;
-            serializer
-                .serialize_array_meta_field(
-                    "variantVariableValues",
-                    &self.m_variantVariableValues,
-                )?;
-            serializer
                 .serialize_array_field(
                     "wordVariableValues",
                     &self.m_wordVariableValues,
+                    TypeSize::Struct {
+                        size_x86: 4u64,
+                        size_x86_64: 4u64,
+                    },
                 )?;
             serializer
                 .serialize_array_field(
                     "quadVariableValues",
                     &self.m_quadVariableValues,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .serialize_array_field(
                     "variantVariableValues",
                     &self.m_variantVariableValues,
+                    TypeSize::NonPtr,
                 )?;
             serializer.end()
         }

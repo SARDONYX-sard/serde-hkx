@@ -93,63 +93,40 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x76ad60a)));
             let mut serializer = __serializer
-                .serialize_struct("hkbProjectStringData", class_meta)?;
+                .serialize_struct("hkbProjectStringData", class_meta, (76u64, 120u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "animationFilenames",
                     &self.m_animationFilenames,
+                    TypeSize::String,
                 )?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "behaviorFilenames",
                     &self.m_behaviorFilenames,
+                    TypeSize::String,
                 )?;
-            serializer
-                .serialize_array_meta_field(
-                    "characterFilenames",
-                    &self.m_characterFilenames,
-                )?;
-            serializer.serialize_array_meta_field("eventNames", &self.m_eventNames)?;
-            serializer
-                .serialize_stringptr_meta_field("animationPath", &self.m_animationPath)?;
-            serializer
-                .serialize_stringptr_meta_field("behaviorPath", &self.m_behaviorPath)?;
-            serializer
-                .serialize_stringptr_meta_field("characterPath", &self.m_characterPath)?;
-            serializer
-                .serialize_stringptr_meta_field(
-                    "fullPathToSource",
-                    &self.m_fullPathToSource,
-                )?;
-            serializer.skip_stringptr_meta_field("rootPath", &self.m_rootPath)?;
-            serializer
-                .serialize_array_field(
-                    "animationFilenames",
-                    &self.m_animationFilenames,
-                )?;
-            serializer
-                .serialize_array_field("behaviorFilenames", &self.m_behaviorFilenames)?;
             serializer
                 .serialize_array_field(
                     "characterFilenames",
                     &self.m_characterFilenames,
+                    TypeSize::String,
                 )?;
-            serializer.serialize_array_field("eventNames", &self.m_eventNames)?;
             serializer
-                .serialize_stringptr_field("animationPath", &self.m_animationPath)?;
-            serializer.serialize_stringptr_field("behaviorPath", &self.m_behaviorPath)?;
-            serializer
-                .serialize_stringptr_field("characterPath", &self.m_characterPath)?;
-            serializer
-                .serialize_stringptr_field(
-                    "fullPathToSource",
-                    &self.m_fullPathToSource,
+                .serialize_array_field(
+                    "eventNames",
+                    &self.m_eventNames,
+                    TypeSize::String,
                 )?;
-            serializer.serialize_stringptr_field("rootPath", &self.m_rootPath)?;
+            serializer.serialize_field("animationPath", &self.m_animationPath)?;
+            serializer.serialize_field("behaviorPath", &self.m_behaviorPath)?;
+            serializer.serialize_field("characterPath", &self.m_characterPath)?;
+            serializer.serialize_field("fullPathToSource", &self.m_fullPathToSource)?;
+            serializer.skip_field("rootPath", &self.m_rootPath)?;
             serializer.end()
         }
     }

@@ -57,7 +57,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xb149e5a)));
             let mut serializer = __serializer
-                .serialize_struct("hkpPulleyConstraintDataAtoms", class_meta)?;
+                .serialize_struct(
+                    "hkpPulleyConstraintDataAtoms",
+                    class_meta,
+                    (112u64, 112u64),
+                )?;
             serializer.serialize_field("translations", &self.m_translations)?;
             serializer.serialize_field("pulley", &self.m_pulley)?;
             serializer.end()

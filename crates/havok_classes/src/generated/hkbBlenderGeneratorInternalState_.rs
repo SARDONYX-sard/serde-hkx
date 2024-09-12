@@ -94,18 +94,30 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x84717488)));
             let mut serializer = __serializer
-                .serialize_struct("hkbBlenderGeneratorInternalState", class_meta)?;
+                .serialize_struct(
+                    "hkbBlenderGeneratorInternalState",
+                    class_meta,
+                    (48u64, 64u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "childrenInternalStates",
                     &self.m_childrenInternalStates,
+                    TypeSize::Struct {
+                        size_x86: 2u64,
+                        size_x86_64: 2u64,
+                    },
                 )?;
             serializer
-                .serialize_array_meta_field("sortedChildren", &self.m_sortedChildren)?;
+                .serialize_array_field(
+                    "sortedChildren",
+                    &self.m_sortedChildren,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("endIntervalWeight", &self.m_endIntervalWeight)?;
             serializer.serialize_field("numActiveChildren", &self.m_numActiveChildren)?;
             serializer
@@ -115,12 +127,6 @@ const _: () = {
             serializer
                 .serialize_field("doSubtractiveBlend", &self.m_doSubtractiveBlend)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 2usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "childrenInternalStates",
-                    &self.m_childrenInternalStates,
-                )?;
-            serializer.serialize_array_field("sortedChildren", &self.m_sortedChildren)?;
             serializer.end()
         }
     }

@@ -63,6 +63,7 @@ const _: () = {
                 .serialize_struct(
                     "hkTrackerSerializableScanSnapshotAllocation",
                     class_meta,
+                    (12u64, 24u64),
                 )?;
             serializer.serialize_field("start", &self.m_start)?;
             serializer.serialize_field("size", &self.m_size)?;

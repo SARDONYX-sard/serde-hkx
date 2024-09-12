@@ -205,7 +205,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x333b85b9)));
             let mut serializer = __serializer
-                .serialize_struct("hkbClipGenerator", class_meta)?;
+                .serialize_struct("hkbClipGenerator", class_meta, (208u64, 272u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field(
@@ -224,9 +224,10 @@ const _: () = {
                     &self.parent.parent.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.parent.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field(
@@ -235,18 +236,17 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.serialize_field("userData", &self.parent.parent.m_userData)?;
-            serializer
-                .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
+            serializer.serialize_field("name", &self.parent.parent.m_name)?;
             serializer.skip_field("id", &self.parent.parent.m_id)?;
             serializer.skip_field("cloneState", &self.parent.parent.m_cloneState)?;
             serializer
                 .skip_fixed_array_field(
                     "padNode",
                     self.parent.parent.m_padNode.as_slice(),
+                    TypeSize::NonPtr,
                 )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer
-                .serialize_stringptr_meta_field("animationName", &self.m_animationName)?;
+            serializer.serialize_field("animationName", &self.m_animationName)?;
             serializer.serialize_field("triggers", &self.m_triggers)?;
             serializer
                 .serialize_field(
@@ -274,7 +274,8 @@ const _: () = {
             serializer.serialize_field("mode", &self.m_mode)?;
             serializer.serialize_field("flags", &self.m_flags)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.skip_array_meta_field("animDatas", &self.m_animDatas)?;
+            serializer
+                .skip_array_field("animDatas", &self.m_animDatas, TypeSize::NonPtr)?;
             serializer.skip_field("animationControl", &self.m_animationControl)?;
             serializer.skip_field("originalTriggers", &self.m_originalTriggers)?;
             serializer.skip_field("mapperData", &self.m_mapperData)?;
@@ -282,7 +283,7 @@ const _: () = {
             serializer.skip_field("mirroredAnimation", &self.m_mirroredAnimation)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.skip_field("extractedMotion", &self.m_extractedMotion)?;
-            serializer.skip_array_meta_field("echos", &self.m_echos)?;
+            serializer.skip_array_field("echos", &self.m_echos, TypeSize::NonPtr)?;
             serializer.skip_field("localTime", &self.m_localTime)?;
             serializer.skip_field("time", &self.m_time)?;
             serializer
@@ -296,16 +297,6 @@ const _: () = {
             serializer.skip_field("ignoreStartTime", &self.m_ignoreStartTime)?;
             serializer.skip_field("pingPongBackward", &self.m_pingPongBackward)?;
             serializer.pad_field([0u8; 13usize].as_slice(), [0u8; 9usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.parent.parent.m_cachedBindables,
-                )?;
-            serializer.serialize_stringptr_field("name", &self.parent.parent.m_name)?;
-            serializer
-                .serialize_stringptr_field("animationName", &self.m_animationName)?;
-            serializer.serialize_array_field("animDatas", &self.m_animDatas)?;
-            serializer.serialize_array_field("echos", &self.m_echos)?;
             serializer.end()
         }
     }

@@ -50,8 +50,13 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x9c16df5b)));
             let mut serializer = __serializer
-                .serialize_struct("hkPackedVector3", class_meta)?;
-            serializer.serialize_fixed_array_field("values", self.m_values.as_slice())?;
+                .serialize_struct("hkPackedVector3", class_meta, (8u64, 8u64))?;
+            serializer
+                .serialize_fixed_array_field(
+                    "values",
+                    self.m_values.as_slice(),
+                    TypeSize::NonPtr,
+                )?;
             serializer.end()
         }
     }

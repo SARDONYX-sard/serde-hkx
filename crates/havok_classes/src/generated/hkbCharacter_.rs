@@ -168,20 +168,21 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x3088a5c5)));
             let mut serializer = __serializer
-                .serialize_struct("hkbCharacter", class_meta)?;
+                .serialize_struct("hkbCharacter", class_meta, (88u64, 160u64))?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer
-                .serialize_array_meta_field(
+                .serialize_array_field(
                     "nearbyCharacters",
                     &self.m_nearbyCharacters,
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("currentLod", &self.m_currentLod)?;
             serializer.skip_field("numTracksInLod", &self.m_numTracksInLod)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.skip_field("ragdollDriver", &self.m_ragdollDriver)?;
             serializer
                 .skip_field(
@@ -202,9 +203,6 @@ const _: () = {
             serializer.skip_field("deleteWorldFromModel", &self.m_deleteWorldFromModel)?;
             serializer.skip_field("deletePoseLocal", &self.m_deletePoseLocal)?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 2usize].as_slice())?;
-            serializer
-                .serialize_array_field("nearbyCharacters", &self.m_nearbyCharacters)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
             serializer.end()
         }
     }

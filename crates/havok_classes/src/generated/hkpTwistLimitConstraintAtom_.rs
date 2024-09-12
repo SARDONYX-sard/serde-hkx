@@ -77,7 +77,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x7c9b1052)));
             let mut serializer = __serializer
-                .serialize_struct("hkpTwistLimitConstraintAtom", class_meta)?;
+                .serialize_struct(
+                    "hkpTwistLimitConstraintAtom",
+                    class_meta,
+                    (20u64, 20u64),
+                )?;
             serializer.serialize_field("type", &self.parent.m_type)?;
             serializer.serialize_field("isEnabled", &self.m_isEnabled)?;
             serializer.serialize_field("twistAxis", &self.m_twistAxis)?;

@@ -65,7 +65,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x60a881e5)));
             let mut serializer = __serializer
-                .serialize_struct("hkbStateMachineTimeInterval", class_meta)?;
+                .serialize_struct(
+                    "hkbStateMachineTimeInterval",
+                    class_meta,
+                    (16u64, 16u64),
+                )?;
             serializer.serialize_field("enterEventId", &self.m_enterEventId)?;
             serializer.serialize_field("exitEventId", &self.m_exitEventId)?;
             serializer.serialize_field("enterTime", &self.m_enterTime)?;

@@ -99,7 +99,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xcdec8025)));
             let mut serializer = __serializer
-                .serialize_struct("hkbStateMachineTransitionInfo", class_meta)?;
+                .serialize_struct(
+                    "hkbStateMachineTransitionInfo",
+                    class_meta,
+                    (60u64, 72u64),
+                )?;
             serializer.serialize_field("triggerInterval", &self.m_triggerInterval)?;
             serializer.serialize_field("initiateInterval", &self.m_initiateInterval)?;
             serializer.serialize_field("transition", &self.m_transition)?;

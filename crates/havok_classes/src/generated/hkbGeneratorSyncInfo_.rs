@@ -21,7 +21,7 @@ pub struct hkbGeneratorSyncInfo {
     /// # C++ Info
     /// - name: `syncPoints`(ctype: `struct hkbGeneratorSyncInfoSyncPoint[8]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
-    /// - type_size: `  8`(x86)/` 64`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_syncPoints: [hkbGeneratorSyncInfoSyncPoint; 8usize],
     /// # C++ Info
     /// - name: `baseFrequency`(ctype: `hkReal`)
@@ -92,13 +92,17 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa3c341f8)));
             let mut serializer = __serializer
-                .serialize_struct("hkbGeneratorSyncInfo", class_meta)?;
+                .serialize_struct("hkbGeneratorSyncInfo", class_meta, (80u64, 80u64))?;
             serializer
                 .serialize_fixed_array_field(
                     "syncPoints",
                     self.m_syncPoints.as_slice(),
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 8u64,
+                    },
                 )?;
-            serializer.pad_field([0u8; 56usize].as_slice(), [0u8; 0usize].as_slice())?;
+            serializer.pad_field([0u8; 56usize].as_slice(), [0u8; 56usize].as_slice())?;
             serializer.serialize_field("baseFrequency", &self.m_baseFrequency)?;
             serializer.serialize_field("localTime", &self.m_localTime)?;
             serializer.serialize_field("playbackSpeed", &self.m_playbackSpeed)?;
@@ -241,7 +245,7 @@ const _: () = {
                                         ),
                                     );
                                 }
-                                __A::pad(&mut __map, 56usize, 0usize)?;
+                                __A::pad(&mut __map, 56usize, 56usize)?;
                                 m_baseFrequency = _serde::__private::Some(
                                     match __A::next_value::<f32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,

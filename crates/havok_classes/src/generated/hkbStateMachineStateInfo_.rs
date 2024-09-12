@@ -98,7 +98,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xed7f9d0)));
             let mut serializer = __serializer
-                .serialize_struct("hkbStateMachineStateInfo", class_meta)?;
+                .serialize_struct(
+                    "hkbStateMachineStateInfo",
+                    class_meta,
+                    (72u64, 120u64),
+                )?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer
                 .skip_field("memSizeAndFlags", &self.parent.parent.m_memSizeAndFlags)?;
@@ -111,30 +115,29 @@ const _: () = {
                     &self.parent.m_variableBindingSet,
                 )?;
             serializer
-                .skip_array_meta_field(
+                .skip_array_field(
                     "cachedBindables",
                     &self.parent.m_cachedBindables,
+                    TypeSize::NonPtr,
                 )?;
             serializer
                 .skip_field("areBindablesCached", &self.parent.m_areBindablesCached)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer.serialize_array_meta_field("listeners", &self.m_listeners)?;
+            serializer
+                .serialize_array_field(
+                    "listeners",
+                    &self.m_listeners,
+                    TypeSize::NonPtr,
+                )?;
             serializer.serialize_field("enterNotifyEvents", &self.m_enterNotifyEvents)?;
             serializer.serialize_field("exitNotifyEvents", &self.m_exitNotifyEvents)?;
             serializer.serialize_field("transitions", &self.m_transitions)?;
             serializer.serialize_field("generator", &self.m_generator)?;
-            serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
+            serializer.serialize_field("name", &self.m_name)?;
             serializer.serialize_field("stateId", &self.m_stateId)?;
             serializer.serialize_field("probability", &self.m_probability)?;
             serializer.serialize_field("enable", &self.m_enable)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
-            serializer
-                .serialize_array_field(
-                    "cachedBindables",
-                    &self.parent.m_cachedBindables,
-                )?;
-            serializer.serialize_array_field("listeners", &self.m_listeners)?;
-            serializer.serialize_stringptr_field("name", &self.m_name)?;
             serializer.end()
         }
     }

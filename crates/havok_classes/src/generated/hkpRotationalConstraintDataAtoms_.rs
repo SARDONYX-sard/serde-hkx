@@ -57,7 +57,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa0c64586)));
             let mut serializer = __serializer
-                .serialize_struct("hkpRotationalConstraintDataAtoms", class_meta)?;
+                .serialize_struct(
+                    "hkpRotationalConstraintDataAtoms",
+                    class_meta,
+                    (128u64, 128u64),
+                )?;
             serializer.serialize_field("rotations", &self.m_rotations)?;
             serializer.serialize_field("ang", &self.m_ang)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 12usize].as_slice())?;

@@ -115,7 +115,11 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x14dfe1dd)));
             let mut serializer = __serializer
-                .serialize_struct("hkbHandIkDriverInfoHand", class_meta)?;
+                .serialize_struct(
+                    "hkbHandIkDriverInfoHand",
+                    class_meta,
+                    (96u64, 96u64),
+                )?;
             serializer.serialize_field("elbowAxisLS", &self.m_elbowAxisLS)?;
             serializer.serialize_field("backHandNormalLS", &self.m_backHandNormalLS)?;
             serializer.serialize_field("handOffsetLS", &self.m_handOffsetLS)?;
@@ -139,14 +143,8 @@ const _: () = {
             serializer
                 .serialize_field("enforceEndRotation", &self.m_enforceEndRotation)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
-            serializer
-                .serialize_stringptr_meta_field(
-                    "localFrameName",
-                    &self.m_localFrameName,
-                )?;
+            serializer.serialize_field("localFrameName", &self.m_localFrameName)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
-            serializer
-                .serialize_stringptr_field("localFrameName", &self.m_localFrameName)?;
             serializer.end()
         }
     }

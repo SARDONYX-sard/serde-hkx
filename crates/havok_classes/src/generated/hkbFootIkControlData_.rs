@@ -52,7 +52,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xa111b704)));
             let mut serializer = __serializer
-                .serialize_struct("hkbFootIkControlData", class_meta)?;
+                .serialize_struct("hkbFootIkControlData", class_meta, (48u64, 48u64))?;
             serializer.serialize_field("gains", &self.m_gains)?;
             serializer.end()
         }
