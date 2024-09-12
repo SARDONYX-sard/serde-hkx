@@ -147,7 +147,7 @@ pub struct ByteSerializer {
 
     // ---- local fixup information
     /// The position to which the pointer returns after writing the end of the pointer.
-    nested_pos: Vec<u64>,
+    pointed_pos: Vec<u64>,
     /// Coordination information to associate a pointer of a pointer type of a field in a class with the data location to which it points.
     ///
     /// # Note
@@ -341,10 +341,10 @@ impl ByteSerializer {
     /// And return destination position.
     #[inline]
     fn goto_local_dst(&mut self) -> Result<u32> {
-        let dest_abs_pos = tri!(match self.nested_pos.last() {
+        let dest_abs_pos = tri!(match self.pointed_pos.last() {
             Some(&pos) => Ok(pos),
             None => Err(Error::Message {
-                msg: "Missing nested position".to_string(),
+                msg: "Missing pointed position".to_string(),
             }),
         });
         self.output.set_position(dest_abs_pos);
@@ -370,28 +370,32 @@ impl ByteSerializer {
     /// Write the internal data pointed to by the pointer of `CString` or `StringPtr`.
     fn serialize_cow(&mut self, v: &Option<Cow<'_, str>>) -> Result<()> {
         #[cfg(feature = "tracing")]
-        tracing::trace!("nested_pos:({:#x?})", self.nested_pos);
+        tracing::trace!("pointed_pos:({:#x?})", self.pointed_pos);
 
         // Skip if `Option::None`(null pointer).
         if let Some(v) = v {
             let ptr_start = self.relative_position()?;
             tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
-            let current_ser_pos = self.output.position();
+            let next_ser_pos = self.output.position();
+
             #[cfg(feature = "tracing")]
-            tracing::trace!("Serialize `CString`/`StringPtr` ({current_ser_pos:#x}): (\"{v}\")",);
+            tracing::trace!("Serialize `CString`/`StringPtr` ({next_ser_pos:#x}): (\"{v}\")",);
 
             // local dst
             let pointed_pos = tri!(self.goto_local_dst());
             tri!(self.write_local_fixup_pair(ptr_start, pointed_pos));
+
             let c_string = StdCString::new(v.as_bytes())?;
             let _ = self.output.write(c_string.as_bytes_with_nul())?;
             self.output.zero_fill_align(16)?;
 
-            if let Some(last) = self.nested_pos.last_mut() {
-                *last = self.output.position();
+            let next_pointed_ser_pos = self.output.position();
+            self.current_last_pos = next_pointed_ser_pos;
+            if let Some(last) = self.pointed_pos.last_mut() {
+                *last = next_pointed_ser_pos; // Update to serialize the next pointed data.
             };
-            self.current_last_pos = self.output.position();
-            self.output.set_position(current_ser_pos); // back to previous position.
+
+            self.output.set_position(next_ser_pos);
         } else {
             tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
         };
@@ -535,18 +539,19 @@ impl<'a> Serializer for &'a mut ByteSerializer {
             self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // Backup to write `global_fixups`
 
             // The data pointed to by the pointer (`T* m_data`) must first be aligned 16 bytes before it is written.
-            self.current_last_pos = self.current_last_pos + align!(size, 16u64);
-            self.nested_pos.push(self.current_last_pos);
+            self.current_last_pos += size;
+            self.current_last_pos = align!(self.current_last_pos, 16u64);
+            self.pointed_pos.push(self.current_last_pos);
             true
         } else {
-            self.nested_pos.push(self.output.position() + size);
+            // if let Some(last) = self.pointed_pos.last_mut() {
+            //     *last = self.output.position() + size;
+            // }
             #[cfg(feature = "tracing")]
             tracing::debug!("serialize struct {name}(A class within a field.)");
             false
         };
 
-        #[cfg(feature = "tracing")]
-        tracing::trace!("nested_pos:({:#x?})", self.nested_pos);
         Ok(Self::SerializeStruct::new(self, is_root))
     }
 

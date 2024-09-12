@@ -186,7 +186,7 @@ fn impl_serialize_self_fields(
                     false => quote! { serialize_fixed_array_field },
                 };
 
-                match vsubtype {
+                match vtype {
                     Struct => {
                         let (x86_size, x64_size) = {
                             let class_name = class_ref.as_ref().unwrap().as_ref();

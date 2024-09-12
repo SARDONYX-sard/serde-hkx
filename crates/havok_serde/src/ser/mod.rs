@@ -280,6 +280,7 @@ pub trait SerializeSeq {
 
 /// Used for writing binary data in Array. (To write after the pointer type data)
 /// - `array_size` = `size of the pointer type` * `array len`
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum TypeSize {
     /// C++ Class size
     Struct {

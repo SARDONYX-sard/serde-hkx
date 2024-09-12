@@ -6,16 +6,13 @@ use havok_types::Pointer;
 #[derive(Debug, snafu::Snafu)]
 #[snafu(visibility(pub))]
 pub enum Error {
-    /// User custom error.
+    /// {msg}
     Message {
         /// Error message
         msg: String,
     },
 
     /// Only 0 (big) or 1 (little) can be specified for the header endian. But got {invalid}
-    #[snafu(display(
-        "Only 0 (big) or 1 (little) can be specified for the header endian. But got {invalid}"
-    ))]
     InvalidEndian {
         invalid: u8,
         /// error location
@@ -24,7 +21,6 @@ pub enum Error {
     },
 
     /// The only supported pointer sizes are 4 and 8. But got {invalid}
-    #[snafu(display("The only supported pointer sizes are 4 and 8. But got {invalid}"))]
     UnsupportedPtrSize {
         invalid: u8,
         /// error location
@@ -34,10 +30,9 @@ pub enum Error {
 
     /// Relative position cannot be obtained because abs is larger than {position}.
     /// This indicates that the value of `absolute_data_offset` in the header is wrong.
-    #[snafu(display("Relative position cannot be obtained because abs is larger than {position}. This indicates that the value of `absolute_data_offset`({abs_data_offset}) in the header is wrong."))]
     OverflowSubtractAbs { position: u32, abs_data_offset: u32 },
 
-    #[snafu(display("Missing global fixup class: {ptr}"))]
+    /// Missing global fixup class: {ptr}
     MissingGlobalFixupClass {
         /// missing global fixup class ptr(e.g. #0050)
         ptr: Pointer,
@@ -47,8 +42,8 @@ pub enum Error {
     },
 
     /// The constructor class for virtual_fixup did not exist in the class
-    /// in the `__classnames__` section written.
-    #[snafu(display("The constructor class for virtual_fixup did not exist in the class in the `__classnames__` section written.: {class_name}"))]
+    /// The constructor class for virtual_fixup did not exist in the class
+    /// in the `__classnames__` section written.: {class_name}
     MissingClassInClassnamesSection {
         class_name: &'static str,
         /// error location

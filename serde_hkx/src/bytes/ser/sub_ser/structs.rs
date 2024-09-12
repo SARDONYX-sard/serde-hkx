@@ -1,4 +1,4 @@
-use crate::{lib::*, tri};
+use crate::{align, lib::*, tri};
 
 use super::super::ByteSerializer;
 use crate::errors::ser::{Error, Result};
@@ -26,50 +26,131 @@ impl<'a> StructSerializer<'a> {
         array: V,
         size: TypeSize,
         local_src: u32,
-        current_ser_pos: u64,
     ) -> Result<()>
     where
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
-        let len = array.as_ref().len() as u32;
+        let next_src_pos = self.ser.output.position();
+
+        {
+            let pointed_pos = tri!(self.ser.goto_local_dst());
+            self.ser.write_local_fixup_pair(local_src, pointed_pos)?;
+        }
+        let array_base_pos = self.ser.current_last_pos;
 
         // push nest
-        let mut is_nested = false;
-        if !self.is_root {
+        let len = array.as_ref().len() as u32;
+        match size {
+            TypeSize::Struct {
+                size_x86,
+                size_x86_64,
+            } => {
+                let write_pointed_pos = {
+                    let one_size = if self.ser.is_x86 {
+                        size_x86
+                    } else {
+                        size_x86_64
+                    };
+                    array_base_pos + (one_size * (len as u64))
+                }; // `local_dst` starting position of class.
+                self.ser.pointed_pos.push(write_pointed_pos); // To write inner member type.
+            }
+            TypeSize::String => {
+                let write_pointed_pos = {
+                    let one_size = if self.ser.is_x86 { 4 } else { 8 };
+                    array_base_pos + (one_size * (len as u64))
+                }; // `local_dst` starting position of string.
+
+                self.ser.pointed_pos.push(write_pointed_pos); // To write pointed string data.
+            }
+            TypeSize::NonPtr => {}
+        }
+        #[cfg(feature = "tracing")]
+        tracing::trace!("pointed_pos:({:#x?})", self.ser.pointed_pos);
+
+        tri!(array.serialize(&mut *self.ser));
+
+        if size == TypeSize::NonPtr {
+            let next_pointed_ser_pos = align!(self.ser.output.position(), 16_u64);
+            self.ser.current_last_pos = next_pointed_ser_pos;
+            if let Some(last) = self.ser.pointed_pos.last_mut() {
+                *last = next_pointed_ser_pos; // Update to serialize the next pointed data.
+            };
+        } else {
+            // HACK: unused first value to update;
+            let pos = self.ser.pointed_pos.pop().unwrap();
+            if let Some(last) = self.ser.pointed_pos.last_mut() {
+                *last = pos;
+            };
+            self.ser.current_last_pos = pos;
+        }
+
+        self.ser.output.set_position(next_src_pos); // Go to the next field serialization position.
+        Ok(())
+    }
+
+    /// Common processing of fixed_array(e.g. `[bool; 3]`)
+    fn serialize_array_fixed<V, T>(
+        &mut self,
+        array: V,
+        size: TypeSize,
+        local_src: u32,
+    ) -> Result<()>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        let need_local_jump = size != TypeSize::NonPtr;
+        if need_local_jump {
+            let pointed_pos = tri!(self.ser.goto_local_dst());
+            let array_base_pos = self.ser.current_last_pos;
+            self.ser.write_local_fixup_pair(local_src, pointed_pos)?;
+
+            // push nest
+            let len = array.as_ref().len() as u32;
             match size {
                 TypeSize::Struct {
                     size_x86,
                     size_x86_64,
                 } => {
-                    let size = if self.ser.is_x86 {
-                        size_x86
-                    } else {
-                        size_x86_64
-                    };
-
-                    let write_pointed_pos = current_ser_pos + ((len as u64) * size);
-                    self.ser.nested_pos.push(write_pointed_pos); // To write inner member type.
-                    is_nested = true;
+                    let write_pointed_pos = {
+                        let one_size = if self.ser.is_x86 {
+                            size_x86
+                        } else {
+                            size_x86_64
+                        };
+                        array_base_pos + (one_size * (len as u64))
+                    }; // `local_dst` starting position of class.
+                    self.ser.pointed_pos.push(write_pointed_pos); // To write inner member type.
                 }
                 TypeSize::String => {
-                    let size = if self.ser.is_x86 { 4 } else { 8 };
-                    let write_pointed_pos = current_ser_pos + ((len as u64) * size);
-                    self.ser.nested_pos.push(write_pointed_pos); // To write pointed string data.
-                    is_nested = true;
+                    let write_pointed_pos = {
+                        let one_size = if self.ser.is_x86 { 4 } else { 8 };
+                        array_base_pos + (one_size * (len as u64))
+                    }; // `local_dst` starting position of string.
+
+                    self.ser.pointed_pos.push(write_pointed_pos); // To write pointed string data.
                 }
                 TypeSize::NonPtr => {}
             }
-        }
+        };
 
-        let pointed_pos = tri!(self.ser.goto_local_dst());
-        self.ser.write_local_fixup_pair(local_src, pointed_pos)?;
+        #[cfg(feature = "tracing")]
+        tracing::trace!("pointed_pos:({:#x?})", self.ser.pointed_pos);
+
+        #[cfg(feature = "tracing")]
+        tracing::trace!("current position: {:#x}", self.ser.output.position());
+
         tri!(array.serialize(&mut *self.ser));
-        if is_nested {
-            self.ser.current_last_pos = self.ser.output.position();
-            let _ = self.ser.nested_pos.pop();
+
+        if size != TypeSize::NonPtr {
+            // HACK: unused first value to update;
+            let pos = self.ser.pointed_pos.pop().unwrap();
+            if let Some(last) = self.ser.pointed_pos.last_mut() {
+                *last = pos;
+            };
         }
-        self.ser.output.set_position(current_ser_pos); // back to previous position.
         Ok(())
     }
 }
@@ -143,9 +224,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
             return Ok(());
         }
         let start_relative = tri!(self.ser.relative_position()); // Ptr type need to pointing data position(local.dst).
-        let current_abs = self.ser.output.position();
-
-        self.serialize_array_common(value, size, start_relative, current_abs)
+        self.serialize_array_fixed(value, size, start_relative)
     }
 
     #[inline]
@@ -186,9 +265,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
             self.ser.output.position()
         );
 
-        // Write Array meta field
-        let start_relative = tri!(self.ser.relative_position()); // Ptr type need to pointing data position(local.dst).
-        let current_abs = self.ser.output.position();
+        let local_src = tri!(self.ser.relative_position()); // Ptr type need to pointing data position(local.dst).
         tri!(self.ser.serialize_ulong(Ulong::new(0))); // ptr size
         let len = value.as_ref().len() as u32;
         tri!(self.ser.serialize_uint32(len)); // array size
@@ -197,7 +274,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
         if len == 0 {
             return Ok(());
         }
-        self.serialize_array_common(value, size, start_relative, current_abs)
+        self.serialize_array_common(value, size, local_src)
     }
 
     #[inline]
@@ -215,11 +292,11 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
     fn end(self) -> Result<()> {
         if self.is_root {
             #[cfg(feature = "tracing")]
-            tracing::trace!("nested_pos:({:#x?})", self.ser.nested_pos);
-            self.ser.nested_pos.clear();
+            tracing::trace!("pointed_pos:({:#x?})", self.ser.pointed_pos);
+            self.ser.pointed_pos.clear();
+            #[cfg(feature = "tracing")]
+            tracing::trace!("current_last_pos:({:#x?})", self.ser.current_last_pos);
             self.ser.output.set_position(self.ser.current_last_pos);
-        } else {
-            let _ = self.ser.nested_pos.pop();
         }
         Ok(())
     }
