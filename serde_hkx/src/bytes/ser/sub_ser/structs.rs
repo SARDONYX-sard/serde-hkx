@@ -135,18 +135,18 @@ impl<'a> StructSerializer<'a> {
                 TypeSize::NonPtr => {}
             }
         };
-
         #[cfg(feature = "tracing")]
         tracing::trace!("pointed_pos:({:#x?})", self.ser.pointed_pos);
-
-        #[cfg(feature = "tracing")]
-        tracing::trace!("current position: {:#x}", self.ser.output.position());
 
         tri!(array.serialize(&mut *self.ser));
 
         if size != TypeSize::NonPtr {
             // HACK: unused first value to update;
-            let pos = self.ser.pointed_pos.pop().unwrap();
+            let &pos = tri!(self
+                .ser
+                .pointed_pos
+                .last()
+                .ok_or(Error::NotFoundPointedPosition));
             if let Some(last) = self.ser.pointed_pos.last_mut() {
                 *last = pos;
             };

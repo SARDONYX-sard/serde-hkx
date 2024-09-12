@@ -51,6 +51,9 @@ pub enum Error {
         location: snafu::Location,
     },
 
+    /// Not found where to write ptr. This could be an incorrect value inside hkx or a mistake by the library implementor.
+    NotFoundPointedPosition,
+
     /// Invalid utf8 error
     #[snafu(transparent)]
     Utf8Error {

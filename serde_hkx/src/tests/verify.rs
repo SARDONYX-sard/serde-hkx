@@ -11,17 +11,19 @@ use winnow::Parser;
 type Result<T> = core::result::Result<T, SerdeHkxError>;
 
 #[test]
-#[ignore = "Because it can't be fully reproduced yet"]
+// #[ignore = "Because it can't be fully reproduced yet"]
 #[quick_tracing::init(test = "should_reproduce_x64_bytes", stdio = false)]
 fn should_reproduce_x64_bytes() {
     let xml = {
         // include_str!("../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
         include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
+        // include_str!("../../../tests/test/test.xml")
     };
     let expected_bytes = {
         // include_bytes!("../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx")
         // include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx")
         include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton_x64_reconverted.hkx")
+        // include_bytes!("../../../tests/test/test_x64_reconverted.hkx")
     };
 
     if let Err(err) = assert_bytes(xml, expected_bytes) {
@@ -31,7 +33,7 @@ fn should_reproduce_x64_bytes() {
 }
 
 #[test]
-#[ignore = "Because it can't be fully reproduced yet"]
+// #[ignore = "Because it can't be fully reproduced yet"]
 #[quick_tracing::init(test = "should_reproduce_x86_bytes", stdio = false)]
 fn should_reproduce_x86_bytes() {
     let xml = include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");

@@ -341,12 +341,10 @@ impl ByteSerializer {
     /// And return destination position.
     #[inline]
     fn goto_local_dst(&mut self) -> Result<u32> {
-        let dest_abs_pos = tri!(match self.pointed_pos.last() {
-            Some(&pos) => Ok(pos),
-            None => Err(Error::Message {
-                msg: "Missing pointed position".to_string(),
-            }),
-        });
+        let &dest_abs_pos = tri!(self
+            .pointed_pos
+            .last()
+            .ok_or(Error::NotFoundPointedPosition));
         self.output.set_position(dest_abs_pos);
         self.relative_position()
     }
