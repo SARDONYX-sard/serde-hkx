@@ -66,7 +66,10 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "axis",
                     self.m_axis.as_slice(),
-                    TypeSize::NonPtr,
+                    TypeSize::Struct {
+                        size_x86: 36u64,
+                        size_x86_64: 36u64,
+                    },
                 )?;
             serializer.pad_field([0u8; 36usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.end()

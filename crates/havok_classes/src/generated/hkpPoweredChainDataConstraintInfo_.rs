@@ -89,10 +89,7 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "motors",
                     self.m_motors.as_slice(),
-                    TypeSize::Struct {
-                        size_x86: 12u64,
-                        size_x86_64: 24u64,
-                    },
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("switchBodies", &self.m_switchBodies)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;

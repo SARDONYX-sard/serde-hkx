@@ -67,7 +67,10 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "elements",
                     self.m_elements.as_slice(),
-                    TypeSize::NonPtr,
+                    TypeSize::Struct {
+                        size_x86: 8u64,
+                        size_x86_64: 8u64,
+                    },
                 )?;
             serializer.pad_field([0u8; 248usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("numElements", &self.m_numElements)?;

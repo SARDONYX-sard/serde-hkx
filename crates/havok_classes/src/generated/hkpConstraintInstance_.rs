@@ -130,10 +130,7 @@ const _: () = {
                 .serialize_fixed_array_field(
                     "entities",
                     self.m_entities.as_slice(),
-                    TypeSize::Struct {
-                        size_x86: 544u64,
-                        size_x86_64: 720u64,
-                    },
+                    TypeSize::NonPtr,
                 )?;
             serializer.serialize_field("priority", &self.m_priority)?;
             serializer.serialize_field("wantRuntime", &self.m_wantRuntime)?;
