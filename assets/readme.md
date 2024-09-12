@@ -1,6 +1,11 @@
 # Havok Class information for `hk_2010.2.0-r1` (32bit/64bit)
 
-The [`hkxcmd Report` (32bit info)](https://github.com/figment/hkxcmd) and the SKSE dump of [`HKX2Library` (64bit info)](https://github.com/ret2end/HKX2Library) gave x86 and x86_64 offset information.
+source of C++ information
+
+- 32bit info: [`hkxcmd Report` output files](https://github.com/figment/hkxcmd)
+- 64bit info: [`HKX2Library` (This is SKSE dump info)](https://github.com/ret2end/HKX2Library)
+
+Furthermore, from the information in hkxcmd, I created my own automatic calculation program to calculate the missing classes in HKX2Library, taking into account the C++ conventions. (In other words, there is no guarantee that the data is correct.)
 
 We then generated a set of Json files here using this offset & size information.
 
@@ -95,3 +100,19 @@ hkpCompressedMeshShape
 
 - `hkxcmd`: 0xa62d5e6e
 - `HKX2Library`: 0xe3d1dba
+
+## Licenses
+
+First of all, the 64-bit information is extracted from the comments from 'HKX2Library' and is clearly part of the source code. Therefore, the license is clearly stated here.
+
+```txt
+SPDX-License-Identifier: MIT
+SPDX-FileCopyrightText: 2021 kreny
+```
+
+The source code for “hkxcmd” is BSD, but the SDK is under the Havok license.
+However, it is not likely that the data output by the `hkxcmd Report` is under the influence of the license.
+
+The compiler and linker do not impose a license on the output data.
+
+The same is true for the types section information in HavokBehaviorProcess.exe.
