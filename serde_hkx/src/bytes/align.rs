@@ -9,8 +9,8 @@
 /// ```rust
 /// use serde_hkx::align;
 ///
-/// assert_eq!(align!(10, 4_u32), 12);
-/// assert_eq!(align!(10, 8_usize), 16);
+/// assert_eq!(align!(10_u32, 4_u32), 12);
+/// assert_eq!(align!(10_usize, 8_usize), 16);
 /// ```
 #[macro_export]
 macro_rules! align {
