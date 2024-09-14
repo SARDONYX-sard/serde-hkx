@@ -60,7 +60,7 @@ where
                 let deps = class.deps_indexes();
 
                 #[cfg(feature = "tracing")]
-                tracing::debug!("index = {key}, deps_indexes = {deps:?}");
+                tracing::trace!("index = {key}, deps_indexes = {deps:?}");
 
                 for dep_key in deps {
                     collect_deps(classes, dep_key, sorted_keys);
@@ -81,7 +81,7 @@ where
         collect_deps(self, root_key, &mut sorted_keys);
 
         #[cfg(feature = "tracing")]
-        tracing::debug!("sorted_keys = {:?}", sorted_keys);
+        tracing::trace!("sorted_keys = {:?}", sorted_keys);
     }
 
     fn sort_for_xml(&mut self) -> Result<usize, Self::Error> {
@@ -100,7 +100,7 @@ where
 
             let deps = class.deps_indexes();
             #[cfg(feature = "tracing")]
-            tracing::debug!("index = {key}, deps_indexes = {deps:?}");
+            tracing::trace!("index = {key}, deps_indexes = {deps:?}");
 
             for dep_key in deps {
                 if let Some(dep_class) = classes.get(&dep_key) {
@@ -122,7 +122,7 @@ where
         collect_deps(self, root_key, root_class, &mut sorted_keys);
 
         #[cfg(feature = "tracing")]
-        tracing::debug!("sorted_keys = {sorted_keys:?}");
+        tracing::trace!("sorted_keys = {sorted_keys:?}");
         let mut sorted_classes = IndexMap::with_capacity(self.len());
         for index in &sorted_keys {
             if let Some(class) = self.swap_remove(index) {

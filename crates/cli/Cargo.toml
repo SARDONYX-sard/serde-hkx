@@ -13,26 +13,19 @@ edition.workspace = true
 [dependencies]
 clap = { version = "4.5.13", features = ["derive"] } # For CLI
 clap_complete_command = "0.6.1" # Generate auto complition
-color-print = "0.3.6" # To color example help
-encoding_rs_io = "0.1.7"
-indexmap = { workspace = true }
-jwalk = { workspace = true } # To enumarate json class files
+color-print = { workspace = true } # To color example help
 parse-display = { workspace = true } # Display derive
-similar = { workspace = true } # Create diff
-snafu = { workspace = true } # Define all error patterns(with backtrace)
 tokio = { workspace = true, features = [
-  "fs",
   "macros",
   "rt",
-  "rt-multi-thread",
   "time",
+  "rt-multi-thread",
 ] }
 tracing = { workspace = true }
 tracing-subscriber = "0.3.18"
 
 # workspace members
-havok_classes = { workspace = true, features = ["ignore_duplicates"] }
-serde_hkx = { path = "../../serde_hkx", features = ["tracing"] }
+serde_hkx_features = { workspace = true, features = ["clap", "tracing"] }
 
 [build-dependencies]
 winres = "0.1.12" # Meta information can be added to the exe.

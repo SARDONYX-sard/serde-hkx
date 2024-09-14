@@ -3,7 +3,7 @@ use crate::{
     errors::SerdeHkxError,
     from_bytes, from_str,
     tests::ClassMap,
-    to_bytes, to_string, HavokSort,
+    to_bytes, to_string, HavokSort as _,
 };
 use pretty_assertions::assert_eq;
 use winnow::Parser;

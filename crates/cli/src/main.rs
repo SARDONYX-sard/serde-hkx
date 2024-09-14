@@ -1,10 +1,7 @@
-mod cli;
-#[cfg(feature = "color")]
-mod error;
+pub mod args;
 mod logger;
-pub mod read_ext;
 
-use crate::cli::Args;
+use crate::args::Args;
 use clap::Parser;
 use std::process::exit;
 use tokio::time::Instant;
@@ -13,7 +10,7 @@ use tokio::time::Instant;
 async fn main() {
     let start = Instant::now();
 
-    match cli::run(Args::parse()).await {
+    match crate::args::run(Args::parse()).await {
         Ok(()) => {
             let elapsed = start.elapsed();
             let time = (elapsed.as_secs(), elapsed.subsec_millis());

@@ -78,8 +78,12 @@ impl<'a> StructSerializer<'a> {
                 *last = next_pointed_ser_pos; // Update to serialize the next pointed data.
             };
         } else {
-            // HACK: unused first value to update;
-            let pos = self.ser.pointed_pos.pop().unwrap();
+            // HACK: unused last value to update;
+            let pos = tri!(self
+                .ser
+                .pointed_pos
+                .pop()
+                .ok_or(Error::NotFoundPointedPosition));
             if let Some(last) = self.ser.pointed_pos.last_mut() {
                 *last = pos;
             };
@@ -141,11 +145,11 @@ impl<'a> StructSerializer<'a> {
         tri!(array.serialize(&mut *self.ser));
 
         if size != TypeSize::NonPtr {
-            // HACK: unused first value to update;
-            let &pos = tri!(self
+            // HACK: unused last value to update;
+            let pos = tri!(self
                 .ser
                 .pointed_pos
-                .last()
+                .pop()
                 .ok_or(Error::NotFoundPointedPosition));
             if let Some(last) = self.ser.pointed_pos.last_mut() {
                 *last = pos;
@@ -294,6 +298,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
             #[cfg(feature = "tracing")]
             tracing::trace!("pointed_pos:({:#x?})", self.ser.pointed_pos);
             self.ser.pointed_pos.clear();
+
             #[cfg(feature = "tracing")]
             tracing::trace!("current_last_pos:({:#x?})", self.ser.current_last_pos);
             self.ser.output.set_position(self.ser.current_last_pos);

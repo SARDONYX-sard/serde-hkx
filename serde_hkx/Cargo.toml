@@ -43,19 +43,13 @@ tracing = { workspace = true }
 zerocopy = { version = "0.7.34" } # To(As)Bytes
 
 # workspace members
-havok_classes = { workspace = true }
+havok_classes = { workspace = true, features = ["ignore_duplicates"] }
 
 [features]
-default = ["ignore_duplicates", "tracing"]
+default = ["tracing"]
 
 # Use tracing logging.(We may need `tracing-subscriber` crate too.)
 tracing = ["dep:tracing"]
 
 # Derive `serde`
 serde = ["havok_types/serde"]
-
-# Strictly check for the presence of values.
-# For example, forbitten missing fields, duplicate fields, an error is made. (but not the original behavior).
-strict = ["havok_classes/strict"]
-# When reading partial XML in Nemesis, you may want to ignore duplicates because the original comes a second time. This is used in that case.
-ignore_duplicates = ["havok_classes/ignore_duplicates"]

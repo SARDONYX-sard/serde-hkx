@@ -17,7 +17,7 @@ pub enum Error {
     #[snafu(display("{source}: {}", path.display()))]
     FailedReadFile { source: io::Error, path: PathBuf },
 
-    #[snafu(display("Use `-o [FILE]` option. (Unable to write bytes to stdout.)"))]
+    /// Use `-o [FILE]` option. (Unable to write bytes to stdout.)
     InvalidStdout,
 
     /// Serialize error
@@ -47,6 +47,7 @@ pub enum Error {
     JwalkError { source: jwalk::Error },
 
     /// Tracing log error
+    #[cfg(feature = "tracing")]
     #[snafu(transparent)]
     TracingError {
         source: tracing::subscriber::SetGlobalDefaultError,
@@ -56,4 +57,5 @@ pub enum Error {
     FailedThreadJoin { source: tokio::task::JoinError },
 }
 
+/// `Result` for `serde_hkx` wrapper crate.
 pub type Result<T, E = Error> = core::result::Result<T, E>;

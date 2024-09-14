@@ -737,7 +737,7 @@ mod tests {
     #[test]
     #[cfg_attr(
         feature = "tracing",
-        quick_tracing::init(test = "deserialize_classes_from_xml")
+        quick_tracing::init(test = "deserialize_classes_from_xml", stdio = false)
     )]
     fn should_deserialize_classes_from_xml() {
         use crate::tests::mocks::new_defaultmale;

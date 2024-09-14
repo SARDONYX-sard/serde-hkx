@@ -1,5 +1,5 @@
-use crate::error::Result;
 use parse_display::{Display, FromStr};
+use serde_hkx_features::error::Result;
 use std::fs::File;
 use std::path::Path;
 use tracing::Level;
