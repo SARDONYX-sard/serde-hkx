@@ -32,8 +32,8 @@ serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.2.0" 
 
 ## Documentation
 
-- Specification: [specification](./docs/specification/hkx_binary_format.md)
-- Binary analysis: [hkx spec](./docs/handson_hex_dump/defaultmale/readme.md)
+- [Specification](./docs/specification/hkx_binary_format.md)
+- [Binary analysis](./docs/handson_hex_dump/defaultmale/readme.md)
 
 - API:
 
