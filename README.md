@@ -1,4 +1,4 @@
-# Havok behavior Serialize/Deserialize library
+# Havok Behavior Serialization/Deserialization Library
 
 ## Features
 
@@ -41,7 +41,7 @@ serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.2.0" 
 git clone https://github.com/SARDONYX-sard/serde-hkx.git;cd ./serde-hkx; cargo doc -p serde_hkx_features;
 ```
 
-## Implementations processing
+## implementation progress
 
 The only way to find out if it is possible or not is to try it out.
 
