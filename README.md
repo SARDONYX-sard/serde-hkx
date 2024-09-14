@@ -37,7 +37,7 @@ serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.2.0" 
 - API:
 
 ```shell
-git clone https://github.com/SARDONYX-sard/serde-hkx.git;cd ./serde-hkx;cargo docs --open;
+git clone https://github.com/SARDONYX-sard/serde-hkx.git;cd ./serde-hkx; cargo doc -p serde_hkx_features;
 ```
 
 ## Try implementations
