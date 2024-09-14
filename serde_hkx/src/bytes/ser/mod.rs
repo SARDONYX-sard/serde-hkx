@@ -602,7 +602,6 @@ mod tests {
     use crate::{bytes::hexdump, tests::mocks::new_defaultmale, HavokSort as _};
 
     #[test]
-    #[cfg_attr(feature = "tracing", quick_tracing::try_init(test = "serialize_bytes"))]
     fn test_serialize() -> Result<()> {
         let mut classes = new_defaultmale();
         classes.sort_for_bytes();

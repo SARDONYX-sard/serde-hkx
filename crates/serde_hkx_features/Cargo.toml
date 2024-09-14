@@ -1,0 +1,36 @@
+[package]
+name = "serde_hkx_features"
+description = "Havok Behavior (De)Serialization easy-to-use upper wrapper for CLI/GUI"
+authors.workspace = true
+version.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+edition.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.5.13", features = ["derive"], optional = true } # For CLI
+color-print = { workspace = true }                                    # To color example help
+encoding_rs_io = "0.1.7"                                              # Read any string
+indexmap = { workspace = true }                                       # Ordering HashMap
+jwalk = { workspace = true }                                          # To enumarate json class files
+parse-display = { workspace = true }                                  # Display derive
+similar = { workspace = true }                                        # Create diff
+snafu = { workspace = true }                                          # Define all error patterns(with backtrace)
+tokio = { workspace = true, features = ["fs"] }
+tracing = { workspace = true, optional = true }
+
+# workspace members
+havok_classes = { workspace = true, features = ["ignore_duplicates"] }
+serde_hkx = { workspace = true }
+
+[build-dependencies]
+
+
+[features]
+# For `Format`(Output)
+clap = ["dep:clap"]
+# Enable tracing logging
+tracing = ["dep:tracing", "serde_hkx/tracing"]

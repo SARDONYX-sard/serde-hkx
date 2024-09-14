@@ -91,7 +91,9 @@ fn print_node(
             result.push_str(&node.name);
             result.push('\n');
         } else {
-            panic!("Not found key: {}", idx);
+            #[cfg(feature = "tracing")]
+            tracing::error!("Not found key: {idx}");
+            return;
         }
     } else if *visit_count > 1 {
         for level in 0..depth {
@@ -108,8 +110,8 @@ fn print_node(
             }
         }
         result.push_str(&format!(
-            "{} (visited {} times)\n",
-            nodes[&idx].name, visit_count
+            "{} (visited {visit_count} times)\n",
+            nodes[&idx].name,
         ));
     }
 
@@ -191,7 +193,7 @@ where
 }
 
 #[test]
-#[quick_tracing::init]
+#[cfg_attr(feature = "tracing", quick_tracing::init)]
 fn should_create_tree() {
     use crate::tests::ClassMap;
 

@@ -6,46 +6,38 @@ mod tree;
 
 #[cfg(feature = "color")]
 use self::color::get_styles;
-use crate::{
-    error::{Error, Result},
-    logger::LogLevel,
-};
+use crate::logger::LogLevel;
 use clap::CommandFactory as _;
-use convert::Format;
-use havok_classes::Classes;
-use std::{
-    io,
-    path::{Path, PathBuf},
+use serde_hkx_features::{
+    convert::{convert, Format},
+    diff::exec,
+    dump as hexdump,
+    error::{Error, Result},
+    tree::output as show_tree,
 };
-
-pub type ClassMap<'a> = indexmap::IndexMap<usize, Classes<'a>>;
+use std::{io, path::PathBuf};
 
 pub(crate) async fn run(args: Args) -> Result<()> {
     crate::logger::init(args.log_file, args.log_level, args.stdout)?;
 
+    // For drag & drop
     if let Some(input) = args.input {
-        let input = input.as_path();
-        return convert::convert::<&Path, PathBuf>(input, None, Format::from_input(input)).await;
+        let out_fmt = Format::from_input(&input);
+        let output: Option<PathBuf> = None;
+        return convert(input, output, out_fmt).await;
     }
 
     if let Some(command) = args.subcommand {
         match command {
-            SubCommands::Convert(args) => {
-                convert::convert(&args.input, args.output, args.format).await
-            }
-            SubCommands::Tree(args) => tree::output(args.input, args.output).await,
-            SubCommands::Dump(args) => {
-                if args.reserve {
-                    dump::to_bytes(args.input, args.output).await
-                } else {
-                    dump::to_string(args.input, args.output).await
-                }
-            }
-            SubCommands::Diff(args) => {
-                diff::exec(args.old, args.new, args.output, args.color).await
-            }
+            SubCommands::Convert(args) => convert(&args.input, args.output, args.format).await,
+            SubCommands::Tree(args) => show_tree(args.input, args.output).await,
+            SubCommands::Dump(args) => match args.reserve {
+                true => hexdump::to_bytes(args.input, args.output).await,
+                false => hexdump::to_string(args.input, args.output).await,
+            },
+            SubCommands::Diff(args) => exec(args.old, args.new, args.output, args.color).await,
             SubCommands::Completions { shell } => {
-                shell.generate(&mut Args::command(), &mut std::io::stdout());
+                shell.generate(&mut Args::command(), &mut io::stdout());
                 Ok(())
             }
         }
