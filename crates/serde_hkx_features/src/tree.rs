@@ -10,6 +10,9 @@ use std::{io::Read as _, path::Path};
 
 /// Output reference tree to stdout/file.
 /// - `output`: If not provided, then stdout.
+///
+/// # Errors
+/// If the extension is not `hkx` or `xml`.
 pub async fn output<I, O>(input: I, output: Option<O>) -> Result<()>
 where
     I: AsRef<Path>,
@@ -24,6 +27,9 @@ where
 }
 
 /// Generate reference tree.
+///
+/// # Errors
+/// If the extension is not `hkx` or `xml`.
 pub async fn gen<P>(input: P) -> Result<String>
 where
     P: AsRef<Path>,
