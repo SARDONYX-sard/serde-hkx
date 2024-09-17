@@ -45,6 +45,7 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
         #bit_flags
 
         impl Default for #struct_ident {
+            #[inline]
             fn default() -> Self {
                 Self::empty()
             }
