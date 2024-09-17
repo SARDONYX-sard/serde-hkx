@@ -31,7 +31,7 @@ pub(crate) async fn run(args: Args) -> Result<()> {
         match command {
             SubCommands::Convert(args) => convert(&args.input, args.output, args.format).await,
             SubCommands::Tree(args) => show_tree(args.input, args.output).await,
-            SubCommands::Dump(args) => match args.reserve {
+            SubCommands::Dump(args) => match args.reverse {
                 true => hexdump::to_bytes(args.input, args.output).await,
                 false => hexdump::to_string(args.input, args.output).await,
             },

@@ -28,5 +28,5 @@ NOTE: Bytes cannot be written to stdout, so always use `-o` to specify the outpu
 
     /// Reverse conversion from hexdump to bytes
     #[clap(short, long)]
-    pub reserve: bool,
+    pub reverse: bool,
 }
