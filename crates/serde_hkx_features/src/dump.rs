@@ -8,7 +8,9 @@ use std::path::Path;
 use tokio::fs;
 
 /// Output bytes to stdout/file.
-/// - `output`: If not provided, then stdout.
+///
+/// # Errors
+/// If `output` is [`None`].(Unable to write bytes to stdout.)
 pub async fn to_bytes<I, O>(input: I, output: Option<O>) -> Result<()>
 where
     I: AsRef<Path>,
