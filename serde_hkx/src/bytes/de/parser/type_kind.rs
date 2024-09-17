@@ -147,6 +147,7 @@ pub fn half<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f16, Context
                 if cfg!(target_endian = "big") {
                     f16::from_be_bytes([b0, b1])
                 } else {
+                    #[allow(clippy::tuple_array_conversions)]
                     f16::from_le_bytes([b0, b1]) // if cfg!(target_endian = "little")
                 }
             }

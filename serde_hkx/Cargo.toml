@@ -1,12 +1,16 @@
 [package]
 name = "serde_hkx"
-authors.workspace = true
-version.workspace = true
-license.workspace = true
 description.workspace = true
+version.workspace = true
+
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+keywords.workspace = true
+license.workspace = true
+readme.workspace = true
 repository.workspace = true
 rust-version.workspace = true
-edition.workspace = true
 
 
 [dependencies]
@@ -23,6 +27,7 @@ winnow = { version = "0.6.8", features = ["simd"] } # Parser conbinator
 # workspace members
 havok_serde = { workspace = true, features = ["indexmap"] }
 havok_types = { workspace = true }
+
 
 [dev-dependencies]
 bitflags = { workspace = true } # To generate flags type
@@ -45,11 +50,14 @@ zerocopy = { version = "0.7.34" } # To(As)Bytes
 # workspace members
 havok_classes = { workspace = true, features = ["ignore_duplicates"] }
 
+
 [features]
 default = ["tracing"]
-
 # Use tracing logging.(We may need `tracing-subscriber` crate too.)
 tracing = ["dep:tracing"]
-
 # Derive `serde`
 serde = ["havok_types/serde"]
+
+
+[lints]
+workspace = true

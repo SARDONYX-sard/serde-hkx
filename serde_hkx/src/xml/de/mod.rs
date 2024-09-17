@@ -61,7 +61,8 @@ pub struct XmlDeserializer<'de> {
 impl<'de> XmlDeserializer<'de> {
     /// from xml string
     #[allow(clippy::should_implement_trait)]
-    pub fn from_str(input: &'de str) -> Self {
+    #[inline]
+    pub const fn from_str(input: &'de str) -> Self {
         XmlDeserializer {
             input,
             original: input,

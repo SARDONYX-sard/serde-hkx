@@ -18,9 +18,9 @@ num-traits = { workspace = true } # To serialize Enum & Flags
 serde = { workspace = true, features = [
   "derive",
 ], optional = true } # Implement (De)Serializer
+serde_with = { workspace = true, optional = true } # Serde utility
 
 # workspace members
-serde_with = { workspace = true, optional = true } # Serde utility
 havok_serde = { workspace = true }
 havok_types = { workspace = true }
 havok_types_derive = { workspace = true }

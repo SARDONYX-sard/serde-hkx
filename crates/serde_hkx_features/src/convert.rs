@@ -35,9 +35,9 @@ impl Format {
     #[inline]
     const fn as_extension(&self) -> &str {
         match *self {
-            Format::Xml => "xml",
-            Format::Win32 => "hkx",
-            Format::Amd64 => "hkx",
+            Self::Xml => "xml",
+            Self::Win32 => "hkx",
+            Self::Amd64 => "hkx",
         }
     }
 
@@ -49,16 +49,14 @@ impl Format {
     where
         P: AsRef<Path>,
     {
-        if let Some(extension) = input.as_ref().extension() {
+        input.as_ref().extension().map_or(Self::Amd64, |extension| {
             let extension = extension.to_ascii_lowercase();
             match extension.to_string_lossy().as_ref() {
-                "hkx" => Format::Xml,
-                "xml" => Format::Amd64,
-                _ => Format::Amd64,
+                "hkx" => Self::Xml,
+                "xml" => Self::Amd64,
+                _ => Self::Amd64,
             }
-        } else {
-            Format::Amd64
-        }
+        })
     }
 }
 

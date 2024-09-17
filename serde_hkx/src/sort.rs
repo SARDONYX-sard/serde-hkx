@@ -123,7 +123,7 @@ where
 
         #[cfg(feature = "tracing")]
         tracing::trace!("sorted_keys = {sorted_keys:?}");
-        let mut sorted_classes = IndexMap::with_capacity(self.len());
+        let mut sorted_classes = Self::with_capacity(self.len());
         for index in &sorted_keys {
             if let Some(class) = self.swap_remove(index) {
                 sorted_classes.insert(*index, class);

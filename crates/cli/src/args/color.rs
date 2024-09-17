@@ -1,7 +1,7 @@
 use clap::builder::styling::{AnsiColor, Color, Style};
 
 /// See: [`clap.rs not printing colors during --help`](https://stackoverflow.com/questions/74068168/clap-rs-not-printing-colors-during-help)
-pub fn get_styles() -> clap::builder::Styles {
+pub const fn get_styles() -> clap::builder::Styles {
     clap::builder::Styles::styled()
         .usage(
             Style::new()

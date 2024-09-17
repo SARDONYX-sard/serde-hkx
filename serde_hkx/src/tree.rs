@@ -20,11 +20,9 @@ struct Node {
 }
 
 impl Node {
-    fn new(name: impl Into<String>, deps: Vec<usize>) -> Self {
-        Node {
-            name: name.into(),
-            deps,
-        }
+    #[inline]
+    const fn new(name: String, deps: Vec<usize>) -> Self {
+        Self { name, deps }
     }
 }
 

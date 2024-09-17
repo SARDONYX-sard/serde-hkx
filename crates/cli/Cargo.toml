@@ -1,12 +1,13 @@
 [package]
 name = "hkxc"
 description = "Havok Behavior (De)Serialization CLI(for ver. hk_2010.2.0-r1)"
+
+edition.workspace = true
 authors.workspace = true
-version.workspace = true
 license.workspace = true
 repository.workspace = true
 rust-version.workspace = true
-edition.workspace = true
+version.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -34,3 +35,7 @@ winres = "0.1.12" # Meta information can be added to the exe.
 [features]
 default = ["color"]
 color = []
+
+
+[lints]
+workspace = true

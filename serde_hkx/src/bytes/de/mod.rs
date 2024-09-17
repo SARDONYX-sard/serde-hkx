@@ -178,7 +178,7 @@ impl<'de> BytesDeserializer<'de> {
     /// Parse by argument parser.
     ///
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
-    fn parse_peek<O, P>(&mut self, mut parser: P) -> Result<O>
+    fn parse_peek<O, P>(&self, mut parser: P) -> Result<O>
     where
         P: Parser<BytesStream<'de>, O, winnow::error::ContextError>,
     {
@@ -191,7 +191,7 @@ impl<'de> BytesDeserializer<'de> {
     /// Parse by argument parser.
     ///
     /// If an error occurs, it is converted to [`Error::ContextError`] and returned.
-    fn parse_range<O, P>(&mut self, mut parser: P, range: Range<usize>) -> Result<O>
+    fn parse_range<O, P>(&self, mut parser: P, range: Range<usize>) -> Result<O>
     where
         P: Parser<BytesStream<'de>, O, winnow::error::ContextError>,
     {
@@ -732,14 +732,14 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = match tri!(self.parse_local_fixup(string())) {
-            Some(s) => CString::from_str(s),
-            None => {
+        let s = tri!(self.parse_local_fixup(string())).map_or_else(
+            || {
                 #[cfg(feature = "tracing")]
                 tracing::debug!("CString is NullPtr");
                 CString::from_option(None)
-            }
-        };
+            },
+            CString::from_str,
+        );
         tri!(self.skip_ptr_size());
         visitor.visit_cstring(s)
     }
@@ -785,14 +785,14 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = match tri!(self.parse_local_fixup(string())) {
-            Some(s) => StringPtr::from_str(s),
-            None => {
+        let s = tri!(self.parse_local_fixup(string())).map_or_else(
+            || {
                 #[cfg(feature = "tracing")]
                 tracing::debug!("StringPtr is NullPtr");
                 StringPtr::from_option(None)
-            }
-        };
+            },
+            StringPtr::from_str,
+        );
         tri!(self.skip_ptr_size());
         visitor.visit_stringptr(s)
     }

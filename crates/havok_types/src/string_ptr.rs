@@ -62,7 +62,7 @@ impl<'a> StringPtr<'a> {
     ///
     /// This is an invalid value or not.
     #[inline]
-    pub fn should_write_binary(&self) -> bool {
+    pub const fn should_write_binary(&self) -> bool {
         self.get_ref().is_some()
     }
 }
