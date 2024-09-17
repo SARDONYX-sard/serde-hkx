@@ -399,11 +399,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         tri!(self.parse_next(comment_multispace0()));
-        let value = visitor.visit_array(SeqDeserializer::new(self));
-
-        // NOTE: If to_readable_err is used here, for some reason the stack overflows
-        // and falls into an infinite loop.
-        value
+        visitor.visit_array(SeqDeserializer::new(self))
     }
 
     #[inline]
@@ -515,6 +511,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         let s = tri!(self.parse_next(string()));
+        // Call `FromStr` of each flags. Always returns Some because `unwrap` is used on the assumption that there is a string inside.
         visitor.visit_stringptr(StringPtr::from_option(Some(s)))
     }
 

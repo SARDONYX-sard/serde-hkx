@@ -26,6 +26,9 @@ where
 /// extension
 /// - `hkx` -> Hexdump string
 /// - else -> Any encode string
+///
+/// # Errors
+/// Not found extension.
 async fn read_any_to_string<I>(path: I) -> Result<String>
 where
     I: AsRef<Path>,
@@ -73,7 +76,7 @@ pub fn diff(old: impl AsRef<str>, new: impl AsRef<str>, color: bool) -> String {
             };
             (sign, "")
         };
-        output_diff += &color_print::cformat!("{sign}{change}{end}");
+        output_diff += &format!("{sign}{change}{end}");
     }
     output_diff
 }

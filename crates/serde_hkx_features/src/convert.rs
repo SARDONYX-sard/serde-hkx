@@ -4,6 +4,7 @@ use crate::{
     error::{DeSnafu, Error, FailedReadFileSnafu, Result, SerSnafu},
     read_ext::ReadExt as _,
 };
+use parse_display::{Display, FromStr};
 use serde_hkx::{
     bytes::serde::hkx_header::HkxHeader, from_bytes, from_str, to_bytes, to_string, HavokSort,
 };
@@ -16,7 +17,7 @@ use std::{
 use tokio::fs;
 
 #[cfg_attr(feature = "clap", derive(clap::ValueEnum))]
-#[derive(Debug, Clone, Copy, parse_display::Display, parse_display::FromStr)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Display, FromStr)]
 pub enum Format {
     /// XML
     #[display("xml")]
@@ -31,6 +32,7 @@ pub enum Format {
 
 impl Format {
     /// Return the file extension corresponding to the format.
+    #[inline]
     const fn as_extension(&self) -> &str {
         match *self {
             Format::Xml => "xml",
@@ -40,6 +42,9 @@ impl Format {
     }
 
     /// Return output format from input path.
+    ///
+    /// # Note
+    /// Unknown extension => `Amd64`
     pub fn from_input<P>(input: P) -> Self
     where
         P: AsRef<Path>,
@@ -58,6 +63,12 @@ impl Format {
 }
 
 /// Convert dir or file(hkx, xml).
+///
+/// # Note
+/// If `output` is not specified, the output is placed at the same level as `input`.
+///
+/// # Errors
+/// Failed to convert.
 pub async fn convert<I, O>(input: I, output: Option<O>, format: Format) -> Result<()>
 where
     I: AsRef<Path>,
@@ -79,6 +90,12 @@ where
 }
 
 /// Convert dir.
+///
+/// # Note
+/// If `output` is not specified, the output is placed at the same level as `input`.
+///
+/// # Errors
+/// Failed to convert.
 pub async fn convert_dir<I, O>(input_dir: I, output_dir: Option<O>, format: Format) -> Result<()>
 where
     I: AsRef<Path>,
@@ -129,6 +146,9 @@ where
 ///
 /// # Note
 /// If `output` is not specified, the output is placed at the same level as `input`.
+///
+/// # Errors
+/// Failed to convert.
 pub async fn convert_file<I, O>(input: I, output: Option<O>, format: Format) -> Result<()>
 where
     I: AsRef<Path>,
