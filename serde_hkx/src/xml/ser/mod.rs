@@ -105,13 +105,15 @@ impl<'a> Serializer for &'a mut XmlSerializer {
         Ok(())
     }
 
+    #[inline]
     fn serialize_bool(self, v: bool) -> Result<Self::Ok> {
         self.output += if v { "true" } else { "false" };
         Ok(())
     }
 
+    #[inline]
     fn serialize_char(self, v: char) -> Result<Self::Ok> {
-        self.output += &v.to_string();
+        self.output.push(v);
         Ok(())
     }
 
@@ -145,56 +147,67 @@ impl<'a> Serializer for &'a mut XmlSerializer {
         self.serialize_uint64(v as u64)
     }
 
+    #[inline]
     fn serialize_int64(self, v: i64) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_uint64(self, v: u64) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_real(self, v: f32) -> Result<Self::Ok> {
         self.output += &format!("{v:.06}");
         Ok(())
     }
 
+    #[inline]
     fn serialize_vector4(self, v: &Vector4) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_quaternion(self, v: &Quaternion) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_matrix3(self, v: &Matrix3) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_rotation(self, v: &Rotation) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_qstransform(self, v: &QsTransform) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_matrix4(self, v: &Matrix4) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_transform(self, v: &Transform) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_pointer(self, v: Pointer) -> Result<Self::Ok> {
         if v.get() == 0 {
             self.output += "null"; // Null pointer
@@ -248,11 +261,13 @@ impl<'a> Serializer for &'a mut XmlSerializer {
     }
 
     /// FIXME: Unclear XML representation
+    #[inline]
     fn serialize_variant(self, v: &Variant) -> Result<Self::Ok> {
         tri!(self.serialize_pointer(v.object));
         self.serialize_pointer(v.class)
     }
 
+    #[inline]
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok> {
         if let Some(s) = v.get_ref() {
             self.output += &html_escape::encode_text(s);
@@ -263,6 +278,7 @@ impl<'a> Serializer for &'a mut XmlSerializer {
         Ok(())
     }
 
+    #[inline]
     fn serialize_ulong(self, v: Ulong) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
@@ -273,11 +289,13 @@ impl<'a> Serializer for &'a mut XmlSerializer {
         Ok(self)
     }
 
+    #[inline]
     fn serialize_half(self, v: f16) -> Result<Self::Ok> {
         self.output += &format!("{v:.06}");
         Ok(())
     }
 
+    #[inline]
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok> {
         if let Some(s) = v.get_ref() {
             self.output += &html_escape::encode_text(s);
@@ -291,6 +309,7 @@ impl<'a> Serializer for &'a mut XmlSerializer {
 
 impl XmlSerializer {
     /// Do indentation by `self.depth`.
+    #[inline]
     fn indent(&mut self) {
         match self.depth {
             // Heap alloc optimizations
@@ -354,6 +373,7 @@ impl<'a> SerializeSeq for &'a mut XmlSerializer {
         Ok(())
     }
 
+    #[inline]
     fn serialize_class_element<T>(&mut self, value: &T) -> Result<()>
     where
         T: ?Sized + Serialize,
@@ -512,6 +532,7 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
     /// <!-- key SERIALIZE_IGNORED --><!-- This is skip_field -->
     /// <hkparam name="otherKey"></hkparam>
     /// ```
+    #[inline]
     fn skip_field<T>(&mut self, key: &'static str, _: &T) -> Result<()>
     where
         T: ?Sized + Serialize,
@@ -521,6 +542,7 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
         Ok(())
     }
 
+    #[inline]
     fn end(self) -> Result<()> {
         self.decrement_depth();
         self.indent();
@@ -540,6 +562,7 @@ impl<'a> SerializeFlags for &'a mut XmlSerializer {
         Ok(())
     }
 
+    #[inline]
     fn serialize_field<T>(&mut self, key: &str, _value: &T) -> Result<(), Self::Error>
     where
         T: ?Sized + Serialize,
