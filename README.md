@@ -1,5 +1,20 @@
 # Havok Behavior Serialization/Deserialization Library
 
+<div>
+    <a href="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/build-and-test.yaml">
+        <img src="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/build-and-test.yaml/badge.svg" alt="Build & Test(Cargo)">
+    </a>
+    <a href="https://github.com/SARDONYX-sard/serde-hkx">
+        <img src="https://tokei.rs/b1/github/SARDONYX-sard/serde-hkx?category=lines" alt="Line of Code">
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+        <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
+    </a>
+    <a href="https://opensource.org/licenses/Apache-2.0">
+        <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License">
+    </a>
+</div>
+
 ## Features
 
 - [x] 32bit to 64bit (reverse) conversion of hkx.
