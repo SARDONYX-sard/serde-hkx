@@ -1105,7 +1105,6 @@ name = "serde_hkx_features"
 version = "0.2.0"
 dependencies = [
  "clap",
- "color-print",
  "encoding_rs_io",
  "havok_classes",
  "indexmap 2.5.0",

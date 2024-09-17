@@ -12,7 +12,6 @@ edition.workspace = true
 
 [dependencies]
 clap = { version = "4.5.13", features = ["derive"], optional = true } # For CLI
-color-print = { workspace = true }                                    # To color example help
 encoding_rs_io = "0.1.7"                                              # Read any string
 indexmap = { workspace = true }                                       # Ordering HashMap
 jwalk = { workspace = true }                                          # To enumarate json class files
