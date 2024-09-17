@@ -162,17 +162,7 @@ impl SectionHeader {
         writer.write_u32::<O>(fixups_offset) // end_offset
     }
 
-    /// Create new `__types__` section header
-    ///
-    /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
-    ///
-    /// # Return
-    /// `absolute_data_start`
-    ///
-    /// # Why do you return the write position of `absolute_data_offset`?
-    /// The `absolute_data_offset` is found (basically, depending on the header settings) just before the `__data__` section begins.
-    ///
-    /// It is not yet known at this point when the types section header is written, so the position is returned so that it can be written later.
+    /// Write `__types__` section header.
     pub fn write_types<O>(mut writer: impl WriteBytesExt, abs_offset: u32) -> io::Result<()>
     where
         O: ByteOrder,
