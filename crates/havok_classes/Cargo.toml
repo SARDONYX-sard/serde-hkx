@@ -28,7 +28,7 @@ havok_types_derive = { workspace = true }
 
 [features]
 # Derive `serde`
-serde = ["dep:serde", "dep:serde_with"]
+serde = ["havok_types/serde", "bitflags/serde", "dep:serde", "dep:serde_with"]
 
 # Strictly check for the presence of values.
 # For example, forbitten missing fields, duplicate fields, an error is made. (but not the original behavior).

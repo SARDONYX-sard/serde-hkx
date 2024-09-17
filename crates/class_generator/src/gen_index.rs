@@ -48,6 +48,7 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> String {
             #(#mods)*
 
             use havok_serde as _serde;
+            #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
             #[derive(Debug, Default, Clone, PartialEq)]
             pub enum Classes<'a> {
                 /// For binary writing, the youngest pointer index must be first after sorting in reverse order.

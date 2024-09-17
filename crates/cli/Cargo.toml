@@ -34,8 +34,12 @@ winres = "0.1.12" # Meta information can be added to the exe.
 
 [features]
 default = ["color"]
+
+# ANSI color
 color = []
 
+# Extra output format(json, toml, yaml)
+extra_fmt = ["serde_hkx_features/extra_fmt"]
 
 [lints]
 workspace = true

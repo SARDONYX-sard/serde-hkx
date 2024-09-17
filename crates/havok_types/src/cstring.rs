@@ -15,6 +15,7 @@ use crate::{lib::*, StringPtr, NULL_STR};
 /// Struct([`str`]) -> (alloc [`String`])
 ///
 /// [`str`]: https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct CString<'a> {
     inner: Option<Cow<'a, str>>,

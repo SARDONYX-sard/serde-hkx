@@ -55,12 +55,12 @@ where
             Ok(classes.tree_for_bytes())
             //
         } else {
-            Err(Error::UnsupportedExtension {
+            Err(Error::UnsupportedExtensionPath {
                 path: input.to_path_buf(),
             })
         }
     } else {
-        Err(Error::UnsupportedExtension {
+        Err(Error::UnsupportedExtensionPath {
             path: input.to_path_buf(),
         })
     }
