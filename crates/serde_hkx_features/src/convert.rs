@@ -62,10 +62,12 @@ impl Format {
     }
 
     /// Return output format from input path.
+    /// - "hkx" => `Self::Xml`
+    /// - "xml" => `Self::Amd64`
     ///
-    /// # Note
-    /// Unknown extension => `Amd64`
-    pub fn from_path<P>(path: P) -> Result<Self>
+    /// # Errors
+    /// Unknown extension.
+    pub fn from_input<P>(path: P) -> Result<Self>
     where
         P: AsRef<Path>,
     {
@@ -73,15 +75,23 @@ impl Format {
         let ext = path.extension().ok_or(Error::UnsupportedExtensionPath {
             path: path.to_path_buf(),
         })?;
-        Self::from_extension(ext).map_err(|_| Error::UnsupportedExtensionPath {
-            path: path.to_path_buf(),
-        })
-    }
 
-    pub fn from_extension(ext: &OsStr) -> Result<Self> {
         Ok(match ext {
             ext if ext.eq_ignore_ascii_case("hkx") => Self::Xml,
             ext if ext.eq_ignore_ascii_case("xml") => Self::Amd64,
+            _ => {
+                return Err(Error::UnsupportedExtensionPath {
+                    path: path.to_path_buf(),
+                })
+            }
+        })
+    }
+
+    /// Determine format from extension.
+    pub fn from_extension(ext: &OsStr) -> Result<Self> {
+        Ok(match ext {
+            ext if ext.eq_ignore_ascii_case("hkx") => Self::Amd64,
+            ext if ext.eq_ignore_ascii_case("xml") => Self::Xml,
 
             #[cfg(feature = "extra_fmt")]
             ext if ext.eq_ignore_ascii_case("json") => Self::Json,
@@ -176,11 +186,9 @@ where
         }
 
         if let Some(ext) = path.extension() {
-            let ext = ext.to_string_lossy();
-            match ext.as_ref() {
-                "hkx" | "xml" => {}
-                _ => continue,
-            }
+            if Format::from_extension(ext).is_err() {
+                continue;
+            };
         }
         let input = path.to_path_buf();
 
@@ -220,14 +228,15 @@ where
 {
     let input = input.as_ref();
     let bytes = input.read_bytes().await?;
-    let extension = input.extension();
+    let input_ext = input.extension();
     let mut xml = String::new(); // To avoid ownership errors, declare it here, but since it is a 0-allocation, there is no problem.
 
     // Deserialize
-    let mut classes: ClassMap = if let Some(ext) = extension {
-        let fmt = Format::from_extension(ext).map_err(|_| Error::UnsupportedExtensionPath {
-            path: input.to_path_buf(),
-        })?;
+    let mut classes: ClassMap = if let Some(input_ext) = input_ext {
+        let fmt =
+            Format::from_extension(input_ext).map_err(|_| Error::UnsupportedExtensionPath {
+                path: input.to_path_buf(),
+            })?;
 
         match fmt {
             Format::Amd64 | Format::Win32 => from_bytes(&bytes).context(DeSnafu {
