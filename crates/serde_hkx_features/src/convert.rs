@@ -303,9 +303,11 @@ where
                 #[cfg(feature = "extra_fmt")]
                 Format::Json | Format::Yaml | Format::Toml => {
                     let contents = match format {
-                        Format::Json => simd_json::to_string(&classes).context(JsonSnafu {
-                            input: input.to_path_buf(),
-                        })?,
+                        Format::Json => {
+                            simd_json::to_string_pretty(&classes).context(JsonSnafu {
+                                input: input.to_path_buf(),
+                            })?
+                        }
                         Format::Toml => toml::to_string_pretty(&classes).context(TomlSerSnafu {
                             input: input.to_path_buf(),
                         })?,
