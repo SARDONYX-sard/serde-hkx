@@ -109,8 +109,8 @@ impl FromStr for Format {
     #[inline]
     fn from_str(ext: &str) -> core::result::Result<Self, Self::Err> {
         Ok(match ext {
-            ext if ext.eq_ignore_ascii_case("hkx") => Self::Xml,
-            ext if ext.eq_ignore_ascii_case("xml") => Self::Amd64,
+            ext if ext.eq_ignore_ascii_case("hkx") => Self::Amd64,
+            ext if ext.eq_ignore_ascii_case("xml") => Self::Xml,
 
             #[cfg(feature = "extra_fmt")]
             ext if ext.eq_ignore_ascii_case("json") => Self::Json,
