@@ -1,5 +1,7 @@
+//! Show diff between two files.
+
 use crate::error::{Error, Result};
-use crate::read_ext::ReadExt as _;
+use crate::fs::ReadExt as _;
 use serde_hkx::bytes::hexdump;
 use std::path::Path;
 use tokio::fs;

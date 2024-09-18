@@ -1,7 +1,7 @@
 //! Dump binary data in hexadecimal
 use crate::{
     error::{Error, Result},
-    read_ext::ReadExt as _,
+    fs::ReadExt as _,
 };
 pub use serde_hkx::bytes::hexdump;
 use std::path::Path;

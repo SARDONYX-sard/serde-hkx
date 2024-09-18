@@ -1,12 +1,8 @@
 //! Show dependency tree from havok behavior state machine (hkx/xml file)
-use super::ClassMap;
-use crate::{
-    error::{DeSnafu, Error, Result},
-    read_ext::ReadExt,
-};
-use serde_hkx::{from_bytes, from_str, tree::HavokTree as _};
-use snafu::ResultExt as _;
-use std::{io::Read as _, path::Path};
+use crate::{error::Result, fs::ReadExt, serde::deserialize};
+use serde_hkx::tree::HavokTree as _;
+use std::path::Path;
+use tokio::fs;
 
 /// Output reference tree to stdout/file.
 /// - `output`: If not provided, then stdout.
@@ -20,7 +16,7 @@ where
 {
     let tree = gen(input).await?; // NOTE: With newline
     match output.as_ref() {
-        Some(output) => tokio::fs::write(output, &tree).await?,
+        Some(output) => fs::write(output, &tree).await?,
         None => print!("{tree}"),
     };
     Ok(())
@@ -29,39 +25,12 @@ where
 /// Generate reference tree.
 ///
 /// # Errors
-/// If the extension is not `hkx` or `xml`.
+/// If the unknown extension. (Not `hkx`, `xml`...).
 pub async fn gen<P>(input: P) -> Result<String>
 where
     P: AsRef<Path>,
 {
-    let input = input.as_ref();
-    let extension = input.extension();
     let bytes = input.read_bytes().await?;
-    let mut xml = String::new();
-
-    if let Some(extension) = extension {
-        if extension.eq_ignore_ascii_case("hkx") {
-            let mut classes: ClassMap = from_bytes(&bytes).context(DeSnafu {
-                input: input.to_path_buf(),
-            })?;
-            Ok(classes.tree_for_bytes())
-            //
-        } else if extension.eq_ignore_ascii_case("xml") {
-            let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
-            decoder.read_to_string(&mut xml)?;
-            let mut classes: ClassMap = from_str(&xml).context(DeSnafu {
-                input: input.to_path_buf(),
-            })?;
-            Ok(classes.tree_for_bytes())
-            //
-        } else {
-            Err(Error::UnsupportedExtensionPath {
-                path: input.to_path_buf(),
-            })
-        }
-    } else {
-        Err(Error::UnsupportedExtensionPath {
-            path: input.to_path_buf(),
-        })
-    }
+    let mut string = String::new();
+    Ok(deserialize(&bytes, &mut string, input)?.tree_for_bytes())
 }

@@ -1,3 +1,4 @@
+//! `serde_hkx_features`'s errors
 use std::{io, path::PathBuf};
 
 /// Cli error

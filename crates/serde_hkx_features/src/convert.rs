@@ -1,24 +1,16 @@
 //! Convert hkx <-> xml
-use super::ClassMap;
-#[cfg(feature = "extra_fmt")]
-use crate::error::{JsonSnafu, YamlSnafu};
 use crate::{
-    error::{DeSnafu, Error, FailedReadFileSnafu, Result, SerSnafu},
-    read_ext::ReadExt as _,
+    error::{Error, Result},
+    fs::{write, ReadExt as _},
+    serde::{deserialize, serialize_to_bytes},
 };
 use core::str::FromStr;
 use parse_display::Display;
-use serde_hkx::{
-    bytes::serde::hkx_header::HkxHeader, from_bytes, from_str, to_bytes, to_string, HavokSort,
-};
-use snafu::ResultExt as _;
 use std::{
-    borrow::Cow,
     ffi::OsStr,
-    io::{self, Read},
+    io::{self},
     path::Path,
 };
-use tokio::fs;
 
 #[cfg_attr(feature = "clap", derive(clap::ValueEnum))]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Display)]
@@ -214,7 +206,7 @@ where
     Ok(())
 }
 
-/// Convert `hkx`/`xml` file to `hkx`/`xml` file.
+/// Convert `hkx`/`xml` file and vice vasa.
 ///
 /// # Note
 /// If `output` is not specified, the output is placed at the same level as `input`.
@@ -228,127 +220,8 @@ where
 {
     let input = input.as_ref();
     let bytes = input.read_bytes().await?;
-    let input_ext = input.extension();
     let mut string = String::new(); // To avoid ownership errors, declare it here, but since it is a 0-allocation, there is no problem.
-
-    // Deserialize
-    let mut classes: ClassMap = if let Some(input_ext) = input_ext {
-        let fmt =
-            Format::from_extension(input_ext).map_err(|_| Error::UnsupportedExtensionPath {
-                path: input.to_path_buf(),
-            })?;
-
-        match fmt {
-            Format::Amd64 | Format::Win32 => from_bytes(&bytes).context(DeSnafu {
-                input: input.to_path_buf(),
-            })?,
-
-            _ => {
-                let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
-                decoder
-                    .read_to_string(&mut string)
-                    .context(FailedReadFileSnafu {
-                        path: input.to_path_buf(),
-                    })?;
-
-                match fmt {
-                    Format::Xml => from_str(&string).context(DeSnafu {
-                        input: input.to_path_buf(),
-                    })?,
-
-                    #[cfg(feature = "extra_fmt")]
-                    Format::Json => simd_json::from_slice(unsafe { string.as_bytes_mut() })
-                        .context(JsonSnafu {
-                            input: input.to_path_buf(),
-                        })?,
-                    #[cfg(feature = "extra_fmt")]
-                    Format::Yaml => serde_yml::from_str(&string).context(YamlSnafu {
-                        input: input.to_path_buf(),
-                    })?,
-                    _ => unreachable!(),
-                }
-            }
-        }
-    } else {
-        return Err(Error::MissingExtension {
-            path: input.to_path_buf(),
-        });
-    };
-
-    // Serialize
-    match format {
-        Format::Xml => {
-            let top_ptr = classes.sort_for_xml().context(SerSnafu {
-                input: input.to_path_buf(),
-            })?;
-            let xml = to_string(&classes, top_ptr).context(SerSnafu {
-                input: input.to_path_buf(),
-            })?;
-            fs_write(input, output, "xml", xml).await?;
-            Ok(())
-        }
-        _ => {
-            classes.sort_for_bytes();
-            let binary_data = match format {
-                Format::Win32 => to_bytes(&classes, &HkxHeader::new_skyrim_le()),
-                Format::Amd64 => to_bytes(&classes, &HkxHeader::new_skyrim_se()),
-
-                #[cfg(feature = "extra_fmt")]
-                Format::Json | Format::Yaml => {
-                    let contents = match format {
-                        Format::Json => {
-                            simd_json::to_string_pretty(&classes).context(JsonSnafu {
-                                input: input.to_path_buf(),
-                            })?
-                        }
-                        Format::Yaml => serde_yml::to_string(&classes).context(YamlSnafu {
-                            input: input.to_path_buf(),
-                        })?,
-                        _ => unreachable!(),
-                    };
-                    fs_write(input, output, format.as_str(), contents).await?;
-                    return Ok(());
-                }
-                _ => unreachable!(),
-            }
-            .context(SerSnafu {
-                input: input.to_path_buf(),
-            })?;
-
-            fs_write(input, output, "hkx", binary_data).await?;
-            Ok(())
-        }
-    }
-}
-
-/// Write specified or same location.
-async fn fs_write<I, O>(
-    input: I,
-    output: Option<O>,
-    ext: &str,
-    contents: impl AsRef<[u8]>,
-) -> io::Result<()>
-where
-    I: AsRef<Path>,
-    O: AsRef<Path>,
-{
-    let input = input.as_ref();
-
-    let output = output
-        .as_ref()
-        .map(|output| Cow::Borrowed(output.as_ref()))
-        .unwrap_or({
-            let mut output = input.to_path_buf();
-            output.set_extension(ext);
-            Cow::Owned(output)
-        });
-
-    if let Some(parent) = output.parent() {
-        fs::create_dir_all(parent).await?;
-    }
-    fs::write(&output, contents).await?;
-
-    #[cfg(feature = "tracing")]
-    tracing::info!("Converted {} -> {}", input.display(), output.display());
-    Ok(())
+    let mut classes = deserialize(&bytes, &mut string, input)?;
+    let bytes = serialize_to_bytes(input, format, &mut classes).await?;
+    Ok(write(input, output, format.as_str(), bytes).await?)
 }
