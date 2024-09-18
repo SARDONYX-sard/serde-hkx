@@ -1,5 +1,9 @@
+//! Convenience file I/O.
+
 use crate::error::{FailedReadFileSnafu, Result};
 use snafu::ResultExt as _;
+use std::borrow::Cow;
+use std::io;
 use std::{future::Future, io::Read as _, path::Path};
 use tokio::fs;
 
@@ -32,4 +36,38 @@ where
             path: input.to_path_buf(),
         })
     }
+}
+
+/// Write specified or same location.
+///
+/// - `ext`: If `output` is unspecified, rewrite the `input` extension and make it the `output`. In that case, the extension.
+pub async fn write<I, O>(
+    input: I,
+    output: Option<O>,
+    ext: &str,
+    contents: impl AsRef<[u8]>,
+) -> io::Result<()>
+where
+    I: AsRef<Path>,
+    O: AsRef<Path>,
+{
+    let input = input.as_ref();
+
+    let output = output
+        .as_ref()
+        .map(|output| Cow::Borrowed(output.as_ref()))
+        .unwrap_or({
+            let mut output = input.to_path_buf();
+            output.set_extension(ext);
+            Cow::Owned(output)
+        });
+
+    if let Some(parent) = output.parent() {
+        fs::create_dir_all(parent).await?;
+    }
+    fs::write(&output, contents).await?;
+
+    #[cfg(feature = "tracing")]
+    tracing::info!("Input: {} -> Output: {}", input.display(), output.display());
+    Ok(())
 }

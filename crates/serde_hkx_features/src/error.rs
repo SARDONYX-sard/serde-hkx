@@ -1,3 +1,4 @@
+//! `serde_hkx_features`'s errors
 use std::{io, path::PathBuf};
 
 /// Cli error
@@ -6,10 +7,22 @@ use std::{io, path::PathBuf};
 #[snafu(visibility(pub))]
 pub enum Error {
     /// The only supported extension is `.hkx` or `.xml`. But this path is neither: {path}.
+    #[cfg(not(feature = "extra_fmt"))]
     #[snafu(display("The only supported extension is `.hkx` or `.xml`. But this path is neither: {}.", path.display()))]
-    UnsupportedExtension { path: PathBuf },
+    UnsupportedExtensionPath { path: PathBuf },
+    #[cfg(feature = "extra_fmt")]
+    /// The only supported extension is  `.hkx`, `.xml`, `.json`, `yaml`. But this path is neither: {path}.
+    #[snafu(display("The only supported extension is `.hkx`, `.xml`, `.json`, `yaml`. But this path is neither: {}.", path.display()))]
+    UnsupportedExtensionPath { path: PathBuf },
 
-    /// This path has a missing extension.: {path}.
+    /// The only supported extension is `.hkx` or `.xml`. But this is neither: {ext}.
+    #[cfg(not(feature = "extra_fmt"))]
+    UnsupportedExtension { ext: String },
+    #[cfg(feature = "extra_fmt")]
+    /// The only supported extension is  `.hkx`, `.xml`, `.json`, `yaml`. But this is neither: {ext}.
+    UnsupportedExtension { ext: String },
+
+    /// This path has a missing extension.
     #[snafu(display("This path has a missing extension.: {}.", path.display()))]
     MissingExtension { path: PathBuf },
 
@@ -17,7 +30,7 @@ pub enum Error {
     #[snafu(display("{source}: {}", path.display()))]
     FailedReadFile { source: io::Error, path: PathBuf },
 
-    /// Use `-o [FILE]` option. (Unable to write bytes to stdout.)
+    /// Please specify the output path.(OS cannot output bytes as stdout.)
     InvalidStdout,
 
     /// Serialize error
@@ -55,6 +68,23 @@ pub enum Error {
 
     #[snafu(transparent)]
     FailedThreadJoin { source: tokio::task::JoinError },
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Extra formats
+    /// (De)Serialize json error
+    #[cfg(feature = "extra_fmt")]
+    #[snafu(display("{}:\n {source}", input.display()))]
+    JsonError {
+        input: PathBuf,
+        source: simd_json::Error,
+    },
+    /// (De)Serialize yaml error
+    #[cfg(feature = "extra_fmt")]
+    #[snafu(display("{}:\n {source}", input.display()))]
+    YamlError {
+        input: PathBuf,
+        source: serde_yml::Error,
+    },
 }
 
 /// `Result` for `serde_hkx` wrapper crate.

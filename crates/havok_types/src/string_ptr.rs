@@ -11,6 +11,7 @@ use crate::{lib::*, NULL_STR};
 /// - json: [`String`] -> Struct([`str`])                    => non copy
 ///
 /// [`CStr`]: https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct StringPtr<'a> {
     inner: Option<Cow<'a, str>>,

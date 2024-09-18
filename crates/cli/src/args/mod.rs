@@ -22,7 +22,7 @@ pub(crate) async fn run(args: Args) -> Result<()> {
 
     // For drag & drop
     if let Some(input) = args.input {
-        let out_fmt = Format::from_input(&input);
+        let out_fmt = Format::from_input(&input)?;
         let output: Option<PathBuf> = None;
         return convert(input, output, out_fmt).await;
     }

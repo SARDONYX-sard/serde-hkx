@@ -1,11 +1,19 @@
+//! Show diff between two files.
+
 use crate::error::{Error, Result};
-use crate::read_ext::ReadExt as _;
+use crate::fs::ReadExt as _;
 use serde_hkx::bytes::hexdump;
 use std::path::Path;
 use tokio::fs;
 
-/// Show diff between two files.
+/// Output diff between two files string to stdout/file.
+/// - `output`: If not provided, then stdout.
 /// - `use_color`: ANSI color diff. (red & green)
+///
+/// # Note
+/// extension
+/// - `hkx` -> Hexdump string
+/// - else -> Any encode string
 pub async fn exec<I1, I2, O>(old: I1, new: I2, output: Option<O>, use_color: bool) -> Result<()>
 where
     I1: AsRef<Path>,

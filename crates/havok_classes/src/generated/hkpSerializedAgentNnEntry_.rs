@@ -74,7 +74,10 @@ pub struct hkpSerializedAgentNnEntry {
     /// - name: `nnEntryData`(ctype: `hkUint8[160]`)
     /// - offset: `116`(x86)/`160`(x86_64)
     /// - type_size: `160`(x86)/`160`(x86_64)
-    #[cfg_attr(feature = "serde", serde_as(as = "[_; 160]"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(with = "::serde_with::As::<[::serde_with::Same; 160]>")
+    )]
     #[educe(Default = [0;160usize])]
     pub m_nnEntryData: [u8; 160usize],
     /// # C++ Info

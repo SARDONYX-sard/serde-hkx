@@ -42,7 +42,10 @@ pub struct hkpAgent1nSector {
     /// - name: `data`(ctype: `hkUint8[496]`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `496`(x86)/`496`(x86_64)
-    #[cfg_attr(feature = "serde", serde_as(as = "[_; 496]"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(with = "::serde_with::As::<[::serde_with::Same; 496]>")
+    )]
     #[educe(Default = [0;496usize])]
     pub m_data: [u8; 496usize],
 }

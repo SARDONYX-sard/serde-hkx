@@ -16,9 +16,11 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
 
     // `Default` implementations with huge sizes such as [0u8; 256] are not automatically supported, so use `educe` crate to define them.
     let default_attr = if *arrsize > 32 {
-        let as_value = format!("[_; {arrsize}]"); // NOTE: need `serde_with`
+        // NOTE: This can only be solved with `#[serde(with=“”)` because you cannot put a feature inside a feature
+        // see https://github.com/jonasbb/serde_with/issues/355
+        let as_value = format!("::serde_with::As::<[::serde_with::Same; {arrsize}]>"); // NOTE: need `serde_with`
         let serde_with_attr = quote! {
-            #[cfg_attr(feature = "serde", serde_as(as = #as_value))]
+            #[cfg_attr(feature = "serde", serde(with = #as_value))]
         };
 
         let default_attr = match vtype {
