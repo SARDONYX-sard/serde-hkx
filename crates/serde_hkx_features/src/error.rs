@@ -89,14 +89,14 @@ pub enum Error {
     #[snafu(display("{}:\n {source}", input.display()))]
     TomlSerError {
         input: PathBuf,
-        source: toml::ser::Error,
+        source: toml_edit::ser::Error,
     },
     /// Deserialize toml error
     #[cfg(feature = "extra_fmt")]
     #[snafu(display("{}:\n {source}", input.display()))]
     TomlDeError {
         input: PathBuf,
-        source: Box<toml::de::Error>,
+        source: Box<toml_edit::de::Error>,
     },
 }
 

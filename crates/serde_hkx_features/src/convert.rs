@@ -229,7 +229,7 @@ where
     let input = input.as_ref();
     let bytes = input.read_bytes().await?;
     let input_ext = input.extension();
-    let mut xml = String::new(); // To avoid ownership errors, declare it here, but since it is a 0-allocation, there is no problem.
+    let mut string = String::new(); // To avoid ownership errors, declare it here, but since it is a 0-allocation, there is no problem.
 
     // Deserialize
     let mut classes: ClassMap = if let Some(input_ext) = input_ext {
@@ -246,31 +246,32 @@ where
             _ => {
                 let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
                 decoder
-                    .read_to_string(&mut xml)
+                    .read_to_string(&mut string)
                     .context(FailedReadFileSnafu {
                         path: input.to_path_buf(),
                     })?;
 
                 match fmt {
-                    Format::Xml => from_str(&xml).context(DeSnafu {
+                    Format::Xml => from_str(&string).context(DeSnafu {
                         input: input.to_path_buf(),
                     })?,
 
                     #[cfg(feature = "extra_fmt")]
-                    Format::Json => {
-                        simd_json::from_slice(unsafe { xml.as_bytes_mut() }).context(JsonSnafu {
+                    Format::Json => simd_json::from_slice(unsafe { string.as_bytes_mut() })
+                        .context(JsonSnafu {
                             input: input.to_path_buf(),
+                        })?,
+                    #[cfg(feature = "extra_fmt")]
+                    Format::Yaml => serde_yml::from_str(&string).context(YamlSnafu {
+                        input: input.to_path_buf(),
+                    })?,
+                    #[cfg(feature = "extra_fmt")]
+                    Format::Toml => {
+                        toml_edit::de::from_str(&string).map_err(|err| Error::TomlDeError {
+                            input: input.to_path_buf(),
+                            source: Box::new(err),
                         })?
                     }
-                    #[cfg(feature = "extra_fmt")]
-                    Format::Yaml => serde_yml::from_str(&xml).context(YamlSnafu {
-                        input: input.to_path_buf(),
-                    })?,
-                    #[cfg(feature = "extra_fmt")]
-                    Format::Toml => toml::from_str(&xml).map_err(|err| Error::TomlDeError {
-                        input: input.to_path_buf(),
-                        source: Box::new(err),
-                    })?,
 
                     _ => unreachable!(),
                 }
@@ -308,9 +309,11 @@ where
                                 input: input.to_path_buf(),
                             })?
                         }
-                        Format::Toml => toml::to_string_pretty(&classes).context(TomlSerSnafu {
-                            input: input.to_path_buf(),
-                        })?,
+                        Format::Toml => {
+                            toml_edit::ser::to_string(&classes).context(TomlSerSnafu {
+                                input: input.to_path_buf(),
+                            })?
+                        }
                         Format::Yaml => serde_yml::to_string(&classes).context(YamlSnafu {
                             input: input.to_path_buf(),
                         })?,
