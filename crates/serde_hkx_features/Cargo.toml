@@ -27,7 +27,7 @@ tracing = { workspace = true, optional = true }
 
 # serde ext
 serde_yml = { version = "0.0.12", optional = true }
-simd-json = { version = "0.13.10", optional = true } # NOTE: unstalbe https://github.com/simd-lite/simd-json/issues/391
+simd-json = { version = "0.14.0-rc.3", optional = true } # NOTE: unstalbe https://github.com/simd-lite/simd-json/issues/391
 
 # workspace members
 havok_classes = { workspace = true, features = ["ignore_duplicates"] }
