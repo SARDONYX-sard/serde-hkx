@@ -267,10 +267,12 @@ where
                     })?,
                     #[cfg(feature = "extra_fmt")]
                     Format::Toml => {
-                        toml_edit::de::from_str(&string).map_err(|err| Error::TomlDeError {
-                            input: input.to_path_buf(),
-                            source: Box::new(err),
-                        })?
+                        toml_edit::de::from_str::<crate::toml_err_avoider::ClassMapWrapper>(&string)
+                            .map_err(|err| Error::TomlDeError {
+                                input: input.to_path_buf(),
+                                source: Box::new(err),
+                            })?
+                            .into()
                     }
 
                     _ => unreachable!(),
@@ -310,7 +312,8 @@ where
                             })?
                         }
                         Format::Toml => {
-                            toml_edit::ser::to_string(&classes).context(TomlSerSnafu {
+                            let classes = crate::toml_err_avoider::ClassMapWrapper::new(classes);
+                            toml_edit::ser::to_string_pretty(&classes).context(TomlSerSnafu {
                                 input: input.to_path_buf(),
                             })?
                         }
