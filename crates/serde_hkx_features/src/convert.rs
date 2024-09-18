@@ -74,6 +74,13 @@ impl Format {
         Ok(match ext {
             ext if ext.eq_ignore_ascii_case("hkx") => Self::Xml,
             ext if ext.eq_ignore_ascii_case("xml") => Self::Amd64,
+
+            #[cfg(feature = "extra_fmt")]
+            ext if ext.eq_ignore_ascii_case("yaml") || ext.eq_ignore_ascii_case("yml") => {
+                Self::Amd64
+            }
+            #[cfg(feature = "extra_fmt")]
+            ext if ext.eq_ignore_ascii_case("json") => Self::Amd64,
             _ => {
                 return Err(Error::UnsupportedExtensionPath {
                     path: path.to_path_buf(),
