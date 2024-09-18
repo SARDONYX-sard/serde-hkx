@@ -10,15 +10,15 @@ pub enum Error {
     #[snafu(display("The only supported extension is `.hkx` or `.xml`. But this path is neither: {}.", path.display()))]
     UnsupportedExtensionPath { path: PathBuf },
     #[cfg(feature = "extra_fmt")]
-    /// The only supported extension is  `.hkx`, `.xml`, `.json`, `yaml`, `.toml`. But this path is neither: {path}.
-    #[snafu(display("The only supported extension is `.hkx`, `.xml`, `.json`, `yaml`, `.toml`. But this path is neither: {}.", path.display()))]
+    /// The only supported extension is  `.hkx`, `.xml`, `.json`, `yaml`. But this path is neither: {path}.
+    #[snafu(display("The only supported extension is `.hkx`, `.xml`, `.json`, `yaml`. But this path is neither: {}.", path.display()))]
     UnsupportedExtensionPath { path: PathBuf },
 
     /// The only supported extension is `.hkx` or `.xml`. But this is neither: {ext}.
     #[cfg(not(feature = "extra_fmt"))]
     UnsupportedExtension { ext: String },
     #[cfg(feature = "extra_fmt")]
-    /// The only supported extension is  `.hkx`, `.xml`, `.json`, `yaml`, `.toml`. But this is neither: {ext}.
+    /// The only supported extension is  `.hkx`, `.xml`, `.json`, `yaml`. But this is neither: {ext}.
     UnsupportedExtension { ext: String },
 
     /// This path has a missing extension.
@@ -83,20 +83,6 @@ pub enum Error {
     YamlError {
         input: PathBuf,
         source: serde_yml::Error,
-    },
-    /// Serialize toml error
-    #[cfg(feature = "extra_fmt")]
-    #[snafu(display("{}:\n {source}", input.display()))]
-    TomlSerError {
-        input: PathBuf,
-        source: toml_edit::ser::Error,
-    },
-    /// Deserialize toml error
-    #[cfg(feature = "extra_fmt")]
-    #[snafu(display("{}:\n {source}", input.display()))]
-    TomlDeError {
-        input: PathBuf,
-        source: Box<toml_edit::de::Error>,
     },
 }
 

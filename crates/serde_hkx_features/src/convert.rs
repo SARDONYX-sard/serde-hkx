@@ -1,7 +1,7 @@
 //! Convert hkx <-> xml
 use super::ClassMap;
 #[cfg(feature = "extra_fmt")]
-use crate::error::{JsonSnafu, TomlSerSnafu, YamlSnafu};
+use crate::error::{JsonSnafu, YamlSnafu};
 use crate::{
     error::{DeSnafu, Error, FailedReadFileSnafu, Result, SerSnafu},
     read_ext::ReadExt as _,
@@ -38,9 +38,6 @@ pub enum Format {
     #[cfg(feature = "extra_fmt")]
     /// yaml
     Yaml,
-    #[cfg(feature = "extra_fmt")]
-    /// toml
-    Toml,
 }
 
 impl Format {
@@ -56,8 +53,6 @@ impl Format {
             Self::Json => "json",
             #[cfg(feature = "extra_fmt")]
             Self::Yaml => "yaml",
-            #[cfg(feature = "extra_fmt")]
-            Self::Toml => "toml",
         }
     }
 
@@ -99,8 +94,6 @@ impl Format {
             ext if ext.eq_ignore_ascii_case("yaml") || ext.eq_ignore_ascii_case("yml") => {
                 Self::Yaml
             }
-            #[cfg(feature = "extra_fmt")]
-            ext if ext.eq_ignore_ascii_case("toml") => Self::Toml,
             _ => {
                 return Err(Error::UnsupportedExtension {
                     ext: ext.to_string_lossy().to_string(),
@@ -125,8 +118,6 @@ impl FromStr for Format {
             ext if ext.eq_ignore_ascii_case("yaml") || ext.eq_ignore_ascii_case("yml") => {
                 Self::Yaml
             }
-            #[cfg(feature = "extra_fmt")]
-            ext if ext.eq_ignore_ascii_case("toml") => Self::Toml,
             _ => {
                 return Err(Error::UnsupportedExtension {
                     ext: ext.to_string(),
@@ -265,16 +256,6 @@ where
                     Format::Yaml => serde_yml::from_str(&string).context(YamlSnafu {
                         input: input.to_path_buf(),
                     })?,
-                    #[cfg(feature = "extra_fmt")]
-                    Format::Toml => {
-                        toml_edit::de::from_str::<crate::toml_err_avoider::ClassMapWrapper>(&string)
-                            .map_err(|err| Error::TomlDeError {
-                                input: input.to_path_buf(),
-                                source: Box::new(err),
-                            })?
-                            .into()
-                    }
-
                     _ => unreachable!(),
                 }
             }
@@ -304,16 +285,10 @@ where
                 Format::Amd64 => to_bytes(&classes, &HkxHeader::new_skyrim_se()),
 
                 #[cfg(feature = "extra_fmt")]
-                Format::Json | Format::Yaml | Format::Toml => {
+                Format::Json | Format::Yaml => {
                     let contents = match format {
                         Format::Json => {
                             simd_json::to_string_pretty(&classes).context(JsonSnafu {
-                                input: input.to_path_buf(),
-                            })?
-                        }
-                        Format::Toml => {
-                            let classes = crate::toml_err_avoider::ClassMapWrapper::new(classes);
-                            toml_edit::ser::to_string_pretty(&classes).context(TomlSerSnafu {
                                 input: input.to_path_buf(),
                             })?
                         }

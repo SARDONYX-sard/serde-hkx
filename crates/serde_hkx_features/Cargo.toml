@@ -26,13 +26,8 @@ tokio = { workspace = true, features = ["fs"] }
 tracing = { workspace = true, optional = true }
 
 # serde ext
-serde = { workspace = true, features = [
-  "derive",
-], optional = true } # Implement (De)Serializer
-serde_with = { workspace = true, optional = true } # Serde utility
 serde_yml = { version = "0.0.12", optional = true }
 simd-json = { version = "0.13.10", optional = true } # NOTE: unstalbe https://github.com/simd-lite/simd-json/issues/391
-toml_edit = { version = "0.22.21", optional = true, features = ["serde"] }
 
 # workspace members
 havok_classes = { workspace = true, features = ["ignore_duplicates"] }
@@ -40,7 +35,7 @@ serde_hkx = { workspace = true }
 
 
 [features]
-default = ["extra_fmt"] # For debug
+# default = ["extra_fmt"] # For debug
 
 # For `Format`(Output)
 clap = ["dep:clap"]
@@ -49,11 +44,8 @@ tracing = ["dep:tracing", "serde_hkx/tracing"]
 extra_fmt = [
   "havok_classes/serde",
   "indexmap/serde",
-  "dep:serde",
-  "dep:serde_with",
   "dep:serde_yml",
   "dep:simd-json",
-  "dep:toml_edit",
 ] # Extra output format(json, toml, yaml)
 
 
