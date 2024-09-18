@@ -4,7 +4,6 @@ use crate::lib::*;
 /// # Note
 /// - This `f16` is made by truncating the last 16 bits of [`f32`] to 7-bit precision.
 #[allow(non_camel_case_types)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct f16(u16);
 
@@ -66,6 +65,31 @@ impl fmt::Debug for f16 {
         write!(f, "{:.06}", self.to_f32())
     }
 }
+
+#[cfg(feature = "serde")]
+const _: () = {
+    use super::f16;
+    use serde::{Deserialize, Deserializer, Serialize, Serializer};
+
+    impl Serialize for f16 {
+        fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+        where
+            S: Serializer,
+        {
+            self.to_f32().serialize(serializer)
+        }
+    }
+
+    impl<'de> Deserialize<'de> for f16 {
+        fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+        where
+            D: Deserializer<'de>,
+        {
+            let f = f32::deserialize(deserializer)?;
+            Ok(Self::from_f32(f))
+        }
+    }
+};
 
 #[test]
 fn test_half() {
