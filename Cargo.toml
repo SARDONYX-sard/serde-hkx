@@ -61,8 +61,11 @@ pretty_assertions = "1.4.1"                                  # Color diff assert
 quick_tracing = { version = "0.1.5", features = ["derive"] } # Easy logging
 
 [profile.release]
-lto = "thin"
-strip = "debuginfo"
+codegen-units = 1
+debug = false
+lto = true
+opt-level = 3
+strip = true
 
 [workspace.lints.clippy]
 all = { level = "warn", priority = -1 }
