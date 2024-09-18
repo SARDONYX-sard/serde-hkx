@@ -62,6 +62,7 @@ impl Format {
     ///
     /// # Errors
     /// Unknown extension.
+    #[inline]
     pub fn from_input<P>(path: P) -> Result<Self>
     where
         P: AsRef<Path>,
@@ -90,6 +91,7 @@ impl Format {
     }
 
     /// Determine format from extension.
+    #[inline]
     pub fn from_extension(ext: &OsStr) -> Result<Self> {
         Ok(match ext {
             ext if ext.eq_ignore_ascii_case("hkx") => Self::Amd64,
