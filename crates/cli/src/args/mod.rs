@@ -9,7 +9,7 @@ use self::color::get_styles;
 use crate::logger::LogLevel;
 use clap::CommandFactory as _;
 use serde_hkx_features::{
-    convert::{convert, Format},
+    convert::{convert, OutFormat},
     diff::exec,
     dump as hexdump,
     error::{Error, Result},
@@ -22,7 +22,7 @@ pub(crate) async fn run(args: Args) -> Result<()> {
 
     // For drag & drop
     if let Some(input) = args.input {
-        let out_fmt = Format::from_input(&input)?;
+        let out_fmt = OutFormat::from_input(&input)?;
         let output: Option<PathBuf> = None;
         return convert(input, output, out_fmt).await;
     }

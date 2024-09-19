@@ -4,7 +4,7 @@ use super::ClassMap;
 #[cfg(feature = "extra_fmt")]
 use crate::error::{JsonSnafu, YamlSnafu};
 use crate::{
-    convert::Format,
+    convert::OutFormat,
     error::{DeSnafu, Error, FailedReadFileSnafu, Result, SerSnafu},
 };
 use serde_hkx::{
@@ -16,7 +16,7 @@ use std::{io::Read, path::Path};
 /// Serialize bytes(file contents) to a file.
 pub async fn serialize_to_bytes<I>(
     input: I,
-    format: Format,
+    format: OutFormat,
     classes: &mut ClassMap<'_>,
 ) -> Result<Vec<u8>>
 where
@@ -26,7 +26,7 @@ where
 
     // Serialize
     match format {
-        Format::Xml => {
+        OutFormat::Xml => {
             let top_ptr = classes.sort_for_xml().context(SerSnafu {
                 input: input.to_path_buf(),
             })?;
@@ -38,18 +38,18 @@ where
         _ => {
             classes.sort_for_bytes();
             let binary_data = match format {
-                Format::Win32 => to_bytes(classes, &HkxHeader::new_skyrim_le()),
-                Format::Amd64 => to_bytes(classes, &HkxHeader::new_skyrim_se()),
+                OutFormat::Win32 => to_bytes(classes, &HkxHeader::new_skyrim_le()),
+                OutFormat::Amd64 => to_bytes(classes, &HkxHeader::new_skyrim_se()),
 
                 #[cfg(feature = "extra_fmt")]
-                Format::Json | Format::Yaml => {
+                OutFormat::Json | OutFormat::Yaml => {
                     let contents = match format {
-                        Format::Json => {
+                        OutFormat::Json => {
                             simd_json::to_string_pretty(&classes).context(JsonSnafu {
                                 input: input.to_path_buf(),
                             })?
                         }
-                        Format::Yaml => serde_yml::to_string(&classes).context(YamlSnafu {
+                        OutFormat::Yaml => serde_yml::to_string(&classes).context(YamlSnafu {
                             input: input.to_path_buf(),
                         })?,
                         _ => unreachable!(),
@@ -82,12 +82,12 @@ where
     // Deserialize
     let classes: ClassMap = if let Some(input_ext) = input_ext {
         let fmt =
-            Format::from_extension(input_ext).map_err(|_| Error::UnsupportedExtensionPath {
+            OutFormat::from_extension(input_ext).map_err(|_| Error::UnsupportedExtensionPath {
                 path: input.to_path_buf(),
             })?;
 
         match fmt {
-            Format::Amd64 | Format::Win32 => from_bytes(bytes).context(DeSnafu {
+            OutFormat::Amd64 | OutFormat::Win32 => from_bytes(bytes).context(DeSnafu {
                 input: input.to_path_buf(),
             })?,
 
@@ -100,17 +100,17 @@ where
                     })?;
 
                 match fmt {
-                    Format::Xml => from_str(&*string).context(DeSnafu {
+                    OutFormat::Xml => from_str(&*string).context(DeSnafu {
                         input: input.to_path_buf(),
                     })?,
 
                     #[cfg(feature = "extra_fmt")]
-                    Format::Json => simd_json::from_slice(unsafe { string.as_bytes_mut() })
+                    OutFormat::Json => simd_json::from_slice(unsafe { string.as_bytes_mut() })
                         .context(JsonSnafu {
                             input: input.to_path_buf(),
                         })?,
                     #[cfg(feature = "extra_fmt")]
-                    Format::Yaml => serde_yml::from_str(&string).context(YamlSnafu {
+                    OutFormat::Yaml => serde_yml::from_str(&string).context(YamlSnafu {
                         input: input.to_path_buf(),
                     })?,
                     _ => unreachable!(),

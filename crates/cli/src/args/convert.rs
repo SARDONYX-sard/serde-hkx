@@ -1,5 +1,5 @@
 //! Convert hkx <-> xml
-use serde_hkx_features::convert::Format;
+use serde_hkx_features::convert::OutFormat;
 use std::path::PathBuf;
 
 /// ANSI color representation command examples.
@@ -31,5 +31,5 @@ pub(crate) struct Args {
 
     /// File format to output
     #[clap(short = 'v', long, ignore_case = true)]
-    pub format: Format,
+    pub format: OutFormat,
 }
