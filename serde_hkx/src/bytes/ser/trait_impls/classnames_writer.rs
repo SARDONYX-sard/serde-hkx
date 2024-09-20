@@ -1,4 +1,5 @@
 //! Trait that defines a set of dedicated methods for writing Havok Class data.
+use super::Align as _;
 use byteorder::{ByteOrder, WriteBytesExt as _};
 use havok_serde::HavokClass;
 use indexmap::IndexMap;
@@ -7,8 +8,8 @@ use std::{
     io::{self, Cursor, Write as _},
 };
 
-use super::Align as _;
-
+/// This must be retained because the information about which C++ class was written to which location
+/// will be in `virtual_fixup.src`.
 pub type ClassStartsMap = IndexMap<&'static str, u32>;
 
 /// Trait that defines a set of dedicated methods for writing Havok Class data.
@@ -39,8 +40,9 @@ macro_rules! impl_writer_for_map {
             {
                 let classnames_section_start = writer.position() as u32;
 
-                // These classes are meta-information, such as C++ class signatures, and are always considered
-                // to exist because they are already defined in the SDK.
+                // If a class is used in the __data__ section, an `hkClass` is used to represent that information
+                // Similarly, `hkClassEnum` is used depending on whether or not enum is used,
+                // but here we assume that it is always used and write it in advance.
                 writer.write_u32::<O>(0x75585ef6)?;
                 writer.write_all(b"\x09hkClass\0")?;
 
@@ -102,8 +104,9 @@ macro_rules! impl_writer_for_slice {
             {
                 let classnames_section_start = writer.position() as u32;
 
-                // These classes are meta-information, such as C++ class signatures, and are always considered
-                // to exist because they are already defined in the SDK.
+                // If a class is used in the __data__ section, an `hkClass` is used to represent that information
+                // Similarly, `hkClassEnum` is used depending on whether or not enum is used,
+                // but here we assume that it is always used and write it in advance.
                 writer.write_u32::<O>(0x75585ef6)?;
                 writer.write_all(b"\x09hkClass\0")?;
 

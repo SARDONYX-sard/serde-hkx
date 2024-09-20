@@ -5,7 +5,7 @@ mod trait_impls;
 use crate::{align, lib::*, tri};
 
 use self::sub_ser::structs::StructSerializer;
-use self::trait_impls::{Align as _, ClassNamesWriter, ClassStartsMap, LocalFixupsWriter as _};
+use self::trait_impls::{Align as _, ClassNamesWriter, ClassStartsMap};
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
@@ -360,8 +360,16 @@ impl ByteSerializer {
                 "[local_fixup] src({local_src}/abs: {src_abs:#x}), dst({local_dst}/abs: {dst_abs:#x})"
             );
         }
-        self.local_fixups
-            .write_local_fixups(local_src, local_dst, self.is_little_endian)?;
+        match self.is_little_endian {
+            true => {
+                self.local_fixups.write_u32::<LittleEndian>(local_src)?;
+                self.local_fixups.write_u32::<LittleEndian>(local_dst)?;
+            }
+            false => {
+                self.local_fixups.write_u32::<BigEndian>(local_src)?;
+                self.local_fixups.write_u32::<BigEndian>(local_dst)?;
+            }
+        }
         Ok(())
     }
 
