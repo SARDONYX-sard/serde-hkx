@@ -1,8 +1,7 @@
 //! Alignment functions
 
 ///  Get the aligned value.
-///
-/// <https://github.com/rust-lang/rust/blob/1.30.0/src/libcore/alloc.rs#L199-L219>
+/// - [Original code (Rust lang)](https://github.com/rust-lang/rust/blob/1.30.0/src/libcore/alloc.rs#L199-L219)
 ///
 /// # Examples
 ///
