@@ -1,9 +1,12 @@
 use crate::lib::*;
 
 /// Not an IEEE expression `f16`
+///
 /// # Note
-/// - This `f16` is made by truncating the last 16 bits of [`f32`] to 7-bit precision.
+/// - It is created by taking the upper 16 bits from f32.
+/// - Internally, it is the same as u16.
 #[allow(non_camel_case_types)]
+#[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct f16(u16);
 
