@@ -20,10 +20,10 @@ use std::{
 #[display(style = "camelCase")]
 #[non_exhaustive]
 pub enum OutFormat {
-    /// 64bit
+    /// 64bit hkx
     #[default]
     Amd64,
-    /// 32bit
+    /// 32bit hkx
     Win32,
     /// XML
     Xml,
