@@ -179,12 +179,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
-name = "bytes"
-version = "1.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8318a53db07bb3f8dca91a600466bdb3f2eaadeedfdbcf02e1accbad9271ba50"
-
-[[package]]
 name = "cc"
 version = "1.0.97"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1179,7 +1173,6 @@ dependencies = [
  "havok_types",
  "html-escape",
  "indexmap 2.5.0",
- "jwalk",
  "num-derive",
  "num-traits",
  "pretty_assertions",
@@ -1187,7 +1180,6 @@ dependencies = [
  "similar",
  "snafu",
  "static_assertions",
- "tokio",
  "tracing",
  "winnow 0.6.18",
  "zerocopy",
@@ -1452,7 +1444,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2b070231665d27ad9ec9b8df639893f46727666c6767db40317fbe920a5d998"
 dependencies = [
  "backtrace",
- "bytes",
  "pin-project-lite",
  "tokio-macros",
 ]
