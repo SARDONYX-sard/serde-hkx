@@ -22,7 +22,7 @@ use parse_display::Display;
 /// assert_eq!("0x13a39ba7".parse(), Ok(Signature::new(0x13a39ba7)));
 /// ```
 ///
-/// # NOte
+/// # Note
 /// The [`Copy`] is derive for [`usize`] wrapper type.
 #[cfg_attr(
     feature = "serde",

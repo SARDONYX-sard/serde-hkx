@@ -81,13 +81,13 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
                     "deserialize {}th field({:#x}): {field_name}",
                     self.field_index,
                     self.de.current_position
-                )
+                );
             } else {
                 tracing::warn!(
                     "invalid field index: {} of {}",
                     self.field_index,
                     self.fields.len()
-                )
+                );
             };
             self.field_index += 1;
         }

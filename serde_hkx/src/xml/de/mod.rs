@@ -73,6 +73,9 @@ impl<'de> XmlDeserializer<'de> {
 }
 
 /// from partial xml string.
+///
+/// # Errors
+/// If XML parsing fails.
 #[inline]
 pub fn from_partial_str<'a, T>(s: &'a str) -> Result<T>
 where
@@ -82,6 +85,9 @@ where
 }
 
 /// from partial xml string with custom `XmlDeserializer` settings.
+///
+/// # Errors
+/// If XML parsing fails.
 pub fn from_partial_str_with_opt<'a, T>(de: XmlDeserializer<'a>) -> Result<T>
 where
     T: Deserialize<'a>,
@@ -99,6 +105,9 @@ where
 }
 
 /// From xml string.
+///
+/// # Errors
+/// If XML parsing fails.
 #[inline]
 pub fn from_str<'a, T>(s: &'a str) -> Result<T>
 where
@@ -108,6 +117,9 @@ where
 }
 
 /// from xml string with custom `XmlDeserializer` settings.
+///
+/// # Errors
+/// If XML parsing fails.
 pub fn from_str_with_opt<'a, T>(de: XmlDeserializer<'a>) -> Result<T>
 where
     T: Deserialize<'a>,
@@ -141,6 +153,9 @@ where
 }
 
 /// Deserializes any value and returns the rest of the string together.
+///
+/// # Errors
+/// If XML parsing fails.
 ///
 /// # Returns
 /// (remain input, deserialized value)
@@ -759,6 +774,6 @@ mod tests {
 
         let actual = from_file::<indexmap::IndexMap<usize, Classes>>(xml);
         let expected = new_defaultmale();
-        assert_eq!(actual, expected)
+        assert_eq!(actual, expected);
     }
 }

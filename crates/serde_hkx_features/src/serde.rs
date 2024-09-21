@@ -14,6 +14,11 @@ use snafu::ResultExt as _;
 use std::{io::Read, path::Path};
 
 /// Serialize bytes(file contents) to a file.
+///
+/// # Errors
+/// If the information required for serialization is missing.
+///
+/// See `serde_hkx::errors::ser::Error` for possible errors that may occur.
 pub async fn serialize_to_bytes<I>(
     input: I,
     format: OutFormat,
@@ -25,49 +30,53 @@ where
     let input = input.as_ref();
 
     // Serialize
-    match format {
-        OutFormat::Xml => {
-            let top_ptr = classes.sort_for_xml().context(SerSnafu {
-                input: input.to_path_buf(),
-            })?;
-            let xml = to_string(classes, top_ptr).context(SerSnafu {
-                input: input.to_path_buf(),
-            })?;
-            Ok(xml.into_bytes())
-        }
-        _ => {
-            classes.sort_for_bytes();
-            let binary_data = match format {
-                OutFormat::Win32 => to_bytes(classes, &HkxHeader::new_skyrim_le()),
-                OutFormat::Amd64 => to_bytes(classes, &HkxHeader::new_skyrim_se()),
+    if format == OutFormat::Xml {
+        let top_ptr = classes.sort_for_xml().context(SerSnafu {
+            input: input.to_path_buf(),
+        })?;
+        let xml = to_string(classes, top_ptr).context(SerSnafu {
+            input: input.to_path_buf(),
+        })?;
+        Ok(xml.into_bytes())
+    } else {
+        classes.sort_for_bytes();
+        let binary_data = match format {
+            OutFormat::Win32 => to_bytes(classes, &HkxHeader::new_skyrim_le()),
+            OutFormat::Amd64 => to_bytes(classes, &HkxHeader::new_skyrim_se()),
 
-                #[cfg(feature = "extra_fmt")]
-                OutFormat::Json | OutFormat::Yaml => {
-                    let contents = match format {
-                        OutFormat::Json => {
-                            simd_json::to_string_pretty(&classes).context(JsonSnafu {
-                                input: input.to_path_buf(),
-                            })?
-                        }
-                        OutFormat::Yaml => serde_yml::to_string(&classes).context(YamlSnafu {
+            #[cfg(feature = "extra_fmt")]
+            OutFormat::Json | OutFormat::Yaml => {
+                let contents = match format {
+                    OutFormat::Json => {
+                        simd_json::to_string_pretty(&classes).context(JsonSnafu {
                             input: input.to_path_buf(),
-                        })?,
-                        _ => unreachable!(),
-                    };
-                    return Ok(contents.into_bytes());
-                }
-                _ => unreachable!(),
+                        })?
+                    }
+                    OutFormat::Yaml => serde_yml::to_string(&classes).context(YamlSnafu {
+                        input: input.to_path_buf(),
+                    })?,
+                    _ => unreachable!(),
+                };
+                return Ok(contents.into_bytes());
             }
-            .context(SerSnafu {
-                input: input.to_path_buf(),
-            })?;
-            Ok(binary_data)
+            _ => unreachable!(),
         }
+        .context(SerSnafu {
+            input: input.to_path_buf(),
+        })?;
+        Ok(binary_data)
     }
 }
 
 /// Deserialize bytes(file contents) to ClassMap.
 /// - `string`: new String(To avoid XML ownership error.)
+///
+/// # Errors
+/// - Missing extension.
+/// - If the input extension is not `hkx` or `xml`.(If `extra_fmt` is enabled, also `json`, `yaml`, `yml`.)
+/// - Incorrect syntax in the input path file.(`DeError`)
+///
+/// See `serde_hkx::errors::de::Error` for possible errors that may occur.
 pub fn deserialize<'a, I>(
     bytes: &'a Vec<u8>,
     string: &'a mut String,

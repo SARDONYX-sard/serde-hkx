@@ -91,7 +91,7 @@ impl SectionHeader {
             {
                 seq! {
                     Self {
-                        section_tag: take(19usize).try_map(TryFrom::try_from).context(StrContext::Label("section_tag"))
+                        section_tag: take(19_usize).try_map(TryFrom::try_from).context(StrContext::Label("section_tag"))
                             .context(StrContext::Expected(StringLiteral("[u8; 19]"))),
                         section_tag_separator: 0xff.context(StrContext::Label("section_tag_separator"))
                             .context(StrContext::Expected(StringLiteral("0xFF"))),
@@ -118,6 +118,11 @@ impl SectionHeader {
     }
 
     /// Write section header to writer.
+    ///
+    /// # Errors
+    /// This method returns the same errors as [`Write::write_all`].
+    ///
+    /// [`Write::write_all`]: https://doc.rust-lang.org/std/io/trait.Write.html#method.write_all
     pub fn write_bytes<O>(&self, mut writer: impl WriteBytesExt) -> io::Result<()>
     where
         O: ByteOrder,
@@ -137,6 +142,13 @@ impl SectionHeader {
     /// Create new `__classnames__` section header
     ///
     /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
+    ///
+    /// # Errors
+    ///
+    /// This function will return the first error of
+    /// non-[`ErrorKind::Interrupted`] kind that [`write`] returns.
+    ///
+    /// [`write`]: Write::write
     pub fn write_classnames<O>(
         mut writer: impl WriteBytesExt,
         section_offset: i16,
@@ -163,13 +175,20 @@ impl SectionHeader {
     }
 
     /// Write `__types__` section header.
+    ///
+    /// # Errors
+    ///
+    /// This function will return the first error of
+    /// non-[`ErrorKind::Interrupted`] kind that [`write`] returns.
+    ///
+    /// [`write`]: Write::write
     pub fn write_types<O>(mut writer: impl WriteBytesExt, abs_offset: u32) -> io::Result<()>
     where
         O: ByteOrder,
     {
         writer.write_all(b"__types__\0\0\0\0\0\0\0\0\0\0\xff")?; // with separator(0xff)
         writer.write_u32::<O>(abs_offset)?; // same as `__data__` section's `absolute_data_offset`
-        tri!(writer.write_all([0u8; 24].as_slice())); // Fixup does not exist in `types` section, always 0.
+        tri!(writer.write_all([0_u8; 24].as_slice())); // Fixup does not exist in `types` section, always 0.
         Ok(())
     }
 }

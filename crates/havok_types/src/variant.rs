@@ -2,7 +2,7 @@
 use crate::Pointer;
 
 /// C++ info
-/// - byte size: 8(x86)/ 16(x86_64)
+/// - byte size: `   8`(x86)/` 16`(x86_64)
 ///
 /// Only used for `value` of `hkCustomAttributesAttribute`.
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

@@ -10,6 +10,11 @@ use tokio::fs;
 /// - `output`: If not provided, then stdout.
 /// - `use_color`: ANSI color diff. (red & green)
 ///
+/// # Errors
+/// - Not found extension.
+/// - Fail to read.
+/// - Fail to write.
+///
 /// # Note
 /// extension
 /// - `hkx` -> Hexdump string

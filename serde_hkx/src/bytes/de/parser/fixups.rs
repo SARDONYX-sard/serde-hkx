@@ -75,6 +75,10 @@ impl Fixups {
         }
     }
 
+    /// Create a new fixups from section header & bytes.
+    ///
+    /// # Errors
+    /// If the analysis of fixups fails.
     pub fn from_section_header<'a>(
         header: &SectionHeader,
         endian: Endianness,
@@ -90,15 +94,16 @@ impl Fixups {
         let local_range = global_fixups_offset - local_fixups_offset;
         let global_range = virtual_fixups_offset - global_fixups_offset;
         let virtual_range = exports_offset - virtual_fixups_offset;
-        let needs_bytes_len = local_range + global_range + virtual_range;
+        let _needs_bytes_len = local_range + global_range + virtual_range;
 
         #[cfg(feature = "tracing")]
         tracing::trace!(local_range, global_range, virtual_range);
 
         move |bytes: &mut &'a [u8]| {
-            if needs_bytes_len as usize > bytes.len() {
-                panic!("need {needs_bytes_len}. but got {}", bytes.len());
-            };
+            #[cfg(feature = "tracing")]
+            if _needs_bytes_len as usize > bytes.len() {
+                tracing::error!("need {_needs_bytes_len}. but got {}", bytes.len());
+            }
 
             let local_max_len = local_range / LOCAL_FIXUP_ONE_SIZE;
             let global_max_len = global_range / GLOBAL_FIXUP_ONE_SIZE;
@@ -124,7 +129,7 @@ fn read_local_fixups(
     let mut local_map = LocalFixups::new();
     for _ in 0..len {
         if let Ok(local_src) = binary::u32::<&[u8], ContextError>(endian)
-            .verify(|src| *src != FIXUP_VALUE_FOR_ALIGN)
+            .verify(|&src| src != FIXUP_VALUE_FOR_ALIGN)
             .context(StrContext::Expected(Description("local_fixup.src(u32)")))
             .parse_next(bytes)
         {

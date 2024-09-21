@@ -93,18 +93,28 @@ const _: () = {
 
 #[test]
 fn test_half() {
-    let half = f16::from_f32(1.0);
-    assert_eq!(f16::from_le_bytes([0x80, 0x3f]), f16::from_f32(1.0));
-    assert_eq!(f16::from_be_bytes([0x3f, 0x80]), f16::from_f32(1.0));
+    {
+        let half = f16::from_f32(1.0);
+        const HALF_LE: [u8; 2] = [0x80, 0x3f];
+        const HALF_BE: [u8; 2] = [0x3f, 0x80];
 
-    assert_eq!(half.to_le_bytes(), [0x80, 0x3f]);
-    assert_eq!(half.to_be_bytes(), [0x3f, 0x80]);
-    assert_eq!(half.to_f32(), 1.0);
-    assert_eq!(half.to_string(), "1.000000");
+        assert_eq!(half.to_le_bytes(), HALF_LE);
+        assert_eq!(half.to_be_bytes(), HALF_BE);
+        assert_eq!(f16::from_le_bytes(HALF_LE), half);
+        assert_eq!(f16::from_be_bytes(HALF_BE), half);
+        assert_eq!(half.to_f32().to_bits(), (1.0_f32).to_bits()); // Check f32 at the bit level because of errors.
+        assert_eq!(half.to_string(), "1.000000");
+    }
 
-    let half = f16::from_f32(0.049805);
-    assert_eq!(half.to_le_bytes(), [0x4c, 0x3d]);
-    assert_eq!(half.to_be_bytes(), [0x3d, 0x4c]);
-    assert_eq!(half.to_f32(), 0.049804688); // Precision is lost.
-    assert_eq!(half.to_string(), "0.049805");
+    {
+        let half = f16::from_f32(0.049805);
+        const HALF_LE: [u8; 2] = [0x4c, 0x3d];
+        const HALF_BE: [u8; 2] = [0x3d, 0x4c];
+        assert_eq!(half.to_le_bytes(), HALF_LE);
+        assert_eq!(half.to_be_bytes(), HALF_BE);
+        assert_eq!(f16::from_le_bytes(HALF_LE), half);
+        assert_eq!(f16::from_be_bytes(HALF_BE), half);
+        assert_eq!(half.to_f32().to_bits(), (0.049804688_f32).to_bits()); // Check f32 at the bit level because of errors.
+        assert_eq!(half.to_string(), "0.049805");
+    }
 }

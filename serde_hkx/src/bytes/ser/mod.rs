@@ -21,6 +21,10 @@ use std::ffi::CString as StdCString;
 use std::io::{Cursor, Write as _};
 
 /// To hkx binary file data.
+///
+/// # Errors
+/// - When information necessary for binary data conversion is missing.
+/// - When a write to the wrong write position is requested.
 pub fn to_bytes<V>(value: &V, header: &HkxHeader) -> Result<Vec<u8>>
 where
     V: Serialize + ClassNamesWriter,
@@ -46,10 +50,9 @@ where
 
 /// Serialize to bytes with custom `BytesSerializer` settings.
 ///
-/// # Note
-/// This serializer assumes the following.
-/// - `contents_class_name_section_index`: It is always assumed to be 0.
-/// - `contents_section_index`: It is always assumed to be 2.
+/// # Errors
+/// - When information necessary for binary data conversion is missing.
+/// - When a write to the wrong write position is requested.
 pub fn to_bytes_with_opt<V>(value: &V, header: &HkxHeader, ser: ByteSerializer) -> Result<Vec<u8>>
 where
     V: Serialize + ClassNamesWriter,
@@ -546,7 +549,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
             // The data pointed to by the pointer (`T* m_data`) must first be aligned 16 bytes before it is written.
             self.current_last_pos += size;
-            self.current_last_pos = align!(self.current_last_pos, 16u64);
+            self.current_last_pos = align!(self.current_last_pos, 16_u64);
             self.pointed_pos.push(self.current_last_pos);
             true
         } else {
