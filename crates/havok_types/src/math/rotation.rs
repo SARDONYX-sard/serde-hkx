@@ -1,7 +1,7 @@
 use crate::Vector4;
 use parse_display::Display;
 
-/// ROtation (same as [`Matrix3`])
+/// Rotation (same as [`Matrix3`])
 ///
 /// # Examples
 /// ```
@@ -45,7 +45,7 @@ impl Rotation {
     }
 
     pub fn to_le_bytes(&self) -> [u8; 48] {
-        let mut bytes = [0u8; 48];
+        let mut bytes = [0_u8; 48];
         bytes[0..16].copy_from_slice(&self.x.to_le_bytes());
         bytes[16..32].copy_from_slice(&self.y.to_le_bytes());
         bytes[32..48].copy_from_slice(&self.z.to_le_bytes());
@@ -53,7 +53,7 @@ impl Rotation {
     }
 
     pub fn to_be_bytes(&self) -> [u8; 48] {
-        let mut bytes = [0u8; 48];
+        let mut bytes = [0_u8; 48];
         bytes[0..16].copy_from_slice(&self.x.to_be_bytes());
         bytes[16..32].copy_from_slice(&self.y.to_be_bytes());
         bytes[32..48].copy_from_slice(&self.z.to_be_bytes());

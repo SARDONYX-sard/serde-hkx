@@ -41,7 +41,7 @@ impl Matrix4 {
     }
 
     pub fn to_be_bytes(&self) -> [u8; 64] {
-        let mut bytes = [0u8; 64];
+        let mut bytes = [0_u8; 64];
         bytes[0..16].copy_from_slice(&self.x.to_be_bytes());
         bytes[16..32].copy_from_slice(&self.y.to_be_bytes());
         bytes[32..48].copy_from_slice(&self.z.to_be_bytes());

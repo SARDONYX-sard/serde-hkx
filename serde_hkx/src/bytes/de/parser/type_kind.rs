@@ -225,16 +225,16 @@ mod tests {
     fn test_vector4() {
         assert_eq!(
             vector4(Endianness::Little)
-                .parse(zerocopy::AsBytes::as_bytes(&[-0.0f32, 0.0, -0.0, 1.0])),
+                .parse(zerocopy::AsBytes::as_bytes(&[-0.0_f32, 0.0, -0.0, 1.0])),
             Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0))
-        )
+        );
     }
 
     #[test]
     fn test_matrix3() {
         assert_eq!(
             matrix3(Endianness::Little).parse(zerocopy::AsBytes::as_bytes(&[
-                0.0f32, 0.0, 0.0, 0.0, // 1 vec4
+                0.0_f32, 0.0, 0.0, 0.0, // 1 vec4
                 -0.0, 0.0, 1.0, 0.0, // 2 vec4
                 1.0, 1.0, 0.0, 0.0, // 3 vec4
             ])),

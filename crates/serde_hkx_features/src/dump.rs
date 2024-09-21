@@ -19,7 +19,7 @@ where
     match output {
         Some(output) => {
             let bytes = hexdump::to_bytes(&input.read_any_string().await?);
-            fs::write(output, &bytes).await?
+            fs::write(output, &bytes).await?;
         }
         None => return Err(Error::InvalidStdout),
     };
@@ -28,6 +28,11 @@ where
 
 /// Output hexdump to stdout/file.
 /// - `output`: If not provided, then stdout.
+///
+/// # Errors
+/// - If the path does not exist.
+/// - When an interrupt is received during reading.
+/// - No write permission to the given path.
 pub async fn to_string<I, O>(input: I, output: Option<O>) -> Result<()>
 where
     I: AsRef<Path>,

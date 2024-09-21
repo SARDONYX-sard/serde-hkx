@@ -70,7 +70,7 @@ impl<'a> StringPtr<'a> {
 
 impl fmt::Display for StringPtr<'_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let s = self.inner.as_ref().map(|s| s.as_ref()).unwrap_or(NULL_STR);
+        let s = self.inner.as_ref().map_or(NULL_STR, |s| s.as_ref());
         write!(f, "{s}")
     }
 }

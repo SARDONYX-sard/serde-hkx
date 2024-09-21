@@ -15,9 +15,6 @@ pub trait HavokSort {
     /// # Current implementation
     /// - If deserialize a binary with `serde-hkx` -> already sorted for bytes
     /// - If deserialize xml of official SDK -> sort is required
-    ///
-    /// # Errors
-    /// Error when using circular references. (Behavior is a state machine, so if it is correct, it should not be circular.)
     fn sort_for_bytes(&mut self);
 
     /// Sort by dependent class for XML serialization.
@@ -26,7 +23,7 @@ pub trait HavokSort {
     /// top ptr
     ///
     /// # Errors
-    /// Error when using circular references. (Behavior is a state machine, so if it is correct, it should not be circular.)
+    /// Missing top pointer.
     fn sort_for_xml(&mut self) -> Result<usize, Self::Error>;
 }
 

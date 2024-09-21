@@ -97,6 +97,9 @@ impl<'de> BytesDeserializer<'de> {
 ///
 /// e.g. one class, 3 booleans, `[u32; 10]`,
 ///
+/// # Errors
+/// Fail to parse bytes.
+///
 /// # Note
 /// If pointer types are included, it is impossible to deserialize correctly because fixups information is required.
 pub fn from_partial_bytes<'a, T>(bytes: &'a [u8]) -> Result<T>
@@ -109,6 +112,9 @@ where
 /// Parse binary data as the type specified in the partial generics with custom `BytesDeserializer` settings.
 ///
 /// e.g. one class, 3 booleans, `[u32; 10]`,
+///
+/// # Errors
+/// Fail to parse bytes.
 ///
 /// # Note
 /// If pointer types are included, it is impossible to deserialize correctly because fixups information is required.
@@ -127,6 +133,9 @@ where
 }
 
 /// Analyze as binary data of one file in order from hkx header.
+///
+/// # Errors
+/// Fail to parse bytes.
 pub fn from_bytes<'a, T>(bytes: &'a [u8]) -> Result<T>
 where
     T: Deserialize<'a>,
@@ -135,6 +144,9 @@ where
 }
 
 /// Analyze as binary data of one file in order from hkx header(with custom deserializer settings).
+///
+/// # Errors
+/// Fail to parse bytes.
 pub fn from_bytes_with_opt<'a, T>(de: BytesDeserializer<'a>) -> Result<T>
 where
     T: Deserialize<'a>,
@@ -272,34 +284,32 @@ impl<'de> BytesDeserializer<'de> {
     fn get_class_index_ptr(&mut self) -> Result<Pointer> {
         let global_fixup_src = self.relative_position();
 
-        match self.data_fixups.global_fixups.get(&global_fixup_src) {
-            Some((_section_index, global_dst)) => {
-                if let Some(class_index) = self.data_fixups.virtual_fixups.get_index_of(global_dst)
-                {
-                    #[cfg(feature = "tracing")]
-                    tracing::debug!(
-                        "global_fixup_src: {global_fixup_src}, class_index(from global_dst): {class_index}"
-                    );
-
-                    self.current_position += if self.is_x86 { 4 } else { 8 };
-                    Ok(Pointer::new(class_index + 1))
-                } else {
-                    #[cfg(feature = "tracing")]
-                    tracing::debug!(
-                    "Missing unique index of class for `global_fixup.dst(virtual_src)`({global_dst}) -> Not found `virtual_fixup.name_offset`. `NullPtr` is entered instead."
-                );
-                    self.current_position += if self.is_x86 { 4 } else { 8 };
-                    Ok(Pointer::new(0))
-                }
-            }
-            None => {
+        if let Some((_section_index, global_dst)) =
+            self.data_fixups.global_fixups.get(&global_fixup_src)
+        {
+            if let Some(class_index) = self.data_fixups.virtual_fixups.get_index_of(global_dst) {
                 #[cfg(feature = "tracing")]
                 tracing::debug!(
-                    "Not found `global_fixup.src({global_fixup_src})` -> `global_fixup.dst`. `NullPtr` is entered instead."
+                    "global_fixup_src: {global_fixup_src}, class_index(from global_dst): {class_index}"
                 );
+
+                self.current_position += if self.is_x86 { 4 } else { 8 };
+                Ok(Pointer::new(class_index + 1))
+            } else {
+                #[cfg(feature = "tracing")]
+                tracing::debug!(
+                "Missing unique index of class for `global_fixup.dst(virtual_src)`({global_dst}) -> Not found `virtual_fixup.name_offset`. `NullPtr` is entered instead."
+            );
                 self.current_position += if self.is_x86 { 4 } else { 8 };
                 Ok(Pointer::new(0))
             }
+        } else {
+            #[cfg(feature = "tracing")]
+            tracing::debug!(
+                "Not found `global_fixup.src({global_fixup_src})` -> `global_fixup.dst`. `NullPtr` is entered instead."
+            );
+            self.current_position += if self.is_x86 { 4 } else { 8 };
+            Ok(Pointer::new(0))
         }
     }
 
@@ -801,6 +811,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::tests::ClassMap;
+    use havok_classes::{hkBaseObject, hkClassMember_::FlagValues, hkReferencedObject, EventMode};
     use pretty_assertions::assert_eq;
 
     fn partial_parse_assert<'a, T>(s: BytesStream<'a>, expected: T)
@@ -818,7 +830,6 @@ mod tests {
 
     #[test]
     fn test_deserialize_primitive() {
-        use havok_classes::{hkClassMember_::FlagValues, EventMode};
         partial_parse_assert(&[128, 0, 0, 0], FlagValues::ALIGN_8);
         partial_parse_assert(&[0], EventMode::EVENT_MODE_DEFAULT);
     }
@@ -826,43 +837,28 @@ mod tests {
     #[test]
     fn test_deserialize_primitive_array() {
         partial_parse_assert::<[char; 0]>(b"", []);
-
         partial_parse_assert(&[1, 0], [true, false]);
         partial_parse_assert(
             zerocopy::AsBytes::as_bytes(&[
-                0u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                0_u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             ]),
             [
-                0u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                0_u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             ],
         );
     }
 
     #[test]
     fn test_deserialize_math_array() {
+        #[rustfmt::skip]
         let expected = [
-            Vector4 {
-                x: -0.0,
-                y: 0.0,
-                z: -0.0,
-                w: 1.0,
-            },
-            Vector4 {
-                x: 0.0,
-                y: 0.0,
-                z: -0.0,
-                w: 1.0,
-            },
-            Vector4 {
-                x: -0.0,
-                y: 0.0,
-                z: -0.0,
-                w: 1.0,
-            },
+            Vector4 { x: -0.0, y: 0.0, z: -0.0, w: 1.0, },
+            Vector4 { x:  0.0, y: 0.0, z: -0.0, w: 1.0, },
+            Vector4 { x: -0.0, y: 0.0, z: -0.0, w: 1.0, },
         ];
         partial_parse_assert(
             zerocopy::AsBytes::as_bytes(&[
-                -0.0f32, 0.0, -0.0, 1.0, // 1 vec4
+                -0.0_f32, 0.0, -0.0, 1.0, // 1 vec4
                 0.0, 0.0, -0.0, 1.0, // 2 vec4
                 -0.0, 0.0, -0.0, 1.0, // 3 vec4
             ]),
@@ -872,8 +868,6 @@ mod tests {
 
     #[test]
     fn test_deserialize_class() {
-        use havok_classes::{hkBaseObject, hkReferencedObject};
-
         partial_parse_assert(
             &[
                 0, 0, 0, 0, 0, 0, 0, 0, // hkBaseObject
@@ -890,29 +884,29 @@ mod tests {
         );
     }
 
-    #[test]
-    // #[cfg_attr(
-    //     feature = "tracing",
-    //     quick_tracing::init(test = "deserialize_hkx_bytes", stdio = false)
-    // )]
-    fn test_deserialize_class_index() {
-        use havok_classes::Classes;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        fn from_file<'a, T>(bytes: &'a [u8]) -> T
-        where
-            T: Deserialize<'a>,
-        {
-            match from_bytes::<T>(bytes) {
-                Ok(res) => res,
-                Err(err) => {
-                    tracing::error!("{err}");
-                    panic!("{err}")
-                }
+    fn from_file<'a, T>(bytes: &'a [u8]) -> T
+    where
+        T: Deserialize<'a>,
+    {
+        match from_bytes::<T>(bytes) {
+            Ok(res) => res,
+            Err(err) => {
+                tracing::error!("{err}");
+                panic!("{err}")
             }
         }
+    }
 
+    #[test]
+    #[cfg_attr(
+        feature = "tracing",
+        quick_tracing::init(test = "deserialize_hkx_bytes", stdio = false)
+    )]
+    fn test_deserialize_class_index() {
         let bytes = include_bytes!("../../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx");
-        let actual = from_file::<indexmap::IndexMap<usize, Classes>>(bytes);
+        let actual = from_file::<ClassMap>(bytes);
         assert!(actual.len() == 3);
     }
 }

@@ -122,7 +122,7 @@ impl HkxHeader {
     pub fn from_bytes<'a>() -> impl Parser<&'a [u8], Self, ContextError> {
         move |bytes: &mut &[u8]| {
             let endianness = {
-                let (mut bytes, _) = take(17usize).parse_peek(*bytes)?;
+                let (mut bytes, _) = take(17_usize).parse_peek(*bytes)?;
                 dispatch!(binary::u8; // 18th of bytes
                     0 => empty.value(Endianness::Big),
                     1 => empty.value(Endianness::Little),
@@ -170,7 +170,7 @@ impl HkxHeader {
                         .context(StrContext::Expected(Description("i32"))),
                     contents_class_name_section_offset: binary::i32(endianness).context(StrContext::Label("contents_class_name_section_offset"))
                         .context(StrContext::Expected(Description("i32"))),
-                    contents_version_string: take(15usize).try_map(TryFrom::try_from).context(StrContext::Label("contents_version_string"))
+                    contents_version_string: take(15_usize).try_map(TryFrom::try_from).context(StrContext::Label("contents_version_string"))
                         .context(StrContext::Expected(Description("[u8; 15]"))),
                     contents_version_string_separator: 0xff.context(StrContext::Label("contents_version_string_separator"))
                         .context(StrContext::Expected(StringLiteral("0xFF"))),
@@ -193,54 +193,46 @@ impl HkxHeader {
     pub fn to_bytes(&self) -> [u8; 64] {
         let mut buffer = [0; 64];
 
-        match self.endian {
-            0 => {
-                buffer[..4].copy_from_slice(&self.magic0.to_be_bytes());
-                buffer[4..8].copy_from_slice(&self.magic1.to_be_bytes());
-                buffer[8..12].copy_from_slice(&self.user_tag.to_be_bytes());
-                buffer[12..16].copy_from_slice(&self.file_version.to_be_bytes());
-                buffer[16] = self.pointer_size;
-                buffer[17] = self.endian;
-                buffer[18] = self.padding_option;
-                buffer[19] = self.base_class;
-                buffer[20..24].copy_from_slice(&self.section_count.to_be_bytes());
-                buffer[24..28].copy_from_slice(&self.contents_section_index.to_be_bytes());
-                buffer[28..32].copy_from_slice(&self.contents_section_offset.to_be_bytes());
-                buffer[32..36]
-                    .copy_from_slice(&self.contents_class_name_section_index.to_be_bytes());
-                buffer[36..40]
-                    .copy_from_slice(&self.contents_class_name_section_offset.to_be_bytes());
-                buffer[40..55].copy_from_slice(self.contents_version_string.as_slice());
-                buffer[55] = self.contents_version_string_separator;
-                buffer[56..60].copy_from_slice(&self.flags.to_be_bytes());
-                buffer[60..62].copy_from_slice(&self.max_predicate.to_be_bytes());
-                buffer[62..64].copy_from_slice(&self.section_offset.to_be_bytes());
-                buffer
-            }
-            _ => {
-                buffer[..4].copy_from_slice(&self.magic0.to_le_bytes());
-                buffer[4..8].copy_from_slice(&self.magic1.to_le_bytes());
-                buffer[8..12].copy_from_slice(&self.user_tag.to_le_bytes());
-                buffer[12..16].copy_from_slice(&self.file_version.to_le_bytes());
-                buffer[16] = self.pointer_size;
-                buffer[17] = self.endian;
-                buffer[18] = self.padding_option;
-                buffer[19] = self.base_class;
-                buffer[20..24].copy_from_slice(&self.section_count.to_le_bytes());
-                buffer[24..28].copy_from_slice(&self.contents_section_index.to_le_bytes());
-                buffer[28..32].copy_from_slice(&self.contents_section_offset.to_le_bytes());
-                buffer[32..36]
-                    .copy_from_slice(&self.contents_class_name_section_index.to_le_bytes());
-                buffer[36..40]
-                    .copy_from_slice(&self.contents_class_name_section_offset.to_le_bytes());
-                buffer[40..55].copy_from_slice(self.contents_version_string.as_slice());
-                buffer[55] = self.contents_version_string_separator;
-                buffer[56..60].copy_from_slice(&self.flags.to_le_bytes());
-                buffer[60..62].copy_from_slice(&self.max_predicate.to_le_bytes());
-                buffer[62..64].copy_from_slice(&self.section_offset.to_le_bytes());
-                buffer
-            }
+        if self.endian == 0 {
+            buffer[..4].copy_from_slice(&self.magic0.to_be_bytes());
+            buffer[4..8].copy_from_slice(&self.magic1.to_be_bytes());
+            buffer[8..12].copy_from_slice(&self.user_tag.to_be_bytes());
+            buffer[12..16].copy_from_slice(&self.file_version.to_be_bytes());
+            buffer[16] = self.pointer_size;
+            buffer[17] = self.endian;
+            buffer[18] = self.padding_option;
+            buffer[19] = self.base_class;
+            buffer[20..24].copy_from_slice(&self.section_count.to_be_bytes());
+            buffer[24..28].copy_from_slice(&self.contents_section_index.to_be_bytes());
+            buffer[28..32].copy_from_slice(&self.contents_section_offset.to_be_bytes());
+            buffer[32..36].copy_from_slice(&self.contents_class_name_section_index.to_be_bytes());
+            buffer[36..40].copy_from_slice(&self.contents_class_name_section_offset.to_be_bytes());
+            buffer[40..55].copy_from_slice(self.contents_version_string.as_slice());
+            buffer[55] = self.contents_version_string_separator;
+            buffer[56..60].copy_from_slice(&self.flags.to_be_bytes());
+            buffer[60..62].copy_from_slice(&self.max_predicate.to_be_bytes());
+            buffer[62..64].copy_from_slice(&self.section_offset.to_be_bytes());
+        } else {
+            buffer[..4].copy_from_slice(&self.magic0.to_le_bytes());
+            buffer[4..8].copy_from_slice(&self.magic1.to_le_bytes());
+            buffer[8..12].copy_from_slice(&self.user_tag.to_le_bytes());
+            buffer[12..16].copy_from_slice(&self.file_version.to_le_bytes());
+            buffer[16] = self.pointer_size;
+            buffer[17] = self.endian;
+            buffer[18] = self.padding_option;
+            buffer[19] = self.base_class;
+            buffer[20..24].copy_from_slice(&self.section_count.to_le_bytes());
+            buffer[24..28].copy_from_slice(&self.contents_section_index.to_le_bytes());
+            buffer[28..32].copy_from_slice(&self.contents_section_offset.to_le_bytes());
+            buffer[32..36].copy_from_slice(&self.contents_class_name_section_index.to_le_bytes());
+            buffer[36..40].copy_from_slice(&self.contents_class_name_section_offset.to_le_bytes());
+            buffer[40..55].copy_from_slice(self.contents_version_string.as_slice());
+            buffer[55] = self.contents_version_string_separator;
+            buffer[56..60].copy_from_slice(&self.flags.to_le_bytes());
+            buffer[60..62].copy_from_slice(&self.max_predicate.to_le_bytes());
+            buffer[62..64].copy_from_slice(&self.section_offset.to_le_bytes());
         }
+        buffer
     }
 
     /// Get padding size.

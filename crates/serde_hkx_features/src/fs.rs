@@ -13,6 +13,10 @@ pub trait ReadExt {
     fn read_any_string(&self) -> impl Future<Output = Result<String>>;
 
     /// Read bytes.
+    ///
+    /// # Errors
+    /// - If the path does not exist.
+    /// - When an interrupt is received during reading.
     fn read_bytes(&self) -> impl Future<Output = Result<Vec<u8>>>;
 }
 
@@ -41,6 +45,10 @@ where
 /// Write specified or same location.
 ///
 /// - `ext`: If `output` is unspecified, rewrite the `input` extension and make it the `output`. In that case, the extension.
+///
+/// # Errors
+/// - Conflict error due to simultaneous dir creation.
+/// - No write permission to the given path.
 pub async fn write<I, O>(
     input: I,
     output: Option<O>,
@@ -53,14 +61,14 @@ where
 {
     let input = input.as_ref();
 
-    let output = output
-        .as_ref()
-        .map(|output| Cow::Borrowed(output.as_ref()))
-        .unwrap_or({
+    let output = output.as_ref().map_or(
+        {
             let mut output = input.to_path_buf();
             output.set_extension(ext);
             Cow::Owned(output)
-        });
+        },
+        |output| Cow::Borrowed(output.as_ref()),
+    );
 
     if let Some(parent) = output.parent() {
         fs::create_dir_all(parent).await?;

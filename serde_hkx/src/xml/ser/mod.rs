@@ -50,6 +50,9 @@ impl Default for XmlSerializer {
 }
 
 /// To XML String.
+///
+/// # Errors
+/// serde(fork version) Error defined on crate's trace definition, but will not fail due to mere XML stringing.
 #[inline]
 pub fn to_string<T>(value: &T, top_ptr: usize) -> Result<String>
 where
@@ -59,6 +62,9 @@ where
 }
 
 /// To xml string with custom `XmlSerializer` settings.
+///
+/// # Errors
+/// serde(fork version) Error defined on crate's trace definition, but will not fail due to mere XML stringing.
 ///
 /// # Info
 /// This can be done in partial mode by eliminating the root string.
@@ -586,29 +592,20 @@ impl<'a> SerializeFlags for &'a mut XmlSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::{tests::mocks::new_defaultmale, HavokSort as _};
+    use pretty_assertions::assert_eq;
 
     #[ignore = "No error on local PC Windows, but for some reason error occurs on GitHub Actions Windows"]
     #[test]
     fn test_serialize_defaultmale() -> Result<()> {
-        use crate::tests::mocks::new_defaultmale;
-
         let mut classes = new_defaultmale();
+        let top_ptr = classes.sort_for_xml()?; // hkRootContainer" is processed last.
 
-        // hkRootContainer" is processed last.
-        classes.sort_keys();
-        let mut top_ptr = None;
-        if !classes.is_empty() {
-            if let Some((first_key, first_value)) = classes.shift_remove_index(0) {
-                classes.insert(first_key, first_value);
-                top_ptr = Some(first_key);
-            }
-        }
-
-        let actual = tri!(to_string(&classes, top_ptr.unwrap_or_default()));
+        let actual = tri!(to_string(&classes, top_ptr));
         let expected =
             include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
 
-        pretty_assertions::assert_eq!(actual, expected);
+        assert_eq!(actual, expected);
         Ok(())
     }
 }

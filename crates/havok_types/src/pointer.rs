@@ -5,7 +5,7 @@
 //!
 //! # Example
 //! - `#0457`
-//! - `#0007`use core::str::FromStr;
+//! - `#0007`
 use core::str::FromStr;
 use parse_display::Display;
 

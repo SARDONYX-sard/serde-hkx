@@ -59,6 +59,9 @@ impl OutFormat {
     /// - `hkx` -> `Self::Xml`
     /// - `xml` -> `Self::Amd64`
     ///
+    /// When enable `extra_fmt` feature.
+    /// - `json`, `yaml` -> `Self::Amd64`
+    ///
     /// # Errors
     /// Unknown extension.
     #[inline]
@@ -92,6 +95,13 @@ impl OutFormat {
     /// Determine format from extension.
     /// - `hkx` -> `Self::Amd64`
     /// - `xml` -> `Self::Xml`
+    ///
+    /// When enable `extra_fmt` feature.
+    /// - `json` -> `Self::Json`
+    /// - `yaml` -> `Self::Yaml`
+    ///
+    /// # Errors
+    /// Unknown extension.
     #[inline]
     pub fn from_extension(ext: &OsStr) -> Result<Self> {
         Ok(match ext {
