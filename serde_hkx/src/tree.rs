@@ -191,7 +191,10 @@ where
 }
 
 #[test]
-#[cfg_attr(feature = "tracing", quick_tracing::init)]
+#[cfg_attr(
+    feature = "tracing",
+    quick_tracing::init(test = "generate_tree_from_xml", stdio = false)
+)]
 fn should_create_tree() {
     use crate::tests::ClassMap;
 

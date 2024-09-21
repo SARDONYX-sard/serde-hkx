@@ -824,7 +824,6 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init]
     fn test_deserialize_primitive_array() {
         partial_parse_assert::<[char; 0]>(b"", []);
 
@@ -872,7 +871,6 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init]
     fn test_deserialize_class() {
         use havok_classes::{hkBaseObject, hkReferencedObject};
 

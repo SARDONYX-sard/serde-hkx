@@ -11,7 +11,6 @@ use winnow::Parser;
 type Result<T> = core::result::Result<T, SerdeHkxError>;
 
 #[test]
-// #[ignore = "Because it can't be fully reproduced yet"]
 #[quick_tracing::init(test = "should_reproduce_x64_bytes", stdio = false)]
 fn should_reproduce_x64_bytes() {
     let xml = {
@@ -33,7 +32,6 @@ fn should_reproduce_x64_bytes() {
 }
 
 #[test]
-// #[ignore = "Because it can't be fully reproduced yet"]
 #[quick_tracing::init(test = "should_reproduce_x86_bytes", stdio = false)]
 fn should_reproduce_x86_bytes() {
     let xml = include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
@@ -78,10 +76,10 @@ fn assert_bytes(xml: &str, expected_bytes: &[u8]) -> Result<()> {
     Ok(())
 }
 
-#[tokio::test]
+#[test]
 #[ignore = "Because it can't be fully reproduced yet"]
 #[quick_tracing::try_init(test = "should_reproduce_xml", stdio = false)]
-async fn should_reproduce_xml() -> Result<()> {
+fn should_reproduce_xml() -> Result<()> {
     let bytes = {
         // include_bytes!("../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx")
         // include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.hkx")
