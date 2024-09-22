@@ -470,19 +470,18 @@ macro_rules! array_impls {
                 where
                     A: SeqAccess<'de>,
                 {
-                    let mut array = super::lazy_init_array::LazyInitArray::<$ty, N>::new();
-                    array.set_stack_ptr();
+                    let mut array = arrayvec::ArrayVec::<$ty, N>::new();
                     for _ in 0..N {
                         if let Some(value_i) = tri!(seq.$fn_name()) {
-                            array.write_next(value_i);
+                            array.push(value_i);
                         } else {
                             break;
                         };
                     }
-                    match array.try_init() {
+                    match array.take().into_inner() {
                         Ok(array) => Ok(array),
-                        Err(guard) => Err(Error::invalid_length(
-                            guard.initialized_count,
+                        Err(array) => Err(Error::invalid_length(
+                            array.len(),
                             &(N.to_string().as_str()),
                         )),
                     }
@@ -554,19 +553,18 @@ where
     where
         A: SeqAccess<'de>,
     {
-        let mut array = super::lazy_init_array::LazyInitArray::<T, N>::new();
-        array.set_stack_ptr();
+        let mut array = arrayvec::ArrayVec::<T, N>::new();
         for _ in 0..N {
             if let Some(value_i) = tri!(seq.next_class_element()) {
-                array.write_next(value_i);
+                array.push(value_i);
             } else {
                 break;
             };
         }
-        match array.try_init() {
+        match array.take().into_inner() {
             Ok(array) => Ok(array),
-            Err(guard) => Err(Error::invalid_length(
-                guard.initialized_count,
+            Err(array) => Err(Error::invalid_length(
+                array.len(),
                 &(N.to_string().as_str()),
             )),
         }

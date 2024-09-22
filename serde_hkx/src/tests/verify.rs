@@ -10,8 +10,12 @@ use winnow::Parser;
 
 type Result<T> = core::result::Result<T, SerdeHkxError>;
 
+#[cfg_attr(miri, ignore)] // Unexplained hang
 #[test]
-#[quick_tracing::init(test = "should_reproduce_x64_bytes", stdio = false)]
+#[cfg_attr(
+    all(feature = "tracing", not(miri)),
+    quick_tracing::init(test = "should_reproduce_x64_bytes", stdio = false)
+)]
 fn should_reproduce_x64_bytes() {
     let xml = {
         // include_str!("../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
@@ -31,8 +35,12 @@ fn should_reproduce_x64_bytes() {
     }
 }
 
+#[cfg_attr(miri, ignore)] // Unexplained hang
 #[test]
-#[quick_tracing::init(test = "should_reproduce_x86_bytes", stdio = false)]
+#[cfg_attr(
+    all(feature = "tracing", not(miri)),
+    quick_tracing::init(test = "should_reproduce_x86_bytes", stdio = false)
+)]
 fn should_reproduce_x86_bytes() {
     let xml = include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
     let expected_bytes =
@@ -77,7 +85,7 @@ fn assert_bytes(xml: &str, expected_bytes: &[u8]) -> Result<()> {
 }
 
 #[test]
-#[ignore = "Because it can't be fully reproduced yet"]
+#[ignore = "Because it can't be fully reproduced yet"] // Should ignore miri test, because unexplained hang.
 #[quick_tracing::try_init(test = "should_reproduce_xml", stdio = false)]
 fn should_reproduce_xml() -> Result<()> {
     let bytes = {

@@ -901,7 +901,7 @@ mod tests {
 
     #[test]
     #[cfg_attr(
-        feature = "tracing",
+        all(feature = "tracing", not(miri)),
         quick_tracing::init(test = "deserialize_hkx_bytes", stdio = false)
     )]
     fn test_deserialize_class_index() {

@@ -9,8 +9,11 @@ rust-version.workspace = true
 edition.workspace = true
 
 [dependencies]
-havok_types = { workspace = true }
+arrayvec = "0.7.6"                               # To lazy init fixed array
 indexmap = { workspace = true, optional = true }
+
+# workspace members
+havok_types = { workspace = true }
 
 [features]
 default = ["std"]

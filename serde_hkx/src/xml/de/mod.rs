@@ -638,6 +638,7 @@ mod tests {
 
     #[test]
     fn test_deserialize_math_vec() {
+        #[rustfmt::skip]
         partial_parse_assert(
             r#"   <!-- comment -->
 
@@ -652,24 +653,9 @@ mod tests {
                             <!-- comment -->
 "#,
             vec![
-                Vector4 {
-                    x: -0.0,
-                    y: 0.0,
-                    z: -0.0,
-                    w: 1.0,
-                },
-                Vector4 {
-                    x: 0.0,
-                    y: 0.0,
-                    z: -0.0,
-                    w: 1.0,
-                },
-                Vector4 {
-                    x: -0.0,
-                    y: 0.0,
-                    z: -0.0,
-                    w: 1.0,
-                },
+                Vector4 { x: -0.0, y: 0.0, z: -0.0, w: 1.0, },
+                Vector4 { x:  0.0, y: 0.0, z: -0.0, w: 1.0, },
+                Vector4 { x: -0.0, y: 0.0, z: -0.0, w: 1.0, },
             ],
         );
     }
@@ -748,10 +734,6 @@ mod tests {
     }
 
     #[test]
-    #[cfg_attr(
-        feature = "tracing",
-        quick_tracing::init(test = "deserialize_classes_from_xml", stdio = false)
-    )]
     fn should_deserialize_classes_from_xml() {
         use crate::tests::mocks::new_defaultmale;
         use havok_classes::Classes;

@@ -190,6 +190,7 @@ where
     }
 }
 
+#[cfg_attr(miri, ignore)] // Unexplained hang
 #[test]
 #[cfg_attr(
     feature = "tracing",

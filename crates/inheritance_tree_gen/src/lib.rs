@@ -37,6 +37,7 @@ flowchart LR
     ))
 }
 
+#[cfg_attr(miri, ignore)] //  unsupported operation: `statx` system call
 #[test]
 fn should_gen_inheritance_tree() -> std::io::Result<()> {
     let repo_root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
