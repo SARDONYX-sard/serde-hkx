@@ -1,4 +1,3 @@
-mod mermaid;
 pub(crate) mod mocks;
 mod verify;
 

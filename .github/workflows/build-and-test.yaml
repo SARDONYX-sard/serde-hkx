@@ -51,6 +51,22 @@ jobs:
       - name: Test
         run: cargo test --workspace --target ${{ matrix.job.target}}
 
+  miri:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.3
+        with:
+          prefix-key: cargo-debug-miri-x86_64_unknown-linux-gnu
+      - name: Install Miri
+        run: |
+          rustup toolchain install nightly --component miri
+          rustup override set nightly
+          cargo miri setup
+      - name: Search undefined behavior
+        run: cargo miri test --workspace
+
   build:
     strategy:
       fail-fast: false

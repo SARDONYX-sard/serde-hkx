@@ -635,6 +635,7 @@ dependencies = [
 name = "havok_serde"
 version = "0.3.0"
 dependencies = [
+ "arrayvec",
  "havok_types",
  "indexmap 2.5.0",
 ]

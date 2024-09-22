@@ -266,21 +266,18 @@ impl ByteSerializer {
         virtual_src: u32,
     ) -> Result<()> {
         if let Some(class_name_offset) = self.class_starts.get(class_name) {
-            match self.is_little_endian {
-                true => {
-                    self.virtual_fixups.write_u32::<LittleEndian>(virtual_src)?; // src
-                    self.virtual_fixups
-                        .write_i32::<LittleEndian>(self.contents_class_name_section_index)?; // dst_section_index, `__classnames__` section is 0
-                    self.virtual_fixups
-                        .write_u32::<LittleEndian>(*class_name_offset)?; // dst(virtual_fixup.dst)
-                }
-                false => {
-                    self.virtual_fixups.write_u32::<BigEndian>(virtual_src)?; // src
-                    self.virtual_fixups
-                        .write_i32::<BigEndian>(self.contents_class_name_section_index)?; // dst_section_index, `__classnames__` section is 0
-                    self.virtual_fixups
-                        .write_u32::<BigEndian>(*class_name_offset)?; // dst(virtual_fixup.dst)
-                }
+            if self.is_little_endian {
+                self.virtual_fixups.write_u32::<LittleEndian>(virtual_src)?; // src
+                self.virtual_fixups
+                    .write_i32::<LittleEndian>(self.contents_class_name_section_index)?; // dst_section_index, `__classnames__` section is 0
+                self.virtual_fixups
+                    .write_u32::<LittleEndian>(*class_name_offset)?; // dst(virtual_fixup.dst)
+            } else {
+                self.virtual_fixups.write_u32::<BigEndian>(virtual_src)?; // src
+                self.virtual_fixups
+                    .write_i32::<BigEndian>(self.contents_class_name_section_index)?; // dst_section_index, `__classnames__` section is 0
+                self.virtual_fixups
+                    .write_u32::<BigEndian>(*class_name_offset)?; // dst(virtual_fixup.dst)
             };
             Ok(())
         } else {
@@ -363,15 +360,12 @@ impl ByteSerializer {
                 "[local_fixup] src({local_src}/abs: {src_abs:#x}), dst({local_dst}/abs: {dst_abs:#x})"
             );
         }
-        match self.is_little_endian {
-            true => {
-                self.local_fixups.write_u32::<LittleEndian>(local_src)?;
-                self.local_fixups.write_u32::<LittleEndian>(local_dst)?;
-            }
-            false => {
-                self.local_fixups.write_u32::<BigEndian>(local_src)?;
-                self.local_fixups.write_u32::<BigEndian>(local_dst)?;
-            }
+        if self.is_little_endian {
+            self.local_fixups.write_u32::<LittleEndian>(local_src)?;
+            self.local_fixups.write_u32::<LittleEndian>(local_dst)?;
+        } else {
+            self.local_fixups.write_u32::<BigEndian>(local_src)?;
+            self.local_fixups.write_u32::<BigEndian>(local_dst)?;
         }
         Ok(())
     }

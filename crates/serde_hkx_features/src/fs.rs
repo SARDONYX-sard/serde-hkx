@@ -61,8 +61,8 @@ where
 {
     let input = input.as_ref();
 
-    let output = output.as_ref().map_or(
-        {
+    let output = output.as_ref().map_or_else(
+        || {
             let mut output = input.to_path_buf();
             output.set_extension(ext);
             Cow::Owned(output)

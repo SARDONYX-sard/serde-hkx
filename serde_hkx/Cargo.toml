@@ -44,7 +44,8 @@ havok_classes = { workspace = true, features = ["ignore_duplicates"] }
 
 
 [features]
-default = ["tracing"]
+default = ["tracing"] # For debug
+
 # Use tracing logging.(We may need `tracing-subscriber` crate too.)
 tracing = ["dep:tracing"]
 
