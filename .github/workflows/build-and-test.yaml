@@ -82,7 +82,7 @@ jobs:
       - name: Rust cache
         uses: Swatinem/rust-cache@v2.7.3
         with:
-          prefix-key: cargo-release-${{ matrix.job.target }}
+          prefix-key: cargo-release-${{ matrix.job.target }}-extra_fmt
 
       - name: Build CLI
         run: cargo build --release --target ${{ matrix.job.target }}
