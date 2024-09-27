@@ -1,0 +1,124 @@
+name: Release(CLI)
+
+on:
+  push:
+    tags:
+      - "*"
+
+env:
+  APP_NAME: hkxc
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        # https://stackoverflow.com/questions/73642596/how-to-cross-compile-rust-across-operating-systems-and-cpu-architectures
+        job:
+          - { target: aarch64-apple-darwin, os: macos-latest }
+          - { target: x86_64-pc-windows-msvc, os: windows-latest }
+          - { target: x86_64-unknown-linux-gnu, os: ubuntu-latest }
+    runs-on: ${{ matrix.job.os }}
+    steps:
+      - uses: actions/checkout@v4.2.0
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.3
+        with:
+          prefix-key: cargo-release-${{ matrix.job.target }}
+
+      - name: Build CLI
+        run: cargo build --release --target ${{ matrix.job.target }}
+
+      - name: Make outputs dir
+        run: mkdir -p ./build
+      - name: Compress outputs(Windows)
+        shell: pwsh
+        if: runner.os == 'Windows'
+        run: |
+          Move-Item -Path ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }}.exe -Destination './build'
+          Move-Item -Path ./LICENSES.toml -Destination './build'
+          Compress-Archive -Path './build/*' -DestinationPath './serde-hkx-cli-${{ matrix.job.target }}.zip'
+
+      - name: Compress outputs(MacOS)
+        shell: bash
+        if: runner.os == 'macOS'
+        run: |
+          mv ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }} ./build
+          mv ./LICENSES.toml './build'
+          tar -czf serde-hkx-cli-${{ matrix.job.target }}.tar.gz -C ./build .
+
+      - name: Compress outputs(Linux)
+        shell: bash
+        if: runner.os == 'Linux'
+        run: |
+          mv ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }} ./build
+          mv ./LICENSES.toml './build'
+          tar -czf serde-hkx-cli-${{ matrix.job.target }}.tar.gz -C ./build .
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.4.0
+        with:
+          name: serde-hkx-cli-${{ matrix.job.target }}
+          path: ./build/
+
+      - uses: ncipollo/release-action@v1.14.0
+        with:
+          artifacts: |
+            serde-hkx-cli-${{ matrix.job.target }}.zip
+            serde-hkx-cli-${{ matrix.job.target }}.tar.gz
+          bodyFile: ./docs/release.md
+          generateReleaseNotes: true
+
+  build_extra:
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - { target: aarch64-apple-darwin, os: macos-latest }
+          - { target: x86_64-pc-windows-msvc, os: windows-latest }
+          - { target: x86_64-unknown-linux-gnu, os: ubuntu-latest }
+    runs-on: ${{ matrix.job.os }}
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.3
+        with:
+          prefix-key: cargo-release-${{ matrix.job.target }}-extra
+
+      - name: Build CLI
+        run: cargo build --release --target ${{ matrix.job.target }} --features extra_fmt
+
+      - name: Make outputs dir
+        run: mkdir -p ./build
+      - name: Compress outputs(Windows)
+        shell: pwsh
+        if: runner.os == 'Windows'
+        run: |
+          Move-Item -Path ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }}.exe -Destination './build'
+          Move-Item -Path ./LICENSES.toml -Destination './build'
+          Compress-Archive -Path './build/*' -DestinationPath './serde-hkx-cli-${{ matrix.job.target }}-extra_fmt.zip'
+
+      - name: Compress outputs(MacOS)
+        shell: bash
+        if: runner.os == 'macOS'
+        run: |
+          mv ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }} ./build
+          mv ./LICENSES.toml './build'
+          tar -czf serde-hkx-cli-${{ matrix.job.target }}-extra_fmt.tar.gz -C ./build .
+
+      - name: Compress outputs(Linux)
+        shell: bash
+        if: runner.os == 'Linux'
+        run: |
+          mv ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }} ./build
+          mv ./LICENSES.toml './build'
+          tar -czf serde-hkx-cli-${{ matrix.job.target }}-extra_fmt.tar.gz -C ./build .
+
+      - uses: ncipollo/release-action@v1.14.0
+        with:
+          artifacts: |
+            serde-hkx-cli-${{ matrix.job.target }}-extra_fmt.zip
+            serde-hkx-cli-${{ matrix.job.target }}-extra_fmt.tar.gz
+          bodyFile: ./docs/release.md
+          generateReleaseNotes: true
