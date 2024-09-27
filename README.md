@@ -1,6 +1,9 @@
 # Havok Behavior Serialization/Deserialization Library
 
 <div>
+    <a href="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/release-cli.yaml">
+        <img src="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/release-cli.yaml/badge.svg" alt="Release(CLI)">
+    </a>
     <a href="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/build-and-test.yaml">
         <img src="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/build-and-test.yaml/badge.svg" alt="Build & Test(Cargo)">
     </a>
@@ -24,17 +27,17 @@
 - [x] Hexdump the binary data of hkx.
 - [x] Display data differences between two hkx/XML.
 
-## Usage(For user)
+## Download CLI(For behavior creator)
 
-[CLI release page](https://github.com/SARDONYX-sard/serde-hkx/releases)
+- [CLI release page](https://github.com/SARDONYX-sard/serde-hkx/releases)
 
-[Nexus](https://www.nexusmods.com/skyrimspecialedition/mods/126214/?tab=files)
+- [Nexus](https://www.nexusmods.com/skyrimspecialedition/mods/126214/?tab=files)
 
 ```shell
 ./hkxc --help
 ```
 
-## Usage(As a library)
+## When used as a library(For developer)
 
 - Convenience wrapper API(For CLI/GUI): (e.g. [CLI](./crates/cli/src/args/mod.rs))
 
