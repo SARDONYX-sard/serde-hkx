@@ -183,7 +183,7 @@
       "vsubtype": "TYPE_VOID",
       "offset_x86": 0,
       "offset_x86_64": 0,
-      "type_size_x86": 8,
+      "type_size_x86": 256,
       "type_size_x86_64": 256,
       "arrsize": 32,
       "flags": "FLAGS_NONE",
