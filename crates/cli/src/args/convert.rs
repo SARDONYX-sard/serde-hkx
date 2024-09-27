@@ -25,7 +25,7 @@ pub(crate) struct Args {
     /// Path containing the hkx/xml file/directory
     #[clap(short, long)]
     pub input: PathBuf,
-    /// Output path
+    /// Output path (If not specified, it is automatically created in the same location as the input path.)
     #[clap(short, long)]
     pub output: Option<PathBuf>,
 
