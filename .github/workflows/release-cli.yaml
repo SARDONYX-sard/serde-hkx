@@ -57,6 +57,7 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         if: runner.os == 'Windows'
         with:
+          allowUpdates: true
           artifacts: ${{ matrix.job.asset }}
           bodyFile: ./docs/release.md
           generateReleaseNotes: true
@@ -72,6 +73,7 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         if: runner.os == 'macOS'
         with:
+          allowUpdates: true
           artifacts: ${{ matrix.job.asset }}
           bodyFile: ./docs/release.md
           generateReleaseNotes: true
@@ -87,6 +89,7 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         if: runner.os == 'Linux'
         with:
+          allowUpdates: true
           artifacts: ${{ matrix.job.asset }}
           bodyFile: ./docs/release.md
           generateReleaseNotes: true
@@ -138,6 +141,7 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         if: runner.os == 'Windows'
         with:
+          allowUpdates: true
           artifacts: ${{ matrix.job.asset }}
           bodyFile: ./docs/release.md
           generateReleaseNotes: true
@@ -153,6 +157,7 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         if: runner.os == 'macOS'
         with:
+          allowUpdates: true
           artifacts: ${{ matrix.job.asset }}
           bodyFile: ./docs/release.md
           generateReleaseNotes: true
@@ -168,6 +173,7 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         if: runner.os == 'Linux'
         with:
+          allowUpdates: true
           artifacts: ${{ matrix.job.asset }}
           bodyFile: ./docs/release.md
           generateReleaseNotes: true
