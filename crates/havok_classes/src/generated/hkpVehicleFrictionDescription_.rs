@@ -31,7 +31,7 @@ pub struct hkpVehicleFrictionDescription {
     /// # C++ Info
     /// - name: `axleDescr`(ctype: `struct hkpVehicleFrictionDescriptionAxisDescription[2]`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
-    /// - type_size: `100`(x86)/`200`(x86_64)
+    /// - type_size: `200`(x86)/`200`(x86_64)
     pub m_axleDescr: [hkpVehicleFrictionDescriptionAxisDescription; 2usize],
 }
 const _: () = {
@@ -83,7 +83,6 @@ const _: () = {
                         size_x86_64: 100u64,
                     },
                 )?;
-            serializer.pad_field([0u8; 100usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.end()
         }
     }
@@ -234,7 +233,6 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    __A::pad(&mut __map, 100usize, 0usize)?;
                     let m_wheelDistance = match m_wheelDistance {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {

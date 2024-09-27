@@ -21,7 +21,7 @@ pub struct hkVertexFormat {
     /// # C++ Info
     /// - name: `elements`(ctype: `struct hkVertexFormatElement[32]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
-    /// - type_size: `  8`(x86)/`256`(x86_64)
+    /// - type_size: `256`(x86)/`256`(x86_64)
     pub m_elements: [hkVertexFormatElement; 32usize],
     /// # C++ Info
     /// - name: `numElements`(ctype: `hkInt32`)
@@ -72,7 +72,6 @@ const _: () = {
                         size_x86_64: 8u64,
                     },
                 )?;
-            serializer.pad_field([0u8; 248usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("numElements", &self.m_numElements)?;
             serializer.end()
         }
@@ -188,7 +187,6 @@ const _: () = {
                                         ),
                                     );
                                 }
-                                __A::pad(&mut __map, 248usize, 0usize)?;
                                 m_numElements = _serde::__private::Some(
                                     match __A::next_value::<i32>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,

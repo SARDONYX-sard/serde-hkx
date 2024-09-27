@@ -21,7 +21,7 @@ pub struct hkpVehicleFrictionStatus {
     /// # C++ Info
     /// - name: `axis`(ctype: `struct hkpVehicleFrictionStatusAxisStatus[2]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
-    /// - type_size: ` 36`(x86)/` 72`(x86_64)
+    /// - type_size: ` 72`(x86)/` 72`(x86_64)
     pub m_axis: [hkpVehicleFrictionStatusAxisStatus; 2usize],
 }
 const _: () = {
@@ -71,7 +71,6 @@ const _: () = {
                         size_x86_64: 36u64,
                     },
                 )?;
-            serializer.pad_field([0u8; 36usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.end()
         }
     }
@@ -180,7 +179,6 @@ const _: () = {
                             _ => {}
                         }
                     }
-                    __A::pad(&mut __map, 36usize, 0usize)?;
                     let m_axis = match m_axis {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
