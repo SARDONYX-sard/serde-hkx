@@ -28,21 +28,27 @@
 
 [CLI release page](https://github.com/SARDONYX-sard/serde-hkx/releases)
 
+[Nexus](https://www.nexusmods.com/skyrimspecialedition/mods/126214/?tab=files)
+
+```shell
+./hkxc --help
+```
+
 ## Usage(As a library)
 
 - Convenience wrapper API(For CLI/GUI): (e.g. [CLI](./crates/cli/src/args/mod.rs))
 
 ```toml
 # in Cargo.toml
-serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.2.0" }
+serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.3.1" }
 ```
 
 - Low level API: (e.g. [Tests](./serde_hkx/src/tests/verify.rs))
 
 ```toml
 # in Cargo.toml
-havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.2.0" }
-serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.2.0" }
+havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.3.1" }
+serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.3.1" }
 ```
 
 ## Documentation
