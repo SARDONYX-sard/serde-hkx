@@ -171,26 +171,27 @@ where
             continue;
         }
 
+        // Convert only if there is a supported extension.
         if let Some(ext) = input.extension() {
             if OutFormat::from_extension(ext).is_err() {
                 continue;
             };
-        }
 
-        // If output_dir is specified, make it the root dir to maintain the hierarchy and output.
-        let output = match output_dir.as_ref() {
-            Some(output_dir) => {
-                let relative_path = input.strip_prefix(input_dir)?;
-                let mut output = output_dir.as_ref().join(relative_path);
-                output.set_extension(format.as_extension());
-                Some(output)
-            }
-            None => None,
+            // If output_dir is specified, make it the root dir to maintain the hierarchy and output.
+            let output = match output_dir.as_ref() {
+                Some(output_dir) => {
+                    let relative_path = input.strip_prefix(input_dir)?;
+                    let mut output = output_dir.as_ref().join(relative_path);
+                    output.set_extension(format.as_extension());
+                    Some(output)
+                }
+                None => None,
+            };
+
+            task_handles.push(tokio::spawn(async move {
+                convert_file(&input, output, format).await
+            }));
         };
-
-        task_handles.push(tokio::spawn(async move {
-            convert_file(&input, output, format).await
-        }));
     }
 
     for task_handle in task_handles {
