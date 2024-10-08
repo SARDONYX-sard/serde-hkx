@@ -14,7 +14,6 @@
     "MD024": false,
     "MD025": false,
     "MD033": false,
-    "MD034": false, // OFF must use `<>`: Because the code must not be enclosed in `<>` for range visualization in github.
     "no-hard-tabs": false
   },
   "rust-analyzer.check.command": "clippy"

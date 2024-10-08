@@ -46,8 +46,6 @@
 serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.3.1" }
 ```
 
-https://github.com/SARDONYX-sard/serde-hkx/blob/0.3.1/crates/cli/src/args/mod.rs#L11-L56
-
 - Low level API: (e.g. [Tests](./serde_hkx/src/tests/verify.rs))
 
 ```toml
@@ -55,8 +53,6 @@ https://github.com/SARDONYX-sard/serde-hkx/blob/0.3.1/crates/cli/src/args/mod.rs
 havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.3.1" }
 serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.3.1" }
 ```
-
-https://github.com/SARDONYX-sard/serde-hkx/blob/0.3.1/serde_hkx/src/tests/verify.rs#L1-L85
 
 ## Documentation
 
