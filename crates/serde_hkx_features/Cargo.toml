@@ -41,12 +41,13 @@ serde_hkx = { workspace = true }
 clap = ["dep:clap"]
 # Enable tracing logging
 tracing = ["dep:tracing", "serde_hkx/tracing"]
+# Extra output format(json, toml, yaml)
 extra_fmt = [
   "havok_classes/serde",
   "indexmap/serde",
   "dep:serde_yml",
   "dep:simd-json",
-] # Extra output format(json, toml, yaml)
+]
 
 
 [lints]
