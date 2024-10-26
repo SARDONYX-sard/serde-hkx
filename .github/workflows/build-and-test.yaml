@@ -17,9 +17,9 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
-      - uses: actions/checkout@v4.1.7
+      - uses: actions/checkout@v4.2.2
       - name: Rust cache
-        uses: Swatinem/rust-cache@v2.7.3
+        uses: Swatinem/rust-cache@v2.7.5
         with:
           prefix-key: cargo-debug-${{ matrix.platform }}
 
@@ -43,9 +43,9 @@ jobs:
           - { target: x86_64-unknown-linux-gnu, os: ubuntu-latest }
     runs-on: ${{ matrix.job.os }}
     steps:
-      - uses: actions/checkout@v4.1.7
+      - uses: actions/checkout@v4.2.2
       - name: Rust cache
-        uses: Swatinem/rust-cache@v2.7.3
+        uses: Swatinem/rust-cache@v2.7.5
         with:
           prefix-key: cargo-debug-${{ matrix.job.target }}
       - name: Test
@@ -54,9 +54,9 @@ jobs:
   miri:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.1.7
+      - uses: actions/checkout@v4.2.2
       - name: Rust cache
-        uses: Swatinem/rust-cache@v2.7.3
+        uses: Swatinem/rust-cache@v2.7.5
         with:
           prefix-key: cargo-debug-miri-x86_64_unknown-linux-gnu
       - name: Install Miri
@@ -78,9 +78,9 @@ jobs:
           - { target: x86_64-unknown-linux-gnu, os: ubuntu-latest }
     runs-on: ${{ matrix.job.os }}
     steps:
-      - uses: actions/checkout@v4.1.7
+      - uses: actions/checkout@v4.2.2
       - name: Rust cache
-        uses: Swatinem/rust-cache@v2.7.3
+        uses: Swatinem/rust-cache@v2.7.5
         with:
           prefix-key: cargo-release-${{ matrix.job.target }}-extra_fmt
 
@@ -111,7 +111,7 @@ jobs:
           mv ./LICENSES.toml './build'
 
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v4.4.0
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: serde-hkx-cli-${{ matrix.job.target }}
           path: ./build/
@@ -126,9 +126,9 @@ jobs:
           - { target: x86_64-unknown-linux-gnu, os: ubuntu-latest }
     runs-on: ${{ matrix.job.os }}
     steps:
-      - uses: actions/checkout@v4.1.7
+      - uses: actions/checkout@v4.2.2
       - name: Rust cache
-        uses: Swatinem/rust-cache@v2.7.3
+        uses: Swatinem/rust-cache@v2.7.5
         with:
           prefix-key: cargo-release-${{ matrix.job.target }}-extra
 
@@ -159,7 +159,7 @@ jobs:
           mv ./LICENSES.toml './build'
 
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v4.4.0
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: serde-hkx-cli-${{ matrix.job.target }}-extra_fmt
           path: ./build/
