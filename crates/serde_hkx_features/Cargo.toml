@@ -22,7 +22,7 @@ jwalk = { workspace = true }                                          # To enuma
 parse-display = { workspace = true }                                  # Display derive
 similar = { workspace = true }                                        # Create diff
 snafu = { workspace = true }                                          # Define all error patterns(with backtrace)
-tokio = { workspace = true, features = ["fs"] }
+tokio = { workspace = true, features = ["fs", "rt"] }
 tracing = { workspace = true, optional = true }
 
 # serde ext

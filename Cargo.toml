@@ -27,26 +27,28 @@ default-members = ["crates/cli"]
 resolver = "2"
 
 [workspace.dependencies]
-bitflags = "2.6.0"                                             # To generate flags type
-color-print = "0.3.6"                                          # To color example help
-educe = "0.6.0"                                                # Custom derive by derive
-indexmap = "2.5.0"                                             # Ordering HashMap
-jwalk = { version = "0.8" }                                    # To enumarate json class files
-num-derive = "0.4"                                             # To serialize Enum & Flags
-num-traits = "0.2.19"                                          # To serialize Enum & Flags
-parse-display = "0.10.0"                                       # Display derive
+bitflags = "2.6.0" # To generate flags type
+color-print = "0.3.6" # To color example help
+educe = "0.6.0" # Custom derive by derive
+indexmap = "2.6.0" # Ordering HashMap
+jwalk = { version = "0.8" } # To enumarate json class files
+num-derive = "0.4" # To serialize Enum & Flags
+num-traits = "0.2.19" # To serialize Enum & Flags
+parse-display = "0.10.0" # Display derive
 parse_int = { version = "0.6" }
-proc-macro2 = { version = "1.0.86", default-features = false } # Rust token
-quote = { version = "1.0.37", default-features = false }       # Rust token gen to more convinience
-serde = { version = "1.0", features = ["derive"] }             # Implement (De)Serializer
-serde_json = { version = "1.0.128" }                           # To read and write Json files
-serde_with = "3.9.0"                                           # Serde utility
-similar = "2.6.0"                                              # Create diff
-snafu = "0.8.4"                                                # Define all error patterns(with backtrace)
-static_assertions = "1.1.0"                                    # Compile tim assertions
-syn = { version = "2.0.77", default-features = false }         # Rust parser
-tokio = { version = "1.40.0" }                                 # Async runtime
-tracing = { version = "0.1.40" }                               # logger
+proc-macro2 = { version = "1.0.89", default-features = false } # Rust token
+quote = { version = "1.0.37", default-features = false } # Rust token gen to more convinience
+serde = { version = "1.0.213", features = [
+  "derive",
+] } # Implement (De)Serializer
+serde_json = { version = "1.0.132" } # To read and write Json files
+serde_with = "3.11.0" # Serde utility
+similar = "2.6.0" # Create diff
+snafu = "0.8.4" # Define all error patterns(with backtrace)
+static_assertions = "1.1.0" # Compile tim assertions
+syn = { version = "2.0.85", default-features = false } # Rust parser
+tokio = { version = "1.41.0" } # Async runtime
+tracing = { version = "0.1.40" } # logger
 
 # workspace members
 havok_classes = { path = "./crates/havok_classes" }

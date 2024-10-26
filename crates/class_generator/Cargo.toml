@@ -13,7 +13,7 @@ version.workspace = true
 
 [dependencies]
 bitflags = { workspace = true }                     # To generate flags type
-derive-new = "0.6"
+derive-new = "0.7.0"
 indexmap = { workspace = true }
 jwalk = { workspace = true }                        # To enumarate json class files
 num-derive = { workspace = true }                   # TypeKind extension
@@ -25,7 +25,7 @@ serde_with = { workspace = true }                   # Serde utility
 snafu = { workspace = true }                        # Define all error patterns(with backtrace)
 tracing = { workspace = true }                      # Logger
 
-prettyplease = "0.2.20"
+prettyplease = "0.2.25"
 proc-macro2 = { workspace = true }
 quote = { workspace = true }
 syn = { workspace = true, features = [

@@ -15,7 +15,7 @@ rust-version.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "4.5.13", features = ["derive"] } # For CLI
+clap = { version = "4.5.20", features = ["derive"] } # For CLI
 clap_complete_command = "0.6.1" # Generate auto complition
 color-print = { workspace = true } # To color example help
 parse-display = { workspace = true } # Display derive
