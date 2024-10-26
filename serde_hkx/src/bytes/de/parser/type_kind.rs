@@ -213,6 +213,7 @@ pub fn array_meta<'a>(
 mod tests {
     use super::*;
     use pretty_assertions::assert_eq;
+    use zerocopy::IntoBytes as _;
 
     #[test]
     fn test_boolean() {
@@ -224,8 +225,7 @@ mod tests {
     #[test]
     fn test_vector4() {
         assert_eq!(
-            vector4(Endianness::Little)
-                .parse(zerocopy::AsBytes::as_bytes(&[-0.0_f32, 0.0, -0.0, 1.0])),
+            vector4(Endianness::Little).parse([-0.0_f32, 0.0, -0.0, 1.0].as_bytes()),
             Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0))
         );
     }
@@ -233,11 +233,14 @@ mod tests {
     #[test]
     fn test_matrix3() {
         assert_eq!(
-            matrix3(Endianness::Little).parse(zerocopy::AsBytes::as_bytes(&[
-                0.0_f32, 0.0, 0.0, 0.0, // 1 vec4
-                -0.0, 0.0, 1.0, 0.0, // 2 vec4
-                1.0, 1.0, 0.0, 0.0, // 3 vec4
-            ])),
+            matrix3(Endianness::Little).parse(
+                [
+                    0.0_f32, 0.0, 0.0, 0.0, // 1 vec4
+                    -0.0, 0.0, 1.0, 0.0, // 2 vec4
+                    1.0, 1.0, 0.0, 0.0, // 3 vec4
+                ]
+                .as_bytes()
+            ),
             Ok(Matrix3 {
                 x: Vector4::default(),
                 y: Vector4 {

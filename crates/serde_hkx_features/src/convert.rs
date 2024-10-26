@@ -4,7 +4,7 @@ use crate::{
     fs::{write, ReadExt as _},
     serde::{deserialize, serialize_to_bytes},
 };
-use parse_display::Display;
+use parse_display::{Display, FromStr};
 use std::{
     ffi::OsStr,
     io::{self},
@@ -16,7 +16,7 @@ use std::{
 /// # Default
 /// `Amd64`
 #[cfg_attr(feature = "clap", derive(clap::ValueEnum))]
-#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display, FromStr)]
 #[display(style = "camelCase")]
 #[non_exhaustive]
 pub enum OutFormat {
@@ -38,11 +38,17 @@ pub enum OutFormat {
 
 impl OutFormat {
     /// Return the file extension corresponding to the format.
-    /// - `Self::Amd64` -> `hkx`
-    /// - `Self::Win32` -> `hkx`
-    /// - `Self::Xml` -> `xml`,
+    ///
+    /// # Examples
+    /// ```edition2021
+    /// use serde_hkx_features::convert::OutFormat;
+    ///
+    /// assert_eq!(OutFormat::Amd64.as_extension(), "hkx");
+    /// assert_eq!(OutFormat::Win32.as_extension(), "hkx");
+    /// assert_eq!(OutFormat::Xml.as_extension(), "xml");
+    /// ```
     #[inline]
-    const fn as_extension(&self) -> &str {
+    pub const fn as_extension(&self) -> &str {
         match *self {
             Self::Amd64 => "hkx",
             Self::Win32 => "hkx",
@@ -56,8 +62,14 @@ impl OutFormat {
     }
 
     /// Return output format from input path.
-    /// - `hkx` -> `Self::Xml`
-    /// - `xml` -> `Self::Amd64`
+    ///
+    /// # Examples
+    /// ```edition2021
+    /// use serde_hkx_features::convert::OutFormat;
+    ///
+    /// assert_eq!(OutFormat::from_input("example.hkx").unwrap(), OutFormat::Xml);
+    /// assert_eq!(OutFormat::from_input("example.xml").unwrap(), OutFormat::Amd64);
+    /// ```
     ///
     /// When enable `extra_fmt` feature.
     /// - `json`, `yaml` -> `Self::Amd64`
@@ -93,8 +105,14 @@ impl OutFormat {
     }
 
     /// Determine format from extension.
-    /// - `hkx` -> `Self::Amd64`
-    /// - `xml` -> `Self::Xml`
+    ///
+    /// # Examples
+    /// ```edition2021
+    /// use serde_hkx_features::convert::OutFormat;
+    ///
+    /// assert_eq!(OutFormat::from_extension("hkx").unwrap(), OutFormat::Amd64);
+    /// assert_eq!(OutFormat::from_extension("xml").unwrap(), OutFormat::Xml);
+    /// ```
     ///
     /// When enable `extra_fmt` feature.
     /// - `json` -> `Self::Json`
@@ -103,7 +121,11 @@ impl OutFormat {
     /// # Errors
     /// Unknown extension.
     #[inline]
-    pub fn from_extension(ext: &OsStr) -> Result<Self> {
+    pub fn from_extension<S>(ext: S) -> Result<Self>
+    where
+        S: AsRef<OsStr>,
+    {
+        let ext = ext.as_ref();
         Ok(match ext {
             ext if ext.eq_ignore_ascii_case("hkx") => Self::Amd64,
             ext if ext.eq_ignore_ascii_case("xml") => Self::Xml,
@@ -174,14 +196,19 @@ where
         // Convert only if there is a supported extension.
         if let Some(ext) = input.extension() {
             if OutFormat::from_extension(ext).is_err() {
+                #[cfg(feature = "tracing")]
+                tracing::info!(
+                    "Skip this extension as it is not `.hkx` or `.xml`: {}",
+                    input.display()
+                );
                 continue;
             };
 
-            // If output_dir is specified, make it the root dir to maintain the hierarchy and output.
+            // If `out_dir` is specified, join the internal dirs of `input_dir` with it as root.
             let output = match output_dir.as_ref() {
                 Some(output_dir) => {
-                    let relative_path = input.strip_prefix(input_dir)?;
-                    let mut output = output_dir.as_ref().join(relative_path);
+                    let input_inner_dir = input.strip_prefix(input_dir)?;
+                    let mut output = output_dir.as_ref().join(input_inner_dir);
                     output.set_extension(format.as_extension());
                     Some(output)
                 }

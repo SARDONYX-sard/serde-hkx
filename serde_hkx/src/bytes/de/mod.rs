@@ -814,6 +814,7 @@ mod tests {
     use crate::tests::ClassMap;
     use havok_classes::{hkBaseObject, hkClassMember_::FlagValues, hkReferencedObject, EventMode};
     use pretty_assertions::assert_eq;
+    use zerocopy::IntoBytes as _;
 
     fn partial_parse_assert<'a, T>(s: BytesStream<'a>, expected: T)
     where
@@ -839,9 +840,10 @@ mod tests {
         partial_parse_assert::<[char; 0]>(b"", []);
         partial_parse_assert(&[1, 0], [true, false]);
         partial_parse_assert(
-            zerocopy::AsBytes::as_bytes(&[
+            [
                 0_u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-            ]),
+            ]
+            .as_bytes(),
             [
                 0_u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             ],
@@ -857,11 +859,12 @@ mod tests {
             Vector4 { x: -0.0, y: 0.0, z: -0.0, w: 1.0, },
         ];
         partial_parse_assert(
-            zerocopy::AsBytes::as_bytes(&[
+            [
                 -0.0_f32, 0.0, -0.0, 1.0, // 1 vec4
                 0.0, 0.0, -0.0, 1.0, // 2 vec4
                 -0.0, 0.0, -0.0, 1.0, // 3 vec4
-            ]),
+            ]
+            .as_bytes(),
             expected,
         );
     }

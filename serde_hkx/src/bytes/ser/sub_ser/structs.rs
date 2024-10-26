@@ -20,8 +20,8 @@ impl<'a> StructSerializer<'a> {
         Self { ser, is_root }
     }
 
-    /// Common processing of fixed_array(e.g. `[bool; 3]`) and array(`hkArray`).
-    fn serialize_array_common<V, T>(
+    /// processing of array(`hkArray`).
+    fn serialize_array_inner<V, T>(
         &mut self,
         array: V,
         size: TypeSize,
@@ -255,7 +255,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
     /// That is, ptr(x86: 12bytes, x64: 16bytes).
     fn serialize_array_field<V, T>(
         &mut self,
-        key: &'static str,
+        _key: &'static str,
         value: V,
         size: TypeSize,
     ) -> Result<()>
@@ -265,7 +265,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
     {
         #[cfg(feature = "tracing")]
         tracing::trace!(
-            "serialize Array field({:#x}): {key}",
+            "serialize Array field({:#x}): {_key}",
             self.ser.output.position()
         );
 
@@ -278,7 +278,7 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
         if len == 0 {
             return Ok(());
         }
-        self.serialize_array_common(value, size, local_src)
+        self.serialize_array_inner(value, size, local_src)
     }
 
     #[inline]
