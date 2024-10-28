@@ -150,7 +150,12 @@ pub struct ByteSerializer {
 
     // ---- local fixup information
     /// The position to which the pointer returns after writing the end of the pointer.
+    /// Holds positional information for writing the destination of the nested array pointers in the field,
+    /// where the Nth element means N hierarchically nested.
+    /// - Example: `u32` <- `ClassB.b: u32` <- `ClassA.a: Array<ClassB>` <- `Array<ClassA>`
     pointed_pos: Vec<u64>,
+    /// each Root class ptr pointed data position.
+    current_last_pos: u64,
     /// Coordination information to associate a pointer of a pointer type of a field in a class with the data location to which it points.
     ///
     /// # Note
@@ -197,10 +202,6 @@ pub struct ByteSerializer {
     ///
     /// It is usually `0` and refers to the index of `__classnames__`.
     contents_class_name_section_index: i32,
-
-    // ----------------------------------------------------------------
-    /// each Root class ptr pointed data position.
-    current_last_pos: u64,
 }
 
 impl ByteSerializer {
