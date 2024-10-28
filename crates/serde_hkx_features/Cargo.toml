@@ -15,7 +15,7 @@ rust-version.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "4.5.13", features = ["derive"], optional = true } # For CLI
+clap = { version = "4.5.20", features = ["derive"], optional = true } # For CLI
 encoding_rs_io = "0.1.7"                                              # Read any string
 indexmap = { workspace = true }                                       # Ordering HashMap
 jwalk = { workspace = true }                                          # To enumarate json class files
@@ -27,7 +27,7 @@ tracing = { workspace = true, optional = true }
 
 # serde ext
 serde_yml = { version = "0.0.12", optional = true }
-simd-json = { version = "0.14.0-rc.3", optional = true } # NOTE: unstalbe https://github.com/simd-lite/simd-json/issues/391
+simd-json = { version = "0.14.2", optional = true }
 
 # workspace members
 havok_classes = { workspace = true, features = ["ignore_duplicates"] }

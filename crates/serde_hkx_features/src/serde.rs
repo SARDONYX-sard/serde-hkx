@@ -19,7 +19,7 @@ use std::{io::Read, path::Path};
 /// If the information required for serialization is missing.
 ///
 /// See `serde_hkx::errors::ser::Error` for possible errors that may occur.
-pub async fn serialize_to_bytes<I>(
+pub fn serialize_to_bytes<I>(
     input: I,
     format: OutFormat,
     classes: &mut ClassMap<'_>,
@@ -119,7 +119,7 @@ where
                             input: input.to_path_buf(),
                         })?,
                     #[cfg(feature = "extra_fmt")]
-                    OutFormat::Yaml => serde_yml::from_str(&string).context(YamlSnafu {
+                    OutFormat::Yaml => serde_yml::from_str(string).context(YamlSnafu {
                         input: input.to_path_buf(),
                     })?,
                     _ => unreachable!(),

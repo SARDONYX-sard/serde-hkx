@@ -243,6 +243,6 @@ where
     let in_bytes = input.read_bytes().await?;
     let mut string = String::new(); // To avoid ownership errors, declare it here, but since it is a 0-allocation, there is no problem.
     let mut classes = deserialize(&in_bytes, &mut string, input)?;
-    let out_bytes = serialize_to_bytes(input, format, &mut classes).await?;
+    let out_bytes = serialize_to_bytes(input, format, &mut classes)?;
     Ok(write(input, output, format.as_extension(), out_bytes).await?)
 }
