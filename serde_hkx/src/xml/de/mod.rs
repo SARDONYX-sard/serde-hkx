@@ -552,7 +552,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    // use crate::mocks::{classes::*, enums::EventMode, flags::FlagValues};
+    use crate::tests::ClassMap;
     use pretty_assertions::assert_eq;
 
     fn partial_parse_assert<'a, T>(s: &'a str, expected: T)
@@ -754,7 +754,7 @@ mod tests {
         let xml = include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
         tracing::debug!("{:#?}", from_file::<Vec<Classes>>(xml));
 
-        let actual = from_file::<indexmap::IndexMap<usize, Classes>>(xml);
+        let actual = from_file::<ClassMap>(xml);
         let expected = new_defaultmale();
         assert_eq!(actual, expected);
     }
