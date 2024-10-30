@@ -17,41 +17,52 @@ pub struct hkMultipleVertexBufferLockedElement {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `vertexBufferIndex`(ctype: `hkUint8`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexBufferIndex"))]
     pub m_vertexBufferIndex: u8,
     /// # C++ Info
     /// - name: `elementIndex`(ctype: `hkUint8`)
     /// - offset: `  1`(x86)/`  1`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "elementIndex"))]
     pub m_elementIndex: u8,
     /// # C++ Info
     /// - name: `lockedBufferIndex`(ctype: `hkUint8`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lockedBufferIndex"))]
     pub m_lockedBufferIndex: u8,
     /// # C++ Info
     /// - name: `vertexFormatIndex`(ctype: `hkUint8`)
     /// - offset: `  3`(x86)/`  3`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexFormatIndex"))]
     pub m_vertexFormatIndex: u8,
     /// # C++ Info
     /// - name: `lockFlags`(ctype: `hkUint8`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lockFlags"))]
     pub m_lockFlags: u8,
     /// # C++ Info
     /// - name: `outputBufferIndex`(ctype: `hkUint8`)
     /// - offset: `  5`(x86)/`  5`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "outputBufferIndex"))]
     pub m_outputBufferIndex: u8,
     /// # C++ Info
     /// - name: `emulatedIndex`(ctype: `hkInt8`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "emulatedIndex"))]
     pub m_emulatedIndex: i8,
 }
 const _: () = {

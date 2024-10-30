@@ -17,11 +17,16 @@ pub struct hkbEventInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags Flags`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: Flags,
 }
 const _: () = {

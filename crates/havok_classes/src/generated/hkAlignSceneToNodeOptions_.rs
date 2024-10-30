@@ -17,53 +17,67 @@ pub struct hkAlignSceneToNodeOptions<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `invert`(ctype: `hkBool`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "invert"))]
     pub m_invert: bool,
     /// # C++ Info
     /// - name: `transformPositionX`(ctype: `hkBool`)
     /// - offset: `  9`(x86)/` 17`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transformPositionX"))]
     pub m_transformPositionX: bool,
     /// # C++ Info
     /// - name: `transformPositionY`(ctype: `hkBool`)
     /// - offset: ` 10`(x86)/` 18`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transformPositionY"))]
     pub m_transformPositionY: bool,
     /// # C++ Info
     /// - name: `transformPositionZ`(ctype: `hkBool`)
     /// - offset: ` 11`(x86)/` 19`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transformPositionZ"))]
     pub m_transformPositionZ: bool,
     /// # C++ Info
     /// - name: `transformRotation`(ctype: `hkBool`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transformRotation"))]
     pub m_transformRotation: bool,
     /// # C++ Info
     /// - name: `transformScale`(ctype: `hkBool`)
     /// - offset: ` 13`(x86)/` 21`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transformScale"))]
     pub m_transformScale: bool,
     /// # C++ Info
     /// - name: `transformSkew`(ctype: `hkBool`)
     /// - offset: ` 14`(x86)/` 22`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transformSkew"))]
     pub m_transformSkew: bool,
     /// # C++ Info
     /// - name: `keyframe`(ctype: `hkInt32`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "keyframe"))]
     pub m_keyframe: i32,
     /// # C++ Info
     /// - name: `nodeName`(ctype: `hkStringPtr`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nodeName"))]
     pub m_nodeName: StringPtr<'a>,
 }
 const _: () = {

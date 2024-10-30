@@ -17,54 +17,68 @@ pub struct hkbProjectStringData<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `animationFilenames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "animationFilenames"))]
     pub m_animationFilenames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `behaviorFilenames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "behaviorFilenames"))]
     pub m_behaviorFilenames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `characterFilenames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "characterFilenames"))]
     pub m_characterFilenames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `eventNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "eventNames"))]
     pub m_eventNames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `animationPath`(ctype: `hkStringPtr`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "animationPath"))]
     pub m_animationPath: StringPtr<'a>,
     /// # C++ Info
     /// - name: `behaviorPath`(ctype: `hkStringPtr`)
     /// - offset: ` 60`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "behaviorPath"))]
     pub m_behaviorPath: StringPtr<'a>,
     /// # C++ Info
     /// - name: `characterPath`(ctype: `hkStringPtr`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "characterPath"))]
     pub m_characterPath: StringPtr<'a>,
     /// # C++ Info
     /// - name: `fullPathToSource`(ctype: `hkStringPtr`)
     /// - offset: ` 68`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "fullPathToSource"))]
     pub m_fullPathToSource: StringPtr<'a>,
     /// # C++ Info
     /// - name: `rootPath`(ctype: `hkStringPtr`)
     /// - offset: ` 72`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "rootPath"))]
     pub m_rootPath: StringPtr<'a>,
 }
 const _: () = {

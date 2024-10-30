@@ -17,25 +17,33 @@ pub struct hkpAabbPhantom<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpPhantom<'a>,
     /// # C++ Info
     /// - name: `aabb`(ctype: `struct hkAabb`)
     /// - offset: `176`(x86)/`240`(x86_64)
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "aabb"))]
     pub m_aabb: hkAabb,
     /// # C++ Info
     /// - name: `overlappingCollidables`(ctype: `hkArray<void*>`)
     /// - offset: `208`(x86)/`272`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "overlappingCollidables"))]
     pub m_overlappingCollidables: Vec<Pointer>,
     /// # C++ Info
     /// - name: `orderDirty`(ctype: `hkBool`)
     /// - offset: `220`(x86)/`288`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "orderDirty"))]
     pub m_orderDirty: bool,
 }
 const _: () = {

@@ -17,36 +17,46 @@ pub struct hkTrackerSerializableScanSnapshotBlock {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `typeIndex`(ctype: `hkInt32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "typeIndex"))]
     pub m_typeIndex: i32,
     /// # C++ Info
     /// - name: `start`(ctype: `hkUlong`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "start"))]
     pub m_start: Ulong,
     /// # C++ Info
     /// - name: `size`(ctype: `hkUlong`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "size"))]
     pub m_size: Ulong,
     /// # C++ Info
     /// - name: `arraySize`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "arraySize"))]
     pub m_arraySize: i32,
     /// # C++ Info
     /// - name: `startReferenceIndex`(ctype: `hkInt32`)
     /// - offset: ` 16`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "startReferenceIndex"))]
     pub m_startReferenceIndex: i32,
     /// # C++ Info
     /// - name: `numReferences`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numReferences"))]
     pub m_numReferences: i32,
 }
 const _: () = {

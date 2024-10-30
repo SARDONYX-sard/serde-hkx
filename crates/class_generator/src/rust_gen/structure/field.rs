@@ -53,6 +53,7 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
     quote! {
         #doc
         #default_attr
+        #[cfg_attr(feature = "serde", serde(rename = #name))]
         pub #field_name: #field_type
     }
 }

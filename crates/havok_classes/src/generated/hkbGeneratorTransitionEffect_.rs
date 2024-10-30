@@ -17,100 +17,121 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbTransitionEffect<'a>,
     /// # C++ Info
     /// - name: `transitionGenerator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transitionGenerator"))]
     pub m_transitionGenerator: Pointer,
     /// # C++ Info
     /// - name: `blendInDuration`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blendInDuration"))]
     pub m_blendInDuration: f32,
     /// # C++ Info
     /// - name: `blendOutDuration`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blendOutDuration"))]
     pub m_blendOutDuration: f32,
     /// # C++ Info
     /// - name: `syncToGeneratorStartTime`(ctype: `hkBool`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "syncToGeneratorStartTime"))]
     pub m_syncToGeneratorStartTime: bool,
     /// # C++ Info
     /// - name: `fromGenerator`(ctype: `void*`)
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "fromGenerator"))]
     pub m_fromGenerator: Pointer,
     /// # C++ Info
     /// - name: `toGenerator`(ctype: `void*`)
     /// - offset: ` 64`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "toGenerator"))]
     pub m_toGenerator: Pointer,
     /// # C++ Info
     /// - name: `timeInTransition`(ctype: `hkReal`)
     /// - offset: ` 68`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "timeInTransition"))]
     pub m_timeInTransition: f32,
     /// # C++ Info
     /// - name: `duration`(ctype: `hkReal`)
     /// - offset: ` 72`(x86)/`124`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "duration"))]
     pub m_duration: f32,
     /// # C++ Info
     /// - name: `effectiveBlendInDuration`(ctype: `hkReal`)
     /// - offset: ` 76`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "effectiveBlendInDuration"))]
     pub m_effectiveBlendInDuration: f32,
     /// # C++ Info
     /// - name: `effectiveBlendOutDuration`(ctype: `hkReal`)
     /// - offset: ` 80`(x86)/`132`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "effectiveBlendOutDuration"))]
     pub m_effectiveBlendOutDuration: f32,
     /// # C++ Info
     /// - name: `toGeneratorState`(ctype: `enum unknown`)
     /// - offset: ` 84`(x86)/`136`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "toGeneratorState"))]
     pub m_toGeneratorState: i8,
     /// # C++ Info
     /// - name: `echoTransitionGenerator`(ctype: `hkBool`)
     /// - offset: ` 85`(x86)/`137`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "echoTransitionGenerator"))]
     pub m_echoTransitionGenerator: bool,
     /// # C++ Info
     /// - name: `echoToGenerator`(ctype: `hkBool`)
     /// - offset: ` 86`(x86)/`138`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "echoToGenerator"))]
     pub m_echoToGenerator: bool,
     /// # C++ Info
     /// - name: `justActivated`(ctype: `hkBool`)
     /// - offset: ` 87`(x86)/`139`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "justActivated"))]
     pub m_justActivated: bool,
     /// # C++ Info
     /// - name: `updateActiveNodes`(ctype: `hkBool`)
     /// - offset: ` 88`(x86)/`140`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "updateActiveNodes"))]
     pub m_updateActiveNodes: bool,
     /// # C++ Info
     /// - name: `stage`(ctype: `enum unknown`)
     /// - offset: ` 89`(x86)/`141`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "stage"))]
     pub m_stage: i8,
 }
 const _: () = {

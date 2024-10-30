@@ -17,31 +17,40 @@ pub struct hkbCharacterControllerControlData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `desiredVelocity`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "desiredVelocity"))]
     pub m_desiredVelocity: Vector4,
     /// # C++ Info
     /// - name: `verticalGain`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "verticalGain"))]
     pub m_verticalGain: f32,
     /// # C++ Info
     /// - name: `horizontalCatchUpGain`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "horizontalCatchUpGain"))]
     pub m_horizontalCatchUpGain: f32,
     /// # C++ Info
     /// - name: `maxVerticalSeparation`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxVerticalSeparation"))]
     pub m_maxVerticalSeparation: f32,
     /// # C++ Info
     /// - name: `maxHorizontalSeparation`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxHorizontalSeparation"))]
     pub m_maxHorizontalSeparation: f32,
 }
 const _: () = {

@@ -17,16 +17,22 @@ pub struct hkBitField {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `words`(ctype: `hkArray<hkUint32>`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "words"))]
     pub m_words: Vec<u32>,
     /// # C++ Info
     /// - name: `numBits`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numBits"))]
     pub m_numBits: i32,
 }
 const _: () = {

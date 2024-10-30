@@ -17,19 +17,26 @@ pub struct hkpVehicleWheelCollide {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `alreadyUsed`(ctype: `hkBool`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "alreadyUsed"))]
     pub m_alreadyUsed: bool,
     /// # C++ Info
     /// - name: `type`(ctype: `enum unknown`)
     /// - offset: `  9`(x86)/` 17`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "type"))]
     pub m_type: u8,
 }
 const _: () = {

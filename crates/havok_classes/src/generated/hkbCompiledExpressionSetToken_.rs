@@ -17,21 +17,28 @@ pub struct hkbCompiledExpressionSetToken {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `data`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "data"))]
     pub m_data: f32,
     /// # C++ Info
     /// - name: `type`(ctype: `enum TokenType`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "type"))]
     pub m_type: TokenType,
     /// # C++ Info
     /// - name: `operator`(ctype: `enum Operator`)
     /// - offset: `  5`(x86)/`  5`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "operator"))]
     pub m_operator: Operator,
 }
 const _: () = {

@@ -17,26 +17,34 @@ pub struct hkbKeyframeBonesModifierKeyframeInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `keyframedPosition`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "keyframedPosition"))]
     pub m_keyframedPosition: Vector4,
     /// # C++ Info
     /// - name: `keyframedRotation`(ctype: `hkQuaternion`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "keyframedRotation"))]
     pub m_keyframedRotation: Quaternion,
     /// # C++ Info
     /// - name: `boneIndex`(ctype: `hkInt16`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "boneIndex"))]
     pub m_boneIndex: i16,
     /// # C++ Info
     /// - name: `isValid`(ctype: `hkBool`)
     /// - offset: ` 34`(x86)/` 34`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isValid"))]
     pub m_isValid: bool,
 }
 const _: () = {

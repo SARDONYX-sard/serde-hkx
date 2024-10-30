@@ -17,30 +17,39 @@ pub struct BSRagdollContactListenerModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `contactEvent`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "contactEvent"))]
     pub m_contactEvent: hkbEventProperty,
     /// # C++ Info
     /// - name: `bones`(ctype: `struct hkbBoneIndexArray*`)
     /// - offset: ` 56`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bones"))]
     pub m_bones: Pointer,
     /// # C++ Info
     /// - name: `throwEvent`(ctype: `hkBool`)
     /// - offset: ` 60`(x86)/`112`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "throwEvent"))]
     pub m_throwEvent: bool,
     /// # C++ Info
     /// - name: `ragdollRigidBodies`(ctype: `hkArray<void*>`)
     /// - offset: ` 64`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "ragdollRigidBodies"))]
     pub m_ragdollRigidBodies: Vec<Pointer>,
 }
 const _: () = {

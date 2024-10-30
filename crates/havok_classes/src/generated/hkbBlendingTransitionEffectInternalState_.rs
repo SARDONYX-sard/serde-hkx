@@ -17,33 +17,46 @@ pub struct hkbBlendingTransitionEffectInternalState {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `characterPoseAtBeginningOfTransition`(ctype: `hkArray<hkQsTransform>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(
+        feature = "serde",
+        serde(rename = "characterPoseAtBeginningOfTransition")
+    )]
     pub m_characterPoseAtBeginningOfTransition: Vec<QsTransform>,
     /// # C++ Info
     /// - name: `timeRemaining`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "timeRemaining"))]
     pub m_timeRemaining: f32,
     /// # C++ Info
     /// - name: `timeInTransition`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "timeInTransition"))]
     pub m_timeInTransition: f32,
     /// # C++ Info
     /// - name: `applySelfTransition`(ctype: `hkBool`)
     /// - offset: ` 28`(x86)/` 40`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "applySelfTransition"))]
     pub m_applySelfTransition: bool,
     /// # C++ Info
     /// - name: `initializeCharacterPose`(ctype: `hkBool`)
     /// - offset: ` 29`(x86)/` 41`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "initializeCharacterPose"))]
     pub m_initializeCharacterPose: bool,
 }
 const _: () = {

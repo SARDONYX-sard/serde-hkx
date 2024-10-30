@@ -17,91 +17,111 @@ pub struct hkbSequence<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `eventSequencedData`(ctype: `hkArray<hkbEventSequencedData*>`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "eventSequencedData"))]
     pub m_eventSequencedData: Vec<Pointer>,
     /// # C++ Info
     /// - name: `realVariableSequencedData`(ctype: `hkArray<hkbRealVariableSequencedData*>`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "realVariableSequencedData"))]
     pub m_realVariableSequencedData: Vec<Pointer>,
     /// # C++ Info
     /// - name: `boolVariableSequencedData`(ctype: `hkArray<hkbBoolVariableSequencedData*>`)
     /// - offset: ` 68`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "boolVariableSequencedData"))]
     pub m_boolVariableSequencedData: Vec<Pointer>,
     /// # C++ Info
     /// - name: `intVariableSequencedData`(ctype: `hkArray<hkbIntVariableSequencedData*>`)
     /// - offset: ` 80`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "intVariableSequencedData"))]
     pub m_intVariableSequencedData: Vec<Pointer>,
     /// # C++ Info
     /// - name: `enableEventId`(ctype: `hkInt32`)
     /// - offset: ` 92`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "enableEventId"))]
     pub m_enableEventId: i32,
     /// # C++ Info
     /// - name: `disableEventId`(ctype: `hkInt32`)
     /// - offset: ` 96`(x86)/`148`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "disableEventId"))]
     pub m_disableEventId: i32,
     /// # C++ Info
     /// - name: `stringData`(ctype: `struct hkbSequenceStringData*`)
     /// - offset: `100`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "stringData"))]
     pub m_stringData: Pointer,
     /// # C++ Info
     /// - name: `variableIdMap`(ctype: `void*`)
     /// - offset: `104`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "variableIdMap"))]
     pub m_variableIdMap: Pointer,
     /// # C++ Info
     /// - name: `eventIdMap`(ctype: `void*`)
     /// - offset: `108`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "eventIdMap"))]
     pub m_eventIdMap: Pointer,
     /// # C++ Info
     /// - name: `nextSampleEvents`(ctype: `hkArray<void>`)
     /// - offset: `112`(x86)/`176`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "nextSampleEvents"))]
     pub m_nextSampleEvents: Vec<()>,
     /// # C++ Info
     /// - name: `nextSampleReals`(ctype: `hkArray<void>`)
     /// - offset: `124`(x86)/`192`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "nextSampleReals"))]
     pub m_nextSampleReals: Vec<()>,
     /// # C++ Info
     /// - name: `nextSampleBools`(ctype: `hkArray<void>`)
     /// - offset: `136`(x86)/`208`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "nextSampleBools"))]
     pub m_nextSampleBools: Vec<()>,
     /// # C++ Info
     /// - name: `nextSampleInts`(ctype: `hkArray<void>`)
     /// - offset: `148`(x86)/`224`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "nextSampleInts"))]
     pub m_nextSampleInts: Vec<()>,
     /// # C++ Info
     /// - name: `time`(ctype: `hkReal`)
     /// - offset: `160`(x86)/`240`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "time"))]
     pub m_time: f32,
     /// # C++ Info
     /// - name: `isEnabled`(ctype: `hkBool`)
     /// - offset: `164`(x86)/`244`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "isEnabled"))]
     pub m_isEnabled: bool,
 }
 const _: () = {

@@ -17,52 +17,65 @@ pub struct hkClassMember<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `name`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: CString<'a>,
     /// # C++ Info
     /// - name: `class`(ctype: `struct hkClass*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "class"))]
     pub m_class: Pointer,
     /// # C++ Info
     /// - name: `enum`(ctype: `struct hkClassEnum*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "enum"))]
     pub m_enum: Pointer,
     /// # C++ Info
     /// - name: `type`(ctype: `enum Type`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "type"))]
     pub m_type: Type,
     /// # C++ Info
     /// - name: `subtype`(ctype: `enum Type`)
     /// - offset: ` 13`(x86)/` 25`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "subtype"))]
     pub m_subtype: Type,
     /// # C++ Info
     /// - name: `cArraySize`(ctype: `hkInt16`)
     /// - offset: ` 14`(x86)/` 26`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "cArraySize"))]
     pub m_cArraySize: i16,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags FlagValues`)
     /// - offset: ` 16`(x86)/` 28`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: FlagValues,
     /// # C++ Info
     /// - name: `offset`(ctype: `hkUint16`)
     /// - offset: ` 18`(x86)/` 30`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "offset"))]
     pub m_offset: u16,
     /// # C++ Info
     /// - name: `attributes`(ctype: `struct hkCustomAttributes*`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "attributes"))]
     pub m_attributes: Pointer,
 }
 const _: () = {

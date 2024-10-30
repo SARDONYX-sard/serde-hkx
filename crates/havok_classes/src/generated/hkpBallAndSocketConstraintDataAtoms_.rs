@@ -17,21 +17,28 @@ pub struct hkpBallAndSocketConstraintDataAtoms {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `pivots`(ctype: `struct hkpSetLocalTranslationsConstraintAtom`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "pivots"))]
     pub m_pivots: hkpSetLocalTranslationsConstraintAtom,
     /// # C++ Info
     /// - name: `setupStabilization`(ctype: `struct hkpSetupStabilizationAtom`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "setupStabilization"))]
     pub m_setupStabilization: hkpSetupStabilizationAtom,
     /// # C++ Info
     /// - name: `ballSocket`(ctype: `struct hkpBallSocketConstraintAtom`)
     /// - offset: ` 64`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "ballSocket"))]
     pub m_ballSocket: hkpBallSocketConstraintAtom,
 }
 const _: () = {

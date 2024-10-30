@@ -17,28 +17,37 @@ pub struct hkbExtractRagdollPoseModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `poseMatchingBone0`(ctype: `hkInt16`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone0"))]
     pub m_poseMatchingBone0: i16,
     /// # C++ Info
     /// - name: `poseMatchingBone1`(ctype: `hkInt16`)
     /// - offset: ` 46`(x86)/` 82`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone1"))]
     pub m_poseMatchingBone1: i16,
     /// # C++ Info
     /// - name: `poseMatchingBone2`(ctype: `hkInt16`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone2"))]
     pub m_poseMatchingBone2: i16,
     /// # C++ Info
     /// - name: `enableComputeWorldFromModel`(ctype: `hkBool`)
     /// - offset: ` 50`(x86)/` 86`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "enableComputeWorldFromModel"))]
     pub m_enableComputeWorldFromModel: bool,
 }
 const _: () = {

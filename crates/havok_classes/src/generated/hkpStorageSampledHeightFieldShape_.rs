@@ -17,18 +17,25 @@ pub struct hkpStorageSampledHeightFieldShape {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpSampledHeightFieldShape,
     /// # C++ Info
     /// - name: `storage`(ctype: `hkArray<hkReal>`)
     /// - offset: ` 96`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "storage"))]
     pub m_storage: Vec<f32>,
     /// # C++ Info
     /// - name: `triangleFlip`(ctype: `hkBool`)
     /// - offset: `108`(x86)/`128`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "triangleFlip"))]
     pub m_triangleFlip: bool,
 }
 const _: () = {

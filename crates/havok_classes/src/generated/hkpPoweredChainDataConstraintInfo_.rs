@@ -17,36 +17,46 @@ pub struct hkpPoweredChainDataConstraintInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `pivotInA`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "pivotInA"))]
     pub m_pivotInA: Vector4,
     /// # C++ Info
     /// - name: `pivotInB`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "pivotInB"))]
     pub m_pivotInB: Vector4,
     /// # C++ Info
     /// - name: `aTc`(ctype: `hkQuaternion`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "aTc"))]
     pub m_aTc: Quaternion,
     /// # C++ Info
     /// - name: `bTc`(ctype: `hkQuaternion`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bTc"))]
     pub m_bTc: Quaternion,
     /// # C++ Info
     /// - name: `motors`(ctype: `struct hkpConstraintMotor*`)
     /// - offset: ` 64`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "motors"))]
     pub m_motors: [Pointer; 3usize],
     /// # C++ Info
     /// - name: `switchBodies`(ctype: `hkBool`)
     /// - offset: ` 76`(x86)/` 88`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "switchBodies"))]
     pub m_switchBodies: bool,
 }
 const _: () = {

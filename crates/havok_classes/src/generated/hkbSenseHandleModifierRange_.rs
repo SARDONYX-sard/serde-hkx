@@ -17,26 +17,34 @@ pub struct hkbSenseHandleModifierRange {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `event`(ctype: `struct hkbEventProperty`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "event"))]
     pub m_event: hkbEventProperty,
     /// # C++ Info
     /// - name: `minDistance`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "minDistance"))]
     pub m_minDistance: f32,
     /// # C++ Info
     /// - name: `maxDistance`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxDistance"))]
     pub m_maxDistance: f32,
     /// # C++ Info
     /// - name: `ignoreHandle`(ctype: `hkBool`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "ignoreHandle"))]
     pub m_ignoreHandle: bool,
 }
 const _: () = {

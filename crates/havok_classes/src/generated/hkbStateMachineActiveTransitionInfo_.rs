@@ -17,42 +17,53 @@ pub struct hkbStateMachineActiveTransitionInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `transitionEffect`(ctype: `void*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "transitionEffect"))]
     pub m_transitionEffect: Pointer,
     /// # C++ Info
     /// - name: `transitionEffectInternalStateInfo`(ctype: `struct hkbNodeInternalStateInfo*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transitionEffectInternalStateInfo"))]
     pub m_transitionEffectInternalStateInfo: Pointer,
     /// # C++ Info
     /// - name: `transitionInfoReference`(ctype: `struct hkbStateMachineTransitionInfoReference`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  6`(x86)/`  6`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transitionInfoReference"))]
     pub m_transitionInfoReference: hkbStateMachineTransitionInfoReference,
     /// # C++ Info
     /// - name: `transitionInfoReferenceForTE`(ctype: `struct hkbStateMachineTransitionInfoReference`)
     /// - offset: ` 14`(x86)/` 22`(x86_64)
     /// - type_size: `  6`(x86)/`  6`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transitionInfoReferenceForTE"))]
     pub m_transitionInfoReferenceForTE: hkbStateMachineTransitionInfoReference,
     /// # C++ Info
     /// - name: `fromStateId`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "fromStateId"))]
     pub m_fromStateId: i32,
     /// # C++ Info
     /// - name: `toStateId`(ctype: `hkInt32`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "toStateId"))]
     pub m_toStateId: i32,
     /// # C++ Info
     /// - name: `isReturnToPreviousState`(ctype: `hkBool`)
     /// - offset: ` 28`(x86)/` 36`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isReturnToPreviousState"))]
     pub m_isReturnToPreviousState: bool,
 }
 const _: () = {

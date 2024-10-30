@@ -17,56 +17,70 @@ pub struct hkaWaveletCompressedAnimationCompressionParams {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `quantizationBits`(ctype: `hkUint16`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "quantizationBits"))]
     pub m_quantizationBits: u16,
     /// # C++ Info
     /// - name: `blockSize`(ctype: `hkUint16`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blockSize"))]
     pub m_blockSize: u16,
     /// # C++ Info
     /// - name: `preserve`(ctype: `hkUint16`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "preserve"))]
     pub m_preserve: u16,
     /// # C++ Info
     /// - name: `truncProp`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "truncProp"))]
     pub m_truncProp: f32,
     /// # C++ Info
     /// - name: `useOldStyleTruncation`(ctype: `hkBool`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "useOldStyleTruncation"))]
     pub m_useOldStyleTruncation: bool,
     /// # C++ Info
     /// - name: `absolutePositionTolerance`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "absolutePositionTolerance"))]
     pub m_absolutePositionTolerance: f32,
     /// # C++ Info
     /// - name: `relativePositionTolerance`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "relativePositionTolerance"))]
     pub m_relativePositionTolerance: f32,
     /// # C++ Info
     /// - name: `rotationTolerance`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotationTolerance"))]
     pub m_rotationTolerance: f32,
     /// # C++ Info
     /// - name: `scaleTolerance`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "scaleTolerance"))]
     pub m_scaleTolerance: f32,
     /// # C++ Info
     /// - name: `absoluteFloatTolerance`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "absoluteFloatTolerance"))]
     pub m_absoluteFloatTolerance: f32,
 }
 const _: () = {

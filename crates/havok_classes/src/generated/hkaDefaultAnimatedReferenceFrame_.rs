@@ -17,28 +17,37 @@ pub struct hkaDefaultAnimatedReferenceFrame {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkaAnimatedReferenceFrame,
     /// # C++ Info
     /// - name: `up`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "up"))]
     pub m_up: Vector4,
     /// # C++ Info
     /// - name: `forward`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "forward"))]
     pub m_forward: Vector4,
     /// # C++ Info
     /// - name: `duration`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "duration"))]
     pub m_duration: f32,
     /// # C++ Info
     /// - name: `referenceFrameSamples`(ctype: `hkArray<hkVector4>`)
     /// - offset: ` 52`(x86)/` 56`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "referenceFrameSamples"))]
     pub m_referenceFrameSamples: Vec<Vector4>,
 }
 const _: () = {

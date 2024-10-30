@@ -17,48 +17,61 @@ pub struct hkbBlenderGeneratorInternalState {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `childrenInternalStates`(ctype: `hkArray<struct hkbBlenderGeneratorChildInternalState>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "childrenInternalStates"))]
     pub m_childrenInternalStates: Vec<hkbBlenderGeneratorChildInternalState>,
     /// # C++ Info
     /// - name: `sortedChildren`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sortedChildren"))]
     pub m_sortedChildren: Vec<i16>,
     /// # C++ Info
     /// - name: `endIntervalWeight`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "endIntervalWeight"))]
     pub m_endIntervalWeight: f32,
     /// # C++ Info
     /// - name: `numActiveChildren`(ctype: `hkInt32`)
     /// - offset: ` 36`(x86)/` 52`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numActiveChildren"))]
     pub m_numActiveChildren: i32,
     /// # C++ Info
     /// - name: `beginIntervalIndex`(ctype: `hkInt16`)
     /// - offset: ` 40`(x86)/` 56`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "beginIntervalIndex"))]
     pub m_beginIntervalIndex: i16,
     /// # C++ Info
     /// - name: `endIntervalIndex`(ctype: `hkInt16`)
     /// - offset: ` 42`(x86)/` 58`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "endIntervalIndex"))]
     pub m_endIntervalIndex: i16,
     /// # C++ Info
     /// - name: `initSync`(ctype: `hkBool`)
     /// - offset: ` 44`(x86)/` 60`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "initSync"))]
     pub m_initSync: bool,
     /// # C++ Info
     /// - name: `doSubtractiveBlend`(ctype: `hkBool`)
     /// - offset: ` 45`(x86)/` 61`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "doSubtractiveBlend"))]
     pub m_doSubtractiveBlend: bool,
 }
 const _: () = {

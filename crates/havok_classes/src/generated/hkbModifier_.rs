@@ -17,19 +17,26 @@ pub struct hkbModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbNode<'a>,
     /// # C++ Info
     /// - name: `enable`(ctype: `hkBool`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "enable"))]
     pub m_enable: bool,
     /// # C++ Info
     /// - name: `padModifier`(ctype: `hkBool[3]`)
     /// - offset: ` 41`(x86)/` 73`(x86_64)
     /// - type_size: `  3`(x86)/`  3`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "padModifier"))]
     pub m_padModifier: [bool; 3usize],
 }
 const _: () = {

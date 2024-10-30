@@ -17,38 +17,48 @@ pub struct hkbExpressionData<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `expression`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "expression"))]
     pub m_expression: StringPtr<'a>,
     /// # C++ Info
     /// - name: `assignmentVariableIndex`(ctype: `hkInt32`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "assignmentVariableIndex"))]
     pub m_assignmentVariableIndex: i32,
     /// # C++ Info
     /// - name: `assignmentEventIndex`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "assignmentEventIndex"))]
     pub m_assignmentEventIndex: i32,
     /// # C++ Info
     /// - name: `eventMode`(ctype: `enum ExpressionEventMode`)
     /// - offset: ` 12`(x86)/` 16`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "eventMode"))]
     pub m_eventMode: ExpressionEventMode,
     /// # C++ Info
     /// - name: `raisedEvent`(ctype: `hkBool`)
     /// - offset: ` 13`(x86)/` 17`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "raisedEvent"))]
     pub m_raisedEvent: bool,
     /// # C++ Info
     /// - name: `wasTrueInPreviousFrame`(ctype: `hkBool`)
     /// - offset: ` 14`(x86)/` 18`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "wasTrueInPreviousFrame"))]
     pub m_wasTrueInPreviousFrame: bool,
 }
 const _: () = {

@@ -17,18 +17,25 @@ pub struct hkpBvShape {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpShape,
     /// # C++ Info
     /// - name: `boundingVolumeShape`(ctype: `struct hkpShape*`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "boundingVolumeShape"))]
     pub m_boundingVolumeShape: Pointer,
     /// # C++ Info
     /// - name: `childShape`(ctype: `struct hkpSingleShapeContainer`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "childShape"))]
     pub m_childShape: hkpSingleShapeContainer,
 }
 const _: () = {

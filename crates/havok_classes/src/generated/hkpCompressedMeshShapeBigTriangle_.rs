@@ -17,36 +17,46 @@ pub struct hkpCompressedMeshShapeBigTriangle {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `a`(ctype: `hkUint16`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "a"))]
     pub m_a: u16,
     /// # C++ Info
     /// - name: `b`(ctype: `hkUint16`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "b"))]
     pub m_b: u16,
     /// # C++ Info
     /// - name: `c`(ctype: `hkUint16`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "c"))]
     pub m_c: u16,
     /// # C++ Info
     /// - name: `material`(ctype: `hkUint32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "material"))]
     pub m_material: u32,
     /// # C++ Info
     /// - name: `weldingInfo`(ctype: `hkUint16`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "weldingInfo"))]
     pub m_weldingInfo: u16,
     /// # C++ Info
     /// - name: `transformIndex`(ctype: `hkUint16`)
     /// - offset: ` 14`(x86)/` 14`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transformIndex"))]
     pub m_transformIndex: u16,
 }
 const _: () = {

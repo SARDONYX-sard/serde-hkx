@@ -17,23 +17,31 @@ pub struct hkpStorageExtendedMeshShapeMaterial {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpMeshMaterial,
     /// # C++ Info
     /// - name: `restitution`(ctype: `hkHalf`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "restitution"))]
     pub m_restitution: f16,
     /// # C++ Info
     /// - name: `friction`(ctype: `hkHalf`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "friction"))]
     pub m_friction: f16,
     /// # C++ Info
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "userData"))]
     pub m_userData: Ulong,
 }
 const _: () = {

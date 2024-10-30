@@ -17,18 +17,24 @@ pub struct hkbStateMachineNestedStateMachineData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `nestedStateMachine`(ctype: `void*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "nestedStateMachine"))]
     pub m_nestedStateMachine: Pointer,
     /// # C++ Info
     /// - name: `eventIdMap`(ctype: `void*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "eventIdMap"))]
     pub m_eventIdMap: Pointer,
 }
 const _: () = {

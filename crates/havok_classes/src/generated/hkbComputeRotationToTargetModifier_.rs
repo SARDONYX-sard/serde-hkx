@@ -17,43 +17,55 @@ pub struct hkbComputeRotationToTargetModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `rotationOut`(ctype: `hkQuaternion`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotationOut"))]
     pub m_rotationOut: Quaternion,
     /// # C++ Info
     /// - name: `targetPosition`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "targetPosition"))]
     pub m_targetPosition: Vector4,
     /// # C++ Info
     /// - name: `currentPosition`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "currentPosition"))]
     pub m_currentPosition: Vector4,
     /// # C++ Info
     /// - name: `currentRotation`(ctype: `hkQuaternion`)
     /// - offset: ` 96`(x86)/`128`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "currentRotation"))]
     pub m_currentRotation: Quaternion,
     /// # C++ Info
     /// - name: `localAxisOfRotation`(ctype: `hkVector4`)
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "localAxisOfRotation"))]
     pub m_localAxisOfRotation: Vector4,
     /// # C++ Info
     /// - name: `localFacingDirection`(ctype: `hkVector4`)
     /// - offset: `128`(x86)/`160`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "localFacingDirection"))]
     pub m_localFacingDirection: Vector4,
     /// # C++ Info
     /// - name: `resultIsDelta`(ctype: `hkBool`)
     /// - offset: `144`(x86)/`176`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "resultIsDelta"))]
     pub m_resultIsDelta: bool,
 }
 const _: () = {

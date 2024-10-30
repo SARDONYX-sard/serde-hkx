@@ -17,18 +17,25 @@ pub struct hkpVehicleDefaultBrake {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpVehicleBrake,
     /// # C++ Info
     /// - name: `wheelBrakingProperties`(ctype: `hkArray<struct hkpVehicleDefaultBrakeWheelBrakingProperties>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelBrakingProperties"))]
     pub m_wheelBrakingProperties: Vec<hkpVehicleDefaultBrakeWheelBrakingProperties>,
     /// # C++ Info
     /// - name: `wheelsMinTimeToBlock`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelsMinTimeToBlock"))]
     pub m_wheelsMinTimeToBlock: f32,
 }
 const _: () = {

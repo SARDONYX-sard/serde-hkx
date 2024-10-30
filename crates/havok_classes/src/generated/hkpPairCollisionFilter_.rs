@@ -17,19 +17,26 @@ pub struct hkpPairCollisionFilter {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpCollisionFilter,
     /// # C++ Info
     /// - name: `disabledPairs`(ctype: `struct hkpPairCollisionFilterMapPairFilterKeyOverrideType`)
     /// - offset: ` 48`(x86)/` 72`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "disabledPairs"))]
     pub m_disabledPairs: hkpPairCollisionFilterMapPairFilterKeyOverrideType,
     /// # C++ Info
     /// - name: `childFilter`(ctype: `struct hkpCollisionFilter*`)
     /// - offset: ` 60`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "childFilter"))]
     pub m_childFilter: Pointer,
 }
 const _: () = {

@@ -17,28 +17,37 @@ pub struct hkbPoweredRagdollControlsModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `controlData`(ctype: `struct hkbPoweredRagdollControlData`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "controlData"))]
     pub m_controlData: hkbPoweredRagdollControlData,
     /// # C++ Info
     /// - name: `bones`(ctype: `struct hkbBoneIndexArray*`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bones"))]
     pub m_bones: Pointer,
     /// # C++ Info
     /// - name: `worldFromModelModeData`(ctype: `struct hkbWorldFromModelModeData`)
     /// - offset: ` 84`(x86)/`120`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "worldFromModelModeData"))]
     pub m_worldFromModelModeData: hkbWorldFromModelModeData,
     /// # C++ Info
     /// - name: `boneWeights`(ctype: `struct hkbBoneWeightArray*`)
     /// - offset: ` 92`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "boneWeights"))]
     pub m_boneWeights: Pointer,
 }
 const _: () = {

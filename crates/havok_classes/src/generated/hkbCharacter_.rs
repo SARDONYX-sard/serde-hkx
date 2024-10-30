@@ -17,116 +17,140 @@ pub struct hkbCharacter<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `nearbyCharacters`(ctype: `hkArray<hkbCharacter*>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nearbyCharacters"))]
     pub m_nearbyCharacters: Vec<Pointer>,
     /// # C++ Info
     /// - name: `currentLod`(ctype: `hkInt16`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "currentLod"))]
     pub m_currentLod: i16,
     /// # C++ Info
     /// - name: `numTracksInLod`(ctype: `hkInt16`)
     /// - offset: ` 22`(x86)/` 34`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "numTracksInLod"))]
     pub m_numTracksInLod: i16,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
     /// # C++ Info
     /// - name: `ragdollDriver`(ctype: `void*`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "ragdollDriver"))]
     pub m_ragdollDriver: Pointer,
     /// # C++ Info
     /// - name: `characterControllerDriver`(ctype: `void*`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "characterControllerDriver"))]
     pub m_characterControllerDriver: Pointer,
     /// # C++ Info
     /// - name: `footIkDriver`(ctype: `void*`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "footIkDriver"))]
     pub m_footIkDriver: Pointer,
     /// # C++ Info
     /// - name: `handIkDriver`(ctype: `void*`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "handIkDriver"))]
     pub m_handIkDriver: Pointer,
     /// # C++ Info
     /// - name: `setup`(ctype: `struct hkbCharacterSetup*`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "setup"))]
     pub m_setup: Pointer,
     /// # C++ Info
     /// - name: `behaviorGraph`(ctype: `struct hkbBehaviorGraph*`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "behaviorGraph"))]
     pub m_behaviorGraph: Pointer,
     /// # C++ Info
     /// - name: `projectData`(ctype: `struct hkbProjectData*`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "projectData"))]
     pub m_projectData: Pointer,
     /// # C++ Info
     /// - name: `animationBindingSet`(ctype: `void*`)
     /// - offset: ` 56`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "animationBindingSet"))]
     pub m_animationBindingSet: Pointer,
     /// # C++ Info
     /// - name: `raycastInterface`(ctype: `void*`)
     /// - offset: ` 60`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "raycastInterface"))]
     pub m_raycastInterface: Pointer,
     /// # C++ Info
     /// - name: `world`(ctype: `void*`)
     /// - offset: ` 64`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `NOT_OWNED|SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "world"))]
     pub m_world: Pointer,
     /// # C++ Info
     /// - name: `eventQueue`(ctype: `void*`)
     /// - offset: ` 68`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "eventQueue"))]
     pub m_eventQueue: Pointer,
     /// # C++ Info
     /// - name: `worldFromModel`(ctype: `void*`)
     /// - offset: ` 72`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "worldFromModel"))]
     pub m_worldFromModel: Pointer,
     /// # C++ Info
     /// - name: `poseLocal`(ctype: `hkSimpleArray<void>`)
     /// - offset: ` 76`(x86)/`144`(x86_64)
     /// - type_size: `  8`(x86)/` 12`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "poseLocal"))]
     pub m_poseLocal: Vec<()>,
     /// # C++ Info
     /// - name: `deleteWorldFromModel`(ctype: `hkBool`)
     /// - offset: ` 84`(x86)/`156`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "deleteWorldFromModel"))]
     pub m_deleteWorldFromModel: bool,
     /// # C++ Info
     /// - name: `deletePoseLocal`(ctype: `hkBool`)
     /// - offset: ` 85`(x86)/`157`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "deletePoseLocal"))]
     pub m_deletePoseLocal: bool,
 }
 const _: () = {

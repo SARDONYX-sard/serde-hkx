@@ -17,34 +17,44 @@ pub struct hkpCallbackConstraintMotor {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpLimitedForceConstraintMotor,
     /// # C++ Info
     /// - name: `callbackFunc`(ctype: `void*`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "callbackFunc"))]
     pub m_callbackFunc: Pointer,
     /// # C++ Info
     /// - name: `callbackType`(ctype: `enum CallbackType`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "callbackType"))]
     pub m_callbackType: CallbackType,
     /// # C++ Info
     /// - name: `userData0`(ctype: `hkUlong`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "userData0"))]
     pub m_userData0: Ulong,
     /// # C++ Info
     /// - name: `userData1`(ctype: `hkUlong`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "userData1"))]
     pub m_userData1: Ulong,
     /// # C++ Info
     /// - name: `userData2`(ctype: `hkUlong`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "userData2"))]
     pub m_userData2: Ulong,
 }
 const _: () = {

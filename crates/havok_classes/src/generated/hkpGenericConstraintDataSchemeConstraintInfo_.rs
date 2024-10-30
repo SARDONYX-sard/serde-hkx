@@ -17,26 +17,34 @@ pub struct hkpGenericConstraintDataSchemeConstraintInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `maxSizeOfSchema`(ctype: `hkInt32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxSizeOfSchema"))]
     pub m_maxSizeOfSchema: i32,
     /// # C++ Info
     /// - name: `sizeOfSchemas`(ctype: `hkInt32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sizeOfSchemas"))]
     pub m_sizeOfSchemas: i32,
     /// # C++ Info
     /// - name: `numSolverResults`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numSolverResults"))]
     pub m_numSolverResults: i32,
     /// # C++ Info
     /// - name: `numSolverElemTemps`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numSolverElemTemps"))]
     pub m_numSolverElemTemps: i32,
 }
 const _: () = {

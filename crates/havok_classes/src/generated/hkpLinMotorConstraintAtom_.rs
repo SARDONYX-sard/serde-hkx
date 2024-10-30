@@ -17,38 +17,49 @@ pub struct hkpLinMotorConstraintAtom {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintAtom,
     /// # C++ Info
     /// - name: `isEnabled`(ctype: `hkBool`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isEnabled"))]
     pub m_isEnabled: bool,
     /// # C++ Info
     /// - name: `motorAxis`(ctype: `hkUint8`)
     /// - offset: `  3`(x86)/`  3`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "motorAxis"))]
     pub m_motorAxis: u8,
     /// # C++ Info
     /// - name: `initializedOffset`(ctype: `hkInt16`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "initializedOffset"))]
     pub m_initializedOffset: i16,
     /// # C++ Info
     /// - name: `previousTargetPositionOffset`(ctype: `hkInt16`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "previousTargetPositionOffset"))]
     pub m_previousTargetPositionOffset: i16,
     /// # C++ Info
     /// - name: `targetPosition`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "targetPosition"))]
     pub m_targetPosition: f32,
     /// # C++ Info
     /// - name: `motor`(ctype: `struct hkpConstraintMotor*`)
     /// - offset: ` 12`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "motor"))]
     pub m_motor: Pointer,
 }
 const _: () = {

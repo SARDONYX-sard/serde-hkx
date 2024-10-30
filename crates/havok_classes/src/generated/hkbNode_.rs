@@ -17,36 +17,46 @@ pub struct hkbNode<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbBindable,
     /// # C++ Info
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "userData"))]
     pub m_userData: Ulong,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
     /// # C++ Info
     /// - name: `id`(ctype: `hkInt16`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "id"))]
     pub m_id: i16,
     /// # C++ Info
     /// - name: `cloneState`(ctype: `enum unknown`)
     /// - offset: ` 38`(x86)/` 66`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "cloneState"))]
     pub m_cloneState: i8,
     /// # C++ Info
     /// - name: `padNode`(ctype: `hkBool[1]`)
     /// - offset: ` 39`(x86)/` 67`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "padNode"))]
     pub m_padNode: [bool; 1usize],
 }
 const _: () = {

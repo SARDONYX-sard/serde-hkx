@@ -17,18 +17,25 @@ pub struct hkpDisplayBindingData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `rigidBodyBindings`(ctype: `hkArray<hkpDisplayBindingDataRigidBody*>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rigidBodyBindings"))]
     pub m_rigidBodyBindings: Vec<Pointer>,
     /// # C++ Info
     /// - name: `physicsSystemBindings`(ctype: `hkArray<hkpDisplayBindingDataPhysicsSystem*>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "physicsSystemBindings"))]
     pub m_physicsSystemBindings: Vec<Pointer>,
 }
 const _: () = {

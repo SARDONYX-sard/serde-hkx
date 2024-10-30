@@ -17,45 +17,57 @@ pub struct hkpWorldObject<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `world`(ctype: `void*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "world"))]
     pub m_world: Pointer,
     /// # C++ Info
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "userData"))]
     pub m_userData: Ulong,
     /// # C++ Info
     /// - name: `collidable`(ctype: `struct hkpLinkedCollidable`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 92`(x86)/`128`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "collidable"))]
     pub m_collidable: hkpLinkedCollidable,
     /// # C++ Info
     /// - name: `multiThreadCheck`(ctype: `struct hkMultiThreadCheck`)
     /// - offset: `108`(x86)/`160`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "multiThreadCheck"))]
     pub m_multiThreadCheck: hkMultiThreadCheck,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `120`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
     /// # C++ Info
     /// - name: `properties`(ctype: `hkArray<struct hkpProperty>`)
     /// - offset: `124`(x86)/`184`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "properties"))]
     pub m_properties: Vec<hkpProperty>,
     /// # C++ Info
     /// - name: `treeData`(ctype: `void*`)
     /// - offset: `136`(x86)/`200`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "treeData"))]
     pub m_treeData: Pointer,
 }
 const _: () = {

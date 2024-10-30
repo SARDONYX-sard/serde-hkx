@@ -17,20 +17,27 @@ pub struct hkpBridgeConstraintAtom {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintAtom,
     /// # C++ Info
     /// - name: `buildJacobianFunc`(ctype: `void*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "buildJacobianFunc"))]
     pub m_buildJacobianFunc: Pointer,
     /// # C++ Info
     /// - name: `constraintData`(ctype: `struct hkpConstraintData*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `NOT_OWNED`
+    #[cfg_attr(feature = "serde", serde(rename = "constraintData"))]
     pub m_constraintData: Pointer,
 }
 const _: () = {

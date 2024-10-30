@@ -17,26 +17,34 @@ pub struct hkpRagdollLimitsDataAtoms {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `rotations`(ctype: `struct hkpSetLocalRotationsConstraintAtom`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `112`(x86)/`112`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotations"))]
     pub m_rotations: hkpSetLocalRotationsConstraintAtom,
     /// # C++ Info
     /// - name: `twistLimit`(ctype: `struct hkpTwistLimitConstraintAtom`)
     /// - offset: `112`(x86)/`112`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "twistLimit"))]
     pub m_twistLimit: hkpTwistLimitConstraintAtom,
     /// # C++ Info
     /// - name: `coneLimit`(ctype: `struct hkpConeLimitConstraintAtom`)
     /// - offset: `132`(x86)/`132`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "coneLimit"))]
     pub m_coneLimit: hkpConeLimitConstraintAtom,
     /// # C++ Info
     /// - name: `planesLimit`(ctype: `struct hkpConeLimitConstraintAtom`)
     /// - offset: `152`(x86)/`152`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "planesLimit"))]
     pub m_planesLimit: hkpConeLimitConstraintAtom,
 }
 const _: () = {

@@ -17,13 +17,19 @@ pub struct hkpShapePhantom<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpPhantom<'a>,
     /// # C++ Info
     /// - name: `motionState`(ctype: `struct hkMotionState`)
     /// - offset: `176`(x86)/`240`(x86_64)
     /// - type_size: `176`(x86)/`176`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "motionState"))]
     pub m_motionState: hkMotionState,
 }
 const _: () = {

@@ -17,73 +17,91 @@ pub struct hkaSplineCompressedAnimation<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkaAnimation<'a>,
     /// # C++ Info
     /// - name: `numFrames`(ctype: `hkInt32`)
     /// - offset: ` 40`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numFrames"))]
     pub m_numFrames: i32,
     /// # C++ Info
     /// - name: `numBlocks`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numBlocks"))]
     pub m_numBlocks: i32,
     /// # C++ Info
     /// - name: `maxFramesPerBlock`(ctype: `hkInt32`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxFramesPerBlock"))]
     pub m_maxFramesPerBlock: i32,
     /// # C++ Info
     /// - name: `maskAndQuantizationSize`(ctype: `hkInt32`)
     /// - offset: ` 52`(x86)/` 68`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maskAndQuantizationSize"))]
     pub m_maskAndQuantizationSize: i32,
     /// # C++ Info
     /// - name: `blockDuration`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blockDuration"))]
     pub m_blockDuration: f32,
     /// # C++ Info
     /// - name: `blockInverseDuration`(ctype: `hkReal`)
     /// - offset: ` 60`(x86)/` 76`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blockInverseDuration"))]
     pub m_blockInverseDuration: f32,
     /// # C++ Info
     /// - name: `frameDuration`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "frameDuration"))]
     pub m_frameDuration: f32,
     /// # C++ Info
     /// - name: `blockOffsets`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 68`(x86)/` 88`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blockOffsets"))]
     pub m_blockOffsets: Vec<u32>,
     /// # C++ Info
     /// - name: `floatBlockOffsets`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 80`(x86)/`104`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "floatBlockOffsets"))]
     pub m_floatBlockOffsets: Vec<u32>,
     /// # C++ Info
     /// - name: `transformOffsets`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 92`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transformOffsets"))]
     pub m_transformOffsets: Vec<u32>,
     /// # C++ Info
     /// - name: `floatOffsets`(ctype: `hkArray<hkUint32>`)
     /// - offset: `104`(x86)/`136`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "floatOffsets"))]
     pub m_floatOffsets: Vec<u32>,
     /// # C++ Info
     /// - name: `data`(ctype: `hkArray<hkUint8>`)
     /// - offset: `116`(x86)/`152`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "data"))]
     pub m_data: Vec<u8>,
     /// # C++ Info
     /// - name: `endian`(ctype: `hkInt32`)
     /// - offset: `128`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "endian"))]
     pub m_endian: i32,
 }
 const _: () = {

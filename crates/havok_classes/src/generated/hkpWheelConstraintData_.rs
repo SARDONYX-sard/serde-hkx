@@ -17,24 +17,32 @@ pub struct hkpWheelConstraintData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintData,
     /// # C++ Info
     /// - name: `atoms`(ctype: `struct hkpWheelConstraintDataAtoms`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `304`(x86)/`304`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
     pub m_atoms: hkpWheelConstraintDataAtoms,
     /// # C++ Info
     /// - name: `initialAxleInB`(ctype: `hkVector4`)
     /// - offset: `320`(x86)/`336`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "initialAxleInB"))]
     pub m_initialAxleInB: Vector4,
     /// # C++ Info
     /// - name: `initialSteeringAxisInB`(ctype: `hkVector4`)
     /// - offset: `336`(x86)/`352`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "initialSteeringAxisInB"))]
     pub m_initialSteeringAxisInB: Vector4,
 }
 const _: () = {

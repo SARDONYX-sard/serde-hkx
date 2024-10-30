@@ -17,24 +17,32 @@ pub struct hkbVariableBindingSet<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `bindings`(ctype: `hkArray<struct hkbVariableBindingSetBinding>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bindings"))]
     pub m_bindings: Vec<hkbVariableBindingSetBinding<'a>>,
     /// # C++ Info
     /// - name: `indexOfBindingToEnable`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "indexOfBindingToEnable"))]
     pub m_indexOfBindingToEnable: i32,
     /// # C++ Info
     /// - name: `hasOutputBinding`(ctype: `hkBool`)
     /// - offset: ` 24`(x86)/` 36`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "hasOutputBinding"))]
     pub m_hasOutputBinding: bool,
 }
 const _: () = {

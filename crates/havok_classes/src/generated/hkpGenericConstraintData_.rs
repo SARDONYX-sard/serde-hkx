@@ -17,18 +17,25 @@ pub struct hkpGenericConstraintData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintData,
     /// # C++ Info
     /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
     /// - name: `scheme`(ctype: `struct hkpGenericConstraintDataScheme`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: ` 64`(x86)/` 80`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "scheme"))]
     pub m_scheme: hkpGenericConstraintDataScheme,
 }
 const _: () = {

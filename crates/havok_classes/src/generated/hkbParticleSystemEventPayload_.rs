@@ -17,38 +17,49 @@ pub struct hkbParticleSystemEventPayload {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbEventPayload,
     /// # C++ Info
     /// - name: `type`(ctype: `enum SystemType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "type"))]
     pub m_type: SystemType,
     /// # C++ Info
     /// - name: `emitBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 10`(x86)/` 18`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "emitBoneIndex"))]
     pub m_emitBoneIndex: i16,
     /// # C++ Info
     /// - name: `offset`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "offset"))]
     pub m_offset: Vector4,
     /// # C++ Info
     /// - name: `direction`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "direction"))]
     pub m_direction: Vector4,
     /// # C++ Info
     /// - name: `numParticles`(ctype: `hkInt32`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numParticles"))]
     pub m_numParticles: i32,
     /// # C++ Info
     /// - name: `speed`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 68`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "speed"))]
     pub m_speed: f32,
 }
 const _: () = {

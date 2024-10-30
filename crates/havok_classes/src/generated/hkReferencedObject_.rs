@@ -17,20 +17,27 @@ pub struct hkReferencedObject {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkBaseObject,
     /// # C++ Info
     /// - name: `memSizeAndFlags`(ctype: `hkUint16`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "memSizeAndFlags"))]
     pub m_memSizeAndFlags: u16,
     /// # C++ Info
     /// - name: `referenceCount`(ctype: `hkInt16`)
     /// - offset: `  6`(x86)/` 10`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "referenceCount"))]
     pub m_referenceCount: i16,
 }
 const _: () = {

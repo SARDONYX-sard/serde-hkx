@@ -17,48 +17,61 @@ pub struct hkbTransformVectorModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `rotation`(ctype: `hkQuaternion`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotation"))]
     pub m_rotation: Quaternion,
     /// # C++ Info
     /// - name: `translation`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "translation"))]
     pub m_translation: Vector4,
     /// # C++ Info
     /// - name: `vectorIn`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vectorIn"))]
     pub m_vectorIn: Vector4,
     /// # C++ Info
     /// - name: `vectorOut`(ctype: `hkVector4`)
     /// - offset: ` 96`(x86)/`128`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vectorOut"))]
     pub m_vectorOut: Vector4,
     /// # C++ Info
     /// - name: `rotateOnly`(ctype: `hkBool`)
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotateOnly"))]
     pub m_rotateOnly: bool,
     /// # C++ Info
     /// - name: `inverse`(ctype: `hkBool`)
     /// - offset: `113`(x86)/`145`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "inverse"))]
     pub m_inverse: bool,
     /// # C++ Info
     /// - name: `computeOnActivate`(ctype: `hkBool`)
     /// - offset: `114`(x86)/`146`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "computeOnActivate"))]
     pub m_computeOnActivate: bool,
     /// # C++ Info
     /// - name: `computeOnModify`(ctype: `hkBool`)
     /// - offset: `115`(x86)/`147`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "computeOnModify"))]
     pub m_computeOnModify: bool,
 }
 const _: () = {

@@ -17,128 +17,158 @@ pub struct hkpEntity<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpWorldObject<'a>,
     /// # C++ Info
     /// - name: `material`(ctype: `struct hkpMaterial`)
     /// - offset: `140`(x86)/`208`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "material"))]
     pub m_material: hkpMaterial,
     /// # C++ Info
     /// - name: `limitContactImpulseUtilAndFlag`(ctype: `void*`)
     /// - offset: `152`(x86)/`224`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "limitContactImpulseUtilAndFlag"))]
     pub m_limitContactImpulseUtilAndFlag: Pointer,
     /// # C++ Info
     /// - name: `damageMultiplier`(ctype: `hkReal`)
     /// - offset: `156`(x86)/`232`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "damageMultiplier"))]
     pub m_damageMultiplier: f32,
     /// # C++ Info
     /// - name: `breakableBody`(ctype: `void*`)
     /// - offset: `160`(x86)/`240`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "breakableBody"))]
     pub m_breakableBody: Pointer,
     /// # C++ Info
     /// - name: `solverData`(ctype: `hkUint32`)
     /// - offset: `164`(x86)/`248`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "solverData"))]
     pub m_solverData: u32,
     /// # C++ Info
     /// - name: `storageIndex`(ctype: `hkUint16`)
     /// - offset: `168`(x86)/`252`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "storageIndex"))]
     pub m_storageIndex: u16,
     /// # C++ Info
     /// - name: `contactPointCallbackDelay`(ctype: `hkUint16`)
     /// - offset: `170`(x86)/`254`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "contactPointCallbackDelay"))]
     pub m_contactPointCallbackDelay: u16,
     /// # C++ Info
     /// - name: `constraintsMaster`(ctype: `struct hkpEntitySmallArraySerializeOverrideType`)
     /// - offset: `172`(x86)/`256`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "constraintsMaster"))]
     pub m_constraintsMaster: hkpEntitySmallArraySerializeOverrideType,
     /// # C++ Info
     /// - name: `constraintsSlave`(ctype: `hkArray<hkpConstraintInstance*>`)
     /// - offset: `180`(x86)/`272`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `NOT_OWNED|SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "constraintsSlave"))]
     pub m_constraintsSlave: Vec<Pointer>,
     /// # C++ Info
     /// - name: `constraintRuntime`(ctype: `hkArray<hkUint8>`)
     /// - offset: `192`(x86)/`288`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "constraintRuntime"))]
     pub m_constraintRuntime: Vec<u8>,
     /// # C++ Info
     /// - name: `simulationIsland`(ctype: `void*`)
     /// - offset: `204`(x86)/`304`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "simulationIsland"))]
     pub m_simulationIsland: Pointer,
     /// # C++ Info
     /// - name: `autoRemoveLevel`(ctype: `hkInt8`)
     /// - offset: `208`(x86)/`312`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "autoRemoveLevel"))]
     pub m_autoRemoveLevel: i8,
     /// # C++ Info
     /// - name: `numShapeKeysInContactPointProperties`(ctype: `hkUint8`)
     /// - offset: `209`(x86)/`313`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "serde",
+        serde(rename = "numShapeKeysInContactPointProperties")
+    )]
     pub m_numShapeKeysInContactPointProperties: u8,
     /// # C++ Info
     /// - name: `responseModifierFlags`(ctype: `hkUint8`)
     /// - offset: `210`(x86)/`314`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "responseModifierFlags"))]
     pub m_responseModifierFlags: u8,
     /// # C++ Info
     /// - name: `uid`(ctype: `hkUint32`)
     /// - offset: `212`(x86)/`316`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "uid"))]
     pub m_uid: u32,
     /// # C++ Info
     /// - name: `spuCollisionCallback`(ctype: `struct hkpEntitySpuCollisionCallback`)
     /// - offset: `216`(x86)/`320`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "spuCollisionCallback"))]
     pub m_spuCollisionCallback: hkpEntitySpuCollisionCallback,
     /// # C++ Info
     /// - name: `motion`(ctype: `struct hkpMaxSizeMotion`)
     /// - offset: `224`(x86)/`336`(x86_64)
     /// - type_size: `288`(x86)/`320`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "motion"))]
     pub m_motion: hkpMaxSizeMotion,
     /// # C++ Info
     /// - name: `contactListeners`(ctype: `struct hkpEntitySmallArraySerializeOverrideType`)
     /// - offset: `512`(x86)/`656`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "contactListeners"))]
     pub m_contactListeners: hkpEntitySmallArraySerializeOverrideType,
     /// # C++ Info
     /// - name: `actions`(ctype: `struct hkpEntitySmallArraySerializeOverrideType`)
     /// - offset: `520`(x86)/`672`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "actions"))]
     pub m_actions: hkpEntitySmallArraySerializeOverrideType,
     /// # C++ Info
     /// - name: `localFrame`(ctype: `struct hkLocalFrame*`)
     /// - offset: `528`(x86)/`688`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "localFrame"))]
     pub m_localFrame: Pointer,
     /// # C++ Info
     /// - name: `extendedListeners`(ctype: `struct hkpEntityExtendedListeners*`)
     /// - offset: `532`(x86)/`696`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "extendedListeners"))]
     pub m_extendedListeners: Pointer,
     /// # C++ Info
     /// - name: `npData`(ctype: `hkUint32`)
     /// - offset: `536`(x86)/`704`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "npData"))]
     pub m_npData: u32,
 }
 const _: () = {

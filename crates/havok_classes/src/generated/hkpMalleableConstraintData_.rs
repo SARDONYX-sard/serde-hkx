@@ -17,23 +17,31 @@ pub struct hkpMalleableConstraintData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintData,
     /// # C++ Info
     /// - name: `constraintData`(ctype: `struct hkpConstraintData*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "constraintData"))]
     pub m_constraintData: Pointer,
     /// # C++ Info
     /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
     /// - name: `strength`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "strength"))]
     pub m_strength: f32,
 }
 const _: () = {

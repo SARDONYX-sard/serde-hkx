@@ -17,11 +17,16 @@ pub struct hkCustomAttributes<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `attributes`(ctype: `hkSimpleArray<struct hkCustomAttributesAttribute>`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  8`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "attributes"))]
     pub m_attributes: Vec<hkCustomAttributesAttribute<'a>>,
 }
 const _: () = {

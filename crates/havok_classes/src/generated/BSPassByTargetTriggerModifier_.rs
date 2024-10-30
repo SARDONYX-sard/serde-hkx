@@ -17,34 +17,44 @@ pub struct BSPassByTargetTriggerModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `targetPosition`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "targetPosition"))]
     pub m_targetPosition: Vector4,
     /// # C++ Info
     /// - name: `radius`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "radius"))]
     pub m_radius: f32,
     /// # C++ Info
     /// - name: `movementDirection`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "movementDirection"))]
     pub m_movementDirection: Vector4,
     /// # C++ Info
     /// - name: `triggerEvent`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 96`(x86)/`128`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "triggerEvent"))]
     pub m_triggerEvent: hkbEventProperty,
     /// # C++ Info
     /// - name: `targetPassed`(ctype: `hkBool`)
     /// - offset: `104`(x86)/`144`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "targetPassed"))]
     pub m_targetPassed: bool,
 }
 const _: () = {

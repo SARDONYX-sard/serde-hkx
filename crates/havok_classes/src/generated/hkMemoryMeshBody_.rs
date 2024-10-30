@@ -17,33 +17,43 @@ pub struct hkMemoryMeshBody<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkMeshBody,
     /// # C++ Info
     /// - name: `transform`(ctype: `hkMatrix4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transform"))]
     pub m_transform: Matrix4,
     /// # C++ Info
     /// - name: `transformSet`(ctype: `struct hkIndexedTransformSet*`)
     /// - offset: ` 80`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transformSet"))]
     pub m_transformSet: Pointer,
     /// # C++ Info
     /// - name: `shape`(ctype: `struct hkMeshShape*`)
     /// - offset: ` 84`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "shape"))]
     pub m_shape: Pointer,
     /// # C++ Info
     /// - name: `vertexBuffers`(ctype: `hkArray<hkMeshVertexBuffer*>`)
     /// - offset: ` 88`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexBuffers"))]
     pub m_vertexBuffers: Vec<Pointer>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `100`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
 }
 const _: () = {

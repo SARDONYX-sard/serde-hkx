@@ -17,29 +17,38 @@ pub struct hkbEventDrivenModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifierWrapper<'a>,
     /// # C++ Info
     /// - name: `activateEventId`(ctype: `hkInt32`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "activateEventId"))]
     pub m_activateEventId: i32,
     /// # C++ Info
     /// - name: `deactivateEventId`(ctype: `hkInt32`)
     /// - offset: ` 52`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "deactivateEventId"))]
     pub m_deactivateEventId: i32,
     /// # C++ Info
     /// - name: `activeByDefault`(ctype: `hkBool`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "activeByDefault"))]
     pub m_activeByDefault: bool,
     /// # C++ Info
     /// - name: `isActive`(ctype: `hkBool`)
     /// - offset: ` 57`(x86)/` 97`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "isActive"))]
     pub m_isActive: bool,
 }
 const _: () = {

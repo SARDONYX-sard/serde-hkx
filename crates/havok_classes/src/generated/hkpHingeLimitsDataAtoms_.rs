@@ -17,21 +17,28 @@ pub struct hkpHingeLimitsDataAtoms {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `rotations`(ctype: `struct hkpSetLocalRotationsConstraintAtom`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `112`(x86)/`112`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotations"))]
     pub m_rotations: hkpSetLocalRotationsConstraintAtom,
     /// # C++ Info
     /// - name: `angLimit`(ctype: `struct hkpAngLimitConstraintAtom`)
     /// - offset: `112`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "angLimit"))]
     pub m_angLimit: hkpAngLimitConstraintAtom,
     /// # C++ Info
     /// - name: `2dAng`(ctype: `struct hkp2dAngConstraintAtom`)
     /// - offset: `128`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "2dAng"))]
     pub m_2dAng: hkp2dAngConstraintAtom,
 }
 const _: () = {

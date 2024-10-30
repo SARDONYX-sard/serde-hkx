@@ -17,75 +17,93 @@ pub struct hkpExtendedMeshShape {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpShapeCollection,
     /// # C++ Info
     /// - name: `embeddedTrianglesSubpart`(ctype: `struct hkpExtendedMeshShapeTrianglesSubpart`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: `112`(x86)/`160`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "embeddedTrianglesSubpart"))]
     pub m_embeddedTrianglesSubpart: hkpExtendedMeshShapeTrianglesSubpart,
     /// # C++ Info
     /// - name: `aabbHalfExtents`(ctype: `hkVector4`)
     /// - offset: `144`(x86)/`208`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "aabbHalfExtents"))]
     pub m_aabbHalfExtents: Vector4,
     /// # C++ Info
     /// - name: `aabbCenter`(ctype: `hkVector4`)
     /// - offset: `160`(x86)/`224`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "aabbCenter"))]
     pub m_aabbCenter: Vector4,
     /// # C++ Info
     /// - name: `materialClass`(ctype: `void*`)
     /// - offset: `176`(x86)/`240`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "materialClass"))]
     pub m_materialClass: Pointer,
     /// # C++ Info
     /// - name: `numBitsForSubpartIndex`(ctype: `hkInt32`)
     /// - offset: `180`(x86)/`248`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numBitsForSubpartIndex"))]
     pub m_numBitsForSubpartIndex: i32,
     /// # C++ Info
     /// - name: `trianglesSubparts`(ctype: `hkArray<struct hkpExtendedMeshShapeTrianglesSubpart>`)
     /// - offset: `184`(x86)/`256`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "trianglesSubparts"))]
     pub m_trianglesSubparts: Vec<hkpExtendedMeshShapeTrianglesSubpart>,
     /// # C++ Info
     /// - name: `shapesSubparts`(ctype: `hkArray<struct hkpExtendedMeshShapeShapesSubpart>`)
     /// - offset: `196`(x86)/`272`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "shapesSubparts"))]
     pub m_shapesSubparts: Vec<hkpExtendedMeshShapeShapesSubpart>,
     /// # C++ Info
     /// - name: `weldingInfo`(ctype: `hkArray<hkUint16>`)
     /// - offset: `208`(x86)/`288`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "weldingInfo"))]
     pub m_weldingInfo: Vec<u16>,
     /// # C++ Info
     /// - name: `weldingType`(ctype: `enum WeldingType`)
     /// - offset: `220`(x86)/`304`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "weldingType"))]
     pub m_weldingType: WeldingType,
     /// # C++ Info
     /// - name: `defaultCollisionFilterInfo`(ctype: `hkUint32`)
     /// - offset: `224`(x86)/`308`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "defaultCollisionFilterInfo"))]
     pub m_defaultCollisionFilterInfo: u32,
     /// # C++ Info
     /// - name: `cachedNumChildShapes`(ctype: `hkInt32`)
     /// - offset: `228`(x86)/`312`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "cachedNumChildShapes"))]
     pub m_cachedNumChildShapes: i32,
     /// # C++ Info
     /// - name: `triangleRadius`(ctype: `hkReal`)
     /// - offset: `232`(x86)/`316`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "triangleRadius"))]
     pub m_triangleRadius: f32,
     /// # C++ Info
     /// - name: `padding`(ctype: `hkInt32`)
     /// - offset: `236`(x86)/`320`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "padding"))]
     pub m_padding: i32,
 }
 const _: () = {

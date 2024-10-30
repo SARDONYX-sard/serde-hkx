@@ -17,18 +17,25 @@ pub struct hkbIntVariableSequencedData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbSequencedData,
     /// # C++ Info
     /// - name: `samples`(ctype: `hkArray<struct hkbIntVariableSequencedDataSample>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "samples"))]
     pub m_samples: Vec<hkbIntVariableSequencedDataSample>,
     /// # C++ Info
     /// - name: `variableIndex`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "variableIndex"))]
     pub m_variableIndex: i32,
 }
 const _: () = {

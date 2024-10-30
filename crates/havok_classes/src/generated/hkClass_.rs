@@ -17,58 +17,72 @@ pub struct hkClass<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `name`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: CString<'a>,
     /// # C++ Info
     /// - name: `parent`(ctype: `struct hkClass*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "parent"))]
     pub m_parent: Pointer,
     /// # C++ Info
     /// - name: `objectSize`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "objectSize"))]
     pub m_objectSize: i32,
     /// # C++ Info
     /// - name: `numImplementedInterfaces`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numImplementedInterfaces"))]
     pub m_numImplementedInterfaces: i32,
     /// # C++ Info
     /// - name: `declaredEnums`(ctype: `hkSimpleArray<struct hkClassEnum>`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  8`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "declaredEnums"))]
     pub m_declaredEnums: Vec<hkClassEnum<'a>>,
     /// # C++ Info
     /// - name: `declaredMembers`(ctype: `hkSimpleArray<struct hkClassMember>`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  8`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "declaredMembers"))]
     pub m_declaredMembers: Vec<hkClassMember<'a>>,
     /// # C++ Info
     /// - name: `defaults`(ctype: `void*`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "defaults"))]
     pub m_defaults: Pointer,
     /// # C++ Info
     /// - name: `attributes`(ctype: `struct hkCustomAttributes*`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "attributes"))]
     pub m_attributes: Pointer,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags FlagValues`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: FlagValues,
     /// # C++ Info
     /// - name: `describedVersion`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 76`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "describedVersion"))]
     pub m_describedVersion: i32,
 }
 const _: () = {

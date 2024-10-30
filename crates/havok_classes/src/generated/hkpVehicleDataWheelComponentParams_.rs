@@ -17,56 +17,70 @@ pub struct hkpVehicleDataWheelComponentParams {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `radius`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "radius"))]
     pub m_radius: f32,
     /// # C++ Info
     /// - name: `mass`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "mass"))]
     pub m_mass: f32,
     /// # C++ Info
     /// - name: `width`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "width"))]
     pub m_width: f32,
     /// # C++ Info
     /// - name: `friction`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "friction"))]
     pub m_friction: f32,
     /// # C++ Info
     /// - name: `viscosityFriction`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "viscosityFriction"))]
     pub m_viscosityFriction: f32,
     /// # C++ Info
     /// - name: `maxFriction`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxFriction"))]
     pub m_maxFriction: f32,
     /// # C++ Info
     /// - name: `slipAngle`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "slipAngle"))]
     pub m_slipAngle: f32,
     /// # C++ Info
     /// - name: `forceFeedbackMultiplier`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "forceFeedbackMultiplier"))]
     pub m_forceFeedbackMultiplier: f32,
     /// # C++ Info
     /// - name: `maxContactBodyAcceleration`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxContactBodyAcceleration"))]
     pub m_maxContactBodyAcceleration: f32,
     /// # C++ Info
     /// - name: `axle`(ctype: `hkInt8`)
     /// - offset: ` 36`(x86)/` 36`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "axle"))]
     pub m_axle: i8,
 }
 const _: () = {

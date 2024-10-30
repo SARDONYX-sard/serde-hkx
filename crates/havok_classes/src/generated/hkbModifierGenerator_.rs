@@ -17,18 +17,25 @@ pub struct hkbModifierGenerator<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `modifier`(ctype: `struct hkbModifier*`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "modifier"))]
     pub m_modifier: Pointer,
     /// # C++ Info
     /// - name: `generator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "generator"))]
     pub m_generator: Pointer,
 }
 const _: () = {

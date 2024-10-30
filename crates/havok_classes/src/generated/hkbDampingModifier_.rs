@@ -17,73 +17,91 @@ pub struct hkbDampingModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `kP`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "kP"))]
     pub m_kP: f32,
     /// # C++ Info
     /// - name: `kI`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "kI"))]
     pub m_kI: f32,
     /// # C++ Info
     /// - name: `kD`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "kD"))]
     pub m_kD: f32,
     /// # C++ Info
     /// - name: `enableScalarDamping`(ctype: `hkBool`)
     /// - offset: ` 56`(x86)/` 92`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "enableScalarDamping"))]
     pub m_enableScalarDamping: bool,
     /// # C++ Info
     /// - name: `enableVectorDamping`(ctype: `hkBool`)
     /// - offset: ` 57`(x86)/` 93`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "enableVectorDamping"))]
     pub m_enableVectorDamping: bool,
     /// # C++ Info
     /// - name: `rawValue`(ctype: `hkReal`)
     /// - offset: ` 60`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rawValue"))]
     pub m_rawValue: f32,
     /// # C++ Info
     /// - name: `dampedValue`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/`100`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "dampedValue"))]
     pub m_dampedValue: f32,
     /// # C++ Info
     /// - name: `rawVector`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rawVector"))]
     pub m_rawVector: Vector4,
     /// # C++ Info
     /// - name: `dampedVector`(ctype: `hkVector4`)
     /// - offset: ` 96`(x86)/`128`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "dampedVector"))]
     pub m_dampedVector: Vector4,
     /// # C++ Info
     /// - name: `vecErrorSum`(ctype: `hkVector4`)
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vecErrorSum"))]
     pub m_vecErrorSum: Vector4,
     /// # C++ Info
     /// - name: `vecPreviousError`(ctype: `hkVector4`)
     /// - offset: `128`(x86)/`160`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vecPreviousError"))]
     pub m_vecPreviousError: Vector4,
     /// # C++ Info
     /// - name: `errorSum`(ctype: `hkReal`)
     /// - offset: `144`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "errorSum"))]
     pub m_errorSum: f32,
     /// # C++ Info
     /// - name: `previousError`(ctype: `hkReal`)
     /// - offset: `148`(x86)/`180`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "previousError"))]
     pub m_previousError: f32,
 }
 const _: () = {

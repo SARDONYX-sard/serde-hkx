@@ -17,43 +17,55 @@ pub struct hkxNode<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkxAttributeHolder<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
     /// # C++ Info
     /// - name: `object`(ctype: `struct hkReferencedObject*`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "object"))]
     pub m_object: Pointer,
     /// # C++ Info
     /// - name: `keyFrames`(ctype: `hkArray<hkMatrix4>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "keyFrames"))]
     pub m_keyFrames: Vec<Matrix4>,
     /// # C++ Info
     /// - name: `children`(ctype: `hkArray<hkxNode*>`)
     /// - offset: ` 40`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "children"))]
     pub m_children: Vec<Pointer>,
     /// # C++ Info
     /// - name: `annotations`(ctype: `hkArray<struct hkxNodeAnnotationData>`)
     /// - offset: ` 52`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "annotations"))]
     pub m_annotations: Vec<hkxNodeAnnotationData<'a>>,
     /// # C++ Info
     /// - name: `userProperties`(ctype: `hkStringPtr`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "userProperties"))]
     pub m_userProperties: StringPtr<'a>,
     /// # C++ Info
     /// - name: `selected`(ctype: `hkBool`)
     /// - offset: ` 68`(x86)/`104`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "selected"))]
     pub m_selected: bool,
 }
 const _: () = {

@@ -17,58 +17,73 @@ pub struct hkpSerializedAgentNnEntry {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `bodyA`(ctype: `struct hkpEntity*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bodyA"))]
     pub m_bodyA: Pointer,
     /// # C++ Info
     /// - name: `bodyB`(ctype: `struct hkpEntity*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bodyB"))]
     pub m_bodyB: Pointer,
     /// # C++ Info
     /// - name: `bodyAId`(ctype: `hkUlong`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bodyAId"))]
     pub m_bodyAId: Ulong,
     /// # C++ Info
     /// - name: `bodyBId`(ctype: `hkUlong`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bodyBId"))]
     pub m_bodyBId: Ulong,
     /// # C++ Info
     /// - name: `useEntityIds`(ctype: `hkBool`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "useEntityIds"))]
     pub m_useEntityIds: bool,
     /// # C++ Info
     /// - name: `agentType`(ctype: `enum SerializedAgentType`)
     /// - offset: ` 25`(x86)/` 49`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "agentType"))]
     pub m_agentType: SerializedAgentType,
     /// # C++ Info
     /// - name: `atom`(ctype: `struct hkpSimpleContactConstraintAtom`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "atom"))]
     pub m_atom: hkpSimpleContactConstraintAtom,
     /// # C++ Info
     /// - name: `propertiesStream`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "propertiesStream"))]
     pub m_propertiesStream: Vec<u8>,
     /// # C++ Info
     /// - name: `contactPoints`(ctype: `hkArray<struct hkContactPoint>`)
     /// - offset: ` 92`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "contactPoints"))]
     pub m_contactPoints: Vec<hkContactPoint>,
     /// # C++ Info
     /// - name: `cpIdMgr`(ctype: `hkArray<hkUint8>`)
     /// - offset: `104`(x86)/`144`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "cpIdMgr"))]
     pub m_cpIdMgr: Vec<u8>,
     /// # C++ Info
     /// - name: `nnEntryData`(ctype: `hkUint8[160]`)
@@ -79,21 +94,25 @@ pub struct hkpSerializedAgentNnEntry {
         serde(with = "::serde_with::As::<[::serde_with::Same; 160]>")
     )]
     #[educe(Default = [0;160usize])]
+    #[cfg_attr(feature = "serde", serde(rename = "nnEntryData"))]
     pub m_nnEntryData: [u8; 160usize],
     /// # C++ Info
     /// - name: `trackInfo`(ctype: `struct hkpSerializedTrack1nInfo`)
     /// - offset: `276`(x86)/`320`(x86_64)
     /// - type_size: ` 24`(x86)/` 32`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "trackInfo"))]
     pub m_trackInfo: hkpSerializedTrack1nInfo,
     /// # C++ Info
     /// - name: `endianCheckBuffer`(ctype: `hkUint8[4]`)
     /// - offset: `300`(x86)/`352`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "endianCheckBuffer"))]
     pub m_endianCheckBuffer: [u8; 4usize],
     /// # C++ Info
     /// - name: `version`(ctype: `hkUint32`)
     /// - offset: `304`(x86)/`356`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "version"))]
     pub m_version: u32,
 }
 const _: () = {

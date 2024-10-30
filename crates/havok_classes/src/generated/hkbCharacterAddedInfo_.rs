@@ -17,43 +17,55 @@ pub struct hkbCharacterAddedInfo<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `characterId`(ctype: `hkUint64`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "characterId"))]
     pub m_characterId: u64,
     /// # C++ Info
     /// - name: `instanceName`(ctype: `hkStringPtr`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "instanceName"))]
     pub m_instanceName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `templateName`(ctype: `hkStringPtr`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "templateName"))]
     pub m_templateName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `fullPathToProject`(ctype: `hkStringPtr`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "fullPathToProject"))]
     pub m_fullPathToProject: StringPtr<'a>,
     /// # C++ Info
     /// - name: `skeleton`(ctype: `struct hkaSkeleton*`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "skeleton"))]
     pub m_skeleton: Pointer,
     /// # C++ Info
     /// - name: `worldFromModel`(ctype: `hkQsTransform`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "worldFromModel"))]
     pub m_worldFromModel: QsTransform,
     /// # C++ Info
     /// - name: `poseModelSpace`(ctype: `hkArray<hkQsTransform>`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "poseModelSpace"))]
     pub m_poseModelSpace: Vec<QsTransform>,
 }
 const _: () = {

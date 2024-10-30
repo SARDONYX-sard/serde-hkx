@@ -17,72 +17,89 @@ pub struct hkpConstraintInstance<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `owner`(ctype: `void*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "owner"))]
     pub m_owner: Pointer,
     /// # C++ Info
     /// - name: `data`(ctype: `struct hkpConstraintData*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "data"))]
     pub m_data: Pointer,
     /// # C++ Info
     /// - name: `constraintModifiers`(ctype: `struct hkpModifierConstraintAtom*`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "constraintModifiers"))]
     pub m_constraintModifiers: Pointer,
     /// # C++ Info
     /// - name: `entities`(ctype: `struct hkpEntity*`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "entities"))]
     pub m_entities: [Pointer; 2usize],
     /// # C++ Info
     /// - name: `priority`(ctype: `enum ConstraintPriority`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "priority"))]
     pub m_priority: ConstraintPriority,
     /// # C++ Info
     /// - name: `wantRuntime`(ctype: `hkBool`)
     /// - offset: ` 29`(x86)/` 57`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wantRuntime"))]
     pub m_wantRuntime: bool,
     /// # C++ Info
     /// - name: `destructionRemapInfo`(ctype: `enum OnDestructionRemapInfo`)
     /// - offset: ` 30`(x86)/` 58`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "destructionRemapInfo"))]
     pub m_destructionRemapInfo: OnDestructionRemapInfo,
     /// # C++ Info
     /// - name: `listeners`(ctype: `struct hkpConstraintInstanceSmallArraySerializeOverrideType`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "listeners"))]
     pub m_listeners: hkpConstraintInstanceSmallArraySerializeOverrideType,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 40`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
     /// # C++ Info
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: ` 44`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "userData"))]
     pub m_userData: Ulong,
     /// # C++ Info
     /// - name: `internal`(ctype: `void*`)
     /// - offset: ` 48`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "internal"))]
     pub m_internal: Pointer,
     /// # C++ Info
     /// - name: `uid`(ctype: `hkUint32`)
     /// - offset: ` 52`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "uid"))]
     pub m_uid: u32,
 }
 const _: () = {

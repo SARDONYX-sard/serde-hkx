@@ -17,21 +17,28 @@ pub struct hkpVehicleFrictionDescription {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `wheelDistance`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelDistance"))]
     pub m_wheelDistance: f32,
     /// # C++ Info
     /// - name: `chassisMassInv`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "chassisMassInv"))]
     pub m_chassisMassInv: f32,
     /// # C++ Info
     /// - name: `axleDescr`(ctype: `struct hkpVehicleFrictionDescriptionAxisDescription[2]`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `200`(x86)/`200`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "axleDescr"))]
     pub m_axleDescr: [hkpVehicleFrictionDescriptionAxisDescription; 2usize],
 }
 const _: () = {

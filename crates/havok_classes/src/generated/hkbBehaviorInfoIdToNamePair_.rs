@@ -17,26 +17,34 @@ pub struct hkbBehaviorInfoIdToNamePair<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `behaviorName`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "behaviorName"))]
     pub m_behaviorName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `nodeName`(ctype: `hkStringPtr`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nodeName"))]
     pub m_nodeName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `toolType`(ctype: `enum ToolNodeType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "toolType"))]
     pub m_toolType: ToolNodeType,
     /// # C++ Info
     /// - name: `id`(ctype: `hkInt16`)
     /// - offset: ` 10`(x86)/` 18`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "id"))]
     pub m_id: i16,
 }
 const _: () = {

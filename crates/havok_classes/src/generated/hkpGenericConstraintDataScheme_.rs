@@ -17,33 +17,42 @@ pub struct hkpGenericConstraintDataScheme {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `info`(ctype: `struct hkpGenericConstraintDataSchemeConstraintInfo`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "info"))]
     pub m_info: hkpGenericConstraintDataSchemeConstraintInfo,
     /// # C++ Info
     /// - name: `data`(ctype: `hkArray<hkVector4>`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "data"))]
     pub m_data: Vec<Vector4>,
     /// # C++ Info
     /// - name: `commands`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 28`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "commands"))]
     pub m_commands: Vec<i32>,
     /// # C++ Info
     /// - name: `modifiers`(ctype: `hkArray<void*>`)
     /// - offset: ` 40`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "modifiers"))]
     pub m_modifiers: Vec<Pointer>,
     /// # C++ Info
     /// - name: `motors`(ctype: `hkArray<hkpConstraintMotor*>`)
     /// - offset: ` 52`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "motors"))]
     pub m_motors: Vec<Pointer>,
 }
 const _: () = {

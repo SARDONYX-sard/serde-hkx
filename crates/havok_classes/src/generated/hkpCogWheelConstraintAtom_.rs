@@ -17,38 +17,49 @@ pub struct hkpCogWheelConstraintAtom {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintAtom,
     /// # C++ Info
     /// - name: `cogWheelRadiusA`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "cogWheelRadiusA"))]
     pub m_cogWheelRadiusA: f32,
     /// # C++ Info
     /// - name: `cogWheelRadiusB`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "cogWheelRadiusB"))]
     pub m_cogWheelRadiusB: f32,
     /// # C++ Info
     /// - name: `isScrew`(ctype: `hkBool`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isScrew"))]
     pub m_isScrew: bool,
     /// # C++ Info
     /// - name: `memOffsetToInitialAngleOffset`(ctype: `hkInt8`)
     /// - offset: ` 13`(x86)/` 13`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "memOffsetToInitialAngleOffset"))]
     pub m_memOffsetToInitialAngleOffset: i8,
     /// # C++ Info
     /// - name: `memOffsetToPrevAngle`(ctype: `hkInt8`)
     /// - offset: ` 14`(x86)/` 14`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "memOffsetToPrevAngle"))]
     pub m_memOffsetToPrevAngle: i8,
     /// # C++ Info
     /// - name: `memOffsetToRevolutionCounter`(ctype: `hkInt8`)
     /// - offset: ` 15`(x86)/` 15`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "memOffsetToRevolutionCounter"))]
     pub m_memOffsetToRevolutionCounter: i8,
 }
 const _: () = {

@@ -17,28 +17,37 @@ pub struct hkbCharacterControllerModifierInternalState {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `gravity`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "gravity"))]
     pub m_gravity: Vector4,
     /// # C++ Info
     /// - name: `timestep`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "timestep"))]
     pub m_timestep: f32,
     /// # C++ Info
     /// - name: `isInitialVelocityAdded`(ctype: `hkBool`)
     /// - offset: ` 36`(x86)/` 36`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isInitialVelocityAdded"))]
     pub m_isInitialVelocityAdded: bool,
     /// # C++ Info
     /// - name: `isTouchingGround`(ctype: `hkBool`)
     /// - offset: ` 37`(x86)/` 37`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isTouchingGround"))]
     pub m_isTouchingGround: bool,
 }
 const _: () = {

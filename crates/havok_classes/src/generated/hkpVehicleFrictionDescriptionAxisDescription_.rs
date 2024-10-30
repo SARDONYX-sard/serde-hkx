@@ -17,56 +17,70 @@ pub struct hkpVehicleFrictionDescriptionAxisDescription {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `frictionCircleYtab`(ctype: `hkReal[16]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "frictionCircleYtab"))]
     pub m_frictionCircleYtab: [f32; 16usize],
     /// # C++ Info
     /// - name: `xStep`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "xStep"))]
     pub m_xStep: f32,
     /// # C++ Info
     /// - name: `xStart`(ctype: `hkReal`)
     /// - offset: ` 68`(x86)/` 68`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "xStart"))]
     pub m_xStart: f32,
     /// # C++ Info
     /// - name: `wheelSurfaceInertia`(ctype: `hkReal`)
     /// - offset: ` 72`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelSurfaceInertia"))]
     pub m_wheelSurfaceInertia: f32,
     /// # C++ Info
     /// - name: `wheelSurfaceInertiaInv`(ctype: `hkReal`)
     /// - offset: ` 76`(x86)/` 76`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelSurfaceInertiaInv"))]
     pub m_wheelSurfaceInertiaInv: f32,
     /// # C++ Info
     /// - name: `wheelChassisMassRatio`(ctype: `hkReal`)
     /// - offset: ` 80`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelChassisMassRatio"))]
     pub m_wheelChassisMassRatio: f32,
     /// # C++ Info
     /// - name: `wheelRadius`(ctype: `hkReal`)
     /// - offset: ` 84`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelRadius"))]
     pub m_wheelRadius: f32,
     /// # C++ Info
     /// - name: `wheelRadiusInv`(ctype: `hkReal`)
     /// - offset: ` 88`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelRadiusInv"))]
     pub m_wheelRadiusInv: f32,
     /// # C++ Info
     /// - name: `wheelDownForceFactor`(ctype: `hkReal`)
     /// - offset: ` 92`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelDownForceFactor"))]
     pub m_wheelDownForceFactor: f32,
     /// # C++ Info
     /// - name: `wheelDownForceSumFactor`(ctype: `hkReal`)
     /// - offset: ` 96`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelDownForceSumFactor"))]
     pub m_wheelDownForceSumFactor: f32,
 }
 const _: () = {

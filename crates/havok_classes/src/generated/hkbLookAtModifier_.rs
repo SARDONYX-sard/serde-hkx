@@ -17,110 +17,135 @@ pub struct hkbLookAtModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `targetWS`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "targetWS"))]
     pub m_targetWS: Vector4,
     /// # C++ Info
     /// - name: `headForwardLS`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "headForwardLS"))]
     pub m_headForwardLS: Vector4,
     /// # C++ Info
     /// - name: `neckForwardLS`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "neckForwardLS"))]
     pub m_neckForwardLS: Vector4,
     /// # C++ Info
     /// - name: `neckRightLS`(ctype: `hkVector4`)
     /// - offset: ` 96`(x86)/`128`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "neckRightLS"))]
     pub m_neckRightLS: Vector4,
     /// # C++ Info
     /// - name: `eyePositionHS`(ctype: `hkVector4`)
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "eyePositionHS"))]
     pub m_eyePositionHS: Vector4,
     /// # C++ Info
     /// - name: `newTargetGain`(ctype: `hkReal`)
     /// - offset: `128`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "newTargetGain"))]
     pub m_newTargetGain: f32,
     /// # C++ Info
     /// - name: `onGain`(ctype: `hkReal`)
     /// - offset: `132`(x86)/`164`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "onGain"))]
     pub m_onGain: f32,
     /// # C++ Info
     /// - name: `offGain`(ctype: `hkReal`)
     /// - offset: `136`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "offGain"))]
     pub m_offGain: f32,
     /// # C++ Info
     /// - name: `limitAngleDegrees`(ctype: `hkReal`)
     /// - offset: `140`(x86)/`172`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "limitAngleDegrees"))]
     pub m_limitAngleDegrees: f32,
     /// # C++ Info
     /// - name: `limitAngleLeft`(ctype: `hkReal`)
     /// - offset: `144`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "limitAngleLeft"))]
     pub m_limitAngleLeft: f32,
     /// # C++ Info
     /// - name: `limitAngleRight`(ctype: `hkReal`)
     /// - offset: `148`(x86)/`180`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "limitAngleRight"))]
     pub m_limitAngleRight: f32,
     /// # C++ Info
     /// - name: `limitAngleUp`(ctype: `hkReal`)
     /// - offset: `152`(x86)/`184`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "limitAngleUp"))]
     pub m_limitAngleUp: f32,
     /// # C++ Info
     /// - name: `limitAngleDown`(ctype: `hkReal`)
     /// - offset: `156`(x86)/`188`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "limitAngleDown"))]
     pub m_limitAngleDown: f32,
     /// # C++ Info
     /// - name: `headIndex`(ctype: `hkInt16`)
     /// - offset: `160`(x86)/`192`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "headIndex"))]
     pub m_headIndex: i16,
     /// # C++ Info
     /// - name: `neckIndex`(ctype: `hkInt16`)
     /// - offset: `162`(x86)/`194`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "neckIndex"))]
     pub m_neckIndex: i16,
     /// # C++ Info
     /// - name: `isOn`(ctype: `hkBool`)
     /// - offset: `164`(x86)/`196`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isOn"))]
     pub m_isOn: bool,
     /// # C++ Info
     /// - name: `individualLimitsOn`(ctype: `hkBool`)
     /// - offset: `165`(x86)/`197`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "individualLimitsOn"))]
     pub m_individualLimitsOn: bool,
     /// # C++ Info
     /// - name: `isTargetInsideLimitCone`(ctype: `hkBool`)
     /// - offset: `166`(x86)/`198`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isTargetInsideLimitCone"))]
     pub m_isTargetInsideLimitCone: bool,
     /// # C++ Info
     /// - name: `lookAtLastTargetWS`(ctype: `hkVector4`)
     /// - offset: `176`(x86)/`208`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "lookAtLastTargetWS"))]
     pub m_lookAtLastTargetWS: Vector4,
     /// # C++ Info
     /// - name: `lookAtWeight`(ctype: `hkReal`)
     /// - offset: `192`(x86)/`224`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "lookAtWeight"))]
     pub m_lookAtWeight: f32,
 }
 const _: () = {

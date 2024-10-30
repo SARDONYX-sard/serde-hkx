@@ -17,33 +17,43 @@ pub struct hkpVehicleDefaultAerodynamics {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpVehicleAerodynamics,
     /// # C++ Info
     /// - name: `airDensity`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "airDensity"))]
     pub m_airDensity: f32,
     /// # C++ Info
     /// - name: `frontalArea`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "frontalArea"))]
     pub m_frontalArea: f32,
     /// # C++ Info
     /// - name: `dragCoefficient`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "dragCoefficient"))]
     pub m_dragCoefficient: f32,
     /// # C++ Info
     /// - name: `liftCoefficient`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "liftCoefficient"))]
     pub m_liftCoefficient: f32,
     /// # C++ Info
     /// - name: `extraGravityws`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "extraGravityws"))]
     pub m_extraGravityws: Vector4,
 }
 const _: () = {

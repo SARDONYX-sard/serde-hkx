@@ -17,18 +17,25 @@ pub struct hkpConvexVerticesConnectivity {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `vertexIndices`(ctype: `hkArray<hkUint16>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexIndices"))]
     pub m_vertexIndices: Vec<u16>,
     /// # C++ Info
     /// - name: `numVerticesPerFace`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numVerticesPerFace"))]
     pub m_numVerticesPerFace: Vec<u8>,
 }
 const _: () = {

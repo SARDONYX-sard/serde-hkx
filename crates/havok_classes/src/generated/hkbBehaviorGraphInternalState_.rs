@@ -17,18 +17,25 @@ pub struct hkbBehaviorGraphInternalState {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `nodeInternalStateInfos`(ctype: `hkArray<hkbNodeInternalStateInfo*>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nodeInternalStateInfos"))]
     pub m_nodeInternalStateInfos: Vec<Pointer>,
     /// # C++ Info
     /// - name: `variableValueSet`(ctype: `struct hkbVariableValueSet*`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "variableValueSet"))]
     pub m_variableValueSet: Pointer,
 }
 const _: () = {

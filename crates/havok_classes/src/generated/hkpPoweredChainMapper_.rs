@@ -17,23 +17,31 @@ pub struct hkpPoweredChainMapper {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `links`(ctype: `hkArray<struct hkpPoweredChainMapperLinkInfo>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "links"))]
     pub m_links: Vec<hkpPoweredChainMapperLinkInfo>,
     /// # C++ Info
     /// - name: `targets`(ctype: `hkArray<struct hkpPoweredChainMapperTarget>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "targets"))]
     pub m_targets: Vec<hkpPoweredChainMapperTarget>,
     /// # C++ Info
     /// - name: `chains`(ctype: `hkArray<hkpConstraintChainInstance*>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "chains"))]
     pub m_chains: Vec<Pointer>,
 }
 const _: () = {

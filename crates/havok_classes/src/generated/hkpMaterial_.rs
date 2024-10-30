@@ -17,26 +17,34 @@ pub struct hkpMaterial {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `responseType`(ctype: `enum ResponseType`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "responseType"))]
     pub m_responseType: ResponseType,
     /// # C++ Info
     /// - name: `rollingFrictionMultiplier`(ctype: `hkHalf`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rollingFrictionMultiplier"))]
     pub m_rollingFrictionMultiplier: f16,
     /// # C++ Info
     /// - name: `friction`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "friction"))]
     pub m_friction: f32,
     /// # C++ Info
     /// - name: `restitution`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "restitution"))]
     pub m_restitution: f32,
 }
 const _: () = {

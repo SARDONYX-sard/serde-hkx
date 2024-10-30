@@ -17,27 +17,35 @@ pub struct hkClassEnum<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `name`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: CString<'a>,
     /// # C++ Info
     /// - name: `items`(ctype: `hkSimpleArray<struct hkClassEnumItem>`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  8`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "items"))]
     pub m_items: Vec<hkClassEnumItem<'a>>,
     /// # C++ Info
     /// - name: `attributes`(ctype: `struct hkCustomAttributes*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "attributes"))]
     pub m_attributes: Pointer,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags FlagValues`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: FlagValues,
 }
 const _: () = {

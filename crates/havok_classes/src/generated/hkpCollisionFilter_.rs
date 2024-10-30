@@ -17,23 +17,31 @@ pub struct hkpCollisionFilter {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `prepad`(ctype: `hkUint32[2]`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "prepad"))]
     pub m_prepad: [u32; 2usize],
     /// # C++ Info
     /// - name: `type`(ctype: `enum hkpFilterType`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "type"))]
     pub m_type: hkpFilterType,
     /// # C++ Info
     /// - name: `postpad`(ctype: `hkUint32[3]`)
     /// - offset: ` 36`(x86)/` 60`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "postpad"))]
     pub m_postpad: [u32; 3usize],
 }
 const _: () = {

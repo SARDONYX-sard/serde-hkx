@@ -17,36 +17,46 @@ pub struct hkpCompressedMeshShapeConvexPiece {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `offset`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "offset"))]
     pub m_offset: Vector4,
     /// # C++ Info
     /// - name: `vertices`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertices"))]
     pub m_vertices: Vec<u16>,
     /// # C++ Info
     /// - name: `faceVertices`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 28`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "faceVertices"))]
     pub m_faceVertices: Vec<u8>,
     /// # C++ Info
     /// - name: `faceOffsets`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 40`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "faceOffsets"))]
     pub m_faceOffsets: Vec<u16>,
     /// # C++ Info
     /// - name: `reference`(ctype: `hkUint16`)
     /// - offset: ` 52`(x86)/` 64`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "reference"))]
     pub m_reference: u16,
     /// # C++ Info
     /// - name: `transformIndex`(ctype: `hkUint16`)
     /// - offset: ` 54`(x86)/` 66`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transformIndex"))]
     pub m_transformIndex: u16,
 }
 const _: () = {

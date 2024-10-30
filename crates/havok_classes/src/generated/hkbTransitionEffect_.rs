@@ -17,24 +17,32 @@ pub struct hkbTransitionEffect<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `selfTransitionMode`(ctype: `enum SelfTransitionMode`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "selfTransitionMode"))]
     pub m_selfTransitionMode: SelfTransitionMode,
     /// # C++ Info
     /// - name: `eventMode`(ctype: `enum EventMode`)
     /// - offset: ` 41`(x86)/` 73`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "eventMode"))]
     pub m_eventMode: EventMode,
     /// # C++ Info
     /// - name: `defaultEventMode`(ctype: `enum unknown`)
     /// - offset: ` 42`(x86)/` 74`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "defaultEventMode"))]
     pub m_defaultEventMode: i8,
 }
 const _: () = {

@@ -17,28 +17,36 @@ pub struct hkpCdBody {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `shape`(ctype: `struct hkpShape*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "shape"))]
     pub m_shape: Pointer,
     /// # C++ Info
     /// - name: `shapeKey`(ctype: `hkUint32`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "shapeKey"))]
     pub m_shapeKey: u32,
     /// # C++ Info
     /// - name: `motion`(ctype: `void*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "motion"))]
     pub m_motion: Pointer,
     /// # C++ Info
     /// - name: `parent`(ctype: `struct hkpCdBody*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "parent"))]
     pub m_parent: Pointer,
 }
 const _: () = {

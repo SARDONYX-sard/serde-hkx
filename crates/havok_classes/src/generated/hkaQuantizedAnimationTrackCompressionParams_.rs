@@ -17,26 +17,34 @@ pub struct hkaQuantizedAnimationTrackCompressionParams {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `rotationTolerance`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotationTolerance"))]
     pub m_rotationTolerance: f32,
     /// # C++ Info
     /// - name: `translationTolerance`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "translationTolerance"))]
     pub m_translationTolerance: f32,
     /// # C++ Info
     /// - name: `scaleTolerance`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "scaleTolerance"))]
     pub m_scaleTolerance: f32,
     /// # C++ Info
     /// - name: `floatingTolerance`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "floatingTolerance"))]
     pub m_floatingTolerance: f32,
 }
 const _: () = {

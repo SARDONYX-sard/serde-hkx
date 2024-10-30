@@ -17,23 +17,31 @@ pub struct hkpGroupFilter {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpCollisionFilter,
     /// # C++ Info
     /// - name: `nextFreeSystemGroup`(ctype: `hkInt32`)
     /// - offset: ` 48`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nextFreeSystemGroup"))]
     pub m_nextFreeSystemGroup: i32,
     /// # C++ Info
     /// - name: `collisionLookupTable`(ctype: `hkUint32[32]`)
     /// - offset: ` 52`(x86)/` 76`(x86_64)
     /// - type_size: `128`(x86)/`128`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "collisionLookupTable"))]
     pub m_collisionLookupTable: [u32; 32usize],
     /// # C++ Info
     /// - name: `pad256`(ctype: `hkVector4[4]`)
     /// - offset: `192`(x86)/`208`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "pad256"))]
     pub m_pad256: [Vector4; 4usize],
 }
 const _: () = {

@@ -17,14 +17,20 @@ pub struct hkpConstraintChainInstanceAction<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpAction<'a>,
     /// # C++ Info
     /// - name: `constraintInstance`(ctype: `struct hkpConstraintChainInstance*`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `NOT_OWNED`
+    #[cfg_attr(feature = "serde", serde(rename = "constraintInstance"))]
     pub m_constraintInstance: Pointer,
 }
 const _: () = {

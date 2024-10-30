@@ -17,18 +17,25 @@ pub struct hkpSerializedSubTrack1nInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpSerializedTrack1nInfo,
     /// # C++ Info
     /// - name: `sectorIndex`(ctype: `hkInt32`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sectorIndex"))]
     pub m_sectorIndex: i32,
     /// # C++ Info
     /// - name: `offsetInSector`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "offsetInSector"))]
     pub m_offsetInSector: i32,
 }
 const _: () = {

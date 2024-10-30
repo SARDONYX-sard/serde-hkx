@@ -17,20 +17,27 @@ pub struct hkpSimpleShapePhantom<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpShapePhantom<'a>,
     /// # C++ Info
     /// - name: `collisionDetails`(ctype: `hkArray<struct hkpSimpleShapePhantomCollisionDetail>`)
     /// - offset: `352`(x86)/`416`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "collisionDetails"))]
     pub m_collisionDetails: Vec<hkpSimpleShapePhantomCollisionDetail>,
     /// # C++ Info
     /// - name: `orderDirty`(ctype: `hkBool`)
     /// - offset: `364`(x86)/`432`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "orderDirty"))]
     pub m_orderDirty: bool,
 }
 const _: () = {

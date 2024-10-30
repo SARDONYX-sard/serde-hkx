@@ -17,28 +17,36 @@ pub struct hkpEntitySpuCollisionCallback {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `util`(ctype: `void*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "util"))]
     pub m_util: Pointer,
     /// # C++ Info
     /// - name: `capacity`(ctype: `hkUint16`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "capacity"))]
     pub m_capacity: u16,
     /// # C++ Info
     /// - name: `eventFilter`(ctype: `hkUint8`)
     /// - offset: `  6`(x86)/` 10`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "eventFilter"))]
     pub m_eventFilter: u8,
     /// # C++ Info
     /// - name: `userFilter`(ctype: `hkUint8`)
     /// - offset: `  7`(x86)/` 11`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "userFilter"))]
     pub m_userFilter: u8,
 }
 const _: () = {

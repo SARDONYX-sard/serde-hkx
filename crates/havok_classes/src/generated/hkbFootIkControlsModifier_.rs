@@ -17,28 +17,37 @@ pub struct hkbFootIkControlsModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `controlData`(ctype: `struct hkbFootIkControlData`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "controlData"))]
     pub m_controlData: hkbFootIkControlData,
     /// # C++ Info
     /// - name: `legs`(ctype: `hkArray<struct hkbFootIkControlsModifierLeg>`)
     /// - offset: ` 96`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "legs"))]
     pub m_legs: Vec<hkbFootIkControlsModifierLeg>,
     /// # C++ Info
     /// - name: `errorOutTranslation`(ctype: `hkVector4`)
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "errorOutTranslation"))]
     pub m_errorOutTranslation: Vector4,
     /// # C++ Info
     /// - name: `alignWithGroundRotation`(ctype: `hkQuaternion`)
     /// - offset: `128`(x86)/`160`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "alignWithGroundRotation"))]
     pub m_alignWithGroundRotation: Quaternion,
 }
 const _: () = {

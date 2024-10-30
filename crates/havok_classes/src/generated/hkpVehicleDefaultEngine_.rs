@@ -17,58 +17,73 @@ pub struct hkpVehicleDefaultEngine {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpVehicleEngine,
     /// # C++ Info
     /// - name: `minRPM`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "minRPM"))]
     pub m_minRPM: f32,
     /// # C++ Info
     /// - name: `optRPM`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "optRPM"))]
     pub m_optRPM: f32,
     /// # C++ Info
     /// - name: `maxRPM`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxRPM"))]
     pub m_maxRPM: f32,
     /// # C++ Info
     /// - name: `maxTorque`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxTorque"))]
     pub m_maxTorque: f32,
     /// # C++ Info
     /// - name: `torqueFactorAtMinRPM`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "torqueFactorAtMinRPM"))]
     pub m_torqueFactorAtMinRPM: f32,
     /// # C++ Info
     /// - name: `torqueFactorAtMaxRPM`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "torqueFactorAtMaxRPM"))]
     pub m_torqueFactorAtMaxRPM: f32,
     /// # C++ Info
     /// - name: `resistanceFactorAtMinRPM`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "resistanceFactorAtMinRPM"))]
     pub m_resistanceFactorAtMinRPM: f32,
     /// # C++ Info
     /// - name: `resistanceFactorAtOptRPM`(ctype: `hkReal`)
     /// - offset: ` 36`(x86)/` 44`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "resistanceFactorAtOptRPM"))]
     pub m_resistanceFactorAtOptRPM: f32,
     /// # C++ Info
     /// - name: `resistanceFactorAtMaxRPM`(ctype: `hkReal`)
     /// - offset: ` 40`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "resistanceFactorAtMaxRPM"))]
     pub m_resistanceFactorAtMaxRPM: f32,
     /// # C++ Info
     /// - name: `clutchSlipRPM`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 52`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "clutchSlipRPM"))]
     pub m_clutchSlipRPM: f32,
 }
 const _: () = {

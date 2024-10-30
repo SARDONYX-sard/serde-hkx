@@ -17,63 +17,79 @@ pub struct hkMultipleVertexBuffer {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkMeshVertexBuffer,
     /// # C++ Info
     /// - name: `vertexFormat`(ctype: `struct hkVertexFormat`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `260`(x86)/`260`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexFormat"))]
     pub m_vertexFormat: hkVertexFormat,
     /// # C++ Info
     /// - name: `lockedElements`(ctype: `hkArray<struct hkMultipleVertexBufferLockedElement>`)
     /// - offset: `268`(x86)/`280`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lockedElements"))]
     pub m_lockedElements: Vec<hkMultipleVertexBufferLockedElement>,
     /// # C++ Info
     /// - name: `lockedBuffer`(ctype: `struct hkMemoryMeshVertexBuffer*`)
     /// - offset: `280`(x86)/`296`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lockedBuffer"))]
     pub m_lockedBuffer: Pointer,
     /// # C++ Info
     /// - name: `elementInfos`(ctype: `hkArray<struct hkMultipleVertexBufferElementInfo>`)
     /// - offset: `284`(x86)/`304`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "elementInfos"))]
     pub m_elementInfos: Vec<hkMultipleVertexBufferElementInfo>,
     /// # C++ Info
     /// - name: `vertexBufferInfos`(ctype: `hkArray<struct hkMultipleVertexBufferVertexBufferInfo>`)
     /// - offset: `296`(x86)/`320`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexBufferInfos"))]
     pub m_vertexBufferInfos: Vec<hkMultipleVertexBufferVertexBufferInfo>,
     /// # C++ Info
     /// - name: `numVertices`(ctype: `hkInt32`)
     /// - offset: `308`(x86)/`336`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numVertices"))]
     pub m_numVertices: i32,
     /// # C++ Info
     /// - name: `isLocked`(ctype: `hkBool`)
     /// - offset: `312`(x86)/`340`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isLocked"))]
     pub m_isLocked: bool,
     /// # C++ Info
     /// - name: `updateCount`(ctype: `hkUint32`)
     /// - offset: `316`(x86)/`344`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "updateCount"))]
     pub m_updateCount: u32,
     /// # C++ Info
     /// - name: `writeLock`(ctype: `hkBool`)
     /// - offset: `320`(x86)/`348`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "writeLock"))]
     pub m_writeLock: bool,
     /// # C++ Info
     /// - name: `isSharable`(ctype: `hkBool`)
     /// - offset: `321`(x86)/`349`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isSharable"))]
     pub m_isSharable: bool,
     /// # C++ Info
     /// - name: `constructionComplete`(ctype: `hkBool`)
     /// - offset: `322`(x86)/`350`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "constructionComplete"))]
     pub m_constructionComplete: bool,
 }
 const _: () = {

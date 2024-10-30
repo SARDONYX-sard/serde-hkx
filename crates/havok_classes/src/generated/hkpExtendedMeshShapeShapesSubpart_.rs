@@ -17,23 +17,31 @@ pub struct hkpExtendedMeshShapeShapesSubpart {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpExtendedMeshShapeSubpart,
     /// # C++ Info
     /// - name: `childShapes`(ctype: `hkArray<hkpConvexShape*>`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "childShapes"))]
     pub m_childShapes: Vec<Pointer>,
     /// # C++ Info
     /// - name: `rotation`(ctype: `hkQuaternion`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotation"))]
     pub m_rotation: Quaternion,
     /// # C++ Info
     /// - name: `translation`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "translation"))]
     pub m_translation: Vector4,
 }
 const _: () = {

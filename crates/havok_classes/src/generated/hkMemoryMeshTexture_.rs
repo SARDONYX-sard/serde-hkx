@@ -17,43 +17,55 @@ pub struct hkMemoryMeshTexture<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkMeshTexture,
     /// # C++ Info
     /// - name: `filename`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "filename"))]
     pub m_filename: StringPtr<'a>,
     /// # C++ Info
     /// - name: `data`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "data"))]
     pub m_data: Vec<u8>,
     /// # C++ Info
     /// - name: `format`(ctype: `enum Format`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "format"))]
     pub m_format: Format,
     /// # C++ Info
     /// - name: `hasMipMaps`(ctype: `hkBool`)
     /// - offset: ` 25`(x86)/` 41`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "hasMipMaps"))]
     pub m_hasMipMaps: bool,
     /// # C++ Info
     /// - name: `filterMode`(ctype: `enum FilterMode`)
     /// - offset: ` 26`(x86)/` 42`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "filterMode"))]
     pub m_filterMode: FilterMode,
     /// # C++ Info
     /// - name: `usageHint`(ctype: `enum TextureUsageType`)
     /// - offset: ` 27`(x86)/` 43`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "usageHint"))]
     pub m_usageHint: TextureUsageType,
     /// # C++ Info
     /// - name: `textureCoordChannel`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 44`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "textureCoordChannel"))]
     pub m_textureCoordChannel: i32,
 }
 const _: () = {

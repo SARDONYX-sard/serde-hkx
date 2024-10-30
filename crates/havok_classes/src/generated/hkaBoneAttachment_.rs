@@ -17,33 +17,43 @@ pub struct hkaBoneAttachment<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `originalSkeletonName`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "originalSkeletonName"))]
     pub m_originalSkeletonName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `boneFromAttachment`(ctype: `hkMatrix4`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "boneFromAttachment"))]
     pub m_boneFromAttachment: Matrix4,
     /// # C++ Info
     /// - name: `attachment`(ctype: `struct hkReferencedObject*`)
     /// - offset: ` 80`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "attachment"))]
     pub m_attachment: Pointer,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 84`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
     /// # C++ Info
     /// - name: `boneIndex`(ctype: `hkInt16`)
     /// - offset: ` 88`(x86)/`112`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "boneIndex"))]
     pub m_boneIndex: i16,
 }
 const _: () = {

@@ -17,18 +17,25 @@ pub struct hkbKeyframeBonesModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `keyframeInfo`(ctype: `hkArray<struct hkbKeyframeBonesModifierKeyframeInfo>`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "keyframeInfo"))]
     pub m_keyframeInfo: Vec<hkbKeyframeBonesModifierKeyframeInfo>,
     /// # C++ Info
     /// - name: `keyframedBonesList`(ctype: `struct hkbBoneIndexArray*`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "keyframedBonesList"))]
     pub m_keyframedBonesList: Pointer,
 }
 const _: () = {

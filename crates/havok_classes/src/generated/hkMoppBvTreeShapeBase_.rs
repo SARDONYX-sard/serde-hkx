@@ -17,31 +17,40 @@ pub struct hkMoppBvTreeShapeBase {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpBvTreeShape,
     /// # C++ Info
     /// - name: `code`(ctype: `struct hkpMoppCode*`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "code"))]
     pub m_code: Pointer,
     /// # C++ Info
     /// - name: `moppData`(ctype: `void*`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "moppData"))]
     pub m_moppData: Pointer,
     /// # C++ Info
     /// - name: `moppDataSize`(ctype: `hkUint32`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "moppDataSize"))]
     pub m_moppDataSize: u32,
     /// # C++ Info
     /// - name: `codeInfoCopy`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "codeInfoCopy"))]
     pub m_codeInfoCopy: Vector4,
 }
 const _: () = {

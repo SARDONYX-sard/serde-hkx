@@ -17,28 +17,37 @@ pub struct hkpPositionConstraintMotor {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpLimitedForceConstraintMotor,
     /// # C++ Info
     /// - name: `tau`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "tau"))]
     pub m_tau: f32,
     /// # C++ Info
     /// - name: `damping`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "damping"))]
     pub m_damping: f32,
     /// # C++ Info
     /// - name: `proportionalRecoveryVelocity`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "proportionalRecoveryVelocity"))]
     pub m_proportionalRecoveryVelocity: f32,
     /// # C++ Info
     /// - name: `constantRecoveryVelocity`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 44`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "constantRecoveryVelocity"))]
     pub m_constantRecoveryVelocity: f32,
 }
 const _: () = {

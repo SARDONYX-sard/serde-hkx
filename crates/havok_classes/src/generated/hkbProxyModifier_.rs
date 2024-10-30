@@ -17,160 +17,194 @@ pub struct hkbProxyModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `proxyInfo`(ctype: `struct hkbProxyModifierProxyInfo`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 80`(x86)/` 80`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "proxyInfo"))]
     pub m_proxyInfo: hkbProxyModifierProxyInfo,
     /// # C++ Info
     /// - name: `linearVelocity`(ctype: `hkVector4`)
     /// - offset: `128`(x86)/`160`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "linearVelocity"))]
     pub m_linearVelocity: Vector4,
     /// # C++ Info
     /// - name: `horizontalGain`(ctype: `hkReal`)
     /// - offset: `144`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "horizontalGain"))]
     pub m_horizontalGain: f32,
     /// # C++ Info
     /// - name: `verticalGain`(ctype: `hkReal`)
     /// - offset: `148`(x86)/`180`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "verticalGain"))]
     pub m_verticalGain: f32,
     /// # C++ Info
     /// - name: `maxHorizontalSeparation`(ctype: `hkReal`)
     /// - offset: `152`(x86)/`184`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxHorizontalSeparation"))]
     pub m_maxHorizontalSeparation: f32,
     /// # C++ Info
     /// - name: `maxVerticalSeparation`(ctype: `hkReal`)
     /// - offset: `156`(x86)/`188`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxVerticalSeparation"))]
     pub m_maxVerticalSeparation: f32,
     /// # C++ Info
     /// - name: `verticalDisplacementError`(ctype: `hkReal`)
     /// - offset: `160`(x86)/`192`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "verticalDisplacementError"))]
     pub m_verticalDisplacementError: f32,
     /// # C++ Info
     /// - name: `verticalDisplacementErrorGain`(ctype: `hkReal`)
     /// - offset: `164`(x86)/`196`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "verticalDisplacementErrorGain"))]
     pub m_verticalDisplacementErrorGain: f32,
     /// # C++ Info
     /// - name: `maxVerticalDisplacement`(ctype: `hkReal`)
     /// - offset: `168`(x86)/`200`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxVerticalDisplacement"))]
     pub m_maxVerticalDisplacement: f32,
     /// # C++ Info
     /// - name: `minVerticalDisplacement`(ctype: `hkReal`)
     /// - offset: `172`(x86)/`204`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "minVerticalDisplacement"))]
     pub m_minVerticalDisplacement: f32,
     /// # C++ Info
     /// - name: `capsuleHeight`(ctype: `hkReal`)
     /// - offset: `176`(x86)/`208`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "capsuleHeight"))]
     pub m_capsuleHeight: f32,
     /// # C++ Info
     /// - name: `capsuleRadius`(ctype: `hkReal`)
     /// - offset: `180`(x86)/`212`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "capsuleRadius"))]
     pub m_capsuleRadius: f32,
     /// # C++ Info
     /// - name: `maxSlopeForRotation`(ctype: `hkReal`)
     /// - offset: `184`(x86)/`216`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxSlopeForRotation"))]
     pub m_maxSlopeForRotation: f32,
     /// # C++ Info
     /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
     /// - offset: `188`(x86)/`220`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "collisionFilterInfo"))]
     pub m_collisionFilterInfo: u32,
     /// # C++ Info
     /// - name: `phantomType`(ctype: `enum PhantomType`)
     /// - offset: `192`(x86)/`224`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "phantomType"))]
     pub m_phantomType: PhantomType,
     /// # C++ Info
     /// - name: `linearVelocityMode`(ctype: `enum LinearVelocityMode`)
     /// - offset: `193`(x86)/`225`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "linearVelocityMode"))]
     pub m_linearVelocityMode: LinearVelocityMode,
     /// # C++ Info
     /// - name: `ignoreIncomingRotation`(ctype: `hkBool`)
     /// - offset: `194`(x86)/`226`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "ignoreIncomingRotation"))]
     pub m_ignoreIncomingRotation: bool,
     /// # C++ Info
     /// - name: `ignoreCollisionDuringRotation`(ctype: `hkBool`)
     /// - offset: `195`(x86)/`227`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "ignoreCollisionDuringRotation"))]
     pub m_ignoreCollisionDuringRotation: bool,
     /// # C++ Info
     /// - name: `ignoreIncomingTranslation`(ctype: `hkBool`)
     /// - offset: `196`(x86)/`228`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "ignoreIncomingTranslation"))]
     pub m_ignoreIncomingTranslation: bool,
     /// # C++ Info
     /// - name: `includeDownwardMomentum`(ctype: `hkBool`)
     /// - offset: `197`(x86)/`229`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "includeDownwardMomentum"))]
     pub m_includeDownwardMomentum: bool,
     /// # C++ Info
     /// - name: `followWorldFromModel`(ctype: `hkBool`)
     /// - offset: `198`(x86)/`230`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "followWorldFromModel"))]
     pub m_followWorldFromModel: bool,
     /// # C++ Info
     /// - name: `isTouchingGround`(ctype: `hkBool`)
     /// - offset: `199`(x86)/`231`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isTouchingGround"))]
     pub m_isTouchingGround: bool,
     /// # C++ Info
     /// - name: `characterProxy`(ctype: `void*`)
     /// - offset: `200`(x86)/`232`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "characterProxy"))]
     pub m_characterProxy: Pointer,
     /// # C++ Info
     /// - name: `phantom`(ctype: `void*`)
     /// - offset: `204`(x86)/`240`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "phantom"))]
     pub m_phantom: Pointer,
     /// # C++ Info
     /// - name: `phantomShape`(ctype: `void*`)
     /// - offset: `208`(x86)/`248`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "phantomShape"))]
     pub m_phantomShape: Pointer,
     /// # C++ Info
     /// - name: `horizontalDisplacement`(ctype: `hkVector4`)
     /// - offset: `224`(x86)/`256`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "horizontalDisplacement"))]
     pub m_horizontalDisplacement: Vector4,
     /// # C++ Info
     /// - name: `verticalDisplacement`(ctype: `hkReal`)
     /// - offset: `240`(x86)/`272`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "verticalDisplacement"))]
     pub m_verticalDisplacement: f32,
     /// # C++ Info
     /// - name: `timestep`(ctype: `hkReal`)
     /// - offset: `244`(x86)/`276`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "timestep"))]
     pub m_timestep: f32,
     /// # C++ Info
     /// - name: `previousFrameFollowWorldFromModel`(ctype: `hkBool`)
     /// - offset: `248`(x86)/`280`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "previousFrameFollowWorldFromModel"))]
     pub m_previousFrameFollowWorldFromModel: bool,
 }
 const _: () = {

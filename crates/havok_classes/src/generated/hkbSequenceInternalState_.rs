@@ -17,38 +17,49 @@ pub struct hkbSequenceInternalState {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `nextSampleEvents`(ctype: `hkArray<hkInt32>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nextSampleEvents"))]
     pub m_nextSampleEvents: Vec<i32>,
     /// # C++ Info
     /// - name: `nextSampleReals`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nextSampleReals"))]
     pub m_nextSampleReals: Vec<i32>,
     /// # C++ Info
     /// - name: `nextSampleBools`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nextSampleBools"))]
     pub m_nextSampleBools: Vec<i32>,
     /// # C++ Info
     /// - name: `nextSampleInts`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nextSampleInts"))]
     pub m_nextSampleInts: Vec<i32>,
     /// # C++ Info
     /// - name: `time`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "time"))]
     pub m_time: f32,
     /// # C++ Info
     /// - name: `isEnabled`(ctype: `hkBool`)
     /// - offset: ` 60`(x86)/` 84`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isEnabled"))]
     pub m_isEnabled: bool,
 }
 const _: () = {

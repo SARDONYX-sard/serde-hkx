@@ -17,46 +17,58 @@ pub struct hkaSkeletonMapperData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `skeletonA`(ctype: `struct hkaSkeleton*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "skeletonA"))]
     pub m_skeletonA: Pointer,
     /// # C++ Info
     /// - name: `skeletonB`(ctype: `struct hkaSkeleton*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "skeletonB"))]
     pub m_skeletonB: Pointer,
     /// # C++ Info
     /// - name: `simpleMappings`(ctype: `hkArray<struct hkaSkeletonMapperDataSimpleMapping>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "simpleMappings"))]
     pub m_simpleMappings: Vec<hkaSkeletonMapperDataSimpleMapping>,
     /// # C++ Info
     /// - name: `chainMappings`(ctype: `hkArray<struct hkaSkeletonMapperDataChainMapping>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "chainMappings"))]
     pub m_chainMappings: Vec<hkaSkeletonMapperDataChainMapping>,
     /// # C++ Info
     /// - name: `unmappedBones`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "unmappedBones"))]
     pub m_unmappedBones: Vec<i16>,
     /// # C++ Info
     /// - name: `extractedMotionMapping`(ctype: `hkQsTransform`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "extractedMotionMapping"))]
     pub m_extractedMotionMapping: QsTransform,
     /// # C++ Info
     /// - name: `keepUnmappedLocal`(ctype: `hkBool`)
     /// - offset: ` 96`(x86)/`112`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "keepUnmappedLocal"))]
     pub m_keepUnmappedLocal: bool,
     /// # C++ Info
     /// - name: `mappingType`(ctype: `enum MappingType`)
     /// - offset: `100`(x86)/`116`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "mappingType"))]
     pub m_mappingType: MappingType,
 }
 const _: () = {

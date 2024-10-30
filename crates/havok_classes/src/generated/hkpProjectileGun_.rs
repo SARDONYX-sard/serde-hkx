@@ -17,42 +17,53 @@ pub struct hkpProjectileGun<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpFirstPersonGun<'a>,
     /// # C++ Info
     /// - name: `maxProjectiles`(ctype: `hkInt32`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxProjectiles"))]
     pub m_maxProjectiles: i32,
     /// # C++ Info
     /// - name: `reloadTime`(ctype: `hkReal`)
     /// - offset: ` 36`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "reloadTime"))]
     pub m_reloadTime: f32,
     /// # C++ Info
     /// - name: `reload`(ctype: `hkReal`)
     /// - offset: ` 40`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "reload"))]
     pub m_reload: f32,
     /// # C++ Info
     /// - name: `projectiles`(ctype: `hkArray<void*>`)
     /// - offset: ` 44`(x86)/` 72`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "projectiles"))]
     pub m_projectiles: Vec<Pointer>,
     /// # C++ Info
     /// - name: `world`(ctype: `void*`)
     /// - offset: ` 56`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "world"))]
     pub m_world: Pointer,
     /// # C++ Info
     /// - name: `destructionWorld`(ctype: `void*`)
     /// - offset: ` 60`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "destructionWorld"))]
     pub m_destructionWorld: Pointer,
 }
 const _: () = {
