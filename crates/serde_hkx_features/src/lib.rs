@@ -26,11 +26,16 @@ pub fn generate_json_schema() -> error::Result<String> {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
 
+    #[cfg(feature = "json_schema")]
+    #[cfg_attr(miri, ignore = "`create_dir_all` is error.")]
     #[test]
     fn gen_schema() {
         std::fs::create_dir_all("../../tests").unwrap();
-        std::fs::write("../../tests/schema.json", generate_json_schema().unwrap()).unwrap();
+        std::fs::write(
+            "../../tests/schema.json",
+            super::generate_json_schema().unwrap(),
+        )
+        .unwrap();
     }
 }
