@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 96`(x86)/`128`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct hkbSetWorldFromModelModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `translation`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "translation"))]
     #[cfg_attr(feature = "serde", serde(rename = "translation"))]
     pub m_translation: Vector4,
     /// # C++ Info
     /// - name: `rotation`(ctype: `hkQuaternion`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotation"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotation"))]
     pub m_rotation: Quaternion,
     /// # C++ Info
     /// - name: `setTranslation`(ctype: `hkBool`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "setTranslation"))]
     #[cfg_attr(feature = "serde", serde(rename = "setTranslation"))]
     pub m_setTranslation: bool,
     /// # C++ Info
     /// - name: `setRotation`(ctype: `hkBool`)
     /// - offset: ` 81`(x86)/`113`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "setRotation"))]
     #[cfg_attr(feature = "serde", serde(rename = "setRotation"))]
     pub m_setRotation: bool,
 }

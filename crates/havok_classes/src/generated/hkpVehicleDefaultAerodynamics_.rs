@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 48`(x86)/` 48`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,42 @@ pub struct hkpVehicleDefaultAerodynamics {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpVehicleAerodynamics,
     /// # C++ Info
     /// - name: `airDensity`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "airDensity"))]
     #[cfg_attr(feature = "serde", serde(rename = "airDensity"))]
     pub m_airDensity: f32,
     /// # C++ Info
     /// - name: `frontalArea`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "frontalArea"))]
     #[cfg_attr(feature = "serde", serde(rename = "frontalArea"))]
     pub m_frontalArea: f32,
     /// # C++ Info
     /// - name: `dragCoefficient`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "dragCoefficient"))]
     #[cfg_attr(feature = "serde", serde(rename = "dragCoefficient"))]
     pub m_dragCoefficient: f32,
     /// # C++ Info
     /// - name: `liftCoefficient`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "liftCoefficient"))]
     #[cfg_attr(feature = "serde", serde(rename = "liftCoefficient"))]
     pub m_liftCoefficient: f32,
     /// # C++ Info
     /// - name: `extraGravityws`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "extraGravityws"))]
     #[cfg_attr(feature = "serde", serde(rename = "extraGravityws"))]
     pub m_extraGravityws: Vector4,
 }

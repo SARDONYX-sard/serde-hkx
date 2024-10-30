@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 60`(x86)/`112`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkbTimerModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `alarmTimeSeconds`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "alarmTimeSeconds"))]
     #[cfg_attr(feature = "serde", serde(rename = "alarmTimeSeconds"))]
     pub m_alarmTimeSeconds: f32,
     /// # C++ Info
     /// - name: `alarmEvent`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "alarmEvent"))]
     #[cfg_attr(feature = "serde", serde(rename = "alarmEvent"))]
     pub m_alarmEvent: hkbEventProperty,
     /// # C++ Info
@@ -42,6 +46,7 @@ pub struct hkbTimerModifier<'a> {
     /// - offset: ` 56`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "secondsElapsed"))]
     #[cfg_attr(feature = "serde", serde(rename = "secondsElapsed"))]
     pub m_secondsElapsed: f32,
 }

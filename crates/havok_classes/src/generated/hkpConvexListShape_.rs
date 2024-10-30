@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 80`(x86)/`128`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,12 +24,17 @@ pub struct hkpConvexListShape {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConvexShape,
     /// # C++ Info
     /// - name: `minDistanceToUseConvexHullForGetClosestPoints`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "minDistanceToUseConvexHullForGetClosestPoints")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "minDistanceToUseConvexHullForGetClosestPoints")
@@ -38,24 +44,28 @@ pub struct hkpConvexListShape {
     /// - name: `aabbHalfExtents`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "aabbHalfExtents"))]
     #[cfg_attr(feature = "serde", serde(rename = "aabbHalfExtents"))]
     pub m_aabbHalfExtents: Vector4,
     /// # C++ Info
     /// - name: `aabbCenter`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "aabbCenter"))]
     #[cfg_attr(feature = "serde", serde(rename = "aabbCenter"))]
     pub m_aabbCenter: Vector4,
     /// # C++ Info
     /// - name: `useCachedAabb`(ctype: `hkBool`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "useCachedAabb"))]
     #[cfg_attr(feature = "serde", serde(rename = "useCachedAabb"))]
     pub m_useCachedAabb: bool,
     /// # C++ Info
     /// - name: `childShapes`(ctype: `hkArray<hkpConvexShape*>`)
     /// - offset: ` 68`(x86)/`104`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childShapes"))]
     #[cfg_attr(feature = "serde", serde(rename = "childShapes"))]
     pub m_childShapes: Vec<Pointer>,
 }

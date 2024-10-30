@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 16`(x86)/` 16`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,45 @@ pub struct hkpBallSocketConstraintAtom {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintAtom,
     /// # C++ Info
     /// - name: `solvingMethod`(ctype: `enum SolvingMethod`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "solvingMethod"))]
     #[cfg_attr(feature = "serde", serde(rename = "solvingMethod"))]
     pub m_solvingMethod: SolvingMethod,
     /// # C++ Info
     /// - name: `bodiesToNotify`(ctype: `hkUint8`)
     /// - offset: `  3`(x86)/`  3`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bodiesToNotify"))]
     #[cfg_attr(feature = "serde", serde(rename = "bodiesToNotify"))]
     pub m_bodiesToNotify: u8,
     /// # C++ Info
     /// - name: `velocityStabilizationFactor`(ctype: `hkUint8`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "velocityStabilizationFactor")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "velocityStabilizationFactor"))]
     pub m_velocityStabilizationFactor: u8,
     /// # C++ Info
     /// - name: `maxImpulse`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxImpulse"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxImpulse"))]
     pub m_maxImpulse: f32,
     /// # C++ Info
     /// - name: `inertiaStabilizationFactor`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "inertiaStabilizationFactor"))]
     #[cfg_attr(feature = "serde", serde(rename = "inertiaStabilizationFactor"))]
     pub m_inertiaStabilizationFactor: f32,
 }

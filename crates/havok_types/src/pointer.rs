@@ -33,6 +33,8 @@ use parse_display::Display;
 ///
 /// # Note
 /// The [`Copy`] is derive for [`usize`] wrapper type.
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "json_schema", schemars(transparent))]
 #[cfg_attr(
     feature = "serde",
     derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)
@@ -40,7 +42,7 @@ use parse_display::Display;
 #[repr(transparent)]
 #[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display)]
 #[display("#{0:04}")]
-pub struct Pointer(usize);
+pub struct Pointer(#[cfg_attr(feature = "json_schema", schemars(with = "String"))] usize);
 
 impl Pointer {
     /// Creates a new `Pointer`

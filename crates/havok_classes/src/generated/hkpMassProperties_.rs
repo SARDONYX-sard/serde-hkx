@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 80`(x86)/` 80`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,24 +27,28 @@ pub struct hkpMassProperties {
     /// - name: `volume`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "volume"))]
     #[cfg_attr(feature = "serde", serde(rename = "volume"))]
     pub m_volume: f32,
     /// # C++ Info
     /// - name: `mass`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "mass"))]
     #[cfg_attr(feature = "serde", serde(rename = "mass"))]
     pub m_mass: f32,
     /// # C++ Info
     /// - name: `centerOfMass`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "centerOfMass"))]
     #[cfg_attr(feature = "serde", serde(rename = "centerOfMass"))]
     pub m_centerOfMass: Vector4,
     /// # C++ Info
     /// - name: `inertiaTensor`(ctype: `hkMatrix3`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "inertiaTensor"))]
     #[cfg_attr(feature = "serde", serde(rename = "inertiaTensor"))]
     pub m_inertiaTensor: Matrix3,
 }

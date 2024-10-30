@@ -7,6 +7,7 @@ use super::*;
 /// - size: `  8`(x86)/` 16`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct hkReferencedObject {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkBaseObject,
     /// # C++ Info
@@ -30,6 +32,7 @@ pub struct hkReferencedObject {
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "memSizeAndFlags"))]
     #[cfg_attr(feature = "serde", serde(rename = "memSizeAndFlags"))]
     pub m_memSizeAndFlags: u16,
     /// # C++ Info
@@ -37,6 +40,7 @@ pub struct hkReferencedObject {
     /// - offset: `  6`(x86)/` 10`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "referenceCount"))]
     #[cfg_attr(feature = "serde", serde(rename = "referenceCount"))]
     pub m_referenceCount: i16,
 }

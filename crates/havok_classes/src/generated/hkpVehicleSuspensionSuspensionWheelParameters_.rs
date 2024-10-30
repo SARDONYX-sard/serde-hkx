@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 48`(x86)/` 48`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,18 +27,21 @@ pub struct hkpVehicleSuspensionSuspensionWheelParameters {
     /// - name: `hardpointChassisSpace`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "hardpointChassisSpace"))]
     #[cfg_attr(feature = "serde", serde(rename = "hardpointChassisSpace"))]
     pub m_hardpointChassisSpace: Vector4,
     /// # C++ Info
     /// - name: `directionChassisSpace`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "directionChassisSpace"))]
     #[cfg_attr(feature = "serde", serde(rename = "directionChassisSpace"))]
     pub m_directionChassisSpace: Vector4,
     /// # C++ Info
     /// - name: `length`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "length"))]
     #[cfg_attr(feature = "serde", serde(rename = "length"))]
     pub m_length: f32,
 }

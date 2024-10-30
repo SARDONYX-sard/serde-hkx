@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 24`(x86)/` 24`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,18 +27,24 @@ pub struct hkbStateMachineDelayedTransitionInfo {
     /// - name: `delayedTransition`(ctype: `struct hkbStateMachineProspectiveTransitionInfo`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "delayedTransition"))]
     #[cfg_attr(feature = "serde", serde(rename = "delayedTransition"))]
     pub m_delayedTransition: hkbStateMachineProspectiveTransitionInfo,
     /// # C++ Info
     /// - name: `timeDelayed`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timeDelayed"))]
     #[cfg_attr(feature = "serde", serde(rename = "timeDelayed"))]
     pub m_timeDelayed: f32,
     /// # C++ Info
     /// - name: `isDelayedTransitionReturnToPreviousState`(ctype: `hkBool`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "isDelayedTransitionReturnToPreviousState")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "isDelayedTransitionReturnToPreviousState")
@@ -47,6 +54,7 @@ pub struct hkbStateMachineDelayedTransitionInfo {
     /// - name: `wasInAbutRangeLastFrame`(ctype: `hkBool`)
     /// - offset: ` 21`(x86)/` 21`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wasInAbutRangeLastFrame"))]
     #[cfg_attr(feature = "serde", serde(rename = "wasInAbutRangeLastFrame"))]
     pub m_wasInAbutRangeLastFrame: bool,
 }

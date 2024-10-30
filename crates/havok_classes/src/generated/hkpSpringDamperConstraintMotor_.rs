@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 28`(x86)/` 40`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkpSpringDamperConstraintMotor {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpLimitedForceConstraintMotor,
     /// # C++ Info
     /// - name: `springConstant`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "springConstant"))]
     #[cfg_attr(feature = "serde", serde(rename = "springConstant"))]
     pub m_springConstant: f32,
     /// # C++ Info
     /// - name: `springDamping`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "springDamping"))]
     #[cfg_attr(feature = "serde", serde(rename = "springDamping"))]
     pub m_springDamping: f32,
 }

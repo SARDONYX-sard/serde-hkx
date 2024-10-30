@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 20`(x86)/` 32`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,12 +24,14 @@ pub struct hkxAttributeHolder<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `attributeGroups`(ctype: `hkArray<struct hkxAttributeGroup>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "attributeGroups"))]
     #[cfg_attr(feature = "serde", serde(rename = "attributeGroups"))]
     pub m_attributeGroups: Vec<hkxAttributeGroup<'a>>,
 }

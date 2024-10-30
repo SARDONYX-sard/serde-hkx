@@ -7,6 +7,7 @@ use super::*;
 /// - size: `192`(x86)/`192`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,24 +27,28 @@ pub struct hkpHingeConstraintDataAtoms {
     /// - name: `transforms`(ctype: `struct hkpSetLocalTransformsConstraintAtom`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `144`(x86)/`144`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transforms"))]
     #[cfg_attr(feature = "serde", serde(rename = "transforms"))]
     pub m_transforms: hkpSetLocalTransformsConstraintAtom,
     /// # C++ Info
     /// - name: `setupStabilization`(ctype: `struct hkpSetupStabilizationAtom`)
     /// - offset: `144`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "setupStabilization"))]
     #[cfg_attr(feature = "serde", serde(rename = "setupStabilization"))]
     pub m_setupStabilization: hkpSetupStabilizationAtom,
     /// # C++ Info
     /// - name: `2dAng`(ctype: `struct hkp2dAngConstraintAtom`)
     /// - offset: `160`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "2dAng"))]
     #[cfg_attr(feature = "serde", serde(rename = "2dAng"))]
     pub m_2dAng: hkp2dAngConstraintAtom,
     /// # C++ Info
     /// - name: `ballSocket`(ctype: `struct hkpBallSocketConstraintAtom`)
     /// - offset: `164`(x86)/`164`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "ballSocket"))]
     #[cfg_attr(feature = "serde", serde(rename = "ballSocket"))]
     pub m_ballSocket: hkpBallSocketConstraintAtom,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 48`(x86)/` 48`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkbMirroredSkeletonInfo {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `mirrorAxis`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "mirrorAxis"))]
     #[cfg_attr(feature = "serde", serde(rename = "mirrorAxis"))]
     pub m_mirrorAxis: Vector4,
     /// # C++ Info
     /// - name: `bonePairMap`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bonePairMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "bonePairMap"))]
     pub m_bonePairMap: Vec<i16>,
 }

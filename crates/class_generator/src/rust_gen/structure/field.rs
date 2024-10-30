@@ -20,6 +20,7 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
         // see https://github.com/jonasbb/serde_with/issues/355
         let as_value = format!("::serde_with::As::<[::serde_with::Same; {arrsize}]>"); // NOTE: need `serde_with`
         let serde_with_attr = quote! {
+            #[cfg_attr(feature = "json_schema", schemars(schema_with = "make_large_int_array_schema"))]
             #[cfg_attr(feature = "serde", serde(with = #as_value))]
         };
 
@@ -53,6 +54,7 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
     quote! {
         #doc
         #default_attr
+        #[cfg_attr(feature = "json_schema", schemars(rename = #name))]
         #[cfg_attr(feature = "serde", serde(rename = #name))]
         pub #field_name: #field_type
     }

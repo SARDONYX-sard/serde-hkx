@@ -7,6 +7,7 @@ use super::*;
 /// - size: `128`(x86)/`176`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct BSOffsetAnimationGenerator<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
@@ -30,6 +32,7 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pDefaultGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "pDefaultGenerator"))]
     pub m_pDefaultGenerator: Pointer,
     /// # C++ Info
@@ -37,24 +40,28 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pOffsetClipGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "pOffsetClipGenerator"))]
     pub m_pOffsetClipGenerator: Pointer,
     /// # C++ Info
     /// - name: `fOffsetVariable`(ctype: `hkReal`)
     /// - offset: ` 68`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fOffsetVariable"))]
     #[cfg_attr(feature = "serde", serde(rename = "fOffsetVariable"))]
     pub m_fOffsetVariable: f32,
     /// # C++ Info
     /// - name: `fOffsetRangeStart`(ctype: `hkReal`)
     /// - offset: ` 72`(x86)/`108`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fOffsetRangeStart"))]
     #[cfg_attr(feature = "serde", serde(rename = "fOffsetRangeStart"))]
     pub m_fOffsetRangeStart: f32,
     /// # C++ Info
     /// - name: `fOffsetRangeEnd`(ctype: `hkReal`)
     /// - offset: ` 76`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fOffsetRangeEnd"))]
     #[cfg_attr(feature = "serde", serde(rename = "fOffsetRangeEnd"))]
     pub m_fOffsetRangeEnd: f32,
     /// # C++ Info
@@ -62,6 +69,7 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// - offset: ` 80`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "BoneOffsetA"))]
     #[cfg_attr(feature = "serde", serde(rename = "BoneOffsetA"))]
     pub m_BoneOffsetA: Vec<()>,
     /// # C++ Info
@@ -69,6 +77,7 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// - offset: ` 92`(x86)/`136`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "BoneIndexA"))]
     #[cfg_attr(feature = "serde", serde(rename = "BoneIndexA"))]
     pub m_BoneIndexA: Vec<()>,
     /// # C++ Info
@@ -76,6 +85,7 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// - offset: `104`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fCurrentPercentage"))]
     #[cfg_attr(feature = "serde", serde(rename = "fCurrentPercentage"))]
     pub m_fCurrentPercentage: f32,
     /// # C++ Info
@@ -83,6 +93,7 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// - offset: `108`(x86)/`156`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "iCurrentFrame"))]
     #[cfg_attr(feature = "serde", serde(rename = "iCurrentFrame"))]
     pub m_iCurrentFrame: u32,
     /// # C++ Info
@@ -90,6 +101,7 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// - offset: `112`(x86)/`160`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bZeroOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "bZeroOffset"))]
     pub m_bZeroOffset: bool,
     /// # C++ Info
@@ -97,6 +109,7 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// - offset: `113`(x86)/`161`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bOffsetValid"))]
     #[cfg_attr(feature = "serde", serde(rename = "bOffsetValid"))]
     pub m_bOffsetValid: bool,
 }

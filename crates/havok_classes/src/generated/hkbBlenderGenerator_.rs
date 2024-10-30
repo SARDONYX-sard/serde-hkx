@@ -7,6 +7,7 @@ use super::*;
 /// - size: `116`(x86)/`160`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,54 +24,66 @@ pub struct hkbBlenderGenerator<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `referencePoseWeightThreshold`(ctype: `hkReal`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "referencePoseWeightThreshold")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "referencePoseWeightThreshold"))]
     pub m_referencePoseWeightThreshold: f32,
     /// # C++ Info
     /// - name: `blendParameter`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 76`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "blendParameter"))]
     #[cfg_attr(feature = "serde", serde(rename = "blendParameter"))]
     pub m_blendParameter: f32,
     /// # C++ Info
     /// - name: `minCyclicBlendParameter`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "minCyclicBlendParameter"))]
     #[cfg_attr(feature = "serde", serde(rename = "minCyclicBlendParameter"))]
     pub m_minCyclicBlendParameter: f32,
     /// # C++ Info
     /// - name: `maxCyclicBlendParameter`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxCyclicBlendParameter"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxCyclicBlendParameter"))]
     pub m_maxCyclicBlendParameter: f32,
     /// # C++ Info
     /// - name: `indexOfSyncMasterChild`(ctype: `hkInt16`)
     /// - offset: ` 56`(x86)/` 88`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "indexOfSyncMasterChild"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexOfSyncMasterChild"))]
     pub m_indexOfSyncMasterChild: i16,
     /// # C++ Info
     /// - name: `flags`(ctype: `hkInt16`)
     /// - offset: ` 58`(x86)/` 90`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: i16,
     /// # C++ Info
     /// - name: `subtractLastChild`(ctype: `hkBool`)
     /// - offset: ` 60`(x86)/` 92`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "subtractLastChild"))]
     #[cfg_attr(feature = "serde", serde(rename = "subtractLastChild"))]
     pub m_subtractLastChild: bool,
     /// # C++ Info
     /// - name: `children`(ctype: `hkArray<hkbBlenderGeneratorChild*>`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "children"))]
     #[cfg_attr(feature = "serde", serde(rename = "children"))]
     pub m_children: Vec<Pointer>,
     /// # C++ Info
@@ -78,6 +91,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - offset: ` 76`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childrenInternalStates"))]
     #[cfg_attr(feature = "serde", serde(rename = "childrenInternalStates"))]
     pub m_childrenInternalStates: Vec<()>,
     /// # C++ Info
@@ -85,6 +99,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - offset: ` 88`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sortedChildren"))]
     #[cfg_attr(feature = "serde", serde(rename = "sortedChildren"))]
     pub m_sortedChildren: Vec<()>,
     /// # C++ Info
@@ -92,6 +107,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - offset: `100`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "endIntervalWeight"))]
     #[cfg_attr(feature = "serde", serde(rename = "endIntervalWeight"))]
     pub m_endIntervalWeight: f32,
     /// # C++ Info
@@ -99,6 +115,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - offset: `104`(x86)/`148`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numActiveChildren"))]
     #[cfg_attr(feature = "serde", serde(rename = "numActiveChildren"))]
     pub m_numActiveChildren: i32,
     /// # C++ Info
@@ -106,6 +123,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - offset: `108`(x86)/`152`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "beginIntervalIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "beginIntervalIndex"))]
     pub m_beginIntervalIndex: i16,
     /// # C++ Info
@@ -113,6 +131,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - offset: `110`(x86)/`154`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "endIntervalIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "endIntervalIndex"))]
     pub m_endIntervalIndex: i16,
     /// # C++ Info
@@ -120,6 +139,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - offset: `112`(x86)/`156`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "initSync"))]
     #[cfg_attr(feature = "serde", serde(rename = "initSync"))]
     pub m_initSync: bool,
     /// # C++ Info
@@ -127,6 +147,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - offset: `113`(x86)/`157`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "doSubtractiveBlend"))]
     #[cfg_attr(feature = "serde", serde(rename = "doSubtractiveBlend"))]
     pub m_doSubtractiveBlend: bool,
 }

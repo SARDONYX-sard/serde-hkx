@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 20`(x86)/` 32`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkpLimitedForceConstraintMotor {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintMotor,
     /// # C++ Info
     /// - name: `minForce`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "minForce"))]
     #[cfg_attr(feature = "serde", serde(rename = "minForce"))]
     pub m_minForce: f32,
     /// # C++ Info
     /// - name: `maxForce`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxForce"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxForce"))]
     pub m_maxForce: f32,
 }

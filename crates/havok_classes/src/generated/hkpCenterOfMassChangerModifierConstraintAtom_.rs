@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/` 80`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkpCenterOfMassChangerModifierConstraintAtom {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpModifierConstraintAtom,
     /// # C++ Info
     /// - name: `displacementA`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "displacementA"))]
     #[cfg_attr(feature = "serde", serde(rename = "displacementA"))]
     pub m_displacementA: Vector4,
     /// # C++ Info
     /// - name: `displacementB`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "displacementB"))]
     #[cfg_attr(feature = "serde", serde(rename = "displacementB"))]
     pub m_displacementB: Vector4,
 }

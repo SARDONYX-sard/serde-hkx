@@ -24,6 +24,7 @@ use parse_display::Display;
 ///
 /// # Note
 /// The [`Copy`] is derive for [`usize`] wrapper type.
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(
     feature = "serde",
     derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)

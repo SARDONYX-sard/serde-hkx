@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 32`(x86)/` 48`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,24 +24,31 @@ pub struct hkpVelocityConstraintMotor {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpLimitedForceConstraintMotor,
     /// # C++ Info
     /// - name: `tau`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "tau"))]
     #[cfg_attr(feature = "serde", serde(rename = "tau"))]
     pub m_tau: f32,
     /// # C++ Info
     /// - name: `velocityTarget`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "velocityTarget"))]
     #[cfg_attr(feature = "serde", serde(rename = "velocityTarget"))]
     pub m_velocityTarget: f32,
     /// # C++ Info
     /// - name: `useVelocityTargetFromConstraintTargets`(ctype: `hkBool`)
     /// - offset: ` 28`(x86)/` 40`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "useVelocityTargetFromConstraintTargets")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "useVelocityTargetFromConstraintTargets")

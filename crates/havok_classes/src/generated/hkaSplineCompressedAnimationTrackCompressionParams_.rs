@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 28`(x86)/` 28`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,72 +27,87 @@ pub struct hkaSplineCompressedAnimationTrackCompressionParams {
     /// - name: `rotationTolerance`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotationTolerance"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotationTolerance"))]
     pub m_rotationTolerance: f32,
     /// # C++ Info
     /// - name: `translationTolerance`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "translationTolerance"))]
     #[cfg_attr(feature = "serde", serde(rename = "translationTolerance"))]
     pub m_translationTolerance: f32,
     /// # C++ Info
     /// - name: `scaleTolerance`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "scaleTolerance"))]
     #[cfg_attr(feature = "serde", serde(rename = "scaleTolerance"))]
     pub m_scaleTolerance: f32,
     /// # C++ Info
     /// - name: `floatingTolerance`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "floatingTolerance"))]
     #[cfg_attr(feature = "serde", serde(rename = "floatingTolerance"))]
     pub m_floatingTolerance: f32,
     /// # C++ Info
     /// - name: `rotationDegree`(ctype: `hkUint16`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotationDegree"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotationDegree"))]
     pub m_rotationDegree: u16,
     /// # C++ Info
     /// - name: `translationDegree`(ctype: `hkUint16`)
     /// - offset: ` 18`(x86)/` 18`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "translationDegree"))]
     #[cfg_attr(feature = "serde", serde(rename = "translationDegree"))]
     pub m_translationDegree: u16,
     /// # C++ Info
     /// - name: `scaleDegree`(ctype: `hkUint16`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "scaleDegree"))]
     #[cfg_attr(feature = "serde", serde(rename = "scaleDegree"))]
     pub m_scaleDegree: u16,
     /// # C++ Info
     /// - name: `floatingDegree`(ctype: `hkUint16`)
     /// - offset: ` 22`(x86)/` 22`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "floatingDegree"))]
     #[cfg_attr(feature = "serde", serde(rename = "floatingDegree"))]
     pub m_floatingDegree: u16,
     /// # C++ Info
     /// - name: `rotationQuantizationType`(ctype: `enum RotationQuantization`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotationQuantizationType"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotationQuantizationType"))]
     pub m_rotationQuantizationType: RotationQuantization,
     /// # C++ Info
     /// - name: `translationQuantizationType`(ctype: `enum ScalarQuantization`)
     /// - offset: ` 25`(x86)/` 25`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "translationQuantizationType")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "translationQuantizationType"))]
     pub m_translationQuantizationType: ScalarQuantization,
     /// # C++ Info
     /// - name: `scaleQuantizationType`(ctype: `enum ScalarQuantization`)
     /// - offset: ` 26`(x86)/` 26`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "scaleQuantizationType"))]
     #[cfg_attr(feature = "serde", serde(rename = "scaleQuantizationType"))]
     pub m_scaleQuantizationType: ScalarQuantization,
     /// # C++ Info
     /// - name: `floatQuantizationType`(ctype: `enum ScalarQuantization`)
     /// - offset: ` 27`(x86)/` 27`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "floatQuantizationType"))]
     #[cfg_attr(feature = "serde", serde(rename = "floatQuantizationType"))]
     pub m_floatQuantizationType: ScalarQuantization,
 }
@@ -1203,6 +1219,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -1226,6 +1243,7 @@ pub enum RotationQuantization {
 }
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

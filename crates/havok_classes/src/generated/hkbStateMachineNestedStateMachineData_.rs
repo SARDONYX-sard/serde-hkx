@@ -7,6 +7,7 @@ use super::*;
 /// - size: `  8`(x86)/` 16`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -27,6 +28,7 @@ pub struct hkbStateMachineNestedStateMachineData {
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "nestedStateMachine"))]
     #[cfg_attr(feature = "serde", serde(rename = "nestedStateMachine"))]
     pub m_nestedStateMachine: Pointer,
     /// # C++ Info
@@ -34,6 +36,7 @@ pub struct hkbStateMachineNestedStateMachineData {
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "eventIdMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventIdMap"))]
     pub m_eventIdMap: Pointer,
 }

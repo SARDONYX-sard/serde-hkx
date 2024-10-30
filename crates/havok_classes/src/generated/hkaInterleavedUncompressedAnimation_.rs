@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/` 88`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkaInterleavedUncompressedAnimation<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkaAnimation<'a>,
     /// # C++ Info
     /// - name: `transforms`(ctype: `hkArray<hkQsTransform>`)
     /// - offset: ` 40`(x86)/` 56`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transforms"))]
     #[cfg_attr(feature = "serde", serde(rename = "transforms"))]
     pub m_transforms: Vec<QsTransform>,
     /// # C++ Info
     /// - name: `floats`(ctype: `hkArray<hkReal>`)
     /// - offset: ` 52`(x86)/` 72`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "floats"))]
     #[cfg_attr(feature = "serde", serde(rename = "floats"))]
     pub m_floats: Vec<f32>,
 }

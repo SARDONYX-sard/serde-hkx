@@ -7,6 +7,7 @@ use super::*;
 /// - size: `180`(x86)/`208`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkpGroupCollisionFilter {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpCollisionFilter,
     /// # C++ Info
     /// - name: `noGroupCollisionEnabled`(ctype: `hkBool`)
     /// - offset: ` 48`(x86)/` 72`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "noGroupCollisionEnabled"))]
     #[cfg_attr(feature = "serde", serde(rename = "noGroupCollisionEnabled"))]
     pub m_noGroupCollisionEnabled: bool,
     /// # C++ Info
     /// - name: `collisionGroups`(ctype: `hkUint32[32]`)
     /// - offset: ` 52`(x86)/` 76`(x86_64)
     /// - type_size: `128`(x86)/`128`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "collisionGroups"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionGroups"))]
     pub m_collisionGroups: [u32; 32usize],
 }

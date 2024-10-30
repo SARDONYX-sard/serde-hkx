@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/` 64`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct hkpPulleyConstraintAtom {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintAtom,
     /// # C++ Info
     /// - name: `fixedPivotAinWorld`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fixedPivotAinWorld"))]
     #[cfg_attr(feature = "serde", serde(rename = "fixedPivotAinWorld"))]
     pub m_fixedPivotAinWorld: Vector4,
     /// # C++ Info
     /// - name: `fixedPivotBinWorld`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fixedPivotBinWorld"))]
     #[cfg_attr(feature = "serde", serde(rename = "fixedPivotBinWorld"))]
     pub m_fixedPivotBinWorld: Vector4,
     /// # C++ Info
     /// - name: `ropeLength`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "ropeLength"))]
     #[cfg_attr(feature = "serde", serde(rename = "ropeLength"))]
     pub m_ropeLength: f32,
     /// # C++ Info
     /// - name: `leverageOnBodyB`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 52`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "leverageOnBodyB"))]
     #[cfg_attr(feature = "serde", serde(rename = "leverageOnBodyB"))]
     pub m_leverageOnBodyB: f32,
 }

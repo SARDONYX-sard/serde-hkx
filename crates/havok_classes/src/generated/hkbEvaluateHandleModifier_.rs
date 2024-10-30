@@ -7,6 +7,7 @@ use super::*;
 /// - size: `176`(x86)/`240`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,48 +24,56 @@ pub struct hkbEvaluateHandleModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `handle`(ctype: `struct hkbHandle*`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "handle"))]
     #[cfg_attr(feature = "serde", serde(rename = "handle"))]
     pub m_handle: Pointer,
     /// # C++ Info
     /// - name: `handlePositionOut`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "handlePositionOut"))]
     #[cfg_attr(feature = "serde", serde(rename = "handlePositionOut"))]
     pub m_handlePositionOut: Vector4,
     /// # C++ Info
     /// - name: `handleRotationOut`(ctype: `hkQuaternion`)
     /// - offset: ` 64`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "handleRotationOut"))]
     #[cfg_attr(feature = "serde", serde(rename = "handleRotationOut"))]
     pub m_handleRotationOut: Quaternion,
     /// # C++ Info
     /// - name: `isValidOut`(ctype: `hkBool`)
     /// - offset: ` 80`(x86)/`128`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isValidOut"))]
     #[cfg_attr(feature = "serde", serde(rename = "isValidOut"))]
     pub m_isValidOut: bool,
     /// # C++ Info
     /// - name: `extrapolationTimeStep`(ctype: `hkReal`)
     /// - offset: ` 84`(x86)/`132`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "extrapolationTimeStep"))]
     #[cfg_attr(feature = "serde", serde(rename = "extrapolationTimeStep"))]
     pub m_extrapolationTimeStep: f32,
     /// # C++ Info
     /// - name: `handleChangeSpeed`(ctype: `hkReal`)
     /// - offset: ` 88`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "handleChangeSpeed"))]
     #[cfg_attr(feature = "serde", serde(rename = "handleChangeSpeed"))]
     pub m_handleChangeSpeed: f32,
     /// # C++ Info
     /// - name: `handleChangeMode`(ctype: `enum HandleChangeMode`)
     /// - offset: ` 92`(x86)/`140`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "handleChangeMode"))]
     #[cfg_attr(feature = "serde", serde(rename = "handleChangeMode"))]
     pub m_handleChangeMode: HandleChangeMode,
     /// # C++ Info
@@ -72,6 +81,7 @@ pub struct hkbEvaluateHandleModifier<'a> {
     /// - offset: ` 96`(x86)/`144`(x86_64)
     /// - type_size: ` 24`(x86)/` 48`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "oldHandle"))]
     #[cfg_attr(feature = "serde", serde(rename = "oldHandle"))]
     pub m_oldHandle: hkbHandle,
     /// # C++ Info
@@ -79,6 +89,7 @@ pub struct hkbEvaluateHandleModifier<'a> {
     /// - offset: `128`(x86)/`192`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "oldHandlePosition"))]
     #[cfg_attr(feature = "serde", serde(rename = "oldHandlePosition"))]
     pub m_oldHandlePosition: Vector4,
     /// # C++ Info
@@ -86,6 +97,7 @@ pub struct hkbEvaluateHandleModifier<'a> {
     /// - offset: `144`(x86)/`208`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "oldHandleRotation"))]
     #[cfg_attr(feature = "serde", serde(rename = "oldHandleRotation"))]
     pub m_oldHandleRotation: Quaternion,
     /// # C++ Info
@@ -93,6 +105,7 @@ pub struct hkbEvaluateHandleModifier<'a> {
     /// - offset: `160`(x86)/`224`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timeSinceLastModify"))]
     #[cfg_attr(feature = "serde", serde(rename = "timeSinceLastModify"))]
     pub m_timeSinceLastModify: f32,
     /// # C++ Info
@@ -100,6 +113,7 @@ pub struct hkbEvaluateHandleModifier<'a> {
     /// - offset: `164`(x86)/`228`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "smoothlyChangingHandles"))]
     #[cfg_attr(feature = "serde", serde(rename = "smoothlyChangingHandles"))]
     pub m_smoothlyChangingHandles: bool,
 }
@@ -1199,6 +1213,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

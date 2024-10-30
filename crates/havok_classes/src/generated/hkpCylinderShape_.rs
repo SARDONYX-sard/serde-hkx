@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 96`(x86)/`112`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,24 @@ pub struct hkpCylinderShape {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConvexShape,
     /// # C++ Info
     /// - name: `cylRadius`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "cylRadius"))]
     #[cfg_attr(feature = "serde", serde(rename = "cylRadius"))]
     pub m_cylRadius: f32,
     /// # C++ Info
     /// - name: `cylBaseRadiusFactorForHeightFieldCollisions`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 44`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "cylBaseRadiusFactorForHeightFieldCollisions")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "cylBaseRadiusFactorForHeightFieldCollisions")
@@ -44,24 +51,28 @@ pub struct hkpCylinderShape {
     /// - name: `vertexA`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "vertexA"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexA"))]
     pub m_vertexA: Vector4,
     /// # C++ Info
     /// - name: `vertexB`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "vertexB"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexB"))]
     pub m_vertexB: Vector4,
     /// # C++ Info
     /// - name: `perpendicular1`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "perpendicular1"))]
     #[cfg_attr(feature = "serde", serde(rename = "perpendicular1"))]
     pub m_perpendicular1: Vector4,
     /// # C++ Info
     /// - name: `perpendicular2`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "perpendicular2"))]
     #[cfg_attr(feature = "serde", serde(rename = "perpendicular2"))]
     pub m_perpendicular2: Vector4,
 }

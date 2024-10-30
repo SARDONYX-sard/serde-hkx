@@ -7,6 +7,7 @@ use super::*;
 /// - size: `224`(x86)/`304`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,12 +24,14 @@ pub struct hkpAabbPhantom<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpPhantom<'a>,
     /// # C++ Info
     /// - name: `aabb`(ctype: `struct hkAabb`)
     /// - offset: `176`(x86)/`240`(x86_64)
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "aabb"))]
     #[cfg_attr(feature = "serde", serde(rename = "aabb"))]
     pub m_aabb: hkAabb,
     /// # C++ Info
@@ -36,6 +39,7 @@ pub struct hkpAabbPhantom<'a> {
     /// - offset: `208`(x86)/`272`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "overlappingCollidables"))]
     #[cfg_attr(feature = "serde", serde(rename = "overlappingCollidables"))]
     pub m_overlappingCollidables: Vec<Pointer>,
     /// # C++ Info
@@ -43,6 +47,7 @@ pub struct hkpAabbPhantom<'a> {
     /// - offset: `220`(x86)/`288`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "orderDirty"))]
     #[cfg_attr(feature = "serde", serde(rename = "orderDirty"))]
     pub m_orderDirty: bool,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 96`(x86)/`128`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,54 +24,63 @@ pub struct hkpSpringAction<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpBinaryAction<'a>,
     /// # C++ Info
     /// - name: `lastForce`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "lastForce"))]
     #[cfg_attr(feature = "serde", serde(rename = "lastForce"))]
     pub m_lastForce: Vector4,
     /// # C++ Info
     /// - name: `positionAinA`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "positionAinA"))]
     #[cfg_attr(feature = "serde", serde(rename = "positionAinA"))]
     pub m_positionAinA: Vector4,
     /// # C++ Info
     /// - name: `positionBinB`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "positionBinB"))]
     #[cfg_attr(feature = "serde", serde(rename = "positionBinB"))]
     pub m_positionBinB: Vector4,
     /// # C++ Info
     /// - name: `restLength`(ctype: `hkReal`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "restLength"))]
     #[cfg_attr(feature = "serde", serde(rename = "restLength"))]
     pub m_restLength: f32,
     /// # C++ Info
     /// - name: `strength`(ctype: `hkReal`)
     /// - offset: ` 84`(x86)/`116`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "strength"))]
     #[cfg_attr(feature = "serde", serde(rename = "strength"))]
     pub m_strength: f32,
     /// # C++ Info
     /// - name: `damping`(ctype: `hkReal`)
     /// - offset: ` 88`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "damping"))]
     #[cfg_attr(feature = "serde", serde(rename = "damping"))]
     pub m_damping: f32,
     /// # C++ Info
     /// - name: `onCompression`(ctype: `hkBool`)
     /// - offset: ` 92`(x86)/`124`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "onCompression"))]
     #[cfg_attr(feature = "serde", serde(rename = "onCompression"))]
     pub m_onCompression: bool,
     /// # C++ Info
     /// - name: `onExtension`(ctype: `hkBool`)
     /// - offset: ` 93`(x86)/`125`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "onExtension"))]
     #[cfg_attr(feature = "serde", serde(rename = "onExtension"))]
     pub m_onExtension: bool,
 }

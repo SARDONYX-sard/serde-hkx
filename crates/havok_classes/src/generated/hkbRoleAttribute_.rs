@@ -7,6 +7,7 @@ use super::*;
 /// - size: `  4`(x86)/`  4`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,12 +27,14 @@ pub struct hkbRoleAttribute {
     /// - name: `role`(ctype: `enum Role`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "role"))]
     #[cfg_attr(feature = "serde", serde(rename = "role"))]
     pub m_role: Role,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags RoleFlags`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: RoleFlags,
 }
@@ -315,6 +318,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT16`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -342,13 +346,34 @@ pub enum Role {
 bitflags::bitflags! {
     #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
     "- size(C++): `TYPE_INT16`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
-    RoleFlags : i16 { #[doc = "0"] const FLAG_NONE = 0i16; #[doc = "1"] const
-    FLAG_RAGDOLL = 1i16; #[doc = "2"] const FLAG_NORMALIZED = 2i16; #[doc = "4"] const
-    FLAG_NOT_VARIABLE = 4i16; #[doc = "8"] const FLAG_HIDDEN = 8i16; #[doc = "16"] const
-    FLAG_OUTPUT = 16i16; #[doc = "32"] const FLAG_NOT_CHARACTER_PROPERTY = 32i16; }
+    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
+    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
+    PartialEq, Eq, Hash)] pub struct RoleFlags : i16 { #[doc = "0"] const FLAG_NONE =
+    0i16; #[doc = "1"] const FLAG_RAGDOLL = 1i16; #[doc = "2"] const FLAG_NORMALIZED =
+    2i16; #[doc = "4"] const FLAG_NOT_VARIABLE = 4i16; #[doc = "8"] const FLAG_HIDDEN =
+    8i16; #[doc = "16"] const FLAG_OUTPUT = 16i16; #[doc = "32"] const
+    FLAG_NOT_CHARACTER_PROPERTY = 32i16; }
 }
+#[cfg(feature = "json_schema")]
+const _: () = {
+    use schemars::{SchemaGenerator, Schema, JsonSchema, json_schema};
+    use std::borrow::Cow;
+    impl JsonSchema for RoleFlags {
+        fn schema_name() -> Cow<'static, str> {
+            "RoleFlags".into()
+        }
+        fn schema_id() -> Cow<'static, str> {
+            concat!(module_path!(), "::", "RoleFlags").into()
+        }
+        fn json_schema(_generate: &mut SchemaGenerator) -> Schema {
+            json_schema!(
+                { "description" :
+                "Bitflags field. Specific flags: FLAG_NONE: 0, FLAG_RAGDOLL: 1, FLAG_NORMALIZED: 2, FLAG_NOT_VARIABLE: 4, FLAG_HIDDEN: 8, FLAG_OUTPUT: 16, FLAG_NOT_CHARACTER_PROPERTY: 32. Additional unspecified bits may be set.(e.g.: BIT_FLAG|BIT_FLAG2|4)",
+                "type" : "string", }
+            )
+        }
+    }
+};
 const _: () = {
     use havok_serde as __serde;
     impl __serde::Serialize for Role {

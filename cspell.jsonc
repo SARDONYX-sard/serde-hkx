@@ -59,6 +59,7 @@
     "Rustc",
     "rustdoc",
     "rustfmt",
+    "schemars",
     "serde",
     "SIMD",
     "SIMPLEARRAY",

@@ -7,6 +7,7 @@ use super::*;
 /// - size: `208`(x86)/`208`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,18 +27,21 @@ pub struct hkpVehicleFrictionDescription {
     /// - name: `wheelDistance`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wheelDistance"))]
     #[cfg_attr(feature = "serde", serde(rename = "wheelDistance"))]
     pub m_wheelDistance: f32,
     /// # C++ Info
     /// - name: `chassisMassInv`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "chassisMassInv"))]
     #[cfg_attr(feature = "serde", serde(rename = "chassisMassInv"))]
     pub m_chassisMassInv: f32,
     /// # C++ Info
     /// - name: `axleDescr`(ctype: `struct hkpVehicleFrictionDescriptionAxisDescription[2]`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `200`(x86)/`200`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "axleDescr"))]
     #[cfg_attr(feature = "serde", serde(rename = "axleDescr"))]
     pub m_axleDescr: [hkpVehicleFrictionDescriptionAxisDescription; 2usize],
 }

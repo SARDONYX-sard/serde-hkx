@@ -7,6 +7,7 @@ use super::*;
 /// - size: `128`(x86)/`160`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkbRigidBodyRagdollControlsModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `controlData`(ctype: `struct hkbRigidBodyRagdollControlData`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "controlData"))]
     #[cfg_attr(feature = "serde", serde(rename = "controlData"))]
     pub m_controlData: hkbRigidBodyRagdollControlData,
     /// # C++ Info
     /// - name: `bones`(ctype: `struct hkbBoneIndexArray*`)
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bones"))]
     #[cfg_attr(feature = "serde", serde(rename = "bones"))]
     pub m_bones: Pointer,
 }

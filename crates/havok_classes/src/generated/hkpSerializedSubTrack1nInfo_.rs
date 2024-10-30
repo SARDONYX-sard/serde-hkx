@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 32`(x86)/` 40`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkpSerializedSubTrack1nInfo {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpSerializedTrack1nInfo,
     /// # C++ Info
     /// - name: `sectorIndex`(ctype: `hkInt32`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sectorIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "sectorIndex"))]
     pub m_sectorIndex: i32,
     /// # C++ Info
     /// - name: `offsetInSector`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "offsetInSector"))]
     #[cfg_attr(feature = "serde", serde(rename = "offsetInSector"))]
     pub m_offsetInSector: i32,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 48`(x86)/` 72`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,48 +24,56 @@ pub struct hkbSetBehaviorCommand {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `characterId`(ctype: `hkUint64`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "characterId"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterId"))]
     pub m_characterId: u64,
     /// # C++ Info
     /// - name: `behavior`(ctype: `struct hkbBehaviorGraph*`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "behavior"))]
     #[cfg_attr(feature = "serde", serde(rename = "behavior"))]
     pub m_behavior: Pointer,
     /// # C++ Info
     /// - name: `rootGenerator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rootGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "rootGenerator"))]
     pub m_rootGenerator: Pointer,
     /// # C++ Info
     /// - name: `referencedBehaviors`(ctype: `hkArray<hkbBehaviorGraph*>`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "referencedBehaviors"))]
     #[cfg_attr(feature = "serde", serde(rename = "referencedBehaviors"))]
     pub m_referencedBehaviors: Vec<Pointer>,
     /// # C++ Info
     /// - name: `startStateIndex`(ctype: `hkInt32`)
     /// - offset: ` 36`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startStateIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "startStateIndex"))]
     pub m_startStateIndex: i32,
     /// # C++ Info
     /// - name: `randomizeSimulation`(ctype: `hkBool`)
     /// - offset: ` 40`(x86)/` 60`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "randomizeSimulation"))]
     #[cfg_attr(feature = "serde", serde(rename = "randomizeSimulation"))]
     pub m_randomizeSimulation: bool,
     /// # C++ Info
     /// - name: `padding`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "padding"))]
     #[cfg_attr(feature = "serde", serde(rename = "padding"))]
     pub m_padding: i32,
 }

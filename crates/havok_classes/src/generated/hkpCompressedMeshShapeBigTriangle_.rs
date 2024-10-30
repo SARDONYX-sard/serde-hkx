@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 16`(x86)/` 16`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,36 +27,42 @@ pub struct hkpCompressedMeshShapeBigTriangle {
     /// - name: `a`(ctype: `hkUint16`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "a"))]
     #[cfg_attr(feature = "serde", serde(rename = "a"))]
     pub m_a: u16,
     /// # C++ Info
     /// - name: `b`(ctype: `hkUint16`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "b"))]
     #[cfg_attr(feature = "serde", serde(rename = "b"))]
     pub m_b: u16,
     /// # C++ Info
     /// - name: `c`(ctype: `hkUint16`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "c"))]
     #[cfg_attr(feature = "serde", serde(rename = "c"))]
     pub m_c: u16,
     /// # C++ Info
     /// - name: `material`(ctype: `hkUint32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "material"))]
     #[cfg_attr(feature = "serde", serde(rename = "material"))]
     pub m_material: u32,
     /// # C++ Info
     /// - name: `weldingInfo`(ctype: `hkUint16`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "weldingInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "weldingInfo"))]
     pub m_weldingInfo: u16,
     /// # C++ Info
     /// - name: `transformIndex`(ctype: `hkUint16`)
     /// - offset: ` 14`(x86)/` 14`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transformIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "transformIndex"))]
     pub m_transformIndex: u16,
 }

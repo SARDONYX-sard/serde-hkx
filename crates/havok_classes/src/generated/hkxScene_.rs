@@ -7,6 +7,7 @@ use super::*;
 /// - size: `176`(x86)/`224`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,84 +24,98 @@ pub struct hkxScene<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `modeller`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "modeller"))]
     #[cfg_attr(feature = "serde", serde(rename = "modeller"))]
     pub m_modeller: StringPtr<'a>,
     /// # C++ Info
     /// - name: `asset`(ctype: `hkStringPtr`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "asset"))]
     #[cfg_attr(feature = "serde", serde(rename = "asset"))]
     pub m_asset: StringPtr<'a>,
     /// # C++ Info
     /// - name: `sceneLength`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sceneLength"))]
     #[cfg_attr(feature = "serde", serde(rename = "sceneLength"))]
     pub m_sceneLength: f32,
     /// # C++ Info
     /// - name: `rootNode`(ctype: `struct hkxNode*`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rootNode"))]
     #[cfg_attr(feature = "serde", serde(rename = "rootNode"))]
     pub m_rootNode: Pointer,
     /// # C++ Info
     /// - name: `selectionSets`(ctype: `hkArray<hkxNodeSelectionSet*>`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "selectionSets"))]
     #[cfg_attr(feature = "serde", serde(rename = "selectionSets"))]
     pub m_selectionSets: Vec<Pointer>,
     /// # C++ Info
     /// - name: `cameras`(ctype: `hkArray<hkxCamera*>`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "cameras"))]
     #[cfg_attr(feature = "serde", serde(rename = "cameras"))]
     pub m_cameras: Vec<Pointer>,
     /// # C++ Info
     /// - name: `lights`(ctype: `hkArray<hkxLight*>`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "lights"))]
     #[cfg_attr(feature = "serde", serde(rename = "lights"))]
     pub m_lights: Vec<Pointer>,
     /// # C++ Info
     /// - name: `meshes`(ctype: `hkArray<hkxMesh*>`)
     /// - offset: ` 60`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "meshes"))]
     #[cfg_attr(feature = "serde", serde(rename = "meshes"))]
     pub m_meshes: Vec<Pointer>,
     /// # C++ Info
     /// - name: `materials`(ctype: `hkArray<hkxMaterial*>`)
     /// - offset: ` 72`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "materials"))]
     #[cfg_attr(feature = "serde", serde(rename = "materials"))]
     pub m_materials: Vec<Pointer>,
     /// # C++ Info
     /// - name: `inplaceTextures`(ctype: `hkArray<hkxTextureInplace*>`)
     /// - offset: ` 84`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "inplaceTextures"))]
     #[cfg_attr(feature = "serde", serde(rename = "inplaceTextures"))]
     pub m_inplaceTextures: Vec<Pointer>,
     /// # C++ Info
     /// - name: `externalTextures`(ctype: `hkArray<hkxTextureFile*>`)
     /// - offset: ` 96`(x86)/`144`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "externalTextures"))]
     #[cfg_attr(feature = "serde", serde(rename = "externalTextures"))]
     pub m_externalTextures: Vec<Pointer>,
     /// # C++ Info
     /// - name: `skinBindings`(ctype: `hkArray<hkxSkinBinding*>`)
     /// - offset: `108`(x86)/`160`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "skinBindings"))]
     #[cfg_attr(feature = "serde", serde(rename = "skinBindings"))]
     pub m_skinBindings: Vec<Pointer>,
     /// # C++ Info
     /// - name: `appliedTransform`(ctype: `hkMatrix3`)
     /// - offset: `128`(x86)/`176`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "appliedTransform"))]
     #[cfg_attr(feature = "serde", serde(rename = "appliedTransform"))]
     pub m_appliedTransform: Matrix3,
 }

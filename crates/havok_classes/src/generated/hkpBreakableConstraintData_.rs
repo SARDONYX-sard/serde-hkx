@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 40`(x86)/` 72`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,48 +24,56 @@ pub struct hkpBreakableConstraintData {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintData,
     /// # C++ Info
     /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "atoms"))]
     #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
     /// - name: `constraintData`(ctype: `struct hkpConstraintData*`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "constraintData"))]
     #[cfg_attr(feature = "serde", serde(rename = "constraintData"))]
     pub m_constraintData: Pointer,
     /// # C++ Info
     /// - name: `childRuntimeSize`(ctype: `hkUint16`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childRuntimeSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "childRuntimeSize"))]
     pub m_childRuntimeSize: u16,
     /// # C++ Info
     /// - name: `childNumSolverResults`(ctype: `hkUint16`)
     /// - offset: ` 30`(x86)/` 58`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childNumSolverResults"))]
     #[cfg_attr(feature = "serde", serde(rename = "childNumSolverResults"))]
     pub m_childNumSolverResults: u16,
     /// # C++ Info
     /// - name: `solverResultLimit`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "solverResultLimit"))]
     #[cfg_attr(feature = "serde", serde(rename = "solverResultLimit"))]
     pub m_solverResultLimit: f32,
     /// # C++ Info
     /// - name: `removeWhenBroken`(ctype: `hkBool`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "removeWhenBroken"))]
     #[cfg_attr(feature = "serde", serde(rename = "removeWhenBroken"))]
     pub m_removeWhenBroken: bool,
     /// # C++ Info
     /// - name: `revertBackVelocityOnBreak`(ctype: `hkBool`)
     /// - offset: ` 37`(x86)/` 65`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "revertBackVelocityOnBreak"))]
     #[cfg_attr(feature = "serde", serde(rename = "revertBackVelocityOnBreak"))]
     pub m_revertBackVelocityOnBreak: bool,
 }

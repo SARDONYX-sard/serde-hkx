@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 80`(x86)/`112`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct hkpReorientAction<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpUnaryAction<'a>,
     /// # C++ Info
     /// - name: `rotationAxis`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotationAxis"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotationAxis"))]
     pub m_rotationAxis: Vector4,
     /// # C++ Info
     /// - name: `upAxis`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "upAxis"))]
     #[cfg_attr(feature = "serde", serde(rename = "upAxis"))]
     pub m_upAxis: Vector4,
     /// # C++ Info
     /// - name: `strength`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "strength"))]
     #[cfg_attr(feature = "serde", serde(rename = "strength"))]
     pub m_strength: f32,
     /// # C++ Info
     /// - name: `damping`(ctype: `hkReal`)
     /// - offset: ` 68`(x86)/`100`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "damping"))]
     #[cfg_attr(feature = "serde", serde(rename = "damping"))]
     pub m_damping: f32,
 }

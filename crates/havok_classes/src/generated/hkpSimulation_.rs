@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 44`(x86)/` 64`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,60 +24,73 @@ pub struct hkpSimulation {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `determinismCheckFrameCounter`(ctype: `hkUint32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "determinismCheckFrameCounter")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "determinismCheckFrameCounter"))]
     pub m_determinismCheckFrameCounter: u32,
     /// # C++ Info
     /// - name: `world`(ctype: `struct hkpWorld*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "world"))]
     #[cfg_attr(feature = "serde", serde(rename = "world"))]
     pub m_world: Pointer,
     /// # C++ Info
     /// - name: `lastProcessingStep`(ctype: `enum LastProcessingStep`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "lastProcessingStep"))]
     #[cfg_attr(feature = "serde", serde(rename = "lastProcessingStep"))]
     pub m_lastProcessingStep: LastProcessingStep,
     /// # C++ Info
     /// - name: `currentTime`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "currentTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentTime"))]
     pub m_currentTime: f32,
     /// # C++ Info
     /// - name: `currentPsiTime`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "currentPsiTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentPsiTime"))]
     pub m_currentPsiTime: f32,
     /// # C++ Info
     /// - name: `physicsDeltaTime`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 44`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "physicsDeltaTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "physicsDeltaTime"))]
     pub m_physicsDeltaTime: f32,
     /// # C++ Info
     /// - name: `simulateUntilTime`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "simulateUntilTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "simulateUntilTime"))]
     pub m_simulateUntilTime: f32,
     /// # C++ Info
     /// - name: `frameMarkerPsiSnap`(ctype: `hkReal`)
     /// - offset: ` 36`(x86)/` 52`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "frameMarkerPsiSnap"))]
     #[cfg_attr(feature = "serde", serde(rename = "frameMarkerPsiSnap"))]
     pub m_frameMarkerPsiSnap: f32,
     /// # C++ Info
     /// - name: `previousStepResult`(ctype: `hkUint32`)
     /// - offset: ` 40`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "previousStepResult"))]
     #[cfg_attr(feature = "serde", serde(rename = "previousStepResult"))]
     pub m_previousStepResult: u32,
 }
@@ -937,6 +951,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

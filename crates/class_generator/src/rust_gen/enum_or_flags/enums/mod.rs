@@ -36,6 +36,7 @@ pub fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
     syn::parse_quote! {
         #[doc = #doc]
         #[allow(non_upper_case_globals, non_snake_case)]
+        #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
         #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
         #[derive(
             Debug, Clone, Default, PartialEq, Eq, PartialOrd, Ord,

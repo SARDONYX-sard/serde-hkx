@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 44`(x86)/` 72`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,48 @@ pub struct hkaAnimationBinding<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `originalSkeletonName`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "originalSkeletonName"))]
     #[cfg_attr(feature = "serde", serde(rename = "originalSkeletonName"))]
     pub m_originalSkeletonName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `animation`(ctype: `struct hkaAnimation*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "animation"))]
     #[cfg_attr(feature = "serde", serde(rename = "animation"))]
     pub m_animation: Pointer,
     /// # C++ Info
     /// - name: `transformTrackToBoneIndices`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "transformTrackToBoneIndices")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "transformTrackToBoneIndices"))]
     pub m_transformTrackToBoneIndices: Vec<i16>,
     /// # C++ Info
     /// - name: `floatTrackToFloatSlotIndices`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "floatTrackToFloatSlotIndices")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "floatTrackToFloatSlotIndices"))]
     pub m_floatTrackToFloatSlotIndices: Vec<i16>,
     /// # C++ Info
     /// - name: `blendHint`(ctype: `enum BlendHint`)
     /// - offset: ` 40`(x86)/` 64`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "blendHint"))]
     #[cfg_attr(feature = "serde", serde(rename = "blendHint"))]
     pub m_blendHint: BlendHint,
 }
@@ -630,6 +643,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

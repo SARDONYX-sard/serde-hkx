@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 20`(x86)/` 20`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,54 +24,63 @@ pub struct hkpConeLimitConstraintAtom {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintAtom,
     /// # C++ Info
     /// - name: `isEnabled`(ctype: `hkUint8`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isEnabled"))]
     #[cfg_attr(feature = "serde", serde(rename = "isEnabled"))]
     pub m_isEnabled: u8,
     /// # C++ Info
     /// - name: `twistAxisInA`(ctype: `hkUint8`)
     /// - offset: `  3`(x86)/`  3`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "twistAxisInA"))]
     #[cfg_attr(feature = "serde", serde(rename = "twistAxisInA"))]
     pub m_twistAxisInA: u8,
     /// # C++ Info
     /// - name: `refAxisInB`(ctype: `hkUint8`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "refAxisInB"))]
     #[cfg_attr(feature = "serde", serde(rename = "refAxisInB"))]
     pub m_refAxisInB: u8,
     /// # C++ Info
     /// - name: `angleMeasurementMode`(ctype: `enum MeasurementMode`)
     /// - offset: `  5`(x86)/`  5`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "angleMeasurementMode"))]
     #[cfg_attr(feature = "serde", serde(rename = "angleMeasurementMode"))]
     pub m_angleMeasurementMode: MeasurementMode,
     /// # C++ Info
     /// - name: `memOffsetToAngleOffset`(ctype: `hkUint8`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "memOffsetToAngleOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "memOffsetToAngleOffset"))]
     pub m_memOffsetToAngleOffset: u8,
     /// # C++ Info
     /// - name: `minAngle`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "minAngle"))]
     #[cfg_attr(feature = "serde", serde(rename = "minAngle"))]
     pub m_minAngle: f32,
     /// # C++ Info
     /// - name: `maxAngle`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxAngle"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxAngle"))]
     pub m_maxAngle: f32,
     /// # C++ Info
     /// - name: `angularLimitsTauFactor`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "angularLimitsTauFactor"))]
     #[cfg_attr(feature = "serde", serde(rename = "angularLimitsTauFactor"))]
     pub m_angularLimitsTauFactor: f32,
 }
@@ -878,6 +888,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

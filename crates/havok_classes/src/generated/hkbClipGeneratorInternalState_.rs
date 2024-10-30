@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`112`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,66 +24,80 @@ pub struct hkbClipGeneratorInternalState {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `extractedMotion`(ctype: `hkQsTransform`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "extractedMotion"))]
     #[cfg_attr(feature = "serde", serde(rename = "extractedMotion"))]
     pub m_extractedMotion: QsTransform,
     /// # C++ Info
     /// - name: `echos`(ctype: `hkArray<struct hkbClipGeneratorEcho>`)
     /// - offset: ` 64`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "echos"))]
     #[cfg_attr(feature = "serde", serde(rename = "echos"))]
     pub m_echos: Vec<hkbClipGeneratorEcho>,
     /// # C++ Info
     /// - name: `localTime`(ctype: `hkReal`)
     /// - offset: ` 76`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "localTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "localTime"))]
     pub m_localTime: f32,
     /// # C++ Info
     /// - name: `time`(ctype: `hkReal`)
     /// - offset: ` 80`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "time"))]
     #[cfg_attr(feature = "serde", serde(rename = "time"))]
     pub m_time: f32,
     /// # C++ Info
     /// - name: `previousUserControlledTimeFraction`(ctype: `hkReal`)
     /// - offset: ` 84`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "previousUserControlledTimeFraction")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "previousUserControlledTimeFraction"))]
     pub m_previousUserControlledTimeFraction: f32,
     /// # C++ Info
     /// - name: `bufferSize`(ctype: `hkInt32`)
     /// - offset: ` 88`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bufferSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "bufferSize"))]
     pub m_bufferSize: i32,
     /// # C++ Info
     /// - name: `echoBufferSize`(ctype: `hkInt32`)
     /// - offset: ` 92`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "echoBufferSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "echoBufferSize"))]
     pub m_echoBufferSize: i32,
     /// # C++ Info
     /// - name: `atEnd`(ctype: `hkBool`)
     /// - offset: ` 96`(x86)/`100`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "atEnd"))]
     #[cfg_attr(feature = "serde", serde(rename = "atEnd"))]
     pub m_atEnd: bool,
     /// # C++ Info
     /// - name: `ignoreStartTime`(ctype: `hkBool`)
     /// - offset: ` 97`(x86)/`101`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "ignoreStartTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "ignoreStartTime"))]
     pub m_ignoreStartTime: bool,
     /// # C++ Info
     /// - name: `pingPongBackward`(ctype: `hkBool`)
     /// - offset: ` 98`(x86)/`102`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pingPongBackward"))]
     #[cfg_attr(feature = "serde", serde(rename = "pingPongBackward"))]
     pub m_pingPongBackward: bool,
 }

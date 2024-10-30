@@ -1,6 +1,13 @@
 use crate::{Quaternion, Vector4};
 use parse_display::Display;
 
+/// # QsTransform
+///
+/// # C++ Info
+/// - name: `hkQsTransform`
+/// - type_size: ` 48`(x86)/` 48`(x86_64)
+/// - align: ` 16`(x86)/` 16`(x86_64)
+///
 /// # XML representation
 /// - [`Vector4::w`] (4th) of `transition` & `scale` isn't used.
 /// ```xml
@@ -10,17 +17,29 @@ use parse_display::Display;
 ///
 /// [`Vector4::w`](Vector4)
 #[repr(C, align(16))]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
 #[display("{transition}{quaternion}{scale}")]
 pub struct QsTransform {
+    /// # C++ Info
+    /// - name: `transition`(ctype: `hkVector4`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    ///
     /// # NOTE
-    /// `Vector4::w`(4th) isn't used(always 0.0).
+    /// - `Vector4::w`(4th) isn't used(always 0.0).
     #[display("({x:.06} {y:.06} {z:.06})")]
     pub transition: Vector4,
+    /// # C++ Info
+    /// - name: `quaternion`(ctype: `hkQuaternion`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub quaternion: Quaternion,
+    /// - `scale`: `Vector4`
+    ///
     /// # NOTE
-    /// `Vector4::w`(4th) isn't used(always 0.0).
+    /// - `Vector4::w`(4th) isn't used(always 0.0).
     #[display("({x:.06} {y:.06} {z:.06})")]
     pub scale: Vector4,
 }

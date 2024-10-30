@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 48`(x86)/` 80`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,12 +24,14 @@ pub struct hkMoppBvTreeShapeBase {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpBvTreeShape,
     /// # C++ Info
     /// - name: `code`(ctype: `struct hkpMoppCode*`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "code"))]
     #[cfg_attr(feature = "serde", serde(rename = "code"))]
     pub m_code: Pointer,
     /// # C++ Info
@@ -36,6 +39,7 @@ pub struct hkMoppBvTreeShapeBase {
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "moppData"))]
     #[cfg_attr(feature = "serde", serde(rename = "moppData"))]
     pub m_moppData: Pointer,
     /// # C++ Info
@@ -43,6 +47,7 @@ pub struct hkMoppBvTreeShapeBase {
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "moppDataSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "moppDataSize"))]
     pub m_moppDataSize: u32,
     /// # C++ Info
@@ -50,6 +55,7 @@ pub struct hkMoppBvTreeShapeBase {
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "codeInfoCopy"))]
     #[cfg_attr(feature = "serde", serde(rename = "codeInfoCopy"))]
     pub m_codeInfoCopy: Vector4,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 72`(x86)/`128`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,45 @@ pub struct BSEventEveryNEventsModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `eventToCheckFor`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "eventToCheckFor"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventToCheckFor"))]
     pub m_eventToCheckFor: hkbEventProperty,
     /// # C++ Info
     /// - name: `eventToSend`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "eventToSend"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventToSend"))]
     pub m_eventToSend: hkbEventProperty,
     /// # C++ Info
     /// - name: `numberOfEventsBeforeSend`(ctype: `hkInt8`)
     /// - offset: ` 60`(x86)/`112`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numberOfEventsBeforeSend"))]
     #[cfg_attr(feature = "serde", serde(rename = "numberOfEventsBeforeSend"))]
     pub m_numberOfEventsBeforeSend: i8,
     /// # C++ Info
     /// - name: `minimumNumberOfEventsBeforeSend`(ctype: `hkInt8`)
     /// - offset: ` 61`(x86)/`113`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "minimumNumberOfEventsBeforeSend")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "minimumNumberOfEventsBeforeSend"))]
     pub m_minimumNumberOfEventsBeforeSend: i8,
     /// # C++ Info
     /// - name: `randomizeNumberOfEvents`(ctype: `hkBool`)
     /// - offset: ` 62`(x86)/`114`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "randomizeNumberOfEvents"))]
     #[cfg_attr(feature = "serde", serde(rename = "randomizeNumberOfEvents"))]
     pub m_randomizeNumberOfEvents: bool,
     /// # C++ Info
@@ -60,6 +70,7 @@ pub struct BSEventEveryNEventsModifier<'a> {
     /// - offset: ` 64`(x86)/`116`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numberOfEventsSeen"))]
     #[cfg_attr(feature = "serde", serde(rename = "numberOfEventsSeen"))]
     pub m_numberOfEventsSeen: i32,
     /// # C++ Info
@@ -67,6 +78,10 @@ pub struct BSEventEveryNEventsModifier<'a> {
     /// - offset: ` 68`(x86)/`120`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "calculatedNumberOfEventsBeforeSend")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "calculatedNumberOfEventsBeforeSend"))]
     pub m_calculatedNumberOfEventsBeforeSend: i8,
 }

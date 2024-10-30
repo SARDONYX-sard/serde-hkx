@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 48`(x86)/` 72`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,24 +24,28 @@ pub struct hkpCollisionFilter {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `prepad`(ctype: `hkUint32[2]`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "prepad"))]
     #[cfg_attr(feature = "serde", serde(rename = "prepad"))]
     pub m_prepad: [u32; 2usize],
     /// # C++ Info
     /// - name: `type`(ctype: `enum hkpFilterType`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "type"))]
     #[cfg_attr(feature = "serde", serde(rename = "type"))]
     pub m_type: hkpFilterType,
     /// # C++ Info
     /// - name: `postpad`(ctype: `hkUint32[3]`)
     /// - offset: ` 36`(x86)/` 60`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "postpad"))]
     #[cfg_attr(feature = "serde", serde(rename = "postpad"))]
     pub m_postpad: [u32; 3usize],
 }
@@ -418,6 +423,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_UINT32`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

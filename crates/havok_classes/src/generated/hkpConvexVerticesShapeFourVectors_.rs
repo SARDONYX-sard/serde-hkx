@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 48`(x86)/` 48`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,18 +27,21 @@ pub struct hkpConvexVerticesShapeFourVectors {
     /// - name: `x`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "x"))]
     #[cfg_attr(feature = "serde", serde(rename = "x"))]
     pub m_x: Vector4,
     /// # C++ Info
     /// - name: `y`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "y"))]
     #[cfg_attr(feature = "serde", serde(rename = "y"))]
     pub m_y: Vector4,
     /// # C++ Info
     /// - name: `z`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "z"))]
     #[cfg_attr(feature = "serde", serde(rename = "z"))]
     pub m_z: Vector4,
 }

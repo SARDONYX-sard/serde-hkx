@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 36`(x86)/` 56`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,24 +24,28 @@ pub struct hkbCompiledExpressionSet {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `rpn`(ctype: `hkArray<struct hkbCompiledExpressionSetToken>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rpn"))]
     #[cfg_attr(feature = "serde", serde(rename = "rpn"))]
     pub m_rpn: Vec<hkbCompiledExpressionSetToken>,
     /// # C++ Info
     /// - name: `expressionToRpnIndex`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "expressionToRpnIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "expressionToRpnIndex"))]
     pub m_expressionToRpnIndex: Vec<i32>,
     /// # C++ Info
     /// - name: `numExpressions`(ctype: `hkInt8`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numExpressions"))]
     #[cfg_attr(feature = "serde", serde(rename = "numExpressions"))]
     pub m_numExpressions: i8,
 }

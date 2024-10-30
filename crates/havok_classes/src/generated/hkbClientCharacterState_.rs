@@ -7,6 +7,7 @@ use super::*;
 /// - size: `208`(x86)/`272`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,78 +24,91 @@ pub struct hkbClientCharacterState<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `deformableSkinIds`(ctype: `hkArray<hkUint64>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "deformableSkinIds"))]
     #[cfg_attr(feature = "serde", serde(rename = "deformableSkinIds"))]
     pub m_deformableSkinIds: Vec<u64>,
     /// # C++ Info
     /// - name: `rigidSkinIds`(ctype: `hkArray<hkUint64>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rigidSkinIds"))]
     #[cfg_attr(feature = "serde", serde(rename = "rigidSkinIds"))]
     pub m_rigidSkinIds: Vec<u64>,
     /// # C++ Info
     /// - name: `externalEventIds`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "externalEventIds"))]
     #[cfg_attr(feature = "serde", serde(rename = "externalEventIds"))]
     pub m_externalEventIds: Vec<i16>,
     /// # C++ Info
     /// - name: `auxiliaryInfo`(ctype: `hkArray<hkbAuxiliaryNodeInfo*>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "auxiliaryInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "auxiliaryInfo"))]
     pub m_auxiliaryInfo: Vec<Pointer>,
     /// # C++ Info
     /// - name: `activeEventIds`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "activeEventIds"))]
     #[cfg_attr(feature = "serde", serde(rename = "activeEventIds"))]
     pub m_activeEventIds: Vec<i16>,
     /// # C++ Info
     /// - name: `activeVariableIds`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "activeVariableIds"))]
     #[cfg_attr(feature = "serde", serde(rename = "activeVariableIds"))]
     pub m_activeVariableIds: Vec<i16>,
     /// # C++ Info
     /// - name: `characterId`(ctype: `hkUint64`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "characterId"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterId"))]
     pub m_characterId: u64,
     /// # C++ Info
     /// - name: `instanceName`(ctype: `hkStringPtr`)
     /// - offset: ` 88`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "instanceName"))]
     #[cfg_attr(feature = "serde", serde(rename = "instanceName"))]
     pub m_instanceName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `templateName`(ctype: `hkStringPtr`)
     /// - offset: ` 92`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "templateName"))]
     #[cfg_attr(feature = "serde", serde(rename = "templateName"))]
     pub m_templateName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `fullPathToProject`(ctype: `hkStringPtr`)
     /// - offset: ` 96`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fullPathToProject"))]
     #[cfg_attr(feature = "serde", serde(rename = "fullPathToProject"))]
     pub m_fullPathToProject: StringPtr<'a>,
     /// # C++ Info
     /// - name: `behaviorData`(ctype: `struct hkbBehaviorGraphData*`)
     /// - offset: `100`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "behaviorData"))]
     #[cfg_attr(feature = "serde", serde(rename = "behaviorData"))]
     pub m_behaviorData: Pointer,
     /// # C++ Info
     /// - name: `behaviorInternalState`(ctype: `struct hkbBehaviorGraphInternalState*`)
     /// - offset: `104`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "behaviorInternalState"))]
     #[cfg_attr(feature = "serde", serde(rename = "behaviorInternalState"))]
     pub m_behaviorInternalState: Pointer,
     /// # C++ Info
@@ -102,42 +116,49 @@ pub struct hkbClientCharacterState<'a> {
     /// - offset: `108`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "nodeIdToInternalStateMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "nodeIdToInternalStateMap"))]
     pub m_nodeIdToInternalStateMap: Pointer,
     /// # C++ Info
     /// - name: `visible`(ctype: `hkBool`)
     /// - offset: `112`(x86)/`168`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "visible"))]
     #[cfg_attr(feature = "serde", serde(rename = "visible"))]
     pub m_visible: bool,
     /// # C++ Info
     /// - name: `elapsedSimulationTime`(ctype: `hkReal`)
     /// - offset: `116`(x86)/`172`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "elapsedSimulationTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "elapsedSimulationTime"))]
     pub m_elapsedSimulationTime: f32,
     /// # C++ Info
     /// - name: `skeleton`(ctype: `struct hkaSkeleton*`)
     /// - offset: `120`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "skeleton"))]
     #[cfg_attr(feature = "serde", serde(rename = "skeleton"))]
     pub m_skeleton: Pointer,
     /// # C++ Info
     /// - name: `worldFromModel`(ctype: `hkQsTransform`)
     /// - offset: `128`(x86)/`192`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "worldFromModel"))]
     #[cfg_attr(feature = "serde", serde(rename = "worldFromModel"))]
     pub m_worldFromModel: QsTransform,
     /// # C++ Info
     /// - name: `poseModelSpace`(ctype: `hkArray<hkQsTransform>`)
     /// - offset: `176`(x86)/`240`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "poseModelSpace"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseModelSpace"))]
     pub m_poseModelSpace: Vec<QsTransform>,
     /// # C++ Info
     /// - name: `rigidAttachmentTransforms`(ctype: `hkArray<hkQsTransform>`)
     /// - offset: `188`(x86)/`256`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rigidAttachmentTransforms"))]
     #[cfg_attr(feature = "serde", serde(rename = "rigidAttachmentTransforms"))]
     pub m_rigidAttachmentTransforms: Vec<QsTransform>,
 }

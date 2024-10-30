@@ -28,6 +28,7 @@ tracing = { workspace = true, optional = true }
 # serde ext
 serde_yml = { version = "0.0.12", optional = true }
 simd-json = { version = "0.14.2", optional = true }
+schemars = { workspace = true, features = ["indexmap2"], optional = true }
 
 # workspace members
 havok_classes = { workspace = true, features = ["ignore_duplicates"] }
@@ -36,6 +37,7 @@ serde_hkx = { workspace = true }
 
 [features]
 # default = ["extra_fmt"] # For debug
+# default = ["json_schema"] # For debug
 
 # For `Format`(Output)
 clap = ["dep:clap"]
@@ -49,6 +51,7 @@ extra_fmt = [
   "dep:simd-json",
 ]
 
+json_schema = ["havok_classes/json_schema", "dep:simd-json", "dep:schemars"]
 
 [lints]
 workspace = true

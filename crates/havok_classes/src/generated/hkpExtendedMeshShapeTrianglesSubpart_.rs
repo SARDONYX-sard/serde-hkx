@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`160`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,12 +24,14 @@ pub struct hkpExtendedMeshShapeTrianglesSubpart {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpExtendedMeshShapeSubpart,
     /// # C++ Info
     /// - name: `numTriangleShapes`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numTriangleShapes"))]
     #[cfg_attr(feature = "serde", serde(rename = "numTriangleShapes"))]
     pub m_numTriangleShapes: i32,
     /// # C++ Info
@@ -36,12 +39,14 @@ pub struct hkpExtendedMeshShapeTrianglesSubpart {
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "vertexBase"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexBase"))]
     pub m_vertexBase: Pointer,
     /// # C++ Info
     /// - name: `numVertices`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numVertices"))]
     #[cfg_attr(feature = "serde", serde(rename = "numVertices"))]
     pub m_numVertices: i32,
     /// # C++ Info
@@ -49,48 +54,56 @@ pub struct hkpExtendedMeshShapeTrianglesSubpart {
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "indexBase"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexBase"))]
     pub m_indexBase: Pointer,
     /// # C++ Info
     /// - name: `vertexStriding`(ctype: `hkUint16`)
     /// - offset: ` 36`(x86)/` 72`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "vertexStriding"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexStriding"))]
     pub m_vertexStriding: u16,
     /// # C++ Info
     /// - name: `triangleOffset`(ctype: `hkInt32`)
     /// - offset: ` 40`(x86)/` 76`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "triangleOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "triangleOffset"))]
     pub m_triangleOffset: i32,
     /// # C++ Info
     /// - name: `indexStriding`(ctype: `hkUint16`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "indexStriding"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexStriding"))]
     pub m_indexStriding: u16,
     /// # C++ Info
     /// - name: `stridingType`(ctype: `enum IndexStridingType`)
     /// - offset: ` 46`(x86)/` 82`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "stridingType"))]
     #[cfg_attr(feature = "serde", serde(rename = "stridingType"))]
     pub m_stridingType: IndexStridingType,
     /// # C++ Info
     /// - name: `flipAlternateTriangles`(ctype: `hkInt8`)
     /// - offset: ` 47`(x86)/` 83`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "flipAlternateTriangles"))]
     #[cfg_attr(feature = "serde", serde(rename = "flipAlternateTriangles"))]
     pub m_flipAlternateTriangles: i8,
     /// # C++ Info
     /// - name: `extrusion`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "extrusion"))]
     #[cfg_attr(feature = "serde", serde(rename = "extrusion"))]
     pub m_extrusion: Vector4,
     /// # C++ Info
     /// - name: `transform`(ctype: `hkQsTransform`)
     /// - offset: ` 64`(x86)/`112`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transform"))]
     #[cfg_attr(feature = "serde", serde(rename = "transform"))]
     pub m_transform: QsTransform,
 }

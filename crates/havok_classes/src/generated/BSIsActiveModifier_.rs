@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 56`(x86)/` 96`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,66 +24,77 @@ pub struct BSIsActiveModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `bIsActive0`(ctype: `hkBool`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bIsActive0"))]
     #[cfg_attr(feature = "serde", serde(rename = "bIsActive0"))]
     pub m_bIsActive0: bool,
     /// # C++ Info
     /// - name: `bInvertActive0`(ctype: `hkBool`)
     /// - offset: ` 45`(x86)/` 81`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bInvertActive0"))]
     #[cfg_attr(feature = "serde", serde(rename = "bInvertActive0"))]
     pub m_bInvertActive0: bool,
     /// # C++ Info
     /// - name: `bIsActive1`(ctype: `hkBool`)
     /// - offset: ` 46`(x86)/` 82`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bIsActive1"))]
     #[cfg_attr(feature = "serde", serde(rename = "bIsActive1"))]
     pub m_bIsActive1: bool,
     /// # C++ Info
     /// - name: `bInvertActive1`(ctype: `hkBool`)
     /// - offset: ` 47`(x86)/` 83`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bInvertActive1"))]
     #[cfg_attr(feature = "serde", serde(rename = "bInvertActive1"))]
     pub m_bInvertActive1: bool,
     /// # C++ Info
     /// - name: `bIsActive2`(ctype: `hkBool`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bIsActive2"))]
     #[cfg_attr(feature = "serde", serde(rename = "bIsActive2"))]
     pub m_bIsActive2: bool,
     /// # C++ Info
     /// - name: `bInvertActive2`(ctype: `hkBool`)
     /// - offset: ` 49`(x86)/` 85`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bInvertActive2"))]
     #[cfg_attr(feature = "serde", serde(rename = "bInvertActive2"))]
     pub m_bInvertActive2: bool,
     /// # C++ Info
     /// - name: `bIsActive3`(ctype: `hkBool`)
     /// - offset: ` 50`(x86)/` 86`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bIsActive3"))]
     #[cfg_attr(feature = "serde", serde(rename = "bIsActive3"))]
     pub m_bIsActive3: bool,
     /// # C++ Info
     /// - name: `bInvertActive3`(ctype: `hkBool`)
     /// - offset: ` 51`(x86)/` 87`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bInvertActive3"))]
     #[cfg_attr(feature = "serde", serde(rename = "bInvertActive3"))]
     pub m_bInvertActive3: bool,
     /// # C++ Info
     /// - name: `bIsActive4`(ctype: `hkBool`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bIsActive4"))]
     #[cfg_attr(feature = "serde", serde(rename = "bIsActive4"))]
     pub m_bIsActive4: bool,
     /// # C++ Info
     /// - name: `bInvertActive4`(ctype: `hkBool`)
     /// - offset: ` 53`(x86)/` 89`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bInvertActive4"))]
     #[cfg_attr(feature = "serde", serde(rename = "bInvertActive4"))]
     pub m_bInvertActive4: bool,
 }

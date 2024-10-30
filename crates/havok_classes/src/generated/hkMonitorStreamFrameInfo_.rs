@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 36`(x86)/` 40`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,54 +27,63 @@ pub struct hkMonitorStreamFrameInfo<'a> {
     /// - name: `heading`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "heading"))]
     #[cfg_attr(feature = "serde", serde(rename = "heading"))]
     pub m_heading: StringPtr<'a>,
     /// # C++ Info
     /// - name: `indexOfTimer0`(ctype: `hkInt32`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "indexOfTimer0"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexOfTimer0"))]
     pub m_indexOfTimer0: i32,
     /// # C++ Info
     /// - name: `indexOfTimer1`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "indexOfTimer1"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexOfTimer1"))]
     pub m_indexOfTimer1: i32,
     /// # C++ Info
     /// - name: `absoluteTimeCounter`(ctype: `enum AbsoluteTimeCounter`)
     /// - offset: ` 12`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "absoluteTimeCounter"))]
     #[cfg_attr(feature = "serde", serde(rename = "absoluteTimeCounter"))]
     pub m_absoluteTimeCounter: AbsoluteTimeCounter,
     /// # C++ Info
     /// - name: `timerFactor0`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timerFactor0"))]
     #[cfg_attr(feature = "serde", serde(rename = "timerFactor0"))]
     pub m_timerFactor0: f32,
     /// # C++ Info
     /// - name: `timerFactor1`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timerFactor1"))]
     #[cfg_attr(feature = "serde", serde(rename = "timerFactor1"))]
     pub m_timerFactor1: f32,
     /// # C++ Info
     /// - name: `threadId`(ctype: `hkInt32`)
     /// - offset: ` 24`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "threadId"))]
     #[cfg_attr(feature = "serde", serde(rename = "threadId"))]
     pub m_threadId: i32,
     /// # C++ Info
     /// - name: `frameStreamStart`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "frameStreamStart"))]
     #[cfg_attr(feature = "serde", serde(rename = "frameStreamStart"))]
     pub m_frameStreamStart: i32,
     /// # C++ Info
     /// - name: `frameStreamEnd`(ctype: `hkInt32`)
     /// - offset: ` 32`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "frameStreamEnd"))]
     #[cfg_attr(feature = "serde", serde(rename = "frameStreamEnd"))]
     pub m_frameStreamEnd: i32,
 }
@@ -893,6 +903,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_UINT32`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

@@ -7,6 +7,7 @@ use super::*;
 /// - size: `176`(x86)/`192`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,42 @@ pub struct hkpPointToPathConstraintData {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintData,
     /// # C++ Info
     /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "atoms"))]
     #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
     /// - name: `path`(ctype: `struct hkpParametricCurve*`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "path"))]
     #[cfg_attr(feature = "serde", serde(rename = "path"))]
     pub m_path: Pointer,
     /// # C++ Info
     /// - name: `maxFrictionForce`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxFrictionForce"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxFrictionForce"))]
     pub m_maxFrictionForce: f32,
     /// # C++ Info
     /// - name: `angularConstrainedDOF`(ctype: `enum OrientationConstraintType`)
     /// - offset: ` 32`(x86)/` 60`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "angularConstrainedDOF"))]
     #[cfg_attr(feature = "serde", serde(rename = "angularConstrainedDOF"))]
     pub m_angularConstrainedDOF: OrientationConstraintType,
     /// # C++ Info
     /// - name: `transform_OS_KS`(ctype: `hkTransform[2]`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: `128`(x86)/`128`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transform_OS_KS"))]
     #[cfg_attr(feature = "serde", serde(rename = "transform_OS_KS"))]
     pub m_transform_OS_KS: [Transform; 2usize],
 }
@@ -655,6 +662,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

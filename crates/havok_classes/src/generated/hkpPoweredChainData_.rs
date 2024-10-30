@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/` 96`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,60 +24,70 @@ pub struct hkpPoweredChainData {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintChainData,
     /// # C++ Info
     /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "atoms"))]
     #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
     /// - name: `infos`(ctype: `hkArray<struct hkpPoweredChainDataConstraintInfo>`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "infos"))]
     #[cfg_attr(feature = "serde", serde(rename = "infos"))]
     pub m_infos: Vec<hkpPoweredChainDataConstraintInfo>,
     /// # C++ Info
     /// - name: `tau`(ctype: `hkReal`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "tau"))]
     #[cfg_attr(feature = "serde", serde(rename = "tau"))]
     pub m_tau: f32,
     /// # C++ Info
     /// - name: `damping`(ctype: `hkReal`)
     /// - offset: ` 40`(x86)/` 68`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "damping"))]
     #[cfg_attr(feature = "serde", serde(rename = "damping"))]
     pub m_damping: f32,
     /// # C++ Info
     /// - name: `cfmLinAdd`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "cfmLinAdd"))]
     #[cfg_attr(feature = "serde", serde(rename = "cfmLinAdd"))]
     pub m_cfmLinAdd: f32,
     /// # C++ Info
     /// - name: `cfmLinMul`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 76`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "cfmLinMul"))]
     #[cfg_attr(feature = "serde", serde(rename = "cfmLinMul"))]
     pub m_cfmLinMul: f32,
     /// # C++ Info
     /// - name: `cfmAngAdd`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "cfmAngAdd"))]
     #[cfg_attr(feature = "serde", serde(rename = "cfmAngAdd"))]
     pub m_cfmAngAdd: f32,
     /// # C++ Info
     /// - name: `cfmAngMul`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "cfmAngMul"))]
     #[cfg_attr(feature = "serde", serde(rename = "cfmAngMul"))]
     pub m_cfmAngMul: f32,
     /// # C++ Info
     /// - name: `maxErrorDistance`(ctype: `hkReal`)
     /// - offset: ` 60`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxErrorDistance"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxErrorDistance"))]
     pub m_maxErrorDistance: f32,
 }

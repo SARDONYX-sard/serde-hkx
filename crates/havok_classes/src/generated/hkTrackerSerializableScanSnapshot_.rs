@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 92`(x86)/`128`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,48 +24,56 @@ pub struct hkTrackerSerializableScanSnapshot {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `allocations`(ctype: `hkArray<struct hkTrackerSerializableScanSnapshotAllocation>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "allocations"))]
     #[cfg_attr(feature = "serde", serde(rename = "allocations"))]
     pub m_allocations: Vec<hkTrackerSerializableScanSnapshotAllocation>,
     /// # C++ Info
     /// - name: `blocks`(ctype: `hkArray<struct hkTrackerSerializableScanSnapshotBlock>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "blocks"))]
     #[cfg_attr(feature = "serde", serde(rename = "blocks"))]
     pub m_blocks: Vec<hkTrackerSerializableScanSnapshotBlock>,
     /// # C++ Info
     /// - name: `refs`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "refs"))]
     #[cfg_attr(feature = "serde", serde(rename = "refs"))]
     pub m_refs: Vec<i32>,
     /// # C++ Info
     /// - name: `typeNames`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "typeNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "typeNames"))]
     pub m_typeNames: Vec<u8>,
     /// # C++ Info
     /// - name: `traceText`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "traceText"))]
     #[cfg_attr(feature = "serde", serde(rename = "traceText"))]
     pub m_traceText: Vec<u8>,
     /// # C++ Info
     /// - name: `traceAddrs`(ctype: `hkArray<hkUint64>`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "traceAddrs"))]
     #[cfg_attr(feature = "serde", serde(rename = "traceAddrs"))]
     pub m_traceAddrs: Vec<u64>,
     /// # C++ Info
     /// - name: `traceParents`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "traceParents"))]
     #[cfg_attr(feature = "serde", serde(rename = "traceParents"))]
     pub m_traceParents: Vec<i32>,
 }

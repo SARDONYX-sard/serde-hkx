@@ -7,6 +7,7 @@ use super::*;
 /// - size: `208`(x86)/`240`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,78 +24,91 @@ pub struct hkbPoseMatchingGenerator<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbBlenderGenerator<'a>,
     /// # C++ Info
     /// - name: `worldFromModelRotation`(ctype: `hkQuaternion`)
     /// - offset: `128`(x86)/`160`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "worldFromModelRotation"))]
     #[cfg_attr(feature = "serde", serde(rename = "worldFromModelRotation"))]
     pub m_worldFromModelRotation: Quaternion,
     /// # C++ Info
     /// - name: `blendSpeed`(ctype: `hkReal`)
     /// - offset: `144`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "blendSpeed"))]
     #[cfg_attr(feature = "serde", serde(rename = "blendSpeed"))]
     pub m_blendSpeed: f32,
     /// # C++ Info
     /// - name: `minSpeedToSwitch`(ctype: `hkReal`)
     /// - offset: `148`(x86)/`180`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "minSpeedToSwitch"))]
     #[cfg_attr(feature = "serde", serde(rename = "minSpeedToSwitch"))]
     pub m_minSpeedToSwitch: f32,
     /// # C++ Info
     /// - name: `minSwitchTimeNoError`(ctype: `hkReal`)
     /// - offset: `152`(x86)/`184`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "minSwitchTimeNoError"))]
     #[cfg_attr(feature = "serde", serde(rename = "minSwitchTimeNoError"))]
     pub m_minSwitchTimeNoError: f32,
     /// # C++ Info
     /// - name: `minSwitchTimeFullError`(ctype: `hkReal`)
     /// - offset: `156`(x86)/`188`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "minSwitchTimeFullError"))]
     #[cfg_attr(feature = "serde", serde(rename = "minSwitchTimeFullError"))]
     pub m_minSwitchTimeFullError: f32,
     /// # C++ Info
     /// - name: `startPlayingEventId`(ctype: `hkInt32`)
     /// - offset: `160`(x86)/`192`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startPlayingEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "startPlayingEventId"))]
     pub m_startPlayingEventId: i32,
     /// # C++ Info
     /// - name: `startMatchingEventId`(ctype: `hkInt32`)
     /// - offset: `164`(x86)/`196`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startMatchingEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "startMatchingEventId"))]
     pub m_startMatchingEventId: i32,
     /// # C++ Info
     /// - name: `rootBoneIndex`(ctype: `hkInt16`)
     /// - offset: `168`(x86)/`200`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rootBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "rootBoneIndex"))]
     pub m_rootBoneIndex: i16,
     /// # C++ Info
     /// - name: `otherBoneIndex`(ctype: `hkInt16`)
     /// - offset: `170`(x86)/`202`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "otherBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "otherBoneIndex"))]
     pub m_otherBoneIndex: i16,
     /// # C++ Info
     /// - name: `anotherBoneIndex`(ctype: `hkInt16`)
     /// - offset: `172`(x86)/`204`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "anotherBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "anotherBoneIndex"))]
     pub m_anotherBoneIndex: i16,
     /// # C++ Info
     /// - name: `pelvisIndex`(ctype: `hkInt16`)
     /// - offset: `174`(x86)/`206`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pelvisIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "pelvisIndex"))]
     pub m_pelvisIndex: i16,
     /// # C++ Info
     /// - name: `mode`(ctype: `enum Mode`)
     /// - offset: `176`(x86)/`208`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "mode"))]
     #[cfg_attr(feature = "serde", serde(rename = "mode"))]
     pub m_mode: Mode,
     /// # C++ Info
@@ -102,6 +116,7 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// - offset: `180`(x86)/`212`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "currentMatch"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentMatch"))]
     pub m_currentMatch: i32,
     /// # C++ Info
@@ -109,6 +124,7 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// - offset: `184`(x86)/`216`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bestMatch"))]
     #[cfg_attr(feature = "serde", serde(rename = "bestMatch"))]
     pub m_bestMatch: i32,
     /// # C++ Info
@@ -116,6 +132,7 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// - offset: `188`(x86)/`220`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timeSinceBetterMatch"))]
     #[cfg_attr(feature = "serde", serde(rename = "timeSinceBetterMatch"))]
     pub m_timeSinceBetterMatch: f32,
     /// # C++ Info
@@ -123,6 +140,7 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// - offset: `192`(x86)/`224`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "error"))]
     #[cfg_attr(feature = "serde", serde(rename = "error"))]
     pub m_error: f32,
     /// # C++ Info
@@ -130,6 +148,7 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// - offset: `196`(x86)/`228`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "resetCurrentMatchLocalTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "resetCurrentMatchLocalTime"))]
     pub m_resetCurrentMatchLocalTime: bool,
     /// # C++ Info
@@ -137,6 +156,7 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// - offset: `200`(x86)/`232`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "poseMatchingUtility"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseMatchingUtility"))]
     pub m_poseMatchingUtility: Pointer,
 }
@@ -1999,6 +2019,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

@@ -1,14 +1,21 @@
 use crate::lib::*;
 
-/// Not an IEEE expression `f16`
+/// # f16
+/// Not an IEEE expression `f16`.
+///
+/// # C++ Info
+/// - name: `hkHalf`
+/// - type_size: ` 16`(x86)/` 16`(x86_64)
 ///
 /// # Note
 /// - It is created by taking the upper 16 bits from f32.
 /// - Internally, it is the same as u16.
 #[allow(non_camel_case_types)]
 #[repr(transparent)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "json_schema", schemars(transparent))]
 #[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct f16(u16);
+pub struct f16(#[cfg_attr(feature = "json_schema", schemars(with = "f32"))] u16);
 
 impl f16 {
     // NOTE: The bits in f64 and f32 are different, so if we get bits from f64, it will be an invalid value.

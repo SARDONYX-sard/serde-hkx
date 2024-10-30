@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 48`(x86)/` 64`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct BSBoneSwitchGeneratorBoneData {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbBindable,
     /// # C++ Info
@@ -30,12 +32,14 @@ pub struct BSBoneSwitchGeneratorBoneData {
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "pGenerator"))]
     pub m_pGenerator: Pointer,
     /// # C++ Info
     /// - name: `spBoneWeight`(ctype: `struct hkbBoneWeightArray*`)
     /// - offset: ` 36`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "spBoneWeight"))]
     #[cfg_attr(feature = "serde", serde(rename = "spBoneWeight"))]
     pub m_spBoneWeight: Pointer,
 }

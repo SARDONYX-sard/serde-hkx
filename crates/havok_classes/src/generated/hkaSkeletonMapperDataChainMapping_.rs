@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`112`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,36 +27,42 @@ pub struct hkaSkeletonMapperDataChainMapping {
     /// - name: `startBoneA`(ctype: `hkInt16`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startBoneA"))]
     #[cfg_attr(feature = "serde", serde(rename = "startBoneA"))]
     pub m_startBoneA: i16,
     /// # C++ Info
     /// - name: `endBoneA`(ctype: `hkInt16`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "endBoneA"))]
     #[cfg_attr(feature = "serde", serde(rename = "endBoneA"))]
     pub m_endBoneA: i16,
     /// # C++ Info
     /// - name: `startBoneB`(ctype: `hkInt16`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startBoneB"))]
     #[cfg_attr(feature = "serde", serde(rename = "startBoneB"))]
     pub m_startBoneB: i16,
     /// # C++ Info
     /// - name: `endBoneB`(ctype: `hkInt16`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "endBoneB"))]
     #[cfg_attr(feature = "serde", serde(rename = "endBoneB"))]
     pub m_endBoneB: i16,
     /// # C++ Info
     /// - name: `startAFromBTransform`(ctype: `hkQsTransform`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startAFromBTransform"))]
     #[cfg_attr(feature = "serde", serde(rename = "startAFromBTransform"))]
     pub m_startAFromBTransform: QsTransform,
     /// # C++ Info
     /// - name: `endAFromBTransform`(ctype: `hkQsTransform`)
     /// - offset: ` 64`(x86)/` 64`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "endAFromBTransform"))]
     #[cfg_attr(feature = "serde", serde(rename = "endAFromBTransform"))]
     pub m_endAFromBTransform: QsTransform,
 }

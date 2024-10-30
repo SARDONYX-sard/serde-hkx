@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 80`(x86)/` 96`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,36 +27,42 @@ pub struct hkpPoweredChainDataConstraintInfo {
     /// - name: `pivotInA`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pivotInA"))]
     #[cfg_attr(feature = "serde", serde(rename = "pivotInA"))]
     pub m_pivotInA: Vector4,
     /// # C++ Info
     /// - name: `pivotInB`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pivotInB"))]
     #[cfg_attr(feature = "serde", serde(rename = "pivotInB"))]
     pub m_pivotInB: Vector4,
     /// # C++ Info
     /// - name: `aTc`(ctype: `hkQuaternion`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "aTc"))]
     #[cfg_attr(feature = "serde", serde(rename = "aTc"))]
     pub m_aTc: Quaternion,
     /// # C++ Info
     /// - name: `bTc`(ctype: `hkQuaternion`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bTc"))]
     #[cfg_attr(feature = "serde", serde(rename = "bTc"))]
     pub m_bTc: Quaternion,
     /// # C++ Info
     /// - name: `motors`(ctype: `struct hkpConstraintMotor*`)
     /// - offset: ` 64`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "motors"))]
     #[cfg_attr(feature = "serde", serde(rename = "motors"))]
     pub m_motors: [Pointer; 3usize],
     /// # C++ Info
     /// - name: `switchBodies`(ctype: `hkBool`)
     /// - offset: ` 76`(x86)/` 88`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "switchBodies"))]
     #[cfg_attr(feature = "serde", serde(rename = "switchBodies"))]
     pub m_switchBodies: bool,
 }

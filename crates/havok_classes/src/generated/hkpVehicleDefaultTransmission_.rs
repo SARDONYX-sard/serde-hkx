@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 52`(x86)/` 72`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,48 +24,56 @@ pub struct hkpVehicleDefaultTransmission {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpVehicleTransmission,
     /// # C++ Info
     /// - name: `downshiftRPM`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "downshiftRPM"))]
     #[cfg_attr(feature = "serde", serde(rename = "downshiftRPM"))]
     pub m_downshiftRPM: f32,
     /// # C++ Info
     /// - name: `upshiftRPM`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "upshiftRPM"))]
     #[cfg_attr(feature = "serde", serde(rename = "upshiftRPM"))]
     pub m_upshiftRPM: f32,
     /// # C++ Info
     /// - name: `primaryTransmissionRatio`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "primaryTransmissionRatio"))]
     #[cfg_attr(feature = "serde", serde(rename = "primaryTransmissionRatio"))]
     pub m_primaryTransmissionRatio: f32,
     /// # C++ Info
     /// - name: `clutchDelayTime`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "clutchDelayTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "clutchDelayTime"))]
     pub m_clutchDelayTime: f32,
     /// # C++ Info
     /// - name: `reverseGearRatio`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "reverseGearRatio"))]
     #[cfg_attr(feature = "serde", serde(rename = "reverseGearRatio"))]
     pub m_reverseGearRatio: f32,
     /// # C++ Info
     /// - name: `gearsRatio`(ctype: `hkArray<hkReal>`)
     /// - offset: ` 28`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "gearsRatio"))]
     #[cfg_attr(feature = "serde", serde(rename = "gearsRatio"))]
     pub m_gearsRatio: Vec<f32>,
     /// # C++ Info
     /// - name: `wheelsTorqueRatio`(ctype: `hkArray<hkReal>`)
     /// - offset: ` 40`(x86)/` 56`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wheelsTorqueRatio"))]
     #[cfg_attr(feature = "serde", serde(rename = "wheelsTorqueRatio"))]
     pub m_wheelsTorqueRatio: Vec<f32>,
 }

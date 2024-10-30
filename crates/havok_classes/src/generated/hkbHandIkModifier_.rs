@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 72`(x86)/`120`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkbHandIkModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `hands`(ctype: `hkArray<struct hkbHandIkModifierHand>`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "hands"))]
     #[cfg_attr(feature = "serde", serde(rename = "hands"))]
     pub m_hands: Vec<hkbHandIkModifierHand<'a>>,
     /// # C++ Info
     /// - name: `fadeInOutCurve`(ctype: `enum BlendCurve`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fadeInOutCurve"))]
     #[cfg_attr(feature = "serde", serde(rename = "fadeInOutCurve"))]
     pub m_fadeInOutCurve: BlendCurve,
     /// # C++ Info
@@ -42,6 +46,7 @@ pub struct hkbHandIkModifier<'a> {
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "internalHandData"))]
     #[cfg_attr(feature = "serde", serde(rename = "internalHandData"))]
     pub m_internalHandData: Vec<()>,
 }

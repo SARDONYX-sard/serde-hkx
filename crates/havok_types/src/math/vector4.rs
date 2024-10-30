@@ -1,6 +1,10 @@
 use parse_display::Display;
 
-/// Vector4 for Havok C++ Class.
+/// # Vector4
+///
+/// # C++ Info
+/// - name: `hkVector4`
+/// - type_size: ` 16`(x86)/` 16`(x86_64)
 ///
 /// # Examples
 /// ```
@@ -17,14 +21,31 @@ use parse_display::Display;
 ///   (-0.000000 0.000000 -0.000000 1.000000)
 /// </hkparam>
 /// ```
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[repr(C, align(16))]
 #[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
 #[display("({x:.06} {y:.06} {z:.06} {w:.06})")]
 pub struct Vector4 {
+    /// # C++ Info
+    /// - name: `x`(ctype: `hkReal`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 4`(x86)/` 4`(x86_64)
     pub x: f32,
+    /// # C++ Info
+    /// - name: `y`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: ` 4`(x86)/` 4`(x86_64)
     pub y: f32,
+    /// # C++ Info
+    /// - name: `z`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: ` 4`(x86)/` 4`(x86_64)
     pub z: f32,
+    /// # C++ Info
+    /// - name: `w`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: ` 4`(x86)/` 4`(x86_64)
     pub w: f32,
 }
 

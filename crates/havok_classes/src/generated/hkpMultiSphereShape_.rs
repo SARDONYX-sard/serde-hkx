@@ -7,6 +7,7 @@ use super::*;
 /// - size: `160`(x86)/`176`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkpMultiSphereShape {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpSphereRepShape,
     /// # C++ Info
     /// - name: `numSpheres`(ctype: `hkInt32`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numSpheres"))]
     #[cfg_attr(feature = "serde", serde(rename = "numSpheres"))]
     pub m_numSpheres: i32,
     /// # C++ Info
     /// - name: `spheres`(ctype: `hkVector4[8]`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: `128`(x86)/`128`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "spheres"))]
     #[cfg_attr(feature = "serde", serde(rename = "spheres"))]
     pub m_spheres: [Vector4; 8usize],
 }

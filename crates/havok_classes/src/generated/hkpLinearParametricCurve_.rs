@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/` 80`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,24 +24,31 @@ pub struct hkpLinearParametricCurve {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpParametricCurve,
     /// # C++ Info
     /// - name: `smoothingFactor`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "smoothingFactor"))]
     #[cfg_attr(feature = "serde", serde(rename = "smoothingFactor"))]
     pub m_smoothingFactor: f32,
     /// # C++ Info
     /// - name: `closedLoop`(ctype: `hkBool`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "closedLoop"))]
     #[cfg_attr(feature = "serde", serde(rename = "closedLoop"))]
     pub m_closedLoop: bool,
     /// # C++ Info
     /// - name: `dirNotParallelToTangentAlongWholePath`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "dirNotParallelToTangentAlongWholePath")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "dirNotParallelToTangentAlongWholePath")
@@ -50,12 +58,14 @@ pub struct hkpLinearParametricCurve {
     /// - name: `points`(ctype: `hkArray<hkVector4>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "points"))]
     #[cfg_attr(feature = "serde", serde(rename = "points"))]
     pub m_points: Vec<Vector4>,
     /// # C++ Info
     /// - name: `distance`(ctype: `hkArray<hkReal>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "distance"))]
     #[cfg_attr(feature = "serde", serde(rename = "distance"))]
     pub m_distance: Vec<f32>,
 }

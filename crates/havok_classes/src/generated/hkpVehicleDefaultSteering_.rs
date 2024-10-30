@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 28`(x86)/` 40`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,24 +24,28 @@ pub struct hkpVehicleDefaultSteering {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpVehicleSteering,
     /// # C++ Info
     /// - name: `maxSteeringAngle`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxSteeringAngle"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxSteeringAngle"))]
     pub m_maxSteeringAngle: f32,
     /// # C++ Info
     /// - name: `maxSpeedFullSteeringAngle`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxSpeedFullSteeringAngle"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxSpeedFullSteeringAngle"))]
     pub m_maxSpeedFullSteeringAngle: f32,
     /// # C++ Info
     /// - name: `doesWheelSteer`(ctype: `hkArray<hkBool>`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "doesWheelSteer"))]
     #[cfg_attr(feature = "serde", serde(rename = "doesWheelSteer"))]
     pub m_doesWheelSteer: Vec<bool>,
 }

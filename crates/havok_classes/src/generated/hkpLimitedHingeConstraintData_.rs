@@ -7,6 +7,7 @@ use super::*;
 /// - size: `256`(x86)/`272`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct hkpLimitedHingeConstraintData {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintData,
     /// # C++ Info
@@ -30,6 +32,7 @@ pub struct hkpLimitedHingeConstraintData {
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `240`(x86)/`240`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "atoms"))]
     #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
     pub m_atoms: hkpLimitedHingeConstraintDataAtoms,
 }

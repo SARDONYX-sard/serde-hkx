@@ -44,10 +44,18 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> String {
                     HavokClass,
                 };
                 pub use havok_types::*;
+
+                #[cfg(feature = "json_schema")]
+                pub fn make_large_int_array_schema(generator: &mut schemars::SchemaGenerator) -> schemars::Schema {
+                    let mut schema = <Vec<i32> as schemars::JsonSchema>::json_schema(generator);
+                    let mut map = schema.ensure_object();
+                    schema
+                }
             }
             #(#mods)*
 
             use havok_serde as _serde;
+            #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
             #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
             #[derive(Debug, Default, Clone, PartialEq)]
             pub enum Classes<'a> {
@@ -56,6 +64,7 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> String {
                 /// To speed up the process, swap the first and last indexes instead of using shift.
                 /// This dummy class exists to reserve space for this purpose.
                 #[default]
+                #[cfg_attr(feature = "json_schema", schemars(skip))]
                 SwapDummy,
                 #(#enum_variants,)*
             }

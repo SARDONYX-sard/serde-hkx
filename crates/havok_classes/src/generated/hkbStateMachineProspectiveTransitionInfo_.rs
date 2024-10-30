@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 16`(x86)/` 16`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,18 +27,24 @@ pub struct hkbStateMachineProspectiveTransitionInfo {
     /// - name: `transitionInfoReference`(ctype: `struct hkbStateMachineTransitionInfoReference`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  6`(x86)/`  6`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transitionInfoReference"))]
     #[cfg_attr(feature = "serde", serde(rename = "transitionInfoReference"))]
     pub m_transitionInfoReference: hkbStateMachineTransitionInfoReference,
     /// # C++ Info
     /// - name: `transitionInfoReferenceForTE`(ctype: `struct hkbStateMachineTransitionInfoReference`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
     /// - type_size: `  6`(x86)/`  6`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "transitionInfoReferenceForTE")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "transitionInfoReferenceForTE"))]
     pub m_transitionInfoReferenceForTE: hkbStateMachineTransitionInfoReference,
     /// # C++ Info
     /// - name: `toStateId`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "toStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "toStateId"))]
     pub m_toStateId: i32,
 }

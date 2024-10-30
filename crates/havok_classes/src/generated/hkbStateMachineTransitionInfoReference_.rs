@@ -7,6 +7,7 @@ use super::*;
 /// - size: `  6`(x86)/`  6`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,18 +27,21 @@ pub struct hkbStateMachineTransitionInfoReference {
     /// - name: `fromStateIndex`(ctype: `hkInt16`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fromStateIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "fromStateIndex"))]
     pub m_fromStateIndex: i16,
     /// # C++ Info
     /// - name: `transitionIndex`(ctype: `hkInt16`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transitionIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "transitionIndex"))]
     pub m_transitionIndex: i16,
     /// # C++ Info
     /// - name: `stateMachineId`(ctype: `hkInt16`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "stateMachineId"))]
     #[cfg_attr(feature = "serde", serde(rename = "stateMachineId"))]
     pub m_stateMachineId: i16,
 }

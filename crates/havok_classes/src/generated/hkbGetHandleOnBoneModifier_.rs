@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 56`(x86)/`104`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct hkbGetHandleOnBoneModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `handleOut`(ctype: `struct hkbHandle*`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "handleOut"))]
     #[cfg_attr(feature = "serde", serde(rename = "handleOut"))]
     pub m_handleOut: Pointer,
     /// # C++ Info
     /// - name: `localFrameName`(ctype: `hkStringPtr`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "localFrameName"))]
     #[cfg_attr(feature = "serde", serde(rename = "localFrameName"))]
     pub m_localFrameName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `ragdollBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "ragdollBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "ragdollBoneIndex"))]
     pub m_ragdollBoneIndex: i16,
     /// # C++ Info
     /// - name: `animationBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 54`(x86)/` 98`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "animationBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "animationBoneIndex"))]
     pub m_animationBoneIndex: i16,
 }

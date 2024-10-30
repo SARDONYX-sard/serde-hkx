@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/`104`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkbDelayedModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifierWrapper<'a>,
     /// # C++ Info
     /// - name: `delaySeconds`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "delaySeconds"))]
     #[cfg_attr(feature = "serde", serde(rename = "delaySeconds"))]
     pub m_delaySeconds: f32,
     /// # C++ Info
     /// - name: `durationSeconds`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "durationSeconds"))]
     #[cfg_attr(feature = "serde", serde(rename = "durationSeconds"))]
     pub m_durationSeconds: f32,
     /// # C++ Info
@@ -42,6 +46,7 @@ pub struct hkbDelayedModifier<'a> {
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "secondsElapsed"))]
     #[cfg_attr(feature = "serde", serde(rename = "secondsElapsed"))]
     pub m_secondsElapsed: f32,
     /// # C++ Info
@@ -49,6 +54,7 @@ pub struct hkbDelayedModifier<'a> {
     /// - offset: ` 60`(x86)/`100`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isActive"))]
     #[cfg_attr(feature = "serde", serde(rename = "isActive"))]
     pub m_isActive: bool,
 }

@@ -17,6 +17,7 @@ rust-version.workspace = true
 [dependencies]
 parse-display = { workspace = true }               # Display derive
 parse_int = { workspace = true }
+schemars = { workspace = true, optional = true }
 serde = { workspace = true, optional = true }      # Implement (De)Serializer
 serde_with = { workspace = true, optional = true }
 static_assertions = { workspace = true }
@@ -27,6 +28,7 @@ serde_json = { workspace = true }        # To read and write Json files
 
 [features]
 default = []
+json_schema = ["dep:schemars"]
 serde = ["dep:serde", "dep:serde_with"]
 
 [lints]

@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 28`(x86)/` 56`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct hkpConstraintChainInstanceAction<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpAction<'a>,
     /// # C++ Info
@@ -30,6 +32,7 @@ pub struct hkpConstraintChainInstanceAction<'a> {
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `NOT_OWNED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "constraintInstance"))]
     #[cfg_attr(feature = "serde", serde(rename = "constraintInstance"))]
     pub m_constraintInstance: Pointer,
 }

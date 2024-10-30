@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 24`(x86)/` 40`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,48 +27,56 @@ pub struct hkClassMember<'a> {
     /// - name: `name`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: CString<'a>,
     /// # C++ Info
     /// - name: `class`(ctype: `struct hkClass*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "class"))]
     #[cfg_attr(feature = "serde", serde(rename = "class"))]
     pub m_class: Pointer,
     /// # C++ Info
     /// - name: `enum`(ctype: `struct hkClassEnum*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enum"))]
     #[cfg_attr(feature = "serde", serde(rename = "enum"))]
     pub m_enum: Pointer,
     /// # C++ Info
     /// - name: `type`(ctype: `enum Type`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "type"))]
     #[cfg_attr(feature = "serde", serde(rename = "type"))]
     pub m_type: Type,
     /// # C++ Info
     /// - name: `subtype`(ctype: `enum Type`)
     /// - offset: ` 13`(x86)/` 25`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "subtype"))]
     #[cfg_attr(feature = "serde", serde(rename = "subtype"))]
     pub m_subtype: Type,
     /// # C++ Info
     /// - name: `cArraySize`(ctype: `hkInt16`)
     /// - offset: ` 14`(x86)/` 26`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "cArraySize"))]
     #[cfg_attr(feature = "serde", serde(rename = "cArraySize"))]
     pub m_cArraySize: i16,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags FlagValues`)
     /// - offset: ` 16`(x86)/` 28`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: FlagValues,
     /// # C++ Info
     /// - name: `offset`(ctype: `hkUint16`)
     /// - offset: ` 18`(x86)/` 30`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "offset"))]
     #[cfg_attr(feature = "serde", serde(rename = "offset"))]
     pub m_offset: u16,
     /// # C++ Info
@@ -75,6 +84,7 @@ pub struct hkClassMember<'a> {
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "attributes"))]
     #[cfg_attr(feature = "serde", serde(rename = "attributes"))]
     pub m_attributes: Pointer,
 }
@@ -795,6 +805,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -850,12 +861,33 @@ pub enum Type {
 bitflags::bitflags! {
     #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
     "- size(C++): `TYPE_UINT32`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
-    FlagValues : u32 { #[doc = "0"] const FLAGS_NONE = 0u32; #[doc = "128"] const ALIGN_8
-    = 128u32; #[doc = "256"] const ALIGN_16 = 256u32; #[doc = "512"] const NOT_OWNED =
-    512u32; #[doc = "1024"] const SERIALIZE_IGNORED = 1024u32; }
+    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
+    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
+    PartialEq, Eq, Hash)] pub struct FlagValues : u32 { #[doc = "0"] const FLAGS_NONE =
+    0u32; #[doc = "128"] const ALIGN_8 = 128u32; #[doc = "256"] const ALIGN_16 = 256u32;
+    #[doc = "512"] const NOT_OWNED = 512u32; #[doc = "1024"] const SERIALIZE_IGNORED =
+    1024u32; }
 }
+#[cfg(feature = "json_schema")]
+const _: () = {
+    use schemars::{SchemaGenerator, Schema, JsonSchema, json_schema};
+    use std::borrow::Cow;
+    impl JsonSchema for FlagValues {
+        fn schema_name() -> Cow<'static, str> {
+            "FlagValues".into()
+        }
+        fn schema_id() -> Cow<'static, str> {
+            concat!(module_path!(), "::", "FlagValues").into()
+        }
+        fn json_schema(_generate: &mut SchemaGenerator) -> Schema {
+            json_schema!(
+                { "description" :
+                "Bitflags field. Specific flags: FLAGS_NONE: 0, ALIGN_8: 128, ALIGN_16: 256, NOT_OWNED: 512, SERIALIZE_IGNORED: 1024. Additional unspecified bits may be set.(e.g.: BIT_FLAG|BIT_FLAG2|4)",
+                "type" : "string", }
+            )
+        }
+    }
+};
 const _: () = {
     use havok_serde as __serde;
     impl __serde::Serialize for Type {

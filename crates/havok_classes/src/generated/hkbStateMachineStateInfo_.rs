@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 72`(x86)/`120`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,60 +24,70 @@ pub struct hkbStateMachineStateInfo<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbBindable,
     /// # C++ Info
     /// - name: `listeners`(ctype: `hkArray<hkbStateListener*>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "listeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "listeners"))]
     pub m_listeners: Vec<Pointer>,
     /// # C++ Info
     /// - name: `enterNotifyEvents`(ctype: `struct hkbStateMachineEventPropertyArray*`)
     /// - offset: ` 40`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enterNotifyEvents"))]
     #[cfg_attr(feature = "serde", serde(rename = "enterNotifyEvents"))]
     pub m_enterNotifyEvents: Pointer,
     /// # C++ Info
     /// - name: `exitNotifyEvents`(ctype: `struct hkbStateMachineEventPropertyArray*`)
     /// - offset: ` 44`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "exitNotifyEvents"))]
     #[cfg_attr(feature = "serde", serde(rename = "exitNotifyEvents"))]
     pub m_exitNotifyEvents: Pointer,
     /// # C++ Info
     /// - name: `transitions`(ctype: `struct hkbStateMachineTransitionInfoArray*`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transitions"))]
     #[cfg_attr(feature = "serde", serde(rename = "transitions"))]
     pub m_transitions: Pointer,
     /// # C++ Info
     /// - name: `generator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "generator"))]
     #[cfg_attr(feature = "serde", serde(rename = "generator"))]
     pub m_generator: Pointer,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
     /// # C++ Info
     /// - name: `stateId`(ctype: `hkInt32`)
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "stateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "stateId"))]
     pub m_stateId: i32,
     /// # C++ Info
     /// - name: `probability`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/`108`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "probability"))]
     #[cfg_attr(feature = "serde", serde(rename = "probability"))]
     pub m_probability: f32,
     /// # C++ Info
     /// - name: `enable`(ctype: `hkBool`)
     /// - offset: ` 68`(x86)/`112`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enable"))]
     #[cfg_attr(feature = "serde", serde(rename = "enable"))]
     pub m_enable: bool,
 }

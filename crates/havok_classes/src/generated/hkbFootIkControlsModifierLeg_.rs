@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 32`(x86)/` 48`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,30 +27,35 @@ pub struct hkbFootIkControlsModifierLeg {
     /// - name: `groundPosition`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "groundPosition"))]
     #[cfg_attr(feature = "serde", serde(rename = "groundPosition"))]
     pub m_groundPosition: Vector4,
     /// # C++ Info
     /// - name: `ungroundedEvent`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "ungroundedEvent"))]
     #[cfg_attr(feature = "serde", serde(rename = "ungroundedEvent"))]
     pub m_ungroundedEvent: hkbEventProperty,
     /// # C++ Info
     /// - name: `verticalError`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "verticalError"))]
     #[cfg_attr(feature = "serde", serde(rename = "verticalError"))]
     pub m_verticalError: f32,
     /// # C++ Info
     /// - name: `hitSomething`(ctype: `hkBool`)
     /// - offset: ` 28`(x86)/` 36`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "hitSomething"))]
     #[cfg_attr(feature = "serde", serde(rename = "hitSomething"))]
     pub m_hitSomething: bool,
     /// # C++ Info
     /// - name: `isPlantedMS`(ctype: `hkBool`)
     /// - offset: ` 29`(x86)/` 37`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isPlantedMS"))]
     #[cfg_attr(feature = "serde", serde(rename = "isPlantedMS"))]
     pub m_isPlantedMS: bool,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 24`(x86)/` 32`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct hkpVehicleDefaultAnalogDriverInput {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpVehicleDriverInput,
     /// # C++ Info
     /// - name: `slopeChangePointX`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "slopeChangePointX"))]
     #[cfg_attr(feature = "serde", serde(rename = "slopeChangePointX"))]
     pub m_slopeChangePointX: f32,
     /// # C++ Info
     /// - name: `initialSlope`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "initialSlope"))]
     #[cfg_attr(feature = "serde", serde(rename = "initialSlope"))]
     pub m_initialSlope: f32,
     /// # C++ Info
     /// - name: `deadZone`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "deadZone"))]
     #[cfg_attr(feature = "serde", serde(rename = "deadZone"))]
     pub m_deadZone: f32,
     /// # C++ Info
     /// - name: `autoReverse`(ctype: `hkBool`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "autoReverse"))]
     #[cfg_attr(feature = "serde", serde(rename = "autoReverse"))]
     pub m_autoReverse: bool,
 }

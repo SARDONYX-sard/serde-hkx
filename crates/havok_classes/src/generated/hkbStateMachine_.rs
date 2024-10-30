@@ -7,6 +7,7 @@ use super::*;
 /// - size: `180`(x86)/`264`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,12 +24,17 @@ pub struct hkbStateMachine<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `eventToSendWhenStateOrTransitionChanges`(ctype: `struct hkbEvent`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "eventToSendWhenStateOrTransitionChanges")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "eventToSendWhenStateOrTransitionChanges")
@@ -38,42 +44,58 @@ pub struct hkbStateMachine<'a> {
     /// - name: `startStateChooser`(ctype: `struct hkbStateChooser*`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startStateChooser"))]
     #[cfg_attr(feature = "serde", serde(rename = "startStateChooser"))]
     pub m_startStateChooser: Pointer,
     /// # C++ Info
     /// - name: `startStateId`(ctype: `hkInt32`)
     /// - offset: ` 56`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "startStateId"))]
     pub m_startStateId: i32,
     /// # C++ Info
     /// - name: `returnToPreviousStateEventId`(ctype: `hkInt32`)
     /// - offset: ` 60`(x86)/`108`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "returnToPreviousStateEventId")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "returnToPreviousStateEventId"))]
     pub m_returnToPreviousStateEventId: i32,
     /// # C++ Info
     /// - name: `randomTransitionEventId`(ctype: `hkInt32`)
     /// - offset: ` 64`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "randomTransitionEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "randomTransitionEventId"))]
     pub m_randomTransitionEventId: i32,
     /// # C++ Info
     /// - name: `transitionToNextHigherStateEventId`(ctype: `hkInt32`)
     /// - offset: ` 68`(x86)/`116`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "transitionToNextHigherStateEventId")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "transitionToNextHigherStateEventId"))]
     pub m_transitionToNextHigherStateEventId: i32,
     /// # C++ Info
     /// - name: `transitionToNextLowerStateEventId`(ctype: `hkInt32`)
     /// - offset: ` 72`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "transitionToNextLowerStateEventId")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "transitionToNextLowerStateEventId"))]
     pub m_transitionToNextLowerStateEventId: i32,
     /// # C++ Info
     /// - name: `syncVariableIndex`(ctype: `hkInt32`)
     /// - offset: ` 76`(x86)/`124`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "syncVariableIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "syncVariableIndex"))]
     pub m_syncVariableIndex: i32,
     /// # C++ Info
@@ -81,30 +103,35 @@ pub struct hkbStateMachine<'a> {
     /// - offset: ` 80`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "currentStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentStateId"))]
     pub m_currentStateId: i32,
     /// # C++ Info
     /// - name: `wrapAroundStateId`(ctype: `hkBool`)
     /// - offset: ` 84`(x86)/`132`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wrapAroundStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "wrapAroundStateId"))]
     pub m_wrapAroundStateId: bool,
     /// # C++ Info
     /// - name: `maxSimultaneousTransitions`(ctype: `hkInt8`)
     /// - offset: ` 85`(x86)/`133`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxSimultaneousTransitions"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxSimultaneousTransitions"))]
     pub m_maxSimultaneousTransitions: i8,
     /// # C++ Info
     /// - name: `startStateMode`(ctype: `enum StartStateMode`)
     /// - offset: ` 86`(x86)/`134`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startStateMode"))]
     #[cfg_attr(feature = "serde", serde(rename = "startStateMode"))]
     pub m_startStateMode: StartStateMode,
     /// # C++ Info
     /// - name: `selfTransitionMode`(ctype: `enum StateMachineSelfTransitionMode`)
     /// - offset: ` 87`(x86)/`135`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "selfTransitionMode"))]
     #[cfg_attr(feature = "serde", serde(rename = "selfTransitionMode"))]
     pub m_selfTransitionMode: StateMachineSelfTransitionMode,
     /// # C++ Info
@@ -112,18 +139,21 @@ pub struct hkbStateMachine<'a> {
     /// - offset: ` 88`(x86)/`136`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isActive"))]
     #[cfg_attr(feature = "serde", serde(rename = "isActive"))]
     pub m_isActive: bool,
     /// # C++ Info
     /// - name: `states`(ctype: `hkArray<hkbStateMachineStateInfo*>`)
     /// - offset: ` 92`(x86)/`144`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "states"))]
     #[cfg_attr(feature = "serde", serde(rename = "states"))]
     pub m_states: Vec<Pointer>,
     /// # C++ Info
     /// - name: `wildcardTransitions`(ctype: `struct hkbStateMachineTransitionInfoArray*`)
     /// - offset: `104`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wildcardTransitions"))]
     #[cfg_attr(feature = "serde", serde(rename = "wildcardTransitions"))]
     pub m_wildcardTransitions: Pointer,
     /// # C++ Info
@@ -131,6 +161,7 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `108`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "stateIdToIndexMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "stateIdToIndexMap"))]
     pub m_stateIdToIndexMap: Pointer,
     /// # C++ Info
@@ -138,6 +169,7 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `112`(x86)/`176`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "activeTransitions"))]
     #[cfg_attr(feature = "serde", serde(rename = "activeTransitions"))]
     pub m_activeTransitions: Vec<()>,
     /// # C++ Info
@@ -145,6 +177,7 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `124`(x86)/`192`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transitionFlags"))]
     #[cfg_attr(feature = "serde", serde(rename = "transitionFlags"))]
     pub m_transitionFlags: Vec<()>,
     /// # C++ Info
@@ -152,6 +185,7 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `136`(x86)/`208`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wildcardTransitionFlags"))]
     #[cfg_attr(feature = "serde", serde(rename = "wildcardTransitionFlags"))]
     pub m_wildcardTransitionFlags: Vec<()>,
     /// # C++ Info
@@ -159,6 +193,7 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `148`(x86)/`224`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "delayedTransitions"))]
     #[cfg_attr(feature = "serde", serde(rename = "delayedTransitions"))]
     pub m_delayedTransitions: Vec<()>,
     /// # C++ Info
@@ -166,6 +201,7 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `160`(x86)/`240`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timeInState"))]
     #[cfg_attr(feature = "serde", serde(rename = "timeInState"))]
     pub m_timeInState: f32,
     /// # C++ Info
@@ -173,6 +209,7 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `164`(x86)/`244`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "lastLocalTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "lastLocalTime"))]
     pub m_lastLocalTime: f32,
     /// # C++ Info
@@ -180,6 +217,7 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `168`(x86)/`248`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "previousStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "previousStateId"))]
     pub m_previousStateId: i32,
     /// # C++ Info
@@ -187,6 +225,10 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `172`(x86)/`252`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "nextStartStateIndexOverride")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "nextStartStateIndexOverride"))]
     pub m_nextStartStateIndexOverride: i32,
     /// # C++ Info
@@ -194,6 +236,7 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `176`(x86)/`256`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "stateOrTransitionChanged"))]
     #[cfg_attr(feature = "serde", serde(rename = "stateOrTransitionChanged"))]
     pub m_stateOrTransitionChanged: bool,
     /// # C++ Info
@@ -201,6 +244,7 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `177`(x86)/`257`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "echoNextUpdate"))]
     #[cfg_attr(feature = "serde", serde(rename = "echoNextUpdate"))]
     pub m_echoNextUpdate: bool,
     /// # C++ Info
@@ -208,6 +252,10 @@ pub struct hkbStateMachine<'a> {
     /// - offset: `178`(x86)/`258`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "sCurrentStateIndexAndEntered")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "sCurrentStateIndexAndEntered"))]
     pub m_sCurrentStateIndexAndEntered: u16,
 }
@@ -2173,6 +2221,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -2194,6 +2243,7 @@ pub enum StartStateMode {
 }
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

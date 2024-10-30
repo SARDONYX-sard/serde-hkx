@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 40`(x86)/` 64`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct hkxMeshSection {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `vertexBuffer`(ctype: `struct hkxVertexBuffer*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "vertexBuffer"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexBuffer"))]
     pub m_vertexBuffer: Pointer,
     /// # C++ Info
     /// - name: `indexBuffers`(ctype: `hkArray<hkxIndexBuffer*>`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "indexBuffers"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexBuffers"))]
     pub m_indexBuffers: Vec<Pointer>,
     /// # C++ Info
     /// - name: `material`(ctype: `struct hkxMaterial*`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "material"))]
     #[cfg_attr(feature = "serde", serde(rename = "material"))]
     pub m_material: Pointer,
     /// # C++ Info
     /// - name: `userChannels`(ctype: `hkArray<hkReferencedObject*>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "userChannels"))]
     #[cfg_attr(feature = "serde", serde(rename = "userChannels"))]
     pub m_userChannels: Vec<Pointer>,
 }

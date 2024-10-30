@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 16`(x86)/` 16`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,24 +27,28 @@ pub struct hkbStateMachineTimeInterval {
     /// - name: `enterEventId`(ctype: `hkInt32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enterEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "enterEventId"))]
     pub m_enterEventId: i32,
     /// # C++ Info
     /// - name: `exitEventId`(ctype: `hkInt32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "exitEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "exitEventId"))]
     pub m_exitEventId: i32,
     /// # C++ Info
     /// - name: `enterTime`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enterTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "enterTime"))]
     pub m_enterTime: f32,
     /// # C++ Info
     /// - name: `exitTime`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "exitTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "exitTime"))]
     pub m_exitTime: f32,
 }

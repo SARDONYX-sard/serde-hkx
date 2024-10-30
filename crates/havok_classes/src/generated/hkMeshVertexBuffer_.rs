@@ -7,6 +7,7 @@ use super::*;
 /// - size: `  8`(x86)/` 16`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct hkMeshVertexBuffer {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
 }
@@ -194,12 +196,33 @@ const _: () = {
 bitflags::bitflags! {
     #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
     "- size(C++): `TYPE_UINT32`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
-    Flags : u32 { #[doc = "1"] const ACCESS_READ = 1u32; #[doc = "2"] const ACCESS_WRITE
-    = 2u32; #[doc = "3"] const ACCESS_READ_WRITE = 3u32; #[doc = "4"] const
-    ACCESS_WRITE_DISCARD = 4u32; #[doc = "8"] const ACCESS_ELEMENT_ARRAY = 8u32; }
+    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
+    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
+    PartialEq, Eq, Hash)] pub struct Flags : u32 { #[doc = "1"] const ACCESS_READ = 1u32;
+    #[doc = "2"] const ACCESS_WRITE = 2u32; #[doc = "3"] const ACCESS_READ_WRITE = 3u32;
+    #[doc = "4"] const ACCESS_WRITE_DISCARD = 4u32; #[doc = "8"] const
+    ACCESS_ELEMENT_ARRAY = 8u32; }
 }
+#[cfg(feature = "json_schema")]
+const _: () = {
+    use schemars::{SchemaGenerator, Schema, JsonSchema, json_schema};
+    use std::borrow::Cow;
+    impl JsonSchema for Flags {
+        fn schema_name() -> Cow<'static, str> {
+            "Flags".into()
+        }
+        fn schema_id() -> Cow<'static, str> {
+            concat!(module_path!(), "::", "Flags").into()
+        }
+        fn json_schema(_generate: &mut SchemaGenerator) -> Schema {
+            json_schema!(
+                { "description" :
+                "Bitflags field. Specific flags: ACCESS_READ: 1, ACCESS_WRITE: 2, ACCESS_READ_WRITE: 3, ACCESS_WRITE_DISCARD: 4, ACCESS_ELEMENT_ARRAY: 8. Additional unspecified bits may be set.(e.g.: BIT_FLAG|BIT_FLAG2|4)",
+                "type" : "string", }
+            )
+        }
+    }
+};
 const _: () = {
     use havok_serde as __serde;
     impl __serde::Serialize for Flags {

@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/` 96`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct hkpPairCollisionFilter {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpCollisionFilter,
     /// # C++ Info
@@ -30,12 +32,14 @@ pub struct hkpPairCollisionFilter {
     /// - offset: ` 48`(x86)/` 72`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "disabledPairs"))]
     #[cfg_attr(feature = "serde", serde(rename = "disabledPairs"))]
     pub m_disabledPairs: hkpPairCollisionFilterMapPairFilterKeyOverrideType,
     /// # C++ Info
     /// - name: `childFilter`(ctype: `struct hkpCollisionFilter*`)
     /// - offset: ` 60`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childFilter"))]
     #[cfg_attr(feature = "serde", serde(rename = "childFilter"))]
     pub m_childFilter: Pointer,
 }

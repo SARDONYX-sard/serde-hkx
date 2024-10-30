@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 16`(x86)/` 16`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -27,6 +28,7 @@ pub struct hkHalf8 {
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "quad"))]
     #[cfg_attr(feature = "serde", serde(rename = "quad"))]
     pub m_quad: [f16; 8usize],
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: `208`(x86)/`256`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,108 +24,126 @@ pub struct hkbFootIkModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `gains`(ctype: `struct hkbFootIkGains`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "gains"))]
     #[cfg_attr(feature = "serde", serde(rename = "gains"))]
     pub m_gains: hkbFootIkGains,
     /// # C++ Info
     /// - name: `legs`(ctype: `hkArray<struct hkbFootIkModifierLeg>`)
     /// - offset: ` 92`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "legs"))]
     #[cfg_attr(feature = "serde", serde(rename = "legs"))]
     pub m_legs: Vec<hkbFootIkModifierLeg>,
     /// # C++ Info
     /// - name: `raycastDistanceUp`(ctype: `hkReal`)
     /// - offset: `104`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "raycastDistanceUp"))]
     #[cfg_attr(feature = "serde", serde(rename = "raycastDistanceUp"))]
     pub m_raycastDistanceUp: f32,
     /// # C++ Info
     /// - name: `raycastDistanceDown`(ctype: `hkReal`)
     /// - offset: `108`(x86)/`148`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "raycastDistanceDown"))]
     #[cfg_attr(feature = "serde", serde(rename = "raycastDistanceDown"))]
     pub m_raycastDistanceDown: f32,
     /// # C++ Info
     /// - name: `originalGroundHeightMS`(ctype: `hkReal`)
     /// - offset: `112`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "originalGroundHeightMS"))]
     #[cfg_attr(feature = "serde", serde(rename = "originalGroundHeightMS"))]
     pub m_originalGroundHeightMS: f32,
     /// # C++ Info
     /// - name: `errorOut`(ctype: `hkReal`)
     /// - offset: `116`(x86)/`156`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "errorOut"))]
     #[cfg_attr(feature = "serde", serde(rename = "errorOut"))]
     pub m_errorOut: f32,
     /// # C++ Info
     /// - name: `errorOutTranslation`(ctype: `hkVector4`)
     /// - offset: `128`(x86)/`160`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "errorOutTranslation"))]
     #[cfg_attr(feature = "serde", serde(rename = "errorOutTranslation"))]
     pub m_errorOutTranslation: Vector4,
     /// # C++ Info
     /// - name: `alignWithGroundRotation`(ctype: `hkQuaternion`)
     /// - offset: `144`(x86)/`176`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "alignWithGroundRotation"))]
     #[cfg_attr(feature = "serde", serde(rename = "alignWithGroundRotation"))]
     pub m_alignWithGroundRotation: Quaternion,
     /// # C++ Info
     /// - name: `verticalOffset`(ctype: `hkReal`)
     /// - offset: `160`(x86)/`192`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "verticalOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "verticalOffset"))]
     pub m_verticalOffset: f32,
     /// # C++ Info
     /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
     /// - offset: `164`(x86)/`196`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "collisionFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionFilterInfo"))]
     pub m_collisionFilterInfo: u32,
     /// # C++ Info
     /// - name: `forwardAlignFraction`(ctype: `hkReal`)
     /// - offset: `168`(x86)/`200`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "forwardAlignFraction"))]
     #[cfg_attr(feature = "serde", serde(rename = "forwardAlignFraction"))]
     pub m_forwardAlignFraction: f32,
     /// # C++ Info
     /// - name: `sidewaysAlignFraction`(ctype: `hkReal`)
     /// - offset: `172`(x86)/`204`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sidewaysAlignFraction"))]
     #[cfg_attr(feature = "serde", serde(rename = "sidewaysAlignFraction"))]
     pub m_sidewaysAlignFraction: f32,
     /// # C++ Info
     /// - name: `sidewaysSampleWidth`(ctype: `hkReal`)
     /// - offset: `176`(x86)/`208`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sidewaysSampleWidth"))]
     #[cfg_attr(feature = "serde", serde(rename = "sidewaysSampleWidth"))]
     pub m_sidewaysSampleWidth: f32,
     /// # C++ Info
     /// - name: `useTrackData`(ctype: `hkBool`)
     /// - offset: `180`(x86)/`212`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "useTrackData"))]
     #[cfg_attr(feature = "serde", serde(rename = "useTrackData"))]
     pub m_useTrackData: bool,
     /// # C++ Info
     /// - name: `lockFeetWhenPlanted`(ctype: `hkBool`)
     /// - offset: `181`(x86)/`213`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "lockFeetWhenPlanted"))]
     #[cfg_attr(feature = "serde", serde(rename = "lockFeetWhenPlanted"))]
     pub m_lockFeetWhenPlanted: bool,
     /// # C++ Info
     /// - name: `useCharacterUpVector`(ctype: `hkBool`)
     /// - offset: `182`(x86)/`214`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "useCharacterUpVector"))]
     #[cfg_attr(feature = "serde", serde(rename = "useCharacterUpVector"))]
     pub m_useCharacterUpVector: bool,
     /// # C++ Info
     /// - name: `alignMode`(ctype: `enum AlignMode`)
     /// - offset: `183`(x86)/`215`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "alignMode"))]
     #[cfg_attr(feature = "serde", serde(rename = "alignMode"))]
     pub m_alignMode: AlignMode,
     /// # C++ Info
@@ -132,6 +151,7 @@ pub struct hkbFootIkModifier<'a> {
     /// - offset: `184`(x86)/`216`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "internalLegData"))]
     #[cfg_attr(feature = "serde", serde(rename = "internalLegData"))]
     pub m_internalLegData: Vec<hkbFootIkModifierInternalLegData>,
     /// # C++ Info
@@ -139,6 +159,7 @@ pub struct hkbFootIkModifier<'a> {
     /// - offset: `196`(x86)/`232`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "prevIsFootIkEnabled"))]
     #[cfg_attr(feature = "serde", serde(rename = "prevIsFootIkEnabled"))]
     pub m_prevIsFootIkEnabled: f32,
     /// # C++ Info
@@ -146,6 +167,7 @@ pub struct hkbFootIkModifier<'a> {
     /// - offset: `200`(x86)/`236`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isSetUp"))]
     #[cfg_attr(feature = "serde", serde(rename = "isSetUp"))]
     pub m_isSetUp: bool,
     /// # C++ Info
@@ -153,6 +175,7 @@ pub struct hkbFootIkModifier<'a> {
     /// - offset: `201`(x86)/`237`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isGroundPositionValid"))]
     #[cfg_attr(feature = "serde", serde(rename = "isGroundPositionValid"))]
     pub m_isGroundPositionValid: bool,
     /// # C++ Info
@@ -160,6 +183,7 @@ pub struct hkbFootIkModifier<'a> {
     /// - offset: `204`(x86)/`240`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timeStep"))]
     #[cfg_attr(feature = "serde", serde(rename = "timeStep"))]
     pub m_timeStep: f32,
 }
@@ -2046,6 +2070,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

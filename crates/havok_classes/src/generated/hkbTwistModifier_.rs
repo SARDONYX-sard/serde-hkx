@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`144`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,48 +24,56 @@ pub struct hkbTwistModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `axisOfRotation`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "axisOfRotation"))]
     #[cfg_attr(feature = "serde", serde(rename = "axisOfRotation"))]
     pub m_axisOfRotation: Vector4,
     /// # C++ Info
     /// - name: `twistAngle`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "twistAngle"))]
     #[cfg_attr(feature = "serde", serde(rename = "twistAngle"))]
     pub m_twistAngle: f32,
     /// # C++ Info
     /// - name: `startBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 68`(x86)/`100`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "startBoneIndex"))]
     pub m_startBoneIndex: i16,
     /// # C++ Info
     /// - name: `endBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 70`(x86)/`102`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "endBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "endBoneIndex"))]
     pub m_endBoneIndex: i16,
     /// # C++ Info
     /// - name: `setAngleMethod`(ctype: `enum SetAngleMethod`)
     /// - offset: ` 72`(x86)/`104`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "setAngleMethod"))]
     #[cfg_attr(feature = "serde", serde(rename = "setAngleMethod"))]
     pub m_setAngleMethod: SetAngleMethod,
     /// # C++ Info
     /// - name: `rotationAxisCoordinates`(ctype: `enum RotationAxisCoordinates`)
     /// - offset: ` 73`(x86)/`105`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotationAxisCoordinates"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotationAxisCoordinates"))]
     pub m_rotationAxisCoordinates: RotationAxisCoordinates,
     /// # C++ Info
     /// - name: `isAdditive`(ctype: `hkBool`)
     /// - offset: ` 74`(x86)/`106`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isAdditive"))]
     #[cfg_attr(feature = "serde", serde(rename = "isAdditive"))]
     pub m_isAdditive: bool,
     /// # C++ Info
@@ -72,6 +81,7 @@ pub struct hkbTwistModifier<'a> {
     /// - offset: ` 76`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "boneChainIndices"))]
     #[cfg_attr(feature = "serde", serde(rename = "boneChainIndices"))]
     pub m_boneChainIndices: Vec<()>,
     /// # C++ Info
@@ -79,6 +89,7 @@ pub struct hkbTwistModifier<'a> {
     /// - offset: ` 88`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "parentBoneIndices"))]
     #[cfg_attr(feature = "serde", serde(rename = "parentBoneIndices"))]
     pub m_parentBoneIndices: Vec<()>,
 }
@@ -1083,6 +1094,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -1102,6 +1114,7 @@ pub enum SetAngleMethod {
 }
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

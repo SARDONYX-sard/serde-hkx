@@ -5,6 +5,8 @@ mod impls;
 use self::enums::gen_enum;
 use self::flags::gen_flag;
 use crate::cpp_info::{Class, Enum, TypeKind};
+use flags::impls::json_schema::enum_flags::impl_schema_for_enum_flag;
+use flags::impls::json_schema::flags::impl_schema_for_flag;
 use proc_macro2::TokenStream;
 use quote::quote;
 use std::collections::HashSet;
@@ -30,18 +32,27 @@ pub fn generate(class: &Class) -> Vec<TokenStream> {
         match vtype {
             TypeKind::Flags => {
                 let flag_struct = gen_flag(one_enum);
+                let impl_json_schema =  impl_schema_for_flag(one_enum);
+
                 enums.push(quote! {
                     #[havok_types_derive::impl_flags_methods]
                     #flag_struct
-                 });
+
+                    #impl_json_schema
+                });
             }
             TypeKind::Enum => {
                 // An enum with the same value is not valid as an enum in Rust. Therefore, express them as BitFlag
                 let item_enum = if has_duplicate_value(one_enum) {
                     let flag_struct = gen_flag(one_enum);
+                    let impl_json_schema =  impl_schema_for_enum_flag(one_enum);
+                    // NOTE: enum can make schema with derive, so it is not impl here.
+
                     quote! {
                         #[havok_types_derive::impl_flags_methods]
                         #flag_struct
+
+                        #impl_json_schema
                     }
                 } else {
                     let item_enum = gen_enum(one_enum);

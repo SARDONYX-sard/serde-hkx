@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`160`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct BSComputeAddBoneAnimModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `boneIndex`(ctype: `hkInt16`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "boneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "boneIndex"))]
     pub m_boneIndex: i16,
     /// # C++ Info
     /// - name: `translationLSOut`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "translationLSOut"))]
     #[cfg_attr(feature = "serde", serde(rename = "translationLSOut"))]
     pub m_translationLSOut: Vector4,
     /// # C++ Info
     /// - name: `rotationLSOut`(ctype: `hkQuaternion`)
     /// - offset: ` 64`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotationLSOut"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotationLSOut"))]
     pub m_rotationLSOut: Quaternion,
     /// # C++ Info
     /// - name: `scaleLSOut`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/`128`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "scaleLSOut"))]
     #[cfg_attr(feature = "serde", serde(rename = "scaleLSOut"))]
     pub m_scaleLSOut: Vector4,
     /// # C++ Info
@@ -54,6 +60,7 @@ pub struct BSComputeAddBoneAnimModifier<'a> {
     /// - offset: ` 96`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pSkeletonMemory"))]
     #[cfg_attr(feature = "serde", serde(rename = "pSkeletonMemory"))]
     pub m_pSkeletonMemory: Pointer,
 }

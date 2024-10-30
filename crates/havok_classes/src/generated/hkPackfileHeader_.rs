@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/` 64`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,72 +27,90 @@ pub struct hkPackfileHeader {
     /// - name: `magic`(ctype: `hkInt32[2]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "magic"))]
     #[cfg_attr(feature = "serde", serde(rename = "magic"))]
     pub m_magic: [i32; 2usize],
     /// # C++ Info
     /// - name: `userTag`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "userTag"))]
     #[cfg_attr(feature = "serde", serde(rename = "userTag"))]
     pub m_userTag: i32,
     /// # C++ Info
     /// - name: `fileVersion`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fileVersion"))]
     #[cfg_attr(feature = "serde", serde(rename = "fileVersion"))]
     pub m_fileVersion: i32,
     /// # C++ Info
     /// - name: `layoutRules`(ctype: `hkUint8[4]`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "layoutRules"))]
     #[cfg_attr(feature = "serde", serde(rename = "layoutRules"))]
     pub m_layoutRules: [u8; 4usize],
     /// # C++ Info
     /// - name: `numSections`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numSections"))]
     #[cfg_attr(feature = "serde", serde(rename = "numSections"))]
     pub m_numSections: i32,
     /// # C++ Info
     /// - name: `contentsSectionIndex`(ctype: `hkInt32`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "contentsSectionIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "contentsSectionIndex"))]
     pub m_contentsSectionIndex: i32,
     /// # C++ Info
     /// - name: `contentsSectionOffset`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "contentsSectionOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "contentsSectionOffset"))]
     pub m_contentsSectionOffset: i32,
     /// # C++ Info
     /// - name: `contentsClassNameSectionIndex`(ctype: `hkInt32`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "contentsClassNameSectionIndex")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "contentsClassNameSectionIndex"))]
     pub m_contentsClassNameSectionIndex: i32,
     /// # C++ Info
     /// - name: `contentsClassNameSectionOffset`(ctype: `hkInt32`)
     /// - offset: ` 36`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "contentsClassNameSectionOffset")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "contentsClassNameSectionOffset"))]
     pub m_contentsClassNameSectionOffset: i32,
     /// # C++ Info
     /// - name: `contentsVersion`(ctype: `hkChar[16]`)
     /// - offset: ` 40`(x86)/` 40`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "contentsVersion"))]
     #[cfg_attr(feature = "serde", serde(rename = "contentsVersion"))]
     pub m_contentsVersion: [char; 16usize],
     /// # C++ Info
     /// - name: `flags`(ctype: `hkInt32`)
     /// - offset: ` 56`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: i32,
     /// # C++ Info
     /// - name: `pad`(ctype: `hkInt32[1]`)
     /// - offset: ` 60`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pad"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad"))]
     pub m_pad: [i32; 1usize],
 }

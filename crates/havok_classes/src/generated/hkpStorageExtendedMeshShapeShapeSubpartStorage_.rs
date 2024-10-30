@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 44`(x86)/` 64`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,24 +24,28 @@ pub struct hkpStorageExtendedMeshShapeShapeSubpartStorage {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `materialIndices`(ctype: `hkArray<hkUint8>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "materialIndices"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialIndices"))]
     pub m_materialIndices: Vec<u8>,
     /// # C++ Info
     /// - name: `materials`(ctype: `hkArray<struct hkpStorageExtendedMeshShapeMaterial>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "materials"))]
     #[cfg_attr(feature = "serde", serde(rename = "materials"))]
     pub m_materials: Vec<hkpStorageExtendedMeshShapeMaterial>,
     /// # C++ Info
     /// - name: `materialIndices16`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "materialIndices16"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialIndices16"))]
     pub m_materialIndices16: Vec<u16>,
 }

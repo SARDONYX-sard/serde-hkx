@@ -7,6 +7,7 @@ use super::*;
 /// - size: `368`(x86)/`448`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct hkpCachingShapePhantom<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpShapePhantom<'a>,
     /// # C++ Info
@@ -30,6 +32,7 @@ pub struct hkpCachingShapePhantom<'a> {
     /// - offset: `352`(x86)/`416`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "collisionDetails"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionDetails"))]
     pub m_collisionDetails: Vec<()>,
     /// # C++ Info
@@ -37,6 +40,7 @@ pub struct hkpCachingShapePhantom<'a> {
     /// - offset: `364`(x86)/`432`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "orderDirty"))]
     #[cfg_attr(feature = "serde", serde(rename = "orderDirty"))]
     pub m_orderDirty: bool,
 }
