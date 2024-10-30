@@ -17,16 +17,22 @@ pub struct hkaAnnotationTrack<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `trackName`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "trackName"))]
     pub m_trackName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `annotations`(ctype: `hkArray<struct hkaAnnotationTrackAnnotation>`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "annotations"))]
     pub m_annotations: Vec<hkaAnnotationTrackAnnotation<'a>>,
 }
 const _: () = {

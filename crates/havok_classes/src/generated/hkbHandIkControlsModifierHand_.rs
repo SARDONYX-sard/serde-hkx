@@ -17,21 +17,28 @@ pub struct hkbHandIkControlsModifierHand {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `controlData`(ctype: `struct hkbHandIkControlData`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 80`(x86)/` 96`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "controlData"))]
     pub m_controlData: hkbHandIkControlData,
     /// # C++ Info
     /// - name: `handIndex`(ctype: `hkInt32`)
     /// - offset: ` 80`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "handIndex"))]
     pub m_handIndex: i32,
     /// # C++ Info
     /// - name: `enable`(ctype: `hkBool`)
     /// - offset: ` 84`(x86)/`100`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "enable"))]
     pub m_enable: bool,
 }
 const _: () = {

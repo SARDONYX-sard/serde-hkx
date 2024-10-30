@@ -17,33 +17,43 @@ pub struct hkxIndexBuffer {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `indexType`(ctype: `enum IndexType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "indexType"))]
     pub m_indexType: IndexType,
     /// # C++ Info
     /// - name: `indices16`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "indices16"))]
     pub m_indices16: Vec<u16>,
     /// # C++ Info
     /// - name: `indices32`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "indices32"))]
     pub m_indices32: Vec<u32>,
     /// # C++ Info
     /// - name: `vertexBaseOffset`(ctype: `hkUint32`)
     /// - offset: ` 36`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexBaseOffset"))]
     pub m_vertexBaseOffset: u32,
     /// # C++ Info
     /// - name: `length`(ctype: `hkUint32`)
     /// - offset: ` 40`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "length"))]
     pub m_length: u32,
 }
 const _: () = {

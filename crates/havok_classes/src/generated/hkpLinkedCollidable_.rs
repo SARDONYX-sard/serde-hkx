@@ -17,14 +17,20 @@ pub struct hkpLinkedCollidable {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpCollidable,
     /// # C++ Info
     /// - name: `collisionEntries`(ctype: `hkArray<void>`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "collisionEntries"))]
     pub m_collisionEntries: Vec<()>,
 }
 const _: () = {

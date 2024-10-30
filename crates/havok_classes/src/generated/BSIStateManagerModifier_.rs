@@ -17,24 +17,32 @@ pub struct BSIStateManagerModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `iStateVar`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "iStateVar"))]
     pub m_iStateVar: i32,
     /// # C++ Info
     /// - name: `stateData`(ctype: `hkArray<struct BSIStateManagerModifierBSiStateData>`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "stateData"))]
     pub m_stateData: Vec<BSIStateManagerModifierBSiStateData>,
     /// # C++ Info
     /// - name: `myStateListener`(ctype: `struct BSIStateManagerModifierBSIStateManagerStateListener`)
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "myStateListener"))]
     pub m_myStateListener: BSIStateManagerModifierBSIStateManagerStateListener,
 }
 const _: () = {

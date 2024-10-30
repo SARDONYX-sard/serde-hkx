@@ -17,43 +17,55 @@ pub struct hkpBreakableConstraintData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintData,
     /// # C++ Info
     /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
     /// - name: `constraintData`(ctype: `struct hkpConstraintData*`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "constraintData"))]
     pub m_constraintData: Pointer,
     /// # C++ Info
     /// - name: `childRuntimeSize`(ctype: `hkUint16`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "childRuntimeSize"))]
     pub m_childRuntimeSize: u16,
     /// # C++ Info
     /// - name: `childNumSolverResults`(ctype: `hkUint16`)
     /// - offset: ` 30`(x86)/` 58`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "childNumSolverResults"))]
     pub m_childNumSolverResults: u16,
     /// # C++ Info
     /// - name: `solverResultLimit`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "solverResultLimit"))]
     pub m_solverResultLimit: f32,
     /// # C++ Info
     /// - name: `removeWhenBroken`(ctype: `hkBool`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "removeWhenBroken"))]
     pub m_removeWhenBroken: bool,
     /// # C++ Info
     /// - name: `revertBackVelocityOnBreak`(ctype: `hkBool`)
     /// - offset: ` 37`(x86)/` 65`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "revertBackVelocityOnBreak"))]
     pub m_revertBackVelocityOnBreak: bool,
 }
 const _: () = {

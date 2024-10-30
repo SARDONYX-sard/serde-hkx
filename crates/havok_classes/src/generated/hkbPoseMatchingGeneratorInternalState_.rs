@@ -17,33 +17,43 @@ pub struct hkbPoseMatchingGeneratorInternalState {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `currentMatch`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "currentMatch"))]
     pub m_currentMatch: i32,
     /// # C++ Info
     /// - name: `bestMatch`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bestMatch"))]
     pub m_bestMatch: i32,
     /// # C++ Info
     /// - name: `timeSinceBetterMatch`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "timeSinceBetterMatch"))]
     pub m_timeSinceBetterMatch: f32,
     /// # C++ Info
     /// - name: `error`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "error"))]
     pub m_error: f32,
     /// # C++ Info
     /// - name: `resetCurrentMatchLocalTime`(ctype: `hkBool`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "resetCurrentMatchLocalTime"))]
     pub m_resetCurrentMatchLocalTime: bool,
 }
 const _: () = {

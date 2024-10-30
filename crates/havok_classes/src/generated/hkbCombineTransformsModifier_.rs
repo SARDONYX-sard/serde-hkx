@@ -17,53 +17,67 @@ pub struct hkbCombineTransformsModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `translationOut`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "translationOut"))]
     pub m_translationOut: Vector4,
     /// # C++ Info
     /// - name: `rotationOut`(ctype: `hkQuaternion`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotationOut"))]
     pub m_rotationOut: Quaternion,
     /// # C++ Info
     /// - name: `leftTranslation`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "leftTranslation"))]
     pub m_leftTranslation: Vector4,
     /// # C++ Info
     /// - name: `leftRotation`(ctype: `hkQuaternion`)
     /// - offset: ` 96`(x86)/`128`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "leftRotation"))]
     pub m_leftRotation: Quaternion,
     /// # C++ Info
     /// - name: `rightTranslation`(ctype: `hkVector4`)
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rightTranslation"))]
     pub m_rightTranslation: Vector4,
     /// # C++ Info
     /// - name: `rightRotation`(ctype: `hkQuaternion`)
     /// - offset: `128`(x86)/`160`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rightRotation"))]
     pub m_rightRotation: Quaternion,
     /// # C++ Info
     /// - name: `invertLeftTransform`(ctype: `hkBool`)
     /// - offset: `144`(x86)/`176`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "invertLeftTransform"))]
     pub m_invertLeftTransform: bool,
     /// # C++ Info
     /// - name: `invertRightTransform`(ctype: `hkBool`)
     /// - offset: `145`(x86)/`177`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "invertRightTransform"))]
     pub m_invertRightTransform: bool,
     /// # C++ Info
     /// - name: `invertResult`(ctype: `hkBool`)
     /// - offset: `146`(x86)/`178`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "invertResult"))]
     pub m_invertResult: bool,
 }
 const _: () = {

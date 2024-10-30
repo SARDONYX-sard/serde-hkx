@@ -17,13 +17,19 @@ pub struct hkpVehicleCastBatchingManager {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpVehicleManager,
     /// # C++ Info
     /// - name: `totalNumWheels`(ctype: `hkUint16`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "totalNumWheels"))]
     pub m_totalNumWheels: u16,
 }
 const _: () = {

@@ -17,65 +17,79 @@ pub struct hkbContext {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `character`(ctype: `void*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "character"))]
     pub m_character: Pointer,
     /// # C++ Info
     /// - name: `behavior`(ctype: `void*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "behavior"))]
     pub m_behavior: Pointer,
     /// # C++ Info
     /// - name: `nodeToIndexMap`(ctype: `void*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "nodeToIndexMap"))]
     pub m_nodeToIndexMap: Pointer,
     /// # C++ Info
     /// - name: `eventQueue`(ctype: `void*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "eventQueue"))]
     pub m_eventQueue: Pointer,
     /// # C++ Info
     /// - name: `sharedEventQueue`(ctype: `void*`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "sharedEventQueue"))]
     pub m_sharedEventQueue: Pointer,
     /// # C++ Info
     /// - name: `generatorOutputListener`(ctype: `struct hkbGeneratorOutputListener*`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "generatorOutputListener"))]
     pub m_generatorOutputListener: Pointer,
     /// # C++ Info
     /// - name: `eventTriggeredTransition`(ctype: `hkBool`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "eventTriggeredTransition"))]
     pub m_eventTriggeredTransition: bool,
     /// # C++ Info
     /// - name: `world`(ctype: `void*`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "world"))]
     pub m_world: Pointer,
     /// # C++ Info
     /// - name: `attachmentManager`(ctype: `void*`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "attachmentManager"))]
     pub m_attachmentManager: Pointer,
     /// # C++ Info
     /// - name: `animationCache`(ctype: `void*`)
     /// - offset: ` 36`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "animationCache"))]
     pub m_animationCache: Pointer,
 }
 const _: () = {

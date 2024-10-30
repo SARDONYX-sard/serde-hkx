@@ -17,13 +17,19 @@ pub struct hkpDefaultWorldMemoryWatchDog {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkWorldMemoryAvailableWatchDog,
     /// # C++ Info
     /// - name: `freeHeapMemoryRequested`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "freeHeapMemoryRequested"))]
     pub m_freeHeapMemoryRequested: i32,
 }
 const _: () = {

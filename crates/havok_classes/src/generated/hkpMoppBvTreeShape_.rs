@@ -17,19 +17,26 @@ pub struct hkpMoppBvTreeShape {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkMoppBvTreeShapeBase,
     /// # C++ Info
     /// - name: `child`(ctype: `struct hkpSingleShapeContainer`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "child"))]
     pub m_child: hkpSingleShapeContainer,
     /// # C++ Info
     /// - name: `childSize`(ctype: `hkInt32`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "childSize"))]
     pub m_childSize: i32,
 }
 const _: () = {

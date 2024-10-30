@@ -17,18 +17,25 @@ pub struct hkpStorageExtendedMeshShape {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpExtendedMeshShape,
     /// # C++ Info
     /// - name: `meshstorage`(ctype: `hkArray<hkpStorageExtendedMeshShapeMeshSubpartStorage*>`)
     /// - offset: `240`(x86)/`336`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "meshstorage"))]
     pub m_meshstorage: Vec<Pointer>,
     /// # C++ Info
     /// - name: `shapestorage`(ctype: `hkArray<hkpStorageExtendedMeshShapeShapeSubpartStorage*>`)
     /// - offset: `252`(x86)/`352`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "shapestorage"))]
     pub m_shapestorage: Vec<Pointer>,
 }
 const _: () = {

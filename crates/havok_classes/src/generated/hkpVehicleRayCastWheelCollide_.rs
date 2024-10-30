@@ -17,23 +17,31 @@ pub struct hkpVehicleRayCastWheelCollide {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpVehicleWheelCollide,
     /// # C++ Info
     /// - name: `wheelCollisionFilterInfo`(ctype: `hkUint32`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelCollisionFilterInfo"))]
     pub m_wheelCollisionFilterInfo: u32,
     /// # C++ Info
     /// - name: `phantom`(ctype: `struct hkpAabbPhantom*`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "phantom"))]
     pub m_phantom: Pointer,
     /// # C++ Info
     /// - name: `rejectRayChassisListener`(ctype: `struct hkpRejectChassisListener`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: ` 16`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rejectRayChassisListener"))]
     pub m_rejectRayChassisListener: hkpRejectChassisListener,
 }
 const _: () = {

@@ -17,71 +17,88 @@ pub struct BSEventOnFalseToTrueModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `bEnableEvent1`(ctype: `hkBool`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bEnableEvent1"))]
     pub m_bEnableEvent1: bool,
     /// # C++ Info
     /// - name: `bVariableToTest1`(ctype: `hkBool`)
     /// - offset: ` 45`(x86)/` 81`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bVariableToTest1"))]
     pub m_bVariableToTest1: bool,
     /// # C++ Info
     /// - name: `EventToSend1`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "EventToSend1"))]
     pub m_EventToSend1: hkbEventProperty,
     /// # C++ Info
     /// - name: `bEnableEvent2`(ctype: `hkBool`)
     /// - offset: ` 56`(x86)/`104`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bEnableEvent2"))]
     pub m_bEnableEvent2: bool,
     /// # C++ Info
     /// - name: `bVariableToTest2`(ctype: `hkBool`)
     /// - offset: ` 57`(x86)/`105`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bVariableToTest2"))]
     pub m_bVariableToTest2: bool,
     /// # C++ Info
     /// - name: `EventToSend2`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 60`(x86)/`112`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "EventToSend2"))]
     pub m_EventToSend2: hkbEventProperty,
     /// # C++ Info
     /// - name: `bEnableEvent3`(ctype: `hkBool`)
     /// - offset: ` 68`(x86)/`128`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bEnableEvent3"))]
     pub m_bEnableEvent3: bool,
     /// # C++ Info
     /// - name: `bVariableToTest3`(ctype: `hkBool`)
     /// - offset: ` 69`(x86)/`129`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bVariableToTest3"))]
     pub m_bVariableToTest3: bool,
     /// # C++ Info
     /// - name: `EventToSend3`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 72`(x86)/`136`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "EventToSend3"))]
     pub m_EventToSend3: hkbEventProperty,
     /// # C++ Info
     /// - name: `bSlot1ActivatedLastFrame`(ctype: `hkBool`)
     /// - offset: ` 80`(x86)/`152`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "bSlot1ActivatedLastFrame"))]
     pub m_bSlot1ActivatedLastFrame: bool,
     /// # C++ Info
     /// - name: `bSlot2ActivatedLastFrame`(ctype: `hkBool`)
     /// - offset: ` 81`(x86)/`153`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "bSlot2ActivatedLastFrame"))]
     pub m_bSlot2ActivatedLastFrame: bool,
     /// # C++ Info
     /// - name: `bSlot3ActivatedLastFrame`(ctype: `hkBool`)
     /// - offset: ` 82`(x86)/`154`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "bSlot3ActivatedLastFrame"))]
     pub m_bSlot3ActivatedLastFrame: bool,
 }
 const _: () = {

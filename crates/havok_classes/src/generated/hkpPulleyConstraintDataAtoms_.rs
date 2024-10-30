@@ -17,16 +17,22 @@ pub struct hkpPulleyConstraintDataAtoms {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `translations`(ctype: `struct hkpSetLocalTranslationsConstraintAtom`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "translations"))]
     pub m_translations: hkpSetLocalTranslationsConstraintAtom,
     /// # C++ Info
     /// - name: `pulley`(ctype: `struct hkpPulleyConstraintAtom`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "pulley"))]
     pub m_pulley: hkpPulleyConstraintAtom,
 }
 const _: () = {

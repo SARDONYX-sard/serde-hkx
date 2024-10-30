@@ -17,26 +17,37 @@ pub struct hkbStateMachineDelayedTransitionInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `delayedTransition`(ctype: `struct hkbStateMachineProspectiveTransitionInfo`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "delayedTransition"))]
     pub m_delayedTransition: hkbStateMachineProspectiveTransitionInfo,
     /// # C++ Info
     /// - name: `timeDelayed`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "timeDelayed"))]
     pub m_timeDelayed: f32,
     /// # C++ Info
     /// - name: `isDelayedTransitionReturnToPreviousState`(ctype: `hkBool`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "serde",
+        serde(rename = "isDelayedTransitionReturnToPreviousState")
+    )]
     pub m_isDelayedTransitionReturnToPreviousState: bool,
     /// # C++ Info
     /// - name: `wasInAbutRangeLastFrame`(ctype: `hkBool`)
     /// - offset: ` 21`(x86)/` 21`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wasInAbutRangeLastFrame"))]
     pub m_wasInAbutRangeLastFrame: bool,
 }
 const _: () = {

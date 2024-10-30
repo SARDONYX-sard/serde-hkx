@@ -17,28 +17,37 @@ pub struct hkpTriggerVolume {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `overlappingBodies`(ctype: `hkArray<hkpRigidBody*>`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "overlappingBodies"))]
     pub m_overlappingBodies: Vec<Pointer>,
     /// # C++ Info
     /// - name: `eventQueue`(ctype: `hkArray<struct hkpTriggerVolumeEventInfo>`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "eventQueue"))]
     pub m_eventQueue: Vec<hkpTriggerVolumeEventInfo>,
     /// # C++ Info
     /// - name: `triggerBody`(ctype: `struct hkpRigidBody*`)
     /// - offset: ` 44`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "triggerBody"))]
     pub m_triggerBody: Pointer,
     /// # C++ Info
     /// - name: `sequenceNumber`(ctype: `hkUint32`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sequenceNumber"))]
     pub m_sequenceNumber: u32,
 }
 const _: () = {

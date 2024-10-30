@@ -17,30 +17,39 @@ pub struct hkbDelayedModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifierWrapper<'a>,
     /// # C++ Info
     /// - name: `delaySeconds`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "delaySeconds"))]
     pub m_delaySeconds: f32,
     /// # C++ Info
     /// - name: `durationSeconds`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "durationSeconds"))]
     pub m_durationSeconds: f32,
     /// # C++ Info
     /// - name: `secondsElapsed`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "secondsElapsed"))]
     pub m_secondsElapsed: f32,
     /// # C++ Info
     /// - name: `isActive`(ctype: `hkBool`)
     /// - offset: ` 60`(x86)/`100`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "isActive"))]
     pub m_isActive: bool,
 }
 const _: () = {

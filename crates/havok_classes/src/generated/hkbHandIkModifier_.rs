@@ -17,24 +17,32 @@ pub struct hkbHandIkModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `hands`(ctype: `hkArray<struct hkbHandIkModifierHand>`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "hands"))]
     pub m_hands: Vec<hkbHandIkModifierHand<'a>>,
     /// # C++ Info
     /// - name: `fadeInOutCurve`(ctype: `enum BlendCurve`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "fadeInOutCurve"))]
     pub m_fadeInOutCurve: BlendCurve,
     /// # C++ Info
     /// - name: `internalHandData`(ctype: `hkArray<void>`)
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "internalHandData"))]
     pub m_internalHandData: Vec<()>,
 }
 const _: () = {

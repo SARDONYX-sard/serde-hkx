@@ -17,23 +17,31 @@ pub struct hkpTyremarksWheel {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `currentPosition`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "currentPosition"))]
     pub m_currentPosition: i32,
     /// # C++ Info
     /// - name: `numPoints`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numPoints"))]
     pub m_numPoints: i32,
     /// # C++ Info
     /// - name: `tyremarkPoints`(ctype: `hkArray<struct hkpTyremarkPoint>`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "tyremarkPoints"))]
     pub m_tyremarkPoints: Vec<hkpTyremarkPoint>,
 }
 const _: () = {

@@ -17,30 +17,38 @@ pub struct hkMultiThreadCheck {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `threadId`(ctype: `hkUint32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "threadId"))]
     pub m_threadId: u32,
     /// # C++ Info
     /// - name: `stackTraceId`(ctype: `hkInt32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "stackTraceId"))]
     pub m_stackTraceId: i32,
     /// # C++ Info
     /// - name: `markCount`(ctype: `hkUint16`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "markCount"))]
     pub m_markCount: u16,
     /// # C++ Info
     /// - name: `markBitStack`(ctype: `hkUint16`)
     /// - offset: ` 10`(x86)/` 10`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "markBitStack"))]
     pub m_markBitStack: u16,
 }
 const _: () = {

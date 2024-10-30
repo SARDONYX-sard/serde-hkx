@@ -17,41 +17,52 @@ pub struct hkpCollidable {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpCdBody,
     /// # C++ Info
     /// - name: `ownerOffset`(ctype: `hkInt8`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "ownerOffset"))]
     pub m_ownerOffset: i8,
     /// # C++ Info
     /// - name: `forceCollideOntoPpu`(ctype: `hkUint8`)
     /// - offset: ` 17`(x86)/` 33`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "forceCollideOntoPpu"))]
     pub m_forceCollideOntoPpu: u8,
     /// # C++ Info
     /// - name: `shapeSizeOnSpu`(ctype: `hkUint16`)
     /// - offset: ` 18`(x86)/` 34`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "shapeSizeOnSpu"))]
     pub m_shapeSizeOnSpu: u16,
     /// # C++ Info
     /// - name: `broadPhaseHandle`(ctype: `struct hkpTypedBroadPhaseHandle`)
     /// - offset: ` 20`(x86)/` 36`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "broadPhaseHandle"))]
     pub m_broadPhaseHandle: hkpTypedBroadPhaseHandle,
     /// # C++ Info
     /// - name: `boundingVolumeData`(ctype: `struct hkpCollidableBoundingVolumeData`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 44`(x86)/` 56`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "boundingVolumeData"))]
     pub m_boundingVolumeData: hkpCollidableBoundingVolumeData,
     /// # C++ Info
     /// - name: `allowedPenetrationDepth`(ctype: `hkReal`)
     /// - offset: ` 76`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "allowedPenetrationDepth"))]
     pub m_allowedPenetrationDepth: f32,
 }
 const _: () = {

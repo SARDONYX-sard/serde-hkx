@@ -17,48 +17,61 @@ pub struct hkMemoryMeshVertexBuffer {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkMeshVertexBuffer,
     /// # C++ Info
     /// - name: `format`(ctype: `struct hkVertexFormat`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `260`(x86)/`260`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "format"))]
     pub m_format: hkVertexFormat,
     /// # C++ Info
     /// - name: `elementOffsets`(ctype: `hkInt32[32]`)
     /// - offset: `268`(x86)/`276`(x86_64)
     /// - type_size: `128`(x86)/`128`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "elementOffsets"))]
     pub m_elementOffsets: [i32; 32usize],
     /// # C++ Info
     /// - name: `memory`(ctype: `hkArray<hkUint8>`)
     /// - offset: `396`(x86)/`408`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "memory"))]
     pub m_memory: Vec<u8>,
     /// # C++ Info
     /// - name: `vertexStride`(ctype: `hkInt32`)
     /// - offset: `408`(x86)/`424`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexStride"))]
     pub m_vertexStride: i32,
     /// # C++ Info
     /// - name: `locked`(ctype: `hkBool`)
     /// - offset: `412`(x86)/`428`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "locked"))]
     pub m_locked: bool,
     /// # C++ Info
     /// - name: `numVertices`(ctype: `hkInt32`)
     /// - offset: `416`(x86)/`432`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numVertices"))]
     pub m_numVertices: i32,
     /// # C++ Info
     /// - name: `isBigEndian`(ctype: `hkBool`)
     /// - offset: `420`(x86)/`436`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isBigEndian"))]
     pub m_isBigEndian: bool,
     /// # C++ Info
     /// - name: `isSharable`(ctype: `hkBool`)
     /// - offset: `421`(x86)/`437`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isSharable"))]
     pub m_isSharable: bool,
 }
 const _: () = {

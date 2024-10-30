@@ -17,68 +17,85 @@ pub struct hkaWaveletCompressedAnimation<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkaAnimation<'a>,
     /// # C++ Info
     /// - name: `numberOfPoses`(ctype: `hkInt32`)
     /// - offset: ` 40`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numberOfPoses"))]
     pub m_numberOfPoses: i32,
     /// # C++ Info
     /// - name: `blockSize`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blockSize"))]
     pub m_blockSize: i32,
     /// # C++ Info
     /// - name: `qFormat`(ctype: `struct hkaWaveletCompressedAnimationQuantizationFormat`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "qFormat"))]
     pub m_qFormat: hkaWaveletCompressedAnimationQuantizationFormat,
     /// # C++ Info
     /// - name: `staticMaskIdx`(ctype: `hkUint32`)
     /// - offset: ` 68`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "staticMaskIdx"))]
     pub m_staticMaskIdx: u32,
     /// # C++ Info
     /// - name: `staticDOFsIdx`(ctype: `hkUint32`)
     /// - offset: ` 72`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "staticDOFsIdx"))]
     pub m_staticDOFsIdx: u32,
     /// # C++ Info
     /// - name: `numStaticTransformDOFs`(ctype: `hkUint32`)
     /// - offset: ` 76`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numStaticTransformDOFs"))]
     pub m_numStaticTransformDOFs: u32,
     /// # C++ Info
     /// - name: `numDynamicTransformDOFs`(ctype: `hkUint32`)
     /// - offset: ` 80`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numDynamicTransformDOFs"))]
     pub m_numDynamicTransformDOFs: u32,
     /// # C++ Info
     /// - name: `blockIndexIdx`(ctype: `hkUint32`)
     /// - offset: ` 84`(x86)/`100`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blockIndexIdx"))]
     pub m_blockIndexIdx: u32,
     /// # C++ Info
     /// - name: `blockIndexSize`(ctype: `hkUint32`)
     /// - offset: ` 88`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blockIndexSize"))]
     pub m_blockIndexSize: u32,
     /// # C++ Info
     /// - name: `quantizedDataIdx`(ctype: `hkUint32`)
     /// - offset: ` 92`(x86)/`108`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "quantizedDataIdx"))]
     pub m_quantizedDataIdx: u32,
     /// # C++ Info
     /// - name: `quantizedDataSize`(ctype: `hkUint32`)
     /// - offset: ` 96`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "quantizedDataSize"))]
     pub m_quantizedDataSize: u32,
     /// # C++ Info
     /// - name: `dataBuffer`(ctype: `hkArray<hkUint8>`)
     /// - offset: `100`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "dataBuffer"))]
     pub m_dataBuffer: Vec<u8>,
 }
 const _: () = {

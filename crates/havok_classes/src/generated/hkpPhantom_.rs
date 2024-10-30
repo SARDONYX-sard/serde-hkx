@@ -17,20 +17,27 @@ pub struct hkpPhantom<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpWorldObject<'a>,
     /// # C++ Info
     /// - name: `overlapListeners`(ctype: `hkArray<void*>`)
     /// - offset: `140`(x86)/`208`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "overlapListeners"))]
     pub m_overlapListeners: Vec<Pointer>,
     /// # C++ Info
     /// - name: `phantomListeners`(ctype: `hkArray<void*>`)
     /// - offset: `152`(x86)/`224`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "phantomListeners"))]
     pub m_phantomListeners: Vec<Pointer>,
 }
 const _: () = {

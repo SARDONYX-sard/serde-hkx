@@ -17,33 +17,43 @@ pub struct hkpSimpleMeshShape {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpShapeCollection,
     /// # C++ Info
     /// - name: `vertices`(ctype: `hkArray<hkVector4>`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertices"))]
     pub m_vertices: Vec<Vector4>,
     /// # C++ Info
     /// - name: `triangles`(ctype: `hkArray<struct hkpSimpleMeshShapeTriangle>`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "triangles"))]
     pub m_triangles: Vec<hkpSimpleMeshShapeTriangle>,
     /// # C++ Info
     /// - name: `materialIndices`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "materialIndices"))]
     pub m_materialIndices: Vec<u8>,
     /// # C++ Info
     /// - name: `radius`(ctype: `hkReal`)
     /// - offset: ` 60`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "radius"))]
     pub m_radius: f32,
     /// # C++ Info
     /// - name: `weldingType`(ctype: `enum WeldingType`)
     /// - offset: ` 64`(x86)/`100`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "weldingType"))]
     pub m_weldingType: WeldingType,
 }
 const _: () = {

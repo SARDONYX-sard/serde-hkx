@@ -17,51 +17,64 @@ pub struct hkbCharacterSetup {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `retargetingSkeletonMappers`(ctype: `hkArray<hkaSkeletonMapper*>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "retargetingSkeletonMappers"))]
     pub m_retargetingSkeletonMappers: Vec<Pointer>,
     /// # C++ Info
     /// - name: `animationSkeleton`(ctype: `struct hkaSkeleton*`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "animationSkeleton"))]
     pub m_animationSkeleton: Pointer,
     /// # C++ Info
     /// - name: `ragdollToAnimationSkeletonMapper`(ctype: `struct hkaSkeletonMapper*`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "ragdollToAnimationSkeletonMapper"))]
     pub m_ragdollToAnimationSkeletonMapper: Pointer,
     /// # C++ Info
     /// - name: `animationToRagdollSkeletonMapper`(ctype: `struct hkaSkeletonMapper*`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "animationToRagdollSkeletonMapper"))]
     pub m_animationToRagdollSkeletonMapper: Pointer,
     /// # C++ Info
     /// - name: `animationBindingSet`(ctype: `void*`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "animationBindingSet"))]
     pub m_animationBindingSet: Pointer,
     /// # C++ Info
     /// - name: `data`(ctype: `struct hkbCharacterData*`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "data"))]
     pub m_data: Pointer,
     /// # C++ Info
     /// - name: `mirroredSkeleton`(ctype: `void*`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "mirroredSkeleton"))]
     pub m_mirroredSkeleton: Pointer,
     /// # C++ Info
     /// - name: `characterPropertyIdMap`(ctype: `void*`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "characterPropertyIdMap"))]
     pub m_characterPropertyIdMap: Pointer,
 }
 const _: () = {

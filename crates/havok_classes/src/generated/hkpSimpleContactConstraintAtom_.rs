@@ -17,49 +17,62 @@ pub struct hkpSimpleContactConstraintAtom {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintAtom,
     /// # C++ Info
     /// - name: `sizeOfAllAtoms`(ctype: `hkUint16`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sizeOfAllAtoms"))]
     pub m_sizeOfAllAtoms: u16,
     /// # C++ Info
     /// - name: `numContactPoints`(ctype: `hkUint16`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numContactPoints"))]
     pub m_numContactPoints: u16,
     /// # C++ Info
     /// - name: `numReservedContactPoints`(ctype: `hkUint16`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numReservedContactPoints"))]
     pub m_numReservedContactPoints: u16,
     /// # C++ Info
     /// - name: `numUserDatasForBodyA`(ctype: `hkUint8`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numUserDatasForBodyA"))]
     pub m_numUserDatasForBodyA: u8,
     /// # C++ Info
     /// - name: `numUserDatasForBodyB`(ctype: `hkUint8`)
     /// - offset: `  9`(x86)/`  9`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numUserDatasForBodyB"))]
     pub m_numUserDatasForBodyB: u8,
     /// # C++ Info
     /// - name: `contactPointPropertiesStriding`(ctype: `hkUint8`)
     /// - offset: ` 10`(x86)/` 10`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "contactPointPropertiesStriding"))]
     pub m_contactPointPropertiesStriding: u8,
     /// # C++ Info
     /// - name: `maxNumContactPoints`(ctype: `hkUint16`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxNumContactPoints"))]
     pub m_maxNumContactPoints: u16,
     /// # C++ Info
     /// - name: `info`(ctype: `struct hkpSimpleContactConstraintDataInfo`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "serde", serde(rename = "info"))]
     pub m_info: hkpSimpleContactConstraintDataInfo,
 }
 const _: () = {

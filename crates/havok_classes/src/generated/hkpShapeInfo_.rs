@@ -17,38 +17,49 @@ pub struct hkpShapeInfo<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `shape`(ctype: `struct hkpShape*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "shape"))]
     pub m_shape: Pointer,
     /// # C++ Info
     /// - name: `isHierarchicalCompound`(ctype: `hkBool`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isHierarchicalCompound"))]
     pub m_isHierarchicalCompound: bool,
     /// # C++ Info
     /// - name: `hkdShapesCollected`(ctype: `hkBool`)
     /// - offset: ` 13`(x86)/` 25`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "hkdShapesCollected"))]
     pub m_hkdShapesCollected: bool,
     /// # C++ Info
     /// - name: `childShapeNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "childShapeNames"))]
     pub m_childShapeNames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `childTransforms`(ctype: `hkArray<hkTransform>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "childTransforms"))]
     pub m_childTransforms: Vec<Transform>,
     /// # C++ Info
     /// - name: `transform`(ctype: `hkTransform`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transform"))]
     pub m_transform: Transform,
 }
 const _: () = {

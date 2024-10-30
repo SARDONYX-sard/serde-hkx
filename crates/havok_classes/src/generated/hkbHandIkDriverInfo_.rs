@@ -17,18 +17,25 @@ pub struct hkbHandIkDriverInfo<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `hands`(ctype: `hkArray<struct hkbHandIkDriverInfoHand>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "hands"))]
     pub m_hands: Vec<hkbHandIkDriverInfoHand<'a>>,
     /// # C++ Info
     /// - name: `fadeInOutCurve`(ctype: `enum BlendCurve`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "fadeInOutCurve"))]
     pub m_fadeInOutCurve: BlendCurve,
 }
 const _: () = {

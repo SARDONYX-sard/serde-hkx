@@ -17,38 +17,49 @@ pub struct hkaAnimation<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `type`(ctype: `enum AnimationType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "type"))]
     pub m_type: AnimationType,
     /// # C++ Info
     /// - name: `duration`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "duration"))]
     pub m_duration: f32,
     /// # C++ Info
     /// - name: `numberOfTransformTracks`(ctype: `hkInt32`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numberOfTransformTracks"))]
     pub m_numberOfTransformTracks: i32,
     /// # C++ Info
     /// - name: `numberOfFloatTracks`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numberOfFloatTracks"))]
     pub m_numberOfFloatTracks: i32,
     /// # C++ Info
     /// - name: `extractedMotion`(ctype: `struct hkaAnimatedReferenceFrame*`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "extractedMotion"))]
     pub m_extractedMotion: Pointer,
     /// # C++ Info
     /// - name: `annotationTracks`(ctype: `hkArray<struct hkaAnnotationTrack>`)
     /// - offset: ` 28`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "annotationTracks"))]
     pub m_annotationTracks: Vec<hkaAnnotationTrack<'a>>,
 }
 const _: () = {

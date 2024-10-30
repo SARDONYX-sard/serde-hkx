@@ -17,73 +17,91 @@ pub struct hkbCharacterStringData<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `deformableSkinNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "deformableSkinNames"))]
     pub m_deformableSkinNames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `rigidSkinNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rigidSkinNames"))]
     pub m_rigidSkinNames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `animationNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "animationNames"))]
     pub m_animationNames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `animationFilenames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "animationFilenames"))]
     pub m_animationFilenames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `characterPropertyNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "characterPropertyNames"))]
     pub m_characterPropertyNames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `retargetingSkeletonMapperFilenames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "retargetingSkeletonMapperFilenames"))]
     pub m_retargetingSkeletonMapperFilenames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `lodNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lodNames"))]
     pub m_lodNames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `mirroredSyncPointSubstringsA`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 92`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "mirroredSyncPointSubstringsA"))]
     pub m_mirroredSyncPointSubstringsA: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `mirroredSyncPointSubstringsB`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: `104`(x86)/`144`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "mirroredSyncPointSubstringsB"))]
     pub m_mirroredSyncPointSubstringsB: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `116`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
     /// # C++ Info
     /// - name: `rigName`(ctype: `hkStringPtr`)
     /// - offset: `120`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rigName"))]
     pub m_rigName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `ragdollName`(ctype: `hkStringPtr`)
     /// - offset: `124`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "ragdollName"))]
     pub m_ragdollName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `behaviorFilename`(ctype: `hkStringPtr`)
     /// - offset: `128`(x86)/`184`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "behaviorFilename"))]
     pub m_behaviorFilename: StringPtr<'a>,
 }
 const _: () = {

@@ -17,23 +17,34 @@ pub struct hkpVelocityConstraintMotor {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpLimitedForceConstraintMotor,
     /// # C++ Info
     /// - name: `tau`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "tau"))]
     pub m_tau: f32,
     /// # C++ Info
     /// - name: `velocityTarget`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "velocityTarget"))]
     pub m_velocityTarget: f32,
     /// # C++ Info
     /// - name: `useVelocityTargetFromConstraintTargets`(ctype: `hkBool`)
     /// - offset: ` 28`(x86)/` 40`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "serde",
+        serde(rename = "useVelocityTargetFromConstraintTargets")
+    )]
     pub m_useVelocityTargetFromConstraintTargets: bool,
 }
 const _: () = {

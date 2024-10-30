@@ -17,26 +17,34 @@ pub struct hkbWorldFromModelModeData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `poseMatchingBone0`(ctype: `hkInt16`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone0"))]
     pub m_poseMatchingBone0: i16,
     /// # C++ Info
     /// - name: `poseMatchingBone1`(ctype: `hkInt16`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone1"))]
     pub m_poseMatchingBone1: i16,
     /// # C++ Info
     /// - name: `poseMatchingBone2`(ctype: `hkInt16`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone2"))]
     pub m_poseMatchingBone2: i16,
     /// # C++ Info
     /// - name: `mode`(ctype: `enum WorldFromModelMode`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "mode"))]
     pub m_mode: WorldFromModelMode,
 }
 const _: () = {

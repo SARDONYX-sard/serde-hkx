@@ -17,16 +17,22 @@ pub struct hkpSerializedTrack1nInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `sectors`(ctype: `hkArray<hkpAgent1nSector*>`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sectors"))]
     pub m_sectors: Vec<Pointer>,
     /// # C++ Info
     /// - name: `subTracks`(ctype: `hkArray<hkpSerializedSubTrack1nInfo*>`)
     /// - offset: ` 12`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "subTracks"))]
     pub m_subTracks: Vec<Pointer>,
 }
 const _: () = {

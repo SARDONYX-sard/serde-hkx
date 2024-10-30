@@ -17,71 +17,87 @@ pub struct BSOffsetAnimationGenerator<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `pDefaultGenerator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "serde", serde(rename = "pDefaultGenerator"))]
     pub m_pDefaultGenerator: Pointer,
     /// # C++ Info
     /// - name: `pOffsetClipGenerator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "serde", serde(rename = "pOffsetClipGenerator"))]
     pub m_pOffsetClipGenerator: Pointer,
     /// # C++ Info
     /// - name: `fOffsetVariable`(ctype: `hkReal`)
     /// - offset: ` 68`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "fOffsetVariable"))]
     pub m_fOffsetVariable: f32,
     /// # C++ Info
     /// - name: `fOffsetRangeStart`(ctype: `hkReal`)
     /// - offset: ` 72`(x86)/`108`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "fOffsetRangeStart"))]
     pub m_fOffsetRangeStart: f32,
     /// # C++ Info
     /// - name: `fOffsetRangeEnd`(ctype: `hkReal`)
     /// - offset: ` 76`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "fOffsetRangeEnd"))]
     pub m_fOffsetRangeEnd: f32,
     /// # C++ Info
     /// - name: `BoneOffsetA`(ctype: `hkArray<void>`)
     /// - offset: ` 80`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "BoneOffsetA"))]
     pub m_BoneOffsetA: Vec<()>,
     /// # C++ Info
     /// - name: `BoneIndexA`(ctype: `hkArray<void>`)
     /// - offset: ` 92`(x86)/`136`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "BoneIndexA"))]
     pub m_BoneIndexA: Vec<()>,
     /// # C++ Info
     /// - name: `fCurrentPercentage`(ctype: `hkReal`)
     /// - offset: `104`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "fCurrentPercentage"))]
     pub m_fCurrentPercentage: f32,
     /// # C++ Info
     /// - name: `iCurrentFrame`(ctype: `hkUint32`)
     /// - offset: `108`(x86)/`156`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "iCurrentFrame"))]
     pub m_iCurrentFrame: u32,
     /// # C++ Info
     /// - name: `bZeroOffset`(ctype: `hkBool`)
     /// - offset: `112`(x86)/`160`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "bZeroOffset"))]
     pub m_bZeroOffset: bool,
     /// # C++ Info
     /// - name: `bOffsetValid`(ctype: `hkBool`)
     /// - offset: `113`(x86)/`161`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "bOffsetValid"))]
     pub m_bOffsetValid: bool,
 }
 const _: () = {

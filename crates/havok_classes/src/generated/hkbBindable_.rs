@@ -17,25 +17,33 @@ pub struct hkbBindable {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `variableBindingSet`(ctype: `struct hkbVariableBindingSet*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "variableBindingSet"))]
     pub m_variableBindingSet: Pointer,
     /// # C++ Info
     /// - name: `cachedBindables`(ctype: `hkArray<void>`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "cachedBindables"))]
     pub m_cachedBindables: Vec<()>,
     /// # C++ Info
     /// - name: `areBindablesCached`(ctype: `hkBool`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "areBindablesCached"))]
     pub m_areBindablesCached: bool,
 }
 const _: () = {

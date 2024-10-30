@@ -17,50 +17,63 @@ pub struct hkpConvexVerticesShape {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConvexShape,
     /// # C++ Info
     /// - name: `aabbHalfExtents`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "aabbHalfExtents"))]
     pub m_aabbHalfExtents: Vector4,
     /// # C++ Info
     /// - name: `aabbCenter`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "aabbCenter"))]
     pub m_aabbCenter: Vector4,
     /// # C++ Info
     /// - name: `rotatedVertices`(ctype: `hkArray<struct hkpConvexVerticesShapeFourVectors>`)
     /// - offset: ` 64`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotatedVertices"))]
     pub m_rotatedVertices: Vec<hkpConvexVerticesShapeFourVectors>,
     /// # C++ Info
     /// - name: `numVertices`(ctype: `hkInt32`)
     /// - offset: ` 76`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numVertices"))]
     pub m_numVertices: i32,
     /// # C++ Info
     /// - name: `externalObject`(ctype: `void*`)
     /// - offset: ` 80`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "externalObject"))]
     pub m_externalObject: Pointer,
     /// # C++ Info
     /// - name: `getFaceNormals`(ctype: `void*`)
     /// - offset: ` 84`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "getFaceNormals"))]
     pub m_getFaceNormals: Pointer,
     /// # C++ Info
     /// - name: `planeEquations`(ctype: `hkArray<hkVector4>`)
     /// - offset: ` 88`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "planeEquations"))]
     pub m_planeEquations: Vec<Vector4>,
     /// # C++ Info
     /// - name: `connectivity`(ctype: `struct hkpConvexVerticesConnectivity*`)
     /// - offset: `100`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "connectivity"))]
     pub m_connectivity: Pointer,
 }
 const _: () = {

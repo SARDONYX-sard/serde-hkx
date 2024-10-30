@@ -17,60 +17,74 @@ pub struct hkpCollidableBoundingVolumeData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `min`(ctype: `hkUint32[3]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "min"))]
     pub m_min: [u32; 3usize],
     /// # C++ Info
     /// - name: `expansionMin`(ctype: `hkUint8[3]`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  3`(x86)/`  3`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "expansionMin"))]
     pub m_expansionMin: [u8; 3usize],
     /// # C++ Info
     /// - name: `expansionShift`(ctype: `hkUint8`)
     /// - offset: ` 15`(x86)/` 15`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "expansionShift"))]
     pub m_expansionShift: u8,
     /// # C++ Info
     /// - name: `max`(ctype: `hkUint32[3]`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "max"))]
     pub m_max: [u32; 3usize],
     /// # C++ Info
     /// - name: `expansionMax`(ctype: `hkUint8[3]`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  3`(x86)/`  3`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "expansionMax"))]
     pub m_expansionMax: [u8; 3usize],
     /// # C++ Info
     /// - name: `padding`(ctype: `hkUint8`)
     /// - offset: ` 31`(x86)/` 31`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "padding"))]
     pub m_padding: u8,
     /// # C++ Info
     /// - name: `numChildShapeAabbs`(ctype: `hkUint16`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "numChildShapeAabbs"))]
     pub m_numChildShapeAabbs: u16,
     /// # C++ Info
     /// - name: `capacityChildShapeAabbs`(ctype: `hkUint16`)
     /// - offset: ` 34`(x86)/` 34`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "capacityChildShapeAabbs"))]
     pub m_capacityChildShapeAabbs: u16,
     /// # C++ Info
     /// - name: `childShapeAabbs`(ctype: `void*`)
     /// - offset: ` 36`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "childShapeAabbs"))]
     pub m_childShapeAabbs: Pointer,
     /// # C++ Info
     /// - name: `childShapeKeys`(ctype: `void*`)
     /// - offset: ` 40`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "childShapeKeys"))]
     pub m_childShapeKeys: Pointer,
 }
 const _: () = {

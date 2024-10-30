@@ -17,34 +17,44 @@ pub struct BSComputeAddBoneAnimModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `boneIndex`(ctype: `hkInt16`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "boneIndex"))]
     pub m_boneIndex: i16,
     /// # C++ Info
     /// - name: `translationLSOut`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "translationLSOut"))]
     pub m_translationLSOut: Vector4,
     /// # C++ Info
     /// - name: `rotationLSOut`(ctype: `hkQuaternion`)
     /// - offset: ` 64`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotationLSOut"))]
     pub m_rotationLSOut: Quaternion,
     /// # C++ Info
     /// - name: `scaleLSOut`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/`128`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "scaleLSOut"))]
     pub m_scaleLSOut: Vector4,
     /// # C++ Info
     /// - name: `pSkeletonMemory`(ctype: `void*`)
     /// - offset: ` 96`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "pSkeletonMemory"))]
     pub m_pSkeletonMemory: Pointer,
 }
 const _: () = {

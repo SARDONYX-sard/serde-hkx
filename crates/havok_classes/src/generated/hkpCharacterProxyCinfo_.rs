@@ -17,103 +17,127 @@ pub struct hkpCharacterProxyCinfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpCharacterControllerCinfo,
     /// # C++ Info
     /// - name: `position`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "position"))]
     pub m_position: Vector4,
     /// # C++ Info
     /// - name: `velocity`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "velocity"))]
     pub m_velocity: Vector4,
     /// # C++ Info
     /// - name: `dynamicFriction`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "dynamicFriction"))]
     pub m_dynamicFriction: f32,
     /// # C++ Info
     /// - name: `staticFriction`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 52`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "staticFriction"))]
     pub m_staticFriction: f32,
     /// # C++ Info
     /// - name: `keepContactTolerance`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "keepContactTolerance"))]
     pub m_keepContactTolerance: f32,
     /// # C++ Info
     /// - name: `up`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "up"))]
     pub m_up: Vector4,
     /// # C++ Info
     /// - name: `extraUpStaticFriction`(ctype: `hkReal`)
     /// - offset: ` 80`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "extraUpStaticFriction"))]
     pub m_extraUpStaticFriction: f32,
     /// # C++ Info
     /// - name: `extraDownStaticFriction`(ctype: `hkReal`)
     /// - offset: ` 84`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "extraDownStaticFriction"))]
     pub m_extraDownStaticFriction: f32,
     /// # C++ Info
     /// - name: `shapePhantom`(ctype: `struct hkpShapePhantom*`)
     /// - offset: ` 88`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "shapePhantom"))]
     pub m_shapePhantom: Pointer,
     /// # C++ Info
     /// - name: `keepDistance`(ctype: `hkReal`)
     /// - offset: ` 92`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "keepDistance"))]
     pub m_keepDistance: f32,
     /// # C++ Info
     /// - name: `contactAngleSensitivity`(ctype: `hkReal`)
     /// - offset: ` 96`(x86)/`100`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "contactAngleSensitivity"))]
     pub m_contactAngleSensitivity: f32,
     /// # C++ Info
     /// - name: `userPlanes`(ctype: `hkUint32`)
     /// - offset: `100`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "userPlanes"))]
     pub m_userPlanes: u32,
     /// # C++ Info
     /// - name: `maxCharacterSpeedForSolver`(ctype: `hkReal`)
     /// - offset: `104`(x86)/`108`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxCharacterSpeedForSolver"))]
     pub m_maxCharacterSpeedForSolver: f32,
     /// # C++ Info
     /// - name: `characterStrength`(ctype: `hkReal`)
     /// - offset: `108`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "characterStrength"))]
     pub m_characterStrength: f32,
     /// # C++ Info
     /// - name: `characterMass`(ctype: `hkReal`)
     /// - offset: `112`(x86)/`116`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "characterMass"))]
     pub m_characterMass: f32,
     /// # C++ Info
     /// - name: `maxSlope`(ctype: `hkReal`)
     /// - offset: `116`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxSlope"))]
     pub m_maxSlope: f32,
     /// # C++ Info
     /// - name: `penetrationRecoverySpeed`(ctype: `hkReal`)
     /// - offset: `120`(x86)/`124`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "penetrationRecoverySpeed"))]
     pub m_penetrationRecoverySpeed: f32,
     /// # C++ Info
     /// - name: `maxCastIterations`(ctype: `hkInt32`)
     /// - offset: `124`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxCastIterations"))]
     pub m_maxCastIterations: i32,
     /// # C++ Info
     /// - name: `refreshManifoldInCheckSupport`(ctype: `hkBool`)
     /// - offset: `128`(x86)/`132`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "refreshManifoldInCheckSupport"))]
     pub m_refreshManifoldInCheckSupport: bool,
 }
 const _: () = {

@@ -17,18 +17,25 @@ pub struct hkpShapeCollection {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpShape,
     /// # C++ Info
     /// - name: `disableWelding`(ctype: `hkBool`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "disableWelding"))]
     pub m_disableWelding: bool,
     /// # C++ Info
     /// - name: `collectionType`(ctype: `enum CollectionType`)
     /// - offset: ` 21`(x86)/` 41`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "collectionType"))]
     pub m_collectionType: CollectionType,
 }
 const _: () = {

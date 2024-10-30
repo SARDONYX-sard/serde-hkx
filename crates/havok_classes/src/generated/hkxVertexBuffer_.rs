@@ -17,18 +17,25 @@ pub struct hkxVertexBuffer {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `data`(ctype: `struct hkxVertexBufferVertexData`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 84`(x86)/`104`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "data"))]
     pub m_data: hkxVertexBufferVertexData,
     /// # C++ Info
     /// - name: `desc`(ctype: `struct hkxVertexDescription`)
     /// - offset: ` 92`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "desc"))]
     pub m_desc: hkxVertexDescription,
 }
 const _: () = {

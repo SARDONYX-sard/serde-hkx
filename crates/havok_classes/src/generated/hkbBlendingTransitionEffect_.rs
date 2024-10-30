@@ -17,75 +17,95 @@ pub struct hkbBlendingTransitionEffect<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbTransitionEffect<'a>,
     /// # C++ Info
     /// - name: `duration`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "duration"))]
     pub m_duration: f32,
     /// # C++ Info
     /// - name: `toGeneratorStartTimeFraction`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "toGeneratorStartTimeFraction"))]
     pub m_toGeneratorStartTimeFraction: f32,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags FlagBits`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: FlagBits,
     /// # C++ Info
     /// - name: `endMode`(ctype: `enum EndMode`)
     /// - offset: ` 54`(x86)/` 90`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "endMode"))]
     pub m_endMode: EndMode,
     /// # C++ Info
     /// - name: `blendCurve`(ctype: `enum BlendCurve`)
     /// - offset: ` 55`(x86)/` 91`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blendCurve"))]
     pub m_blendCurve: BlendCurve,
     /// # C++ Info
     /// - name: `fromGenerator`(ctype: `void*`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "fromGenerator"))]
     pub m_fromGenerator: Pointer,
     /// # C++ Info
     /// - name: `toGenerator`(ctype: `void*`)
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "toGenerator"))]
     pub m_toGenerator: Pointer,
     /// # C++ Info
     /// - name: `characterPoseAtBeginningOfTransition`(ctype: `hkArray<void>`)
     /// - offset: ` 64`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(
+        feature = "serde",
+        serde(rename = "characterPoseAtBeginningOfTransition")
+    )]
     pub m_characterPoseAtBeginningOfTransition: Vec<()>,
     /// # C++ Info
     /// - name: `timeRemaining`(ctype: `hkReal`)
     /// - offset: ` 76`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "timeRemaining"))]
     pub m_timeRemaining: f32,
     /// # C++ Info
     /// - name: `timeInTransition`(ctype: `hkReal`)
     /// - offset: ` 80`(x86)/`132`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "timeInTransition"))]
     pub m_timeInTransition: f32,
     /// # C++ Info
     /// - name: `applySelfTransition`(ctype: `hkBool`)
     /// - offset: ` 84`(x86)/`136`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "applySelfTransition"))]
     pub m_applySelfTransition: bool,
     /// # C++ Info
     /// - name: `initializeCharacterPose`(ctype: `hkBool`)
     /// - offset: ` 85`(x86)/`137`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "initializeCharacterPose"))]
     pub m_initializeCharacterPose: bool,
 }
 const _: () = {

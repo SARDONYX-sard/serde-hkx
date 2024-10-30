@@ -17,26 +17,34 @@ pub struct hkpMassProperties {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `volume`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "volume"))]
     pub m_volume: f32,
     /// # C++ Info
     /// - name: `mass`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "mass"))]
     pub m_mass: f32,
     /// # C++ Info
     /// - name: `centerOfMass`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "centerOfMass"))]
     pub m_centerOfMass: Vector4,
     /// # C++ Info
     /// - name: `inertiaTensor`(ctype: `hkMatrix3`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "inertiaTensor"))]
     pub m_inertiaTensor: Matrix3,
 }
 const _: () = {

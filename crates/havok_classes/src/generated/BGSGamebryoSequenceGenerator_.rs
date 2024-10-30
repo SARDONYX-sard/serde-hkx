@@ -17,47 +17,59 @@ pub struct BGSGamebryoSequenceGenerator<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `pSequence`(ctype: `char*`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "pSequence"))]
     pub m_pSequence: CString<'a>,
     /// # C++ Info
     /// - name: `eBlendModeFunction`(ctype: `enum BlendModeFunction`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "eBlendModeFunction"))]
     pub m_eBlendModeFunction: BlendModeFunction,
     /// # C++ Info
     /// - name: `fPercent`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "fPercent"))]
     pub m_fPercent: f32,
     /// # C++ Info
     /// - name: `events`(ctype: `hkArray<void>`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "events"))]
     pub m_events: Vec<()>,
     /// # C++ Info
     /// - name: `fTime`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "fTime"))]
     pub m_fTime: f32,
     /// # C++ Info
     /// - name: `bDelayedActivate`(ctype: `hkBool`)
     /// - offset: ` 68`(x86)/`108`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "bDelayedActivate"))]
     pub m_bDelayedActivate: bool,
     /// # C++ Info
     /// - name: `bLooping`(ctype: `hkBool`)
     /// - offset: ` 69`(x86)/`109`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "bLooping"))]
     pub m_bLooping: bool,
 }
 const _: () = {

@@ -17,38 +17,49 @@ pub struct hkIndexedTransformSet<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `matrices`(ctype: `hkArray<hkMatrix4>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "matrices"))]
     pub m_matrices: Vec<Matrix4>,
     /// # C++ Info
     /// - name: `inverseMatrices`(ctype: `hkArray<hkMatrix4>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "inverseMatrices"))]
     pub m_inverseMatrices: Vec<Matrix4>,
     /// # C++ Info
     /// - name: `matricesOrder`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "matricesOrder"))]
     pub m_matricesOrder: Vec<i16>,
     /// # C++ Info
     /// - name: `matricesNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "matricesNames"))]
     pub m_matricesNames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `indexMappings`(ctype: `hkArray<struct hkMeshBoneIndexMapping>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "indexMappings"))]
     pub m_indexMappings: Vec<hkMeshBoneIndexMapping>,
     /// # C++ Info
     /// - name: `allMatricesAreAffine`(ctype: `hkBool`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "allMatricesAreAffine"))]
     pub m_allMatricesAreAffine: bool,
 }
 const _: () = {

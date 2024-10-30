@@ -17,16 +17,22 @@ pub struct hkGeometry {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `vertices`(ctype: `hkArray<hkVector4>`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertices"))]
     pub m_vertices: Vec<Vector4>,
     /// # C++ Info
     /// - name: `triangles`(ctype: `hkArray<struct hkGeometryTriangle>`)
     /// - offset: ` 12`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "triangles"))]
     pub m_triangles: Vec<hkGeometryTriangle>,
 }
 const _: () = {

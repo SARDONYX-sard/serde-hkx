@@ -17,106 +17,130 @@ pub struct BSLookAtModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `lookAtTarget`(ctype: `hkBool`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lookAtTarget"))]
     pub m_lookAtTarget: bool,
     /// # C++ Info
     /// - name: `bones`(ctype: `hkArray<struct BSLookAtModifierBoneData>`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bones"))]
     pub m_bones: Vec<BSLookAtModifierBoneData>,
     /// # C++ Info
     /// - name: `eyeBones`(ctype: `hkArray<struct BSLookAtModifierBoneData>`)
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "eyeBones"))]
     pub m_eyeBones: Vec<BSLookAtModifierBoneData>,
     /// # C++ Info
     /// - name: `limitAngleDegrees`(ctype: `hkReal`)
     /// - offset: ` 72`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "limitAngleDegrees"))]
     pub m_limitAngleDegrees: f32,
     /// # C++ Info
     /// - name: `limitAngleThresholdDegrees`(ctype: `hkReal`)
     /// - offset: ` 76`(x86)/`124`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "limitAngleThresholdDegrees"))]
     pub m_limitAngleThresholdDegrees: f32,
     /// # C++ Info
     /// - name: `continueLookOutsideOfLimit`(ctype: `hkBool`)
     /// - offset: ` 80`(x86)/`128`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "continueLookOutsideOfLimit"))]
     pub m_continueLookOutsideOfLimit: bool,
     /// # C++ Info
     /// - name: `onGain`(ctype: `hkReal`)
     /// - offset: ` 84`(x86)/`132`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "onGain"))]
     pub m_onGain: f32,
     /// # C++ Info
     /// - name: `offGain`(ctype: `hkReal`)
     /// - offset: ` 88`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "offGain"))]
     pub m_offGain: f32,
     /// # C++ Info
     /// - name: `useBoneGains`(ctype: `hkBool`)
     /// - offset: ` 92`(x86)/`140`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "useBoneGains"))]
     pub m_useBoneGains: bool,
     /// # C++ Info
     /// - name: `targetLocation`(ctype: `hkVector4`)
     /// - offset: ` 96`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "targetLocation"))]
     pub m_targetLocation: Vector4,
     /// # C++ Info
     /// - name: `targetOutsideLimits`(ctype: `hkBool`)
     /// - offset: `112`(x86)/`160`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "targetOutsideLimits"))]
     pub m_targetOutsideLimits: bool,
     /// # C++ Info
     /// - name: `targetOutOfLimitEvent`(ctype: `struct hkbEventProperty`)
     /// - offset: `116`(x86)/`168`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "targetOutOfLimitEvent"))]
     pub m_targetOutOfLimitEvent: hkbEventProperty,
     /// # C++ Info
     /// - name: `lookAtCamera`(ctype: `hkBool`)
     /// - offset: `124`(x86)/`184`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lookAtCamera"))]
     pub m_lookAtCamera: bool,
     /// # C++ Info
     /// - name: `lookAtCameraX`(ctype: `hkReal`)
     /// - offset: `128`(x86)/`188`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lookAtCameraX"))]
     pub m_lookAtCameraX: f32,
     /// # C++ Info
     /// - name: `lookAtCameraY`(ctype: `hkReal`)
     /// - offset: `132`(x86)/`192`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lookAtCameraY"))]
     pub m_lookAtCameraY: f32,
     /// # C++ Info
     /// - name: `lookAtCameraZ`(ctype: `hkReal`)
     /// - offset: `136`(x86)/`196`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lookAtCameraZ"))]
     pub m_lookAtCameraZ: f32,
     /// # C++ Info
     /// - name: `timeStep`(ctype: `hkReal`)
     /// - offset: `140`(x86)/`200`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "timeStep"))]
     pub m_timeStep: f32,
     /// # C++ Info
     /// - name: `ballBonesValid`(ctype: `hkBool`)
     /// - offset: `144`(x86)/`204`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "ballBonesValid"))]
     pub m_ballBonesValid: bool,
     /// # C++ Info
     /// - name: `pSkeletonMemory`(ctype: `void*`)
     /// - offset: `148`(x86)/`208`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "pSkeletonMemory"))]
     pub m_pSkeletonMemory: Pointer,
 }
 const _: () = {

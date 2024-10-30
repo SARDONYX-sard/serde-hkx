@@ -17,23 +17,31 @@ pub struct hkpVehicleDefaultVelocityDamper {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpVehicleVelocityDamper,
     /// # C++ Info
     /// - name: `normalSpinDamping`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "normalSpinDamping"))]
     pub m_normalSpinDamping: f32,
     /// # C++ Info
     /// - name: `collisionSpinDamping`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "collisionSpinDamping"))]
     pub m_collisionSpinDamping: f32,
     /// # C++ Info
     /// - name: `collisionThreshold`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "collisionThreshold"))]
     pub m_collisionThreshold: f32,
 }
 const _: () = {

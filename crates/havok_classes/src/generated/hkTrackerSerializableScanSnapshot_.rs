@@ -17,43 +17,55 @@ pub struct hkTrackerSerializableScanSnapshot {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `allocations`(ctype: `hkArray<struct hkTrackerSerializableScanSnapshotAllocation>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "allocations"))]
     pub m_allocations: Vec<hkTrackerSerializableScanSnapshotAllocation>,
     /// # C++ Info
     /// - name: `blocks`(ctype: `hkArray<struct hkTrackerSerializableScanSnapshotBlock>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blocks"))]
     pub m_blocks: Vec<hkTrackerSerializableScanSnapshotBlock>,
     /// # C++ Info
     /// - name: `refs`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "refs"))]
     pub m_refs: Vec<i32>,
     /// # C++ Info
     /// - name: `typeNames`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "typeNames"))]
     pub m_typeNames: Vec<u8>,
     /// # C++ Info
     /// - name: `traceText`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "traceText"))]
     pub m_traceText: Vec<u8>,
     /// # C++ Info
     /// - name: `traceAddrs`(ctype: `hkArray<hkUint64>`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "traceAddrs"))]
     pub m_traceAddrs: Vec<u64>,
     /// # C++ Info
     /// - name: `traceParents`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "traceParents"))]
     pub m_traceParents: Vec<i32>,
 }
 const _: () = {

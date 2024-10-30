@@ -17,22 +17,29 @@ pub struct hkMultipleVertexBufferVertexBufferInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `vertexBuffer`(ctype: `struct hkMeshVertexBuffer*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexBuffer"))]
     pub m_vertexBuffer: Pointer,
     /// # C++ Info
     /// - name: `lockedVertices`(ctype: `void*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "lockedVertices"))]
     pub m_lockedVertices: Pointer,
     /// # C++ Info
     /// - name: `isLocked`(ctype: `hkBool`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isLocked"))]
     pub m_isLocked: bool,
 }
 const _: () = {

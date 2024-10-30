@@ -17,33 +17,43 @@ pub struct hkaAnimationContainer {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `skeletons`(ctype: `hkArray<hkaSkeleton*>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "skeletons"))]
     pub m_skeletons: Vec<Pointer>,
     /// # C++ Info
     /// - name: `animations`(ctype: `hkArray<hkaAnimation*>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "animations"))]
     pub m_animations: Vec<Pointer>,
     /// # C++ Info
     /// - name: `bindings`(ctype: `hkArray<hkaAnimationBinding*>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bindings"))]
     pub m_bindings: Vec<Pointer>,
     /// # C++ Info
     /// - name: `attachments`(ctype: `hkArray<hkaBoneAttachment*>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "attachments"))]
     pub m_attachments: Vec<Pointer>,
     /// # C++ Info
     /// - name: `skins`(ctype: `hkArray<hkaMeshBinding*>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "skins"))]
     pub m_skins: Vec<Pointer>,
 }
 const _: () = {

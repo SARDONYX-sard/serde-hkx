@@ -17,72 +17,89 @@ pub struct hkbAttachmentModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `sendToAttacherOnAttach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sendToAttacherOnAttach"))]
     pub m_sendToAttacherOnAttach: hkbEventProperty,
     /// # C++ Info
     /// - name: `sendToAttacheeOnAttach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sendToAttacheeOnAttach"))]
     pub m_sendToAttacheeOnAttach: hkbEventProperty,
     /// # C++ Info
     /// - name: `sendToAttacherOnDetach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 60`(x86)/`112`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sendToAttacherOnDetach"))]
     pub m_sendToAttacherOnDetach: hkbEventProperty,
     /// # C++ Info
     /// - name: `sendToAttacheeOnDetach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 68`(x86)/`128`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sendToAttacheeOnDetach"))]
     pub m_sendToAttacheeOnDetach: hkbEventProperty,
     /// # C++ Info
     /// - name: `attachmentSetup`(ctype: `struct hkbAttachmentSetup*`)
     /// - offset: ` 76`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "attachmentSetup"))]
     pub m_attachmentSetup: Pointer,
     /// # C++ Info
     /// - name: `attacherHandle`(ctype: `struct hkbHandle*`)
     /// - offset: ` 80`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "attacherHandle"))]
     pub m_attacherHandle: Pointer,
     /// # C++ Info
     /// - name: `attacheeHandle`(ctype: `struct hkbHandle*`)
     /// - offset: ` 84`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "attacheeHandle"))]
     pub m_attacheeHandle: Pointer,
     /// # C++ Info
     /// - name: `attacheeLayer`(ctype: `hkInt32`)
     /// - offset: ` 88`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "attacheeLayer"))]
     pub m_attacheeLayer: i32,
     /// # C++ Info
     /// - name: `attacheeRB`(ctype: `void*`)
     /// - offset: ` 92`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "attacheeRB"))]
     pub m_attacheeRB: Pointer,
     /// # C++ Info
     /// - name: `oldMotionType`(ctype: `enum unknown`)
     /// - offset: ` 96`(x86)/`184`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "oldMotionType"))]
     pub m_oldMotionType: u8,
     /// # C++ Info
     /// - name: `oldFilterInfo`(ctype: `hkInt32`)
     /// - offset: `100`(x86)/`188`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "oldFilterInfo"))]
     pub m_oldFilterInfo: i32,
     /// # C++ Info
     /// - name: `attachment`(ctype: `void*`)
     /// - offset: `104`(x86)/`192`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "attachment"))]
     pub m_attachment: Pointer,
 }
 const _: () = {

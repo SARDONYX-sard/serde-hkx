@@ -17,63 +17,79 @@ pub struct hkbStateMachineInternalState {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `activeTransitions`(ctype: `hkArray<struct hkbStateMachineActiveTransitionInfo>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "activeTransitions"))]
     pub m_activeTransitions: Vec<hkbStateMachineActiveTransitionInfo>,
     /// # C++ Info
     /// - name: `transitionFlags`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transitionFlags"))]
     pub m_transitionFlags: Vec<u8>,
     /// # C++ Info
     /// - name: `wildcardTransitionFlags`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wildcardTransitionFlags"))]
     pub m_wildcardTransitionFlags: Vec<u8>,
     /// # C++ Info
     /// - name: `delayedTransitions`(ctype: `hkArray<struct hkbStateMachineDelayedTransitionInfo>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "delayedTransitions"))]
     pub m_delayedTransitions: Vec<hkbStateMachineDelayedTransitionInfo>,
     /// # C++ Info
     /// - name: `timeInState`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "timeInState"))]
     pub m_timeInState: f32,
     /// # C++ Info
     /// - name: `lastLocalTime`(ctype: `hkReal`)
     /// - offset: ` 60`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lastLocalTime"))]
     pub m_lastLocalTime: f32,
     /// # C++ Info
     /// - name: `currentStateId`(ctype: `hkInt32`)
     /// - offset: ` 64`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "currentStateId"))]
     pub m_currentStateId: i32,
     /// # C++ Info
     /// - name: `previousStateId`(ctype: `hkInt32`)
     /// - offset: ` 68`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "previousStateId"))]
     pub m_previousStateId: i32,
     /// # C++ Info
     /// - name: `nextStartStateIndexOverride`(ctype: `hkInt32`)
     /// - offset: ` 72`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nextStartStateIndexOverride"))]
     pub m_nextStartStateIndexOverride: i32,
     /// # C++ Info
     /// - name: `stateOrTransitionChanged`(ctype: `hkBool`)
     /// - offset: ` 76`(x86)/`100`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "stateOrTransitionChanged"))]
     pub m_stateOrTransitionChanged: bool,
     /// # C++ Info
     /// - name: `echoNextUpdate`(ctype: `hkBool`)
     /// - offset: ` 77`(x86)/`101`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "echoNextUpdate"))]
     pub m_echoNextUpdate: bool,
 }
 const _: () = {

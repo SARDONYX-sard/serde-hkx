@@ -17,20 +17,27 @@ pub struct BSModifyOnceModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `pOnActivateModifier`(ctype: `struct hkbModifier*`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "serde", serde(rename = "pOnActivateModifier"))]
     pub m_pOnActivateModifier: Pointer,
     /// # C++ Info
     /// - name: `pOnDeactivateModifier`(ctype: `struct hkbModifier*`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "serde", serde(rename = "pOnDeactivateModifier"))]
     pub m_pOnDeactivateModifier: Pointer,
 }
 const _: () = {

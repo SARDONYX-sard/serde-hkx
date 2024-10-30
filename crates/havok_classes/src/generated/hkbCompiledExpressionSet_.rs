@@ -17,23 +17,31 @@ pub struct hkbCompiledExpressionSet {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `rpn`(ctype: `hkArray<struct hkbCompiledExpressionSetToken>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rpn"))]
     pub m_rpn: Vec<hkbCompiledExpressionSetToken>,
     /// # C++ Info
     /// - name: `expressionToRpnIndex`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "expressionToRpnIndex"))]
     pub m_expressionToRpnIndex: Vec<i32>,
     /// # C++ Info
     /// - name: `numExpressions`(ctype: `hkInt8`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numExpressions"))]
     pub m_numExpressions: i8,
 }
 const _: () = {

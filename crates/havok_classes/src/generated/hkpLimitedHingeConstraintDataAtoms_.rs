@@ -17,41 +17,52 @@ pub struct hkpLimitedHingeConstraintDataAtoms {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `transforms`(ctype: `struct hkpSetLocalTransformsConstraintAtom`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `144`(x86)/`144`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transforms"))]
     pub m_transforms: hkpSetLocalTransformsConstraintAtom,
     /// # C++ Info
     /// - name: `setupStabilization`(ctype: `struct hkpSetupStabilizationAtom`)
     /// - offset: `144`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "setupStabilization"))]
     pub m_setupStabilization: hkpSetupStabilizationAtom,
     /// # C++ Info
     /// - name: `angMotor`(ctype: `struct hkpAngMotorConstraintAtom`)
     /// - offset: `160`(x86)/`160`(x86_64)
     /// - type_size: ` 20`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "angMotor"))]
     pub m_angMotor: hkpAngMotorConstraintAtom,
     /// # C++ Info
     /// - name: `angFriction`(ctype: `struct hkpAngFrictionConstraintAtom`)
     /// - offset: `180`(x86)/`184`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "angFriction"))]
     pub m_angFriction: hkpAngFrictionConstraintAtom,
     /// # C++ Info
     /// - name: `angLimit`(ctype: `struct hkpAngLimitConstraintAtom`)
     /// - offset: `192`(x86)/`196`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "angLimit"))]
     pub m_angLimit: hkpAngLimitConstraintAtom,
     /// # C++ Info
     /// - name: `2dAng`(ctype: `struct hkp2dAngConstraintAtom`)
     /// - offset: `208`(x86)/`212`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "2dAng"))]
     pub m_2dAng: hkp2dAngConstraintAtom,
     /// # C++ Info
     /// - name: `ballSocket`(ctype: `struct hkpBallSocketConstraintAtom`)
     /// - offset: `212`(x86)/`216`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "ballSocket"))]
     pub m_ballSocket: hkpBallSocketConstraintAtom,
 }
 const _: () = {

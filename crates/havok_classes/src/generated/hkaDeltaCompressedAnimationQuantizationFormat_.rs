@@ -17,36 +17,46 @@ pub struct hkaDeltaCompressedAnimationQuantizationFormat {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `maxBitWidth`(ctype: `hkUint8`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxBitWidth"))]
     pub m_maxBitWidth: u8,
     /// # C++ Info
     /// - name: `preserved`(ctype: `hkUint8`)
     /// - offset: `  1`(x86)/`  1`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "preserved"))]
     pub m_preserved: u8,
     /// # C++ Info
     /// - name: `numD`(ctype: `hkUint32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numD"))]
     pub m_numD: u32,
     /// # C++ Info
     /// - name: `offsetIdx`(ctype: `hkUint32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "offsetIdx"))]
     pub m_offsetIdx: u32,
     /// # C++ Info
     /// - name: `scaleIdx`(ctype: `hkUint32`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "scaleIdx"))]
     pub m_scaleIdx: u32,
     /// # C++ Info
     /// - name: `bitWidthIdx`(ctype: `hkUint32`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bitWidthIdx"))]
     pub m_bitWidthIdx: u32,
 }
 const _: () = {

@@ -17,103 +17,127 @@ pub struct hkpVehicleData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `gravity`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "gravity"))]
     pub m_gravity: Vector4,
     /// # C++ Info
     /// - name: `numWheels`(ctype: `hkInt8`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numWheels"))]
     pub m_numWheels: i8,
     /// # C++ Info
     /// - name: `chassisOrientation`(ctype: `hkRotation`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "chassisOrientation"))]
     pub m_chassisOrientation: Rotation,
     /// # C++ Info
     /// - name: `torqueRollFactor`(ctype: `hkReal`)
     /// - offset: ` 96`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "torqueRollFactor"))]
     pub m_torqueRollFactor: f32,
     /// # C++ Info
     /// - name: `torquePitchFactor`(ctype: `hkReal`)
     /// - offset: `100`(x86)/`100`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "torquePitchFactor"))]
     pub m_torquePitchFactor: f32,
     /// # C++ Info
     /// - name: `torqueYawFactor`(ctype: `hkReal`)
     /// - offset: `104`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "torqueYawFactor"))]
     pub m_torqueYawFactor: f32,
     /// # C++ Info
     /// - name: `extraTorqueFactor`(ctype: `hkReal`)
     /// - offset: `108`(x86)/`108`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "extraTorqueFactor"))]
     pub m_extraTorqueFactor: f32,
     /// # C++ Info
     /// - name: `maxVelocityForPositionalFriction`(ctype: `hkReal`)
     /// - offset: `112`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxVelocityForPositionalFriction"))]
     pub m_maxVelocityForPositionalFriction: f32,
     /// # C++ Info
     /// - name: `chassisUnitInertiaYaw`(ctype: `hkReal`)
     /// - offset: `116`(x86)/`116`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "chassisUnitInertiaYaw"))]
     pub m_chassisUnitInertiaYaw: f32,
     /// # C++ Info
     /// - name: `chassisUnitInertiaRoll`(ctype: `hkReal`)
     /// - offset: `120`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "chassisUnitInertiaRoll"))]
     pub m_chassisUnitInertiaRoll: f32,
     /// # C++ Info
     /// - name: `chassisUnitInertiaPitch`(ctype: `hkReal`)
     /// - offset: `124`(x86)/`124`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "chassisUnitInertiaPitch"))]
     pub m_chassisUnitInertiaPitch: f32,
     /// # C++ Info
     /// - name: `frictionEqualizer`(ctype: `hkReal`)
     /// - offset: `128`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "frictionEqualizer"))]
     pub m_frictionEqualizer: f32,
     /// # C++ Info
     /// - name: `normalClippingAngleCos`(ctype: `hkReal`)
     /// - offset: `132`(x86)/`132`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "normalClippingAngleCos"))]
     pub m_normalClippingAngleCos: f32,
     /// # C++ Info
     /// - name: `maxFrictionSolverMassRatio`(ctype: `hkReal`)
     /// - offset: `136`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxFrictionSolverMassRatio"))]
     pub m_maxFrictionSolverMassRatio: f32,
     /// # C++ Info
     /// - name: `wheelParams`(ctype: `hkArray<struct hkpVehicleDataWheelComponentParams>`)
     /// - offset: `140`(x86)/`144`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "wheelParams"))]
     pub m_wheelParams: Vec<hkpVehicleDataWheelComponentParams>,
     /// # C++ Info
     /// - name: `numWheelsPerAxle`(ctype: `hkArray<hkInt8>`)
     /// - offset: `152`(x86)/`160`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numWheelsPerAxle"))]
     pub m_numWheelsPerAxle: Vec<i8>,
     /// # C++ Info
     /// - name: `frictionDescription`(ctype: `struct hkpVehicleFrictionDescription`)
     /// - offset: `164`(x86)/`176`(x86_64)
     /// - type_size: `208`(x86)/`208`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "frictionDescription"))]
     pub m_frictionDescription: hkpVehicleFrictionDescription,
     /// # C++ Info
     /// - name: `chassisFrictionInertiaInvDiag`(ctype: `hkVector4`)
     /// - offset: `384`(x86)/`384`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "chassisFrictionInertiaInvDiag"))]
     pub m_chassisFrictionInertiaInvDiag: Vector4,
     /// # C++ Info
     /// - name: `alreadyInitialised`(ctype: `hkBool`)
     /// - offset: `400`(x86)/`400`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "alreadyInitialised"))]
     pub m_alreadyInitialised: bool,
 }
 const _: () = {

@@ -17,58 +17,73 @@ pub struct hkbClipGeneratorInternalState {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `extractedMotion`(ctype: `hkQsTransform`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "extractedMotion"))]
     pub m_extractedMotion: QsTransform,
     /// # C++ Info
     /// - name: `echos`(ctype: `hkArray<struct hkbClipGeneratorEcho>`)
     /// - offset: ` 64`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "echos"))]
     pub m_echos: Vec<hkbClipGeneratorEcho>,
     /// # C++ Info
     /// - name: `localTime`(ctype: `hkReal`)
     /// - offset: ` 76`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "localTime"))]
     pub m_localTime: f32,
     /// # C++ Info
     /// - name: `time`(ctype: `hkReal`)
     /// - offset: ` 80`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "time"))]
     pub m_time: f32,
     /// # C++ Info
     /// - name: `previousUserControlledTimeFraction`(ctype: `hkReal`)
     /// - offset: ` 84`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "previousUserControlledTimeFraction"))]
     pub m_previousUserControlledTimeFraction: f32,
     /// # C++ Info
     /// - name: `bufferSize`(ctype: `hkInt32`)
     /// - offset: ` 88`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bufferSize"))]
     pub m_bufferSize: i32,
     /// # C++ Info
     /// - name: `echoBufferSize`(ctype: `hkInt32`)
     /// - offset: ` 92`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "echoBufferSize"))]
     pub m_echoBufferSize: i32,
     /// # C++ Info
     /// - name: `atEnd`(ctype: `hkBool`)
     /// - offset: ` 96`(x86)/`100`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "atEnd"))]
     pub m_atEnd: bool,
     /// # C++ Info
     /// - name: `ignoreStartTime`(ctype: `hkBool`)
     /// - offset: ` 97`(x86)/`101`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "ignoreStartTime"))]
     pub m_ignoreStartTime: bool,
     /// # C++ Info
     /// - name: `pingPongBackward`(ctype: `hkBool`)
     /// - offset: ` 98`(x86)/`102`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "pingPongBackward"))]
     pub m_pingPongBackward: bool,
 }
 const _: () = {

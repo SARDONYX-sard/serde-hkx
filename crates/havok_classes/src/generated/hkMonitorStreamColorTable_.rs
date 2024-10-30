@@ -17,18 +17,25 @@ pub struct hkMonitorStreamColorTable<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `colorPairs`(ctype: `hkArray<struct hkMonitorStreamColorTableColorPair>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "colorPairs"))]
     pub m_colorPairs: Vec<hkMonitorStreamColorTableColorPair<'a>>,
     /// # C++ Info
     /// - name: `defaultColor`(ctype: `hkUint32`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "defaultColor"))]
     pub m_defaultColor: u32,
 }
 const _: () = {

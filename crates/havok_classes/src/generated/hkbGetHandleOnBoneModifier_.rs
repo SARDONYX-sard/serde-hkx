@@ -17,28 +17,37 @@ pub struct hkbGetHandleOnBoneModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `handleOut`(ctype: `struct hkbHandle*`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "handleOut"))]
     pub m_handleOut: Pointer,
     /// # C++ Info
     /// - name: `localFrameName`(ctype: `hkStringPtr`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "localFrameName"))]
     pub m_localFrameName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `ragdollBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "ragdollBoneIndex"))]
     pub m_ragdollBoneIndex: i16,
     /// # C++ Info
     /// - name: `animationBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 54`(x86)/` 98`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "animationBoneIndex"))]
     pub m_animationBoneIndex: i16,
 }
 const _: () = {

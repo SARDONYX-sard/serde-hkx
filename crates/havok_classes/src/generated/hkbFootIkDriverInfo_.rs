@@ -17,68 +17,85 @@ pub struct hkbFootIkDriverInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `legs`(ctype: `hkArray<struct hkbFootIkDriverInfoLeg>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "legs"))]
     pub m_legs: Vec<hkbFootIkDriverInfoLeg>,
     /// # C++ Info
     /// - name: `raycastDistanceUp`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "raycastDistanceUp"))]
     pub m_raycastDistanceUp: f32,
     /// # C++ Info
     /// - name: `raycastDistanceDown`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "raycastDistanceDown"))]
     pub m_raycastDistanceDown: f32,
     /// # C++ Info
     /// - name: `originalGroundHeightMS`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "originalGroundHeightMS"))]
     pub m_originalGroundHeightMS: f32,
     /// # C++ Info
     /// - name: `verticalOffset`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 44`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "verticalOffset"))]
     pub m_verticalOffset: f32,
     /// # C++ Info
     /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
     /// - offset: ` 36`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "collisionFilterInfo"))]
     pub m_collisionFilterInfo: u32,
     /// # C++ Info
     /// - name: `forwardAlignFraction`(ctype: `hkReal`)
     /// - offset: ` 40`(x86)/` 52`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "forwardAlignFraction"))]
     pub m_forwardAlignFraction: f32,
     /// # C++ Info
     /// - name: `sidewaysAlignFraction`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sidewaysAlignFraction"))]
     pub m_sidewaysAlignFraction: f32,
     /// # C++ Info
     /// - name: `sidewaysSampleWidth`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sidewaysSampleWidth"))]
     pub m_sidewaysSampleWidth: f32,
     /// # C++ Info
     /// - name: `lockFeetWhenPlanted`(ctype: `hkBool`)
     /// - offset: ` 52`(x86)/` 64`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lockFeetWhenPlanted"))]
     pub m_lockFeetWhenPlanted: bool,
     /// # C++ Info
     /// - name: `useCharacterUpVector`(ctype: `hkBool`)
     /// - offset: ` 53`(x86)/` 65`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "useCharacterUpVector"))]
     pub m_useCharacterUpVector: bool,
     /// # C++ Info
     /// - name: `isQuadrupedNarrow`(ctype: `hkBool`)
     /// - offset: ` 54`(x86)/` 66`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isQuadrupedNarrow"))]
     pub m_isQuadrupedNarrow: bool,
 }
 const _: () = {

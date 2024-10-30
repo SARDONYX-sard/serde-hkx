@@ -17,53 +17,67 @@ pub struct hkpSampledHeightFieldShape {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpHeightFieldShape,
     /// # C++ Info
     /// - name: `xRes`(ctype: `hkInt32`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "xRes"))]
     pub m_xRes: i32,
     /// # C++ Info
     /// - name: `zRes`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "zRes"))]
     pub m_zRes: i32,
     /// # C++ Info
     /// - name: `heightCenter`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "heightCenter"))]
     pub m_heightCenter: f32,
     /// # C++ Info
     /// - name: `useProjectionBasedHeight`(ctype: `hkBool`)
     /// - offset: ` 28`(x86)/` 44`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "useProjectionBasedHeight"))]
     pub m_useProjectionBasedHeight: bool,
     /// # C++ Info
     /// - name: `heightfieldType`(ctype: `enum HeightFieldType`)
     /// - offset: ` 29`(x86)/` 45`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "heightfieldType"))]
     pub m_heightfieldType: HeightFieldType,
     /// # C++ Info
     /// - name: `intToFloatScale`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "intToFloatScale"))]
     pub m_intToFloatScale: Vector4,
     /// # C++ Info
     /// - name: `floatToIntScale`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "floatToIntScale"))]
     pub m_floatToIntScale: Vector4,
     /// # C++ Info
     /// - name: `floatToIntOffsetFloorCorrected`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "floatToIntOffsetFloorCorrected"))]
     pub m_floatToIntOffsetFloorCorrected: Vector4,
     /// # C++ Info
     /// - name: `extents`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "extents"))]
     pub m_extents: Vector4,
 }
 const _: () = {

@@ -17,57 +17,71 @@ pub struct hkMeshSection {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `primitiveType`(ctype: `enum PrimitiveType`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "primitiveType"))]
     pub m_primitiveType: PrimitiveType,
     /// # C++ Info
     /// - name: `numPrimitives`(ctype: `hkInt32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numPrimitives"))]
     pub m_numPrimitives: i32,
     /// # C++ Info
     /// - name: `numIndices`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "numIndices"))]
     pub m_numIndices: i32,
     /// # C++ Info
     /// - name: `vertexStartIndex`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexStartIndex"))]
     pub m_vertexStartIndex: i32,
     /// # C++ Info
     /// - name: `transformIndex`(ctype: `hkInt32`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transformIndex"))]
     pub m_transformIndex: i32,
     /// # C++ Info
     /// - name: `indexType`(ctype: `enum MeshSectionIndexType`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "indexType"))]
     pub m_indexType: MeshSectionIndexType,
     /// # C++ Info
     /// - name: `indices`(ctype: `void*`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "indices"))]
     pub m_indices: Pointer,
     /// # C++ Info
     /// - name: `vertexBuffer`(ctype: `struct hkMeshVertexBuffer*`)
     /// - offset: ` 28`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexBuffer"))]
     pub m_vertexBuffer: Pointer,
     /// # C++ Info
     /// - name: `material`(ctype: `struct hkMeshMaterial*`)
     /// - offset: ` 32`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "material"))]
     pub m_material: Pointer,
     /// # C++ Info
     /// - name: `sectionIndex`(ctype: `hkInt32`)
     /// - offset: ` 36`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sectionIndex"))]
     pub m_sectionIndex: i32,
 }
 const _: () = {

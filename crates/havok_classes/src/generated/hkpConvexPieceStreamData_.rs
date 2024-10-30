@@ -17,23 +17,31 @@ pub struct hkpConvexPieceStreamData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `convexPieceStream`(ctype: `hkArray<hkUint32>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "convexPieceStream"))]
     pub m_convexPieceStream: Vec<u32>,
     /// # C++ Info
     /// - name: `convexPieceOffsets`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "convexPieceOffsets"))]
     pub m_convexPieceOffsets: Vec<u32>,
     /// # C++ Info
     /// - name: `convexPieceSingleTriangles`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "convexPieceSingleTriangles"))]
     pub m_convexPieceSingleTriangles: Vec<u32>,
 }
 const _: () = {

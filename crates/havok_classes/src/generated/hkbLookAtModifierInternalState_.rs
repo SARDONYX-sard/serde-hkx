@@ -17,23 +17,31 @@ pub struct hkbLookAtModifierInternalState {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `lookAtLastTargetWS`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lookAtLastTargetWS"))]
     pub m_lookAtLastTargetWS: Vector4,
     /// # C++ Info
     /// - name: `lookAtWeight`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "lookAtWeight"))]
     pub m_lookAtWeight: f32,
     /// # C++ Info
     /// - name: `isTargetInsideLimitCone`(ctype: `hkBool`)
     /// - offset: ` 36`(x86)/` 36`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "isTargetInsideLimitCone"))]
     pub m_isTargetInsideLimitCone: bool,
 }
 const _: () = {

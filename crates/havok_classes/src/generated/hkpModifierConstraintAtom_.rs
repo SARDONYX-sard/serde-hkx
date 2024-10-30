@@ -17,29 +17,38 @@ pub struct hkpModifierConstraintAtom {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintAtom,
     /// # C++ Info
     /// - name: `modifierAtomSize`(ctype: `hkUint16`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "serde", serde(rename = "modifierAtomSize"))]
     pub m_modifierAtomSize: u16,
     /// # C++ Info
     /// - name: `childSize`(ctype: `hkUint16`)
     /// - offset: ` 18`(x86)/` 18`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "childSize"))]
     pub m_childSize: u16,
     /// # C++ Info
     /// - name: `child`(ctype: `struct hkpConstraintAtom*`)
     /// - offset: ` 20`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "child"))]
     pub m_child: Pointer,
     /// # C++ Info
     /// - name: `pad`(ctype: `hkUint32[2]`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "pad"))]
     pub m_pad: [u32; 2usize],
 }
 const _: () = {

@@ -17,48 +17,61 @@ pub struct hkbAttachmentSetup {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `blendInTime`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "blendInTime"))]
     pub m_blendInTime: f32,
     /// # C++ Info
     /// - name: `moveAttacherFraction`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "moveAttacherFraction"))]
     pub m_moveAttacherFraction: f32,
     /// # C++ Info
     /// - name: `gain`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "gain"))]
     pub m_gain: f32,
     /// # C++ Info
     /// - name: `extrapolationTimeStep`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "extrapolationTimeStep"))]
     pub m_extrapolationTimeStep: f32,
     /// # C++ Info
     /// - name: `fixUpGain`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "fixUpGain"))]
     pub m_fixUpGain: f32,
     /// # C++ Info
     /// - name: `maxLinearDistance`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxLinearDistance"))]
     pub m_maxLinearDistance: f32,
     /// # C++ Info
     /// - name: `maxAngularDistance`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxAngularDistance"))]
     pub m_maxAngularDistance: f32,
     /// # C++ Info
     /// - name: `attachmentType`(ctype: `enum AttachmentType`)
     /// - offset: ` 36`(x86)/` 44`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "attachmentType"))]
     pub m_attachmentType: AttachmentType,
 }
 const _: () = {

@@ -17,18 +17,25 @@ pub struct hkpPhysicsData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `worldCinfo`(ctype: `struct hkpWorldCinfo*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "worldCinfo"))]
     pub m_worldCinfo: Pointer,
     /// # C++ Info
     /// - name: `systems`(ctype: `hkArray<hkpPhysicsSystem*>`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "systems"))]
     pub m_systems: Vec<Pointer>,
 }
 const _: () = {

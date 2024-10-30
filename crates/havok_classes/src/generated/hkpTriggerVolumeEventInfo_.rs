@@ -17,21 +17,28 @@ pub struct hkpTriggerVolumeEventInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `sortValue`(ctype: `hkUint64`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sortValue"))]
     pub m_sortValue: u64,
     /// # C++ Info
     /// - name: `body`(ctype: `struct hkpRigidBody*`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "body"))]
     pub m_body: Pointer,
     /// # C++ Info
     /// - name: `operation`(ctype: `enum Operation`)
     /// - offset: ` 12`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "operation"))]
     pub m_operation: Operation,
 }
 const _: () = {

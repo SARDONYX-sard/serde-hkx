@@ -17,51 +17,64 @@ pub struct hkpVehicleFrictionStatusAxisStatus {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `forward_slip_velocity`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "forward_slip_velocity"))]
     pub m_forward_slip_velocity: f32,
     /// # C++ Info
     /// - name: `side_slip_velocity`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "side_slip_velocity"))]
     pub m_side_slip_velocity: f32,
     /// # C++ Info
     /// - name: `skid_energy_density`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "skid_energy_density"))]
     pub m_skid_energy_density: f32,
     /// # C++ Info
     /// - name: `side_force`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "side_force"))]
     pub m_side_force: f32,
     /// # C++ Info
     /// - name: `delayed_forward_impulse`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "delayed_forward_impulse"))]
     pub m_delayed_forward_impulse: f32,
     /// # C++ Info
     /// - name: `sideRhs`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sideRhs"))]
     pub m_sideRhs: f32,
     /// # C++ Info
     /// - name: `forwardRhs`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "forwardRhs"))]
     pub m_forwardRhs: f32,
     /// # C++ Info
     /// - name: `relativeSideForce`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "relativeSideForce"))]
     pub m_relativeSideForce: f32,
     /// # C++ Info
     /// - name: `relativeForwardForce`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "relativeForwardForce"))]
     pub m_relativeForwardForce: f32,
 }
 const _: () = {

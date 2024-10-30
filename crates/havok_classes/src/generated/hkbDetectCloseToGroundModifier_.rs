@@ -17,44 +17,56 @@ pub struct hkbDetectCloseToGroundModifier<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `closeToGroundEvent`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "closeToGroundEvent"))]
     pub m_closeToGroundEvent: hkbEventProperty,
     /// # C++ Info
     /// - name: `closeToGroundHeight`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "closeToGroundHeight"))]
     pub m_closeToGroundHeight: f32,
     /// # C++ Info
     /// - name: `raycastDistanceDown`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/`100`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "raycastDistanceDown"))]
     pub m_raycastDistanceDown: f32,
     /// # C++ Info
     /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "collisionFilterInfo"))]
     pub m_collisionFilterInfo: u32,
     /// # C++ Info
     /// - name: `boneIndex`(ctype: `hkInt16`)
     /// - offset: ` 64`(x86)/`108`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "boneIndex"))]
     pub m_boneIndex: i16,
     /// # C++ Info
     /// - name: `animBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 66`(x86)/`110`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "animBoneIndex"))]
     pub m_animBoneIndex: i16,
     /// # C++ Info
     /// - name: `isCloseToGround`(ctype: `hkBool`)
     /// - offset: ` 68`(x86)/`112`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(rename = "isCloseToGround"))]
     pub m_isCloseToGround: bool,
 }
 const _: () = {

@@ -17,51 +17,64 @@ pub struct hkPackfileSectionHeader {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `sectionTag`(ctype: `hkChar[19]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 19`(x86)/` 19`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "sectionTag"))]
     pub m_sectionTag: [char; 19usize],
     /// # C++ Info
     /// - name: `nullByte`(ctype: `hkChar`)
     /// - offset: ` 19`(x86)/` 19`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nullByte"))]
     pub m_nullByte: char,
     /// # C++ Info
     /// - name: `absoluteDataStart`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "absoluteDataStart"))]
     pub m_absoluteDataStart: i32,
     /// # C++ Info
     /// - name: `localFixupsOffset`(ctype: `hkInt32`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "localFixupsOffset"))]
     pub m_localFixupsOffset: i32,
     /// # C++ Info
     /// - name: `globalFixupsOffset`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "globalFixupsOffset"))]
     pub m_globalFixupsOffset: i32,
     /// # C++ Info
     /// - name: `virtualFixupsOffset`(ctype: `hkInt32`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "virtualFixupsOffset"))]
     pub m_virtualFixupsOffset: i32,
     /// # C++ Info
     /// - name: `exportsOffset`(ctype: `hkInt32`)
     /// - offset: ` 36`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "exportsOffset"))]
     pub m_exportsOffset: i32,
     /// # C++ Info
     /// - name: `importsOffset`(ctype: `hkInt32`)
     /// - offset: ` 40`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "importsOffset"))]
     pub m_importsOffset: i32,
     /// # C++ Info
     /// - name: `endOffset`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 44`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "endOffset"))]
     pub m_endOffset: i32,
 }
 const _: () = {

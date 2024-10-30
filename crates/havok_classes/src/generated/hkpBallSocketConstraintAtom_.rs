@@ -17,33 +17,43 @@ pub struct hkpBallSocketConstraintAtom {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintAtom,
     /// # C++ Info
     /// - name: `solvingMethod`(ctype: `enum SolvingMethod`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "solvingMethod"))]
     pub m_solvingMethod: SolvingMethod,
     /// # C++ Info
     /// - name: `bodiesToNotify`(ctype: `hkUint8`)
     /// - offset: `  3`(x86)/`  3`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "bodiesToNotify"))]
     pub m_bodiesToNotify: u8,
     /// # C++ Info
     /// - name: `velocityStabilizationFactor`(ctype: `hkUint8`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "velocityStabilizationFactor"))]
     pub m_velocityStabilizationFactor: u8,
     /// # C++ Info
     /// - name: `maxImpulse`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxImpulse"))]
     pub m_maxImpulse: f32,
     /// # C++ Info
     /// - name: `inertiaStabilizationFactor`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "inertiaStabilizationFactor"))]
     pub m_inertiaStabilizationFactor: f32,
 }
 const _: () = {

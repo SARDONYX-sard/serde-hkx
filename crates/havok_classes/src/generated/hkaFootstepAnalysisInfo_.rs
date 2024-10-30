@@ -17,78 +17,97 @@ pub struct hkaFootstepAnalysisInfo {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `name`(ctype: `hkArray<hkChar>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: Vec<char>,
     /// # C++ Info
     /// - name: `nameStrike`(ctype: `hkArray<hkChar>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nameStrike"))]
     pub m_nameStrike: Vec<char>,
     /// # C++ Info
     /// - name: `nameLift`(ctype: `hkArray<hkChar>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nameLift"))]
     pub m_nameLift: Vec<char>,
     /// # C++ Info
     /// - name: `nameLock`(ctype: `hkArray<hkChar>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nameLock"))]
     pub m_nameLock: Vec<char>,
     /// # C++ Info
     /// - name: `nameUnlock`(ctype: `hkArray<hkChar>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "nameUnlock"))]
     pub m_nameUnlock: Vec<char>,
     /// # C++ Info
     /// - name: `minPos`(ctype: `hkArray<hkReal>`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "minPos"))]
     pub m_minPos: Vec<f32>,
     /// # C++ Info
     /// - name: `maxPos`(ctype: `hkArray<hkReal>`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxPos"))]
     pub m_maxPos: Vec<f32>,
     /// # C++ Info
     /// - name: `minVel`(ctype: `hkArray<hkReal>`)
     /// - offset: ` 92`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "minVel"))]
     pub m_minVel: Vec<f32>,
     /// # C++ Info
     /// - name: `maxVel`(ctype: `hkArray<hkReal>`)
     /// - offset: `104`(x86)/`144`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxVel"))]
     pub m_maxVel: Vec<f32>,
     /// # C++ Info
     /// - name: `allBonesDown`(ctype: `hkArray<hkReal>`)
     /// - offset: `116`(x86)/`160`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "allBonesDown"))]
     pub m_allBonesDown: Vec<f32>,
     /// # C++ Info
     /// - name: `anyBonesDown`(ctype: `hkArray<hkReal>`)
     /// - offset: `128`(x86)/`176`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "anyBonesDown"))]
     pub m_anyBonesDown: Vec<f32>,
     /// # C++ Info
     /// - name: `posTol`(ctype: `hkReal`)
     /// - offset: `140`(x86)/`192`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "posTol"))]
     pub m_posTol: f32,
     /// # C++ Info
     /// - name: `velTol`(ctype: `hkReal`)
     /// - offset: `144`(x86)/`196`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "velTol"))]
     pub m_velTol: f32,
     /// # C++ Info
     /// - name: `duration`(ctype: `hkReal`)
     /// - offset: `148`(x86)/`200`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "duration"))]
     pub m_duration: f32,
 }
 const _: () = {

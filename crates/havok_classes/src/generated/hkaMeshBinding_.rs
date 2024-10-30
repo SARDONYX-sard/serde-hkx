@@ -17,33 +17,43 @@ pub struct hkaMeshBinding<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `mesh`(ctype: `struct hkxMesh*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "mesh"))]
     pub m_mesh: Pointer,
     /// # C++ Info
     /// - name: `originalSkeletonName`(ctype: `hkStringPtr`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "originalSkeletonName"))]
     pub m_originalSkeletonName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `skeleton`(ctype: `struct hkaSkeleton*`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "skeleton"))]
     pub m_skeleton: Pointer,
     /// # C++ Info
     /// - name: `mappings`(ctype: `hkArray<struct hkaMeshBindingMapping>`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "mappings"))]
     pub m_mappings: Vec<hkaMeshBindingMapping>,
     /// # C++ Info
     /// - name: `boneFromSkinMeshTransforms`(ctype: `hkArray<hkTransform>`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "boneFromSkinMeshTransforms"))]
     pub m_boneFromSkinMeshTransforms: Vec<Transform>,
 }
 const _: () = {

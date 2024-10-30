@@ -17,28 +17,37 @@ pub struct hkxMeshSection {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `vertexBuffer`(ctype: `struct hkxVertexBuffer*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "vertexBuffer"))]
     pub m_vertexBuffer: Pointer,
     /// # C++ Info
     /// - name: `indexBuffers`(ctype: `hkArray<hkxIndexBuffer*>`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "indexBuffers"))]
     pub m_indexBuffers: Vec<Pointer>,
     /// # C++ Info
     /// - name: `material`(ctype: `struct hkxMaterial*`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "material"))]
     pub m_material: Pointer,
     /// # C++ Info
     /// - name: `userChannels`(ctype: `hkArray<hkReferencedObject*>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "userChannels"))]
     pub m_userChannels: Vec<Pointer>,
 }
 const _: () = {

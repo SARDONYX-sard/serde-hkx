@@ -17,33 +17,43 @@ pub struct hkpPointToPathConstraintData {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintData,
     /// # C++ Info
     /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
     /// - name: `path`(ctype: `struct hkpParametricCurve*`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "path"))]
     pub m_path: Pointer,
     /// # C++ Info
     /// - name: `maxFrictionForce`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "maxFrictionForce"))]
     pub m_maxFrictionForce: f32,
     /// # C++ Info
     /// - name: `angularConstrainedDOF`(ctype: `enum OrientationConstraintType`)
     /// - offset: ` 32`(x86)/` 60`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "angularConstrainedDOF"))]
     pub m_angularConstrainedDOF: OrientationConstraintType,
     /// # C++ Info
     /// - name: `transform_OS_KS`(ctype: `hkTransform[2]`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: `128`(x86)/`128`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "transform_OS_KS"))]
     pub m_transform_OS_KS: [Transform; 2usize],
 }
 const _: () = {

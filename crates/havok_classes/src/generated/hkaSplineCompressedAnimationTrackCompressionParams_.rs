@@ -17,66 +17,82 @@ pub struct hkaSplineCompressedAnimationTrackCompressionParams {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `rotationTolerance`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotationTolerance"))]
     pub m_rotationTolerance: f32,
     /// # C++ Info
     /// - name: `translationTolerance`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "translationTolerance"))]
     pub m_translationTolerance: f32,
     /// # C++ Info
     /// - name: `scaleTolerance`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "scaleTolerance"))]
     pub m_scaleTolerance: f32,
     /// # C++ Info
     /// - name: `floatingTolerance`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "floatingTolerance"))]
     pub m_floatingTolerance: f32,
     /// # C++ Info
     /// - name: `rotationDegree`(ctype: `hkUint16`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotationDegree"))]
     pub m_rotationDegree: u16,
     /// # C++ Info
     /// - name: `translationDegree`(ctype: `hkUint16`)
     /// - offset: ` 18`(x86)/` 18`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "translationDegree"))]
     pub m_translationDegree: u16,
     /// # C++ Info
     /// - name: `scaleDegree`(ctype: `hkUint16`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "scaleDegree"))]
     pub m_scaleDegree: u16,
     /// # C++ Info
     /// - name: `floatingDegree`(ctype: `hkUint16`)
     /// - offset: ` 22`(x86)/` 22`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "floatingDegree"))]
     pub m_floatingDegree: u16,
     /// # C++ Info
     /// - name: `rotationQuantizationType`(ctype: `enum RotationQuantization`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "rotationQuantizationType"))]
     pub m_rotationQuantizationType: RotationQuantization,
     /// # C++ Info
     /// - name: `translationQuantizationType`(ctype: `enum ScalarQuantization`)
     /// - offset: ` 25`(x86)/` 25`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "translationQuantizationType"))]
     pub m_translationQuantizationType: ScalarQuantization,
     /// # C++ Info
     /// - name: `scaleQuantizationType`(ctype: `enum ScalarQuantization`)
     /// - offset: ` 26`(x86)/` 26`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "scaleQuantizationType"))]
     pub m_scaleQuantizationType: ScalarQuantization,
     /// # C++ Info
     /// - name: `floatQuantizationType`(ctype: `enum ScalarQuantization`)
     /// - offset: ` 27`(x86)/` 27`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "floatQuantizationType"))]
     pub m_floatQuantizationType: ScalarQuantization,
 }
 const _: () = {

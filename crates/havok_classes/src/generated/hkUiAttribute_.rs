@@ -17,46 +17,58 @@ pub struct hkUiAttribute<'a> {
     ///
     /// # Note
     /// Not present in the binary & Not exist actual C++ field.
+    #[cfg_attr(
+        feature = "serde",
+        serde(skip_serializing_if = "Option::is_none", default)
+    )]
     pub __ptr: Option<Pointer>,
     /// # C++ Info
     /// - name: `visible`(ctype: `hkBool`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "visible"))]
     pub m_visible: bool,
     /// # C++ Info
     /// - name: `hideInModeler`(ctype: `enum HideInModeler`)
     /// - offset: `  1`(x86)/`  1`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "hideInModeler"))]
     pub m_hideInModeler: HideInModeler,
     /// # C++ Info
     /// - name: `label`(ctype: `char*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "label"))]
     pub m_label: CString<'a>,
     /// # C++ Info
     /// - name: `group`(ctype: `char*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "group"))]
     pub m_group: CString<'a>,
     /// # C++ Info
     /// - name: `hideBaseClassMembers`(ctype: `char*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "hideBaseClassMembers"))]
     pub m_hideBaseClassMembers: CString<'a>,
     /// # C++ Info
     /// - name: `endGroup`(ctype: `hkBool`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "endGroup"))]
     pub m_endGroup: bool,
     /// # C++ Info
     /// - name: `endGroup2`(ctype: `hkBool`)
     /// - offset: ` 17`(x86)/` 33`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "endGroup2"))]
     pub m_endGroup2: bool,
     /// # C++ Info
     /// - name: `advanced`(ctype: `hkBool`)
     /// - offset: ` 18`(x86)/` 34`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "serde", serde(rename = "advanced"))]
     pub m_advanced: bool,
 }
 const _: () = {
