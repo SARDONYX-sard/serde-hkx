@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 44`(x86)/` 80`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,12 +24,14 @@ pub struct hkbModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbNode<'a>,
     /// # C++ Info
     /// - name: `enable`(ctype: `hkBool`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enable"))]
     #[cfg_attr(feature = "serde", serde(rename = "enable"))]
     pub m_enable: bool,
     /// # C++ Info
@@ -36,6 +39,7 @@ pub struct hkbModifier<'a> {
     /// - offset: ` 41`(x86)/` 73`(x86_64)
     /// - type_size: `  3`(x86)/`  3`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "padModifier"))]
     #[cfg_attr(feature = "serde", serde(rename = "padModifier"))]
     pub m_padModifier: [bool; 3usize],
 }

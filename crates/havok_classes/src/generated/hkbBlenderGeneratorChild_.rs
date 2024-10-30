@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 48`(x86)/` 80`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct hkbBlenderGeneratorChild {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbBindable,
     /// # C++ Info
@@ -30,24 +32,28 @@ pub struct hkbBlenderGeneratorChild {
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "generator"))]
     #[cfg_attr(feature = "serde", serde(rename = "generator"))]
     pub m_generator: Pointer,
     /// # C++ Info
     /// - name: `boneWeights`(ctype: `struct hkbBoneWeightArray*`)
     /// - offset: ` 36`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "boneWeights"))]
     #[cfg_attr(feature = "serde", serde(rename = "boneWeights"))]
     pub m_boneWeights: Pointer,
     /// # C++ Info
     /// - name: `weight`(ctype: `hkReal`)
     /// - offset: ` 40`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "weight"))]
     #[cfg_attr(feature = "serde", serde(rename = "weight"))]
     pub m_weight: f32,
     /// # C++ Info
     /// - name: `worldFromModelWeight`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 68`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "worldFromModelWeight"))]
     #[cfg_attr(feature = "serde", serde(rename = "worldFromModelWeight"))]
     pub m_worldFromModelWeight: f32,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: `352`(x86)/`416`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,12 +24,14 @@ pub struct hkpShapePhantom<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpPhantom<'a>,
     /// # C++ Info
     /// - name: `motionState`(ctype: `struct hkMotionState`)
     /// - offset: `176`(x86)/`240`(x86_64)
     /// - type_size: `176`(x86)/`176`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "motionState"))]
     #[cfg_attr(feature = "serde", serde(rename = "motionState"))]
     pub m_motionState: hkMotionState,
 }

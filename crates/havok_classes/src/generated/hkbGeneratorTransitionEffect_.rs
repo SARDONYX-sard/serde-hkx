@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 92`(x86)/`144`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbTransitionEffect<'a>,
     /// # C++ Info
     /// - name: `transitionGenerator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transitionGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "transitionGenerator"))]
     pub m_transitionGenerator: Pointer,
     /// # C++ Info
     /// - name: `blendInDuration`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "blendInDuration"))]
     #[cfg_attr(feature = "serde", serde(rename = "blendInDuration"))]
     pub m_blendInDuration: f32,
     /// # C++ Info
     /// - name: `blendOutDuration`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "blendOutDuration"))]
     #[cfg_attr(feature = "serde", serde(rename = "blendOutDuration"))]
     pub m_blendOutDuration: f32,
     /// # C++ Info
     /// - name: `syncToGeneratorStartTime`(ctype: `hkBool`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "syncToGeneratorStartTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "syncToGeneratorStartTime"))]
     pub m_syncToGeneratorStartTime: bool,
     /// # C++ Info
@@ -54,6 +60,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fromGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "fromGenerator"))]
     pub m_fromGenerator: Pointer,
     /// # C++ Info
@@ -61,6 +68,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 64`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "toGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "toGenerator"))]
     pub m_toGenerator: Pointer,
     /// # C++ Info
@@ -68,6 +76,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 68`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timeInTransition"))]
     #[cfg_attr(feature = "serde", serde(rename = "timeInTransition"))]
     pub m_timeInTransition: f32,
     /// # C++ Info
@@ -75,6 +84,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 72`(x86)/`124`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "duration"))]
     #[cfg_attr(feature = "serde", serde(rename = "duration"))]
     pub m_duration: f32,
     /// # C++ Info
@@ -82,6 +92,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 76`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "effectiveBlendInDuration"))]
     #[cfg_attr(feature = "serde", serde(rename = "effectiveBlendInDuration"))]
     pub m_effectiveBlendInDuration: f32,
     /// # C++ Info
@@ -89,6 +100,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 80`(x86)/`132`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "effectiveBlendOutDuration"))]
     #[cfg_attr(feature = "serde", serde(rename = "effectiveBlendOutDuration"))]
     pub m_effectiveBlendOutDuration: f32,
     /// # C++ Info
@@ -96,6 +108,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 84`(x86)/`136`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "toGeneratorState"))]
     #[cfg_attr(feature = "serde", serde(rename = "toGeneratorState"))]
     pub m_toGeneratorState: i8,
     /// # C++ Info
@@ -103,6 +116,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 85`(x86)/`137`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "echoTransitionGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "echoTransitionGenerator"))]
     pub m_echoTransitionGenerator: bool,
     /// # C++ Info
@@ -110,6 +124,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 86`(x86)/`138`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "echoToGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "echoToGenerator"))]
     pub m_echoToGenerator: bool,
     /// # C++ Info
@@ -117,6 +132,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 87`(x86)/`139`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "justActivated"))]
     #[cfg_attr(feature = "serde", serde(rename = "justActivated"))]
     pub m_justActivated: bool,
     /// # C++ Info
@@ -124,6 +140,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 88`(x86)/`140`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "updateActiveNodes"))]
     #[cfg_attr(feature = "serde", serde(rename = "updateActiveNodes"))]
     pub m_updateActiveNodes: bool,
     /// # C++ Info
@@ -131,6 +148,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - offset: ` 89`(x86)/`141`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "stage"))]
     #[cfg_attr(feature = "serde", serde(rename = "stage"))]
     pub m_stage: i8,
 }
@@ -1287,6 +1305,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -1308,6 +1327,7 @@ pub enum ToGeneratorState {
 }
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

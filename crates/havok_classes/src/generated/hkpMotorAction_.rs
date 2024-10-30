@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/` 96`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct hkpMotorAction<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpUnaryAction<'a>,
     /// # C++ Info
     /// - name: `axis`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "axis"))]
     #[cfg_attr(feature = "serde", serde(rename = "axis"))]
     pub m_axis: Vector4,
     /// # C++ Info
     /// - name: `spinRate`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "spinRate"))]
     #[cfg_attr(feature = "serde", serde(rename = "spinRate"))]
     pub m_spinRate: f32,
     /// # C++ Info
     /// - name: `gain`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "gain"))]
     #[cfg_attr(feature = "serde", serde(rename = "gain"))]
     pub m_gain: f32,
     /// # C++ Info
     /// - name: `active`(ctype: `hkBool`)
     /// - offset: ` 56`(x86)/` 88`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "active"))]
     #[cfg_attr(feature = "serde", serde(rename = "active"))]
     pub m_active: bool,
 }

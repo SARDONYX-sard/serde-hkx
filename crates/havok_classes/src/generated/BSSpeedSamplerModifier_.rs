@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 60`(x86)/` 96`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct BSSpeedSamplerModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `state`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "state"))]
     #[cfg_attr(feature = "serde", serde(rename = "state"))]
     pub m_state: i32,
     /// # C++ Info
     /// - name: `direction`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "direction"))]
     #[cfg_attr(feature = "serde", serde(rename = "direction"))]
     pub m_direction: f32,
     /// # C++ Info
     /// - name: `goalSpeed`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "goalSpeed"))]
     #[cfg_attr(feature = "serde", serde(rename = "goalSpeed"))]
     pub m_goalSpeed: f32,
     /// # C++ Info
     /// - name: `speedOut`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "speedOut"))]
     #[cfg_attr(feature = "serde", serde(rename = "speedOut"))]
     pub m_speedOut: f32,
 }

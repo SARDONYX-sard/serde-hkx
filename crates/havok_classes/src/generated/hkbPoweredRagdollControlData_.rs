@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 32`(x86)/` 32`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -27,30 +28,38 @@ pub struct hkbPoweredRagdollControlData {
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxForce"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxForce"))]
     pub m_maxForce: f32,
     /// # C++ Info
     /// - name: `tau`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "tau"))]
     #[cfg_attr(feature = "serde", serde(rename = "tau"))]
     pub m_tau: f32,
     /// # C++ Info
     /// - name: `damping`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "damping"))]
     #[cfg_attr(feature = "serde", serde(rename = "damping"))]
     pub m_damping: f32,
     /// # C++ Info
     /// - name: `proportionalRecoveryVelocity`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "proportionalRecoveryVelocity")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "proportionalRecoveryVelocity"))]
     pub m_proportionalRecoveryVelocity: f32,
     /// # C++ Info
     /// - name: `constantRecoveryVelocity`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "constantRecoveryVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "constantRecoveryVelocity"))]
     pub m_constantRecoveryVelocity: f32,
 }

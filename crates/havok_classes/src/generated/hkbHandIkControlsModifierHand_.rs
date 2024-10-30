@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 96`(x86)/`112`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,18 +27,21 @@ pub struct hkbHandIkControlsModifierHand {
     /// - name: `controlData`(ctype: `struct hkbHandIkControlData`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 80`(x86)/` 96`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "controlData"))]
     #[cfg_attr(feature = "serde", serde(rename = "controlData"))]
     pub m_controlData: hkbHandIkControlData,
     /// # C++ Info
     /// - name: `handIndex`(ctype: `hkInt32`)
     /// - offset: ` 80`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "handIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "handIndex"))]
     pub m_handIndex: i32,
     /// # C++ Info
     /// - name: `enable`(ctype: `hkBool`)
     /// - offset: ` 84`(x86)/`100`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enable"))]
     #[cfg_attr(feature = "serde", serde(rename = "enable"))]
     pub m_enable: bool,
 }

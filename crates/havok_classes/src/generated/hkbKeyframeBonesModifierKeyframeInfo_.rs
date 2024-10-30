@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 48`(x86)/` 48`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,24 +27,28 @@ pub struct hkbKeyframeBonesModifierKeyframeInfo {
     /// - name: `keyframedPosition`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "keyframedPosition"))]
     #[cfg_attr(feature = "serde", serde(rename = "keyframedPosition"))]
     pub m_keyframedPosition: Vector4,
     /// # C++ Info
     /// - name: `keyframedRotation`(ctype: `hkQuaternion`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "keyframedRotation"))]
     #[cfg_attr(feature = "serde", serde(rename = "keyframedRotation"))]
     pub m_keyframedRotation: Quaternion,
     /// # C++ Info
     /// - name: `boneIndex`(ctype: `hkInt16`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "boneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "boneIndex"))]
     pub m_boneIndex: i16,
     /// # C++ Info
     /// - name: `isValid`(ctype: `hkBool`)
     /// - offset: ` 34`(x86)/` 34`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isValid"))]
     #[cfg_attr(feature = "serde", serde(rename = "isValid"))]
     pub m_isValid: bool,
 }

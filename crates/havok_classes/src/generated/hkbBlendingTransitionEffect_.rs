@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 88`(x86)/`144`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,45 @@ pub struct hkbBlendingTransitionEffect<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbTransitionEffect<'a>,
     /// # C++ Info
     /// - name: `duration`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "duration"))]
     #[cfg_attr(feature = "serde", serde(rename = "duration"))]
     pub m_duration: f32,
     /// # C++ Info
     /// - name: `toGeneratorStartTimeFraction`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "toGeneratorStartTimeFraction")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "toGeneratorStartTimeFraction"))]
     pub m_toGeneratorStartTimeFraction: f32,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags FlagBits`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: FlagBits,
     /// # C++ Info
     /// - name: `endMode`(ctype: `enum EndMode`)
     /// - offset: ` 54`(x86)/` 90`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "endMode"))]
     #[cfg_attr(feature = "serde", serde(rename = "endMode"))]
     pub m_endMode: EndMode,
     /// # C++ Info
     /// - name: `blendCurve`(ctype: `enum BlendCurve`)
     /// - offset: ` 55`(x86)/` 91`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "blendCurve"))]
     #[cfg_attr(feature = "serde", serde(rename = "blendCurve"))]
     pub m_blendCurve: BlendCurve,
     /// # C++ Info
@@ -60,6 +70,7 @@ pub struct hkbBlendingTransitionEffect<'a> {
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fromGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "fromGenerator"))]
     pub m_fromGenerator: Pointer,
     /// # C++ Info
@@ -67,6 +78,7 @@ pub struct hkbBlendingTransitionEffect<'a> {
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "toGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "toGenerator"))]
     pub m_toGenerator: Pointer,
     /// # C++ Info
@@ -74,6 +86,10 @@ pub struct hkbBlendingTransitionEffect<'a> {
     /// - offset: ` 64`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "characterPoseAtBeginningOfTransition")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "characterPoseAtBeginningOfTransition")
@@ -84,6 +100,7 @@ pub struct hkbBlendingTransitionEffect<'a> {
     /// - offset: ` 76`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timeRemaining"))]
     #[cfg_attr(feature = "serde", serde(rename = "timeRemaining"))]
     pub m_timeRemaining: f32,
     /// # C++ Info
@@ -91,6 +108,7 @@ pub struct hkbBlendingTransitionEffect<'a> {
     /// - offset: ` 80`(x86)/`132`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timeInTransition"))]
     #[cfg_attr(feature = "serde", serde(rename = "timeInTransition"))]
     pub m_timeInTransition: f32,
     /// # C++ Info
@@ -98,6 +116,7 @@ pub struct hkbBlendingTransitionEffect<'a> {
     /// - offset: ` 84`(x86)/`136`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "applySelfTransition"))]
     #[cfg_attr(feature = "serde", serde(rename = "applySelfTransition"))]
     pub m_applySelfTransition: bool,
     /// # C++ Info
@@ -105,6 +124,7 @@ pub struct hkbBlendingTransitionEffect<'a> {
     /// - offset: ` 85`(x86)/`137`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "initializeCharacterPose"))]
     #[cfg_attr(feature = "serde", serde(rename = "initializeCharacterPose"))]
     pub m_initializeCharacterPose: bool,
 }
@@ -1158,14 +1178,35 @@ const _: () = {
 bitflags::bitflags! {
     #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
     "- size(C++): `TYPE_UINT16`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
-    FlagBits : u16 { #[doc = "0"] const FLAG_NONE = 0u16; #[doc = "1"] const
-    FLAG_IGNORE_FROM_WORLD_FROM_MODEL = 1u16; #[doc = "2"] const FLAG_SYNC = 2u16; #[doc
-    = "4"] const FLAG_IGNORE_TO_WORLD_FROM_MODEL = 4u16; }
+    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
+    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
+    PartialEq, Eq, Hash)] pub struct FlagBits : u16 { #[doc = "0"] const FLAG_NONE =
+    0u16; #[doc = "1"] const FLAG_IGNORE_FROM_WORLD_FROM_MODEL = 1u16; #[doc = "2"] const
+    FLAG_SYNC = 2u16; #[doc = "4"] const FLAG_IGNORE_TO_WORLD_FROM_MODEL = 4u16; }
 }
+#[cfg(feature = "json_schema")]
+const _: () = {
+    use schemars::{SchemaGenerator, Schema, JsonSchema, json_schema};
+    use std::borrow::Cow;
+    impl JsonSchema for FlagBits {
+        fn schema_name() -> Cow<'static, str> {
+            "FlagBits".into()
+        }
+        fn schema_id() -> Cow<'static, str> {
+            concat!(module_path!(), "::", "FlagBits").into()
+        }
+        fn json_schema(_generate: &mut SchemaGenerator) -> Schema {
+            json_schema!(
+                { "description" :
+                "Bitflags field. Specific flags: FLAG_NONE: 0, FLAG_IGNORE_FROM_WORLD_FROM_MODEL: 1, FLAG_SYNC: 2, FLAG_IGNORE_TO_WORLD_FROM_MODEL: 4. Additional unspecified bits may be set.(e.g.: BIT_FLAG|BIT_FLAG2|4)",
+                "type" : "string", }
+            )
+        }
+    }
+};
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

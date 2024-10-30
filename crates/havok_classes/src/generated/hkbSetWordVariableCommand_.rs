@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/` 64`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,42 +24,49 @@ pub struct hkbSetWordVariableCommand {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `quadValue`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "quadValue"))]
     #[cfg_attr(feature = "serde", serde(rename = "quadValue"))]
     pub m_quadValue: Vector4,
     /// # C++ Info
     /// - name: `characterId`(ctype: `hkUint64`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "characterId"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterId"))]
     pub m_characterId: u64,
     /// # C++ Info
     /// - name: `variableId`(ctype: `hkInt32`)
     /// - offset: ` 40`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "variableId"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableId"))]
     pub m_variableId: i32,
     /// # C++ Info
     /// - name: `value`(ctype: `struct hkbVariableValue`)
     /// - offset: ` 44`(x86)/` 44`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "value"))]
     #[cfg_attr(feature = "serde", serde(rename = "value"))]
     pub m_value: hkbVariableValue,
     /// # C++ Info
     /// - name: `type`(ctype: `enum VariableType`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "type"))]
     #[cfg_attr(feature = "serde", serde(rename = "type"))]
     pub m_type: VariableType,
     /// # C++ Info
     /// - name: `global`(ctype: `hkBool`)
     /// - offset: ` 49`(x86)/` 49`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "global"))]
     #[cfg_attr(feature = "serde", serde(rename = "global"))]
     pub m_global: bool,
 }

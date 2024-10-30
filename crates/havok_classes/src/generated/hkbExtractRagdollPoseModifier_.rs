@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 52`(x86)/` 88`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,38 @@ pub struct hkbExtractRagdollPoseModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `poseMatchingBone0`(ctype: `hkInt16`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "poseMatchingBone0"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone0"))]
     pub m_poseMatchingBone0: i16,
     /// # C++ Info
     /// - name: `poseMatchingBone1`(ctype: `hkInt16`)
     /// - offset: ` 46`(x86)/` 82`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "poseMatchingBone1"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone1"))]
     pub m_poseMatchingBone1: i16,
     /// # C++ Info
     /// - name: `poseMatchingBone2`(ctype: `hkInt16`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "poseMatchingBone2"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone2"))]
     pub m_poseMatchingBone2: i16,
     /// # C++ Info
     /// - name: `enableComputeWorldFromModel`(ctype: `hkBool`)
     /// - offset: ` 50`(x86)/` 86`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "enableComputeWorldFromModel")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "enableComputeWorldFromModel"))]
     pub m_enableComputeWorldFromModel: bool,
 }

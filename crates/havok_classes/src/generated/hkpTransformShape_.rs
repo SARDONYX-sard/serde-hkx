@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`144`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,12 +24,14 @@ pub struct hkpTransformShape {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpShape,
     /// # C++ Info
     /// - name: `childShape`(ctype: `struct hkpSingleShapeContainer`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childShape"))]
     #[cfg_attr(feature = "serde", serde(rename = "childShape"))]
     pub m_childShape: hkpSingleShapeContainer,
     /// # C++ Info
@@ -36,18 +39,21 @@ pub struct hkpTransformShape {
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childShapeSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "childShapeSize"))]
     pub m_childShapeSize: i32,
     /// # C++ Info
     /// - name: `rotation`(ctype: `hkQuaternion`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotation"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotation"))]
     pub m_rotation: Quaternion,
     /// # C++ Info
     /// - name: `transform`(ctype: `hkTransform`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transform"))]
     #[cfg_attr(feature = "serde", serde(rename = "transform"))]
     pub m_transform: Transform,
 }

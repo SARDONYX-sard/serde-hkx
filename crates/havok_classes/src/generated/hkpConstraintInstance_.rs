@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 56`(x86)/`112`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct hkpConstraintInstance<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
@@ -30,42 +32,49 @@ pub struct hkpConstraintInstance<'a> {
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "owner"))]
     #[cfg_attr(feature = "serde", serde(rename = "owner"))]
     pub m_owner: Pointer,
     /// # C++ Info
     /// - name: `data`(ctype: `struct hkpConstraintData*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
     pub m_data: Pointer,
     /// # C++ Info
     /// - name: `constraintModifiers`(ctype: `struct hkpModifierConstraintAtom*`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "constraintModifiers"))]
     #[cfg_attr(feature = "serde", serde(rename = "constraintModifiers"))]
     pub m_constraintModifiers: Pointer,
     /// # C++ Info
     /// - name: `entities`(ctype: `struct hkpEntity*`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "entities"))]
     #[cfg_attr(feature = "serde", serde(rename = "entities"))]
     pub m_entities: [Pointer; 2usize],
     /// # C++ Info
     /// - name: `priority`(ctype: `enum ConstraintPriority`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "priority"))]
     #[cfg_attr(feature = "serde", serde(rename = "priority"))]
     pub m_priority: ConstraintPriority,
     /// # C++ Info
     /// - name: `wantRuntime`(ctype: `hkBool`)
     /// - offset: ` 29`(x86)/` 57`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wantRuntime"))]
     #[cfg_attr(feature = "serde", serde(rename = "wantRuntime"))]
     pub m_wantRuntime: bool,
     /// # C++ Info
     /// - name: `destructionRemapInfo`(ctype: `enum OnDestructionRemapInfo`)
     /// - offset: ` 30`(x86)/` 58`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "destructionRemapInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "destructionRemapInfo"))]
     pub m_destructionRemapInfo: OnDestructionRemapInfo,
     /// # C++ Info
@@ -73,18 +82,21 @@ pub struct hkpConstraintInstance<'a> {
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "listeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "listeners"))]
     pub m_listeners: hkpConstraintInstanceSmallArraySerializeOverrideType,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 40`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
     /// # C++ Info
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: ` 44`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "userData"))]
     #[cfg_attr(feature = "serde", serde(rename = "userData"))]
     pub m_userData: Ulong,
     /// # C++ Info
@@ -92,6 +104,7 @@ pub struct hkpConstraintInstance<'a> {
     /// - offset: ` 48`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "internal"))]
     #[cfg_attr(feature = "serde", serde(rename = "internal"))]
     pub m_internal: Pointer,
     /// # C++ Info
@@ -99,6 +112,7 @@ pub struct hkpConstraintInstance<'a> {
     /// - offset: ` 52`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "uid"))]
     #[cfg_attr(feature = "serde", serde(rename = "uid"))]
     pub m_uid: u32,
 }
@@ -977,6 +991,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -1001,6 +1016,7 @@ pub enum ConstraintPriority {
 }
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

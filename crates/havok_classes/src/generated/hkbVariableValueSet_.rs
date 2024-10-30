@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 44`(x86)/` 64`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,24 +24,28 @@ pub struct hkbVariableValueSet {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `wordVariableValues`(ctype: `hkArray<struct hkbVariableValue>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wordVariableValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "wordVariableValues"))]
     pub m_wordVariableValues: Vec<hkbVariableValue>,
     /// # C++ Info
     /// - name: `quadVariableValues`(ctype: `hkArray<hkVector4>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "quadVariableValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "quadVariableValues"))]
     pub m_quadVariableValues: Vec<Vector4>,
     /// # C++ Info
     /// - name: `variantVariableValues`(ctype: `hkArray<hkReferencedObject*>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "variantVariableValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "variantVariableValues"))]
     pub m_variantVariableValues: Vec<Pointer>,
 }

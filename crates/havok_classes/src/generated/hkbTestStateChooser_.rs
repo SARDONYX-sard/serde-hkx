@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 20`(x86)/` 32`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,24 +24,28 @@ pub struct hkbTestStateChooser<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbStateChooser,
     /// # C++ Info
     /// - name: `int`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "int"))]
     #[cfg_attr(feature = "serde", serde(rename = "int"))]
     pub m_int: i32,
     /// # C++ Info
     /// - name: `real`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "real"))]
     #[cfg_attr(feature = "serde", serde(rename = "real"))]
     pub m_real: f32,
     /// # C++ Info
     /// - name: `string`(ctype: `hkStringPtr`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "string"))]
     #[cfg_attr(feature = "serde", serde(rename = "string"))]
     pub m_string: StringPtr<'a>,
 }

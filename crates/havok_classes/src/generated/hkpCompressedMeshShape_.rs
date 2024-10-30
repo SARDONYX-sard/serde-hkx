@@ -7,6 +7,7 @@ use super::*;
 /// - size: `224`(x86)/`304`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,114 +24,133 @@ pub struct hkpCompressedMeshShape<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpShapeCollection,
     /// # C++ Info
     /// - name: `bitsPerIndex`(ctype: `hkInt32`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bitsPerIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "bitsPerIndex"))]
     pub m_bitsPerIndex: i32,
     /// # C++ Info
     /// - name: `bitsPerWIndex`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 52`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bitsPerWIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "bitsPerWIndex"))]
     pub m_bitsPerWIndex: i32,
     /// # C++ Info
     /// - name: `wIndexMask`(ctype: `hkInt32`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wIndexMask"))]
     #[cfg_attr(feature = "serde", serde(rename = "wIndexMask"))]
     pub m_wIndexMask: i32,
     /// # C++ Info
     /// - name: `indexMask`(ctype: `hkInt32`)
     /// - offset: ` 36`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "indexMask"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexMask"))]
     pub m_indexMask: i32,
     /// # C++ Info
     /// - name: `radius`(ctype: `hkReal`)
     /// - offset: ` 40`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "radius"))]
     #[cfg_attr(feature = "serde", serde(rename = "radius"))]
     pub m_radius: f32,
     /// # C++ Info
     /// - name: `weldingType`(ctype: `enum WeldingType`)
     /// - offset: ` 44`(x86)/` 68`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "weldingType"))]
     #[cfg_attr(feature = "serde", serde(rename = "weldingType"))]
     pub m_weldingType: WeldingType,
     /// # C++ Info
     /// - name: `materialType`(ctype: `enum MaterialType`)
     /// - offset: ` 45`(x86)/` 69`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "materialType"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialType"))]
     pub m_materialType: MaterialType,
     /// # C++ Info
     /// - name: `materials`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 48`(x86)/` 72`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "materials"))]
     #[cfg_attr(feature = "serde", serde(rename = "materials"))]
     pub m_materials: Vec<u32>,
     /// # C++ Info
     /// - name: `materials16`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 60`(x86)/` 88`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "materials16"))]
     #[cfg_attr(feature = "serde", serde(rename = "materials16"))]
     pub m_materials16: Vec<u16>,
     /// # C++ Info
     /// - name: `materials8`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 72`(x86)/`104`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "materials8"))]
     #[cfg_attr(feature = "serde", serde(rename = "materials8"))]
     pub m_materials8: Vec<u8>,
     /// # C++ Info
     /// - name: `transforms`(ctype: `hkArray<hkQsTransform>`)
     /// - offset: ` 84`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transforms"))]
     #[cfg_attr(feature = "serde", serde(rename = "transforms"))]
     pub m_transforms: Vec<QsTransform>,
     /// # C++ Info
     /// - name: `bigVertices`(ctype: `hkArray<hkVector4>`)
     /// - offset: ` 96`(x86)/`136`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bigVertices"))]
     #[cfg_attr(feature = "serde", serde(rename = "bigVertices"))]
     pub m_bigVertices: Vec<Vector4>,
     /// # C++ Info
     /// - name: `bigTriangles`(ctype: `hkArray<struct hkpCompressedMeshShapeBigTriangle>`)
     /// - offset: `108`(x86)/`152`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bigTriangles"))]
     #[cfg_attr(feature = "serde", serde(rename = "bigTriangles"))]
     pub m_bigTriangles: Vec<hkpCompressedMeshShapeBigTriangle>,
     /// # C++ Info
     /// - name: `chunks`(ctype: `hkArray<struct hkpCompressedMeshShapeChunk>`)
     /// - offset: `120`(x86)/`168`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "chunks"))]
     #[cfg_attr(feature = "serde", serde(rename = "chunks"))]
     pub m_chunks: Vec<hkpCompressedMeshShapeChunk>,
     /// # C++ Info
     /// - name: `convexPieces`(ctype: `hkArray<struct hkpCompressedMeshShapeConvexPiece>`)
     /// - offset: `132`(x86)/`184`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "convexPieces"))]
     #[cfg_attr(feature = "serde", serde(rename = "convexPieces"))]
     pub m_convexPieces: Vec<hkpCompressedMeshShapeConvexPiece>,
     /// # C++ Info
     /// - name: `error`(ctype: `hkReal`)
     /// - offset: `144`(x86)/`200`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "error"))]
     #[cfg_attr(feature = "serde", serde(rename = "error"))]
     pub m_error: f32,
     /// # C++ Info
     /// - name: `bounds`(ctype: `struct hkAabb`)
     /// - offset: `160`(x86)/`208`(x86_64)
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bounds"))]
     #[cfg_attr(feature = "serde", serde(rename = "bounds"))]
     pub m_bounds: hkAabb,
     /// # C++ Info
     /// - name: `defaultCollisionFilterInfo`(ctype: `hkUint32`)
     /// - offset: `192`(x86)/`240`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "defaultCollisionFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "defaultCollisionFilterInfo"))]
     pub m_defaultCollisionFilterInfo: u32,
     /// # C++ Info
@@ -138,24 +158,28 @@ pub struct hkpCompressedMeshShape<'a> {
     /// - offset: `196`(x86)/`248`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "meshMaterials"))]
     #[cfg_attr(feature = "serde", serde(rename = "meshMaterials"))]
     pub m_meshMaterials: Pointer,
     /// # C++ Info
     /// - name: `materialStriding`(ctype: `hkUint16`)
     /// - offset: `200`(x86)/`256`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "materialStriding"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialStriding"))]
     pub m_materialStriding: u16,
     /// # C++ Info
     /// - name: `numMaterials`(ctype: `hkUint16`)
     /// - offset: `202`(x86)/`258`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numMaterials"))]
     #[cfg_attr(feature = "serde", serde(rename = "numMaterials"))]
     pub m_numMaterials: u16,
     /// # C++ Info
     /// - name: `namedMaterials`(ctype: `hkArray<struct hkpNamedMeshMaterial>`)
     /// - offset: `204`(x86)/`264`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "namedMaterials"))]
     #[cfg_attr(feature = "serde", serde(rename = "namedMaterials"))]
     pub m_namedMaterials: Vec<hkpNamedMeshMaterial<'a>>,
 }
@@ -2156,6 +2180,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

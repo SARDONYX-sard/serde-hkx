@@ -7,6 +7,7 @@ use super::*;
 /// - size: `  2`(x86)/`  2`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,12 +27,14 @@ pub struct hkMultipleVertexBufferElementInfo {
     /// - name: `vertexBufferIndex`(ctype: `hkUint8`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "vertexBufferIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexBufferIndex"))]
     pub m_vertexBufferIndex: u8,
     /// # C++ Info
     /// - name: `elementIndex`(ctype: `hkUint8`)
     /// - offset: `  1`(x86)/`  1`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "elementIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "elementIndex"))]
     pub m_elementIndex: u8,
 }

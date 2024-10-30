@@ -7,6 +7,7 @@ use super::*;
 /// - size: `176`(x86)/`176`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,60 +27,70 @@ pub struct hkMotionState {
     /// - name: `transform`(ctype: `hkTransform`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transform"))]
     #[cfg_attr(feature = "serde", serde(rename = "transform"))]
     pub m_transform: Transform,
     /// # C++ Info
     /// - name: `sweptTransform`(ctype: `struct hkSweptTransform`)
     /// - offset: ` 64`(x86)/` 64`(x86_64)
     /// - type_size: ` 80`(x86)/` 80`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sweptTransform"))]
     #[cfg_attr(feature = "serde", serde(rename = "sweptTransform"))]
     pub m_sweptTransform: hkSweptTransform,
     /// # C++ Info
     /// - name: `deltaAngle`(ctype: `hkVector4`)
     /// - offset: `144`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "deltaAngle"))]
     #[cfg_attr(feature = "serde", serde(rename = "deltaAngle"))]
     pub m_deltaAngle: Vector4,
     /// # C++ Info
     /// - name: `objectRadius`(ctype: `hkReal`)
     /// - offset: `160`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "objectRadius"))]
     #[cfg_attr(feature = "serde", serde(rename = "objectRadius"))]
     pub m_objectRadius: f32,
     /// # C++ Info
     /// - name: `linearDamping`(ctype: `hkHalf`)
     /// - offset: `164`(x86)/`164`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "linearDamping"))]
     #[cfg_attr(feature = "serde", serde(rename = "linearDamping"))]
     pub m_linearDamping: f16,
     /// # C++ Info
     /// - name: `angularDamping`(ctype: `hkHalf`)
     /// - offset: `166`(x86)/`166`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "angularDamping"))]
     #[cfg_attr(feature = "serde", serde(rename = "angularDamping"))]
     pub m_angularDamping: f16,
     /// # C++ Info
     /// - name: `timeFactor`(ctype: `hkHalf`)
     /// - offset: `168`(x86)/`168`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timeFactor"))]
     #[cfg_attr(feature = "serde", serde(rename = "timeFactor"))]
     pub m_timeFactor: f16,
     /// # C++ Info
     /// - name: `maxLinearVelocity`(ctype: `hkUint8`)
     /// - offset: `170`(x86)/`170`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxLinearVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxLinearVelocity"))]
     pub m_maxLinearVelocity: u8,
     /// # C++ Info
     /// - name: `maxAngularVelocity`(ctype: `hkUint8`)
     /// - offset: `171`(x86)/`171`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxAngularVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxAngularVelocity"))]
     pub m_maxAngularVelocity: u8,
     /// # C++ Info
     /// - name: `deactivationClass`(ctype: `hkUint8`)
     /// - offset: `172`(x86)/`172`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "deactivationClass"))]
     #[cfg_attr(feature = "serde", serde(rename = "deactivationClass"))]
     pub m_deactivationClass: u8,
 }

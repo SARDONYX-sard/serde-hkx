@@ -7,6 +7,7 @@ use super::*;
 /// - size: `176`(x86)/`208`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,42 +24,49 @@ pub struct BSTweenerModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `tweenPosition`(ctype: `hkBool`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "tweenPosition"))]
     #[cfg_attr(feature = "serde", serde(rename = "tweenPosition"))]
     pub m_tweenPosition: bool,
     /// # C++ Info
     /// - name: `tweenRotation`(ctype: `hkBool`)
     /// - offset: ` 45`(x86)/` 81`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "tweenRotation"))]
     #[cfg_attr(feature = "serde", serde(rename = "tweenRotation"))]
     pub m_tweenRotation: bool,
     /// # C++ Info
     /// - name: `useTweenDuration`(ctype: `hkBool`)
     /// - offset: ` 46`(x86)/` 82`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "useTweenDuration"))]
     #[cfg_attr(feature = "serde", serde(rename = "useTweenDuration"))]
     pub m_useTweenDuration: bool,
     /// # C++ Info
     /// - name: `tweenDuration`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "tweenDuration"))]
     #[cfg_attr(feature = "serde", serde(rename = "tweenDuration"))]
     pub m_tweenDuration: f32,
     /// # C++ Info
     /// - name: `targetPosition`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "targetPosition"))]
     #[cfg_attr(feature = "serde", serde(rename = "targetPosition"))]
     pub m_targetPosition: Vector4,
     /// # C++ Info
     /// - name: `targetRotation`(ctype: `hkQuaternion`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "targetRotation"))]
     #[cfg_attr(feature = "serde", serde(rename = "targetRotation"))]
     pub m_targetRotation: Quaternion,
     /// # C++ Info
@@ -66,6 +74,7 @@ pub struct BSTweenerModifier<'a> {
     /// - offset: ` 96`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "duration"))]
     #[cfg_attr(feature = "serde", serde(rename = "duration"))]
     pub m_duration: f32,
     /// # C++ Info
@@ -73,6 +82,7 @@ pub struct BSTweenerModifier<'a> {
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startTransform"))]
     #[cfg_attr(feature = "serde", serde(rename = "startTransform"))]
     pub m_startTransform: QsTransform,
     /// # C++ Info
@@ -80,6 +90,7 @@ pub struct BSTweenerModifier<'a> {
     /// - offset: `160`(x86)/`192`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "time"))]
     #[cfg_attr(feature = "serde", serde(rename = "time"))]
     pub m_time: f32,
 }

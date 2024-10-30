@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 12`(x86)/` 24`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,18 +27,21 @@ pub struct hkTrackerSerializableScanSnapshotAllocation {
     /// - name: `start`(ctype: `hkUlong`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "start"))]
     #[cfg_attr(feature = "serde", serde(rename = "start"))]
     pub m_start: Ulong,
     /// # C++ Info
     /// - name: `size`(ctype: `hkUlong`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "size"))]
     #[cfg_attr(feature = "serde", serde(rename = "size"))]
     pub m_size: Ulong,
     /// # C++ Info
     /// - name: `traceId`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "traceId"))]
     #[cfg_attr(feature = "serde", serde(rename = "traceId"))]
     pub m_traceId: i32,
 }

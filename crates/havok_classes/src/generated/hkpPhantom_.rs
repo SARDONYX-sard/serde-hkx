@@ -7,6 +7,7 @@ use super::*;
 /// - size: `164`(x86)/`240`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct hkpPhantom<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpWorldObject<'a>,
     /// # C++ Info
@@ -30,6 +32,7 @@ pub struct hkpPhantom<'a> {
     /// - offset: `140`(x86)/`208`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "overlapListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "overlapListeners"))]
     pub m_overlapListeners: Vec<Pointer>,
     /// # C++ Info
@@ -37,6 +40,7 @@ pub struct hkpPhantom<'a> {
     /// - offset: `152`(x86)/`224`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "phantomListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "phantomListeners"))]
     pub m_phantomListeners: Vec<Pointer>,
 }

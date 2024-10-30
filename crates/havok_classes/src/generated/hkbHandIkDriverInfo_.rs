@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 24`(x86)/` 40`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkbHandIkDriverInfo<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `hands`(ctype: `hkArray<struct hkbHandIkDriverInfoHand>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "hands"))]
     #[cfg_attr(feature = "serde", serde(rename = "hands"))]
     pub m_hands: Vec<hkbHandIkDriverInfoHand<'a>>,
     /// # C++ Info
     /// - name: `fadeInOutCurve`(ctype: `enum BlendCurve`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fadeInOutCurve"))]
     #[cfg_attr(feature = "serde", serde(rename = "fadeInOutCurve"))]
     pub m_fadeInOutCurve: BlendCurve,
 }

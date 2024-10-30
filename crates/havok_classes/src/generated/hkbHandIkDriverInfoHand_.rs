@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 96`(x86)/` 96`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,84 +27,98 @@ pub struct hkbHandIkDriverInfoHand<'a> {
     /// - name: `elbowAxisLS`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "elbowAxisLS"))]
     #[cfg_attr(feature = "serde", serde(rename = "elbowAxisLS"))]
     pub m_elbowAxisLS: Vector4,
     /// # C++ Info
     /// - name: `backHandNormalLS`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "backHandNormalLS"))]
     #[cfg_attr(feature = "serde", serde(rename = "backHandNormalLS"))]
     pub m_backHandNormalLS: Vector4,
     /// # C++ Info
     /// - name: `handOffsetLS`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "handOffsetLS"))]
     #[cfg_attr(feature = "serde", serde(rename = "handOffsetLS"))]
     pub m_handOffsetLS: Vector4,
     /// # C++ Info
     /// - name: `handOrienationOffsetLS`(ctype: `hkQuaternion`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "handOrienationOffsetLS"))]
     #[cfg_attr(feature = "serde", serde(rename = "handOrienationOffsetLS"))]
     pub m_handOrienationOffsetLS: Quaternion,
     /// # C++ Info
     /// - name: `maxElbowAngleDegrees`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxElbowAngleDegrees"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxElbowAngleDegrees"))]
     pub m_maxElbowAngleDegrees: f32,
     /// # C++ Info
     /// - name: `minElbowAngleDegrees`(ctype: `hkReal`)
     /// - offset: ` 68`(x86)/` 68`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "minElbowAngleDegrees"))]
     #[cfg_attr(feature = "serde", serde(rename = "minElbowAngleDegrees"))]
     pub m_minElbowAngleDegrees: f32,
     /// # C++ Info
     /// - name: `shoulderIndex`(ctype: `hkInt16`)
     /// - offset: ` 72`(x86)/` 72`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "shoulderIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "shoulderIndex"))]
     pub m_shoulderIndex: i16,
     /// # C++ Info
     /// - name: `shoulderSiblingIndex`(ctype: `hkInt16`)
     /// - offset: ` 74`(x86)/` 74`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "shoulderSiblingIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "shoulderSiblingIndex"))]
     pub m_shoulderSiblingIndex: i16,
     /// # C++ Info
     /// - name: `elbowIndex`(ctype: `hkInt16`)
     /// - offset: ` 76`(x86)/` 76`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "elbowIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "elbowIndex"))]
     pub m_elbowIndex: i16,
     /// # C++ Info
     /// - name: `elbowSiblingIndex`(ctype: `hkInt16`)
     /// - offset: ` 78`(x86)/` 78`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "elbowSiblingIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "elbowSiblingIndex"))]
     pub m_elbowSiblingIndex: i16,
     /// # C++ Info
     /// - name: `wristIndex`(ctype: `hkInt16`)
     /// - offset: ` 80`(x86)/` 80`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wristIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "wristIndex"))]
     pub m_wristIndex: i16,
     /// # C++ Info
     /// - name: `enforceEndPosition`(ctype: `hkBool`)
     /// - offset: ` 82`(x86)/` 82`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enforceEndPosition"))]
     #[cfg_attr(feature = "serde", serde(rename = "enforceEndPosition"))]
     pub m_enforceEndPosition: bool,
     /// # C++ Info
     /// - name: `enforceEndRotation`(ctype: `hkBool`)
     /// - offset: ` 83`(x86)/` 83`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enforceEndRotation"))]
     #[cfg_attr(feature = "serde", serde(rename = "enforceEndRotation"))]
     pub m_enforceEndRotation: bool,
     /// # C++ Info
     /// - name: `localFrameName`(ctype: `hkStringPtr`)
     /// - offset: ` 84`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "localFrameName"))]
     #[cfg_attr(feature = "serde", serde(rename = "localFrameName"))]
     pub m_localFrameName: StringPtr<'a>,
 }

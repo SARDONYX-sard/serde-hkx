@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 44`(x86)/` 80`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkbTransitionEffect<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `selfTransitionMode`(ctype: `enum SelfTransitionMode`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "selfTransitionMode"))]
     #[cfg_attr(feature = "serde", serde(rename = "selfTransitionMode"))]
     pub m_selfTransitionMode: SelfTransitionMode,
     /// # C++ Info
     /// - name: `eventMode`(ctype: `enum EventMode`)
     /// - offset: ` 41`(x86)/` 73`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "eventMode"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventMode"))]
     pub m_eventMode: EventMode,
     /// # C++ Info
@@ -42,6 +46,7 @@ pub struct hkbTransitionEffect<'a> {
     /// - offset: ` 42`(x86)/` 74`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "defaultEventMode"))]
     #[cfg_attr(feature = "serde", serde(rename = "defaultEventMode"))]
     pub m_defaultEventMode: i8,
 }
@@ -571,6 +576,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -592,6 +598,7 @@ pub enum SelfTransitionMode {
 }
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

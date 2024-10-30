@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 44`(x86)/` 64`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,42 @@ pub struct hkxIndexBuffer {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `indexType`(ctype: `enum IndexType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "indexType"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexType"))]
     pub m_indexType: IndexType,
     /// # C++ Info
     /// - name: `indices16`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "indices16"))]
     #[cfg_attr(feature = "serde", serde(rename = "indices16"))]
     pub m_indices16: Vec<u16>,
     /// # C++ Info
     /// - name: `indices32`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "indices32"))]
     #[cfg_attr(feature = "serde", serde(rename = "indices32"))]
     pub m_indices32: Vec<u32>,
     /// # C++ Info
     /// - name: `vertexBaseOffset`(ctype: `hkUint32`)
     /// - offset: ` 36`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "vertexBaseOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexBaseOffset"))]
     pub m_vertexBaseOffset: u32,
     /// # C++ Info
     /// - name: `length`(ctype: `hkUint32`)
     /// - offset: ` 40`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "length"))]
     #[cfg_attr(feature = "serde", serde(rename = "length"))]
     pub m_length: u32,
 }
@@ -589,6 +596,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

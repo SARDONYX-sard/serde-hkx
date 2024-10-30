@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 28`(x86)/` 48`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct hkbAuxiliaryNodeInfo<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `type`(ctype: `enum NodeType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "type"))]
     #[cfg_attr(feature = "serde", serde(rename = "type"))]
     pub m_type: NodeType,
     /// # C++ Info
     /// - name: `depth`(ctype: `hkUint8`)
     /// - offset: `  9`(x86)/` 17`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "depth"))]
     #[cfg_attr(feature = "serde", serde(rename = "depth"))]
     pub m_depth: u8,
     /// # C++ Info
     /// - name: `referenceBehaviorName`(ctype: `hkStringPtr`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "referenceBehaviorName"))]
     #[cfg_attr(feature = "serde", serde(rename = "referenceBehaviorName"))]
     pub m_referenceBehaviorName: StringPtr<'a>,
     /// # C++ Info
     /// - name: `selfTransitionNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "selfTransitionNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "selfTransitionNames"))]
     pub m_selfTransitionNames: Vec<StringPtr<'a>>,
 }
@@ -520,6 +526,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

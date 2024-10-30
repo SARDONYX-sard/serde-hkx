@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 80`(x86)/` 80`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,30 +27,35 @@ pub struct hkSweptTransform {
     /// - name: `centerOfMass0`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "centerOfMass0"))]
     #[cfg_attr(feature = "serde", serde(rename = "centerOfMass0"))]
     pub m_centerOfMass0: Vector4,
     /// # C++ Info
     /// - name: `centerOfMass1`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "centerOfMass1"))]
     #[cfg_attr(feature = "serde", serde(rename = "centerOfMass1"))]
     pub m_centerOfMass1: Vector4,
     /// # C++ Info
     /// - name: `rotation0`(ctype: `hkQuaternion`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotation0"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotation0"))]
     pub m_rotation0: Quaternion,
     /// # C++ Info
     /// - name: `rotation1`(ctype: `hkQuaternion`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotation1"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotation1"))]
     pub m_rotation1: Quaternion,
     /// # C++ Info
     /// - name: `centerOfMassLocal`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "centerOfMassLocal"))]
     #[cfg_attr(feature = "serde", serde(rename = "centerOfMassLocal"))]
     pub m_centerOfMassLocal: Vector4,
 }

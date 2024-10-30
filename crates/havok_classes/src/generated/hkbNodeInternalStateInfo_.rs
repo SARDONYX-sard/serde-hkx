@@ -7,6 +7,7 @@ use super::*;
 /// - size: `100`(x86)/`120`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,42 @@ pub struct hkbNodeInternalStateInfo<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `syncInfo`(ctype: `struct hkbGeneratorSyncInfo`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 80`(x86)/` 80`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "syncInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "syncInfo"))]
     pub m_syncInfo: hkbGeneratorSyncInfo,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 88`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
     /// # C++ Info
     /// - name: `internalState`(ctype: `struct hkReferencedObject*`)
     /// - offset: ` 92`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "internalState"))]
     #[cfg_attr(feature = "serde", serde(rename = "internalState"))]
     pub m_internalState: Pointer,
     /// # C++ Info
     /// - name: `nodeId`(ctype: `hkInt16`)
     /// - offset: ` 96`(x86)/`112`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "nodeId"))]
     #[cfg_attr(feature = "serde", serde(rename = "nodeId"))]
     pub m_nodeId: i16,
     /// # C++ Info
     /// - name: `hasActivateBeenCalled`(ctype: `hkBool`)
     /// - offset: ` 98`(x86)/`114`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "hasActivateBeenCalled"))]
     #[cfg_attr(feature = "serde", serde(rename = "hasActivateBeenCalled"))]
     pub m_hasActivateBeenCalled: bool,
 }

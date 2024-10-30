@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 52`(x86)/` 80`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,42 @@ pub struct hkpVehicleLinearCastWheelCollide {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpVehicleWheelCollide,
     /// # C++ Info
     /// - name: `wheelCollisionFilterInfo`(ctype: `hkUint32`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wheelCollisionFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "wheelCollisionFilterInfo"))]
     pub m_wheelCollisionFilterInfo: u32,
     /// # C++ Info
     /// - name: `wheelStates`(ctype: `hkArray<struct hkpVehicleLinearCastWheelCollideWheelState>`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wheelStates"))]
     #[cfg_attr(feature = "serde", serde(rename = "wheelStates"))]
     pub m_wheelStates: Vec<hkpVehicleLinearCastWheelCollideWheelState>,
     /// # C++ Info
     /// - name: `rejectChassisListener`(ctype: `struct hkpRejectChassisListener`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rejectChassisListener"))]
     #[cfg_attr(feature = "serde", serde(rename = "rejectChassisListener"))]
     pub m_rejectChassisListener: hkpRejectChassisListener,
     /// # C++ Info
     /// - name: `maxExtraPenetration`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxExtraPenetration"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxExtraPenetration"))]
     pub m_maxExtraPenetration: f32,
     /// # C++ Info
     /// - name: `startPointTolerance`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 76`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "startPointTolerance"))]
     #[cfg_attr(feature = "serde", serde(rename = "startPointTolerance"))]
     pub m_startPointTolerance: f32,
 }

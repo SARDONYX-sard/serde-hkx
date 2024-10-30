@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 56`(x86)/` 88`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,12 +24,14 @@ pub struct hkpConstrainedSystemFilter {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpCollisionFilter,
     /// # C++ Info
     /// - name: `otherFilter`(ctype: `struct hkpCollisionFilter*`)
     /// - offset: ` 52`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "otherFilter"))]
     #[cfg_attr(feature = "serde", serde(rename = "otherFilter"))]
     pub m_otherFilter: Pointer,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: `224`(x86)/`224`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,12 +27,14 @@ pub struct hkpVehicleInstanceWheelInfo {
     /// - name: `contactPoint`(ctype: `struct hkContactPoint`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "contactPoint"))]
     #[cfg_attr(feature = "serde", serde(rename = "contactPoint"))]
     pub m_contactPoint: hkContactPoint,
     /// # C++ Info
     /// - name: `contactFriction`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "contactFriction"))]
     #[cfg_attr(feature = "serde", serde(rename = "contactFriction"))]
     pub m_contactFriction: f32,
     /// # C++ Info
@@ -39,90 +42,108 @@ pub struct hkpVehicleInstanceWheelInfo {
     /// - offset: ` 36`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "contactBody"))]
     #[cfg_attr(feature = "serde", serde(rename = "contactBody"))]
     pub m_contactBody: Pointer,
     /// # C++ Info
     /// - name: `contactShapeKey`(ctype: `hkUint32[8]`)
     /// - offset: ` 40`(x86)/` 48`(x86_64)
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "contactShapeKey"))]
     #[cfg_attr(feature = "serde", serde(rename = "contactShapeKey"))]
     pub m_contactShapeKey: [u32; 8usize],
     /// # C++ Info
     /// - name: `hardPointWs`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "hardPointWs"))]
     #[cfg_attr(feature = "serde", serde(rename = "hardPointWs"))]
     pub m_hardPointWs: Vector4,
     /// # C++ Info
     /// - name: `rayEndPointWs`(ctype: `hkVector4`)
     /// - offset: ` 96`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rayEndPointWs"))]
     #[cfg_attr(feature = "serde", serde(rename = "rayEndPointWs"))]
     pub m_rayEndPointWs: Vector4,
     /// # C++ Info
     /// - name: `currentSuspensionLength`(ctype: `hkReal`)
     /// - offset: `112`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "currentSuspensionLength"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentSuspensionLength"))]
     pub m_currentSuspensionLength: f32,
     /// # C++ Info
     /// - name: `suspensionDirectionWs`(ctype: `hkVector4`)
     /// - offset: `128`(x86)/`128`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "suspensionDirectionWs"))]
     #[cfg_attr(feature = "serde", serde(rename = "suspensionDirectionWs"))]
     pub m_suspensionDirectionWs: Vector4,
     /// # C++ Info
     /// - name: `spinAxisChassisSpace`(ctype: `hkVector4`)
     /// - offset: `144`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "spinAxisChassisSpace"))]
     #[cfg_attr(feature = "serde", serde(rename = "spinAxisChassisSpace"))]
     pub m_spinAxisChassisSpace: Vector4,
     /// # C++ Info
     /// - name: `spinAxisWs`(ctype: `hkVector4`)
     /// - offset: `160`(x86)/`160`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "spinAxisWs"))]
     #[cfg_attr(feature = "serde", serde(rename = "spinAxisWs"))]
     pub m_spinAxisWs: Vector4,
     /// # C++ Info
     /// - name: `steeringOrientationChassisSpace`(ctype: `hkQuaternion`)
     /// - offset: `176`(x86)/`176`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "steeringOrientationChassisSpace")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "steeringOrientationChassisSpace"))]
     pub m_steeringOrientationChassisSpace: Quaternion,
     /// # C++ Info
     /// - name: `spinVelocity`(ctype: `hkReal`)
     /// - offset: `192`(x86)/`192`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "spinVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "spinVelocity"))]
     pub m_spinVelocity: f32,
     /// # C++ Info
     /// - name: `spinAngle`(ctype: `hkReal`)
     /// - offset: `196`(x86)/`196`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "spinAngle"))]
     #[cfg_attr(feature = "serde", serde(rename = "spinAngle"))]
     pub m_spinAngle: f32,
     /// # C++ Info
     /// - name: `skidEnergyDensity`(ctype: `hkReal`)
     /// - offset: `200`(x86)/`200`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "skidEnergyDensity"))]
     #[cfg_attr(feature = "serde", serde(rename = "skidEnergyDensity"))]
     pub m_skidEnergyDensity: f32,
     /// # C++ Info
     /// - name: `sideForce`(ctype: `hkReal`)
     /// - offset: `204`(x86)/`204`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sideForce"))]
     #[cfg_attr(feature = "serde", serde(rename = "sideForce"))]
     pub m_sideForce: f32,
     /// # C++ Info
     /// - name: `forwardSlipVelocity`(ctype: `hkReal`)
     /// - offset: `208`(x86)/`208`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "forwardSlipVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "forwardSlipVelocity"))]
     pub m_forwardSlipVelocity: f32,
     /// # C++ Info
     /// - name: `sideSlipVelocity`(ctype: `hkReal`)
     /// - offset: `212`(x86)/`212`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sideSlipVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "sideSlipVelocity"))]
     pub m_sideSlipVelocity: f32,
 }

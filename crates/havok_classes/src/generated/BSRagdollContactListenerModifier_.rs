@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 76`(x86)/`136`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct BSRagdollContactListenerModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `contactEvent`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "contactEvent"))]
     #[cfg_attr(feature = "serde", serde(rename = "contactEvent"))]
     pub m_contactEvent: hkbEventProperty,
     /// # C++ Info
     /// - name: `bones`(ctype: `struct hkbBoneIndexArray*`)
     /// - offset: ` 56`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bones"))]
     #[cfg_attr(feature = "serde", serde(rename = "bones"))]
     pub m_bones: Pointer,
     /// # C++ Info
@@ -42,6 +46,7 @@ pub struct BSRagdollContactListenerModifier<'a> {
     /// - offset: ` 60`(x86)/`112`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "throwEvent"))]
     #[cfg_attr(feature = "serde", serde(rename = "throwEvent"))]
     pub m_throwEvent: bool,
     /// # C++ Info
@@ -49,6 +54,7 @@ pub struct BSRagdollContactListenerModifier<'a> {
     /// - offset: ` 64`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "ragdollRigidBodies"))]
     #[cfg_attr(feature = "serde", serde(rename = "ragdollRigidBodies"))]
     pub m_ragdollRigidBodies: Vec<Pointer>,
 }

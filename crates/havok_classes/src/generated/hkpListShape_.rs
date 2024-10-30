@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`144`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,42 +24,49 @@ pub struct hkpListShape {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpShapeCollection,
     /// # C++ Info
     /// - name: `childInfo`(ctype: `hkArray<struct hkpListShapeChildInfo>`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "childInfo"))]
     pub m_childInfo: Vec<hkpListShapeChildInfo>,
     /// # C++ Info
     /// - name: `flags`(ctype: `hkUint16`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: u16,
     /// # C++ Info
     /// - name: `numDisabledChildren`(ctype: `hkUint16`)
     /// - offset: ` 38`(x86)/` 66`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numDisabledChildren"))]
     #[cfg_attr(feature = "serde", serde(rename = "numDisabledChildren"))]
     pub m_numDisabledChildren: u16,
     /// # C++ Info
     /// - name: `aabbHalfExtents`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "aabbHalfExtents"))]
     #[cfg_attr(feature = "serde", serde(rename = "aabbHalfExtents"))]
     pub m_aabbHalfExtents: Vector4,
     /// # C++ Info
     /// - name: `aabbCenter`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "aabbCenter"))]
     #[cfg_attr(feature = "serde", serde(rename = "aabbCenter"))]
     pub m_aabbCenter: Vector4,
     /// # C++ Info
     /// - name: `enabledChildren`(ctype: `hkUint32[8]`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enabledChildren"))]
     #[cfg_attr(feature = "serde", serde(rename = "enabledChildren"))]
     pub m_enabledChildren: [u32; 8usize],
 }

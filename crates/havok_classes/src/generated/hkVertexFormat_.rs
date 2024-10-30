@@ -7,6 +7,7 @@ use super::*;
 /// - size: `260`(x86)/`260`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,12 +27,14 @@ pub struct hkVertexFormat {
     /// - name: `elements`(ctype: `struct hkVertexFormatElement[32]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `256`(x86)/`256`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "elements"))]
     #[cfg_attr(feature = "serde", serde(rename = "elements"))]
     pub m_elements: [hkVertexFormatElement; 32usize],
     /// # C++ Info
     /// - name: `numElements`(ctype: `hkInt32`)
     /// - offset: `256`(x86)/`256`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numElements"))]
     #[cfg_attr(feature = "serde", serde(rename = "numElements"))]
     pub m_numElements: i32,
 }
@@ -347,6 +350,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -377,6 +381,7 @@ pub enum ComponentType {
 }
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -409,12 +414,32 @@ pub enum ComponentUsage {
 bitflags::bitflags! {
     #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
     "- size(C++): `TYPE_UINT8`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
-    HintFlags : u8 { #[doc = "1"] const FLAG_READ = 1u8; #[doc = "2"] const FLAG_WRITE =
-    2u8; #[doc = "4"] const FLAG_DYNAMIC = 4u8; #[doc = "8"] const FLAG_NOT_SHARED = 8u8;
-    }
+    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
+    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
+    PartialEq, Eq, Hash)] pub struct HintFlags : u8 { #[doc = "1"] const FLAG_READ = 1u8;
+    #[doc = "2"] const FLAG_WRITE = 2u8; #[doc = "4"] const FLAG_DYNAMIC = 4u8; #[doc =
+    "8"] const FLAG_NOT_SHARED = 8u8; }
 }
+#[cfg(feature = "json_schema")]
+const _: () = {
+    use schemars::{SchemaGenerator, Schema, JsonSchema, json_schema};
+    use std::borrow::Cow;
+    impl JsonSchema for HintFlags {
+        fn schema_name() -> Cow<'static, str> {
+            "HintFlags".into()
+        }
+        fn schema_id() -> Cow<'static, str> {
+            concat!(module_path!(), "::", "HintFlags").into()
+        }
+        fn json_schema(_generate: &mut SchemaGenerator) -> Schema {
+            json_schema!(
+                { "description" :
+                "Bitflags field. Specific flags: FLAG_READ: 1, FLAG_WRITE: 2, FLAG_DYNAMIC: 4, FLAG_NOT_SHARED: 8. Additional unspecified bits may be set.(e.g.: BIT_FLAG|BIT_FLAG2|4)",
+                "type" : "string", }
+            )
+        }
+    }
+};
 const _: () = {
     use havok_serde as __serde;
     impl __serde::Serialize for ComponentType {

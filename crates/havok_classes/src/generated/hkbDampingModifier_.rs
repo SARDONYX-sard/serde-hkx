@@ -7,6 +7,7 @@ use super::*;
 /// - size: `160`(x86)/`192`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,84 +24,98 @@ pub struct hkbDampingModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `kP`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "kP"))]
     #[cfg_attr(feature = "serde", serde(rename = "kP"))]
     pub m_kP: f32,
     /// # C++ Info
     /// - name: `kI`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "kI"))]
     #[cfg_attr(feature = "serde", serde(rename = "kI"))]
     pub m_kI: f32,
     /// # C++ Info
     /// - name: `kD`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "kD"))]
     #[cfg_attr(feature = "serde", serde(rename = "kD"))]
     pub m_kD: f32,
     /// # C++ Info
     /// - name: `enableScalarDamping`(ctype: `hkBool`)
     /// - offset: ` 56`(x86)/` 92`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enableScalarDamping"))]
     #[cfg_attr(feature = "serde", serde(rename = "enableScalarDamping"))]
     pub m_enableScalarDamping: bool,
     /// # C++ Info
     /// - name: `enableVectorDamping`(ctype: `hkBool`)
     /// - offset: ` 57`(x86)/` 93`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enableVectorDamping"))]
     #[cfg_attr(feature = "serde", serde(rename = "enableVectorDamping"))]
     pub m_enableVectorDamping: bool,
     /// # C++ Info
     /// - name: `rawValue`(ctype: `hkReal`)
     /// - offset: ` 60`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rawValue"))]
     #[cfg_attr(feature = "serde", serde(rename = "rawValue"))]
     pub m_rawValue: f32,
     /// # C++ Info
     /// - name: `dampedValue`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/`100`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "dampedValue"))]
     #[cfg_attr(feature = "serde", serde(rename = "dampedValue"))]
     pub m_dampedValue: f32,
     /// # C++ Info
     /// - name: `rawVector`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rawVector"))]
     #[cfg_attr(feature = "serde", serde(rename = "rawVector"))]
     pub m_rawVector: Vector4,
     /// # C++ Info
     /// - name: `dampedVector`(ctype: `hkVector4`)
     /// - offset: ` 96`(x86)/`128`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "dampedVector"))]
     #[cfg_attr(feature = "serde", serde(rename = "dampedVector"))]
     pub m_dampedVector: Vector4,
     /// # C++ Info
     /// - name: `vecErrorSum`(ctype: `hkVector4`)
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "vecErrorSum"))]
     #[cfg_attr(feature = "serde", serde(rename = "vecErrorSum"))]
     pub m_vecErrorSum: Vector4,
     /// # C++ Info
     /// - name: `vecPreviousError`(ctype: `hkVector4`)
     /// - offset: `128`(x86)/`160`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "vecPreviousError"))]
     #[cfg_attr(feature = "serde", serde(rename = "vecPreviousError"))]
     pub m_vecPreviousError: Vector4,
     /// # C++ Info
     /// - name: `errorSum`(ctype: `hkReal`)
     /// - offset: `144`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "errorSum"))]
     #[cfg_attr(feature = "serde", serde(rename = "errorSum"))]
     pub m_errorSum: f32,
     /// # C++ Info
     /// - name: `previousError`(ctype: `hkReal`)
     /// - offset: `148`(x86)/`180`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "previousError"))]
     #[cfg_attr(feature = "serde", serde(rename = "previousError"))]
     pub m_previousError: f32,
 }

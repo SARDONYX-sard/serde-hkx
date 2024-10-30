@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/` 80`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,36 +27,42 @@ pub struct hkpCompressedMeshShapeConvexPiece {
     /// - name: `offset`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "offset"))]
     #[cfg_attr(feature = "serde", serde(rename = "offset"))]
     pub m_offset: Vector4,
     /// # C++ Info
     /// - name: `vertices`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "vertices"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertices"))]
     pub m_vertices: Vec<u16>,
     /// # C++ Info
     /// - name: `faceVertices`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 28`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "faceVertices"))]
     #[cfg_attr(feature = "serde", serde(rename = "faceVertices"))]
     pub m_faceVertices: Vec<u8>,
     /// # C++ Info
     /// - name: `faceOffsets`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 40`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "faceOffsets"))]
     #[cfg_attr(feature = "serde", serde(rename = "faceOffsets"))]
     pub m_faceOffsets: Vec<u16>,
     /// # C++ Info
     /// - name: `reference`(ctype: `hkUint16`)
     /// - offset: ` 52`(x86)/` 64`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "reference"))]
     #[cfg_attr(feature = "serde", serde(rename = "reference"))]
     pub m_reference: u16,
     /// # C++ Info
     /// - name: `transformIndex`(ctype: `hkUint16`)
     /// - offset: ` 54`(x86)/` 66`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transformIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "transformIndex"))]
     pub m_transformIndex: u16,
 }

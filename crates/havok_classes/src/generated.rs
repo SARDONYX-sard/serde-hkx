@@ -6,6 +6,14 @@ mod class_requires {
         HavokClass,
     };
     pub use havok_types::*;
+    #[cfg(feature = "json_schema")]
+    pub fn make_large_int_array_schema(
+        generator: &mut schemars::SchemaGenerator,
+    ) -> schemars::Schema {
+        let mut schema = <Vec<i32> as schemars::JsonSchema>::json_schema(generator);
+        let mut map = schema.ensure_object();
+        schema
+    }
 }
 pub mod BGSGamebryoSequenceGenerator_;
 pub use BGSGamebryoSequenceGenerator_::*;
@@ -1364,6 +1372,7 @@ pub use hkxVertexSelectionChannel_::*;
 pub mod hkxVertexVectorDataChannel_;
 pub use hkxVertexVectorDataChannel_::*;
 use havok_serde as _serde;
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(Debug, Default, Clone, PartialEq)]
 pub enum Classes<'a> {
@@ -1372,6 +1381,7 @@ pub enum Classes<'a> {
     /// To speed up the process, swap the first and last indexes instead of using shift.
     /// This dummy class exists to reserve space for this purpose.
     #[default]
+    #[cfg_attr(feature = "json_schema", schemars(skip))]
     SwapDummy,
     BGSGamebryoSequenceGenerator(BGSGamebryoSequenceGenerator<'a>),
     BSBoneSwitchGenerator(BSBoneSwitchGenerator<'a>),

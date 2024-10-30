@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`128`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct hkxSkinBinding<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `mesh`(ctype: `struct hkxMesh*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "mesh"))]
     #[cfg_attr(feature = "serde", serde(rename = "mesh"))]
     pub m_mesh: Pointer,
     /// # C++ Info
     /// - name: `nodeNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "nodeNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "nodeNames"))]
     pub m_nodeNames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `bindPose`(ctype: `hkArray<hkMatrix4>`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bindPose"))]
     #[cfg_attr(feature = "serde", serde(rename = "bindPose"))]
     pub m_bindPose: Vec<Matrix4>,
     /// # C++ Info
     /// - name: `initSkinTransform`(ctype: `hkMatrix4`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "initSkinTransform"))]
     #[cfg_attr(feature = "serde", serde(rename = "initSkinTransform"))]
     pub m_initSkinTransform: Matrix4,
 }

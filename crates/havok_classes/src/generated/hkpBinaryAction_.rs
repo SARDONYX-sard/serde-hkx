@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 32`(x86)/` 64`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkpBinaryAction<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpAction<'a>,
     /// # C++ Info
     /// - name: `entityA`(ctype: `struct hkpEntity*`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "entityA"))]
     #[cfg_attr(feature = "serde", serde(rename = "entityA"))]
     pub m_entityA: Pointer,
     /// # C++ Info
     /// - name: `entityB`(ctype: `struct hkpEntity*`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "entityB"))]
     #[cfg_attr(feature = "serde", serde(rename = "entityB"))]
     pub m_entityB: Pointer,
 }

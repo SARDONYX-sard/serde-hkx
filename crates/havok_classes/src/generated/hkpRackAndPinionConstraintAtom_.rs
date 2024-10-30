@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 12`(x86)/` 12`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,48 @@ pub struct hkpRackAndPinionConstraintAtom {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintAtom,
     /// # C++ Info
     /// - name: `pinionRadiusOrScrewPitch`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pinionRadiusOrScrewPitch"))]
     #[cfg_attr(feature = "serde", serde(rename = "pinionRadiusOrScrewPitch"))]
     pub m_pinionRadiusOrScrewPitch: f32,
     /// # C++ Info
     /// - name: `isScrew`(ctype: `hkBool`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isScrew"))]
     #[cfg_attr(feature = "serde", serde(rename = "isScrew"))]
     pub m_isScrew: bool,
     /// # C++ Info
     /// - name: `memOffsetToInitialAngleOffset`(ctype: `hkInt8`)
     /// - offset: `  9`(x86)/`  9`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "memOffsetToInitialAngleOffset")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "memOffsetToInitialAngleOffset"))]
     pub m_memOffsetToInitialAngleOffset: i8,
     /// # C++ Info
     /// - name: `memOffsetToPrevAngle`(ctype: `hkInt8`)
     /// - offset: ` 10`(x86)/` 10`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "memOffsetToPrevAngle"))]
     #[cfg_attr(feature = "serde", serde(rename = "memOffsetToPrevAngle"))]
     pub m_memOffsetToPrevAngle: i8,
     /// # C++ Info
     /// - name: `memOffsetToRevolutionCounter`(ctype: `hkInt8`)
     /// - offset: ` 11`(x86)/` 11`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "memOffsetToRevolutionCounter")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "memOffsetToRevolutionCounter"))]
     pub m_memOffsetToRevolutionCounter: i8,
 }

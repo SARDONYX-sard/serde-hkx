@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 16`(x86)/` 32`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -27,6 +28,7 @@ pub struct hkpEntityExtendedListeners {
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "activationListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "activationListeners"))]
     pub m_activationListeners: hkpEntitySmallArraySerializeOverrideType,
     /// # C++ Info
@@ -34,6 +36,7 @@ pub struct hkpEntityExtendedListeners {
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "entityListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "entityListeners"))]
     pub m_entityListeners: hkpEntitySmallArraySerializeOverrideType,
 }

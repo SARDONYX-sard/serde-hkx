@@ -7,6 +7,7 @@ use super::*;
 /// - size: `176`(x86)/`176`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,24 +27,28 @@ pub struct hkpRagdollLimitsDataAtoms {
     /// - name: `rotations`(ctype: `struct hkpSetLocalRotationsConstraintAtom`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `112`(x86)/`112`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotations"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotations"))]
     pub m_rotations: hkpSetLocalRotationsConstraintAtom,
     /// # C++ Info
     /// - name: `twistLimit`(ctype: `struct hkpTwistLimitConstraintAtom`)
     /// - offset: `112`(x86)/`112`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "twistLimit"))]
     #[cfg_attr(feature = "serde", serde(rename = "twistLimit"))]
     pub m_twistLimit: hkpTwistLimitConstraintAtom,
     /// # C++ Info
     /// - name: `coneLimit`(ctype: `struct hkpConeLimitConstraintAtom`)
     /// - offset: `132`(x86)/`132`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "coneLimit"))]
     #[cfg_attr(feature = "serde", serde(rename = "coneLimit"))]
     pub m_coneLimit: hkpConeLimitConstraintAtom,
     /// # C++ Info
     /// - name: `planesLimit`(ctype: `struct hkpConeLimitConstraintAtom`)
     /// - offset: `152`(x86)/`152`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "planesLimit"))]
     #[cfg_attr(feature = "serde", serde(rename = "planesLimit"))]
     pub m_planesLimit: hkpConeLimitConstraintAtom,
 }

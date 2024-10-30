@@ -7,6 +7,7 @@ use super::*;
 /// - size: `144`(x86)/`176`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,78 +24,91 @@ pub struct hkbCharacterData {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `characterControllerInfo`(ctype: `struct hkbCharacterDataCharacterControllerInfo`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "characterControllerInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterControllerInfo"))]
     pub m_characterControllerInfo: hkbCharacterDataCharacterControllerInfo,
     /// # C++ Info
     /// - name: `modelUpMS`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "modelUpMS"))]
     #[cfg_attr(feature = "serde", serde(rename = "modelUpMS"))]
     pub m_modelUpMS: Vector4,
     /// # C++ Info
     /// - name: `modelForwardMS`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "modelForwardMS"))]
     #[cfg_attr(feature = "serde", serde(rename = "modelForwardMS"))]
     pub m_modelForwardMS: Vector4,
     /// # C++ Info
     /// - name: `modelRightMS`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "modelRightMS"))]
     #[cfg_attr(feature = "serde", serde(rename = "modelRightMS"))]
     pub m_modelRightMS: Vector4,
     /// # C++ Info
     /// - name: `characterPropertyInfos`(ctype: `hkArray<struct hkbVariableInfo>`)
     /// - offset: ` 80`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "characterPropertyInfos"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterPropertyInfos"))]
     pub m_characterPropertyInfos: Vec<hkbVariableInfo>,
     /// # C++ Info
     /// - name: `numBonesPerLod`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 92`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numBonesPerLod"))]
     #[cfg_attr(feature = "serde", serde(rename = "numBonesPerLod"))]
     pub m_numBonesPerLod: Vec<i32>,
     /// # C++ Info
     /// - name: `characterPropertyValues`(ctype: `struct hkbVariableValueSet*`)
     /// - offset: `104`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "characterPropertyValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterPropertyValues"))]
     pub m_characterPropertyValues: Pointer,
     /// # C++ Info
     /// - name: `footIkDriverInfo`(ctype: `struct hkbFootIkDriverInfo*`)
     /// - offset: `108`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "footIkDriverInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "footIkDriverInfo"))]
     pub m_footIkDriverInfo: Pointer,
     /// # C++ Info
     /// - name: `handIkDriverInfo`(ctype: `struct hkbHandIkDriverInfo*`)
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "handIkDriverInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "handIkDriverInfo"))]
     pub m_handIkDriverInfo: Pointer,
     /// # C++ Info
     /// - name: `stringData`(ctype: `struct hkbCharacterStringData*`)
     /// - offset: `116`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "stringData"))]
     #[cfg_attr(feature = "serde", serde(rename = "stringData"))]
     pub m_stringData: Pointer,
     /// # C++ Info
     /// - name: `mirroredSkeletonInfo`(ctype: `struct hkbMirroredSkeletonInfo*`)
     /// - offset: `120`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "mirroredSkeletonInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "mirroredSkeletonInfo"))]
     pub m_mirroredSkeletonInfo: Pointer,
     /// # C++ Info
     /// - name: `scale`(ctype: `hkReal`)
     /// - offset: `124`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "scale"))]
     #[cfg_attr(feature = "serde", serde(rename = "scale"))]
     pub m_scale: f32,
     /// # C++ Info
@@ -102,6 +116,7 @@ pub struct hkbCharacterData {
     /// - offset: `128`(x86)/`172`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numHands"))]
     #[cfg_attr(feature = "serde", serde(rename = "numHands"))]
     pub m_numHands: i16,
     /// # C++ Info
@@ -109,6 +124,7 @@ pub struct hkbCharacterData {
     /// - offset: `130`(x86)/`174`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numFloatSlots"))]
     #[cfg_attr(feature = "serde", serde(rename = "numFloatSlots"))]
     pub m_numFloatSlots: i16,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 68`(x86)/`112`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,24 +24,28 @@ pub struct hkbEventsFromRangeModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `inputValue`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "inputValue"))]
     #[cfg_attr(feature = "serde", serde(rename = "inputValue"))]
     pub m_inputValue: f32,
     /// # C++ Info
     /// - name: `lowerBound`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "lowerBound"))]
     #[cfg_attr(feature = "serde", serde(rename = "lowerBound"))]
     pub m_lowerBound: f32,
     /// # C++ Info
     /// - name: `eventRanges`(ctype: `struct hkbEventRangeDataArray*`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "eventRanges"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventRanges"))]
     pub m_eventRanges: Pointer,
     /// # C++ Info
@@ -48,6 +53,7 @@ pub struct hkbEventsFromRangeModifier<'a> {
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wasActiveInPreviousFrame"))]
     #[cfg_attr(feature = "serde", serde(rename = "wasActiveInPreviousFrame"))]
     pub m_wasActiveInPreviousFrame: Vec<()>,
 }

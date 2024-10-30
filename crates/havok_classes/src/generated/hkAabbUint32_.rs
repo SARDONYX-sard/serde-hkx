@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 32`(x86)/` 32`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -27,36 +28,42 @@ pub struct hkAabbUint32 {
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "min"))]
     #[cfg_attr(feature = "serde", serde(rename = "min"))]
     pub m_min: [u32; 3usize],
     /// # C++ Info
     /// - name: `expansionMin`(ctype: `hkUint8[3]`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  3`(x86)/`  3`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "expansionMin"))]
     #[cfg_attr(feature = "serde", serde(rename = "expansionMin"))]
     pub m_expansionMin: [u8; 3usize],
     /// # C++ Info
     /// - name: `expansionShift`(ctype: `hkUint8`)
     /// - offset: ` 15`(x86)/` 15`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "expansionShift"))]
     #[cfg_attr(feature = "serde", serde(rename = "expansionShift"))]
     pub m_expansionShift: u8,
     /// # C++ Info
     /// - name: `max`(ctype: `hkUint32[3]`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "max"))]
     #[cfg_attr(feature = "serde", serde(rename = "max"))]
     pub m_max: [u32; 3usize],
     /// # C++ Info
     /// - name: `expansionMax`(ctype: `hkUint8[3]`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  3`(x86)/`  3`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "expansionMax"))]
     #[cfg_attr(feature = "serde", serde(rename = "expansionMax"))]
     pub m_expansionMax: [u8; 3usize],
     /// # C++ Info
     /// - name: `shapeKeyByte`(ctype: `hkUint8`)
     /// - offset: ` 31`(x86)/` 31`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "shapeKeyByte"))]
     #[cfg_attr(feature = "serde", serde(rename = "shapeKeyByte"))]
     pub m_shapeKeyByte: u8,
 }

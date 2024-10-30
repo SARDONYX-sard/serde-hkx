@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/` 96`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct BSiStateTaggingGenerator<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
@@ -30,18 +32,21 @@ pub struct BSiStateTaggingGenerator<'a> {
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pDefaultGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "pDefaultGenerator"))]
     pub m_pDefaultGenerator: Pointer,
     /// # C++ Info
     /// - name: `iStateToSetAs`(ctype: `hkInt32`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "iStateToSetAs"))]
     #[cfg_attr(feature = "serde", serde(rename = "iStateToSetAs"))]
     pub m_iStateToSetAs: i32,
     /// # C++ Info
     /// - name: `iPriority`(ctype: `hkInt32`)
     /// - offset: ` 56`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "iPriority"))]
     #[cfg_attr(feature = "serde", serde(rename = "iPriority"))]
     pub m_iPriority: i32,
 }

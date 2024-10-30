@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 32`(x86)/` 32`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -27,36 +28,42 @@ pub struct hkpSimpleContactConstraintDataInfo {
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: u16,
     /// # C++ Info
     /// - name: `index`(ctype: `hkUint16`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "index"))]
     #[cfg_attr(feature = "serde", serde(rename = "index"))]
     pub m_index: u16,
     /// # C++ Info
     /// - name: `internalData0`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "internalData0"))]
     #[cfg_attr(feature = "serde", serde(rename = "internalData0"))]
     pub m_internalData0: f32,
     /// # C++ Info
     /// - name: `rollingFrictionMultiplier`(ctype: `hkHalf`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rollingFrictionMultiplier"))]
     #[cfg_attr(feature = "serde", serde(rename = "rollingFrictionMultiplier"))]
     pub m_rollingFrictionMultiplier: f16,
     /// # C++ Info
     /// - name: `internalData1`(ctype: `hkHalf`)
     /// - offset: ` 10`(x86)/` 10`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "internalData1"))]
     #[cfg_attr(feature = "serde", serde(rename = "internalData1"))]
     pub m_internalData1: f16,
     /// # C++ Info
     /// - name: `data`(ctype: `hkUint32[5]`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
     pub m_data: [u32; 5usize],
 }

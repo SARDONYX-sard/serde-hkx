@@ -7,6 +7,7 @@ use super::*;
 /// - size: `  1`(x86)/`  1`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -177,54 +178,55 @@ bitflags::bitflags! {
     #[doc =
     r" `enum` with duplicate discriminant values, they are defined as `bitflags`."]
     #[allow(non_upper_case_globals, non_snake_case)] #[cfg_attr(feature = "serde",
-    derive(serde::Serialize, serde::Deserialize))] #[repr(transparent)] #[derive(Debug,
-    Clone, Copy, PartialEq, Eq, Hash)] pub struct ExtendedColors : u32 { #[doc =
-    "4286578688"] const MAROON = 4286578688u32; #[doc = "4287299584"] const DARKRED =
-    4287299584u32; #[doc = "4294901760"] const RED = 4294901760u32; #[doc = "4294944449"]
-    const LIGHTPINK = 4294944449u32; #[doc = "4292613180"] const CRIMSON = 4292613180u32;
-    #[doc = "4292789163"] const PALEVIOLETRED = 4292789163u32; #[doc = "4294927108"]
-    const HOTPINK = 4294927108u32; #[doc = "4294907027"] const DEEPPINK = 4294907027u32;
-    #[doc = "4291237253"] const MEDIUMVIOLETRED = 4291237253u32; #[doc = "4286578816"]
-    const PURPLE = 4286578816u32; #[doc = "4287299723"] const DARKMAGENTA =
-    4287299723u32; #[doc = "4292243670"] const ORCHID = 4292243670u32; #[doc =
-    "4292394968"] const THISTLE = 4292394968u32; #[doc = "4292714717"] const PLUM =
-    4292714717u32; #[doc = "4293821166"] const VIOLET = 4293821166u32; #[doc =
-    "4294902015"] const FUCHSIA = 4294902015u32; #[doc = "4294902015"] const MAGENTA =
-    4294902015u32; #[doc = "4290414451"] const MEDIUMORCHID = 4290414451u32; #[doc =
-    "4287889619"] const DARKVIOLET = 4287889619u32; #[doc = "4288230092"] const
-    DARKORCHID = 4288230092u32; #[doc = "4287245282"] const BLUEVIOLET = 4287245282u32;
-    #[doc = "4284875570"] const INDIGO = 4284875570u32; #[doc = "4289454203"] const
-    MEDIUMPURPLE = 4289454203u32; #[doc = "4287317261"] const SLATEBLUE = 4287317261u32;
-    #[doc = "4288269460"] const MEDIUMSLATEBLUE = 4288269460u32; #[doc = "4287299587"]
-    const DARKBLUE = 4287299587u32; #[doc = "4289379277"] const MEDIUMBLUE =
-    4289379277u32; #[doc = "4294901760"] const BLUE = 4294901760u32; #[doc =
-    "4284875648"] const NAVY = 4284875648u32; #[doc = "4281368880"] const MIDNIGHTBLUE =
-    4281368880u32; #[doc = "4284048699"] const DARKSLATEBLUE = 4284048699u32; #[doc =
-    "4286006955"] const ROYALBLUE = 4286006955u32; #[doc = "4284782061"] const
-    CORNFLOWERBLUE = 4284782061u32; #[doc = "4289775366"] const LIGHTSTEELBLUE =
-    4289775366u32; #[doc = "4293982463"] const ALICEBLUE = 4293982463u32; #[doc =
-    "4294638335"] const GHOSTWHITE = 4294638335u32; #[doc = "4293322490"] const LAVENDER
-    = 4293322490u32; #[doc = "4280193279"] const DODGERBLUE = 4280193279u32; #[doc =
-    "4282811060"] const STEELBLUE = 4282811060u32; #[doc = "4278255615"] const
-    DEEPSKYBLUE = 4278255615u32; #[doc = "4285835392"] const SLATEGRAY = 4285835392u32;
-    #[doc = "4286023833"] const LIGHTSLATEGRAY = 4286023833u32; #[doc = "4289339194"]
-    const LIGHTSKYBLUE = 4289339194u32; #[doc = "4289342075"] const SKYBLUE =
-    4289342075u32; #[doc = "4289959174"] const LIGHTBLUE = 4289959174u32; #[doc =
-    "4284829576"] const TEAL = 4284829576u32; #[doc = "4287358955"] const DARKCYAN =
-    4287358955u32; #[doc = "4289470265"] const DARKTURQUOISE = 4289470265u32; #[doc =
-    "4286582015"] const CYAN = 4286582015u32; #[doc = "4289789324"] const MEDIUMTURQUOISE
-    = 4289789324u32; #[doc = "4288893830"] const CADETBLUE = 4288893830u32; #[doc =
-    "4289520374"] const PALETURQUOISE = 4289520374u32; #[doc = "4292935679"] const
-    LIGHTCYAN = 4292935679u32; #[doc = "4293984255"] const AZURE = 4293984255u32; #[doc =
-    "4280332970"] const LIGHTSEAGREEN = 4280332970u32; #[doc = "4283796272"] const
-    TURQUOISE = 4283796272u32; #[doc = "4289774812"] const POWDERBLUE = 4289774812u32;
-    #[doc = "4281522975"] const DARKSLATEGRAY = 4281522975u32; #[doc = "4289379196"]
-    const AQUAMARINE = 4289379196u32; #[doc = "4278258842"] const MEDIUMSPRINGGREEN =
-    4278258842u32; #[doc = "4288723946"] const MEDIUMAQUAMARINE = 4288723946u32; #[doc =
-    "4286563067"] const SPRINGGREEN = 4286563067u32; #[doc = "4285864305"] const
-    MEDIUMSEAGREEN = 4285864305u32; #[doc = "4284861671"] const SEAGREEN = 4284861671u32;
-    #[doc = "4288347394"] const LIMEGREEN = 4288347394u32; #[doc = "4284827999"] const
-    DARKGREEN = 4284827999u32; #[doc = "4284829695"] const GREEN = 4284829695u32; #[doc =
+    derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr))]
+    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
+    ExtendedColors : u32 { #[doc = "4286578688"] const MAROON = 4286578688u32; #[doc =
+    "4287299584"] const DARKRED = 4287299584u32; #[doc = "4294901760"] const RED =
+    4294901760u32; #[doc = "4294944449"] const LIGHTPINK = 4294944449u32; #[doc =
+    "4292613180"] const CRIMSON = 4292613180u32; #[doc = "4292789163"] const
+    PALEVIOLETRED = 4292789163u32; #[doc = "4294927108"] const HOTPINK = 4294927108u32;
+    #[doc = "4294907027"] const DEEPPINK = 4294907027u32; #[doc = "4291237253"] const
+    MEDIUMVIOLETRED = 4291237253u32; #[doc = "4286578816"] const PURPLE = 4286578816u32;
+    #[doc = "4287299723"] const DARKMAGENTA = 4287299723u32; #[doc = "4292243670"] const
+    ORCHID = 4292243670u32; #[doc = "4292394968"] const THISTLE = 4292394968u32; #[doc =
+    "4292714717"] const PLUM = 4292714717u32; #[doc = "4293821166"] const VIOLET =
+    4293821166u32; #[doc = "4294902015"] const FUCHSIA = 4294902015u32; #[doc =
+    "4294902015"] const MAGENTA = 4294902015u32; #[doc = "4290414451"] const MEDIUMORCHID
+    = 4290414451u32; #[doc = "4287889619"] const DARKVIOLET = 4287889619u32; #[doc =
+    "4288230092"] const DARKORCHID = 4288230092u32; #[doc = "4287245282"] const
+    BLUEVIOLET = 4287245282u32; #[doc = "4284875570"] const INDIGO = 4284875570u32; #[doc
+    = "4289454203"] const MEDIUMPURPLE = 4289454203u32; #[doc = "4287317261"] const
+    SLATEBLUE = 4287317261u32; #[doc = "4288269460"] const MEDIUMSLATEBLUE =
+    4288269460u32; #[doc = "4287299587"] const DARKBLUE = 4287299587u32; #[doc =
+    "4289379277"] const MEDIUMBLUE = 4289379277u32; #[doc = "4294901760"] const BLUE =
+    4294901760u32; #[doc = "4284875648"] const NAVY = 4284875648u32; #[doc =
+    "4281368880"] const MIDNIGHTBLUE = 4281368880u32; #[doc = "4284048699"] const
+    DARKSLATEBLUE = 4284048699u32; #[doc = "4286006955"] const ROYALBLUE = 4286006955u32;
+    #[doc = "4284782061"] const CORNFLOWERBLUE = 4284782061u32; #[doc = "4289775366"]
+    const LIGHTSTEELBLUE = 4289775366u32; #[doc = "4293982463"] const ALICEBLUE =
+    4293982463u32; #[doc = "4294638335"] const GHOSTWHITE = 4294638335u32; #[doc =
+    "4293322490"] const LAVENDER = 4293322490u32; #[doc = "4280193279"] const DODGERBLUE
+    = 4280193279u32; #[doc = "4282811060"] const STEELBLUE = 4282811060u32; #[doc =
+    "4278255615"] const DEEPSKYBLUE = 4278255615u32; #[doc = "4285835392"] const
+    SLATEGRAY = 4285835392u32; #[doc = "4286023833"] const LIGHTSLATEGRAY =
+    4286023833u32; #[doc = "4289339194"] const LIGHTSKYBLUE = 4289339194u32; #[doc =
+    "4289342075"] const SKYBLUE = 4289342075u32; #[doc = "4289959174"] const LIGHTBLUE =
+    4289959174u32; #[doc = "4284829576"] const TEAL = 4284829576u32; #[doc =
+    "4287358955"] const DARKCYAN = 4287358955u32; #[doc = "4289470265"] const
+    DARKTURQUOISE = 4289470265u32; #[doc = "4286582015"] const CYAN = 4286582015u32;
+    #[doc = "4289789324"] const MEDIUMTURQUOISE = 4289789324u32; #[doc = "4288893830"]
+    const CADETBLUE = 4288893830u32; #[doc = "4289520374"] const PALETURQUOISE =
+    4289520374u32; #[doc = "4292935679"] const LIGHTCYAN = 4292935679u32; #[doc =
+    "4293984255"] const AZURE = 4293984255u32; #[doc = "4280332970"] const LIGHTSEAGREEN
+    = 4280332970u32; #[doc = "4283796272"] const TURQUOISE = 4283796272u32; #[doc =
+    "4289774812"] const POWDERBLUE = 4289774812u32; #[doc = "4281522975"] const
+    DARKSLATEGRAY = 4281522975u32; #[doc = "4289379196"] const AQUAMARINE =
+    4289379196u32; #[doc = "4278258842"] const MEDIUMSPRINGGREEN = 4278258842u32; #[doc =
+    "4288723946"] const MEDIUMAQUAMARINE = 4288723946u32; #[doc = "4286563067"] const
+    SPRINGGREEN = 4286563067u32; #[doc = "4285864305"] const MEDIUMSEAGREEN =
+    4285864305u32; #[doc = "4284861671"] const SEAGREEN = 4284861671u32; #[doc =
+    "4288347394"] const LIMEGREEN = 4288347394u32; #[doc = "4284827999"] const DARKGREEN
+    = 4284827999u32; #[doc = "4284829695"] const GREEN = 4284829695u32; #[doc =
     "4286563010"] const LIME = 4286563010u32; #[doc = "4286526978"] const FORESTGREEN =
     4286526978u32; #[doc = "4292029967"] const DARKSEAGREEN = 4292029967u32; #[doc =
     "4292148896"] const LIGHTGREEN = 4292148896u32; #[doc = "4292430344"] const PALEGREEN
@@ -278,6 +280,176 @@ bitflags::bitflags! {
     4282400896u32; #[doc = "4286611584"] const GREY50 = 4286611584u32; #[doc =
     "4290822336"] const GREY75 = 4290822336u32; }
 }
+#[cfg(feature = "json_schema")]
+const _: () = {
+    use schemars::{SchemaGenerator, Schema, JsonSchema, json_schema};
+    use std::borrow::Cow;
+    impl JsonSchema for ExtendedColors {
+        fn schema_name() -> Cow<'static, str> {
+            "ExtendedColors".into()
+        }
+        fn schema_id() -> Cow<'static, str> {
+            concat!(module_path!(), "::", "ExtendedColors").into()
+        }
+        fn json_schema(generator: &mut SchemaGenerator) -> Schema {
+            use schemars::_private::serde_json::{self, Value};
+            let selection = &[
+                "MAROON",
+                "DARKRED",
+                "RED",
+                "LIGHTPINK",
+                "CRIMSON",
+                "PALEVIOLETRED",
+                "HOTPINK",
+                "DEEPPINK",
+                "MEDIUMVIOLETRED",
+                "PURPLE",
+                "DARKMAGENTA",
+                "ORCHID",
+                "THISTLE",
+                "PLUM",
+                "VIOLET",
+                "FUCHSIA",
+                "MAGENTA",
+                "MEDIUMORCHID",
+                "DARKVIOLET",
+                "DARKORCHID",
+                "BLUEVIOLET",
+                "INDIGO",
+                "MEDIUMPURPLE",
+                "SLATEBLUE",
+                "MEDIUMSLATEBLUE",
+                "DARKBLUE",
+                "MEDIUMBLUE",
+                "BLUE",
+                "NAVY",
+                "MIDNIGHTBLUE",
+                "DARKSLATEBLUE",
+                "ROYALBLUE",
+                "CORNFLOWERBLUE",
+                "LIGHTSTEELBLUE",
+                "ALICEBLUE",
+                "GHOSTWHITE",
+                "LAVENDER",
+                "DODGERBLUE",
+                "STEELBLUE",
+                "DEEPSKYBLUE",
+                "SLATEGRAY",
+                "LIGHTSLATEGRAY",
+                "LIGHTSKYBLUE",
+                "SKYBLUE",
+                "LIGHTBLUE",
+                "TEAL",
+                "DARKCYAN",
+                "DARKTURQUOISE",
+                "CYAN",
+                "MEDIUMTURQUOISE",
+                "CADETBLUE",
+                "PALETURQUOISE",
+                "LIGHTCYAN",
+                "AZURE",
+                "LIGHTSEAGREEN",
+                "TURQUOISE",
+                "POWDERBLUE",
+                "DARKSLATEGRAY",
+                "AQUAMARINE",
+                "MEDIUMSPRINGGREEN",
+                "MEDIUMAQUAMARINE",
+                "SPRINGGREEN",
+                "MEDIUMSEAGREEN",
+                "SEAGREEN",
+                "LIMEGREEN",
+                "DARKGREEN",
+                "GREEN",
+                "LIME",
+                "FORESTGREEN",
+                "DARKSEAGREEN",
+                "LIGHTGREEN",
+                "PALEGREEN",
+                "MINTCREAM",
+                "HONEYDEW",
+                "CHARTREUSE",
+                "LAWNGREEN",
+                "OLIVEDRAB",
+                "DARKOLIVEGREEN",
+                "YELLOWGREEN",
+                "GREENYELLOW",
+                "BEIGE",
+                "LINEN",
+                "LIGHTGOLDENRODYELLOW",
+                "OLIVE",
+                "YELLOW",
+                "LIGHTYELLOW",
+                "IVORY",
+                "DARKKHAKI",
+                "KHAKI",
+                "PALEGOLDENROD",
+                "WHEAT",
+                "GOLD",
+                "LEMONCHIFFON",
+                "PAPAYAWHIP",
+                "DARKGOLDENROD",
+                "GOLDENROD",
+                "ANTIQUEWHITE",
+                "CORNSILK",
+                "OLDLACE",
+                "MOCCASIN",
+                "NAVAJOWHITE",
+                "ORANGE",
+                "BISQUE",
+                "TAN",
+                "DARKORANGE",
+                "BURLYWOOD",
+                "SADDLEBROWN",
+                "SANDYBROWN",
+                "BLANCHEDALMOND",
+                "LAVENDERBLUSH",
+                "SEASHELL",
+                "FLORALWHITE",
+                "SNOW",
+                "PERU",
+                "PEACHPUFF",
+                "CHOCOLATE",
+                "SIENNA",
+                "LIGHTSALMON",
+                "CORAL",
+                "DARKSALMON",
+                "MISTYROSE",
+                "ORANGERED",
+                "SALMON",
+                "TOMATO",
+                "ROSYBROWN",
+                "PINK",
+                "INDIANRED",
+                "LIGHTCORAL",
+                "BROWN",
+                "FIREBRICK",
+                "BLACK",
+                "DIMGRAY",
+                "GRAY",
+                "DARKGRAY",
+                "SILVER",
+                "LIGHTGREY",
+                "GAINSBORO",
+                "WHITESMOKE",
+                "WHITE",
+                "GREY",
+                "GREY25",
+                "GREY50",
+                "GREY75",
+            ];
+            let selection = selection
+                .iter()
+                .map(|s| Value::String(s.to_string()))
+                .collect();
+            let mut schema = Value::json_schema(generator);
+            let mut map = schema.ensure_object();
+            map.insert("type".to_string(), Value::String("string".to_string()));
+            map.insert("enum".to_string(), Value::Array(selection));
+            schema
+        }
+    }
+};
 const _: () = {
     use havok_serde as __serde;
     impl __serde::Serialize for ExtendedColors {

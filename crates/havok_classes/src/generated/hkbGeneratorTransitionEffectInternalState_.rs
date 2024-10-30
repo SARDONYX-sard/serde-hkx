@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 32`(x86)/` 40`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,66 +24,77 @@ pub struct hkbGeneratorTransitionEffectInternalState {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `timeInTransition`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timeInTransition"))]
     #[cfg_attr(feature = "serde", serde(rename = "timeInTransition"))]
     pub m_timeInTransition: f32,
     /// # C++ Info
     /// - name: `duration`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "duration"))]
     #[cfg_attr(feature = "serde", serde(rename = "duration"))]
     pub m_duration: f32,
     /// # C++ Info
     /// - name: `effectiveBlendInDuration`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "effectiveBlendInDuration"))]
     #[cfg_attr(feature = "serde", serde(rename = "effectiveBlendInDuration"))]
     pub m_effectiveBlendInDuration: f32,
     /// # C++ Info
     /// - name: `effectiveBlendOutDuration`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "effectiveBlendOutDuration"))]
     #[cfg_attr(feature = "serde", serde(rename = "effectiveBlendOutDuration"))]
     pub m_effectiveBlendOutDuration: f32,
     /// # C++ Info
     /// - name: `toGeneratorState`(ctype: `enum ToGeneratorState`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "toGeneratorState"))]
     #[cfg_attr(feature = "serde", serde(rename = "toGeneratorState"))]
     pub m_toGeneratorState: ToGeneratorState,
     /// # C++ Info
     /// - name: `echoTransitionGenerator`(ctype: `hkBool`)
     /// - offset: ` 25`(x86)/` 33`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "echoTransitionGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "echoTransitionGenerator"))]
     pub m_echoTransitionGenerator: bool,
     /// # C++ Info
     /// - name: `echoToGenerator`(ctype: `hkBool`)
     /// - offset: ` 26`(x86)/` 34`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "echoToGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "echoToGenerator"))]
     pub m_echoToGenerator: bool,
     /// # C++ Info
     /// - name: `justActivated`(ctype: `hkBool`)
     /// - offset: ` 27`(x86)/` 35`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "justActivated"))]
     #[cfg_attr(feature = "serde", serde(rename = "justActivated"))]
     pub m_justActivated: bool,
     /// # C++ Info
     /// - name: `updateActiveNodes`(ctype: `hkBool`)
     /// - offset: ` 28`(x86)/` 36`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "updateActiveNodes"))]
     #[cfg_attr(feature = "serde", serde(rename = "updateActiveNodes"))]
     pub m_updateActiveNodes: bool,
     /// # C++ Info
     /// - name: `stage`(ctype: `enum Stage`)
     /// - offset: ` 29`(x86)/` 37`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "stage"))]
     #[cfg_attr(feature = "serde", serde(rename = "stage"))]
     pub m_stage: Stage,
 }

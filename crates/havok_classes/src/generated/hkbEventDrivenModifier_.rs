@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 60`(x86)/`104`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,24 +24,28 @@ pub struct hkbEventDrivenModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifierWrapper<'a>,
     /// # C++ Info
     /// - name: `activateEventId`(ctype: `hkInt32`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "activateEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "activateEventId"))]
     pub m_activateEventId: i32,
     /// # C++ Info
     /// - name: `deactivateEventId`(ctype: `hkInt32`)
     /// - offset: ` 52`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "deactivateEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "deactivateEventId"))]
     pub m_deactivateEventId: i32,
     /// # C++ Info
     /// - name: `activeByDefault`(ctype: `hkBool`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "activeByDefault"))]
     #[cfg_attr(feature = "serde", serde(rename = "activeByDefault"))]
     pub m_activeByDefault: bool,
     /// # C++ Info
@@ -48,6 +53,7 @@ pub struct hkbEventDrivenModifier<'a> {
     /// - offset: ` 57`(x86)/` 97`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isActive"))]
     #[cfg_attr(feature = "serde", serde(rename = "isActive"))]
     pub m_isActive: bool,
 }

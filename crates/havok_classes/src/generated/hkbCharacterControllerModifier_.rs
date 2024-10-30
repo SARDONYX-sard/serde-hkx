@@ -7,6 +7,7 @@ use super::*;
 /// - size: `144`(x86)/`176`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,54 +24,63 @@ pub struct hkbCharacterControllerModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `controlData`(ctype: `struct hkbCharacterControllerControlData`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "controlData"))]
     #[cfg_attr(feature = "serde", serde(rename = "controlData"))]
     pub m_controlData: hkbCharacterControllerControlData,
     /// # C++ Info
     /// - name: `initialVelocity`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "initialVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "initialVelocity"))]
     pub m_initialVelocity: Vector4,
     /// # C++ Info
     /// - name: `initialVelocityCoordinates`(ctype: `enum InitialVelocityCoordinates`)
     /// - offset: ` 96`(x86)/`128`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "initialVelocityCoordinates"))]
     #[cfg_attr(feature = "serde", serde(rename = "initialVelocityCoordinates"))]
     pub m_initialVelocityCoordinates: InitialVelocityCoordinates,
     /// # C++ Info
     /// - name: `motionMode`(ctype: `enum MotionMode`)
     /// - offset: ` 97`(x86)/`129`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "motionMode"))]
     #[cfg_attr(feature = "serde", serde(rename = "motionMode"))]
     pub m_motionMode: MotionMode,
     /// # C++ Info
     /// - name: `forceDownwardMomentum`(ctype: `hkBool`)
     /// - offset: ` 98`(x86)/`130`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "forceDownwardMomentum"))]
     #[cfg_attr(feature = "serde", serde(rename = "forceDownwardMomentum"))]
     pub m_forceDownwardMomentum: bool,
     /// # C++ Info
     /// - name: `applyGravity`(ctype: `hkBool`)
     /// - offset: ` 99`(x86)/`131`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "applyGravity"))]
     #[cfg_attr(feature = "serde", serde(rename = "applyGravity"))]
     pub m_applyGravity: bool,
     /// # C++ Info
     /// - name: `setInitialVelocity`(ctype: `hkBool`)
     /// - offset: `100`(x86)/`132`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "setInitialVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "setInitialVelocity"))]
     pub m_setInitialVelocity: bool,
     /// # C++ Info
     /// - name: `isTouchingGround`(ctype: `hkBool`)
     /// - offset: `101`(x86)/`133`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isTouchingGround"))]
     #[cfg_attr(feature = "serde", serde(rename = "isTouchingGround"))]
     pub m_isTouchingGround: bool,
     /// # C++ Info
@@ -78,6 +88,7 @@ pub struct hkbCharacterControllerModifier<'a> {
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "gravity"))]
     #[cfg_attr(feature = "serde", serde(rename = "gravity"))]
     pub m_gravity: Vector4,
     /// # C++ Info
@@ -85,6 +96,7 @@ pub struct hkbCharacterControllerModifier<'a> {
     /// - offset: `128`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "timestep"))]
     #[cfg_attr(feature = "serde", serde(rename = "timestep"))]
     pub m_timestep: f32,
     /// # C++ Info
@@ -92,6 +104,7 @@ pub struct hkbCharacterControllerModifier<'a> {
     /// - offset: `132`(x86)/`164`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isInitialVelocityAdded"))]
     #[cfg_attr(feature = "serde", serde(rename = "isInitialVelocityAdded"))]
     pub m_isInitialVelocityAdded: bool,
 }
@@ -1214,6 +1227,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -1233,6 +1247,7 @@ pub enum InitialVelocityCoordinates {
 }
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

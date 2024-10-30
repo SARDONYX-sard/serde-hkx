@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 88`(x86)/`128`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,54 +24,63 @@ pub struct hkbBehaviorGraphData {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `attributeDefaults`(ctype: `hkArray<hkReal>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "attributeDefaults"))]
     #[cfg_attr(feature = "serde", serde(rename = "attributeDefaults"))]
     pub m_attributeDefaults: Vec<f32>,
     /// # C++ Info
     /// - name: `variableInfos`(ctype: `hkArray<struct hkbVariableInfo>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "variableInfos"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableInfos"))]
     pub m_variableInfos: Vec<hkbVariableInfo>,
     /// # C++ Info
     /// - name: `characterPropertyInfos`(ctype: `hkArray<struct hkbVariableInfo>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "characterPropertyInfos"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterPropertyInfos"))]
     pub m_characterPropertyInfos: Vec<hkbVariableInfo>,
     /// # C++ Info
     /// - name: `eventInfos`(ctype: `hkArray<struct hkbEventInfo>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "eventInfos"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventInfos"))]
     pub m_eventInfos: Vec<hkbEventInfo>,
     /// # C++ Info
     /// - name: `wordMinVariableValues`(ctype: `hkArray<struct hkbVariableValue>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wordMinVariableValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "wordMinVariableValues"))]
     pub m_wordMinVariableValues: Vec<hkbVariableValue>,
     /// # C++ Info
     /// - name: `wordMaxVariableValues`(ctype: `hkArray<struct hkbVariableValue>`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "wordMaxVariableValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "wordMaxVariableValues"))]
     pub m_wordMaxVariableValues: Vec<hkbVariableValue>,
     /// # C++ Info
     /// - name: `variableInitialValues`(ctype: `struct hkbVariableValueSet*`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "variableInitialValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableInitialValues"))]
     pub m_variableInitialValues: Pointer,
     /// # C++ Info
     /// - name: `stringData`(ctype: `struct hkbBehaviorGraphStringData*`)
     /// - offset: ` 84`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "stringData"))]
     #[cfg_attr(feature = "serde", serde(rename = "stringData"))]
     pub m_stringData: Pointer,
 }

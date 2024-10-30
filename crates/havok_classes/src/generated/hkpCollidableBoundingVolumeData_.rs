@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 44`(x86)/` 56`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,36 +27,42 @@ pub struct hkpCollidableBoundingVolumeData {
     /// - name: `min`(ctype: `hkUint32[3]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "min"))]
     #[cfg_attr(feature = "serde", serde(rename = "min"))]
     pub m_min: [u32; 3usize],
     /// # C++ Info
     /// - name: `expansionMin`(ctype: `hkUint8[3]`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  3`(x86)/`  3`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "expansionMin"))]
     #[cfg_attr(feature = "serde", serde(rename = "expansionMin"))]
     pub m_expansionMin: [u8; 3usize],
     /// # C++ Info
     /// - name: `expansionShift`(ctype: `hkUint8`)
     /// - offset: ` 15`(x86)/` 15`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "expansionShift"))]
     #[cfg_attr(feature = "serde", serde(rename = "expansionShift"))]
     pub m_expansionShift: u8,
     /// # C++ Info
     /// - name: `max`(ctype: `hkUint32[3]`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "max"))]
     #[cfg_attr(feature = "serde", serde(rename = "max"))]
     pub m_max: [u32; 3usize],
     /// # C++ Info
     /// - name: `expansionMax`(ctype: `hkUint8[3]`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  3`(x86)/`  3`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "expansionMax"))]
     #[cfg_attr(feature = "serde", serde(rename = "expansionMax"))]
     pub m_expansionMax: [u8; 3usize],
     /// # C++ Info
     /// - name: `padding`(ctype: `hkUint8`)
     /// - offset: ` 31`(x86)/` 31`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "padding"))]
     #[cfg_attr(feature = "serde", serde(rename = "padding"))]
     pub m_padding: u8,
     /// # C++ Info
@@ -63,6 +70,7 @@ pub struct hkpCollidableBoundingVolumeData {
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numChildShapeAabbs"))]
     #[cfg_attr(feature = "serde", serde(rename = "numChildShapeAabbs"))]
     pub m_numChildShapeAabbs: u16,
     /// # C++ Info
@@ -70,6 +78,7 @@ pub struct hkpCollidableBoundingVolumeData {
     /// - offset: ` 34`(x86)/` 34`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "capacityChildShapeAabbs"))]
     #[cfg_attr(feature = "serde", serde(rename = "capacityChildShapeAabbs"))]
     pub m_capacityChildShapeAabbs: u16,
     /// # C++ Info
@@ -77,6 +86,7 @@ pub struct hkpCollidableBoundingVolumeData {
     /// - offset: ` 36`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childShapeAabbs"))]
     #[cfg_attr(feature = "serde", serde(rename = "childShapeAabbs"))]
     pub m_childShapeAabbs: Pointer,
     /// # C++ Info
@@ -84,6 +94,7 @@ pub struct hkpCollidableBoundingVolumeData {
     /// - offset: ` 40`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childShapeKeys"))]
     #[cfg_attr(feature = "serde", serde(rename = "childShapeKeys"))]
     pub m_childShapeKeys: Pointer,
 }

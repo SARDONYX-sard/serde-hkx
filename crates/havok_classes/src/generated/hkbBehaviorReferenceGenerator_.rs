@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 48`(x86)/` 88`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,12 +24,14 @@ pub struct hkbBehaviorReferenceGenerator<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `behaviorName`(ctype: `hkStringPtr`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "behaviorName"))]
     #[cfg_attr(feature = "serde", serde(rename = "behaviorName"))]
     pub m_behaviorName: StringPtr<'a>,
     /// # C++ Info
@@ -36,6 +39,7 @@ pub struct hkbBehaviorReferenceGenerator<'a> {
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "behavior"))]
     #[cfg_attr(feature = "serde", serde(rename = "behavior"))]
     pub m_behavior: Pointer,
 }

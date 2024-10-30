@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 32`(x86)/` 48`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,6 +24,7 @@ pub struct hkpModifierConstraintAtom {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConstraintAtom,
     /// # C++ Info
@@ -30,24 +32,28 @@ pub struct hkpModifierConstraintAtom {
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `ALIGN_16`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "modifierAtomSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "modifierAtomSize"))]
     pub m_modifierAtomSize: u16,
     /// # C++ Info
     /// - name: `childSize`(ctype: `hkUint16`)
     /// - offset: ` 18`(x86)/` 18`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "childSize"))]
     pub m_childSize: u16,
     /// # C++ Info
     /// - name: `child`(ctype: `struct hkpConstraintAtom*`)
     /// - offset: ` 20`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "child"))]
     #[cfg_attr(feature = "serde", serde(rename = "child"))]
     pub m_child: Pointer,
     /// # C++ Info
     /// - name: `pad`(ctype: `hkUint32[2]`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pad"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad"))]
     pub m_pad: [u32; 2usize],
 }

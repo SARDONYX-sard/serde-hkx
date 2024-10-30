@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`128`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,42 +24,49 @@ pub struct hkpShapeInfo<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `shape`(ctype: `struct hkpShape*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "shape"))]
     #[cfg_attr(feature = "serde", serde(rename = "shape"))]
     pub m_shape: Pointer,
     /// # C++ Info
     /// - name: `isHierarchicalCompound`(ctype: `hkBool`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "isHierarchicalCompound"))]
     #[cfg_attr(feature = "serde", serde(rename = "isHierarchicalCompound"))]
     pub m_isHierarchicalCompound: bool,
     /// # C++ Info
     /// - name: `hkdShapesCollected`(ctype: `hkBool`)
     /// - offset: ` 13`(x86)/` 25`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "hkdShapesCollected"))]
     #[cfg_attr(feature = "serde", serde(rename = "hkdShapesCollected"))]
     pub m_hkdShapesCollected: bool,
     /// # C++ Info
     /// - name: `childShapeNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childShapeNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "childShapeNames"))]
     pub m_childShapeNames: Vec<StringPtr<'a>>,
     /// # C++ Info
     /// - name: `childTransforms`(ctype: `hkArray<hkTransform>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "childTransforms"))]
     #[cfg_attr(feature = "serde", serde(rename = "childTransforms"))]
     pub m_childTransforms: Vec<Transform>,
     /// # C++ Info
     /// - name: `transform`(ctype: `hkTransform`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transform"))]
     #[cfg_attr(feature = "serde", serde(rename = "transform"))]
     pub m_transform: Transform,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 16`(x86)/` 16`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,24 +27,28 @@ pub struct hkpGenericConstraintDataSchemeConstraintInfo {
     /// - name: `maxSizeOfSchema`(ctype: `hkInt32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxSizeOfSchema"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxSizeOfSchema"))]
     pub m_maxSizeOfSchema: i32,
     /// # C++ Info
     /// - name: `sizeOfSchemas`(ctype: `hkInt32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sizeOfSchemas"))]
     #[cfg_attr(feature = "serde", serde(rename = "sizeOfSchemas"))]
     pub m_sizeOfSchemas: i32,
     /// # C++ Info
     /// - name: `numSolverResults`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numSolverResults"))]
     #[cfg_attr(feature = "serde", serde(rename = "numSolverResults"))]
     pub m_numSolverResults: i32,
     /// # C++ Info
     /// - name: `numSolverElemTemps`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numSolverElemTemps"))]
     #[cfg_attr(feature = "serde", serde(rename = "numSolverElemTemps"))]
     pub m_numSolverElemTemps: i32,
 }

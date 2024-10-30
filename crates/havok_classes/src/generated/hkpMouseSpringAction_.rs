@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 96`(x86)/`144`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,48 +24,56 @@ pub struct hkpMouseSpringAction<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpUnaryAction<'a>,
     /// # C++ Info
     /// - name: `positionInRbLocal`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "positionInRbLocal"))]
     #[cfg_attr(feature = "serde", serde(rename = "positionInRbLocal"))]
     pub m_positionInRbLocal: Vector4,
     /// # C++ Info
     /// - name: `mousePositionInWorld`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "mousePositionInWorld"))]
     #[cfg_attr(feature = "serde", serde(rename = "mousePositionInWorld"))]
     pub m_mousePositionInWorld: Vector4,
     /// # C++ Info
     /// - name: `springDamping`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "springDamping"))]
     #[cfg_attr(feature = "serde", serde(rename = "springDamping"))]
     pub m_springDamping: f32,
     /// # C++ Info
     /// - name: `springElasticity`(ctype: `hkReal`)
     /// - offset: ` 68`(x86)/`100`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "springElasticity"))]
     #[cfg_attr(feature = "serde", serde(rename = "springElasticity"))]
     pub m_springElasticity: f32,
     /// # C++ Info
     /// - name: `maxRelativeForce`(ctype: `hkReal`)
     /// - offset: ` 72`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxRelativeForce"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxRelativeForce"))]
     pub m_maxRelativeForce: f32,
     /// # C++ Info
     /// - name: `objectDamping`(ctype: `hkReal`)
     /// - offset: ` 76`(x86)/`108`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "objectDamping"))]
     #[cfg_attr(feature = "serde", serde(rename = "objectDamping"))]
     pub m_objectDamping: f32,
     /// # C++ Info
     /// - name: `shapeKey`(ctype: `hkUint32`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "shapeKey"))]
     #[cfg_attr(feature = "serde", serde(rename = "shapeKey"))]
     pub m_shapeKey: u32,
     /// # C++ Info
@@ -72,6 +81,7 @@ pub struct hkpMouseSpringAction<'a> {
     /// - offset: ` 84`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "applyCallbacks"))]
     #[cfg_attr(feature = "serde", serde(rename = "applyCallbacks"))]
     pub m_applyCallbacks: Vec<Pointer>,
 }

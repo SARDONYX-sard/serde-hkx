@@ -7,6 +7,7 @@ use super::*;
 /// - size: `  8`(x86)/` 16`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -27,6 +28,7 @@ pub struct hkpEntitySpuCollisionCallback {
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "util"))]
     #[cfg_attr(feature = "serde", serde(rename = "util"))]
     pub m_util: Pointer,
     /// # C++ Info
@@ -34,18 +36,21 @@ pub struct hkpEntitySpuCollisionCallback {
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "capacity"))]
     #[cfg_attr(feature = "serde", serde(rename = "capacity"))]
     pub m_capacity: u16,
     /// # C++ Info
     /// - name: `eventFilter`(ctype: `hkUint8`)
     /// - offset: `  6`(x86)/` 10`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "eventFilter"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventFilter"))]
     pub m_eventFilter: u8,
     /// # C++ Info
     /// - name: `userFilter`(ctype: `hkUint8`)
     /// - offset: `  7`(x86)/` 11`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "userFilter"))]
     #[cfg_attr(feature = "serde", serde(rename = "userFilter"))]
     pub m_userFilter: u8,
 }

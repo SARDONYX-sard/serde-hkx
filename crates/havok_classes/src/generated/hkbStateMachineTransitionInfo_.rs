@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 60`(x86)/` 72`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,60 +27,70 @@ pub struct hkbStateMachineTransitionInfo {
     /// - name: `triggerInterval`(ctype: `struct hkbStateMachineTimeInterval`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "triggerInterval"))]
     #[cfg_attr(feature = "serde", serde(rename = "triggerInterval"))]
     pub m_triggerInterval: hkbStateMachineTimeInterval,
     /// # C++ Info
     /// - name: `initiateInterval`(ctype: `struct hkbStateMachineTimeInterval`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "initiateInterval"))]
     #[cfg_attr(feature = "serde", serde(rename = "initiateInterval"))]
     pub m_initiateInterval: hkbStateMachineTimeInterval,
     /// # C++ Info
     /// - name: `transition`(ctype: `struct hkbTransitionEffect*`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transition"))]
     #[cfg_attr(feature = "serde", serde(rename = "transition"))]
     pub m_transition: Pointer,
     /// # C++ Info
     /// - name: `condition`(ctype: `struct hkbCondition*`)
     /// - offset: ` 36`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "condition"))]
     #[cfg_attr(feature = "serde", serde(rename = "condition"))]
     pub m_condition: Pointer,
     /// # C++ Info
     /// - name: `eventId`(ctype: `hkInt32`)
     /// - offset: ` 40`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "eventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventId"))]
     pub m_eventId: i32,
     /// # C++ Info
     /// - name: `toStateId`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 52`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "toStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "toStateId"))]
     pub m_toStateId: i32,
     /// # C++ Info
     /// - name: `fromNestedStateId`(ctype: `hkInt32`)
     /// - offset: ` 48`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fromNestedStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "fromNestedStateId"))]
     pub m_fromNestedStateId: i32,
     /// # C++ Info
     /// - name: `toNestedStateId`(ctype: `hkInt32`)
     /// - offset: ` 52`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "toNestedStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "toNestedStateId"))]
     pub m_toNestedStateId: i32,
     /// # C++ Info
     /// - name: `priority`(ctype: `hkInt16`)
     /// - offset: ` 56`(x86)/` 64`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "priority"))]
     #[cfg_attr(feature = "serde", serde(rename = "priority"))]
     pub m_priority: i16,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags TransitionFlags`)
     /// - offset: ` 58`(x86)/` 66`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: TransitionFlags,
 }
@@ -985,12 +996,12 @@ const _: () = {
 bitflags::bitflags! {
     #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
     "- size(C++): `TYPE_INT16`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
-    TransitionFlags : i16 { #[doc = "1"] const FLAG_USE_TRIGGER_INTERVAL = 1i16; #[doc =
-    "2"] const FLAG_USE_INITIATE_INTERVAL = 2i16; #[doc = "4"] const
-    FLAG_UNINTERRUPTIBLE_WHILE_PLAYING = 4i16; #[doc = "8"] const
-    FLAG_UNINTERRUPTIBLE_WHILE_DELAYED = 8i16; #[doc = "16"] const
+    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
+    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
+    PartialEq, Eq, Hash)] pub struct TransitionFlags : i16 { #[doc = "1"] const
+    FLAG_USE_TRIGGER_INTERVAL = 1i16; #[doc = "2"] const FLAG_USE_INITIATE_INTERVAL =
+    2i16; #[doc = "4"] const FLAG_UNINTERRUPTIBLE_WHILE_PLAYING = 4i16; #[doc = "8"]
+    const FLAG_UNINTERRUPTIBLE_WHILE_DELAYED = 8i16; #[doc = "16"] const
     FLAG_DELAY_STATE_CHANGE = 16i16; #[doc = "32"] const FLAG_DISABLED = 32i16; #[doc =
     "64"] const FLAG_DISALLOW_RETURN_TO_PREVIOUS_STATE = 64i16; #[doc = "128"] const
     FLAG_DISALLOW_RANDOM_TRANSITION = 128i16; #[doc = "256"] const FLAG_DISABLE_CONDITION
@@ -1001,6 +1012,26 @@ bitflags::bitflags! {
     = "8192"] const FLAG_TO_NESTED_STATE_ID_IS_VALID = 8192i16; #[doc = "16384"] const
     FLAG_ABUT_AT_END_OF_FROM_GENERATOR = 16384i16; }
 }
+#[cfg(feature = "json_schema")]
+const _: () = {
+    use schemars::{SchemaGenerator, Schema, JsonSchema, json_schema};
+    use std::borrow::Cow;
+    impl JsonSchema for TransitionFlags {
+        fn schema_name() -> Cow<'static, str> {
+            "TransitionFlags".into()
+        }
+        fn schema_id() -> Cow<'static, str> {
+            concat!(module_path!(), "::", "TransitionFlags").into()
+        }
+        fn json_schema(_generate: &mut SchemaGenerator) -> Schema {
+            json_schema!(
+                { "description" :
+                "Bitflags field. Specific flags: FLAG_USE_TRIGGER_INTERVAL: 1, FLAG_USE_INITIATE_INTERVAL: 2, FLAG_UNINTERRUPTIBLE_WHILE_PLAYING: 4, FLAG_UNINTERRUPTIBLE_WHILE_DELAYED: 8, FLAG_DELAY_STATE_CHANGE: 16, FLAG_DISABLED: 32, FLAG_DISALLOW_RETURN_TO_PREVIOUS_STATE: 64, FLAG_DISALLOW_RANDOM_TRANSITION: 128, FLAG_DISABLE_CONDITION: 256, FLAG_ALLOW_SELF_TRANSITION_BY_TRANSITION_FROM_ANY_STATE: 512, FLAG_IS_GLOBAL_WILDCARD: 1024, FLAG_IS_LOCAL_WILDCARD: 2048, FLAG_FROM_NESTED_STATE_ID_IS_VALID: 4096, FLAG_TO_NESTED_STATE_ID_IS_VALID: 8192, FLAG_ABUT_AT_END_OF_FROM_GENERATOR: 16384. Additional unspecified bits may be set.(e.g.: BIT_FLAG|BIT_FLAG2|4)",
+                "type" : "string", }
+            )
+        }
+    }
+};
 const _: () = {
     use havok_serde as __serde;
     impl __serde::Serialize for TransitionFlags {

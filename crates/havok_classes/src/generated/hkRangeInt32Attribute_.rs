@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 16`(x86)/` 16`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,24 +27,28 @@ pub struct hkRangeInt32Attribute {
     /// - name: `absmin`(ctype: `hkInt32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "absmin"))]
     #[cfg_attr(feature = "serde", serde(rename = "absmin"))]
     pub m_absmin: i32,
     /// # C++ Info
     /// - name: `absmax`(ctype: `hkInt32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "absmax"))]
     #[cfg_attr(feature = "serde", serde(rename = "absmax"))]
     pub m_absmax: i32,
     /// # C++ Info
     /// - name: `softmin`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "softmin"))]
     #[cfg_attr(feature = "serde", serde(rename = "softmin"))]
     pub m_softmin: i32,
     /// # C++ Info
     /// - name: `softmax`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "softmax"))]
     #[cfg_attr(feature = "serde", serde(rename = "softmax"))]
     pub m_softmax: i32,
 }

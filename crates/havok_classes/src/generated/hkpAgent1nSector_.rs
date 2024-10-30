@@ -7,6 +7,7 @@ use super::*;
 /// - size: `512`(x86)/`512`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,24 +27,28 @@ pub struct hkpAgent1nSector {
     /// - name: `bytesAllocated`(ctype: `hkUint32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bytesAllocated"))]
     #[cfg_attr(feature = "serde", serde(rename = "bytesAllocated"))]
     pub m_bytesAllocated: u32,
     /// # C++ Info
     /// - name: `pad0`(ctype: `hkUint32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pad0"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad0"))]
     pub m_pad0: u32,
     /// # C++ Info
     /// - name: `pad1`(ctype: `hkUint32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pad1"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad1"))]
     pub m_pad1: u32,
     /// # C++ Info
     /// - name: `pad2`(ctype: `hkUint32`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pad2"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad2"))]
     pub m_pad2: u32,
     /// # C++ Info
@@ -51,10 +56,15 @@ pub struct hkpAgent1nSector {
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `496`(x86)/`496`(x86_64)
     #[cfg_attr(
+        feature = "json_schema",
+        schemars(schema_with = "make_large_int_array_schema")
+    )]
+    #[cfg_attr(
         feature = "serde",
         serde(with = "::serde_with::As::<[::serde_with::Same; 496]>")
     )]
     #[educe(Default = [0;496usize])]
+    #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
     pub m_data: [u8; 496usize],
 }

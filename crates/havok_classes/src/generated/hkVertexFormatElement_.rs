@@ -7,6 +7,7 @@ use super::*;
 /// - size: `  8`(x86)/`  8`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,36 +27,42 @@ pub struct hkVertexFormatElement {
     /// - name: `dataType`(ctype: `enum ComponentType`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "dataType"))]
     #[cfg_attr(feature = "serde", serde(rename = "dataType"))]
     pub m_dataType: ComponentType,
     /// # C++ Info
     /// - name: `numValues`(ctype: `hkUint8`)
     /// - offset: `  1`(x86)/`  1`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "numValues"))]
     pub m_numValues: u8,
     /// # C++ Info
     /// - name: `usage`(ctype: `enum ComponentUsage`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "usage"))]
     #[cfg_attr(feature = "serde", serde(rename = "usage"))]
     pub m_usage: ComponentUsage,
     /// # C++ Info
     /// - name: `subUsage`(ctype: `hkUint8`)
     /// - offset: `  3`(x86)/`  3`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "subUsage"))]
     #[cfg_attr(feature = "serde", serde(rename = "subUsage"))]
     pub m_subUsage: u8,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags HintFlags`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: HintFlags,
     /// # C++ Info
     /// - name: `pad`(ctype: `hkUint8[3]`)
     /// - offset: `  5`(x86)/`  5`(x86_64)
     /// - type_size: `  3`(x86)/`  3`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "pad"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad"))]
     pub m_pad: [u8; 3usize],
 }

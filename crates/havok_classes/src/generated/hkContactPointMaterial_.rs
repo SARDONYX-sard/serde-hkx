@@ -7,6 +7,7 @@ use super::*;
 /// - size: `  8`(x86)/` 16`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,30 +27,35 @@ pub struct hkContactPointMaterial {
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "userData"))]
     #[cfg_attr(feature = "serde", serde(rename = "userData"))]
     pub m_userData: Ulong,
     /// # C++ Info
     /// - name: `friction`(ctype: `hkUint8`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "friction"))]
     #[cfg_attr(feature = "serde", serde(rename = "friction"))]
     pub m_friction: u8,
     /// # C++ Info
     /// - name: `restitution`(ctype: `hkUint8`)
     /// - offset: `  5`(x86)/`  9`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "restitution"))]
     #[cfg_attr(feature = "serde", serde(rename = "restitution"))]
     pub m_restitution: u8,
     /// # C++ Info
     /// - name: `maxImpulse`(ctype: `hkUint8`)
     /// - offset: `  6`(x86)/` 10`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxImpulse"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxImpulse"))]
     pub m_maxImpulse: u8,
     /// # C++ Info
     /// - name: `flags`(ctype: `hkUint8`)
     /// - offset: `  7`(x86)/` 11`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
     pub m_flags: u8,
 }

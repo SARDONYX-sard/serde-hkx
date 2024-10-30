@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`144`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct hkpConvexVerticesShape {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpConvexShape,
     /// # C++ Info
     /// - name: `aabbHalfExtents`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "aabbHalfExtents"))]
     #[cfg_attr(feature = "serde", serde(rename = "aabbHalfExtents"))]
     pub m_aabbHalfExtents: Vector4,
     /// # C++ Info
     /// - name: `aabbCenter`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "aabbCenter"))]
     #[cfg_attr(feature = "serde", serde(rename = "aabbCenter"))]
     pub m_aabbCenter: Vector4,
     /// # C++ Info
     /// - name: `rotatedVertices`(ctype: `hkArray<struct hkpConvexVerticesShapeFourVectors>`)
     /// - offset: ` 64`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotatedVertices"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotatedVertices"))]
     pub m_rotatedVertices: Vec<hkpConvexVerticesShapeFourVectors>,
     /// # C++ Info
     /// - name: `numVertices`(ctype: `hkInt32`)
     /// - offset: ` 76`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "numVertices"))]
     #[cfg_attr(feature = "serde", serde(rename = "numVertices"))]
     pub m_numVertices: i32,
     /// # C++ Info
@@ -54,6 +60,7 @@ pub struct hkpConvexVerticesShape {
     /// - offset: ` 80`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "externalObject"))]
     #[cfg_attr(feature = "serde", serde(rename = "externalObject"))]
     pub m_externalObject: Pointer,
     /// # C++ Info
@@ -61,18 +68,21 @@ pub struct hkpConvexVerticesShape {
     /// - offset: ` 84`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "getFaceNormals"))]
     #[cfg_attr(feature = "serde", serde(rename = "getFaceNormals"))]
     pub m_getFaceNormals: Pointer,
     /// # C++ Info
     /// - name: `planeEquations`(ctype: `hkArray<hkVector4>`)
     /// - offset: ` 88`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "planeEquations"))]
     #[cfg_attr(feature = "serde", serde(rename = "planeEquations"))]
     pub m_planeEquations: Vec<Vector4>,
     /// # C++ Info
     /// - name: `connectivity`(ctype: `struct hkpConvexVerticesConnectivity*`)
     /// - offset: `100`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "connectivity"))]
     #[cfg_attr(feature = "serde", serde(rename = "connectivity"))]
     pub m_connectivity: Pointer,
 }

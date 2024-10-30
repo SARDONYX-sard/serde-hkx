@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 12`(x86)/` 12`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -27,6 +28,7 @@ pub struct hkMultiThreadCheck {
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "threadId"))]
     #[cfg_attr(feature = "serde", serde(rename = "threadId"))]
     pub m_threadId: u32,
     /// # C++ Info
@@ -34,6 +36,7 @@ pub struct hkMultiThreadCheck {
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "stackTraceId"))]
     #[cfg_attr(feature = "serde", serde(rename = "stackTraceId"))]
     pub m_stackTraceId: i32,
     /// # C++ Info
@@ -41,6 +44,7 @@ pub struct hkMultiThreadCheck {
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "markCount"))]
     #[cfg_attr(feature = "serde", serde(rename = "markCount"))]
     pub m_markCount: u16,
     /// # C++ Info
@@ -48,6 +52,7 @@ pub struct hkMultiThreadCheck {
     /// - offset: ` 10`(x86)/` 10`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "markBitStack"))]
     #[cfg_attr(feature = "serde", serde(rename = "markBitStack"))]
     pub m_markBitStack: u16,
 }

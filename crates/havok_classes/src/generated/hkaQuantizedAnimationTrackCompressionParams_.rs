@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 16`(x86)/` 16`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,24 +27,28 @@ pub struct hkaQuantizedAnimationTrackCompressionParams {
     /// - name: `rotationTolerance`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "rotationTolerance"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotationTolerance"))]
     pub m_rotationTolerance: f32,
     /// # C++ Info
     /// - name: `translationTolerance`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "translationTolerance"))]
     #[cfg_attr(feature = "serde", serde(rename = "translationTolerance"))]
     pub m_translationTolerance: f32,
     /// # C++ Info
     /// - name: `scaleTolerance`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "scaleTolerance"))]
     #[cfg_attr(feature = "serde", serde(rename = "scaleTolerance"))]
     pub m_scaleTolerance: f32,
     /// # C++ Info
     /// - name: `floatingTolerance`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "floatingTolerance"))]
     #[cfg_attr(feature = "serde", serde(rename = "floatingTolerance"))]
     pub m_floatingTolerance: f32,
 }

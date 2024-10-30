@@ -7,6 +7,7 @@ use super::*;
 /// - size: `108`(x86)/`200`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,54 +24,63 @@ pub struct hkbAttachmentModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `sendToAttacherOnAttach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sendToAttacherOnAttach"))]
     #[cfg_attr(feature = "serde", serde(rename = "sendToAttacherOnAttach"))]
     pub m_sendToAttacherOnAttach: hkbEventProperty,
     /// # C++ Info
     /// - name: `sendToAttacheeOnAttach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sendToAttacheeOnAttach"))]
     #[cfg_attr(feature = "serde", serde(rename = "sendToAttacheeOnAttach"))]
     pub m_sendToAttacheeOnAttach: hkbEventProperty,
     /// # C++ Info
     /// - name: `sendToAttacherOnDetach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 60`(x86)/`112`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sendToAttacherOnDetach"))]
     #[cfg_attr(feature = "serde", serde(rename = "sendToAttacherOnDetach"))]
     pub m_sendToAttacherOnDetach: hkbEventProperty,
     /// # C++ Info
     /// - name: `sendToAttacheeOnDetach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 68`(x86)/`128`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sendToAttacheeOnDetach"))]
     #[cfg_attr(feature = "serde", serde(rename = "sendToAttacheeOnDetach"))]
     pub m_sendToAttacheeOnDetach: hkbEventProperty,
     /// # C++ Info
     /// - name: `attachmentSetup`(ctype: `struct hkbAttachmentSetup*`)
     /// - offset: ` 76`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "attachmentSetup"))]
     #[cfg_attr(feature = "serde", serde(rename = "attachmentSetup"))]
     pub m_attachmentSetup: Pointer,
     /// # C++ Info
     /// - name: `attacherHandle`(ctype: `struct hkbHandle*`)
     /// - offset: ` 80`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "attacherHandle"))]
     #[cfg_attr(feature = "serde", serde(rename = "attacherHandle"))]
     pub m_attacherHandle: Pointer,
     /// # C++ Info
     /// - name: `attacheeHandle`(ctype: `struct hkbHandle*`)
     /// - offset: ` 84`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "attacheeHandle"))]
     #[cfg_attr(feature = "serde", serde(rename = "attacheeHandle"))]
     pub m_attacheeHandle: Pointer,
     /// # C++ Info
     /// - name: `attacheeLayer`(ctype: `hkInt32`)
     /// - offset: ` 88`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "attacheeLayer"))]
     #[cfg_attr(feature = "serde", serde(rename = "attacheeLayer"))]
     pub m_attacheeLayer: i32,
     /// # C++ Info
@@ -78,6 +88,7 @@ pub struct hkbAttachmentModifier<'a> {
     /// - offset: ` 92`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "attacheeRB"))]
     #[cfg_attr(feature = "serde", serde(rename = "attacheeRB"))]
     pub m_attacheeRB: Pointer,
     /// # C++ Info
@@ -85,6 +96,7 @@ pub struct hkbAttachmentModifier<'a> {
     /// - offset: ` 96`(x86)/`184`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "oldMotionType"))]
     #[cfg_attr(feature = "serde", serde(rename = "oldMotionType"))]
     pub m_oldMotionType: u8,
     /// # C++ Info
@@ -92,6 +104,7 @@ pub struct hkbAttachmentModifier<'a> {
     /// - offset: `100`(x86)/`188`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "oldFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "oldFilterInfo"))]
     pub m_oldFilterInfo: i32,
     /// # C++ Info
@@ -99,6 +112,7 @@ pub struct hkbAttachmentModifier<'a> {
     /// - offset: `104`(x86)/`192`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "attachment"))]
     #[cfg_attr(feature = "serde", serde(rename = "attachment"))]
     pub m_attachment: Pointer,
 }

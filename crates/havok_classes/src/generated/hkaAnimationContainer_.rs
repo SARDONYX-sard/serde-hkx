@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 68`(x86)/` 96`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,42 @@ pub struct hkaAnimationContainer {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `skeletons`(ctype: `hkArray<hkaSkeleton*>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "skeletons"))]
     #[cfg_attr(feature = "serde", serde(rename = "skeletons"))]
     pub m_skeletons: Vec<Pointer>,
     /// # C++ Info
     /// - name: `animations`(ctype: `hkArray<hkaAnimation*>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "animations"))]
     #[cfg_attr(feature = "serde", serde(rename = "animations"))]
     pub m_animations: Vec<Pointer>,
     /// # C++ Info
     /// - name: `bindings`(ctype: `hkArray<hkaAnimationBinding*>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "bindings"))]
     #[cfg_attr(feature = "serde", serde(rename = "bindings"))]
     pub m_bindings: Vec<Pointer>,
     /// # C++ Info
     /// - name: `attachments`(ctype: `hkArray<hkaBoneAttachment*>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "attachments"))]
     #[cfg_attr(feature = "serde", serde(rename = "attachments"))]
     pub m_attachments: Vec<Pointer>,
     /// # C++ Info
     /// - name: `skins`(ctype: `hkArray<hkaMeshBinding*>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "skins"))]
     #[cfg_attr(feature = "serde", serde(rename = "skins"))]
     pub m_skins: Vec<Pointer>,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 80`(x86)/`128`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,30 +24,35 @@ pub struct BSDistTriggerModifier<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `targetPosition`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "targetPosition"))]
     #[cfg_attr(feature = "serde", serde(rename = "targetPosition"))]
     pub m_targetPosition: Vector4,
     /// # C++ Info
     /// - name: `distance`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "distance"))]
     #[cfg_attr(feature = "serde", serde(rename = "distance"))]
     pub m_distance: f32,
     /// # C++ Info
     /// - name: `distanceTrigger`(ctype: `hkReal`)
     /// - offset: ` 68`(x86)/`100`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "distanceTrigger"))]
     #[cfg_attr(feature = "serde", serde(rename = "distanceTrigger"))]
     pub m_distanceTrigger: f32,
     /// # C++ Info
     /// - name: `triggerEvent`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 72`(x86)/`104`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "triggerEvent"))]
     #[cfg_attr(feature = "serde", serde(rename = "triggerEvent"))]
     pub m_triggerEvent: hkbEventProperty,
 }

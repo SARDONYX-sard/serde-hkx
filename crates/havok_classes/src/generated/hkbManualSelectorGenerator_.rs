@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 56`(x86)/` 96`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,24 +24,28 @@ pub struct hkbManualSelectorGenerator<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `generators`(ctype: `hkArray<hkbGenerator*>`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "generators"))]
     #[cfg_attr(feature = "serde", serde(rename = "generators"))]
     pub m_generators: Vec<Pointer>,
     /// # C++ Info
     /// - name: `selectedGeneratorIndex`(ctype: `hkInt8`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "selectedGeneratorIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "selectedGeneratorIndex"))]
     pub m_selectedGeneratorIndex: i8,
     /// # C++ Info
     /// - name: `currentGeneratorIndex`(ctype: `hkInt8`)
     /// - offset: ` 53`(x86)/` 89`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "currentGeneratorIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentGeneratorIndex"))]
     pub m_currentGeneratorIndex: i8,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: `336`(x86)/`352`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,48 +27,56 @@ pub struct hkpRagdollConstraintDataAtoms {
     /// - name: `transforms`(ctype: `struct hkpSetLocalTransformsConstraintAtom`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `144`(x86)/`144`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transforms"))]
     #[cfg_attr(feature = "serde", serde(rename = "transforms"))]
     pub m_transforms: hkpSetLocalTransformsConstraintAtom,
     /// # C++ Info
     /// - name: `setupStabilization`(ctype: `struct hkpSetupStabilizationAtom`)
     /// - offset: `144`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "setupStabilization"))]
     #[cfg_attr(feature = "serde", serde(rename = "setupStabilization"))]
     pub m_setupStabilization: hkpSetupStabilizationAtom,
     /// # C++ Info
     /// - name: `ragdollMotors`(ctype: `struct hkpRagdollMotorConstraintAtom`)
     /// - offset: `160`(x86)/`160`(x86_64)
     /// - type_size: ` 80`(x86)/` 96`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "ragdollMotors"))]
     #[cfg_attr(feature = "serde", serde(rename = "ragdollMotors"))]
     pub m_ragdollMotors: hkpRagdollMotorConstraintAtom,
     /// # C++ Info
     /// - name: `angFriction`(ctype: `struct hkpAngFrictionConstraintAtom`)
     /// - offset: `240`(x86)/`256`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "angFriction"))]
     #[cfg_attr(feature = "serde", serde(rename = "angFriction"))]
     pub m_angFriction: hkpAngFrictionConstraintAtom,
     /// # C++ Info
     /// - name: `twistLimit`(ctype: `struct hkpTwistLimitConstraintAtom`)
     /// - offset: `252`(x86)/`268`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "twistLimit"))]
     #[cfg_attr(feature = "serde", serde(rename = "twistLimit"))]
     pub m_twistLimit: hkpTwistLimitConstraintAtom,
     /// # C++ Info
     /// - name: `coneLimit`(ctype: `struct hkpConeLimitConstraintAtom`)
     /// - offset: `272`(x86)/`288`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "coneLimit"))]
     #[cfg_attr(feature = "serde", serde(rename = "coneLimit"))]
     pub m_coneLimit: hkpConeLimitConstraintAtom,
     /// # C++ Info
     /// - name: `planesLimit`(ctype: `struct hkpConeLimitConstraintAtom`)
     /// - offset: `292`(x86)/`308`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "planesLimit"))]
     #[cfg_attr(feature = "serde", serde(rename = "planesLimit"))]
     pub m_planesLimit: hkpConeLimitConstraintAtom,
     /// # C++ Info
     /// - name: `ballSocket`(ctype: `struct hkpBallSocketConstraintAtom`)
     /// - offset: `312`(x86)/`328`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "ballSocket"))]
     #[cfg_attr(feature = "serde", serde(rename = "ballSocket"))]
     pub m_ballSocket: hkpBallSocketConstraintAtom,
 }

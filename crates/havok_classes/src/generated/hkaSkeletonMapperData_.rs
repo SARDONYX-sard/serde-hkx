@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`128`(x86_64)
 /// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -26,48 +27,56 @@ pub struct hkaSkeletonMapperData {
     /// - name: `skeletonA`(ctype: `struct hkaSkeleton*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "skeletonA"))]
     #[cfg_attr(feature = "serde", serde(rename = "skeletonA"))]
     pub m_skeletonA: Pointer,
     /// # C++ Info
     /// - name: `skeletonB`(ctype: `struct hkaSkeleton*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "skeletonB"))]
     #[cfg_attr(feature = "serde", serde(rename = "skeletonB"))]
     pub m_skeletonB: Pointer,
     /// # C++ Info
     /// - name: `simpleMappings`(ctype: `hkArray<struct hkaSkeletonMapperDataSimpleMapping>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "simpleMappings"))]
     #[cfg_attr(feature = "serde", serde(rename = "simpleMappings"))]
     pub m_simpleMappings: Vec<hkaSkeletonMapperDataSimpleMapping>,
     /// # C++ Info
     /// - name: `chainMappings`(ctype: `hkArray<struct hkaSkeletonMapperDataChainMapping>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "chainMappings"))]
     #[cfg_attr(feature = "serde", serde(rename = "chainMappings"))]
     pub m_chainMappings: Vec<hkaSkeletonMapperDataChainMapping>,
     /// # C++ Info
     /// - name: `unmappedBones`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "unmappedBones"))]
     #[cfg_attr(feature = "serde", serde(rename = "unmappedBones"))]
     pub m_unmappedBones: Vec<i16>,
     /// # C++ Info
     /// - name: `extractedMotionMapping`(ctype: `hkQsTransform`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "extractedMotionMapping"))]
     #[cfg_attr(feature = "serde", serde(rename = "extractedMotionMapping"))]
     pub m_extractedMotionMapping: QsTransform,
     /// # C++ Info
     /// - name: `keepUnmappedLocal`(ctype: `hkBool`)
     /// - offset: ` 96`(x86)/`112`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "keepUnmappedLocal"))]
     #[cfg_attr(feature = "serde", serde(rename = "keepUnmappedLocal"))]
     pub m_keepUnmappedLocal: bool,
     /// # C++ Info
     /// - name: `mappingType`(ctype: `enum MappingType`)
     /// - offset: `100`(x86)/`116`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "mappingType"))]
     #[cfg_attr(feature = "serde", serde(rename = "mappingType"))]
     pub m_mappingType: MappingType,
 }
@@ -887,6 +896,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT32`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

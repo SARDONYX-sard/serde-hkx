@@ -7,6 +7,7 @@ use super::*;
 /// - size: `240`(x86)/`256`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,45 @@ pub struct hkpWorldCinfo {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkReferencedObject,
     /// # C++ Info
     /// - name: `gravity`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "gravity"))]
     #[cfg_attr(feature = "serde", serde(rename = "gravity"))]
     pub m_gravity: Vector4,
     /// # C++ Info
     /// - name: `broadPhaseQuerySize`(ctype: `hkInt32`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseQuerySize"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseQuerySize"))]
     pub m_broadPhaseQuerySize: i32,
     /// # C++ Info
     /// - name: `contactRestingVelocity`(ctype: `hkReal`)
     /// - offset: ` 36`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "contactRestingVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "contactRestingVelocity"))]
     pub m_contactRestingVelocity: f32,
     /// # C++ Info
     /// - name: `broadPhaseBorderBehaviour`(ctype: `enum BroadPhaseBorderBehaviour`)
     /// - offset: ` 40`(x86)/` 40`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseBorderBehaviour"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseBorderBehaviour"))]
     pub m_broadPhaseBorderBehaviour: BroadPhaseBorderBehaviour,
     /// # C++ Info
     /// - name: `mtPostponeAndSortBroadPhaseBorderCallbacks`(ctype: `hkBool`)
     /// - offset: ` 41`(x86)/` 41`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "mtPostponeAndSortBroadPhaseBorderCallbacks")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "mtPostponeAndSortBroadPhaseBorderCallbacks")
@@ -62,132 +72,160 @@ pub struct hkpWorldCinfo {
     /// - name: `broadPhaseWorldAabb`(ctype: `struct hkAabb`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseWorldAabb"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseWorldAabb"))]
     pub m_broadPhaseWorldAabb: hkAabb,
     /// # C++ Info
     /// - name: `useKdTree`(ctype: `hkBool`)
     /// - offset: ` 80`(x86)/` 80`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "useKdTree"))]
     #[cfg_attr(feature = "serde", serde(rename = "useKdTree"))]
     pub m_useKdTree: bool,
     /// # C++ Info
     /// - name: `useMultipleTree`(ctype: `hkBool`)
     /// - offset: ` 81`(x86)/` 81`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "useMultipleTree"))]
     #[cfg_attr(feature = "serde", serde(rename = "useMultipleTree"))]
     pub m_useMultipleTree: bool,
     /// # C++ Info
     /// - name: `treeUpdateType`(ctype: `enum TreeUpdateType`)
     /// - offset: ` 82`(x86)/` 82`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "treeUpdateType"))]
     #[cfg_attr(feature = "serde", serde(rename = "treeUpdateType"))]
     pub m_treeUpdateType: TreeUpdateType,
     /// # C++ Info
     /// - name: `autoUpdateKdTree`(ctype: `hkBool`)
     /// - offset: ` 83`(x86)/` 83`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "autoUpdateKdTree"))]
     #[cfg_attr(feature = "serde", serde(rename = "autoUpdateKdTree"))]
     pub m_autoUpdateKdTree: bool,
     /// # C++ Info
     /// - name: `collisionTolerance`(ctype: `hkReal`)
     /// - offset: ` 84`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "collisionTolerance"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionTolerance"))]
     pub m_collisionTolerance: f32,
     /// # C++ Info
     /// - name: `collisionFilter`(ctype: `struct hkpCollisionFilter*`)
     /// - offset: ` 88`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "collisionFilter"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionFilter"))]
     pub m_collisionFilter: Pointer,
     /// # C++ Info
     /// - name: `convexListFilter`(ctype: `struct hkpConvexListFilter*`)
     /// - offset: ` 92`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "convexListFilter"))]
     #[cfg_attr(feature = "serde", serde(rename = "convexListFilter"))]
     pub m_convexListFilter: Pointer,
     /// # C++ Info
     /// - name: `expectedMaxLinearVelocity`(ctype: `hkReal`)
     /// - offset: ` 96`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "expectedMaxLinearVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "expectedMaxLinearVelocity"))]
     pub m_expectedMaxLinearVelocity: f32,
     /// # C++ Info
     /// - name: `sizeOfToiEventQueue`(ctype: `hkInt32`)
     /// - offset: `100`(x86)/`108`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "sizeOfToiEventQueue"))]
     #[cfg_attr(feature = "serde", serde(rename = "sizeOfToiEventQueue"))]
     pub m_sizeOfToiEventQueue: i32,
     /// # C++ Info
     /// - name: `expectedMinPsiDeltaTime`(ctype: `hkReal`)
     /// - offset: `104`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "expectedMinPsiDeltaTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "expectedMinPsiDeltaTime"))]
     pub m_expectedMinPsiDeltaTime: f32,
     /// # C++ Info
     /// - name: `memoryWatchDog`(ctype: `struct hkWorldMemoryAvailableWatchDog*`)
     /// - offset: `108`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "memoryWatchDog"))]
     #[cfg_attr(feature = "serde", serde(rename = "memoryWatchDog"))]
     pub m_memoryWatchDog: Pointer,
     /// # C++ Info
     /// - name: `broadPhaseNumMarkers`(ctype: `hkInt32`)
     /// - offset: `112`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseNumMarkers"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseNumMarkers"))]
     pub m_broadPhaseNumMarkers: i32,
     /// # C++ Info
     /// - name: `contactPointGeneration`(ctype: `enum ContactPointGeneration`)
     /// - offset: `116`(x86)/`132`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "contactPointGeneration"))]
     #[cfg_attr(feature = "serde", serde(rename = "contactPointGeneration"))]
     pub m_contactPointGeneration: ContactPointGeneration,
     /// # C++ Info
     /// - name: `allowToSkipConfirmedCallbacks`(ctype: `hkBool`)
     /// - offset: `117`(x86)/`133`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "allowToSkipConfirmedCallbacks")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "allowToSkipConfirmedCallbacks"))]
     pub m_allowToSkipConfirmedCallbacks: bool,
     /// # C++ Info
     /// - name: `useHybridBroadphase`(ctype: `hkBool`)
     /// - offset: `118`(x86)/`134`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "useHybridBroadphase"))]
     #[cfg_attr(feature = "serde", serde(rename = "useHybridBroadphase"))]
     pub m_useHybridBroadphase: bool,
     /// # C++ Info
     /// - name: `solverTau`(ctype: `hkReal`)
     /// - offset: `120`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "solverTau"))]
     #[cfg_attr(feature = "serde", serde(rename = "solverTau"))]
     pub m_solverTau: f32,
     /// # C++ Info
     /// - name: `solverDamp`(ctype: `hkReal`)
     /// - offset: `124`(x86)/`140`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "solverDamp"))]
     #[cfg_attr(feature = "serde", serde(rename = "solverDamp"))]
     pub m_solverDamp: f32,
     /// # C++ Info
     /// - name: `solverIterations`(ctype: `hkInt32`)
     /// - offset: `128`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "solverIterations"))]
     #[cfg_attr(feature = "serde", serde(rename = "solverIterations"))]
     pub m_solverIterations: i32,
     /// # C++ Info
     /// - name: `solverMicrosteps`(ctype: `hkInt32`)
     /// - offset: `132`(x86)/`148`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "solverMicrosteps"))]
     #[cfg_attr(feature = "serde", serde(rename = "solverMicrosteps"))]
     pub m_solverMicrosteps: i32,
     /// # C++ Info
     /// - name: `maxConstraintViolation`(ctype: `hkReal`)
     /// - offset: `136`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxConstraintViolation"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxConstraintViolation"))]
     pub m_maxConstraintViolation: f32,
     /// # C++ Info
     /// - name: `forceCoherentConstraintOrderingInSolver`(ctype: `hkBool`)
     /// - offset: `140`(x86)/`156`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "forceCoherentConstraintOrderingInSolver")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "forceCoherentConstraintOrderingInSolver")
@@ -197,42 +235,64 @@ pub struct hkpWorldCinfo {
     /// - name: `snapCollisionToConvexEdgeThreshold`(ctype: `hkReal`)
     /// - offset: `144`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "snapCollisionToConvexEdgeThreshold")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "snapCollisionToConvexEdgeThreshold"))]
     pub m_snapCollisionToConvexEdgeThreshold: f32,
     /// # C++ Info
     /// - name: `snapCollisionToConcaveEdgeThreshold`(ctype: `hkReal`)
     /// - offset: `148`(x86)/`164`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "snapCollisionToConcaveEdgeThreshold")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "snapCollisionToConcaveEdgeThreshold"))]
     pub m_snapCollisionToConcaveEdgeThreshold: f32,
     /// # C++ Info
     /// - name: `enableToiWeldRejection`(ctype: `hkBool`)
     /// - offset: `152`(x86)/`168`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enableToiWeldRejection"))]
     #[cfg_attr(feature = "serde", serde(rename = "enableToiWeldRejection"))]
     pub m_enableToiWeldRejection: bool,
     /// # C++ Info
     /// - name: `enableDeprecatedWelding`(ctype: `hkBool`)
     /// - offset: `153`(x86)/`169`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enableDeprecatedWelding"))]
     #[cfg_attr(feature = "serde", serde(rename = "enableDeprecatedWelding"))]
     pub m_enableDeprecatedWelding: bool,
     /// # C++ Info
     /// - name: `iterativeLinearCastEarlyOutDistance`(ctype: `hkReal`)
     /// - offset: `156`(x86)/`172`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "iterativeLinearCastEarlyOutDistance")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "iterativeLinearCastEarlyOutDistance"))]
     pub m_iterativeLinearCastEarlyOutDistance: f32,
     /// # C++ Info
     /// - name: `iterativeLinearCastMaxIterations`(ctype: `hkInt32`)
     /// - offset: `160`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "iterativeLinearCastMaxIterations")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "iterativeLinearCastMaxIterations"))]
     pub m_iterativeLinearCastMaxIterations: i32,
     /// # C++ Info
     /// - name: `deactivationNumInactiveFramesSelectFlag0`(ctype: `hkUint8`)
     /// - offset: `164`(x86)/`180`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "deactivationNumInactiveFramesSelectFlag0")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "deactivationNumInactiveFramesSelectFlag0")
@@ -243,6 +303,10 @@ pub struct hkpWorldCinfo {
     /// - offset: `165`(x86)/`181`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "deactivationNumInactiveFramesSelectFlag1")
+    )]
+    #[cfg_attr(
         feature = "serde",
         serde(rename = "deactivationNumInactiveFramesSelectFlag1")
     )]
@@ -251,12 +315,20 @@ pub struct hkpWorldCinfo {
     /// - name: `deactivationIntegrateCounter`(ctype: `hkUint8`)
     /// - offset: `166`(x86)/`182`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "deactivationIntegrateCounter")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "deactivationIntegrateCounter"))]
     pub m_deactivationIntegrateCounter: u8,
     /// # C++ Info
     /// - name: `shouldActivateOnRigidBodyTransformChange`(ctype: `hkBool`)
     /// - offset: `167`(x86)/`183`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "shouldActivateOnRigidBodyTransformChange")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "shouldActivateOnRigidBodyTransformChange")
@@ -266,42 +338,67 @@ pub struct hkpWorldCinfo {
     /// - name: `deactivationReferenceDistance`(ctype: `hkReal`)
     /// - offset: `168`(x86)/`184`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "deactivationReferenceDistance")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "deactivationReferenceDistance"))]
     pub m_deactivationReferenceDistance: f32,
     /// # C++ Info
     /// - name: `toiCollisionResponseRotateNormal`(ctype: `hkReal`)
     /// - offset: `172`(x86)/`188`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "toiCollisionResponseRotateNormal")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "toiCollisionResponseRotateNormal"))]
     pub m_toiCollisionResponseRotateNormal: f32,
     /// # C++ Info
     /// - name: `maxSectorsPerMidphaseCollideTask`(ctype: `hkInt32`)
     /// - offset: `176`(x86)/`192`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "maxSectorsPerMidphaseCollideTask")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "maxSectorsPerMidphaseCollideTask"))]
     pub m_maxSectorsPerMidphaseCollideTask: i32,
     /// # C++ Info
     /// - name: `maxSectorsPerNarrowphaseCollideTask`(ctype: `hkInt32`)
     /// - offset: `180`(x86)/`196`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "maxSectorsPerNarrowphaseCollideTask")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "maxSectorsPerNarrowphaseCollideTask"))]
     pub m_maxSectorsPerNarrowphaseCollideTask: i32,
     /// # C++ Info
     /// - name: `processToisMultithreaded`(ctype: `hkBool`)
     /// - offset: `184`(x86)/`200`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "processToisMultithreaded"))]
     #[cfg_attr(feature = "serde", serde(rename = "processToisMultithreaded"))]
     pub m_processToisMultithreaded: bool,
     /// # C++ Info
     /// - name: `maxEntriesPerToiMidphaseCollideTask`(ctype: `hkInt32`)
     /// - offset: `188`(x86)/`204`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "maxEntriesPerToiMidphaseCollideTask")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "maxEntriesPerToiMidphaseCollideTask"))]
     pub m_maxEntriesPerToiMidphaseCollideTask: i32,
     /// # C++ Info
     /// - name: `maxEntriesPerToiNarrowphaseCollideTask`(ctype: `hkInt32`)
     /// - offset: `192`(x86)/`208`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "maxEntriesPerToiNarrowphaseCollideTask")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "maxEntriesPerToiNarrowphaseCollideTask")
@@ -312,6 +409,10 @@ pub struct hkpWorldCinfo {
     /// - offset: `196`(x86)/`212`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "maxNumToiCollisionPairsSinglethreaded")
+    )]
+    #[cfg_attr(
         feature = "serde",
         serde(rename = "maxNumToiCollisionPairsSinglethreaded")
     )]
@@ -321,6 +422,10 @@ pub struct hkpWorldCinfo {
     /// - offset: `200`(x86)/`216`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "numToisTillAllowedPenetrationSimplifiedToi")
+    )]
+    #[cfg_attr(
         feature = "serde",
         serde(rename = "numToisTillAllowedPenetrationSimplifiedToi")
     )]
@@ -329,12 +434,20 @@ pub struct hkpWorldCinfo {
     /// - name: `numToisTillAllowedPenetrationToi`(ctype: `hkReal`)
     /// - offset: `204`(x86)/`220`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "numToisTillAllowedPenetrationToi")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "numToisTillAllowedPenetrationToi"))]
     pub m_numToisTillAllowedPenetrationToi: f32,
     /// # C++ Info
     /// - name: `numToisTillAllowedPenetrationToiHigher`(ctype: `hkReal`)
     /// - offset: `208`(x86)/`224`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "numToisTillAllowedPenetrationToiHigher")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "numToisTillAllowedPenetrationToiHigher")
@@ -345,6 +458,10 @@ pub struct hkpWorldCinfo {
     /// - offset: `212`(x86)/`228`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "numToisTillAllowedPenetrationToiForced")
+    )]
+    #[cfg_attr(
         feature = "serde",
         serde(rename = "numToisTillAllowedPenetrationToiForced")
     )]
@@ -353,36 +470,48 @@ pub struct hkpWorldCinfo {
     /// - name: `enableDeactivation`(ctype: `hkBool`)
     /// - offset: `216`(x86)/`232`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enableDeactivation"))]
     #[cfg_attr(feature = "serde", serde(rename = "enableDeactivation"))]
     pub m_enableDeactivation: bool,
     /// # C++ Info
     /// - name: `simulationType`(ctype: `enum SimulationType`)
     /// - offset: `217`(x86)/`233`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "simulationType"))]
     #[cfg_attr(feature = "serde", serde(rename = "simulationType"))]
     pub m_simulationType: SimulationType,
     /// # C++ Info
     /// - name: `enableSimulationIslands`(ctype: `hkBool`)
     /// - offset: `218`(x86)/`234`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "enableSimulationIslands"))]
     #[cfg_attr(feature = "serde", serde(rename = "enableSimulationIslands"))]
     pub m_enableSimulationIslands: bool,
     /// # C++ Info
     /// - name: `minDesiredIslandSize`(ctype: `hkUint32`)
     /// - offset: `220`(x86)/`236`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "minDesiredIslandSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "minDesiredIslandSize"))]
     pub m_minDesiredIslandSize: u32,
     /// # C++ Info
     /// - name: `processActionsInSingleThread`(ctype: `hkBool`)
     /// - offset: `224`(x86)/`240`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "processActionsInSingleThread")
+    )]
     #[cfg_attr(feature = "serde", serde(rename = "processActionsInSingleThread"))]
     pub m_processActionsInSingleThread: bool,
     /// # C++ Info
     /// - name: `allowIntegrationOfIslandsWithoutConstraintsInASeparateJob`(ctype: `hkBool`)
     /// - offset: `225`(x86)/`241`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(
+        feature = "json_schema",
+        schemars(rename = "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob")
+    )]
     #[cfg_attr(
         feature = "serde",
         serde(rename = "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob")
@@ -392,12 +521,14 @@ pub struct hkpWorldCinfo {
     /// - name: `frameMarkerPsiSnap`(ctype: `hkReal`)
     /// - offset: `228`(x86)/`244`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "frameMarkerPsiSnap"))]
     #[cfg_attr(feature = "serde", serde(rename = "frameMarkerPsiSnap"))]
     pub m_frameMarkerPsiSnap: f32,
     /// # C++ Info
     /// - name: `fireCollisionCallbacks`(ctype: `hkBool`)
     /// - offset: `232`(x86)/`248`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "fireCollisionCallbacks"))]
     #[cfg_attr(feature = "serde", serde(rename = "fireCollisionCallbacks"))]
     pub m_fireCollisionCallbacks: bool,
 }
@@ -5261,6 +5392,7 @@ const _: () = {
 };
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -5282,6 +5414,7 @@ pub enum SimulationType {
 }
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -5302,6 +5435,7 @@ pub enum ContactPointGeneration {
 }
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,
@@ -5323,6 +5457,7 @@ pub enum BroadPhaseBorderBehaviour {
 }
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(
     Debug,

@@ -7,6 +7,7 @@ use super::*;
 /// - size: `112`(x86)/`128`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,36 +24,42 @@ pub struct hkMemoryMeshBody<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkMeshBody,
     /// # C++ Info
     /// - name: `transform`(ctype: `hkMatrix4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transform"))]
     #[cfg_attr(feature = "serde", serde(rename = "transform"))]
     pub m_transform: Matrix4,
     /// # C++ Info
     /// - name: `transformSet`(ctype: `struct hkIndexedTransformSet*`)
     /// - offset: ` 80`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "transformSet"))]
     #[cfg_attr(feature = "serde", serde(rename = "transformSet"))]
     pub m_transformSet: Pointer,
     /// # C++ Info
     /// - name: `shape`(ctype: `struct hkMeshShape*`)
     /// - offset: ` 84`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "shape"))]
     #[cfg_attr(feature = "serde", serde(rename = "shape"))]
     pub m_shape: Pointer,
     /// # C++ Info
     /// - name: `vertexBuffers`(ctype: `hkArray<hkMeshVertexBuffer*>`)
     /// - offset: ` 88`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "vertexBuffers"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexBuffers"))]
     pub m_vertexBuffers: Vec<Pointer>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `100`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
 }

@@ -7,6 +7,7 @@ use super::*;
 /// - size: ` 64`(x86)/`104`(x86_64)
 /// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
@@ -23,18 +24,21 @@ pub struct hkpProjectileGun<'a> {
     )]
     pub __ptr: Option<Pointer>,
     /// Alternative to C++ class inheritance.
+    #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub parent: hkpFirstPersonGun<'a>,
     /// # C++ Info
     /// - name: `maxProjectiles`(ctype: `hkInt32`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "maxProjectiles"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxProjectiles"))]
     pub m_maxProjectiles: i32,
     /// # C++ Info
     /// - name: `reloadTime`(ctype: `hkReal`)
     /// - offset: ` 36`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
+    #[cfg_attr(feature = "json_schema", schemars(rename = "reloadTime"))]
     #[cfg_attr(feature = "serde", serde(rename = "reloadTime"))]
     pub m_reloadTime: f32,
     /// # C++ Info
@@ -42,6 +46,7 @@ pub struct hkpProjectileGun<'a> {
     /// - offset: ` 40`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "reload"))]
     #[cfg_attr(feature = "serde", serde(rename = "reload"))]
     pub m_reload: f32,
     /// # C++ Info
@@ -49,6 +54,7 @@ pub struct hkpProjectileGun<'a> {
     /// - offset: ` 44`(x86)/` 72`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "projectiles"))]
     #[cfg_attr(feature = "serde", serde(rename = "projectiles"))]
     pub m_projectiles: Vec<Pointer>,
     /// # C++ Info
@@ -56,6 +62,7 @@ pub struct hkpProjectileGun<'a> {
     /// - offset: ` 56`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "world"))]
     #[cfg_attr(feature = "serde", serde(rename = "world"))]
     pub m_world: Pointer,
     /// # C++ Info
@@ -63,6 +70,7 @@ pub struct hkpProjectileGun<'a> {
     /// - offset: ` 60`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "json_schema", schemars(rename = "destructionWorld"))]
     #[cfg_attr(feature = "serde", serde(rename = "destructionWorld"))]
     pub m_destructionWorld: Pointer,
 }
