@@ -16,6 +16,7 @@ use crate::{lib::*, StringPtr, NULL_STR};
 ///
 /// [`str`]: https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "serde", serde(transparent))]
 #[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct CString<'a> {
     inner: Option<Cow<'a, str>>,
@@ -98,5 +99,84 @@ impl<'a> From<CString<'a>> for StringPtr<'a> {
     #[inline]
     fn from(value: CString<'a>) -> Self {
         Self::from_option(value.into_inner())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::borrow::Cow;
+
+    #[test]
+    fn test_is_null() {
+        let cstring = CString::new(None);
+        assert!(cstring.is_null());
+
+        let cstring_with_str = CString::from_str("test");
+        assert!(!cstring_with_str.is_null());
+    }
+
+    #[test]
+    fn test_should_write_binary() {
+        let cstring = CString::new(None);
+        assert!(!cstring.should_write_binary());
+
+        let empty_cstring = CString::from_str("");
+        assert!(!empty_cstring.should_write_binary());
+
+        let null_str_cstring = CString::from_str(NULL_STR);
+        assert!(!null_str_cstring.should_write_binary());
+
+        let valid_cstring = CString::from_str("valid");
+        assert!(valid_cstring.should_write_binary());
+    }
+
+    #[test]
+    fn test_display() {
+        let null_cstring = CString::new(None);
+        assert_eq!(format!("{}", null_cstring), NULL_STR);
+
+        let cstring = CString::from_str("display test");
+        assert_eq!(format!("{}", cstring), "display test");
+    }
+
+    #[test]
+    fn test_from_str_conversion() {
+        let cstring: CString = "test string".into();
+        assert_eq!(cstring.get_ref(), &Some(Cow::Borrowed("test string")));
+    }
+
+    #[test]
+    fn test_to_string_ptr() {
+        let cstring = CString::from_str("test");
+        let string_ptr: StringPtr = cstring.clone().into();
+        assert_eq!(string_ptr.get_ref(), cstring.get_ref());
+    }
+
+    #[cfg(feature = "serde")]
+    #[test]
+    fn test_serialization() {
+        let cstring = CString::from_str("serialize me");
+        let serialized = serde_json::to_string(&cstring).unwrap();
+        assert_eq!(serialized, "\"serialize me\"");
+
+        let null_cstring = CString::new(None);
+        let serialized_null = serde_json::to_string(&null_cstring).unwrap();
+        assert_eq!(serialized_null, "null");
+    }
+
+    #[cfg(feature = "serde")]
+    #[test]
+    fn test_deserialization() {
+        let json_data = "\"deserialize me\"";
+        let deserialized: CString = serde_json::from_str(json_data).unwrap();
+        assert_eq!(
+            deserialized.get_ref(),
+            &Some(Cow::Borrowed("deserialize me"))
+        );
+
+        let json_null = "null";
+        let deserialized_null: CString = serde_json::from_str(json_null).unwrap();
+        assert!(deserialized_null.is_null());
     }
 }

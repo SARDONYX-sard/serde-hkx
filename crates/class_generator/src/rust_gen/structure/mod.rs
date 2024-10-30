@@ -33,6 +33,7 @@ pub fn generate(class: &Class) -> syn::ItemStruct {
             };
             quote! {
                 /// Alternative to C++ class inheritance.
+                #[cfg_attr(feature = "serde", serde(flatten))]
                 pub parent: #parent_struct_name #lifetime,
             }
         }
@@ -53,6 +54,7 @@ pub fn generate(class: &Class) -> syn::ItemStruct {
             ///
             /// # Note
             /// Not present in the binary & Not exist actual C++ field.
+            #[cfg_attr(feature = "serde", serde(skip_serializing_if = "Option::is_none", default))]
             pub __ptr: Option<Pointer>,
             #parent
             #(#fields,)*
