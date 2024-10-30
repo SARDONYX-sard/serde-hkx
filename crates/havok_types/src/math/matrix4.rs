@@ -1,24 +1,42 @@
-use super::vector4::Vector4;
+use crate::Vector4;
 use parse_display::Display;
 
-/// Matrix4x4 for havok.
+/// # Matrix4x4
+///
+/// # C++ Info
+/// - name: `hkMatrix4`
+/// - type_size: ` 64`(x86)/` 64`(x86_64)
+/// - align: ` 16`(x86)/` 16`(x86_64)
 ///
 /// # XML representation
 /// ```xml
 /// <hkparam>(0.000000 0.000000 0.000000 0.000000)(-0.000000 0.000000 -0.000000 1.000000)(1.000000 1.000000 1.000000 0.000000)(1.000000 1.000000 1.000000 0.000000)</hkparam>
 /// ```
 #[repr(C, align(16))]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
 #[display("{x}{y}{z}{w}")]
 pub struct Matrix4 {
-    /// The first column of the matrix.
+    /// # C++ Info
+    /// - name: `x`(ctype: `hkVector4`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub x: Vector4,
-    /// The second column of the matrix.
+    /// # C++ Info
+    /// - name: `y`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub y: Vector4,
-    /// The third column of the matrix.
+    /// # C++ Info
+    /// - name: `z`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub z: Vector4,
-    /// The fourth column of the matrix.
+    /// # C++ Info
+    /// - name: `w`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub w: Vector4,
 }
 

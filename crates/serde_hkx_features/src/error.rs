@@ -72,7 +72,7 @@ pub enum Error {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Extra formats
     /// (De)Serialize json error
-    #[cfg(feature = "extra_fmt")]
+    #[cfg(any(feature = "extra_fmt", feature = "json_schema"))]
     #[snafu(display("{}:\n {source}", input.display()))]
     JsonError {
         input: PathBuf,

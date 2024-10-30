@@ -6,6 +6,7 @@ use parse_display::{Display, FromStr};
 ///
 /// # Why not use [`usize`]?
 /// Because if this code is compiled as a 32-bit application, the usize will be 32-bit, and 32-bit will not be able to reserve the size for 64-bit.
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[cfg_attr(feature = "serde", serde(transparent))]
 #[repr(transparent)]

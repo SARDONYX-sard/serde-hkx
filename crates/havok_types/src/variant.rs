@@ -5,6 +5,7 @@ use crate::Pointer;
 /// - byte size: `   8`(x86)/` 16`(x86_64)
 ///
 /// Only used for `value` of `hkCustomAttributesAttribute`.
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(Debug, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Variant {

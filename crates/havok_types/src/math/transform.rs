@@ -1,6 +1,13 @@
 use crate::{Rotation, Vector4};
 use parse_display::Display;
 
+/// # Transform
+///
+/// # C++ Info
+/// - name: `hkTransform`
+/// - type_size: ` 64`(x86)/` 64`(x86_64)
+/// - align: ` 16`(x86)/` 16`(x86_64)
+///
 /// # XML representation
 /// - [`Vector4::w`] (4th) isn't used.
 /// ```xml
@@ -8,14 +15,23 @@ use parse_display::Display;
 /// <hkparam>(0.000000 0.000000 0.000000)(0.000000 0.000000 0.000000)(0.000000 0.000000 0.000000)(-0.000000 0.000000 -0.000000)</hkparam>
 /// ```
 #[repr(C, align(16))]
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
 #[display("{rotation}{transition}")]
 pub struct Transform {
-    /// Rotation part
+    /// # C++ Info
+    /// - name: `rotation`(ctype: `hkRotation`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub rotation: Rotation,
+    /// # C++ Info
+    /// - name: `transition`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    ///
     /// # NOTE
-    /// `Vector4::w`(4th) isn't used(always 0.0).
+    /// - `Vector4::w`(4th) isn't used(always 0.0).
     #[display("({x:.06} {y:.06} {z:.06})")]
     pub transition: Vector4,
 }

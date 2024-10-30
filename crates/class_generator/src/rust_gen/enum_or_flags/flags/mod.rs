@@ -49,13 +49,17 @@ pub fn gen_flag(one_enum: &Enum) -> syn::Macro {
         bitflags::bitflags! {
             #doc
             #[allow(non_upper_case_globals, non_snake_case)]
-            #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+            #[cfg_attr(
+                feature = "serde",
+                derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)
+            )]
             #[repr(transparent)]
             #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
             pub struct #enum_name: #size_ty {
                 #(#variants)*
             }
         }
+
     }
 }
 

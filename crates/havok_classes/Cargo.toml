@@ -19,6 +19,7 @@ educe = { workspace = true, features = [
 ] } # To support the `Default` trait implementation for huge fixed-size arrays.
 num-derive = { workspace = true } # To serialize Enum & Flags
 num-traits = { workspace = true } # To serialize Enum & Flags
+schemars = { workspace = true, features = ["indexmap2"], optional = true }
 serde = { workspace = true, features = [
   "derive",
 ], optional = true } # Implement (De)Serializer
@@ -40,3 +41,6 @@ strict = []
 
 # When reading partial XML in Nemesis, you may want to ignore duplicates because the original comes a second time. This is used in that case.
 ignore_duplicates = []
+
+# Derive json schema generator
+json_schema = ["serde", "havok_types/json_schema", "dep:schemars"]

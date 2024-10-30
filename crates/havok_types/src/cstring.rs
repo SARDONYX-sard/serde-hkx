@@ -1,10 +1,18 @@
 use crate::{lib::*, StringPtr, NULL_STR};
 
+/// # CString
 /// - binary data(.hkx): null-terminated string
 /// - XML: `&str`
 ///
-/// If it is null (substitute [`Option::None`] in Rust), an empty string or `\u{2400}`,
-/// it will not be written to the binary data.
+/// # C++ Info
+/// - name: `char*`
+/// - type_size: ` 4`(x86)/` 8`(x86_64)
+/// - align: ` 4`(x86)/` 8`(x86_64)
+///
+/// # Null representation
+/// - hkx: It will not be written to the binary data.
+/// - XML: `\u{2400}`.
+/// - Rust: If it is null then [`Option::None`].(To eliminate the risk of always being null ptr by type)
 ///
 /// # Deserialization patterns
 /// - hkx(`Vec<u8>`)   -> Struct([`str`] in `Cow<'_, str>`) => non copy
@@ -14,7 +22,9 @@ use crate::{lib::*, StringPtr, NULL_STR};
 /// # Serialization is alloc
 /// Struct([`str`]) -> (alloc [`String`])
 ///
-/// [`str`]: https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html
+/// [`str`]: https://doc.rust-lang.org/std/primitive.str.html
+#[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "json_schema", schemars(transparent))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[cfg_attr(feature = "serde", serde(transparent))]
 #[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
