@@ -37,7 +37,7 @@ serde_hkx = { workspace = true }
 
 [features]
 # default = ["extra_fmt"] # For debug
-default = ["json_schema"] # For debug
+# default = ["json_schema"] # For debug
 
 # For `Format`(Output)
 clap = ["dep:clap"]
