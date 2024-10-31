@@ -456,7 +456,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_bool(tri!(self.parse_peek(boolean())));
+        let res = visitor.visit_bool(tri!(self.parse_peek(boolean)));
         self.current_position += 1;
         res
     }
@@ -742,7 +742,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse_local_fixup(string())).map_or_else(
+        let s = tri!(self.parse_local_fixup(string)).map_or_else(
             || {
                 #[cfg(feature = "tracing")]
                 tracing::debug!("CString is NullPtr");
@@ -795,7 +795,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse_local_fixup(string())).map_or_else(
+        let s = tri!(self.parse_local_fixup(string)).map_or_else(
             || {
                 #[cfg(feature = "tracing")]
                 tracing::debug!("StringPtr is NullPtr");

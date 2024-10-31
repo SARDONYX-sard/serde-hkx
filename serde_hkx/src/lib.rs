@@ -19,8 +19,6 @@ mod lib {
     pub use self::core::f32;
     pub use self::core::fmt;
     pub use self::core::fmt::Display;
-    pub use self::core::ops::AddAssign;
-    pub use self::core::ops::MulAssign;
     pub use self::core::ops::Range;
     pub use self::core::str;
     pub use self::core::str::FromStr;

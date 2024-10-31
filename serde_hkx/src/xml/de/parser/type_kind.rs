@@ -9,7 +9,7 @@ use winnow::ascii::{digit1, multispace0, Caseless};
 use winnow::combinator::{alt, opt, preceded, seq};
 use winnow::error::{ContextError, StrContext, StrContextValue};
 use winnow::token::take_until;
-use winnow::Parser;
+use winnow::{PResult, Parser};
 
 /// Parses [`bool`]. `true` or `false``
 /// - The corresponding type kind: `Bool`
@@ -159,7 +159,10 @@ pub fn transform<'a>() -> impl Parser<&'a str, Transform, ContextError> {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// - Class pointer. (e.g. `#0050`, `null`, etc.)
-pub fn pointer<'a>() -> impl Parser<&'a str, Pointer, ContextError> {
+///
+/// # Errors
+/// When parse failed.
+pub fn pointer(input: &mut &str) -> PResult<Pointer> {
     let null_ptr = Caseless("null")
         .value(Pointer::new(0))
         .context(StrContext::Label("Pointer"))
@@ -167,7 +170,7 @@ pub fn pointer<'a>() -> impl Parser<&'a str, Pointer, ContextError> {
             "Pointer(e.g. `null`)",
         )));
 
-    alt((null_ptr, move |input: &mut &'a str| {
+    alt((null_ptr, move |input: &mut &str| {
         let digit = tri!(preceded("#", digit1)
             .parse_to()
             .context(StrContext::Label("Pointer"))
@@ -177,6 +180,7 @@ pub fn pointer<'a>() -> impl Parser<&'a str, Pointer, ContextError> {
             .parse_next(input));
         Ok(Pointer::new(digit))
     }))
+    .parse_next(input)
 }
 
 /// Parses a string literal until `</`, e.g., `example` in (`example</`).
