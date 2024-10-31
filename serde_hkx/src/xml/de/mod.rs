@@ -252,7 +252,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let key = tri!(self.parse_next(attr_string()));
+        let key = tri!(self.parse_next(attr_string));
         #[cfg(feature = "tracing")]
         tracing::debug!(key);
 
@@ -407,7 +407,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_pointer(tri!(self.parse_next(pointer())))
+        visitor.visit_pointer(tri!(self.parse_next(pointer)))
     }
 
     fn deserialize_array<V>(self, visitor: V) -> Result<V::Value, Self::Error>
@@ -473,7 +473,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
             tri!(self.parse_next(start_tag("hkobject")));
             None
         } else {
-            let (ptr_name, class_name, _signature) = tri!(self.parse_next(class_start_tag()));
+            let (ptr_name, class_name, _signature) = tri!(self.parse_next(class_start_tag));
             #[cfg(feature = "tracing")]
             tracing::trace!(
                 "Parsed: <hkobject name=\"{ptr_name}\" class=\"{class_name}\" signature=\"{_signature}\">"
@@ -502,7 +502,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_pointer(tri!(self.parse_next(pointer())))
+        visitor.visit_pointer(tri!(self.parse_next(pointer)))
     }
 
     fn deserialize_cstring<V>(self, visitor: V) -> Result<V::Value, Self::Error>

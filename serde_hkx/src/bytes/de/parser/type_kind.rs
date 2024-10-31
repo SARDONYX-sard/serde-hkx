@@ -7,17 +7,21 @@ use winnow::binary::{self, Endianness};
 use winnow::combinator::{alt, seq, terminated};
 use winnow::error::{ContextError, StrContext, StrContextValue};
 use winnow::token::take_until;
-use winnow::Parser;
+use winnow::{PResult, Parser};
 
 /// Parses [`bool`]. `true` or `false``
 /// - The corresponding type kind: `Bool`
+///
+/// # Errors
+/// When parse failed.
 #[inline]
-pub fn boolean<'a>() -> impl Parser<BytesStream<'a>, bool, ContextError> {
+pub fn boolean(input: &mut BytesStream<'_>) -> PResult<bool> {
     alt((1.value(true), 0.value(false)))
         .context(StrContext::Label("bool(u8)"))
         .context(StrContext::Expected(StrContextValue::Description(
             "`1` or `0`",
         )))
+        .parse_next(input)
 }
 
 // Unsigned integers -> use `dec_unit`
@@ -156,13 +160,17 @@ pub fn half<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f16, Context
 }
 
 /// Parses a string literal until `\0`
-pub fn string<'a>() -> impl Parser<BytesStream<'a>, &'a str, ContextError> {
+///
+/// # Errors
+/// If parse failed.
+pub fn string<'a>(input: &mut BytesStream<'a>) -> PResult<&'a str> {
     terminated(take_until(0.., b'\0'), b'\0')
         .try_map(|bytes| core::str::from_utf8(bytes))
         .context(StrContext::Label("string"))
         .context(StrContext::Expected(StrContextValue::Description(
             "Valid ASCII string literal",
         )))
+        .parse_next(input)
 }
 
 /// Parses ptr size(verify 0), size(`int` -> `usize`), and capacity(`int`).
@@ -217,9 +225,9 @@ mod tests {
 
     #[test]
     fn test_boolean() {
-        assert_eq!(boolean().parse(&[1]), Ok(true));
-        assert_eq!(boolean().parse(&[0]), Ok(false));
-        assert!(boolean().parse(b"yes").is_err());
+        assert_eq!(boolean.parse(&[1]), Ok(true));
+        assert_eq!(boolean.parse(&[0]), Ok(false));
+        assert!(boolean.parse(b"yes").is_err());
     }
 
     #[test]
@@ -273,7 +281,7 @@ mod tests {
 
     #[test]
     fn test_string() {
-        assert_eq!(string().parse(b"example\0"), Ok("example"));
-        assert!(string().parse(b"example").is_err());
+        assert_eq!(string.parse(b"example\0"), Ok("example"));
+        assert!(string.parse(b"example").is_err());
     }
 }

@@ -43,7 +43,7 @@ pub fn classnames_section<'a>(
                 _: binary::u8::<&[u8], ContextError>
                     .verify(|byte| *byte == 0x9)
                     .context(StrContext::Expected(Description("class name separator(0x9)"))),
-                string() // Parse until `\0`
+                string // Parse until `\0`
                     .verify(|s: &str| s.is_ascii())
                     .context(StrContext::Expected(Description("ASCII class name(e.g. `hkReferencedObject`")))
             }.parse_next(bytes));
