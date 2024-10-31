@@ -23,7 +23,8 @@
 - [x] 32bit to 64bit (reverse) conversion of hkx.
 - [x] XML to 32bit/64bit hkx (reverse) conversion.
 - [x] Display of hkx/XML state machine dependency tree.
-- [x] Output logs that make it possible to determine the binary data location of hkx.
+- [x] Output logs that make it possible to determine the binary data location of
+      hkx.
 - [x] Hexdump the binary data of hkx.
 - [x] Display data differences between two hkx/XML.
 
@@ -39,19 +40,33 @@
 
 ## When used as a library(For developer)
 
-- Convenience wrapper API(For CLI/GUI): (e.g. [CLI](./crates/cli/src/args/mod.rs))
+- Convenience wrapper API(For CLI/GUI): [Examples](./crates/cli/src/args/mod.rs)
 
 ```toml
 # in Cargo.toml
-serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.3.1" }
+tokio = { version = "1.41.0", features = ["full"] } # Async runtime
+serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.4.0" }
+```
+
+```rust
+use serde_hkx_features::convert::{convert, OutFormat}
+use serde_hkx_features::error::{Result}
+
+#[tokio::main]
+async fn havok_convert() -> Result<()> {
+  let input = "input/path";
+  let out_fmt = OutFormat::from_input(&input)?; // .hkx -> XML, .xml -> Amd64
+  let output: Option<PathBuf> = None; // `None` is same as input.
+  convert(input, output, out_fmt).await
+}
 ```
 
 - Low level API: (e.g. [Tests](./serde_hkx/src/tests/verify.rs))
 
 ```toml
 # in Cargo.toml
-havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.3.1" }
-serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.3.1" }
+havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.4.0" }
+serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.4.0" }
 ```
 
 ## Documentation
@@ -79,6 +94,7 @@ The only way to find out if it is possible or not is to try it out.
 
 ## About the GPL old version
 
-GPL-dependent code (`rhexdump` crate) has been removed, and the GPL usage history has been completely removed.
+GPL-dependent code (`rhexdump` crate) has been removed, and the GPL usage
+history has been completely removed.
 
 - [Prev GPL History(ver. 0.0.0)](https://github.com/SARDONYX-sard/serde-hkx/releases/tag/0.0.0-prev-gpl-history)
