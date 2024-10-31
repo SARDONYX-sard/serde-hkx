@@ -242,7 +242,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse_next(string())); // Read Until `</`
+        let s = tri!(self.parse_next(string)); // Read Until `</`
         visitor.visit_stringptr(StringPtr::from_option(Some(s)))
     }
 
@@ -279,7 +279,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_bool(tri!(self.parse_next(boolean())))
+        visitor.visit_bool(tri!(self.parse_next(boolean)))
     }
 
     fn deserialize_char<V>(self, visitor: V) -> Result<V::Value, Self::Error>
@@ -351,56 +351,56 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_real(tri!(self.parse_next(real())))
+        visitor.visit_real(tri!(self.parse_next(real)))
     }
 
     fn deserialize_vector4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_vector4(tri!(self.parse_next(vector4())))
+        visitor.visit_vector4(tri!(self.parse_next(vector4)))
     }
 
     fn deserialize_quaternion<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_quaternion(tri!(self.parse_next(quaternion())))
+        visitor.visit_quaternion(tri!(self.parse_next(quaternion)))
     }
 
     fn deserialize_matrix3<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_matrix3(tri!(self.parse_next(matrix3())))
+        visitor.visit_matrix3(tri!(self.parse_next(matrix3)))
     }
 
     fn deserialize_rotation<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_rotation(tri!(self.parse_next(rotation())))
+        visitor.visit_rotation(tri!(self.parse_next(rotation)))
     }
 
     fn deserialize_qstransform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_qstransform(tri!(self.parse_next(qstransform())))
+        visitor.visit_qstransform(tri!(self.parse_next(qstransform)))
     }
 
     fn deserialize_matrix4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_matrix4(tri!(self.parse_next(matrix4())))
+        visitor.visit_matrix4(tri!(self.parse_next(matrix4)))
     }
 
     fn deserialize_transform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_transform(tri!(self.parse_next(transform())))
+        visitor.visit_transform(tri!(self.parse_next(transform)))
     }
 
     fn deserialize_pointer<V>(self, visitor: V) -> Result<V::Value, Self::Error>
@@ -414,7 +414,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        tri!(self.parse_next(comment_multispace0()));
+        tri!(self.parse_next(comment_multispace0));
         visitor.visit_array(SeqDeserializer::new(self))
     }
 
@@ -509,7 +509,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse_next(string())); // take until `</`
+        let s = tri!(self.parse_next(string)); // take until `</`
         let s = if s == "\u{2400}" { None } else { Some(s) }; // NOTE: Unicode null to null ptr.
         visitor.visit_cstring(CString::from_option(s))
     }
@@ -526,7 +526,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse_next(string()));
+        let s = tri!(self.parse_next(string));
         // Call `FromStr` of each flags. Always returns Some because `unwrap` is used on the assumption that there is a string inside.
         visitor.visit_stringptr(StringPtr::from_option(Some(s)))
     }
@@ -535,7 +535,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let float = tri!(self.parse_next(real()));
+        let float = tri!(self.parse_next(real));
         visitor.visit_half(f16::from_f32(float))
     }
 
@@ -543,7 +543,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse_next(string())); // take until `</`
+        let s = tri!(self.parse_next(string)); // take until `</`
         let s = if s == "\u{2400}" { None } else { Some(s) }; // NOTE: Unicode null to null ptr.
         visitor.visit_stringptr(StringPtr::from_option(s))
     }

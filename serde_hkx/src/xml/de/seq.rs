@@ -52,7 +52,7 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Space is required before every element except the first.
-        tri!(self.de.parse_next(comment_multispace0()));
+        tri!(self.de.parse_next(comment_multispace0));
 
         // Check if there are no more elements.
         if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {

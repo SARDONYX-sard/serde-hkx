@@ -7,25 +7,65 @@ use havok_types::*;
 use std::borrow::Cow;
 use winnow::ascii::{digit1, multispace0, Caseless};
 use winnow::combinator::{alt, opt, preceded, seq};
-use winnow::error::{ContextError, StrContext, StrContextValue};
+use winnow::error::{StrContext, StrContextValue};
 use winnow::token::take_until;
 use winnow::{PResult, Parser};
 
-/// Parses [`bool`]. `true` or `false``
+/// Parses [`bool`]. `true` or `false`
 /// - The corresponding type kind: `Bool`
-pub fn boolean<'a>() -> impl Parser<&'a str, bool, ContextError> {
+///
+/// # Examples
+///
+/// ```
+/// use havok_types::bool;
+/// use serde_hkx::xml::de::parser::type_kind::boolean;
+/// use winnow::Parser as _;
+///
+/// assert_eq!(boolean.parse("true"), Ok(true));
+/// assert_eq!(boolean.parse("false"), Ok(false));
+/// assert!(boolean.parse("invalid").is_error());
+/// ```
+///
+/// # Errors
+/// When parse failed.
+pub fn boolean(input: &mut &str) -> PResult<bool> {
     alt(("true".value(true), "false".value(false)))
         .context(StrContext::Label("bool"))
         .context(StrContext::Expected(StrContextValue::Description(
             "`true` or `false`",
         )))
+        .parse_next(input)
 }
 
 // Unsigned integers -> use `dec_unit`
 //   Signed integers -> use `dec_nit`
 
 /// Parses [`f32`](`Real`)
-pub fn real<'a>() -> impl Parser<&'a str, f32, ContextError> {
+///
+/// # Examples
+///
+/// ```
+/// use havok_types::bool;
+/// use serde_hkx::xml::de::parser::type_kind::real;
+/// use winnow::Parser as _;
+///
+/// assert_eq!(real.parse("1.0"), Ok(1.0_f32));
+/// assert_eq!(real.parse("0.1"), Ok(0.1_f32));
+///
+/// // C++ indeterminate
+/// assert_eq!(real.parse("1.#IND00"), Ok(f32::NAN));
+/// assert_eq!(real.parse("-1.#IND00"), Ok(f32::NAN));
+///
+/// // C++ infinity
+/// assert_eq!(real.parse("1.#INF"), Ok(f32::INFINITY));
+/// assert_eq!(real.parse("-1.#INF00"), Ok(f32::NEG_INFINITY));
+///
+/// assert!(real.parse("invalid").is_error());
+/// ```
+///
+/// # Errors
+/// When parse failed.
+pub fn real(input: &mut &str) -> PResult<f32> {
     // Need to support special representation of decimal points in C++
     let nan = alt((
         "1.#IND",
@@ -44,6 +84,7 @@ pub fn real<'a>() -> impl Parser<&'a str, f32, ContextError> {
         .context(StrContext::Expected(StrContextValue::Description(
             "Real(e.g. `0.100000`)",
         )))
+        .parse_next(input)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,86 +92,214 @@ pub fn real<'a>() -> impl Parser<&'a str, f32, ContextError> {
 
 /// Parse as [`Vector4`]
 ///
+/// # Examples
+///
 /// ```
 /// use havok_types::Vector4;
 /// use serde_hkx::xml::de::parser::type_kind::vector4;
 /// use winnow::Parser as _;
 ///
-/// assert_eq!(vector4().parse("(1.000000 1.000000 1.000000 0.000000)"), Ok(Vector4::new(1.0, 1.0, 1.0, 0.0)));
-/// assert_eq!(vector4().parse("(-0.000000 0.000000 -0.000000 1.000000)"), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
-/// assert_eq!(vector4().parse("   (   -0.000000 0.000000 -0.000000 1.000000  ) "), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
+/// assert_eq!(vector4.parse("(1.000000 1.000000 1.000000 0.000000)"), Ok(Vector4::new(1.0, 1.0, 1.0, 0.0)));
+/// assert_eq!(vector4.parse("(-0.000000 0.000000 -0.000000 1.000000)"), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
+/// assert_eq!(vector4.parse("   (   -0.000000 0.000000 -0.000000 1.000000  ) "), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
 /// ```
-pub fn vector4<'a>() -> impl Parser<&'a str, Vector4, ContextError> {
+///
+/// # Errors
+/// When parse failed.
+pub fn vector4(input: &mut &str) -> PResult<Vector4> {
     seq!(Vector4 {
         _: opt(delimited_with_multispace0("(")),
-        x: real().context(StrContext::Label("x")),
+        x: real.context(StrContext::Label("x")),
         _: multispace0,
-        y: real().context(StrContext::Label("y")),
+        y: real.context(StrContext::Label("y")),
         _: multispace0,
-        z: real().context(StrContext::Label("z")),
+        z: real.context(StrContext::Label("z")),
         _: multispace0,
-        w: real().context(StrContext::Label("w")),
+        w: real.context(StrContext::Label("w")),
         _: opt(delimited_with_multispace0(")")),
     })
     .context(StrContext::Label("Vector4"))
+    .parse_next(input)
 }
 
-/// Attempt to extract from the string representation in the tag on XML.
+/// Parse as [`Quaternion`]
 ///
 /// # Examples
 /// ```
 /// use havok_types::Quaternion;
 /// use serde_hkx::xml::de::parser::type_kind::quaternion;
 /// use winnow::Parser as _;
-/// assert_eq!(quaternion().parse("   (   -0.000000 0.000000 -0.000000 1.000000  ) "), Ok(Quaternion::new(-0.0, 0.0, -0.0, 1.0)));
+///
+/// assert_eq!(
+///     quaternion.parse("   (   -0.000000 0.000000 -0.000000 1.000000  ) "),
+///     Ok(Quaternion::new(-0.0, 0.0, -0.0, 1.0))
+/// );
 /// ```
+///
+/// # Errors
+/// When parse failed.
 #[inline]
-pub fn quaternion<'a>() -> impl Parser<&'a str, Quaternion, ContextError> {
-    move |input: &mut &'a str| {
-        let Vector4 { x, y, z, w } = tri!(vector4()
-            .context(StrContext::Label("Quaternion"))
-            .parse_next(input));
-        Ok(Quaternion { x, y, z, scaler: w })
-    }
+pub fn quaternion(input: &mut &str) -> PResult<Quaternion> {
+    let Vector4 { x, y, z, w } = tri!(vector4
+        .context(StrContext::Label("Quaternion"))
+        .parse_next(input));
+    Ok(Quaternion { x, y, z, scaler: w })
 }
 
-pub fn matrix3<'a>() -> impl Parser<&'a str, Matrix3, ContextError> {
+/// Parse as [`Matrix3`]
+///
+/// # Examples
+/// ```
+/// use havok_types::{Matrix3, Vector4};
+/// use serde_hkx::xml::de::parser::type_kind::matrix3;
+/// use winnow::Parser as _;
+///
+/// assert_eq!(matrix3.parse("
+///    (0.000000 0.000000 0.000000)
+///    (-0.000000 0.000000 -0.000000)
+///    (1.000000 1.000000 1.000000)
+/// "), Ok(Matrix3::new(
+///    Vector4::default(),
+///    Vector4::new(-0.0, 0.0, -0.0, 0.0),
+///    Vector4::new(1.0, 1.0, 1.0, 0.0),
+/// )));
+/// ```
+///
+/// # Errors
+/// When parse failed.
+pub fn matrix3(input: &mut &str) -> PResult<Matrix3> {
     seq!(Matrix3 {
-        x: vector3().context(StrContext::Label("x")),
-        y: vector3().context(StrContext::Label("y")),
-        z: vector3().context(StrContext::Label("z")),
+        x: vector3.context(StrContext::Label("x")),
+        y: vector3.context(StrContext::Label("y")),
+        z: vector3.context(StrContext::Label("z")),
     })
     .context(StrContext::Label("Matrix3"))
+    .parse_next(input)
 }
 
-pub fn rotation<'a>() -> impl Parser<&'a str, Rotation, ContextError> {
+/// Parse as [`Rotation`]
+///
+/// # Examples
+/// ```
+/// use havok_types::{Rotation, Vector4};
+/// use serde_hkx::xml::de::parser::type_kind::rotation;
+/// use winnow::Parser as _;
+///
+/// assert_eq!(rotation.parse("
+///    (0.000000 0.000000 0.000000)
+///    (-0.000000 0.000000 -0.000000)
+///    (1.000000 1.000000 1.000000)
+/// "), Ok(Rotation::new(
+///    Vector4::default(),
+///    Vector4::new(-0.0, 0.0, -0.0, 0.0),
+///    Vector4::new(1.0, 1.0, 1.0, 0.0),
+/// )));
+/// ```
+///
+/// # Errors
+/// When parse failed.
+pub fn rotation(input: &mut &str) -> PResult<Rotation> {
     seq!(Rotation {
-        x: vector3().context(StrContext::Label("x")),
-        y: vector3().context(StrContext::Label("y")),
-        z: vector3().context(StrContext::Label("z")),
+        x: vector3.context(StrContext::Label("x")),
+        y: vector3.context(StrContext::Label("y")),
+        z: vector3.context(StrContext::Label("z")),
     })
     .context(StrContext::Label("Rotation"))
+    .parse_next(input)
 }
 
-pub fn qstransform<'a>() -> impl Parser<&'a str, QsTransform, ContextError> {
+/// Parse as [`QsTransform`]
+///
+/// # Examples
+/// ```
+/// use havok_types::{QsTransform, Quaternion,Vector4};
+/// use serde_hkx::xml::de::parser::type_kind::qstransform;
+/// use winnow::Parser as _;
+///
+/// assert_eq!(qstransform.parse("
+///    (0.000000 0.000000 0.000000)
+///    (-0.000000 0.000000 -0.000000 0.000000)
+///    (1.000000 1.000000 1.000000)
+/// "), Ok(QsTransform::new(
+///    Vector4::default(),
+///    Quaternion::new(-0.0, 0.0, -0.0, 0.0),
+///    Vector4::new(1.0, 1.0, 1.0, 0.0),
+/// )));
+/// ```
+///
+/// # Errors
+/// When parse failed.
+pub fn qstransform(input: &mut &str) -> PResult<QsTransform> {
     seq!(QsTransform {
-        transition: vector3().context(StrContext::Label("transition")),
-        quaternion: quaternion().context(StrContext::Label("quaternion")),
-        scale: vector3().context(StrContext::Label("scale")),
+        transition: vector3.context(StrContext::Label("transition")),
+        quaternion: quaternion.context(StrContext::Label("quaternion")),
+        scale: vector3.context(StrContext::Label("scale")),
     })
     .context(StrContext::Label("QsTransform"))
+    .parse_next(input)
 }
 
-pub fn matrix4<'a>() -> impl Parser<&'a str, Matrix4, ContextError> {
+/// Parse as [`Matrix4`]
+///
+/// # Examples
+/// ```
+/// use havok_types::{Matrix4, Vector4};
+/// use serde_hkx::xml::de::parser::type_kind::matrix4;
+/// use winnow::Parser as _;
+///
+/// assert_eq!(matrix4.parse("
+///    (0.000000 0.000000 0.000000 0.000000)
+///    (-0.000000 0.000000 -0.000000 0.000000)
+///    (1.000000 1.000000 1.000000 0.000000)
+///    (1.000000 1.000000 1.000000 0.000000)
+/// "), Ok(Matrix4::new(
+///    Vector4::default(),
+///    Vector4::new(-0.0, 0.0, -0.0, 0.0),
+///    Vector4::new(1.0, 1.0, 1.0, 0.0),
+///    Vector4::new(1.0, 1.0, 1.0, 0.0),
+/// )));
+/// ```
+///
+/// # Errors
+/// When parse failed.
+pub fn matrix4(input: &mut &str) -> PResult<Matrix4> {
     seq!(Matrix4 {
-        x: vector4().context(StrContext::Label("x")),
-        y: vector4().context(StrContext::Label("y")),
-        z: vector4().context(StrContext::Label("z")),
-        w: vector4().context(StrContext::Label("w")),
+        x: vector4.context(StrContext::Label("x")),
+        y: vector4.context(StrContext::Label("y")),
+        z: vector4.context(StrContext::Label("z")),
+        w: vector4.context(StrContext::Label("w")),
     })
     .context(StrContext::Label("Matrix4"))
+    .parse_next(input)
 }
 
+/// Parse as [`Transform`]
+///
+/// # Examples
+/// ```
+/// use havok_types::{Rotation, Transform, Vector4};
+/// use serde_hkx::xml::de::parser::type_kind::transform;
+/// use winnow::Parser as _;
+///
+/// assert_eq!(transform.parse("
+///    (0.000000 0.000000 0.000000)
+///    (-0.000000 0.000000 -0.000000)
+///    (1.000000 1.000000 1.000000)
+///
+///    (0.000000 0.000000 1.000000)
+/// "), Ok(Transform::new(
+///    Rotation::new(
+///         Vector4::default(),
+///         Vector4::new(-0.0, 0.0, -0.0, 0.0),
+///         Vector4::new(1.0, 1.0, 1.0, 0.0),
+///    ),
+///    Vector4::new(0.0, 0.0, 1.0, 1.0),
+/// )));
+/// ```
+///
+/// # Errors
+/// When parse failed.
+///
 /// # Why is the w(of transition) in transform 1.0?
 /// Must be 1.0 for affine conversion.
 /// ```txt
@@ -143,10 +312,10 @@ pub fn matrix4<'a>() -> impl Parser<&'a str, Matrix4, ContextError> {
 ///  [0, 0, 0,  1], // transition
 /// ]
 /// ```
-pub fn transform<'a>() -> impl Parser<&'a str, Transform, ContextError> {
+pub fn transform(input: &mut &str) -> PResult<Transform> {
     seq!(Transform {
-        rotation: rotation().context(StrContext::Label("rotation")),
-        transition: vector3()
+        rotation: rotation.context(StrContext::Label("rotation")),
+        transition: vector3
             .context(StrContext::Label("transition"))
             .map(|mut vec4| {
                 vec4.w = 1.0; // To affine conversion.
@@ -154,11 +323,26 @@ pub fn transform<'a>() -> impl Parser<&'a str, Transform, ContextError> {
             }),
     })
     .context(StrContext::Label("Transform"))
+    .parse_next(input)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///
+/// Parse as [`Pointer`]
 /// - Class pointer. (e.g. `#0050`, `null`, etc.)
+///
+/// # Examples
+/// ```
+/// use havok_types::Pointer;
+/// use serde_hkx::xml::de::parser::type_kind::pointer;
+/// use winnow::Parser as _;
+///
+/// assert_eq!(pointer.parse("null"), Ok(Pointer::new(0))); // null pointer
+/// assert_eq!(pointer.parse("#0000"), Ok(Pointer::new(0))); // null pointer
+/// assert_eq!(pointer.parse("#0100"), Ok(Pointer::new(100)));
+/// assert!(pointer.parse("Non_Prefix#").is_err());
+/// ```
 ///
 /// # Errors
 /// When parse failed.
@@ -185,7 +369,32 @@ pub fn pointer(input: &mut &str) -> PResult<Pointer> {
 
 /// Parses a string literal until `</`, e.g., `example` in (`example</`).
 /// - The corresponding type kind: `CString`, `StringPtr`
-pub fn string<'a>() -> impl Parser<&'a str, Cow<'a, str>, ContextError> {
+///
+/// # Examples
+/// ```
+/// use serde_hkx::xml::de::parser::type_kind::string;
+/// use std::borrow::Cow;
+/// use winnow::Parser as _;
+/// assert_eq!(string.parse_next(&mut "example</"), Ok("example".into()));
+/// assert_eq!(
+///     string.parse_next(&mut "example</not_hkparam>"),
+///     Ok("example".into())
+/// );
+///
+/// assert_eq!(string.parse_next(&mut "&#9216;</"), Ok("\u{2400}".into()));
+/// let mut escaped =
+///     "This is a &lt;test&gt; &amp; &quot;example&quot; &apos; &#9216; &#x2400;</";
+/// assert_eq!(
+///     string.parse_next(&mut escaped),
+///     Ok(Cow::Borrowed(
+///         "This is a <test> & \"example\" ' \u{2400} \u{2400}"
+///     ))
+/// );
+/// ```
+///
+/// # Errors
+/// When parse failed.
+pub fn string<'a>(input: &mut &'a str) -> PResult<Cow<'a, str>> {
     take_until(0.., "</")
         .map(|s| html_escape::decode_html_entities(s))
         .context(StrContext::Label(
@@ -194,35 +403,50 @@ pub fn string<'a>() -> impl Parser<&'a str, Cow<'a, str>, ContextError> {
         .context(StrContext::Expected(StrContextValue::Description(
             "e.g. Hello</hkparam>",
         )))
+        .parse_next(input)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Support functions(These are not used as Havok types)
 
-///After reading off whitespace including line breaks and interpreting it as `Vector3`, put `0.0`
-/// in the w element to make `Vector4`.
-fn vector3<'a>() -> impl Parser<&'a str, Vector4, ContextError> {
+/// Parse as `Vector3`
+/// - After reading off whitespace including line breaks and interpreting it as `Vector3`, put `0.0`
+///   in the w element to make `Vector4`.
+///
+/// # Examples
+///
+/// ```
+/// use havok_types::Vector4;
+/// use serde_hkx::xml::de::parser::type_kind::vector3;
+/// use winnow::Parser as _;
+///
+/// assert_eq!(vector3.parse("(1.000000 1.000000 1.000000)"), Ok(Vector4::new(1.0, 1.0, 1.0, 0.0)));
+/// assert_eq!(vector3.parse("(-0.000000 0.000000 -0.000000)"), Ok(Vector4::new(-0.0, 0.0, -0.0, 0.0)));
+/// assert_eq!(vector3.parse("   (   -0.000000 0.000000 -0.000000) "), Ok(Vector4::new(-0.0, 0.0, -0.0, 0.0)));
+/// ```
+///
+/// # Errors
+/// When parse failed.
+pub fn vector3(input: &mut &str) -> PResult<Vector4> {
     struct Vector3 {
         x: f32,
         y: f32,
         z: f32,
     }
 
-    move |input: &mut &'a str| {
-        let Vector3 { x, y, z } = tri!(seq!(Vector3 {
-            _: opt(delimited_with_multispace0("(")),
-            x: real().context(StrContext::Label("x")),
-            _: multispace0,
-            y: real().context(StrContext::Label("y")),
-            _: multispace0,
-            z: real().context(StrContext::Label("z")),
-            _: opt(delimited_with_multispace0(")")),
-        })
-        .context(StrContext::Label("Vector3"))
-        .parse_next(input));
+    let Vector3 { x, y, z } = tri!(seq!(Vector3 {
+        _: opt(delimited_with_multispace0("(")),
+        x: real.context(StrContext::Label("x")),
+        _: multispace0,
+        y: real.context(StrContext::Label("y")),
+        _: multispace0,
+        z: real.context(StrContext::Label("z")),
+        _: opt(delimited_with_multispace0(")")),
+    })
+    .context(StrContext::Label("Vector3"))
+    .parse_next(input));
 
-        Ok(Vector4 { x, y, z, w: 0.0 })
-    }
+    Ok(Vector4 { x, y, z, w: 0.0 })
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -233,53 +457,14 @@ mod tests {
     use pretty_assertions::assert_eq;
 
     #[test]
-    fn test_boolean() {
-        assert_eq!(boolean().parse("true"), Ok(true));
-        assert_eq!(boolean().parse("false"), Ok(false));
-        assert!(boolean().parse("yes").is_err());
-    }
-
-    #[test]
-    fn test_vector4() {
-        assert_eq!(
-            vector4().parse("(-0.000000 0.000000 -0.000000 1.000000)"),
-            Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0))
-        );
-
-        assert_eq!(
-            vector4().parse("-0.000000 0.000000 -0.000000 1.000000"),
-            Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0))
-        );
-    }
-
-    #[test]
     fn test_matrix3() {
         assert_eq!(
-            matrix3().parse("(0.000000 0.000000 0.000000)(-0.000000 0.000000 1.000000)(1.000000 1.000000 0.000000)"),
+            matrix3.parse("(0.000000 0.000000 0.000000)(-0.000000 0.000000 1.000000)(1.000000 1.000000 0.000000)"),
             Ok(Matrix3 {
                 x: Vector4::default(),
                 y: Vector4 { x: -0.0, y: 0.0, z: 1.0, w: 0.0 },
                 z: Vector4 { x: 1.0, y: 1.0, z: 0.0, w: 0.0 }
             })
-        );
-    }
-
-    #[test]
-    fn test_string() {
-        assert_eq!(string().parse_next(&mut "example</"), Ok("example".into()));
-        assert_eq!(
-            string().parse_next(&mut "example</not_hkparam>"),
-            Ok("example".into())
-        );
-
-        assert_eq!(string().parse_next(&mut "&#9216;</"), Ok("\u{2400}".into()));
-        let mut escaped =
-            "This is a &lt;test&gt; &amp; &quot;example&quot; &apos; &#9216; &#x2400;</";
-        assert_eq!(
-            string().parse_next(&mut escaped),
-            Ok(Cow::Borrowed(
-                "This is a <test> & \"example\" ' \u{2400} \u{2400}"
-            ))
         );
     }
 }

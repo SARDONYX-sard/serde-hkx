@@ -119,7 +119,7 @@ pub fn field_start_close_tag(input: &mut &str) -> PResult<Option<u64>> {
 ///
 /// # Errors
 /// When parse failed.
-fn number_in_string<Num>(input: &mut &str) -> PResult<Num>
+pub fn number_in_string<Num>(input: &mut &str) -> PResult<Num>
 where
     Num: FromStr,
 {
