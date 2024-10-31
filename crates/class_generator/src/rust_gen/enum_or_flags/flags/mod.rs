@@ -2,7 +2,9 @@ pub mod impls;
 
 use crate::{
     cpp_info::{Enum, EnumItem, TypeKind},
-    rust_gen::enum_or_flags::{cast_number_to_token, to_rust_storage_type},
+    rust_gen::enum_or_flags::{
+        cast_number_to_token, to_rust_storage_size_ident, to_rust_storage_type,
+    },
 };
 use proc_macro2::TokenStream;
 use quote::quote;
@@ -12,6 +14,7 @@ use quote::quote;
 /// but does not check for `TypeKind` since that is left to upstream functions.
 pub fn gen_flag(one_enum: &Enum) -> syn::Macro {
     let Enum {
+        name,
         vtype,
         vsubtype,
         enum_item,
@@ -27,20 +30,34 @@ pub fn gen_flag(one_enum: &Enum) -> syn::Macro {
         .map(|enum_item| gen_variant_token(enum_item, vsubtype))
         .collect();
 
-    let doc = format!("- size(C++): `{vsubtype}`");
+    // e.g. `Uint64`
+    let storage_size_ident = to_rust_storage_size_ident(vsubtype)
+        .unwrap_or_else(|| panic!("Unsupported enum storage type: {vsubtype}"));
+    // e.g. `hkUint64`
+    let c_type_storage_size = format!("hk{storage_size_ident}");
+
+    let name = if *vtype == TypeKind::Enum {
+        format!(" - name: `{name}`(ctype: `hkEnum<{name}, {c_type_storage_size}>`)")
+    } else {
+        format!(" - name: `{name}`(ctype: `hkFlags<{name}, {c_type_storage_size}>`)")
+    };
+
     let doc = if *vtype == TypeKind::Enum {
         quote! {
-            /// Bit flags that represented `enum hkEnum<Enum, SizeType>`(C++).
-            #[doc = #doc]
+            /// Enum as bit flags
+            ///
+            /// # C++ Info
+            #[doc = #name]
             ///
             /// # Why this `enum` defined as `bitflags`?
-            /// These are not really `TYPE_FLAGS` but `TYPE_ENUM`, but since Rust does not allow the definition of
-            /// `enum` with duplicate discriminant values, they are defined as `bitflags`.
+            /// Since Rust does not allow the definition of `enum` with duplicate discriminant values, they are defined as `bitflags`.
         }
     } else {
         quote! {
-            /// Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++).
-            #[doc = #doc]
+            /// Bit flags
+            ///
+            /// # C++ Info
+            #[doc = #name]
         }
     };
 
