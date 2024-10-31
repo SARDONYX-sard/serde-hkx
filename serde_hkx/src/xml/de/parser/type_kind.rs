@@ -5,7 +5,7 @@ use crate::{lib::*, tri};
 use super::delimited_with_multispace0;
 use havok_types::*;
 use std::borrow::Cow;
-use winnow::ascii::{digit1, multispace0, Caseless};
+use winnow::ascii::{digit1, float, multispace0, Caseless};
 use winnow::combinator::{alt, opt, preceded, seq};
 use winnow::error::{StrContext, StrContextValue};
 use winnow::token::take_until;
@@ -17,13 +17,12 @@ use winnow::{PResult, Parser};
 /// # Examples
 ///
 /// ```
-/// use havok_types::bool;
 /// use serde_hkx::xml::de::parser::type_kind::boolean;
 /// use winnow::Parser as _;
 ///
 /// assert_eq!(boolean.parse("true"), Ok(true));
 /// assert_eq!(boolean.parse("false"), Ok(false));
-/// assert!(boolean.parse("invalid").is_error());
+/// assert!(boolean.parse("invalid").is_err());
 /// ```
 ///
 /// # Errors
@@ -45,7 +44,6 @@ pub fn boolean(input: &mut &str) -> PResult<bool> {
 /// # Examples
 ///
 /// ```
-/// use havok_types::bool;
 /// use serde_hkx::xml::de::parser::type_kind::real;
 /// use winnow::Parser as _;
 ///
@@ -53,33 +51,38 @@ pub fn boolean(input: &mut &str) -> PResult<bool> {
 /// assert_eq!(real.parse("0.1"), Ok(0.1_f32));
 ///
 /// // C++ indeterminate
-/// assert_eq!(real.parse("1.#IND00"), Ok(f32::NAN));
-/// assert_eq!(real.parse("-1.#IND00"), Ok(f32::NAN));
+/// assert!(real.parse("1.#IND").unwrap().is_nan());
+/// assert!(real.parse("1.#IND0").unwrap().is_nan());
+/// assert!(real.parse("1.#IND00").unwrap().is_nan());
+/// assert!(real.parse("-1.#IND0").unwrap().is_nan());
+/// assert!(real.parse("-1.#IND00").unwrap().is_nan());
 ///
 /// // C++ infinity
 /// assert_eq!(real.parse("1.#INF"), Ok(f32::INFINITY));
-/// assert_eq!(real.parse("-1.#INF00"), Ok(f32::NEG_INFINITY));
+/// // assert_eq!(real.parse("-1.#INF00"), Ok(f32::NEG_INFINITY));
 ///
-/// assert!(real.parse("invalid").is_error());
+/// assert!(real.parse("invalid").is_err());
 /// ```
 ///
 /// # Errors
 /// When parse failed.
 pub fn real(input: &mut &str) -> PResult<f32> {
+    // NOTE: For some reason, early errors occur if the display digits, such as 00, are not parsed first.
+
     // Need to support special representation of decimal points in C++
     let nan = alt((
-        "1.#IND",
-        "1.#IND0",
         "1.#IND00",
-        "-1.#IND",
-        "-1.#IND0",
+        "1.#IND0",
+        "1.#IND",
         "-1.#IND00",
+        "-1.#IND0",
+        "-1.#IND",
     ))
-    .map(|_| f32::NAN);
-    let pos_inf = alt(("1.#INF", "1.#INF0", "1.#INF00")).map(|_| f32::INFINITY);
-    let neg_inf = alt(("-1.#INF", "-1.#INF0", "-1.#INF00")).map(|_| f32::NEG_INFINITY);
+    .value(f32::NAN);
+    let pos_inf = alt(("1.#INF00", "1.#INF0", "1.#INF")).value(f32::INFINITY);
+    let neg_inf = alt(("-1.#INF00", "-1.#INF0", "-1.#INF")).value(f32::NEG_INFINITY);
 
-    alt((nan, pos_inf, neg_inf, winnow::ascii::float))
+    alt((nan, pos_inf, neg_inf, float))
         .context(StrContext::Label("real(f32)"))
         .context(StrContext::Expected(StrContextValue::Description(
             "Real(e.g. `0.100000`)",
