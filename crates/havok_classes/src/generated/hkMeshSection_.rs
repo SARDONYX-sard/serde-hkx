@@ -939,7 +939,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_UINT8`
+/// # C++ Info
+/// - name: `MeshSectionIndexType`(ctype: `hkEnum<MeshSectionIndexType, hkUint8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -960,7 +961,8 @@ pub enum MeshSectionIndexType {
     INDEX_TYPE_UINT16 = 1isize,
     INDEX_TYPE_UINT32 = 2isize,
 }
-///- size(C++): `TYPE_UINT8`
+/// # C++ Info
+/// - name: `PrimitiveType`(ctype: `hkEnum<PrimitiveType, hkUint8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

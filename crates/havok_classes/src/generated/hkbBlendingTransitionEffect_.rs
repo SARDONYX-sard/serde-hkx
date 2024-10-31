@@ -1176,13 +1176,14 @@ const _: () = {
 };
 #[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
-    #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
-    "- size(C++): `TYPE_UINT16`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
-    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
-    PartialEq, Eq, Hash)] pub struct FlagBits : u16 { #[doc = "0"] const FLAG_NONE =
-    0u16; #[doc = "1"] const FLAG_IGNORE_FROM_WORLD_FROM_MODEL = 1u16; #[doc = "2"] const
-    FLAG_SYNC = 2u16; #[doc = "4"] const FLAG_IGNORE_TO_WORLD_FROM_MODEL = 4u16; }
+    #[doc = r" Bit flags"] #[doc = r""] #[doc = r" # C++ Info"] #[doc =
+    " - name: `FlagBits`(ctype: `hkFlags<FlagBits, hkUint16>`)"]
+    #[allow(non_upper_case_globals, non_snake_case)] #[cfg_attr(feature = "serde",
+    derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr))]
+    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
+    FlagBits : u16 { #[doc = "0"] const FLAG_NONE = 0u16; #[doc = "1"] const
+    FLAG_IGNORE_FROM_WORLD_FROM_MODEL = 1u16; #[doc = "2"] const FLAG_SYNC = 2u16; #[doc
+    = "4"] const FLAG_IGNORE_TO_WORLD_FROM_MODEL = 4u16; }
 }
 #[cfg(feature = "json_schema")]
 const _: () = {
@@ -1204,7 +1205,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `EndMode`(ctype: `hkEnum<EndMode, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

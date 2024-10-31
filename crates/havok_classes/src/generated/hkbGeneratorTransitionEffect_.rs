@@ -1303,7 +1303,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `ToGeneratorState`(ctype: `hkEnum<ToGeneratorState, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -1325,7 +1326,8 @@ pub enum ToGeneratorState {
     STATE_READY_FOR_APPLY_SELF_TRANSITION_MODE = 2isize,
     STATE_ACTIVE = 3isize,
 }
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `Stage`(ctype: `hkEnum<Stage, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

@@ -172,7 +172,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_UINT8`
+/// # C++ Info
+/// - name: `WeldingType`(ctype: `hkEnum<WeldingType, hkUint8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

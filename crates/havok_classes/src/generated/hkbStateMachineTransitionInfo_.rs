@@ -994,14 +994,15 @@ const _: () = {
 };
 #[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
-    #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
-    "- size(C++): `TYPE_INT16`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
-    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
-    PartialEq, Eq, Hash)] pub struct TransitionFlags : i16 { #[doc = "1"] const
-    FLAG_USE_TRIGGER_INTERVAL = 1i16; #[doc = "2"] const FLAG_USE_INITIATE_INTERVAL =
-    2i16; #[doc = "4"] const FLAG_UNINTERRUPTIBLE_WHILE_PLAYING = 4i16; #[doc = "8"]
-    const FLAG_UNINTERRUPTIBLE_WHILE_DELAYED = 8i16; #[doc = "16"] const
+    #[doc = r" Bit flags"] #[doc = r""] #[doc = r" # C++ Info"] #[doc =
+    " - name: `TransitionFlags`(ctype: `hkFlags<TransitionFlags, hkInt16>`)"]
+    #[allow(non_upper_case_globals, non_snake_case)] #[cfg_attr(feature = "serde",
+    derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr))]
+    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
+    TransitionFlags : i16 { #[doc = "1"] const FLAG_USE_TRIGGER_INTERVAL = 1i16; #[doc =
+    "2"] const FLAG_USE_INITIATE_INTERVAL = 2i16; #[doc = "4"] const
+    FLAG_UNINTERRUPTIBLE_WHILE_PLAYING = 4i16; #[doc = "8"] const
+    FLAG_UNINTERRUPTIBLE_WHILE_DELAYED = 8i16; #[doc = "16"] const
     FLAG_DELAY_STATE_CHANGE = 16i16; #[doc = "32"] const FLAG_DISABLED = 32i16; #[doc =
     "64"] const FLAG_DISALLOW_RETURN_TO_PREVIOUS_STATE = 64i16; #[doc = "128"] const
     FLAG_DISALLOW_RANDOM_TRANSITION = 128i16; #[doc = "256"] const FLAG_DISABLE_CONDITION

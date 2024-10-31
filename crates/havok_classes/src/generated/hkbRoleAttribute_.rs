@@ -316,7 +316,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_INT16`
+/// # C++ Info
+/// - name: `Role`(ctype: `hkEnum<Role, hkInt16>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -344,15 +345,15 @@ pub enum Role {
 }
 #[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
-    #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
-    "- size(C++): `TYPE_INT16`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
-    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
-    PartialEq, Eq, Hash)] pub struct RoleFlags : i16 { #[doc = "0"] const FLAG_NONE =
-    0i16; #[doc = "1"] const FLAG_RAGDOLL = 1i16; #[doc = "2"] const FLAG_NORMALIZED =
-    2i16; #[doc = "4"] const FLAG_NOT_VARIABLE = 4i16; #[doc = "8"] const FLAG_HIDDEN =
-    8i16; #[doc = "16"] const FLAG_OUTPUT = 16i16; #[doc = "32"] const
-    FLAG_NOT_CHARACTER_PROPERTY = 32i16; }
+    #[doc = r" Bit flags"] #[doc = r""] #[doc = r" # C++ Info"] #[doc =
+    " - name: `RoleFlags`(ctype: `hkFlags<RoleFlags, hkInt16>`)"]
+    #[allow(non_upper_case_globals, non_snake_case)] #[cfg_attr(feature = "serde",
+    derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr))]
+    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
+    RoleFlags : i16 { #[doc = "0"] const FLAG_NONE = 0i16; #[doc = "1"] const
+    FLAG_RAGDOLL = 1i16; #[doc = "2"] const FLAG_NORMALIZED = 2i16; #[doc = "4"] const
+    FLAG_NOT_VARIABLE = 4i16; #[doc = "8"] const FLAG_HIDDEN = 8i16; #[doc = "16"] const
+    FLAG_OUTPUT = 16i16; #[doc = "32"] const FLAG_NOT_CHARACTER_PROPERTY = 32i16; }
 }
 #[cfg(feature = "json_schema")]
 const _: () = {

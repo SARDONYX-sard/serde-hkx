@@ -1410,7 +1410,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `IndexStridingType`(ctype: `hkEnum<IndexStridingType, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -1433,7 +1434,8 @@ pub enum IndexStridingType {
     INDICES_INT32 = 3isize,
     INDICES_MAX_ID = 4isize,
 }
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `MaterialIndexStridingType`(ctype: `hkEnum<MaterialIndexStridingType, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -1455,7 +1457,8 @@ pub enum MaterialIndexStridingType {
     MATERIAL_INDICES_INT16 = 2isize,
     MATERIAL_INDICES_MAX_ID = 3isize,
 }
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `SubpartType`(ctype: `hkEnum<SubpartType, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

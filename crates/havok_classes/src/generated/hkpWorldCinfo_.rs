@@ -5390,7 +5390,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `SimulationType`(ctype: `hkEnum<SimulationType, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -5412,7 +5413,8 @@ pub enum SimulationType {
     SIMULATION_TYPE_CONTINUOUS = 2isize,
     SIMULATION_TYPE_MULTITHREADED = 3isize,
 }
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `ContactPointGeneration`(ctype: `hkEnum<ContactPointGeneration, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -5433,7 +5435,8 @@ pub enum ContactPointGeneration {
     CONTACT_POINT_REJECT_DUBIOUS = 1isize,
     CONTACT_POINT_REJECT_MANY = 2isize,
 }
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `BroadPhaseBorderBehaviour`(ctype: `hkEnum<BroadPhaseBorderBehaviour, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -5455,7 +5458,8 @@ pub enum BroadPhaseBorderBehaviour {
     BROADPHASE_BORDER_REMOVE_ENTITY = 2isize,
     BROADPHASE_BORDER_DO_NOTHING = 3isize,
 }
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `TreeUpdateType`(ctype: `hkEnum<TreeUpdateType, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

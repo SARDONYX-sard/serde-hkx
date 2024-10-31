@@ -1225,7 +1225,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `InitialVelocityCoordinates`(ctype: `hkEnum<InitialVelocityCoordinates, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -1245,7 +1246,8 @@ pub enum InitialVelocityCoordinates {
     INITIAL_VELOCITY_IN_WORLD_COORDINATES = 0isize,
     INITIAL_VELOCITY_IN_MODEL_COORDINATES = 1isize,
 }
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `MotionMode`(ctype: `hkEnum<MotionMode, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

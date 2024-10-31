@@ -183,7 +183,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `Format`(ctype: `hkEnum<Format, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -206,7 +207,8 @@ pub enum Format {
     BMP = 3isize,
     DDS = 4isize,
 }
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `FilterMode`(ctype: `hkEnum<FilterMode, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -227,7 +229,8 @@ pub enum FilterMode {
     LINEAR = 1isize,
     ANISOTROPIC = 2isize,
 }
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `TextureUsageType`(ctype: `hkEnum<TextureUsageType, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

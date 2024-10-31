@@ -2219,7 +2219,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `StartStateMode`(ctype: `hkEnum<StartStateMode, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -2241,7 +2242,8 @@ pub enum StartStateMode {
     START_STATE_MODE_RANDOM = 2isize,
     START_STATE_MODE_CHOOSER = 3isize,
 }
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `StateMachineSelfTransitionMode`(ctype: `hkEnum<StateMachineSelfTransitionMode, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

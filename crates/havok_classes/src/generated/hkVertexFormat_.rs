@@ -348,7 +348,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_UINT8`
+/// # C++ Info
+/// - name: `ComponentType`(ctype: `hkEnum<ComponentType, hkUint8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -379,7 +380,8 @@ pub enum ComponentType {
     TYPE_VECTOR4 = 11isize,
     TYPE_LAST = 12isize,
 }
-///- size(C++): `TYPE_UINT8`
+/// # C++ Info
+/// - name: `ComponentUsage`(ctype: `hkEnum<ComponentUsage, hkUint8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -412,13 +414,14 @@ pub enum ComponentUsage {
 }
 #[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
-    #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
-    "- size(C++): `TYPE_UINT8`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
-    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
-    PartialEq, Eq, Hash)] pub struct HintFlags : u8 { #[doc = "1"] const FLAG_READ = 1u8;
-    #[doc = "2"] const FLAG_WRITE = 2u8; #[doc = "4"] const FLAG_DYNAMIC = 4u8; #[doc =
-    "8"] const FLAG_NOT_SHARED = 8u8; }
+    #[doc = r" Bit flags"] #[doc = r""] #[doc = r" # C++ Info"] #[doc =
+    " - name: `HintFlags`(ctype: `hkFlags<HintFlags, hkUint8>`)"]
+    #[allow(non_upper_case_globals, non_snake_case)] #[cfg_attr(feature = "serde",
+    derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr))]
+    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
+    HintFlags : u8 { #[doc = "1"] const FLAG_READ = 1u8; #[doc = "2"] const FLAG_WRITE =
+    2u8; #[doc = "4"] const FLAG_DYNAMIC = 4u8; #[doc = "8"] const FLAG_NOT_SHARED = 8u8;
+    }
 }
 #[cfg(feature = "json_schema")]
 const _: () = {

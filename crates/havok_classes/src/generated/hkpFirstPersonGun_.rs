@@ -421,7 +421,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_UINT8`
+/// # C++ Info
+/// - name: `Type`(ctype: `hkEnum<Type, hkUint8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -450,7 +451,8 @@ pub enum Type {
     WEAPON_TYPE_STICKYGUN = 9isize,
     WEAPON_TYPE_NUM_TYPES = 10isize,
 }
-///- size(C++): `TYPE_UINT8`
+/// # C++ Info
+/// - name: `KeyboardKey`(ctype: `hkEnum<KeyboardKey, hkUint8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

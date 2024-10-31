@@ -239,7 +239,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_UINT16`
+/// # C++ Info
+/// - name: `AtomType`(ctype: `hkEnum<AtomType, hkUint16>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -290,7 +291,8 @@ pub enum AtomType {
     TYPE_MODIFIER_CENTER_OF_MASS_CHANGER = 31isize,
     TYPE_MAX = 32isize,
 }
-///- size(C++): `TYPE_UINT8`
+/// # C++ Info
+/// - name: `SolvingMethod`(ctype: `hkEnum<SolvingMethod, hkUint8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

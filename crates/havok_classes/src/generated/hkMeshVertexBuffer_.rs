@@ -194,14 +194,14 @@ const _: () = {
 };
 #[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
-    #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
-    "- size(C++): `TYPE_UINT32`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
-    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
-    PartialEq, Eq, Hash)] pub struct Flags : u32 { #[doc = "1"] const ACCESS_READ = 1u32;
-    #[doc = "2"] const ACCESS_WRITE = 2u32; #[doc = "3"] const ACCESS_READ_WRITE = 3u32;
-    #[doc = "4"] const ACCESS_WRITE_DISCARD = 4u32; #[doc = "8"] const
-    ACCESS_ELEMENT_ARRAY = 8u32; }
+    #[doc = r" Bit flags"] #[doc = r""] #[doc = r" # C++ Info"] #[doc =
+    " - name: `Flags`(ctype: `hkFlags<Flags, hkUint32>`)"]
+    #[allow(non_upper_case_globals, non_snake_case)] #[cfg_attr(feature = "serde",
+    derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr))]
+    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
+    Flags : u32 { #[doc = "1"] const ACCESS_READ = 1u32; #[doc = "2"] const ACCESS_WRITE
+    = 2u32; #[doc = "3"] const ACCESS_READ_WRITE = 3u32; #[doc = "4"] const
+    ACCESS_WRITE_DISCARD = 4u32; #[doc = "8"] const ACCESS_ELEMENT_ARRAY = 8u32; }
 }
 #[cfg(feature = "json_schema")]
 const _: () = {

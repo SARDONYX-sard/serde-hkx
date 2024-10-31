@@ -400,7 +400,8 @@ const _: () = {
         }
     }
 };
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `TokenType`(ctype: `hkEnum<TokenType, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -426,7 +427,8 @@ pub enum TokenType {
     TOKEN_TYPE_COMMA = 6isize,
     TOKEN_TYPE_CHARACTER_PROPERTY_INDEX = 7isize,
 }
-///- size(C++): `TYPE_INT8`
+/// # C++ Info
+/// - name: `Operator`(ctype: `hkEnum<Operator, hkInt8>`)
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

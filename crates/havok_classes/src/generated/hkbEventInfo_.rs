@@ -238,12 +238,13 @@ const _: () = {
 };
 #[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
-    #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
-    "- size(C++): `TYPE_UINT32`"] #[allow(non_upper_case_globals, non_snake_case)]
-    #[cfg_attr(feature = "serde", derive(serde_with::SerializeDisplay,
-    serde_with::DeserializeFromStr))] #[repr(transparent)] #[derive(Debug, Clone, Copy,
-    PartialEq, Eq, Hash)] pub struct Flags : u32 { #[doc = "1"] const FLAG_SILENT = 1u32;
-    #[doc = "2"] const FLAG_SYNC_POINT = 2u32; }
+    #[doc = r" Bit flags"] #[doc = r""] #[doc = r" # C++ Info"] #[doc =
+    " - name: `Flags`(ctype: `hkFlags<Flags, hkUint32>`)"]
+    #[allow(non_upper_case_globals, non_snake_case)] #[cfg_attr(feature = "serde",
+    derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr))]
+    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
+    Flags : u32 { #[doc = "1"] const FLAG_SILENT = 1u32; #[doc = "2"] const
+    FLAG_SYNC_POINT = 2u32; }
 }
 #[cfg(feature = "json_schema")]
 const _: () = {

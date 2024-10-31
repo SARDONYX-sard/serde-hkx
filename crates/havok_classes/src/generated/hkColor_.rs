@@ -171,12 +171,10 @@ const _: () = {
 };
 #[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
-    #[doc = r" Bit flags that represented `enum hkEnum<Enum, SizeType>`(C++)."] #[doc =
-    "- size(C++): `TYPE_UINT32`"] #[doc = r""] #[doc =
-    r" # Why this `enum` defined as `bitflags`?"] #[doc =
-    r" These are not really `TYPE_FLAGS` but `TYPE_ENUM`, but since Rust does not allow the definition of"]
-    #[doc =
-    r" `enum` with duplicate discriminant values, they are defined as `bitflags`."]
+    #[doc = r" Enum as bit flags"] #[doc = r""] #[doc = r" # C++ Info"] #[doc =
+    " - name: `ExtendedColors`(ctype: `hkEnum<ExtendedColors, hkUint32>`)"] #[doc = r""]
+    #[doc = r" # Why this `enum` defined as `bitflags`?"] #[doc =
+    r" Since Rust does not allow the definition of `enum` with duplicate discriminant values, they are defined as `bitflags`."]
     #[allow(non_upper_case_globals, non_snake_case)] #[cfg_attr(feature = "serde",
     derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr))]
     #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
