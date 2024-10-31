@@ -1,4 +1,4 @@
-//! TypeKind XML parsers
+//! TypeKind bytes parsers
 use crate::{lib::*, tri};
 
 use super::BytesStream;
@@ -41,16 +41,6 @@ pub fn real<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f32, Context
 // Math
 
 /// Parse as [`Vector4`]
-///
-/// ```
-/// use havok_types::Vector4;
-/// use serde_hkx::xml::de::parser::type_kind::vector4;
-/// use winnow::Parser as _;
-///
-/// assert_eq!(vector4().parse("(1.000000 1.000000 1.000000 0.000000)"), Ok(Vector4::new(1.0, 1.0, 1.0, 0.0)));
-/// assert_eq!(vector4().parse("(-0.000000 0.000000 -0.000000 1.000000)"), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
-/// assert_eq!(vector4().parse("   (   -0.000000 0.000000 -0.000000 1.000000  ) "), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
-/// ```
 pub fn vector4<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Vector4, ContextError> {
     seq!(Vector4 {
         x: real(endian).context(StrContext::Label("x")),
@@ -61,15 +51,7 @@ pub fn vector4<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Vector4, 
     .context(StrContext::Label("Vector4"))
 }
 
-/// Attempt to extract from the string representation in the tag on XML.
-///
-/// # Examples
-/// ```
-/// use havok_types::Quaternion;
-/// use serde_hkx::xml::de::parser::type_kind::quaternion;
-/// use winnow::Parser as _;
-/// assert_eq!(quaternion().parse("   (   -0.000000 0.000000 -0.000000 1.000000  ) "), Ok(Quaternion::new(-0.0, 0.0, -0.0, 1.0)));
-/// ```
+/// Parse as [`Quaternion`]
 #[inline]
 pub fn quaternion<'a>(
     endian: Endianness,
