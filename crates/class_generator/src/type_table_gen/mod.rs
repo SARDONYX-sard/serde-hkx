@@ -26,30 +26,26 @@ pub fn generate_havok_class_table<P: AsRef<Path>>(classes_json_dir: P, out_dir: 
         classes.push(from_cpp_class(class, &class_map));
     }
 
+    // code test: https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=a9c17bc352ad0eddf4abd9bc3c93f527
     let rust_code = quote::quote! {
         /// key: className, value: (fieldName, fieldType)
-        pub type ClassInfo = (&'static str, FieldInfo);
-        pub type FieldInfo = &'static [(&'static str, &'static str)];
-        pub type ClassTable = &'static [ClassInfo];
+        pub type ClassTable = OrderedMap<&'static str, FieldInfo>;
+        pub type FieldInfo = OrderedMap<&'static str, &'static str>;
 
-        const CLASS_TABLE: ClassTable = &[#(#classes,)*];
+        // phf = "0.11.2"
+        use phf::{phf_ordered_map, OrderedMap};
+        const CLASS_TABLE: ClassTable = phf_ordered_map! {
+            #(#classes,)*
+        };
 
         /// Find class information by class name.
-        /// - Since the className is alphabetical sorted, it is searched by O(log2 N) in a binary search.
-        pub fn find_class_info(class_name: &str) -> Option<&'static [(&'static str, &'static str)]> {
-            CLASS_TABLE.binary_search_by(|&(name, _)| name.cmp(class_name))
-                .ok()
-                .map(|index| CLASS_TABLE[index].1)
+        pub fn find_class_info(class_name: &str) -> Option<&'static FieldInfo> {
+            CLASS_TABLE.get(class_name)
         }
 
-        /// Find a field type from the fields array
-        ///
-        /// It takes time because of linear search.
-        pub fn find_field_in_class(field_name: &str, fields: &'static [(&'static str, &'static str)]) -> Option<&'static str> {
-            fields
-                .iter()
-                .find(|&&(name, _)| name == field_name)
-                .map(|&(_, field_type)| field_type)
+        /// Find a field type from the fields map.
+        pub fn find_json_parser_by(field_name: &str, fields: &FieldInfo) -> Option<&'static str> {
+            fields.get(field_name).map(|v| &**v)
         }
     };
 
@@ -115,15 +111,25 @@ pub fn from_cpp_class(class: &Class, class_map: &ClassMap) -> TokenStream {
                 .unwrap_or_else(|| panic!("Couldn't convert json type: {vtype}"));
 
             // e.g.
-            // - ("field1", "i64"),
-            // - ("field2", "object|hello"),
+            // - "pSequence" => "String",
             quote::quote! {
-                (#name, #json_type)
+                #name => #json_type
             }
         })
         .collect();
 
-    quote::quote! { (#class_name, &[#(#fields,)*]) }
+    // e.g.
+    // ```
+    // "classB" => phf_ordered_map! {
+    //     "field1" => "F64",
+    //     "field2" => "Bool",
+    // },
+    // ```
+    quote::quote! {
+        #class_name => phf_ordered_map! {
+            #(#fields,)*
+        }
+    }
 }
 
 /// - Null
