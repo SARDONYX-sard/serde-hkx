@@ -1,0 +1,54 @@
+{
+  "name": "Rotation",
+  "version": 0,
+  "signature": "0x0",
+  "size_x86": 48,
+  "size_x86_64": 48,
+  "parent_has_string": false,
+  "vtable": false,
+  "has_string": false,
+  "members": [
+    {
+      "name": "x",
+      "has_string": false,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "y",
+      "has_string": false,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "z",
+      "has_string": false,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

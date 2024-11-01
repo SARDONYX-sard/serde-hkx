@@ -7,6 +7,10 @@
     {
       "fileMatch": ["assets/classes/*.json"],
       "url": "./assets/havok_class_schema.json"
+    },
+    {
+      "fileMatch": ["assets/for_table/*.json"],
+      "url": "./assets/havok_class_schema.json"
     }
   ],
   "markdownlint.config": {
