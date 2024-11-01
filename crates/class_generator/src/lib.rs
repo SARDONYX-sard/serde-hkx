@@ -2,6 +2,7 @@ pub mod cpp_info;
 pub mod error;
 mod gen_index;
 mod rust_gen;
+pub mod type_table_gen;
 
 use crate::{cpp_info::Class, error::*};
 use indexmap::IndexMap;
