@@ -1,7 +1,9 @@
 # HKX types
 
-- Offset and Size: This is used to adjust the size of binary data to be read or written, as well as the current read/write position.
-- Never used(In the Havok classes): `Zero`, `FunctionPointer`, `InplaceArray`, `HomogeneousArray`, `RelArray`, `Max`
+- Offset and Size: This is used to adjust the size of binary data to be read or
+  written, as well as the current read/write position.
+- Never used(In the Havok classes): `Zero`, `FunctionPointer`, `InplaceArray`,
+  `HomogeneousArray`, `RelArray`, `Max`
 
 | TypeKind           | C++ Type                          |  Bytes size(x86) | Bytes size(x86_64) | Align bytes Size(x86) | Align bytes Size(x64) |
 | ------------------ | --------------------------------- | ---------------: | -----------------: | --------------------: | --------------------: |
@@ -45,11 +47,13 @@
 - Which Array pattern is `hkBool[3]` etc.?
 
   It does not seem to be classified as `TYPE_ARRAY` or any other array.
-  `vtype: TYPE_BOOL, array size: 3`, only the array size changes. There is an editing software that calls this C style Array.
+  `vtype: TYPE_BOOL, array size: 3`, only the array size changes. There is an
+  editing software that calls this C style Array.
 
 ## Types details
 
-These are a summary of the assumed C++ code, the binary read/write method derived from it, and the representation method on XML.
+These are a summary of the assumed C++ code, the binary read/write method
+derived from it, and the representation method on XML.
 
 These may change when SIMD operations are enabled.(Especially, `hkVector4`)
 
@@ -57,11 +61,13 @@ These may change when SIMD operations are enabled.(Especially, `hkVector4`)
 
 No type information.
 
-This is often used to fill in generics elements with types for which generics are not used.
+This is often used to fill in generics elements with types for which generics
+are not used.
 
 - `hkArray<hkBool>` -> vtype: TYPE_ARRAY, vsubtype: TYPE_BOOL
 - `hkBool` -> vtype: TYPE_BOOL, vsubtype: TYPE_VOID
-- There is also a pattern `hkArray<void>`. The type information is unknown, but this member always contains the `SERIALIZE_IGNORED` flag and can be skipped.
+- There is also a pattern `hkArray<void>`. The type information is unknown, but
+  this member always contains the `SERIALIZE_IGNORED` flag and can be skipped.
 
 ---
 
@@ -103,7 +109,7 @@ class __attribute__((aligned(16))) hkVector4 {
      */
     hkReal x;
     /**
-     * -    offset:  8(x86)/ 8(x86_64)
+     * -    offset:  4(x86)/ 4(x86_64)
      * - byte size:  4(x86)/ 4(x86_64)
      */
     hkReal y;
@@ -248,7 +254,9 @@ The w component, which is unused on XML, is not displayed.
 
 Same as `hkMatrix3`.
 
-- There is a 16-byte alignment in the class, but Vector4 is used in the hkMatrix3 field, which is considered the same since it does 16-byte alignment internally.
+- There is a 16-byte alignment in the class, but Vector4 is used in the
+  hkMatrix3 field, which is considered the same since it does 16-byte alignment
+  internally.
 
 ```cpp
 /**
@@ -397,7 +405,8 @@ class hkTransform {
 
 ### ~~`Zero`~~
 
-It is said to be set to 0 during serialization, but it is a deprecated item and never used.
+It is said to be set to 0 during serialization, but it is a deprecated item and
+never used.
 
 ---
 
@@ -440,7 +449,8 @@ In case of null pointer
 
 ### Array(`hkArray<T>`)
 
-- Since `T *m_data` is a raw pointer, it is not clear whether it is assigned to the stack or heap segment.
+- Since `T *m_data` is a raw pointer, it is not clear whether it is assigned to
+  the stack or heap segment.
 
 ```cpp
 // This is  closer code.
@@ -488,8 +498,8 @@ class hkArray {
   </hkparam>
   ```
 
-  - `hkArray<SomeHavokClass*>`
-    (It can be regarded as the same as `hkArray<hkReal>` in the sense that it is space free.)
+  - `hkArray<SomeHavokClass*>` (It can be regarded as the same as
+    `hkArray<hkReal>` in the sense that it is space free.)
 
   ```xml
   <hkparam name="variantVariableValues" numelements="2">
@@ -498,8 +508,9 @@ class hkArray {
   </hkparam>
   ```
 
-  - `hkArray<SomeHavokClass>`
-    (e.g. `hkArray<hkRootLevelContainerNamedVariant> namedVariants` field of `hkRootLevelContainer` class)
+  - `hkArray<SomeHavokClass>` (e.g.
+    `hkArray<hkRootLevelContainerNamedVariant> namedVariants` field of
+    `hkRootLevelContainer` class)
 
   ```xml
   <hkparam name="namedVariants" numelements="6">
@@ -532,7 +543,8 @@ class hkArray {
     </hkparam>
     ```
 
-  - `hkArray<Vector4>`(e.g. `hkpRigidBody` class's field), `hkArray<Matrix4>`, etc.
+  - `hkArray<Vector4>`(e.g. `hkpRigidBody` class's field), `hkArray<Matrix4>`,
+    etc.
 
     ```xml
     <hkparam name="deactivationRefPosition" numelements="2">
@@ -585,16 +597,22 @@ Inline defined pointer and size type.
 - Types used in the five classes
 
   - `hkbCharacter`(`poseLocal`)
-  - `hkClass`(`declaredEnums: class hkClassEnum*`, `declaredMembers: class hkClassMember*`)
+  - `hkClass`(`declaredEnums: class hkClassEnum*`,
+    `declaredMembers: class hkClassMember*`)
   - `hkClassEnum`(`items`)
   - `hkClassMember`(enum item)
   - `khkCustomAttributes`(`attributes: struct Attribute*`)
 
-- This can be viewed as a structure consisting of a pointer to a certain class and immediately following it, an `int` representing the number of elements in an array.
+- This can be viewed as a structure consisting of a pointer to a certain class
+  and immediately following it, an `int` representing the number of elements in
+  an array.
 
-  We used the term "viewed as" because this class doesn't actually exist; its fields are directly written into each class.
+  We used the term "viewed as" because this class doesn't actually exist; its
+  fields are directly written into each class.
 
-- The size is always defined as `int`, not `size_t`, which is the same as `hkArray`. In `hkArray`, the size is 16 bytes even in 64-bit environment because of this.
+- The size is always defined as `int`, not `size_t`, which is the same as
+  `hkArray`. In `hkArray`, the size is 16 bytes even in 64-bit environment
+  because of this.
 
 - Assumed C++
 
@@ -619,57 +637,60 @@ struct hkSimpleArray {
 
 - Binary
 
-This is used for the purpose of outputting internal information of the API to XML, which is not present in the binary data.
+This is used for the purpose of outputting internal information of the API to
+XML, which is not present in the binary data.
 
-The reason is probably that this information is already built into the serializer/deserializer.
+The reason is probably that this information is already built into the
+serializer/deserializer.
 
 - XML
 
 The method of expression is exactly the same as that of `Array`.
 
 ```xml
-		<hkobject name="#0003" class="hkClass" signature="0x75585ef6">
-			<hkparam name="name">hkReferencedObject</hkparam>
-			<hkparam name="parent">#0004</hkparam>
-			<hkparam name="objectSize">8</hkparam>
-			<hkparam name="numImplementedInterfaces">0</hkparam>
-			<hkparam name="declaredEnums" numelements="0"></hkparam>
-			<hkparam name="declaredMembers" numelements="2">
-				<hkobject>
-					<hkparam name="name">memSizeAndFlags</hkparam>
-					<hkparam name="class">null</hkparam>
-					<hkparam name="enum">null</hkparam>
-					<hkparam name="type">TYPE_UINT16</hkparam>
-					<hkparam name="subtype">TYPE_VOID</hkparam>
-					<hkparam name="cArraySize">0</hkparam>
-					<hkparam name="flags">SERIALIZE_IGNORED</hkparam>
-					<hkparam name="offset">4</hkparam>
-					<!-- attributes SERIALIZE_IGNORED -->
-				</hkobject>
-				<hkobject>
-					<hkparam name="name">referenceCount</hkparam>
-					<hkparam name="class">null</hkparam>
-					<hkparam name="enum">null</hkparam>
-					<hkparam name="type">TYPE_INT16</hkparam>
-					<hkparam name="subtype">TYPE_VOID</hkparam>
-					<hkparam name="cArraySize">0</hkparam>
-					<hkparam name="flags">SERIALIZE_IGNORED</hkparam>
-					<hkparam name="offset">6</hkparam>
-					<!-- attributes SERIALIZE_IGNORED -->
-				</hkobject>
-			</hkparam>
-			<!-- defaults SERIALIZE_IGNORED -->
+<hkobject name="#0003" class="hkClass" signature="0x75585ef6">
+	<hkparam name="name">hkReferencedObject</hkparam>
+	<hkparam name="parent">#0004</hkparam>
+	<hkparam name="objectSize">8</hkparam>
+	<hkparam name="numImplementedInterfaces">0</hkparam>
+	<hkparam name="declaredEnums" numelements="0"></hkparam>
+	<hkparam name="declaredMembers" numelements="2">
+		<hkobject>
+			<hkparam name="name">memSizeAndFlags</hkparam>
+			<hkparam name="class">null</hkparam>
+			<hkparam name="enum">null</hkparam>
+			<hkparam name="type">TYPE_UINT16</hkparam>
+			<hkparam name="subtype">TYPE_VOID</hkparam>
+			<hkparam name="cArraySize">0</hkparam>
+			<hkparam name="flags">SERIALIZE_IGNORED</hkparam>
+			<hkparam name="offset">4</hkparam>
 			<!-- attributes SERIALIZE_IGNORED -->
-			<hkparam name="flags">0</hkparam>
-			<hkparam name="describedVersion">0</hkparam>
 		</hkobject>
+		<hkobject>
+			<hkparam name="name">referenceCount</hkparam>
+			<hkparam name="class">null</hkparam>
+			<hkparam name="enum">null</hkparam>
+			<hkparam name="type">TYPE_INT16</hkparam>
+			<hkparam name="subtype">TYPE_VOID</hkparam>
+			<hkparam name="cArraySize">0</hkparam>
+			<hkparam name="flags">SERIALIZE_IGNORED</hkparam>
+			<hkparam name="offset">6</hkparam>
+			<!-- attributes SERIALIZE_IGNORED -->
+		</hkobject>
+	</hkparam>
+	<!-- defaults SERIALIZE_IGNORED -->
+	<!-- attributes SERIALIZE_IGNORED -->
+	<hkparam name="flags">0</hkparam>
+	<hkparam name="describedVersion">0</hkparam>
+</hkobject>
 ```
 
 ---
 
 ### `Variant`(`hkVariant`)
 
-- `hkClass` is a class that holds meta-information (Flags, vtable, etc.) for each C++ Havok class and is stored in its own static field.
+- `hkClass` is a class that holds meta-information (Flags, vtable, etc.) for
+  each C++ Havok class and is stored in its own static field.
 - Only used for `value` of `hkCustomAttributesAttribute`.
 
 - C++
@@ -698,7 +719,8 @@ struct hkVariant {
 ### CString(`char*`)
 
 - Null-terminated string type.
-- It is unclear which segment (stack, heap, or other) is being pointed to because of the raw pointer.
+- It is unclear which segment (stack, heap, or other) is being pointed to
+  because of the raw pointer.
 
 ---
 
@@ -812,7 +834,8 @@ class hkFlags {
 ### `Half`(`hkHalf`)
 
 - Represents a 16-bit floating-point number
-- It does not follow IEE and the upper 16 bits are extracted from the float and stored.
+- It does not follow IEE and the upper 16 bits are extracted from the float and
+  stored.
 - [Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=e9285a3ba173bc837b5e0f171bce59e8)
 
 ```cpp
@@ -830,8 +853,10 @@ class hkHalf {
 ### `StringPtr`(`hkStringPtr`)
 
 - Null-terminated string type.
-- There is a flag `StringFlags::OWNED_FLAG = 0x1` defined in the class, so `Owned` is also possible.
-- It is unclear which segment (stack, heap, or other) is being pointed to because of the raw pointer.
+- There is a flag `StringFlags::OWNED_FLAG = 0x1` defined in the class, so
+  `Owned` is also possible.
+- It is unclear which segment (stack, heap, or other) is being pointed to
+  because of the raw pointer.
 
 - C++
 

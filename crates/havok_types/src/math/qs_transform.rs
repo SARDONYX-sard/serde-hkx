@@ -36,6 +36,10 @@ pub struct QsTransform {
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub quaternion: Quaternion,
+    /// # C++ Info
+    /// - name: `scale`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     /// - `scale`: `Vector4`
     ///
     /// # NOTE
