@@ -1,7 +1,7 @@
 use crate::{
     cpp_info::{Class, Member, TypeKind},
     error::*,
-    ClassMap,
+    get_inherited_members, ClassMap,
 };
 use indexmap::IndexMap;
 use proc_macro2::TokenStream;
@@ -23,20 +23,33 @@ pub fn generate_havok_class_table<P: AsRef<Path>>(classes_json_dir: P, out_dir: 
 
     let mut classes = vec![];
     for (_, class) in &class_map {
-        classes.push(from_cpp_class(class));
+        classes.push(from_cpp_class(class, &class_map));
     }
 
     let rust_code = quote::quote! {
         /// key: className, value: (fieldName, fieldType)
-        pub type ClassInfo = (&'static str, &'static [(&'static str, &'static str)]);
+        pub type ClassInfo = (&'static str, FieldInfo);
+        pub type FieldInfo = &'static [(&'static str, &'static str)];
         pub type ClassTable = &'static [ClassInfo];
 
         const CLASS_TABLE: ClassTable = &[#(#classes,)*];
 
-        pub fn find_class_info(class_name: &str) -> Option<&'static ClassInfo> {
+        /// Find class information by class name.
+        /// - Since the className is alphabetical sorted, it is searched by O(log2 N) in a binary search.
+        pub fn find_class_info(class_name: &str) -> Option<&'static [(&'static str, &'static str)]> {
             CLASS_TABLE.binary_search_by(|&(name, _)| name.cmp(class_name))
                 .ok()
-                .map(|index| &CLASS_TABLE[index])
+                .map(|index| CLASS_TABLE[index].1)
+        }
+
+        /// Find a field type from the fields array
+        ///
+        /// It takes time because of linear search.
+        pub fn find_field_in_class(field_name: &str, fields: &'static [(&'static str, &'static str)]) -> Option<&'static str> {
+            fields
+                .iter()
+                .find(|&&(name, _)| name == field_name)
+                .map(|&(_, field_type)| field_type)
         }
     };
 
@@ -88,24 +101,17 @@ where
     Ok(())
 }
 
-pub fn from_cpp_class(class: &Class) -> TokenStream {
+pub fn from_cpp_class(class: &Class, class_map: &ClassMap) -> TokenStream {
     let Class {
-        name: class_name,
-        members,
-        ..
+        name: class_name, ..
     } = class;
 
-    let fields: Vec<_> = members
+    let fields: Vec<_> = get_inherited_members(class_name, class_map)
         .iter()
         .map(|member| {
-            let Member {
-                name,
-                vtype,
-                class_ref,
-                ..
-            } = member;
+            let Member { name, vtype, .. } = member;
 
-            let json_type = to_json_type(class_ref, vtype)
+            let json_type = to_json_type(member, false)
                 .unwrap_or_else(|| panic!("Couldn't convert json type: {vtype}"));
 
             // e.g.
@@ -126,9 +132,20 @@ pub fn from_cpp_class(class: &Class) -> TokenStream {
 /// - F64
 /// - String
 /// - Bool
-/// - Object(val)
-/// - Array(val)
-fn to_json_type<'a>(name: &Option<Cow<'a, str>>, ty: &TypeKind) -> Option<Cow<'a, str>> {
+/// - Object|<ClassName>
+/// - Array|<TypeName>
+/// - Array|Object|<ClassName>
+/// - Pointer,
+fn to_json_type<'a>(member: &Member, search_sub: bool) -> Option<Cow<'a, str>> {
+    let Member {
+        vtype,
+        vsubtype,
+        class_ref,
+        ..
+    } = member;
+
+    let ty = if search_sub { vsubtype } else { vtype };
+
     Some(match ty {
         TypeKind::Void => "Null".into(),
         TypeKind::Bool => "Bool".into(),
@@ -143,16 +160,22 @@ fn to_json_type<'a>(name: &Option<Cow<'a, str>>, ty: &TypeKind) -> Option<Cow<'a
         TypeKind::QsTransform => "Object|QsTransform".into(),
         TypeKind::Matrix4 => "Object|Matrix4".into(),
         TypeKind::Transform => "Object|Transform".into(),
-        TypeKind::Pointer => "String".into(), // e.g. #0000
+        TypeKind::Pointer => "Pointer".into(), // e.g. #0000
         TypeKind::Enum | TypeKind::Flags => "String".into(), // e.g. `TYPE_ROLE`
         TypeKind::Struct => {
-            if let Some(name) = name {
+            if let Some(name) = class_ref {
                 format!("Object|{name}").into()
             } else {
                 panic!("Struct needs a name, but `None` was taken.")
             }
         }
-        TypeKind::Array | TypeKind::SimpleArray => "Array".into(),
+        TypeKind::Array | TypeKind::SimpleArray => {
+            if let Some(ty) = to_json_type(member, true) {
+                format!("Array|{ty}").into()
+            } else {
+                panic!("Struct needs a name, but `None` was taken.")
+            }
+        }
         TypeKind::Variant => "Object|Variant".into(),
         TypeKind::CString | TypeKind::StringPtr => "String".into(),
         TypeKind::Ulong => "U64".into(),
