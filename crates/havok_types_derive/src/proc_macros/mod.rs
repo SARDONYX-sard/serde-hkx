@@ -69,6 +69,7 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
             }
         }
 
+        // Playground test: https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=b28f172141348b5979d29433588874c7
         impl core::str::FromStr for #struct_ident {
             type Err = String;
 
@@ -79,7 +80,31 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
 
                 let mut flags = #struct_ident::empty();
                 for token in s.split('|') {
-                    match token.trim() {
+                    let token = token.trim();
+
+                    // Skip XML comment.
+                    // hkFlags contains `<! -- UNKNOWN BITS -->`, so it must be parsed error-free.
+                    let token = if let Some(start) = token.find("<!--") {
+                        if let Some(end) = token[start..].find("-->") {
+                            let before_comment = token[..start].trim();
+                            let after_comment = token[(start + end + 3)..].trim();
+                            if !before_comment.is_empty() {
+                                before_comment
+                            } else {
+                                after_comment
+                            }
+                        } else {
+                            token[..start].trim() // use pre-comment if `-->` is not there
+                        }
+                    } else {
+                        token
+                    };
+
+                    if token.is_empty() {
+                        continue;
+                    }
+
+                    match token {
                         #(#matchers)*
                         unknown => {
                             let bits = ::havok_types_derive::parse_int::parse(unknown).map_err(|_| {
