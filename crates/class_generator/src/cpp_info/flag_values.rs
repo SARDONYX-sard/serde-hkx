@@ -87,5 +87,21 @@ mod tests {
                 | FlagValues::from_bits_retain(64)),
             "Unknown flags should be able to accepted."
         );
+
+        assert_eq!(
+            "ALIGN_8|ALIGN_16|SERIALIZE_IGNORED|<!-- UNKNOWN BITS -->64".parse(),
+            Ok(FlagValues::ALIGN_8
+                | FlagValues::ALIGN_16
+                | FlagValues::SERIALIZE_IGNORED
+                | FlagValues::from_bits_retain(64)),
+            "Comment with unknown flags should be able to accepted."
+        );
+
+        // Two or more comments within an item separated by `|` are currently unsupported.
+        assert!(
+            "ALIGN_8|ALIGN_16|SERIALIZE_IGNORED|<!-- UNKNOWN BITS -->64<!-- UNKNOWN BITS -->"
+                .parse::<FlagValues>()
+                .is_err(),
+        );
     }
 }
