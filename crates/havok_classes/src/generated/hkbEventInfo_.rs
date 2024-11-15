@@ -275,6 +275,7 @@ const _: () = {
         {
             let mut __serializer = __serializer.serialize_enum_flags()?;
             if self.is_empty() {
+                __serializer.serialize_bits(&self.bits())?;
                 __serializer.serialize_empty_bit()?;
                 return __serializer.end();
             }

@@ -20,7 +20,8 @@ pub fn impl_ser_for_flag(one_enum: &Enum) -> TokenStream {
                 {
                     let mut __serializer = __serializer.serialize_enum_flags()?;
                     if self.is_empty() {
-                        __serializer.serialize_empty_bit()?;
+                        __serializer.serialize_bits(&self.bits())?; // For hkx BytesSerializer method
+                        __serializer.serialize_empty_bit()?; // For XmlSerializer method
                         return __serializer.end();
                     };
 
@@ -31,7 +32,7 @@ pub fn impl_ser_for_flag(one_enum: &Enum) -> TokenStream {
                         }?;
                     }
 
-                    __serializer.serialize_bits(&self.bits())?;
+                    __serializer.serialize_bits(&self.bits())?; // For hkx BytesSerializer method
                     __serializer.end()
                 }
             }
