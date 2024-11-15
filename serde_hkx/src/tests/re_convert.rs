@@ -10,7 +10,7 @@ use winnow::Parser;
 
 type Result<T> = core::result::Result<T, SerdeHkxError>;
 
-// #[cfg_attr(miri, ignore)] // Unexplained hang
+#[cfg_attr(miri, ignore)] // Unexplained hang
 #[test]
 #[cfg_attr(
     all(feature = "tracing", not(miri)),
