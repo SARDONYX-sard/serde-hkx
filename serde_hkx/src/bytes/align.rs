@@ -17,3 +17,11 @@ macro_rules! align {
         $offset.wrapping_add($align_num).wrapping_sub(1) & !$align_num.wrapping_sub(1)
     };
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_align() {
+        assert_eq!(align!(88_u64, 16_u64), 96);
+    }
+}

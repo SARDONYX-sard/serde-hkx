@@ -37,7 +37,7 @@ impl<'a> StructSerializer<'a> {
             let pointed_pos = tri!(self.ser.goto_local_dst());
             self.ser.write_local_fixup_pair(local_src, pointed_pos)?;
         }
-        let array_base_pos = self.ser.current_last_pos;
+        let array_base_pos = self.ser.current_last_local_dst;
 
         // push nest
         let len = array.as_ref().len() as u32;
@@ -57,8 +57,13 @@ impl<'a> StructSerializer<'a> {
                 self.ser.pointed_pos.push(write_pointed_pos); // To write inner member type.
             }
             TypeSize::String => {
+                self.ser.is_in_str_array = true;
                 let write_pointed_pos = {
                     let one_size = if self.ser.is_x86 { 4 } else { 8 };
+                    #[cfg(feature = "tracing")]
+                    tracing::trace!(
+                        "array_base_pos({array_base_pos:#x}) + one_size({one_size}) * len({len})"
+                    );
                     array_base_pos + (one_size * (len as u64))
                 }; // `local_dst` starting position of string.
 
@@ -70,10 +75,11 @@ impl<'a> StructSerializer<'a> {
         tracing::trace!("pointed_pos:({:#x?})", self.ser.pointed_pos);
 
         tri!(array.serialize(&mut *self.ser));
+        self.ser.is_in_str_array = false;
 
         if size == TypeSize::NonPtr {
             let next_pointed_ser_pos = align!(self.ser.output.position(), 16_u64);
-            self.ser.current_last_pos = next_pointed_ser_pos;
+            self.ser.current_last_local_dst = next_pointed_ser_pos;
             if let Some(last) = self.ser.pointed_pos.last_mut() {
                 *last = next_pointed_ser_pos; // Update to serialize the next pointed data.
             };
@@ -84,10 +90,11 @@ impl<'a> StructSerializer<'a> {
                 .pointed_pos
                 .pop()
                 .ok_or(Error::NotFoundPointedPosition));
+            let pos = align!(pos, 16_u64);
             if let Some(last) = self.ser.pointed_pos.last_mut() {
                 *last = pos;
             };
-            self.ser.current_last_pos = pos;
+            self.ser.current_last_local_dst = pos;
         }
 
         self.ser.output.set_position(next_src_pos); // Go to the next field serialization position.
@@ -108,7 +115,7 @@ impl<'a> StructSerializer<'a> {
         let need_local_jump = size != TypeSize::NonPtr;
         if need_local_jump {
             let pointed_pos = tri!(self.ser.goto_local_dst());
-            let array_base_pos = self.ser.current_last_pos;
+            let array_base_pos = self.ser.current_last_local_dst;
             self.ser.write_local_fixup_pair(local_src, pointed_pos)?;
 
             // push nest
@@ -300,8 +307,10 @@ impl<'a> SerializeStruct for StructSerializer<'a> {
             self.ser.pointed_pos.clear();
 
             #[cfg(feature = "tracing")]
-            tracing::trace!("current_last_pos:({:#x?})", self.ser.current_last_pos);
-            self.ser.output.set_position(self.ser.current_last_pos);
+            tracing::trace!("current_last_pos:({:#x?})", self.ser.current_last_local_dst);
+            self.ser
+                .output
+                .set_position(self.ser.current_last_local_dst);
         }
         Ok(())
     }

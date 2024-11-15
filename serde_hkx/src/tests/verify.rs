@@ -2,7 +2,7 @@ use crate::{
     bytes::{hexdump, serde::hkx_header::HkxHeader},
     errors::SerdeHkxError,
     from_bytes, from_str,
-    tests::ClassMap,
+    tests::{diff, ClassMap},
     to_bytes, to_string, HavokSort as _,
 };
 use pretty_assertions::assert_eq;
@@ -14,9 +14,9 @@ type Result<T> = core::result::Result<T, SerdeHkxError>;
 #[test]
 #[cfg_attr(
     all(feature = "tracing", not(miri)),
-    quick_tracing::init(test = "should_reproduce_x64_bytes", stdio = false)
+    quick_tracing::init(test = "should_reproduce_xml_to_amd64", stdio = false)
 )]
-fn should_reproduce_x64_bytes() {
+fn should_reproduce_xml_to_amd64() {
     let xml = {
         // include_str!("../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
         include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
@@ -39,10 +39,14 @@ fn should_reproduce_x64_bytes() {
 #[test]
 #[cfg_attr(
     all(feature = "tracing", not(miri)),
-    quick_tracing::init(test = "should_reproduce_x86_bytes", stdio = false)
+    quick_tracing::init(test = "should_reproduce_xml_to_win32", stdio = false)
 )]
-fn should_reproduce_x86_bytes() {
-    let xml = include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
+fn should_reproduce_xml_to_win32() {
+    let xml = {
+        // include_str!("../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml")
+        include_str!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml")
+        // include_str!("../../../tests/test/test.xml")
+    };
     let expected_bytes =
         include_bytes!("../../../docs/handson_hex_dump/wisp_skeleton/skeleton_x86_reconverted.hkx");
 
@@ -116,18 +120,4 @@ fn should_reproduce_xml() -> Result<()> {
     tracing::debug!("map_diff = \n{xml_diff}");
 
     Ok(())
-}
-
-fn diff(old: impl AsRef<str>, new: impl AsRef<str>) -> String {
-    let diff = similar::TextDiff::from_lines(old.as_ref(), new.as_ref());
-    let mut output_diff = String::new();
-    for change in diff.iter_all_changes() {
-        let sign = match change.tag() {
-            similar::ChangeTag::Delete => "<",
-            similar::ChangeTag::Insert => ">",
-            similar::ChangeTag::Equal => " ",
-        };
-        output_diff += &format!("{sign}{change}");
-    }
-    output_diff
 }

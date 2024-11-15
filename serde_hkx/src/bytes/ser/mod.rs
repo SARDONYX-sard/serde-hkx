@@ -84,7 +84,7 @@ where
 
     // - `__data__` section
     serializer.abs_data_offset = header.padding_size() + serializer.output.position() as u32;
-    serializer.current_last_pos = serializer.abs_data_offset as u64;
+    serializer.current_last_local_dst = serializer.abs_data_offset as u64;
     value.serialize(&mut serializer)?;
 
     // 4/5: Write fixups_offsets of `__data__` section header.
@@ -148,6 +148,12 @@ pub struct ByteSerializer {
     /// This is cached to find the relative position of the binary.
     abs_data_offset: u32,
 
+    /// Flag to branch special align16 conditions such as the following.
+    /// Switch only in `SerializeStruct::serialize_array` and read only in `serialize_cow`.
+    /// - `hkArray<CString>` / `hkArray<StringPtr>` do not align16 each string.
+    /// - For a single field, align16 is done after string serialization.
+    is_in_str_array: bool,
+
     // ---- local fixup information
     /// The position to which the pointer returns after writing the end of the pointer.
     /// Holds positional information for writing the destination of the nested array pointers in the field,
@@ -155,7 +161,7 @@ pub struct ByteSerializer {
     /// - Example: `u32` <- `ClassB.b: u32` <- `ClassA.a: Array<ClassB>` <- `Array<ClassA>`
     pointed_pos: Vec<u64>,
     /// each Root class ptr pointed data position.
-    current_last_pos: u64,
+    current_last_local_dst: u64,
     /// Coordination information to associate a pointer of a pointer type of a field in a class with the data location to which it points.
     ///
     /// # Note
@@ -391,10 +397,14 @@ impl ByteSerializer {
 
             let c_string = StdCString::new(v.as_bytes())?;
             let _ = self.output.write(c_string.as_bytes_with_nul())?;
-            self.output.zero_fill_align(16)?;
+            if self.is_in_str_array {
+                self.output.zero_fill_align(2)?;
+            } else {
+                self.output.zero_fill_align(16)?;
+            }
 
             let next_pointed_ser_pos = self.output.position();
-            self.current_last_pos = next_pointed_ser_pos;
+            self.current_last_local_dst = next_pointed_ser_pos;
             if let Some(last) = self.pointed_pos.last_mut() {
                 *last = next_pointed_ser_pos; // Update to serialize the next pointed data.
             };
@@ -532,10 +542,10 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         let is_root = if let Some((ptr, _sig)) = class_meta {
             self.output.zero_fill_align(16)?; // Make sure `virtual_fixup.src`(each Class) is `align16`.
 
+            let virtual_fixup_abs = self.output.position();
             #[cfg(feature = "tracing")]
             tracing::debug!(
-                "serialize struct {name}(index = {ptr}, signature = {_sig}, abs_position = {:#x})",
-                self.output.position()
+                "serialize struct {name}(index = {ptr}, signature = {_sig}, abs_position = {virtual_fixup_abs:#x})"
             );
 
             let virtual_src = self.relative_position()?;
@@ -543,9 +553,9 @@ impl<'a> Serializer for &'a mut ByteSerializer {
             self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // Backup to write `global_fixups`
 
             // The data pointed to by the pointer (`T* m_data`) must first be aligned 16 bytes before it is written.
-            self.current_last_pos += size;
-            self.current_last_pos = align!(self.current_last_pos, 16_u64);
-            self.pointed_pos.push(self.current_last_pos);
+            let last_local_dst = align!(virtual_fixup_abs + size, 16_u64);
+            self.current_last_local_dst = last_local_dst;
+            self.pointed_pos.push(last_local_dst);
             true
         } else {
             // if let Some(last) = self.pointed_pos.last_mut() {
@@ -606,17 +616,20 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 mod tests {
     use super::*;
     use crate::{bytes::hexdump, tests::mocks::new_defaultmale, HavokSort as _};
-    use havok_classes::{hkbBlendingTransitionEffect, BlendCurve, EndMode, EventMode, FlagBits};
-    use pretty_assertions::assert_eq;
+    use havok_classes::{
+        hkbBlendingTransitionEffect, hkbGenerator, hkbModifierGenerator, BlendCurve, EndMode,
+        EventMode, FlagBits,
+    };
+    // use pretty_assertions::assert_eq;
 
-    fn partial_parse_assert<T>(s: T, expected: &[u8])
+    fn partial_parse_assert<T>(s: T, expected: &[u8], ser: Option<ByteSerializer>)
     where
         T: Serialize + PartialEq,
     {
-        let mut ser = ByteSerializer {
+        let mut ser = ser.unwrap_or(ByteSerializer {
             is_little_endian: true,
             ..Default::default()
-        };
+        });
         match <T as Serialize>::serialize(&s, &mut ser) {
             Ok(_) => assert_eq!(ser.output.into_inner(), expected),
             Err(err) => {
@@ -630,14 +643,14 @@ mod tests {
     fn test_serialize_primitive() {
         assert_eq!(FlagBits::empty().bits(), 0);
         assert_eq!(FlagBits::from_bits_retain(0).bits(), 0);
-        partial_parse_assert(FlagBits::empty().bits(), &[0, 0]);
-        partial_parse_assert(FlagBits::empty(), &[0, 0]);
-        partial_parse_assert(FlagBits::FLAG_SYNC, &[2, 0]);
-        partial_parse_assert(EventMode::EVENT_MODE_DEFAULT, &[0]);
+        partial_parse_assert(FlagBits::empty().bits(), &[0, 0], None);
+        partial_parse_assert(FlagBits::empty(), &[0, 0], None);
+        partial_parse_assert(FlagBits::FLAG_SYNC, &[2, 0], None);
+        partial_parse_assert(EventMode::EVENT_MODE_DEFAULT, &[0], None);
     }
 
     #[test]
-    fn test_serialize_class() {
+    fn test_serialize_hkb_blending_transition_effect() {
         #[rustfmt::skip]
         let expected = &[
 // parent: Default::default(), // - size: ` 44`(x86)/` 80`(x86_64)
@@ -681,6 +694,80 @@ mod tests {
                 m_initializeCharacterPose: true,                      // [1]
             },
             expected,
+            None,
+        );
+    }
+
+    #[test]
+    // #[quick_tracing::init] // NOTE: tracing cannot be used in miri test.
+    fn test_serialize_hkb_modifier_generator() {
+        let ser = ByteSerializer {
+            class_starts: {
+                let mut class_starts = IndexMap::new();
+                class_starts.insert("hkbModifierGenerator", 0);
+                class_starts
+            },
+            is_little_endian: true,
+            ..Default::default()
+        };
+
+        // parent.parent.parent: hkbBindable 48bytes
+        let parent_parent_parent: [u8; 48] = [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0,
+        ];
+        // parent.parent: hkbNode 72bytes - 48bytes = 24bytes
+        #[rustfmt::skip]
+        let parent_parent = [
+1, 0, 0, 0, 0, 0, 0, 0,   // userData: ulong
+0, 0, 0, 0, 0, 0, 0, 0,  // name: StringPtr
+0, 0, // id: i16
+0, // cloneState: i8
+0, // padNode: [bool;1]
+0, 0, 0, 0 // _pad: [u8;4]
+];
+
+        // hkbModifierGenerator 88bytes - (72) = 16bytes
+        #[rustfmt::skip]
+        let current = [
+0, 0, 0, 0, 0, 0, 0, 0, // modifier: Pointer
+0, 0, 0, 0, 0, 0, 0, 0, // generator: Pointer
+];
+        #[rustfmt::skip]
+        let string_ptr = [
+0, 0, 0, 0, 0, 0, 0, 0, // align 16: 88 to 96bytes => 96 / 16 = 6
+78, 111, 100, 101, 78, 97, 109, 101, 0,  // name: "NodeName\0" -> 9bytes
+0, 0, 0, 0, 0, 0, 0,  // align 16: 105 + 7bytes => 112 / 16 = 7
+];
+
+        const ARRAY_LEN: usize = 88 + 24;
+        let mut expected: [u8; ARRAY_LEN] = [0; ARRAY_LEN];
+        expected[0..48].clone_from_slice(&parent_parent_parent);
+        expected[48..72].clone_from_slice(&parent_parent);
+        // expected.extend_from_slice(&parent); parent: hkbGenerator 72bytes - (48 + 24) = 0
+        expected[72..88].clone_from_slice(&current);
+        expected[88..ARRAY_LEN].clone_from_slice(&string_ptr);
+
+        partial_parse_assert(
+            hkbModifierGenerator {
+                __ptr: Some(Pointer::new(1)), // Root class must have a pointer.
+                parent: hkbGenerator {
+                    __ptr: None,
+                    parent: havok_classes::hkbNode {
+                        __ptr: None,
+                        parent: Default::default(),
+                        m_userData: Ulong::new(1),
+                        m_name: "NodeName".into(),
+                        m_id: 0,
+                        m_cloneState: 0,
+                        m_padNode: [false],
+                    },
+                },
+                m_modifier: Pointer::new(0),
+                m_generator: Pointer::new(0),
+            },
+            &expected,
+            Some(ser),
         );
     }
 
