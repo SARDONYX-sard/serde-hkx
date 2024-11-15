@@ -45,7 +45,7 @@
 ```toml
 # in Cargo.toml
 tokio = { version = "1.41.0", features = ["full"] } # Async runtime
-serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.4.0" }
+serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.5.0" }
 ```
 
 ```rust
@@ -54,8 +54,8 @@ use serde_hkx_features::error::{Result}
 
 #[tokio::main]
 async fn havok_convert() -> Result<()> {
-  let input = "input/path";
-  let out_fmt = OutFormat::from_input(&input)?; // .hkx -> XML, .xml -> Amd64
+  let input = "./defaultmale.hkx";
+  let out_fmt = OutFormat::from_input(&input)?; // `.hkx` -> OutFormat::Xml, `.xml` -> OutFormat::Amd64
   let output: Option<PathBuf> = None; // `None` is same as input.
   convert(input, output, out_fmt).await
 }
@@ -65,8 +65,8 @@ async fn havok_convert() -> Result<()> {
 
 ```toml
 # in Cargo.toml
-havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.4.0" }
-serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.4.0" }
+havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.5.0" }
+serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.5.0" }
 ```
 
 ## Documentation
@@ -91,10 +91,3 @@ The only way to find out if it is possible or not is to try it out.
 - [x] Generate Havok Classes
 - [x] Testing the API & CI.
 - [x] Modify the code based on the test data.
-
-## About the GPL old version
-
-GPL-dependent code (`rhexdump` crate) has been removed, and the GPL usage
-history has been completely removed.
-
-- [Prev GPL History(ver. 0.0.0)](https://github.com/SARDONYX-sard/serde-hkx/releases/tag/0.0.0-prev-gpl-history)
