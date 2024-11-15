@@ -699,7 +699,7 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init]
+    // #[quick_tracing::init] // NOTE: tracing cannot be used in miri test.
     fn test_serialize_hkb_modifier_generator() {
         let ser = ByteSerializer {
             class_starts: {
