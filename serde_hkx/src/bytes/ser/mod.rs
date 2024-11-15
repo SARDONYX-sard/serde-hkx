@@ -606,6 +606,83 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 mod tests {
     use super::*;
     use crate::{bytes::hexdump, tests::mocks::new_defaultmale, HavokSort as _};
+    use havok_classes::{hkbBlendingTransitionEffect, BlendCurve, EndMode, EventMode, FlagBits};
+    use pretty_assertions::assert_eq;
+
+    fn partial_parse_assert<T>(s: T, expected: &[u8])
+    where
+        T: Serialize + PartialEq,
+    {
+        let mut ser = ByteSerializer {
+            is_little_endian: true,
+            ..Default::default()
+        };
+        match <T as Serialize>::serialize(&s, &mut ser) {
+            Ok(_) => assert_eq!(ser.output.into_inner(), expected),
+            Err(err) => {
+                tracing::error!(?err);
+                panic!("{err}")
+            }
+        }
+    }
+
+    #[test]
+    fn test_serialize_primitive() {
+        assert_eq!(FlagBits::empty().bits(), 0);
+        assert_eq!(FlagBits::from_bits_retain(0).bits(), 0);
+        partial_parse_assert(FlagBits::empty().bits(), &[0, 0]);
+        partial_parse_assert(FlagBits::empty(), &[0, 0]);
+        partial_parse_assert(FlagBits::FLAG_SYNC, &[2, 0]);
+        partial_parse_assert(EventMode::EVENT_MODE_DEFAULT, &[0]);
+    }
+
+    #[test]
+    fn test_serialize_class() {
+        #[rustfmt::skip]
+        let expected = &[
+// parent: Default::default(), // - size: ` 44`(x86)/` 80`(x86_64)
+// 40 bytes + 40 bytes
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128,
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+
+0, 0, 128, 63,
+0, 0, 128, 63,
+1, 0, // flags: FlagBits(u16)
+2, // endMode: EndMode(u8)
+1,
+0,
+0, 0, 0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128,
+0, 0, 0, 64, // timeRemaining(le_f32): 0x00 0x00 0x00 0x40 => 2.0
+0, 0, 128, 63, // timeInTransition(le_f32): 0x80(128) 0x3f(63) 0x00 0x00 => 1.0
+1,
+1, // applySelfTransition
+0, 0, 0, 0, 0, 0 // offset 138, but class size is 144 => padding 6
+];
+
+        partial_parse_assert(
+            hkbBlendingTransitionEffect {
+                __ptr: None,
+                parent: Default::default(), // - size: ` 44`(x86)/` 80`(x86_64)
+                m_duration: 1.0,            // - f32 bits: 0x3F800000
+                m_toGeneratorStartTimeFraction: 1.0, // - f32 bits: 0x3F800000
+                // m_flags: FlagBits::FLAG_NONE, // [0, 0]
+                m_flags: FlagBits::FLAG_IGNORE_FROM_WORLD_FROM_MODEL, // [1, 0]
+                m_endMode: EndMode::END_MODE_CAP_DURATION_AT_END_OF_FROM_GENERATOR, // [2]
+                m_blendCurve: BlendCurve::BLEND_CURVE_LINEAR,         // [1]
+                m_fromGenerator: Pointer::new(0),                     // 0 fill 8bytes(x86_64)
+                m_toGenerator: Pointer::new(0),                       // 0 fill 8bytes(x86_64)
+                m_characterPoseAtBeginningOfTransition: Vec::new(),   // hkArray 16bytes
+                m_timeRemaining: 2.0,                                 // - f32 bits: 0x40000000
+                m_timeInTransition: 1.0,                              // - f32 bits: 0x3F800000
+                m_applySelfTransition: true,                          // [1]
+                m_initializeCharacterPose: true,                      // [1]
+            },
+            expected,
+        );
+    }
 
     #[test]
     fn test_serialize() -> Result<()> {
