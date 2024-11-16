@@ -662,6 +662,45 @@ macro_rules! impl_deserialize_for_map {
                 deserializer.deserialize_class_index_seq(visitor)
             }
         }
+
+        impl<'de, T> Deserialize<'de> for $map_ident<Pointer, T>
+        where
+            T: Deserialize<'de> + crate::HavokClass,
+        {
+            fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+            where
+                D: Deserializer<'de>,
+            {
+                struct MapVisitor<T>(PhantomData<T>);
+
+                impl<'de, T> Visitor<'de> for MapVisitor<T>
+                where
+                    T: Deserialize<'de> + crate::HavokClass,
+                {
+                    type Value = $map_ident<Pointer, T>;
+
+                    fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                        formatter.write_str("a sequence")
+                    }
+
+                    fn visit_array<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
+                    where
+                        A: SeqAccess<'de>,
+                    {
+                        let capacity = size_hint::cautious::<T>(seq.size_hint());
+                        let mut values: Self::Value = $map_ident::with_capacity(capacity);
+
+                        while let Some(value) = tri!(seq.next_class_element()) {
+                            values.insert(Pointer::new(tri!(seq.class_ptr())), value);
+                        }
+                        Ok(values)
+                    }
+                }
+
+                let visitor = MapVisitor(PhantomData);
+                deserializer.deserialize_class_index_seq(visitor)
+            }
+        }
         )*
     };
 }

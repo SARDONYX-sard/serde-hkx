@@ -1,10 +1,11 @@
 //! Convert hkx <-> xml
 use crate::{
-    error::{Error, Result},
+    error::{Error, Result, SerSnafu},
     fs::{write, ReadExt as _},
-    serde::{deserialize, serialize_to_bytes},
 };
 use parse_display::{Display, FromStr};
+use serde_hkx::HavokSort as _;
+use snafu::ResultExt as _;
 use std::{
     ffi::OsStr,
     io::{self},
@@ -33,6 +34,9 @@ pub enum OutFormat {
     Json,
     #[cfg(feature = "extra_fmt")]
     /// yaml
+    Toml,
+    #[cfg(feature = "extra_fmt")]
+    /// yaml
     Yaml,
 }
 
@@ -56,6 +60,8 @@ impl OutFormat {
 
             #[cfg(feature = "extra_fmt")]
             Self::Json => "json",
+            #[cfg(feature = "extra_fmt")]
+            Self::Toml => "toml",
             #[cfg(feature = "extra_fmt")]
             Self::Yaml => "yaml",
         }
@@ -91,11 +97,13 @@ impl OutFormat {
             ext if ext.eq_ignore_ascii_case("xml") => Self::Amd64,
 
             #[cfg(feature = "extra_fmt")]
+            ext if ext.eq_ignore_ascii_case("json") => Self::Amd64,
+            #[cfg(feature = "extra_fmt")]
+            ext if ext.eq_ignore_ascii_case("toml") => Self::Amd64,
+            #[cfg(feature = "extra_fmt")]
             ext if ext.eq_ignore_ascii_case("yaml") || ext.eq_ignore_ascii_case("yml") => {
                 Self::Amd64
             }
-            #[cfg(feature = "extra_fmt")]
-            ext if ext.eq_ignore_ascii_case("json") => Self::Amd64,
             _ => {
                 return Err(Error::UnsupportedExtensionPath {
                     path: path.to_path_buf(),
@@ -116,6 +124,7 @@ impl OutFormat {
     ///
     /// When enable `extra_fmt` feature.
     /// - `json` -> `Self::Json`
+    /// - `toml` -> `Self::Toml`
     /// - `yaml` -> `Self::Yaml`
     ///
     /// # Errors
@@ -132,6 +141,8 @@ impl OutFormat {
 
             #[cfg(feature = "extra_fmt")]
             ext if ext.eq_ignore_ascii_case("json") => Self::Json,
+            #[cfg(feature = "extra_fmt")]
+            ext if ext.eq_ignore_ascii_case("toml") => Self::Toml,
             #[cfg(feature = "extra_fmt")]
             ext if ext.eq_ignore_ascii_case("yaml") || ext.eq_ignore_ascii_case("yml") => {
                 Self::Yaml
@@ -242,7 +253,42 @@ where
     let input = input.as_ref();
     let in_bytes = input.read_bytes().await?;
     let mut string = String::new(); // To avoid ownership errors, declare it here, but since it is a 0-allocation, there is no problem.
-    let mut classes = deserialize(&in_bytes, &mut string, input)?;
-    let out_bytes = serialize_to_bytes(input, format, &mut classes)?;
+
+    // Deserialize
+    let mut classes = {
+        #[cfg(not(feature = "extra_fmt"))]
+        {
+            crate::serde::de::deserialize(&in_bytes, &mut string, input)?
+        }
+        #[cfg(feature = "extra_fmt")]
+        {
+            crate::serde_extra::de::deserialize(&in_bytes, &mut string, input)?
+        }
+    };
+
+    // Serialize
+    let out_bytes = {
+        match format {
+            OutFormat::Amd64 | OutFormat::Win32 => {
+                crate::serde::ser::to_bytes(input, format, &mut classes)?
+            }
+            OutFormat::Xml => {
+                let top_ptr = classes.sort_for_xml().context(SerSnafu {
+                    input: input.to_path_buf(),
+                })?;
+                let xml = serde_hkx::to_string(&classes, top_ptr).context(SerSnafu {
+                    input: input.to_path_buf(),
+                })?;
+                xml.into_bytes()
+            }
+            #[cfg(feature = "extra_fmt")]
+            _ => {
+                // NOTE: Use a number (e.g. `1`) as a key, which is not supported by TOML, so use a `Pointer`(e.g. `#0001`).
+                let mut classes = crate::types_wrapper::ClassPtrMap::from_class_map(classes);
+                crate::serde_extra::ser::to_bytes(input, format, &mut classes)?
+            }
+        }
+    };
+
     Ok(write(input, output, format.as_extension(), out_bytes).await?)
 }

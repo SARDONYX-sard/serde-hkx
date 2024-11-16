@@ -1,0 +1,141 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build CLI(Debug)",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["build"],
+      "group": {
+        "isDefault": true,
+        "kind": "build"
+      },
+      "options": {
+        "env": {
+          // "RUST_MIN_STACK": "16777216"
+          // "RUST_MIN_STACK": "33554432"
+          // "RUST_MIN_STACK": "67108864" // 64MiB
+        }
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "Build CLI(Debug + extra_fmt)",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["build", "--features", "extra_fmt"],
+      "group": {
+        "isDefault": true,
+        "kind": "build"
+      },
+      "options": {
+        "env": {
+          // "RUST_MIN_STACK": "16777216"
+          // "RUST_MIN_STACK": "33554432"
+          // "RUST_MIN_STACK": "67108864" // 64MiB
+        }
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "Build CLI(Release)",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["build", "--release"],
+      "group": {
+        "isDefault": false,
+        "kind": "build"
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "Build CLI(Release + extra_fmt)",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["build", "--release", "--features", "extra_fmt"],
+      "group": {
+        "isDefault": false,
+        "kind": "build"
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "dependsOn": ["Fix format", "Fix lint"],
+      "group": {
+        "isDefault": true,
+        "kind": "test"
+      },
+      "label": "Fix fmt & lint",
+      "presentation": {
+        "reveal": "silent"
+      }
+    },
+    {
+      "label": "Fix format",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["fmt", "--all"],
+      "group": {
+        "isDefault": true,
+        "kind": "test"
+      }
+    },
+    {
+      "command": "cargo",
+      "label": "Fix lint",
+      "type": "shell",
+      "args": [
+        "clippy",
+        "--workspace",
+        "--fix",
+        "--allow-staged",
+        "--allow-dirty"
+      ],
+      "group": {
+        "isDefault": false,
+        "kind": "test"
+      }
+    },
+    {
+      "label": "Check licenses",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["deny", "check"],
+      "group": {
+        "isDefault": false,
+        "kind": "test"
+      },
+      "problemMatcher": [],
+      "windows": {
+        "isEnabled": false
+      }
+    },
+    {
+      "label": "Workspace Tests",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["test", "--workspace"],
+      "group": {
+        "isDefault": false,
+        "kind": "test"
+      }
+    },
+    {
+      "label": "Generate json schema",
+      "type": "shell",
+      "command": "cargo",
+      "args": [
+        "test",
+        "--package",
+        "serde_hkx_features",
+        "--lib",
+        "--features",
+        "json_schema",
+        "--",
+        "json_schema_gen::tests::gen_schema",
+        "--exact",
+        "--show-output"
+      ]
+    }
+  ]
+}

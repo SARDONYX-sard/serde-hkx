@@ -69,6 +69,9 @@ havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.5
 serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.5.0" }
 ```
 
+NOTE: Currently there is a stack overflow problem of unknown cause. This occurs
+with debug build (`cargo build`) but not with release (`cargo build --release`).
+
 ## Documentation
 
 - [Specification](./docs/specification/hkx_binary_format.md)
