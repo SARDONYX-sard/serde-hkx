@@ -1,5 +1,5 @@
 //! Show dependency tree from havok behavior state machine (hkx/xml file)
-use crate::{error::Result, fs::ReadExt};
+use crate::{error::Result, fs::ReadExt, ClassMap};
 use serde_hkx::tree::HavokTree as _;
 use std::path::Path;
 use tokio::fs;
@@ -32,7 +32,7 @@ where
 {
     let bytes = input.read_bytes().await?;
     let mut string = String::new();
-    let mut class_map = {
+    let mut class_map: ClassMap = {
         #[cfg(not(feature = "extra_fmt"))]
         {
             crate::serde::de::deserialize(&bytes, &mut string, input)?
