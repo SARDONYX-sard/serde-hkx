@@ -40,7 +40,7 @@ havok_types = { workspace = true, features = ["serde"], optional = true }
 
 
 [features]
-default = ["extra_fmt"] # For debug
+# default = ["extra_fmt"] # For debug
 # default = ["json_schema"] # For debug
 
 # For `Format`(Output)
