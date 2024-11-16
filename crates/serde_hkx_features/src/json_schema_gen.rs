@@ -30,6 +30,6 @@ mod tests {
     fn gen_schema() {
         std::fs::create_dir_all("../../tests").unwrap();
         let json = super::generate_json_schema().unwrap();
-        std::fs::write("../../tests/schema.json", json).unwrap();
+        std::fs::write("../../assets/serde_hkx_schema.json", json).unwrap();
     }
 }
