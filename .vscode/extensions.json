@@ -1,3 +1,3 @@
 {
-  "recommendations": ["gruntfuggly.todo-tree"]
+  "recommendations": ["gruntfuggly.todo-tree", "rust-lang.rust-analyzer"]
 }

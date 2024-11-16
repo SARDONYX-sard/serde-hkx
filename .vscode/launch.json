@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch LLDB",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/target/debug/hkxc",
+      "args": [
+        "convert",
+        "-i",
+        "./1hm_behavior.xml",
+        "-v",
+        "amd64",
+        "--log-level",
+        "debug",
+        "--log-file",
+        "./convert_x86_to_x64_bytes.log"
+      ],
+      "cwd": "${workspaceFolder}/target/debug",
+      "preLaunchTask": "",
+      "env": {
+        "ULIMIT_STACK_SIZE": "8192"
+      },
+      "sourceLanguages": ["rust"]
+    }
+  ]
+}
