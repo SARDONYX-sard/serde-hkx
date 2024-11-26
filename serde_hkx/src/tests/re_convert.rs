@@ -2,7 +2,7 @@ use crate::{
     bytes::{hexdump, serde::hkx_header::HkxHeader},
     errors::SerdeHkxError,
     from_bytes, from_str,
-    tests::{diff, ClassMap},
+    tests::ClassMap,
     to_bytes, to_string, HavokSort as _,
 };
 use pretty_assertions::assert_eq;
@@ -26,6 +26,7 @@ fn should_match_re_convert_hkx() {
     };
 
     if let Err(err) = reproduce_bytes(expected_bytes) {
+        #[cfg(feature = "tracing")]
         tracing::error!("{err}");
         panic!("{err}")
     }
@@ -52,16 +53,20 @@ fn reproduce_bytes(expected_bytes: &[u8]) -> Result<()> {
     {
         let actual_hex_dump = hexdump::to_string(&actual_bytes);
         let expected_hex_dump = hexdump::to_string(expected_bytes);
-        let hexdump_diff = diff(&actual_hex_dump, &expected_hex_dump);
-        tracing::debug!("hexdump_diff = \n{hexdump_diff}");
+        #[cfg(feature = "tracing")]
+        {
+            let hexdump_diff = crate::tests::diff(&actual_hex_dump, &expected_hex_dump);
+            tracing::debug!("hexdump_diff = \n{hexdump_diff}");
+        }
         assert_eq!(actual_hex_dump, expected_hex_dump);
     }
 
     // Ast diff
+    #[cfg(feature = "tracing")]
     {
-        let actual_classes: ClassMap = from_bytes(&actual_bytes)?;
         let expected_classes: ClassMap = from_bytes(expected_bytes)?;
-        let ast_diff = diff(
+        let actual_classes: ClassMap = from_bytes(&actual_bytes)?;
+        let ast_diff = crate::tests::diff(
             format!("{expected_classes:#?}"),
             format!("{actual_classes:#?}"),
         );
