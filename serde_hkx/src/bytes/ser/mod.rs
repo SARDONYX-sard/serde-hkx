@@ -25,6 +25,10 @@ use std::io::{Cursor, Write as _};
 /// # Errors
 /// - When information necessary for binary data conversion is missing.
 /// - When a write to the wrong write position is requested.
+///
+/// # NOTE
+/// - To reproduce the original hkx, it is necessary to arrange them in dependency order using `HavokSort::sort_for_bytes` or similar.
+/// - If you convert in the order of hkx => XML => hkx, you may not be able to restore the original hkx due to data loss during XML conversion.
 pub fn to_bytes<V>(value: &V, header: &HkxHeader) -> Result<Vec<u8>>
 where
     V: Serialize + ClassNamesWriter,
