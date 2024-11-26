@@ -37,14 +37,14 @@ pretty_assertions = { workspace = true } # To make diffs color and easy to read 
 quick_tracing = { workspace = true }
 similar = { workspace = true }           # Create diff
 tracing = { workspace = true }
-zerocopy = { version = "0.8.7" }         # To(As)Bytes
+zerocopy = { version = "0.8.11" }        # To(As)Bytes
 
 # workspace members
 havok_classes = { workspace = true, features = ["ignore_duplicates"] }
 
 
 [features]
-default = ["tracing"] # For debug
+# default = ["tracing"] # For debug
 
 # Use tracing logging.(We may need `tracing-subscriber` crate too.)
 tracing = ["dep:tracing"]
