@@ -1,6 +1,7 @@
 use super::to_rust_token::{member_to_rust_type, to_rust_field_ident};
 use crate::{
-    bail_syn_err, cpp_info::{Member, TypeKind},
+    bail_syn_err,
+    cpp_info::{Member, TypeKind},
 };
 use proc_macro2::TokenStream;
 use quote::quote;
