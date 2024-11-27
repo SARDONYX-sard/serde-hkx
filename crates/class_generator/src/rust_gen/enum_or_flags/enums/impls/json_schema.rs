@@ -2,6 +2,11 @@ use crate::cpp_info::{Enum, EnumItem};
 use proc_macro2::TokenStream;
 use quote::quote;
 
+/// # Reasons for manual implementation without using `#[derive(JsonSchema)]`.
+/// More than 256 is an error due to macro's recursion limit,
+/// so do not rely on macros but implement manually.
+///
+/// ref: [schemars/macro.json_schema](https://docs.rs/schemars/1.0.0-alpha.15/schemars/macro.json_schema.html)
 pub fn impl_schema_for_enum_flag(one_enum: &Enum) -> TokenStream {
     let Enum { name, .. } = one_enum;
 
