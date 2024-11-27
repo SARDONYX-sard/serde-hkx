@@ -11,6 +11,12 @@ use std::{borrow::Cow, fs, path::Path};
 /// Generate havok class code(For Rust) from class info json files.
 ///
 /// - `classes_json_dir`: `assets/`
+///
+/// # Errors
+/// Failed to parse json.
+///
+/// # Panics
+/// If invalid json file.
 pub fn generate_havok_class_table<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> Result<()> {
     let class_out_dir = out_dir.as_ref().join("generated");
     std::fs::create_dir_all(&class_out_dir)?;
@@ -81,8 +87,6 @@ where
             if path.ends_with("havok_class_schema.json") {
                 continue;
             }
-        } else {
-            continue;
         }
 
         let class_name = path.file_stem().context(NotFoundFileStemSnafu {
@@ -97,7 +101,7 @@ where
     Ok(())
 }
 
-pub fn from_cpp_class(class: &Class, class_map: &ClassMap) -> TokenStream {
+fn from_cpp_class(class: &Class, class_map: &ClassMap) -> TokenStream {
     let Class {
         name: class_name, ..
     } = class;
@@ -152,6 +156,7 @@ fn to_json_type<'a>(member: &Member, search_sub: bool) -> Option<Cow<'a, str>> {
 
     let ty = if search_sub { vsubtype } else { vtype };
 
+    #[allow(clippy::match_same_arms)]
     Some(match ty {
         TypeKind::Void => "Null".into(),
         TypeKind::Bool => "Bool".into(),
@@ -168,20 +173,14 @@ fn to_json_type<'a>(member: &Member, search_sub: bool) -> Option<Cow<'a, str>> {
         TypeKind::Transform => "Object|Transform".into(),
         TypeKind::Pointer => "Pointer".into(), // e.g. #0000
         TypeKind::Enum | TypeKind::Flags => "String".into(), // e.g. `TYPE_ROLE`
-        TypeKind::Struct => {
-            if let Some(name) = class_ref {
-                format!("Object|{name}").into()
-            } else {
-                panic!("Struct needs a name, but `None` was taken.")
-            }
-        }
-        TypeKind::Array | TypeKind::SimpleArray => {
-            if let Some(ty) = to_json_type(member, true) {
-                format!("Array|{ty}").into()
-            } else {
-                panic!("Struct needs a name, but `None` was taken.")
-            }
-        }
+        TypeKind::Struct => class_ref.as_ref().map_or_else(
+            || panic!("Struct needs a name, but `None` was taken."),
+            |name| format!("Object|{name}").into(),
+        ),
+        TypeKind::Array | TypeKind::SimpleArray => to_json_type(member, true).map_or_else(
+            || panic!("Struct needs a name, but `None` was taken."),
+            |ty| format!("Array|{ty}").into(),
+        ),
         TypeKind::Variant => "Object|Variant".into(),
         TypeKind::CString | TypeKind::StringPtr => "String".into(),
         TypeKind::Ulong => "U64".into(),

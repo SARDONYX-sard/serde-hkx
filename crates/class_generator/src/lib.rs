@@ -10,6 +10,9 @@ use snafu::OptionExt as _;
 use std::{fs, path::Path};
 
 /// Generate havok class code(For Rust) from class info json files.
+///
+/// # Errors
+/// When parse error.
 pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> Result<()> {
     let class_out_dir = out_dir.as_ref().join("generated");
     std::fs::create_dir_all(&class_out_dir)?;
@@ -40,7 +43,7 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> 
         let output_file = output_file.to_string_lossy();
         tracing::debug!(?output_file);
 
-        let rust_code = prettyplease::unparse(&rust_gen::from_cpp_class(class, &class_map));
+        let rust_code = prettyplease::unparse(&rust_gen::from_cpp_class(class, &class_map)?);
         std::fs::write(output_file.as_ref(), rust_code)?;
 
         class_index.push((class_name, class.has_string));
@@ -92,31 +95,30 @@ pub fn get_inherited_members<'a>(
     class_name: &str,
     classes_map: &'a ClassMap,
 ) -> Vec<&'a cpp_info::Member<'a>> {
-    // Cache variables
-    let mut current_class_name = class_name;
-    let mut members = Vec::new();
+    let members = {
+        // Get all parents
+        let mut members = Vec::new();
+        let mut current_class_name = class_name;
+        while let Some(class) = classes_map.get(current_class_name) {
+            members.push(class.members.as_slice());
 
-    // Get all parents
-    while let Some(class) = classes_map.get(current_class_name) {
-        members.push(class.members.as_slice());
-
-        if let Some(parent_name) = &class.parent {
-            current_class_name = parent_name;
-        } else {
-            break; // No more parent to process
+            if let Some(parent_name) = &class.parent {
+                current_class_name = parent_name;
+            } else {
+                break; // No more parent to process
+            }
         }
-    }
-
-    members.reverse(); // This is because binary reads must be read from the most root parent class.
+        members.reverse(); // This is because binary reads must be read from the most root parent class.
+        members
+    };
 
     // NOTE:
     // If we just reverse a flattened `member`, the fields will also be in reverse order,
     // so it is necessary to split the `member` into two.
-    let mut all_members = Vec::new();
-    for member in members {
-        all_members.extend(member)
-    }
-    all_members
+    members.into_iter().fold(Vec::new(), |mut acc, member| {
+        acc.extend(member);
+        acc
+    })
 }
 
 #[cfg(test)]

@@ -135,18 +135,13 @@ impl Member<'_> {
     /// These are not used inside the 2010 Havok Class.
     ///
     /// `TypeKind::Struct`: This cannot be calculated here. It is calculated externally using `HashMap` or similar.
+    #[allow(clippy::match_same_arms)] // Dare to separate for clarity
     pub fn size_of_align(&self, vtype: &TypeKind, ptr_size: u32) -> Result<u32, MemberError> {
         Ok(match vtype {
-            TypeKind::Bool => 1,
-            TypeKind::Char => 1,
-            TypeKind::Int8 => 1,
-            TypeKind::Uint8 => 1,
-            TypeKind::Int16 => 2,
-            TypeKind::Uint16 => 2,
-            TypeKind::Int32 => 4,
-            TypeKind::Uint32 => 4,
-            TypeKind::Int64 => 8,
-            TypeKind::Uint64 => 8,
+            TypeKind::Bool | TypeKind::Char | TypeKind::Int8 | TypeKind::Uint8 => 1,
+            TypeKind::Int16 | TypeKind::Uint16 => 2,
+            TypeKind::Int32 | TypeKind::Uint32 => 4,
+            TypeKind::Int64 | TypeKind::Uint64 => 8,
             TypeKind::Real => 4,
 
             // Normally, f32 => 4bytes is considered, but in the C++ definition, `align(16)` exists in Vector4, so it needs to be aligned at 16 bytes.
@@ -204,6 +199,7 @@ impl Member<'_> {
 ///    TypeKind::RelArray | TypeKind::Max` => These are not used inside the 2010 Havok Class.
 ///
 /// - `TypeKind::Struct` => This cannot be calculated here. It is calculated externally using `HashMap` or similar.
+#[allow(clippy::match_same_arms)] // Dare to separate for clarity
 fn size_of_type_common(type_kind: &TypeKind, ptr_size: u32) -> Result<u32, MemberError> {
     Ok(match type_kind {
         TypeKind::Bool | TypeKind::Char | TypeKind::Int8 | TypeKind::Uint8 => 1,

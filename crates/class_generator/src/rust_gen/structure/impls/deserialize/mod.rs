@@ -3,22 +3,24 @@ mod visit_struct;
 mod visit_struct_for_bytes;
 
 use crate::{
-    cpp_info::{Class, TypeKind},
-    get_inherited_members, ClassMap,
+    bail_syn_err,
+    cpp_info::{Class, Member, TypeKind},
+    get_inherited_members, syn_error, ClassMap,
 };
 use enum_fields::gen_enum_visitor;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
+use syn::Result;
 
-pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> TokenStream {
+pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> Result<TokenStream> {
     let members = &class.members;
     let enum_visitor = gen_enum_visitor(get_inherited_members(&class.name, class_map).as_slice());
 
     let class_name_str = &class.name;
 
     let visitor_ident = to_visitor_ident(class_name_str);
-    let visitor_for_bytes = visit_struct_for_bytes::gen(class, class_map);
-    let visitor_for_xml = visit_struct::gen(class, class_map);
+    let visitor_for_bytes = visit_struct_for_bytes::gen(class, class_map)?;
+    let visitor_for_xml = visit_struct::gen(class, class_map)?;
 
     let expected_msg = format!("struct {class_name_str}");
 
@@ -34,7 +36,7 @@ pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> TokenStream {
         member_names.push(&member.name);
     }
 
-    quote! {
+    Ok(quote! {
         #[doc(hidden)]
         #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
         const _: () = {
@@ -78,7 +80,7 @@ pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> TokenStream {
                 }
             }
         };
-    }
+    })
 }
 
 /// `ClassName` -> `__ClassNameVisitor`
@@ -90,10 +92,7 @@ pub(super) fn to_visitor_ident(class_name_str: &str) -> syn::Ident {
 ///
 /// # Note
 /// lifetime annotation is `'de` (not `'a`)
-pub(super) fn member_to_de_rust_type(
-    member: &crate::cpp_info::Member,
-    class_name: &str,
-) -> TokenStream {
+pub(super) fn member_to_de_rust_type(member: &Member, class_name: &str) -> Result<TokenStream> {
     let crate::cpp_info::Member {
         name,
         class_ref,
@@ -111,32 +110,36 @@ pub(super) fn member_to_de_rust_type(
     };
 
     let field_type = match member.vtype {
-        TypeKind::Struct => {
-            let struct_name = syn::Ident::new(
-                class_ref.as_ref().expect("Struct must have class_ref"),
-                proc_macro2::Span::call_site(),
-            );
-            quote! { #struct_name #lifetime }
-        }
+        TypeKind::Struct => match class_ref {
+            Some(class_ref) => {
+                let struct_name = format_ident!("{class_ref}");
+                quote! { #struct_name #lifetime }
+            }
+            None => {
+                bail_syn_err!("{class_name}({name}): Struct subtype must have a class_ref")
+            }
+        },
         TypeKind::Enum | TypeKind::Flags => {
             if let Some(enum_ref) = enum_ref {
                 quote::ToTokens::to_token_stream(&format_ident!("{enum_ref}"))
             } else {
                 // NOTE: Fall back `enum Unknown` to enum storage size type(`vsubtype`).
-                to_rust_type(vsubtype).unwrap_or_else(|| {
-                    panic!("{class_name}({name}) couldn't cast {vsubtype} to Rust type")
-                })
+                to_rust_type(vsubtype).ok_or_else(|| {
+                    syn_error!("{class_name}({name}): Couldn't cast {vtype} to Rust type")
+                })?
             }
         }
         TypeKind::SimpleArray | TypeKind::Array => {
             let field_subtype = match vsubtype {
-                TypeKind::Struct => {
-                    let struct_name = syn::Ident::new(
-                        class_ref.as_ref().expect("Struct must have class_ref"),
-                        proc_macro2::Span::call_site(),
-                    );
-                    quote! { #struct_name #lifetime }
-                }
+                TypeKind::Struct => match class_ref {
+                    Some(class_ref) => {
+                        let struct_name = format_ident!("{class_ref}");
+                        quote! { #struct_name #lifetime }
+                    }
+                    None => {
+                        bail_syn_err!("{class_name}({name}): Struct subtype must have a class_ref")
+                    }
+                },
                 TypeKind::Enum | TypeKind::Flags => quote::ToTokens::to_token_stream(
                     &format_ident!("{}", enum_ref.as_ref().unwrap()),
                 ),
@@ -150,11 +153,11 @@ pub(super) fn member_to_de_rust_type(
             .unwrap_or_else(|| panic!("{class_name}({name}) couldn't cast {vtype} to Rust type")),
     };
 
-    if *arrsize > 0 {
+    Ok(if *arrsize > 0 {
         quote! { [#field_type; #arrsize] }
     } else {
         quote! { #field_type }
-    }
+    })
 }
 
 /// with `'de` annotation
@@ -182,11 +185,11 @@ fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {
         // TypeKind::Zero => todo!(),
         TypeKind::Pointer => quote!(Pointer),
         // TypeKind::FnPtr => todo!(),
-        TypeKind::Array => quote!(Vec),
+        TypeKind::Array | TypeKind::SimpleArray => quote!(Vec),
         // TypeKind::InplaceArray => todo!(),
         // TypeKind::Enum => todo!(),
         // TypeKind::Struct => todo!(),
-        TypeKind::SimpleArray => quote!(Vec),
+        // TypeKind::SimpleArray => quote!(Vec),
         // TypeKind::HomogeneousArray => todo!(),
         TypeKind::Variant => quote!(Variant),
         TypeKind::CString => quote!(CString<'de>),

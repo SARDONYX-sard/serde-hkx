@@ -34,7 +34,7 @@ pub fn impl_de_for_enum(one_enum: &Enum) -> TokenStream {
     let mut visit_enum_matcher = Vec::new();
     let mut field_variants = Vec::new();
     for (index, enum_item) in enum_item.iter().enumerate() {
-        let EnumItem { name, value, .. } = enum_item;
+        let EnumItem { name, value } = enum_item;
         fields_str.push(name); // For expected value info in `visit_stringptr`
         values.push(value.to_string()); // For expected value info in `visit_uint64`
 

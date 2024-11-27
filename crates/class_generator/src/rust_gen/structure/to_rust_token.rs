@@ -1,6 +1,10 @@
-use crate::cpp_info::TypeKind;
+use crate::{
+    bail_syn_err,
+    cpp_info::{Member, TypeKind},
+};
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
+use syn::Error;
 
 /// `field` -> `m_field`
 pub fn to_rust_field_ident(name: &str) -> syn::Ident {
@@ -8,11 +12,8 @@ pub fn to_rust_field_ident(name: &str) -> syn::Ident {
 }
 
 /// C++ member info -> Rust type token
-pub(super) fn member_to_rust_type(
-    member: &crate::cpp_info::Member,
-    class_name: &str,
-) -> TokenStream {
-    let crate::cpp_info::Member {
+pub(super) fn member_to_rust_type(member: &Member, class_name: &str) -> Result<TokenStream, Error> {
+    let Member {
         name,
         class_ref,
         enum_ref,
@@ -30,49 +31,54 @@ pub(super) fn member_to_rust_type(
 
     let field_type = match member.vtype {
         TypeKind::Struct => {
-            let struct_name = syn::Ident::new(
-                class_ref.as_ref().expect("Struct must have class_ref"),
-                proc_macro2::Span::call_site(),
-            );
-            quote! { #struct_name #lifetime }
+            if let Some(class_ref) = class_ref {
+                let struct_name = format_ident!("{class_ref}");
+                quote! { #struct_name #lifetime }
+            } else {
+                bail_syn_err!("{class_name}({name}): Struct must have a class_ref")
+            }
         }
         TypeKind::Enum | TypeKind::Flags => {
             if let Some(enum_ref) = enum_ref {
                 quote::ToTokens::to_token_stream(&format_ident!("{enum_ref}"))
             } else {
                 // NOTE: Fall back `enum Unknown` to enum storage size type(`vsubtype`).
-                to_rust_type(vsubtype).unwrap_or_else(|| {
-                    panic!("{class_name}({name}) couldn't cast {vsubtype} to Rust type")
-                })
+                to_rust_type(vsubtype)
+                    .ok_or_else(|| create_cast_error(class_name, name, vsubtype))?
             }
         }
         TypeKind::SimpleArray | TypeKind::Array => {
             let field_subtype = match vsubtype {
-                TypeKind::Struct => {
-                    let struct_name = syn::Ident::new(
-                        class_ref.as_ref().expect("Struct must have class_ref"),
-                        proc_macro2::Span::call_site(),
-                    );
-                    quote! { #struct_name #lifetime }
-                }
-                TypeKind::Enum | TypeKind::Flags => quote::ToTokens::to_token_stream(
-                    &format_ident!("{}", enum_ref.as_ref().unwrap()),
-                ),
-                _ => to_rust_type(vsubtype).unwrap_or_else(|| {
-                    panic!("{class_name}({name}) couldn't cast {vsubtype} to Rust type")
-                }),
+                TypeKind::Struct => match class_ref {
+                    Some(class_ref) => {
+                        let struct_name = format_ident!("{class_ref}");
+                        quote! { #struct_name #lifetime }
+                    }
+                    None => {
+                        bail_syn_err!("{class_name}({name}): Struct subtype must have a class_ref")
+                    }
+                },
+                TypeKind::Enum | TypeKind::Flags => match enum_ref {
+                    Some(enum_ref) => {
+                        quote::ToTokens::to_token_stream(&format_ident!("{enum_ref}"))
+                    }
+                    None => {
+                        bail_syn_err!("{class_name}({name}): Enum subtype must have an enum_ref")
+                    }
+                },
+                _ => to_rust_type(vsubtype)
+                    .ok_or_else(|| create_cast_error(class_name, name, vsubtype))?,
             };
             quote! { Vec<#field_subtype> }
         }
-        _ => to_rust_type(vtype)
-            .unwrap_or_else(|| panic!("{class_name}({name}) couldn't cast {vtype} to Rust type")),
+        _ => to_rust_type(vtype).ok_or_else(|| create_cast_error(class_name, name, vtype))?,
     };
 
-    if *arrsize > 0 {
-        quote! { [#field_type; #arrsize] }
-    } else {
+    Ok(if *arrsize == 0 {
         quote! { #field_type }
-    }
+    } else {
+        quote! { [#field_type; #arrsize] }
+    })
 }
 
 fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {
@@ -99,11 +105,11 @@ fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {
         // TypeKind::Zero => todo!(),
         TypeKind::Pointer => quote!(Pointer),
         // TypeKind::FnPtr => todo!(),
-        TypeKind::Array => quote!(Vec),
+        TypeKind::Array | TypeKind::SimpleArray => quote!(Vec),
         // TypeKind::InplaceArray => todo!(),
         // TypeKind::Enum => todo!(),
         // TypeKind::Struct => todo!(),
-        TypeKind::SimpleArray => quote!(Vec),
+        // TypeKind::SimpleArray => quote!(Vec),
         // TypeKind::HomogeneousArray => todo!(),
         TypeKind::Variant => quote!(Variant),
         TypeKind::CString => quote!(CString<'a>),
@@ -115,4 +121,11 @@ fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {
         // TypeKind::Max => todo!(),
         _ => return None,
     })
+}
+
+fn create_cast_error(class_name: &str, name: &str, vtype: &TypeKind) -> Error {
+    syn::Error::new(
+        proc_macro2::Span::call_site(),
+        format!("{class_name}({name}): Couldn't cast {vtype} to Rust type"),
+    )
 }

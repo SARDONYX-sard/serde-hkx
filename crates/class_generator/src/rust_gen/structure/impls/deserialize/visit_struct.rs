@@ -8,9 +8,10 @@ use crate::{
 };
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
+use syn::Result;
 
 /// Generate `visit_struct` (for XML)
-pub fn gen(class: &Class, classes_map: &ClassMap) -> TokenStream {
+pub fn gen(class: &Class, classes_map: &ClassMap) -> Result<TokenStream> {
     let mut first_recv_fields = Vec::new(); // after call `next_value`
     let mut visit_fields_matcher = Vec::new(); // 　The process of removing the Option and inserting the value into the field at the end.
     let mut last_recv_fields = Vec::new();
@@ -43,15 +44,16 @@ pub fn gen(class: &Class, classes_map: &ClassMap) -> TokenStream {
         }
 
         let field_ident = to_rust_field_ident(name); // e.g. `m_fieldName`
-        let field_type = member_to_de_rust_type(member, &class.name); // e.g. `u64`
+        let field_type = member_to_de_rust_type(member, &class.name)?; // e.g. `u64`
 
         first_recv_fields.push(quote! {
             let mut #field_ident: _serde::__private::Option<#field_type> = _serde::__private::None;
         });
 
-        let default_value = match arrsize {
-            33.. => quote! { [Default::default(); #arrsize] },
-            _ => quote! { Default::default() },
+        let default_value = if let 33.. = arrsize {
+            quote! { [Default::default(); #arrsize] }
+        } else {
+            quote! { Default::default() }
         };
         visit_fields_matcher.push(quote! {
             __Field::#field_ident => {
@@ -94,7 +96,7 @@ pub fn gen(class: &Class, classes_map: &ClassMap) -> TokenStream {
     }
 
     let new_struct = create_struct(class);
-    quote! {
+    Ok(quote! {
             #[allow(clippy::manual_unwrap_or_default)]
             fn visit_struct<__A>(
                 self,
@@ -117,7 +119,7 @@ pub fn gen(class: &Class, classes_map: &ClassMap) -> TokenStream {
                 let __ptr = __A::class_ptr(&mut __map); // First make the `__ptr` of the inheritance source `Option::None` by taking `__ptr` here
                 _serde::__private::Ok(#new_struct)
             }
-    }
+    })
 }
 
 fn create_struct<'a>(class: &'a Class<'a>) -> TokenStream {

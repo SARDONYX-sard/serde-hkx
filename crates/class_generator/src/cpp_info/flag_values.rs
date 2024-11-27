@@ -27,19 +27,19 @@ bitflags::bitflags! {
 impl FlagValues {
     /// Does it contain the `SERIALIZE_IGNORED` flag?
     #[inline]
-    pub fn has_skip_serializing(&self) -> bool {
+    pub const fn has_skip_serializing(&self) -> bool {
         self.contains(Self::SERIALIZE_IGNORED)
     }
 
     /// Does it contain the `ALIGN8` flag?
     #[inline]
-    pub fn has_align8(&self) -> bool {
+    pub const fn has_align8(&self) -> bool {
         self.contains(Self::ALIGN_8)
     }
 
     /// Does it contain the `ALIGN16` flag?
     #[inline]
-    pub fn has_align16(&self) -> bool {
+    pub const fn has_align16(&self) -> bool {
         self.contains(Self::ALIGN_16)
     }
 }

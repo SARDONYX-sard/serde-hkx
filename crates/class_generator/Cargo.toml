@@ -43,3 +43,6 @@ havok_types_derive = { workspace = true }
 [dev-dependencies]
 pretty_assertions = { workspace = true } # To make diffs color and easy to read on test
 quick_tracing = { workspace = true }     # quick tracing subscriber
+
+[lints]
+workspace = true

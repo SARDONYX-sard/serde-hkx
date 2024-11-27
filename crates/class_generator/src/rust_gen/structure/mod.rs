@@ -5,28 +5,33 @@ mod to_rust_token;
 use self::field::gen_field;
 use crate::cpp_info::Class;
 use proc_macro2::TokenStream;
-use quote::quote;
+use quote::{format_ident, quote};
+use syn::{Error, ItemStruct};
 
 pub use self::impls::deserialize::impl_deserialize;
 pub use self::impls::serialize::impl_serialize;
-pub fn generate(class: &Class) -> syn::ItemStruct {
+pub fn generate(class: &Class) -> Result<ItemStruct, Error> {
     let class_name = &class.name;
-    let fields: Vec<TokenStream> = class
-        .members
-        .iter()
-        .map(|member| gen_field(member, class_name))
-        .collect();
+
+    let fields = {
+        let mut fields = Vec::new();
+        for member in &class.members {
+            fields.push(gen_field(member, class_name)?);
+        }
+        fields
+    };
 
     let doc_attrs = struct_doc_attrs(class);
-    let struct_name = syn::Ident::new(class_name, proc_macro2::Span::call_site());
+    let struct_name = format_ident!("{class_name}");
     let lifetime = match class.has_string {
         true => quote! { <'a> },
         false => quote! {},
     };
 
-    let parent = match &class.parent {
-        Some(parent) => {
-            let parent_struct_name = syn::Ident::new(parent, proc_macro2::Span::call_site());
+    let parent = class.parent.as_ref().map_or_else(
+        || quote! {},
+        |parent| {
+            let parent_struct_name = format_ident!("{parent}");
             let lifetime = match class.parent_has_string {
                 true => quote! { <'a> },
                 false => quote! {},
@@ -37,12 +42,11 @@ pub fn generate(class: &Class) -> syn::ItemStruct {
                 #[cfg_attr(feature = "serde", serde(flatten))]
                 pub parent: #parent_struct_name #lifetime,
             }
-        }
-        None => quote! {},
-    };
+        },
+    );
 
     // `Default` implementations with huge sizes such as [0u8; 256] are not automatically supported, so use `educe` crate to define them.
-    syn::parse_quote! {
+    Ok(syn::parse_quote! {
         #doc_attrs
         #[allow(non_upper_case_globals, non_snake_case)]
         #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
@@ -61,7 +65,7 @@ pub fn generate(class: &Class) -> syn::ItemStruct {
             #parent
             #(#fields,)*
         }
-    }
+    })
 }
 
 fn struct_doc_attrs(class: &Class) -> TokenStream {

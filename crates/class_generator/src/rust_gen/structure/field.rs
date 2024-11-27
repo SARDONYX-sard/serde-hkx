@@ -1,10 +1,13 @@
 use super::to_rust_token::{member_to_rust_type, to_rust_field_ident};
-use crate::cpp_info::{Member, TypeKind};
+use crate::{
+    bail_syn_err, cpp_info::{Member, TypeKind},
+};
 use proc_macro2::TokenStream;
 use quote::quote;
+use syn::Error;
 
 /// C++ member info -> Rust field token
-pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
+pub(super) fn gen_field(member: &Member, class_name: &str) -> Result<TokenStream, Error> {
     let Member {
         name,
         vtype,
@@ -12,7 +15,7 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
         ..
     } = member;
 
-    let field_type = member_to_rust_type(member, class_name);
+    let field_type = member_to_rust_type(member, class_name)?;
 
     // `Default` implementations with huge sizes such as [0u8; 256] are not automatically supported, so use `educe` crate to define them.
     let default_attr = if *arrsize > 32 {
@@ -37,9 +40,11 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
                     #[educe(Default = [0; #arrsize])]
                 }
             }
-            _ => panic!(
-                "Giant fixed-size arrays are supported only for Int or Uint 8~64. Got {vtype}"
-            ),
+            _ => {
+                bail_syn_err!(
+                    "Giant fixed-size arrays are supported only for Int or Uint 8~64. Got {vtype}"
+                )
+            }
         };
         quote! {
             #serde_with_attr
@@ -51,13 +56,13 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
 
     let doc = field_doc_tokens(member);
     let field_name = to_rust_field_ident(name);
-    quote! {
+    Ok(quote! {
         #doc
         #default_attr
         #[cfg_attr(feature = "json_schema", schemars(rename = #name))]
         #[cfg_attr(feature = "serde", serde(rename = #name))]
         pub #field_name: #field_type
-    }
+    })
 }
 
 fn field_doc_tokens(member: &Member) -> TokenStream {
@@ -76,12 +81,11 @@ fn field_doc_tokens(member: &Member) -> TokenStream {
     let offsets = format!(" - offset: `{offset_x86:3}`(x86)/`{offset_x86_64:3}`(x86_64)");
     let type_sizes =
         format!(" - type_size: `{type_size_x86:3}`(x86)/`{type_size_x86_64:3}`(x86_64)");
-    let flags_doc = match flags.bits() {
-        0 => quote! {},
-        _ => {
-            let doc = format!(" - flags: `{flags}`");
-            quote! { #[doc = #doc]}
-        }
+    let flags_doc = if flags.bits() == 0 {
+        quote! {} // NOTE: If `FlagsNone`, the flag does not exist and is not displayed.
+    } else {
+        let doc = format!(" - flags: `{flags}`");
+        quote! { #[doc = #doc]}
     };
 
     quote! {

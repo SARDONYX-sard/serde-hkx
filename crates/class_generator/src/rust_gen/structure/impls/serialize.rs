@@ -133,60 +133,15 @@ fn impl_serialize_self_fields(
         let rust_field_name = to_rust_field_ident(name);
         let parent_ident = n_time_parent_ident(parent_depth);
 
-        match arrsize {
-            0 => {
-                match vtype {
-                    Array => {
-                        let ser_method = match flags.has_skip_serializing() {
-                            true => quote! { skip_array_field },
-                            false => quote! { serialize_array_field },
-                        };
-
-                        match vsubtype {
-                            Struct => {
-                                let (x86_size, x64_size) = {
-                                    let class_name = class_ref.as_ref().unwrap().as_ref();
-                                    let class = class_map.get(class_name).unwrap();
-                                    (class.size_x86 as u64, class.size_x86_64 as u64)
-                                };
-                                serialize_calls.push(quote! {
-                                    serializer.#ser_method(
-                                        #cpp_field_key,
-                                        &self #parent_ident.#rust_field_name,
-                                        TypeSize::Struct {
-                                            size_x86: #x86_size,
-                                            size_x86_64: #x64_size,
-                                    })?;
-                                });
-                            }
-                            CString | StringPtr => {
-                                serialize_calls.push(quote! {
-                                    serializer.#ser_method(#cpp_field_key, &self #parent_ident.#rust_field_name, TypeSize::String)?;
-                                });
-                            }
-                            _ => {
-                                serialize_calls.push(quote! {
-                                    serializer.#ser_method(#cpp_field_key, &self #parent_ident.#rust_field_name, TypeSize::NonPtr)?;
-                                });
-                            }
-                        };
-                    }
-                    _ => {
-                        let ser_method = match flags.has_skip_serializing() {
-                            true => quote! { skip_field },
-                            false => quote! { serialize_field },
-                        };
-                        serialize_calls.push(quote! { serializer.#ser_method(#cpp_field_key, &self #parent_ident.#rust_field_name)?; });
-                    }
-                };
-            }
-            1.. => {
-                let ser_method = match flags.has_skip_serializing() {
-                    true => quote! { skip_fixed_array_field },
-                    false => quote! { serialize_fixed_array_field },
+        if arrsize == &0 {
+            if vtype == &Array {
+                let ser_method = if flags.has_skip_serializing() {
+                    quote! { skip_array_field }
+                } else {
+                    quote! { serialize_array_field }
                 };
 
-                match vtype {
+                match vsubtype {
                     Struct => {
                         let (x86_size, x64_size) = {
                             let class_name = class_ref.as_ref().unwrap().as_ref();
@@ -196,34 +151,76 @@ fn impl_serialize_self_fields(
                         serialize_calls.push(quote! {
                             serializer.#ser_method(
                                 #cpp_field_key,
-                                self #parent_ident.#rust_field_name.as_slice(),
+                                &self #parent_ident.#rust_field_name,
                                 TypeSize::Struct {
                                     size_x86: #x86_size,
                                     size_x86_64: #x64_size,
-                                }
-                            )?;
+                            })?;
                         });
                     }
                     CString | StringPtr => {
                         serialize_calls.push(quote! {
-                            serializer.#ser_method(
-                                #cpp_field_key,
-                                self #parent_ident.#rust_field_name.as_slice(),
-                                TypeSize::String,
-                            )?;
+                            serializer.#ser_method(#cpp_field_key, &self #parent_ident.#rust_field_name, TypeSize::String)?;
                         });
                     }
                     _ => {
                         serialize_calls.push(quote! {
-                            serializer.#ser_method(
-                                #cpp_field_key,
-                                self #parent_ident.#rust_field_name.as_slice(),
-                                TypeSize::NonPtr,
-                            )?;
+                            serializer.#ser_method(#cpp_field_key, &self #parent_ident.#rust_field_name, TypeSize::NonPtr)?;
                         });
                     }
                 };
-            }
+            } else {
+                let ser_method = if flags.has_skip_serializing() {
+                    quote! { skip_field }
+                } else {
+                    quote! { serialize_field }
+                };
+                serialize_calls.push(quote! { serializer.#ser_method(#cpp_field_key, &self #parent_ident.#rust_field_name)?; });
+            };
+        } else {
+            let ser_method = if flags.has_skip_serializing() {
+                quote! { skip_fixed_array_field }
+            } else {
+                quote! { serialize_fixed_array_field }
+            };
+
+            match vtype {
+                Struct => {
+                    let (x86_size, x64_size) = {
+                        let class_name = class_ref.as_ref().unwrap().as_ref();
+                        let class = class_map.get(class_name).unwrap();
+                        (class.size_x86 as u64, class.size_x86_64 as u64)
+                    };
+                    serialize_calls.push(quote! {
+                        serializer.#ser_method(
+                            #cpp_field_key,
+                            self #parent_ident.#rust_field_name.as_slice(),
+                            TypeSize::Struct {
+                                size_x86: #x86_size,
+                                size_x86_64: #x64_size,
+                            }
+                        )?;
+                    });
+                }
+                CString | StringPtr => {
+                    serialize_calls.push(quote! {
+                        serializer.#ser_method(
+                            #cpp_field_key,
+                            self #parent_ident.#rust_field_name.as_slice(),
+                            TypeSize::String,
+                        )?;
+                    });
+                }
+                _ => {
+                    serialize_calls.push(quote! {
+                        serializer.#ser_method(
+                            #cpp_field_key,
+                            self #parent_ident.#rust_field_name.as_slice(),
+                            TypeSize::NonPtr,
+                        )?;
+                    });
+                }
+            };
         };
     }
 

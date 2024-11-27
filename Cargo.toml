@@ -140,6 +140,7 @@ needless_continue = "deny"
 needless_for_each = "deny"
 option_if_let_else = "deny"
 option_option = "deny"
+# panic = "deny" # Use with test and code_gen
 path_buf_push_overwrite = "deny"
 ptr_as_ptr = "deny"
 rc_mutex = "deny"
