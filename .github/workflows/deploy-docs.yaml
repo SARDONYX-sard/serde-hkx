@@ -13,6 +13,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.5
+        with:
+          prefix-key: cargo-docs
 
       - name: Build documentation
         run: cargo doc --no-deps
