@@ -1,6 +1,9 @@
 # Havok Behavior Serialization/Deserialization Library
 
 <div>
+    <a href="https://serde-hkx-api.netlify.app/serde_hkx_features">
+        <img src="https://api.netlify.com/api/v1/badges/5f3f47f7-b22b-4d0d-b914-dd697b444858/deploy-status" alt="API docs">
+    </a>
     <a href="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/release-cli.yaml">
         <img src="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/release-cli.yaml/badge.svg" alt="Release(CLI)">
     </a>
@@ -40,7 +43,11 @@
 
 ## When used as a library(For developer)
 
-- Convenience wrapper API(For CLI/GUI): [Examples](./crates/cli/src/args/mod.rs)
+NOTE: Currently there is a stack overflow problem of unknown cause. This occurs
+with debug build (`cargo build`) but not with release (`cargo build --release`).
+
+- Convenience wrapper API(For CLI/GUI):
+  [Examples](./crates/cli/src/args/mod.rs)/[API docs](https://serde-hkx-api.netlify.app/serde_hkx_features/)
 
 ```toml
 # in Cargo.toml
@@ -61,7 +68,8 @@ async fn main() -> Result<()> {
 }
 ```
 
-- Low level API: (e.g. [Tests](./serde_hkx/src/tests/verify.rs))
+- Low level API:
+  [Tests](./serde_hkx/src/tests/verify.rs)/[API docs](https://serde-hkx-api.netlify.app/serde_hkx/)
 
 ```toml
 # in Cargo.toml
@@ -69,19 +77,11 @@ havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.5
 serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.5.0" }
 ```
 
-NOTE: Currently there is a stack overflow problem of unknown cause. This occurs
-with debug build (`cargo build`) but not with release (`cargo build --release`).
-
 ## Documentation
 
 - [Specification](./docs/specification/hkx_binary_format.md)
 - [Binary analysis](./docs/handson_hex_dump/defaultmale/readme.md)
-
-- API:
-
-```shell
-git clone https://github.com/SARDONYX-sard/serde-hkx.git;cd ./serde-hkx; cargo doc -p serde_hkx_features;
-```
+- [API](https://serde-hkx-api.netlify.app/serde_hkx/)
 
 ## implementation progress
 
