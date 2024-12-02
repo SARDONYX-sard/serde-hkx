@@ -50,7 +50,7 @@ impl<'a, 'de> MapDeserializer<'a, 'de> {
     }
 }
 
-impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
+impl<'de> MapAccess<'de> for MapDeserializer<'_, 'de> {
     type Error = Error;
 
     #[inline]

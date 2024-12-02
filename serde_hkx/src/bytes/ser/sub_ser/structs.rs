@@ -166,7 +166,7 @@ impl<'a> StructSerializer<'a> {
     }
 }
 
-impl<'a> SerializeStruct for StructSerializer<'a> {
+impl SerializeStruct for StructSerializer<'_> {
     type Ok = ();
     type Error = Error;
 

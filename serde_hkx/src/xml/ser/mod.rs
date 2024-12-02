@@ -98,7 +98,7 @@ where
     Ok(serializer.output)
 }
 
-impl<'a> Serializer for &'a mut XmlSerializer {
+impl Serializer for &mut XmlSerializer {
     type Ok = ();
     type Error = Error;
 
@@ -338,7 +338,7 @@ impl XmlSerializer {
     }
 }
 
-impl<'a> SerializeSeq for &'a mut XmlSerializer {
+impl SerializeSeq for &mut XmlSerializer {
     type Ok = ();
     type Error = Error;
 
@@ -431,7 +431,7 @@ impl<'a> SerializeSeq for &'a mut XmlSerializer {
     }
 }
 
-impl<'a> SerializeStruct for &'a mut XmlSerializer {
+impl SerializeStruct for &mut XmlSerializer {
     type Ok = ();
     type Error = Error;
 
@@ -557,7 +557,7 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
     }
 }
 
-impl<'a> SerializeFlags for &'a mut XmlSerializer {
+impl SerializeFlags for &mut XmlSerializer {
     type Ok = ();
     type Error = Error;
 

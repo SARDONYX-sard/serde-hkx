@@ -5,7 +5,8 @@
     clippy::collapsible_match,
     clippy::enum_variant_names,
     clippy::match_overlapping_arm,
-    clippy::redundant_static_lifetimes
+    clippy::redundant_static_lifetimes,
+    clippy::needless_lifetimes
 )]
 //! If the file name is the same as the struct name representing each generated class,
 //! a troublesome error will occur in namespace invocation, so a trailing `_` is added to avoid this.

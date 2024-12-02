@@ -19,7 +19,7 @@ impl<'a, 'de> BytesClassIndexMapDeserializer<'a, 'de> {
     }
 }
 
-impl<'a, 'de> ClassIndexAccess<'de> for BytesClassIndexMapDeserializer<'a, 'de> {
+impl<'de> ClassIndexAccess<'de> for BytesClassIndexMapDeserializer<'_, 'de> {
     type Error = Error;
 
     // Call constructor by class name

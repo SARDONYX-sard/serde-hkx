@@ -284,7 +284,7 @@ pub enum Unexpected<'a> {
     Other(&'a str),
 }
 
-impl<'a> fmt::Display for Unexpected<'a> {
+impl fmt::Display for Unexpected<'_> {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         use self::Unexpected::*;
         match *self {
@@ -366,13 +366,13 @@ where
     }
 }
 
-impl<'a> Expected for &'a str {
+impl Expected for &str {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         formatter.write_str(self)
     }
 }
 
-impl<'a> Display for dyn Expected + 'a {
+impl Display for dyn Expected + '_ {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         Expected::fmt(self, formatter)
     }
@@ -1260,7 +1260,7 @@ pub trait SeqAccess<'de> {
 }
 
 // NOTE: Deref does not result in a circular call error for `&mut A` because it calls the method of A.
-impl<'de, 'a, A> SeqAccess<'de> for &'a mut A
+impl<'de, A> SeqAccess<'de> for &mut A
 where
     A: ?Sized + SeqAccess<'de>,
 {
@@ -1492,7 +1492,7 @@ pub trait MapAccess<'de> {
     }
 }
 
-impl<'de, 'a, A> MapAccess<'de> for &'a mut A
+impl<'de, A> MapAccess<'de> for &mut A
 where
     A: ?Sized + MapAccess<'de>,
 {
@@ -1614,7 +1614,7 @@ pub trait ClassIndexAccess<'de> {
     }
 }
 
-impl<'de, 'a, A> ClassIndexAccess<'de> for &'a mut A
+impl<'de, A> ClassIndexAccess<'de> for &mut A
 where
     A: ?Sized + ClassIndexAccess<'de>,
 {

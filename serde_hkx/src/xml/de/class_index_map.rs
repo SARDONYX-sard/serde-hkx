@@ -29,7 +29,7 @@ impl<'a, 'de> ClassIndexMapDeserializer<'a, 'de> {
     }
 }
 
-impl<'a, 'de> ClassIndexAccess<'de> for ClassIndexMapDeserializer<'a, 'de> {
+impl<'de> ClassIndexAccess<'de> for ClassIndexMapDeserializer<'_, 'de> {
     type Error = Error;
 
     fn next_key(&mut self) -> Result<&'de str, Self::Error> {

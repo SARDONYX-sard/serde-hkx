@@ -30,7 +30,7 @@ impl<'a, 'de> SeqDeserializer<'a, 'de> {
 
 // `SeqAccess` is provided to the `Visitor` to give it the ability to iterate
 // through elements of the sequence.
-impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
+impl<'de> SeqAccess<'de> for SeqDeserializer<'_, 'de> {
     type Error = Error;
 
     #[inline]

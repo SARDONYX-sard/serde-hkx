@@ -400,7 +400,7 @@ impl<'de> BytesDeserializer<'de> {
     }
 
     /// Returns the relative position of the start of data_section as 0.
-
+    ///
     /// # Intent
     /// Use this API when key of fixups requires relative position.
     #[inline]
@@ -412,7 +412,7 @@ impl<'de> BytesDeserializer<'de> {
 // INFO:
 // Where did the visit method come from?
 // It creates a visit when implementing each Deserialize and reads it. The default is to return an error.
-impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
+impl<'de> de::Deserializer<'de> for &mut BytesDeserializer<'de> {
     type Error = Error;
 
     #[inline]

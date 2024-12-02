@@ -90,7 +90,7 @@ impl<'de> Deserialize<'de> for Ulong {
         D: Deserializer<'de>,
     {
         struct InnerVisitor;
-        impl<'a> Visitor<'a> for InnerVisitor {
+        impl Visitor<'_> for InnerVisitor {
             type Value = Ulong;
 
             fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -571,7 +571,7 @@ where
     }
 }
 
-impl<'a, 'de, T, const N: usize> Visitor<'de> for ArrayInPlaceVisitor<'a, [T; N]>
+impl<'de, T, const N: usize> Visitor<'de> for ArrayInPlaceVisitor<'_, [T; N]>
 where
     T: Deserialize<'de> + crate::HavokClass,
 {

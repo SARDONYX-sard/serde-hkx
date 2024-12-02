@@ -225,7 +225,7 @@ impl<'de> XmlDeserializer<'de> {
 // INFO:
 // Where did the visit method come from?
 // It creates a visit when implementing each Deserialize and reads it. The default is to return an error.
-impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
+impl<'de> de::Deserializer<'de> for &mut XmlDeserializer<'de> {
     type Error = Error;
 
     /// # Note

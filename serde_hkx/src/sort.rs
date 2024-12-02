@@ -113,7 +113,7 @@ where
             .keys()
             .min()
             .and_then(|min| self.get_key_value(min))
-            .ok_or(SerError::Message {
+            .ok_or_else(|| SerError::Message {
                 msg: "Missing top pointer.".to_owned(),
             })?;
         collect_deps(self, root_key, root_class, &mut sorted_keys);
