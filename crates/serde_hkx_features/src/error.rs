@@ -69,6 +69,13 @@ pub enum Error {
     #[snafu(transparent)]
     FailedThreadJoin { source: tokio::task::JoinError },
 
+    /// Error when converting from `ClassMap` of String key to `ClassMap` of [`usize`] key.
+    #[snafu(display("Failed to parse key '{key}' into usize"))]
+    KeyParse {
+        key: String,
+        source: std::num::ParseIntError,
+    },
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Extra formats
