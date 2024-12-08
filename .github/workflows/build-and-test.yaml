@@ -49,8 +49,11 @@ jobs:
         uses: Swatinem/rust-cache@v2.7.5
         with:
           prefix-key: cargo-debug-${{ matrix.job.target }}
+      # https://nexte.st/docs/installation/pre-built-binaries/#using-nextest-in-github-actions
+      - name: Install nextest(Parallel Test Execution CLI)
+        uses: taiki-e/install-action@nextest
       - name: Test
-        run: cargo test --workspace --target ${{ matrix.job.target}}
+        run: cargo nextest run --workspace --target ${{ matrix.job.target}}
 
   miri:
     runs-on: ubuntu-latest
