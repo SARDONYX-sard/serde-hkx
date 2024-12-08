@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Parse &#38;str with common prefixes to integer values"><title>parse in parse_int - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="parse_int" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="sidebar-items.js"></script><script defer src="../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../parse_int/index.html">parse_<wbr>int</a><span class="version">0.6.0</span></h2></div><div class="sidebar-elems"><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="index.html">parse_int</a></span><h1>Function <span class="fn">parse</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/parse_int/lib.rs.html#76-120">source</a> </span></div><pre class="rust item-decl"><code>pub fn parse&lt;T: <a class="trait" href="../num_traits/trait.Num.html" title="trait num_traits::Num">Num</a>&gt;(input: &amp;<a class="primitive" href="https://doc.rust-lang.org/1.83.0/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.83.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;T, T::<a class="associatedtype" href="../num_traits/trait.Num.html#associatedtype.FromStrRadixErr" title="type num_traits::Num::FromStrRadixErr">FromStrRadixErr</a>&gt;</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Parse &amp;str with common prefixes to integer values</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>parse_int::parse;
+
+<span class="comment">// decimal
+</span><span class="kw">let </span>d = parse::&lt;usize&gt;(<span class="string">"42"</span>)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(<span class="number">42</span>, d);
+
+<span class="comment">// hex
+</span><span class="kw">let </span>d = parse::&lt;isize&gt;(<span class="string">"0x42"</span>)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(<span class="number">66</span>, d);
+
+<span class="comment">// you can use underscores for more readable inputs
+</span><span class="kw">let </span>d = parse::&lt;isize&gt;(<span class="string">"0x42_424_242"</span>)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(<span class="number">1_111_638_594</span>, d);
+
+<span class="comment">// octal explicit
+</span><span class="kw">let </span>d = parse::&lt;u8&gt;(<span class="string">"0o42"</span>)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(<span class="number">34</span>, d);
+
+<span class="attr">#[cfg(feature = <span class="string">"implicit-octal"</span>)]
+</span>{
+    <span class="kw">let </span>d = parse::&lt;i8&gt;(<span class="string">"042"</span>)<span class="question-mark">?</span>;
+    <span class="macro">assert_eq!</span>(<span class="number">34</span>, d);
+}
+
+<span class="comment">// binary
+</span><span class="kw">let </span>d = parse::&lt;u16&gt;(<span class="string">"0b0110"</span>)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(<span class="number">6</span>, d);</code></pre></div>
+</div></details></section></div></main></body></html>

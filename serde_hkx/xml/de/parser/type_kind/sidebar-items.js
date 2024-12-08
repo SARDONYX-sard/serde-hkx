@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["boolean","matrix3","matrix4","pointer","qstransform","quaternion","real","rotation","string","transform","vector3","vector4"]};
