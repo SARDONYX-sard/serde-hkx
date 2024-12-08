@@ -89,7 +89,7 @@ where
             class: &V,
             sorted: &mut Vec<usize>,
         ) where
-            V: havok_serde::HavokClass,
+            V: HavokClass,
         {
             if sorted.contains(&key) {
                 return;
