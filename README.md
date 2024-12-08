@@ -55,7 +55,12 @@ tokio = { version = "1.41.0", features = ["full"] } # Async runtime
 serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.5.0" }
 ```
 
-```rust
+<!--
+no_run + rust syntax highlighting
+- ref: https://www.reddit.com/r/rust/comments/pl589v/how_to_ignore_code_blocks_in_readme_with_doc/
+-->
+
+```rust ,no_run
 use serde_hkx_features::convert::{convert, OutFormat}
 use serde_hkx_features::error::{Result}
 
