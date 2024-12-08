@@ -28,10 +28,10 @@ resolver = "2"
 
 [workspace.dependencies]
 bitflags = "2.6.0"                                             # To generate flags type
-clap = { version = "4.5.21", features = ["derive"] }           # For CLI
+clap = { version = "4.5.23", features = ["derive"] }           # For CLI
 color-print = "0.3.7"                                          # To color example help
 educe = "0.6.0"                                                # Custom derive by derive
-indexmap = "2.6.0"                                             # Ordering HashMap
+indexmap = "2.7.0"                                             # Ordering HashMap
 jwalk = { version = "0.8" }                                    # To enumarate json class files
 num-derive = "0.4"                                             # To serialize Enum & Flags
 num-traits = "0.2.19"                                          # To serialize Enum & Flags
@@ -39,6 +39,7 @@ parse-display = "0.10.0"                                       # Display derive
 parse_int = { version = "0.6" }
 proc-macro2 = { version = "1.0.92", default-features = false } # Rust token
 quote = { version = "1.0.37", default-features = false }       # Rust token gen to more convinience
+rayon = { version = "1.10.0" }                                 # Parallel
 schemars = { version = "1.0.0-alpha.15" }
 serde = { version = "1.0.215", features = ["derive"] }         # (De)Serializer
 serde_json = { version = "1.0.133" }                           # To read and write Json files
@@ -46,9 +47,9 @@ serde_with = "3.11.0"                                          # Serde utility
 similar = "2.6.0"                                              # Create diff
 snafu = "0.8.5"                                                # Define all error patterns(with backtrace)
 static_assertions = "1.1.0"                                    # Compile tim assertions
-syn = { version = "2.0.89", default-features = false }         # Rust parser
-tokio = { version = "1.41.1" }                                 # Async runtime
-tracing = { version = "0.1.40" }                               # logger
+syn = { version = "2.0.90", default-features = false }         # Rust parser
+tokio = { version = "1.42.0" }                                 # Async runtime
+tracing = { version = "0.1.41" }                               # logger
 
 # workspace members
 havok_classes = { path = "./crates/havok_classes" }
