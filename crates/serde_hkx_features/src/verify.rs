@@ -40,7 +40,14 @@ pub fn verify_dir(input: &Path, color: bool) -> Result<()> {
     let results: Vec<(PathBuf, Result<(), Error>)> = entries
         .into_par_iter()
         .filter_map(|entry| entry.ok())
-        .filter(|entry| entry.path().is_file())
+        .filter(|entry| {
+            let is_hkx = entry
+                .path()
+                .extension()
+                .map(|ext| ext.eq_ignore_ascii_case("hkx"))
+                .unwrap_or_default();
+            entry.path().is_file() && is_hkx
+        })
         .map(|entry| {
             let input = entry.path();
             (input.clone(), verify_file(&input, color))
