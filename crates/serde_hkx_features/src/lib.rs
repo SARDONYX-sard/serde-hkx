@@ -12,6 +12,7 @@ pub mod serde_extra;
 pub mod tree;
 #[cfg(any(feature = "extra_fmt", feature = "json_schema"))]
 pub mod types_wrapper;
+pub mod verify;
 
 use havok_classes::Classes;
 use indexmap::IndexMap;

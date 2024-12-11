@@ -37,6 +37,10 @@
 //! | Unk48                          | Unknown field (Hex offset: 48)                                 | 4            | 72             |
 //! | Unk4C                          | Unknown field (Hex offset: 4C)                                 | 4            | 76             |
 
+use crate::{
+    bytes::hexdump,
+    errors::{de::Error, readable::ReadableError},
+};
 use winnow::{
     binary::{self, Endianness},
     combinator::{dispatch, empty, fail},
@@ -118,8 +122,22 @@ impl HkxHeader {
         }
     }
 
+    /// Create a header by parsing 64bytes from bytes.
+    ///
+    /// # Errors
+    /// If invalid header format
+    pub fn from_bytes(bytes: &[u8]) -> Result<Self, Error> {
+        let mut input = bytes;
+        let header = Self::parser().parse_next(&mut input).map_err(|err| {
+            let hex = hexdump::to_string(bytes);
+            let hex_pos = hexdump::to_hexdump_pos(input.len());
+            ReadableError::from_context(err, &hex, hex_pos)
+        })?;
+        Ok(header)
+    }
+
     /// Check valid endian & Parse as hkx root header.
-    pub fn from_bytes<'a>() -> impl Parser<&'a [u8], Self, ContextError> {
+    pub fn parser<'a>() -> impl Parser<&'a [u8], Self, ContextError> {
         move |bytes: &mut &[u8]| {
             let endianness = {
                 let (mut bytes, _) = take(17_usize).parse_peek(*bytes)?;
@@ -425,9 +443,7 @@ mod tests {
 
     #[test]
     fn should_read_hkx_bytes() {
-        let header = HkxHeader::from_bytes()
-            .parse(&SKYRIM_SE_ROW_HEADER)
-            .unwrap();
+        let header = HkxHeader::parser().parse(&SKYRIM_SE_ROW_HEADER).unwrap();
 
         assert_eq!(header, HkxHeader::new_skyrim_se());
         assert_eq!(header.padding_size(), 0); // SkyrimSE, no padding.

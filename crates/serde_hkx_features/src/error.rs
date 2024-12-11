@@ -33,6 +33,17 @@ pub enum Error {
     /// Please specify the output path.(OS cannot output bytes as stdout.)
     InvalidStdout,
 
+    /// hkx reproduce error
+    #[snafu(display("Failed to reproduce {}: \n{diff}", path.display()))]
+    ReproduceHkx { path: PathBuf, diff: String },
+
+    /// hkx reproduce error
+    #[snafu(display("Failed to reproduce hkx files in {}: \n{err_paths:#?}", path.display()))]
+    ReproduceHkxFiles {
+        path: PathBuf,
+        err_paths: Vec<PathBuf>,
+    },
+
     /// Serialize error
     #[snafu(display("{}:\n {source}", input.display()))]
     SerError {

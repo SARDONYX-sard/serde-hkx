@@ -61,7 +61,7 @@ fn assert_bytes(xml: &str, expected_bytes: &[u8]) -> Result<()> {
         let mut actual_classes: ClassMap = from_str(xml)?;
         actual_classes.sort_for_bytes();
 
-        let (_remain, header) = HkxHeader::from_bytes().parse_peek(expected_bytes).unwrap();
+        let (_remain, header) = HkxHeader::parser().parse_peek(expected_bytes).unwrap();
         to_bytes(&actual_classes, &header)?
     };
 
