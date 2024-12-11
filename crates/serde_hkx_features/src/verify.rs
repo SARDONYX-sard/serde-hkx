@@ -60,17 +60,12 @@ pub fn verify_dir(input: &Path, color: bool) -> Result<()> {
         .filter_map(|(path, result)| result.err().map(|_| path))
         .collect();
 
-    #[cfg(feature = "tracing")]
-    tracing::error!(
-        "Reproduce err_paths(err count: {}/{all_len}): {errors:#?}",
-        errors.len()
-    );
-
     if errors.is_empty() {
         Ok(())
     } else {
         ReproduceHkxFilesSnafu {
             path: input.to_path_buf(),
+            all_len,
             err_paths: errors,
         }
         .fail()
