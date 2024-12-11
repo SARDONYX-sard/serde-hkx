@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["comment","comment_multispace0","comment_multispace1","delimited_comment_multispace0","delimited_multispace0_comment","delimited_with_multispace0"],"mod":["tag","type_kind"]};

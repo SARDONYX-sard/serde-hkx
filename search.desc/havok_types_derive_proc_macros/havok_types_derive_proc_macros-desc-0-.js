@@ -1,0 +1,1 @@
+searchState.loadedDescShard("havok_types_derive_proc_macros", 0, "Automatically implement <code>core::str::FromStr</code>, …")

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["attr_string","class_start_tag","end_tag","field_start_close_tag","field_start_open_tag","number_in_string","start_tag"]};
