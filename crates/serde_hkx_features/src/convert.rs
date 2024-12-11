@@ -208,10 +208,7 @@ where
         if let Some(ext) = input.extension() {
             if OutFormat::from_extension(ext).is_err() {
                 #[cfg(feature = "tracing")]
-                tracing::info!(
-                    "Skip this extension as it is not `.hkx` or `.xml`: {}",
-                    input.display()
-                );
+                tracing::info!("Skip this unsupported extension`: {}", input.display());
                 continue;
             };
 
@@ -282,7 +279,7 @@ where
                 xml.into_bytes()
             }
             #[cfg(feature = "extra_fmt")]
-            _ => {
+            OutFormat::Json | OutFormat::Toml | OutFormat::Yaml => {
                 // NOTE: Use a number (e.g. `1`) as a key, which is not supported by TOML, so use a `Pointer`(e.g. `#0001`).
                 let mut classes = crate::types_wrapper::ClassPtrMap::from_class_map(classes);
                 crate::serde_extra::ser::to_bytes(input, format, &mut classes)?

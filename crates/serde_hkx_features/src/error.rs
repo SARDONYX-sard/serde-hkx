@@ -76,36 +76,11 @@ pub enum Error {
         source: std::num::ParseIntError,
     },
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     // Extra formats
-    /// (De)Serialize json error
     #[cfg(any(feature = "extra_fmt", feature = "json_schema"))]
-    #[snafu(display("{}:\n {source}", input.display()))]
-    JsonError {
-        input: PathBuf,
-        source: simd_json::Error,
-    },
-    /// (De)Serialize yaml error
-    #[cfg(feature = "extra_fmt")]
-    #[snafu(display("{}:\n {source}", input.display()))]
-    TomlSerError {
-        input: PathBuf,
-        source: toml::ser::Error,
-    },
-    /// (De)Serialize yaml error
-    #[cfg(feature = "extra_fmt")]
-    #[snafu(display("{}:\n {source}", input.display()))]
-    TomlDeError {
-        input: PathBuf,
-        source: Box<toml::de::Error>,
-    },
-    /// (De)Serialize yaml error
-    #[cfg(feature = "extra_fmt")]
-    #[snafu(display("{}:\n {source}", input.display()))]
-    YamlError {
-        input: PathBuf,
-        source: serde_yml::Error,
+    #[snafu(transparent)]
+    ExtraSerdeError {
+        source: crate::serde_extra::error::ExtraSerdeError,
     },
 }
 

@@ -12,7 +12,7 @@ version.workspace = true
 
 [dependencies]
 class_generator = { path = "../class_generator" }
-jwalk = { workspace = true }                      # To enumarate json class files
+jwalk = { workspace = true }                      # To enumerate json class files
 serde_json = { workspace = true }                 # To read and write Json files
 
 [dev-dependencies]

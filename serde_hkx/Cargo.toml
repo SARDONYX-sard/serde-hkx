@@ -14,7 +14,7 @@ rust-version.workspace = true
 
 
 [dependencies]
-annotate-snippets = "0.11.4"                         # Error reporting display
+annotate-snippets = "0.11.5"                         # Error reporting display
 byteorder = "1.5.0"                                  # Care Endianness
 educe = { workspace = true }                         # Custom derive Trait with partially
 html-escape = "0.2.13"                               # Use XML escaping
@@ -22,7 +22,7 @@ indexmap = { workspace = true }                      # bytes info is ordered
 snafu = { workspace = true }                         # Define all error patterns(with backtrace)
 static_assertions = { workspace = true }             # Header size assertion
 tracing = { workspace = true, optional = true }      # Log trace
-winnow = { version = "0.6.20", features = ["simd"] } # Parser conbinator
+winnow = { version = "0.6.20", features = ["simd"] } # Parser combinator
 
 # workspace members
 havok_serde = { workspace = true, features = ["indexmap"] }
@@ -37,7 +37,7 @@ pretty_assertions = { workspace = true } # To make diffs color and easy to read 
 quick_tracing = { workspace = true }
 similar = { workspace = true }           # Create diff
 tracing = { workspace = true }
-zerocopy = { version = "0.8.11" }        # To(As)Bytes
+zerocopy = { version = "0.8.13" }        # To(As)Bytes
 
 # workspace members
 havok_classes = { workspace = true, features = ["ignore_duplicates"] }

@@ -27,6 +27,7 @@ use crate::{lib::*, NULL_STR};
 #[cfg_attr(feature = "serde", serde(transparent))]
 #[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct StringPtr<'a> {
+    #[cfg_attr(feature = "serde", serde(borrow))]
     inner: Option<Cow<'a, str>>,
 }
 

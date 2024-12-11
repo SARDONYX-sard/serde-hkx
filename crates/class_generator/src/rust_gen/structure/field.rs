@@ -1,4 +1,5 @@
 use super::to_rust_token::{member_to_rust_type, to_rust_field_ident};
+use crate::get_class_map::serde_borrow_attr;
 use crate::{
     bail_syn_err,
     cpp_info::{Member, TypeKind},
@@ -13,14 +14,17 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> Result<TokenStream
         name,
         vtype,
         arrsize,
+        has_string,
         ..
     } = member;
 
     let field_type = member_to_rust_type(member, class_name)?;
 
+    let serde_borrow_attr = serde_borrow_attr(*has_string);
+
     // `Default` implementations with huge sizes such as [0u8; 256] are not automatically supported, so use `educe` crate to define them.
-    let default_attr = if *arrsize > 32 {
-        // NOTE: This can only be solved with `#[serde(with=“”)` because you cannot put a feature inside a feature
+    let arr_custom_attr = if *arrsize > 32 {
+        // NOTE: This can only be solved with `#[serde(with=“”)` because we cannot put a feature inside a feature
         // see https://github.com/jonasbb/serde_with/issues/355
         let as_value = format!("::serde_with::As::<[::serde_with::Same; {arrsize}]>"); // NOTE: need `serde_with`
         let serde_with_attr = quote! {
@@ -43,7 +47,7 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> Result<TokenStream
             }
             _ => {
                 bail_syn_err!(
-                    "Giant fixed-size arrays are supported only for Int or Uint 8~64. Got {vtype}"
+                    "Giant fixed-size arrays are supported only for Int or Uint 8~64. But got {vtype}"
                 )
             }
         };
@@ -59,7 +63,8 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> Result<TokenStream
     let field_name = to_rust_field_ident(name);
     Ok(quote! {
         #doc
-        #default_attr
+        #arr_custom_attr
+        #serde_borrow_attr
         #[cfg_attr(feature = "json_schema", schemars(rename = #name))]
         #[cfg_attr(feature = "serde", serde(rename = #name))]
         pub #field_name: #field_type

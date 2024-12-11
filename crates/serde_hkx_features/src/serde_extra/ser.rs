@@ -1,9 +1,8 @@
 //! Serialize/Deserialize ClassMap with extra formats.
+use super::error::{JsonSnafu, TomlSnafu, YamlSnafu};
+use crate::convert::OutFormat;
+use crate::error::Result;
 use crate::types_wrapper::ClassPtrMap;
-use crate::{
-    convert::OutFormat,
-    error::{JsonSnafu, Result, TomlSerSnafu, YamlSnafu},
-};
 use snafu::ResultExt as _;
 use std::path::Path;
 
@@ -24,13 +23,13 @@ where
     let input = input.as_ref();
 
     let contents = match format {
-        OutFormat::Json => simd_json::to_string_pretty(&classes).context(JsonSnafu {
+        OutFormat::Json => simd_json::to_string_pretty(&classes).with_context(|_| JsonSnafu {
             input: input.to_path_buf(),
         })?,
-        OutFormat::Toml => toml::to_string_pretty(&classes).context(TomlSerSnafu {
+        OutFormat::Toml => basic_toml::to_string(&classes).with_context(|_| TomlSnafu {
             input: input.to_path_buf(),
         })?,
-        OutFormat::Yaml => serde_yml::to_string(&classes).context(YamlSnafu {
+        OutFormat::Yaml => serde_yml::to_string(&classes).with_context(|_| YamlSnafu {
             input: input.to_path_buf(),
         })?,
         _ => unreachable!(),

@@ -1,7 +1,8 @@
+use crate::get_class_map::get_inherited_members;
 use crate::{
     cpp_info::{Class, Member, TypeKind},
     error::*,
-    get_inherited_members, ClassMap,
+    ClassMap,
 };
 use indexmap::IndexMap;
 use proc_macro2::TokenStream;
@@ -57,10 +58,7 @@ pub fn generate_havok_class_table<P: AsRef<Path>>(classes_json_dir: P, out_dir: 
 
     let output_file = class_out_dir.join("class_table.rs");
 
-    std::fs::write(
-        output_file,
-        prettyplease::unparse(&syn::parse2(rust_code).unwrap()),
-    )?;
+    std::fs::write(output_file, prettyplease::unparse(&syn::parse2(rust_code)?))?;
 
     Ok(())
 }
@@ -109,10 +107,9 @@ fn from_cpp_class(class: &Class, class_map: &ClassMap) -> TokenStream {
     let fields: Vec<_> = get_inherited_members(class_name, class_map)
         .iter()
         .map(|member| {
-            let Member { name, vtype, .. } = member;
+            let Member { name, .. } = member;
 
-            let json_type = to_json_type(member, false)
-                .unwrap_or_else(|| panic!("Couldn't convert json type: {vtype}"));
+            let json_type = to_json_type(member, false).unwrap_or_else(|err| panic!("{err}"));
 
             // e.g.
             // - "pSequence" => "String",
@@ -146,7 +143,7 @@ fn from_cpp_class(class: &Class, class_map: &ClassMap) -> TokenStream {
 /// - Array|<TypeName>
 /// - Array|Object|<ClassName>
 /// - Pointer,
-fn to_json_type<'a>(member: &Member, search_sub: bool) -> Option<Cow<'a, str>> {
+fn to_json_type<'a>(member: &Member, search_sub: bool) -> syn::Result<Cow<'a, str>> {
     let Member {
         vtype,
         vsubtype,
@@ -157,7 +154,7 @@ fn to_json_type<'a>(member: &Member, search_sub: bool) -> Option<Cow<'a, str>> {
     let ty = if search_sub { vsubtype } else { vtype };
 
     #[allow(clippy::match_same_arms)]
-    Some(match ty {
+    Ok(match ty {
         TypeKind::Void => "Null".into(),
         TypeKind::Bool => "Bool".into(),
         TypeKind::Char => "String".into(), // JSON typically represents characters as strings
@@ -173,19 +170,25 @@ fn to_json_type<'a>(member: &Member, search_sub: bool) -> Option<Cow<'a, str>> {
         TypeKind::Transform => "Object|Transform".into(),
         TypeKind::Pointer => "Pointer".into(), // e.g. #0000
         TypeKind::Enum | TypeKind::Flags => "String".into(), // e.g. `TYPE_ROLE`
-        TypeKind::Struct => class_ref.as_ref().map_or_else(
-            || panic!("Struct needs a name, but `None` was taken."),
-            |name| format!("Object|{name}").into(),
-        ),
-        TypeKind::Array | TypeKind::SimpleArray => to_json_type(member, true).map_or_else(
-            || panic!("Struct needs a name, but `None` was taken."),
-            |ty| format!("Array|{ty}").into(),
-        ),
+        TypeKind::Struct => class_ref
+            .as_ref()
+            .map(|name| format!("Object|{name}").into())
+            .ok_or_else(|| syn_error!("Struct needs a name, but `None` was taken."))?,
+        TypeKind::Array | TypeKind::SimpleArray => to_json_type(member, true)
+            .map(|ty| format!("Array|{ty}").into())
+            .map_err(|_| syn_error!("Array<T> needs `T`, but `Err` was taken."))?,
         TypeKind::Variant => "Object|Variant".into(),
         TypeKind::CString | TypeKind::StringPtr => "String".into(),
         TypeKind::Ulong => "U64".into(),
         TypeKind::Half => "F64".into(),
-        _ => return None,
+
+        // Unsupported
+        TypeKind::Zero
+        | TypeKind::FnPtr
+        | TypeKind::InplaceArray
+        | TypeKind::HomogeneousArray
+        | TypeKind::RelArray
+        | TypeKind::Max => bail_syn_err!("Unsupported type kind {ty}"),
     })
 }
 

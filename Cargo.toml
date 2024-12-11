@@ -32,16 +32,16 @@ clap = { version = "4.5.23", features = ["derive"] }           # For CLI
 color-print = "0.3.7"                                          # To color example help
 educe = "0.6.0"                                                # Custom derive by derive
 indexmap = "2.7.0"                                             # Ordering HashMap
-jwalk = { version = "0.8" }                                    # To enumarate json class files
+jwalk = { version = "0.8.1" }                                  # To enumerate json class files
 num-derive = "0.4"                                             # To serialize Enum & Flags
 num-traits = "0.2.19"                                          # To serialize Enum & Flags
 parse-display = "0.10.0"                                       # Display derive
 parse_int = { version = "0.6" }
 proc-macro2 = { version = "1.0.92", default-features = false } # Rust token
-quote = { version = "1.0.37", default-features = false }       # Rust token gen to more convinience
+quote = { version = "1.0.37", default-features = false }       # Rust token gen to more convenience
 rayon = { version = "1.10.0" }                                 # Parallel
-schemars = { version = "1.0.0-alpha.15" }
-serde = { version = "1.0.215", features = ["derive"] }         # (De)Serializer
+schemars = { version = "1.0.0-alpha.17" }
+serde = { version = "1.0.216", features = ["derive"] }         # (De)Serializer
 serde_json = { version = "1.0.133" }                           # To read and write Json files
 serde_with = "3.11.0"                                          # Serde utility
 similar = "2.6.0"                                              # Create diff
@@ -141,7 +141,7 @@ needless_continue = "deny"
 needless_for_each = "deny"
 option_if_let_else = "deny"
 option_option = "deny"
-# panic = "deny" # Use with test and code_gen
+panic = "deny"                              # Use with test and code_gen
 path_buf_push_overwrite = "deny"
 ptr_as_ptr = "deny"
 rc_mutex = "deny"
@@ -159,6 +159,7 @@ trait_duplication_in_bounds = "deny"
 unnested_or_patterns = "deny"
 unseparated_literal_suffix = "deny"
 unused_self = "deny"
+unwrap_used = "deny"
 unwrap_in_result = "deny"
 useless_let_if_seq = "deny"
 useless_transmute = "deny"
