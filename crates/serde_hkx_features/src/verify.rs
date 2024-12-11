@@ -75,26 +75,26 @@ where
     I: AsRef<Path>,
 {
     let input = input.as_ref();
+
     let expected_bytes = std::fs::read(input).with_context(|_| FailedReadFileSnafu {
         path: input.to_path_buf(),
     })?;
 
-    // Deserialize
-    let classes: ClassMap =
-        serde_hkx::from_bytes(&expected_bytes).with_context(|_| DeSnafu { input })?;
+    let actual_bytes = {
+        let classes: ClassMap =
+            serde_hkx::from_bytes(&expected_bytes).with_context(|_| DeSnafu { input })?;
+        let header = HkxHeader::from_bytes(&expected_bytes).with_context(|_| DeSnafu { input })?;
 
-    // Serialize
-    let header = HkxHeader::from_bytes(&expected_bytes).with_context(|_| DeSnafu { input })?;
-    let actual_bytes =
-        serde_hkx::to_bytes(&classes, &header).with_context(|_| SerSnafu { input })?;
+        serde_hkx::to_bytes(&classes, &header).with_context(|_| SerSnafu { input })?
+    };
 
     // Verify
     if actual_bytes != expected_bytes {
-        let actual_hexdump = hexdump::to_string(&actual_bytes);
-        let expected_hexdump = hexdump::to_string(&expected_bytes);
+        let actual = hexdump::to_string(&actual_bytes);
+        let expected = hexdump::to_string(&expected_bytes);
         return ReproduceHkxSnafu {
             path: input.to_path_buf(),
-            diff: diff::diff(actual_hexdump, expected_hexdump, color),
+            diff: diff::diff(actual, expected, color),
         }
         .fail();
     }
