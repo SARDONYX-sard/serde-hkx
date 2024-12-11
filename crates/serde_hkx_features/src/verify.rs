@@ -101,10 +101,12 @@ where
         let expected = hexdump::to_string(&expected_bytes);
         return ReproduceHkxSnafu {
             path: input.to_path_buf(),
-            diff: diff::diff(actual, expected, color),
+            diff: diff::diff(expected, actual, color),
         }
         .fail();
     }
 
+    #[cfg(feature = "tracing")]
+    tracing::error!("OK reproducible: {}", input.display());
     Ok(())
 }

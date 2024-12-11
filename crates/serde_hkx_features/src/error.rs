@@ -34,7 +34,7 @@ pub enum Error {
     InvalidStdout,
 
     /// hkx reproduce error
-    #[snafu(display("Failed to reproduce {}: \n{diff}", path.display()))]
+    #[snafu(display("Failed to reproduce(-: input/+: output) {}: \n{diff}", path.display()))]
     ReproduceHkx { path: PathBuf, diff: String },
 
     /// hkx reproduce error
