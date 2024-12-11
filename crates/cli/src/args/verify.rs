@@ -11,7 +11,7 @@ pub const EXAMPLES: &str = color_print::cstr!(
   <cyan!>hkxc verify</cyan!> ./defaultmale.hkx
 
 - <blue!>Test the reproducibility of hkx files</blue!>
-  <cyan!>hkxc verify</cyan!> ./
+  <cyan!>./hkxc verify</cyan!> ./input --log-level info --log-file "./verify_inputs.log"
 "#
 );
 
