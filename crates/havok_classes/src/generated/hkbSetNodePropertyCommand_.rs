@@ -38,6 +38,7 @@ pub struct hkbSetNodePropertyCommand<'a> {
     /// - name: `nodeName`(ctype: `hkStringPtr`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "nodeName"))]
     #[cfg_attr(feature = "serde", serde(rename = "nodeName"))]
     pub m_nodeName: StringPtr<'a>,
@@ -45,6 +46,7 @@ pub struct hkbSetNodePropertyCommand<'a> {
     /// - name: `propertyName`(ctype: `hkStringPtr`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "propertyName"))]
     #[cfg_attr(feature = "serde", serde(rename = "propertyName"))]
     pub m_propertyName: StringPtr<'a>,

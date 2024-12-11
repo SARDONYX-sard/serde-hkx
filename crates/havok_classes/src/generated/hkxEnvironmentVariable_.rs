@@ -27,6 +27,7 @@ pub struct hkxEnvironmentVariable<'a> {
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
@@ -34,6 +35,7 @@ pub struct hkxEnvironmentVariable<'a> {
     /// - name: `value`(ctype: `hkStringPtr`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "value"))]
     #[cfg_attr(feature = "serde", serde(rename = "value"))]
     pub m_value: StringPtr<'a>,

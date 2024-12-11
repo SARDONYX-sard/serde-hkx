@@ -26,6 +26,7 @@ pub struct hkpMountedBallGun<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkpBallGun<'a>,
     /// # C++ Info
     /// - name: `position`(ctype: `hkVector4`)

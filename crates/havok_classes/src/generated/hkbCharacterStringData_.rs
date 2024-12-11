@@ -31,6 +31,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `deformableSkinNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "deformableSkinNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "deformableSkinNames"))]
     pub m_deformableSkinNames: Vec<StringPtr<'a>>,
@@ -38,6 +39,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `rigidSkinNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "rigidSkinNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "rigidSkinNames"))]
     pub m_rigidSkinNames: Vec<StringPtr<'a>>,
@@ -45,6 +47,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `animationNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "animationNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "animationNames"))]
     pub m_animationNames: Vec<StringPtr<'a>>,
@@ -52,6 +55,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `animationFilenames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "animationFilenames"))]
     #[cfg_attr(feature = "serde", serde(rename = "animationFilenames"))]
     pub m_animationFilenames: Vec<StringPtr<'a>>,
@@ -59,6 +63,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `characterPropertyNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterPropertyNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterPropertyNames"))]
     pub m_characterPropertyNames: Vec<StringPtr<'a>>,
@@ -66,6 +71,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `retargetingSkeletonMapperFilenames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(
         feature = "json_schema",
         schemars(rename = "retargetingSkeletonMapperFilenames")
@@ -76,6 +82,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `lodNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "lodNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "lodNames"))]
     pub m_lodNames: Vec<StringPtr<'a>>,
@@ -83,6 +90,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `mirroredSyncPointSubstringsA`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 92`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(
         feature = "json_schema",
         schemars(rename = "mirroredSyncPointSubstringsA")
@@ -93,6 +101,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `mirroredSyncPointSubstringsB`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: `104`(x86)/`144`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(
         feature = "json_schema",
         schemars(rename = "mirroredSyncPointSubstringsB")
@@ -103,6 +112,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `116`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
@@ -110,6 +120,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `rigName`(ctype: `hkStringPtr`)
     /// - offset: `120`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "rigName"))]
     #[cfg_attr(feature = "serde", serde(rename = "rigName"))]
     pub m_rigName: StringPtr<'a>,
@@ -117,6 +128,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `ragdollName`(ctype: `hkStringPtr`)
     /// - offset: `124`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "ragdollName"))]
     #[cfg_attr(feature = "serde", serde(rename = "ragdollName"))]
     pub m_ragdollName: StringPtr<'a>,
@@ -124,6 +136,7 @@ pub struct hkbCharacterStringData<'a> {
     /// - name: `behaviorFilename`(ctype: `hkStringPtr`)
     /// - offset: `128`(x86)/`184`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "behaviorFilename"))]
     #[cfg_attr(feature = "serde", serde(rename = "behaviorFilename"))]
     pub m_behaviorFilename: StringPtr<'a>,

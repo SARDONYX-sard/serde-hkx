@@ -26,6 +26,7 @@ pub struct hkpDashpotAction<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkpBinaryAction<'a>,
     /// # C++ Info
     /// - name: `point`(ctype: `hkVector4[2]`)

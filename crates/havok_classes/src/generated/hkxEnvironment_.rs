@@ -31,6 +31,7 @@ pub struct hkxEnvironment<'a> {
     /// - name: `variables`(ctype: `hkArray<struct hkxEnvironmentVariable>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "variables"))]
     #[cfg_attr(feature = "serde", serde(rename = "variables"))]
     pub m_variables: Vec<hkxEnvironmentVariable<'a>>,

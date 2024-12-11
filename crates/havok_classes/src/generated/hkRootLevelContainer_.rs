@@ -27,6 +27,7 @@ pub struct hkRootLevelContainer<'a> {
     /// - name: `namedVariants`(ctype: `hkArray<struct hkRootLevelContainerNamedVariant>`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "namedVariants"))]
     #[cfg_attr(feature = "serde", serde(rename = "namedVariants"))]
     pub m_namedVariants: Vec<hkRootLevelContainerNamedVariant<'a>>,

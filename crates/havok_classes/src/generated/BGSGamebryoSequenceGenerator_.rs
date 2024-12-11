@@ -26,11 +26,13 @@ pub struct BGSGamebryoSequenceGenerator<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `pSequence`(ctype: `char*`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "pSequence"))]
     #[cfg_attr(feature = "serde", serde(rename = "pSequence"))]
     pub m_pSequence: CString<'a>,

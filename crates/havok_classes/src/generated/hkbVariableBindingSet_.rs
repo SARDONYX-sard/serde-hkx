@@ -31,6 +31,7 @@ pub struct hkbVariableBindingSet<'a> {
     /// - name: `bindings`(ctype: `hkArray<struct hkbVariableBindingSetBinding>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "bindings"))]
     #[cfg_attr(feature = "serde", serde(rename = "bindings"))]
     pub m_bindings: Vec<hkbVariableBindingSetBinding<'a>>,

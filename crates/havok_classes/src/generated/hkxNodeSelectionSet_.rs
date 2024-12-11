@@ -26,6 +26,7 @@ pub struct hkxNodeSelectionSet<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkxAttributeHolder<'a>,
     /// # C++ Info
     /// - name: `selectedNodes`(ctype: `hkArray<hkxNode*>`)
@@ -38,6 +39,7 @@ pub struct hkxNodeSelectionSet<'a> {
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,

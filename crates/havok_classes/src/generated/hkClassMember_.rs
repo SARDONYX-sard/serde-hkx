@@ -27,6 +27,7 @@ pub struct hkClassMember<'a> {
     /// - name: `name`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: CString<'a>,

@@ -52,6 +52,7 @@ pub struct hkpShapeInfo<'a> {
     /// - name: `childShapeNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "childShapeNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "childShapeNames"))]
     pub m_childShapeNames: Vec<StringPtr<'a>>,

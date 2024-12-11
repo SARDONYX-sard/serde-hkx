@@ -31,6 +31,7 @@ pub struct hkxScene<'a> {
     /// - name: `modeller`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "modeller"))]
     #[cfg_attr(feature = "serde", serde(rename = "modeller"))]
     pub m_modeller: StringPtr<'a>,
@@ -38,6 +39,7 @@ pub struct hkxScene<'a> {
     /// - name: `asset`(ctype: `hkStringPtr`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "asset"))]
     #[cfg_attr(feature = "serde", serde(rename = "asset"))]
     pub m_asset: StringPtr<'a>,

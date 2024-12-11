@@ -27,6 +27,7 @@ pub struct hkCustomAttributes<'a> {
     /// - name: `attributes`(ctype: `hkSimpleArray<struct hkCustomAttributesAttribute>`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  8`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "attributes"))]
     #[cfg_attr(feature = "serde", serde(rename = "attributes"))]
     pub m_attributes: Vec<hkCustomAttributesAttribute<'a>>,

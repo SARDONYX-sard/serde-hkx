@@ -27,6 +27,7 @@ pub struct hkaAnnotationTrack<'a> {
     /// - name: `trackName`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "trackName"))]
     #[cfg_attr(feature = "serde", serde(rename = "trackName"))]
     pub m_trackName: StringPtr<'a>,
@@ -34,6 +35,7 @@ pub struct hkaAnnotationTrack<'a> {
     /// - name: `annotations`(ctype: `hkArray<struct hkaAnnotationTrackAnnotation>`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "annotations"))]
     #[cfg_attr(feature = "serde", serde(rename = "annotations"))]
     pub m_annotations: Vec<hkaAnnotationTrackAnnotation<'a>>,

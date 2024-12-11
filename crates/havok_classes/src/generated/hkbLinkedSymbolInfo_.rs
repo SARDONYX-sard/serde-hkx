@@ -31,6 +31,7 @@ pub struct hkbLinkedSymbolInfo<'a> {
     /// - name: `eventNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventNames"))]
     pub m_eventNames: Vec<StringPtr<'a>>,
@@ -38,6 +39,7 @@ pub struct hkbLinkedSymbolInfo<'a> {
     /// - name: `variableNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "variableNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableNames"))]
     pub m_variableNames: Vec<StringPtr<'a>>,

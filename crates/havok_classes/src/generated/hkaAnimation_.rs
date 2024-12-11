@@ -66,6 +66,7 @@ pub struct hkaAnimation<'a> {
     /// - name: `annotationTracks`(ctype: `hkArray<struct hkaAnnotationTrack>`)
     /// - offset: ` 28`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "annotationTracks"))]
     #[cfg_attr(feature = "serde", serde(rename = "annotationTracks"))]
     pub m_annotationTracks: Vec<hkaAnnotationTrack<'a>>,

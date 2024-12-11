@@ -27,6 +27,7 @@ pub struct hkMemoryResourceHandleExternalLink<'a> {
     /// - name: `memberName`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "memberName"))]
     #[cfg_attr(feature = "serde", serde(rename = "memberName"))]
     pub m_memberName: StringPtr<'a>,
@@ -34,6 +35,7 @@ pub struct hkMemoryResourceHandleExternalLink<'a> {
     /// - name: `externalId`(ctype: `hkStringPtr`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "externalId"))]
     #[cfg_attr(feature = "serde", serde(rename = "externalId"))]
     pub m_externalId: StringPtr<'a>,

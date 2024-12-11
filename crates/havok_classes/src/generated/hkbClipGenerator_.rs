@@ -26,11 +26,13 @@ pub struct hkbClipGenerator<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `animationName`(ctype: `hkStringPtr`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "animationName"))]
     #[cfg_attr(feature = "serde", serde(rename = "animationName"))]
     pub m_animationName: StringPtr<'a>,

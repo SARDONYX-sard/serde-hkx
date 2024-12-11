@@ -26,6 +26,7 @@ pub struct hkpBinaryAction<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkpAction<'a>,
     /// # C++ Info
     /// - name: `entityA`(ctype: `struct hkpEntity*`)

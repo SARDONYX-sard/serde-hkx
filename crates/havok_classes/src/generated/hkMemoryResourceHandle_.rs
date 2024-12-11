@@ -38,6 +38,7 @@ pub struct hkMemoryResourceHandle<'a> {
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
@@ -45,6 +46,7 @@ pub struct hkMemoryResourceHandle<'a> {
     /// - name: `references`(ctype: `hkArray<struct hkMemoryResourceHandleExternalLink>`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "references"))]
     #[cfg_attr(feature = "serde", serde(rename = "references"))]
     pub m_references: Vec<hkMemoryResourceHandleExternalLink<'a>>,
