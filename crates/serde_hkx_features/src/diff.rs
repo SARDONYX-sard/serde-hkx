@@ -75,6 +75,8 @@ pub fn diff(old: impl AsRef<str>, new: impl AsRef<str>, color: bool) -> String {
             const INSERT: &str = "\u{1b}[32m+"; // 32 is green
             const RESET_COLOR: &str = "\u{1b}[39m";
 
+            output_diff.push_str(RESET_COLOR);
+
             let sign = match change.tag() {
                 similar::ChangeTag::Delete => DELETE,
                 similar::ChangeTag::Insert => INSERT,
