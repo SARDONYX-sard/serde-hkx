@@ -38,7 +38,7 @@ pub enum Error {
     ReproduceHkx { path: PathBuf, diff: String },
 
     /// hkx reproduce error
-    #[snafu(display("Failed to reproduce hkx files in {}: \n{err_paths:#?}", path.display()))]
+    #[snafu(display("Failed to reproduce hkx files in {}(err_len: {}): \n{err_paths:#?}", path.display(), err_paths.len()))]
     ReproduceHkxFiles {
         path: PathBuf,
         err_paths: Vec<PathBuf>,

@@ -60,7 +60,7 @@ pub fn verify_dir(input: &Path, color: bool) -> Result<()> {
         .collect();
 
     #[cfg(feature = "tracing")]
-    tracing::error!("Reproduce err_paths: {errors:#?}");
+    tracing::error!("Reproduce err_paths(count: {}): {errors:#?}", errors.len());
 
     if errors.is_empty() {
         Ok(())
