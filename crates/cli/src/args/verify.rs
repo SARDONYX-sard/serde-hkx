@@ -7,14 +7,11 @@ pub const EXAMPLES: &str = color_print::cstr!(
     - file: Error path + diff displayed
 
 <blue><bold><underline>Examples</underline></bold></blue>
-- <blue!>XML verify -> stdout</blue!>
-  <cyan!>hkxc verify</cyan!> ./defaultmale_by_hkxcmd.xml ./defaultmale_by_HavokBehaviorProcess.xml
+- <blue!>Test the reproducibility of hkx</blue!>
+  <cyan!>hkxc verify</cyan!> ./defaultmale.hkx
 
-- <blue!>hkx hexdump verify -> stdout</blue!>
-  <cyan!>hkxc verify</cyan!> ./defaultmale_by_hkxcmd.hkx ./defaultmale_by_HavokBehaviorProcess.hkx
-
-- <blue!>hexdump verify -> a file</blue!>
-  <cyan!>hkxc verify</cyan!> ./defaultmale_x86_hexdump.txt ./defaultmale_x64_hexdump.txt <cyan!>-o</cyan!> verify.txt
+- <blue!>Test the reproducibility of hkx files</blue!>
+  <cyan!>hkxc verify</cyan!> ./
 "#
 );
 
