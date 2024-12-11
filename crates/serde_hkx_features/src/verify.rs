@@ -111,6 +111,6 @@ where
     }
 
     #[cfg(feature = "tracing")]
-    tracing::error!("OK reproducible: {}", input.display());
+    tracing::info!("OK reproducible: {}", input.display());
     Ok(())
 }
