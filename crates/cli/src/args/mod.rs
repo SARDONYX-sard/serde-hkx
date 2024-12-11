@@ -9,6 +9,7 @@ mod verify;
 use self::color::get_styles;
 use crate::logger::LogLevel;
 use clap::CommandFactory as _;
+use color_print::cprintln;
 use serde_hkx_features::{
     convert::{convert, OutFormat},
     diff::exec,
@@ -38,7 +39,15 @@ pub(crate) async fn run(args: Args) -> Result<()> {
                 false => hexdump::to_string(args.input, args.output).await,
             },
             SubCommands::Diff(args) => exec(args.old, args.new, args.output, args.color).await,
-            SubCommands::Verify(args) => reproduce(args.path, args.color),
+            SubCommands::Verify(args) => {
+                println!("Verifying...");
+                reproduce(&args.path, args.color).map(|_| {
+                    cprintln!(
+                        "<green>Complete hkx reproduction: {}</green>",
+                        args.path.display()
+                    );
+                })
+            }
             SubCommands::Completions { shell } => {
                 shell.generate(&mut Args::command(), &mut io::stdout());
                 Ok(())

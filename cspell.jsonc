@@ -15,6 +15,7 @@
     "compat",
     "contentsversion",
     "cout",
+    "cprintln",
     "CSTRING",
     "ctype",
     "defaultmale",
