@@ -53,6 +53,7 @@ pub fn verify_dir(input: &Path, color: bool) -> Result<()> {
             (input.clone(), verify_file(&input, color))
         })
         .collect();
+    let all_len = results.len();
 
     let errors: Vec<PathBuf> = results
         .into_par_iter()
@@ -60,7 +61,10 @@ pub fn verify_dir(input: &Path, color: bool) -> Result<()> {
         .collect();
 
     #[cfg(feature = "tracing")]
-    tracing::error!("Reproduce err_paths(count: {}): {errors:#?}", errors.len());
+    tracing::error!(
+        "Reproduce err_paths(err count: {}/{all_len}): {errors:#?}",
+        errors.len()
+    );
 
     if errors.is_empty() {
         Ok(())
