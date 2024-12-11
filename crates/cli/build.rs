@@ -3,14 +3,14 @@ fn main() {
     // only run if target os is windows
     if std::env::var("CARGO_CFG_TARGET_OS")
         .map(|var| var != "windows")
-        .unwrap_or_default()
+        .unwrap_or(true)
     {
         return;
     }
 
     // only build the resource for release builds as calling rc.exe might be slow
     if std::env::var("PROFILE")
-        .map(|var| var == "release")
+        .map(|var| var.starts_with("release"))
         .unwrap_or_default()
     {
         let mut res = winres::WindowsResource::new();
@@ -27,6 +27,7 @@ fn main() {
             .set_language(0x0409) // English	0x0009 / English (US)	0x0409
             .set_icon("assets/icon.ico")
             .set_manifest_file("assets/manifest.xml");
+
         if let Err(e) = res.compile() {
             eprintln!("{}", e);
             std::process::exit(1);
