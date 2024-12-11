@@ -27,6 +27,7 @@ pub struct hkDataObjectTypeAttribute<'a> {
     /// - name: `typeName`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "typeName"))]
     #[cfg_attr(feature = "serde", serde(rename = "typeName"))]
     pub m_typeName: CString<'a>,

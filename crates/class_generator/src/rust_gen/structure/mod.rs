@@ -4,6 +4,7 @@ mod to_rust_token;
 
 use self::field::gen_field;
 use crate::cpp_info::Class;
+use crate::get_class_map::serde_borrow_attr;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::{Error, ItemStruct};
@@ -32,6 +33,8 @@ pub fn generate(class: &Class) -> Result<ItemStruct, Error> {
         || quote! {},
         |parent| {
             let parent_struct_name = format_ident!("{parent}");
+
+            let serde_borrow_attr = serde_borrow_attr(class.parent_has_string);
             let lifetime = match class.parent_has_string {
                 true => quote! { <'a> },
                 false => quote! {},
@@ -40,6 +43,7 @@ pub fn generate(class: &Class) -> Result<ItemStruct, Error> {
                 /// Alternative to C++ class inheritance.
                 #[cfg_attr(feature = "json_schema", schemars(flatten))]
                 #[cfg_attr(feature = "serde", serde(flatten))]
+                #serde_borrow_attr
                 pub parent: #parent_struct_name #lifetime,
             }
         },

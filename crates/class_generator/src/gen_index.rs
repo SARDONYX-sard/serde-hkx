@@ -1,15 +1,18 @@
+use crate::get_class_map::serde_borrow_attr;
 use quote::quote;
+use syn::Result;
 
 /// # Args
 /// (class_name, has_string)
-pub fn gen_index(class_index_map: &[(&String, bool)]) -> String {
+pub fn gen_index(class_index_map: &[(&String, bool)]) -> Result<String> {
     let mut mods = Vec::new();
     let mut enum_variants = Vec::new();
     let mut enum_match_variants = Vec::new();
     let mut class_names = Vec::new();
     let mut de_matcher = Vec::new();
 
-    for (class_name, has_string) in class_index_map {
+    let mut default_impl = quote! {};
+    for (index, (class_name, has_string)) in class_index_map.iter().enumerate() {
         class_names.push(class_name);
 
         let class_name_ident = quote::format_ident!("{class_name}");
@@ -19,12 +22,25 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> String {
             pub use #file_name_ident::*;
         });
 
+        let serde_borrow_attr = serde_borrow_attr(*has_string);
         let lifetime = if *has_string {
             quote! { <'a> }
         } else {
             quote! {}
         };
+
+        if index == 0 {
+            default_impl = quote! {
+                impl Default for Classes<'_> {
+                    fn default() -> Self {
+                        Self::#class_name_ident(#class_name_ident::default())
+                    }
+                }
+            };
+        };
+
         enum_variants.push(quote! {
+            #serde_borrow_attr
             #class_name_ident(#class_name_ident #lifetime)
         });
 
@@ -57,36 +73,28 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> String {
             use havok_serde as _serde;
             #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
             #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-            #[derive(Debug, Default, Clone, PartialEq)]
+            #[derive(Debug, Clone, PartialEq)]
             pub enum Classes<'a> {
-                /// For binary writing, the youngest pointer index must be first after sorting in reverse order.
-                ///
-                /// To speed up the process, swap the first and last indexes instead of using shift.
-                /// This dummy class exists to reserve space for this purpose.
-                #[default]
-                #[cfg_attr(feature = "json_schema", schemars(skip))]
-                SwapDummy,
                 #(#enum_variants,)*
             }
+
+            #default_impl
 
             impl _serde::HavokClass for Classes<'_> {
                 fn name(&self) -> &'static str {
                     match &self {
-                        Classes::SwapDummy => panic!("The dummy class is used only for sorting, so being called name is not a good use of the API."),
                         #(#enum_match_variants(class) => class.name(),)*
                     }
                 }
 
                 fn signature(&self) -> _serde::__private::Signature {
                     match &self {
-                        Classes::SwapDummy => panic!("The dummy class is used only for sorting, so being called name is not a good use of the API."),
                         #(#enum_match_variants(class) => class.signature(),)*
                     }
                 }
 
                 fn deps_indexes(&self) -> Vec<usize> {
                     match &self {
-                        Classes::SwapDummy => panic!("The dummy class is used only for sorting, so being called name is not a good use of the API."),
                         #(#enum_match_variants(class) => class.deps_indexes(),)*
                     }
                 }
@@ -95,7 +103,6 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> String {
             impl<'a> _serde::Serialize for Classes<'a> {
                 fn serialize<S: _serde::ser::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
                     match self {
-                        Classes::SwapDummy => panic!("The dummy class is used only for sorting, so being called name is not a good use of the API."),
                         #(#enum_match_variants(class) => class.serialize(serializer),)*
                     }
                 }
@@ -139,9 +146,6 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> String {
             }
     };
 
-    let ast = match syn::parse2(tokens) {
-        Ok(ast) => ast,
-        Err(err) => panic!("{err}"),
-    };
-    prettyplease::unparse(&ast)
+    let ast = syn::parse2(tokens)?;
+    Ok(prettyplease::unparse(&ast))
 }

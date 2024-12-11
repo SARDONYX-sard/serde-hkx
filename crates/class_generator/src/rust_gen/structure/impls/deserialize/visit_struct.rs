@@ -1,6 +1,6 @@
+use crate::get_class_map::{get_inherited_class, get_inherited_members};
 use crate::{
     cpp_info::{Class, Member},
-    get_inherited_class, get_inherited_members,
     rust_gen::structure::{
         impls::deserialize::member_to_de_rust_type, to_rust_token::to_rust_field_ident,
     },

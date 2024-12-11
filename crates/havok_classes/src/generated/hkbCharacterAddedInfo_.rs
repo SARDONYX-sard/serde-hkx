@@ -38,6 +38,7 @@ pub struct hkbCharacterAddedInfo<'a> {
     /// - name: `instanceName`(ctype: `hkStringPtr`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "instanceName"))]
     #[cfg_attr(feature = "serde", serde(rename = "instanceName"))]
     pub m_instanceName: StringPtr<'a>,
@@ -45,6 +46,7 @@ pub struct hkbCharacterAddedInfo<'a> {
     /// - name: `templateName`(ctype: `hkStringPtr`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "templateName"))]
     #[cfg_attr(feature = "serde", serde(rename = "templateName"))]
     pub m_templateName: StringPtr<'a>,
@@ -52,6 +54,7 @@ pub struct hkbCharacterAddedInfo<'a> {
     /// - name: `fullPathToProject`(ctype: `hkStringPtr`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "fullPathToProject"))]
     #[cfg_attr(feature = "serde", serde(rename = "fullPathToProject"))]
     pub m_fullPathToProject: StringPtr<'a>,

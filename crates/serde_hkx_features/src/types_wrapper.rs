@@ -4,6 +4,7 @@ use crate::ClassMap;
 use havok_classes::Classes;
 use havok_types::Pointer;
 use indexmap::IndexMap;
+use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
 
 /// - key: class index(e.g `#0001`)
@@ -16,6 +17,7 @@ pub struct ClassPtrMap<'a> {
     #[serde(default)]
     schema: Option<String>,
     #[serde(flatten)]
+    #[serde(borrow)]
     classes: IndexMap<Pointer, Classes<'a>>,
 }
 
@@ -24,15 +26,15 @@ impl<'a> ClassPtrMap<'a> {
         Self {
             schema: None,
             classes: value
-                .into_iter()
-                .map(|(k, v)| (Pointer::from(k), v))
+                .into_par_iter()
+                .map(|(k, v)| (Pointer::new(k), v))
                 .collect(),
         }
     }
 
     pub fn into_class_map(self) -> ClassMap<'a> {
         self.classes
-            .into_iter()
+            .into_par_iter()
             .map(|(k, v)| (k.get(), v))
             .collect()
     }

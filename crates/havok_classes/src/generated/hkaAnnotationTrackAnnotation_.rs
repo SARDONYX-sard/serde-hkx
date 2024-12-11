@@ -34,6 +34,7 @@ pub struct hkaAnnotationTrackAnnotation<'a> {
     /// - name: `text`(ctype: `hkStringPtr`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "text"))]
     #[cfg_attr(feature = "serde", serde(rename = "text"))]
     pub m_text: StringPtr<'a>,

@@ -26,11 +26,13 @@ pub struct hkbHandIkModifier<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `hands`(ctype: `hkArray<struct hkbHandIkModifierHand>`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "hands"))]
     #[cfg_attr(feature = "serde", serde(rename = "hands"))]
     pub m_hands: Vec<hkbHandIkModifierHand<'a>>,

@@ -31,6 +31,7 @@ pub struct hkxAttributeHolder<'a> {
     /// - name: `attributeGroups`(ctype: `hkArray<struct hkxAttributeGroup>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "attributeGroups"))]
     #[cfg_attr(feature = "serde", serde(rename = "attributeGroups"))]
     pub m_attributeGroups: Vec<hkxAttributeGroup<'a>>,

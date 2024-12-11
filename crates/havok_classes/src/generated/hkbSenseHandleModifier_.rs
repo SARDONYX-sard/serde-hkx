@@ -26,6 +26,7 @@ pub struct hkbSenseHandleModifier<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `handle`(ctype: `struct hkbHandle`)
@@ -67,6 +68,7 @@ pub struct hkbSenseHandleModifier<'a> {
     /// - name: `localFrameName`(ctype: `hkStringPtr`)
     /// - offset: `116`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "localFrameName"))]
     #[cfg_attr(feature = "serde", serde(rename = "localFrameName"))]
     pub m_localFrameName: StringPtr<'a>,
@@ -74,6 +76,7 @@ pub struct hkbSenseHandleModifier<'a> {
     /// - name: `sensorLocalFrameName`(ctype: `hkStringPtr`)
     /// - offset: `120`(x86)/`184`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "sensorLocalFrameName"))]
     #[cfg_attr(feature = "serde", serde(rename = "sensorLocalFrameName"))]
     pub m_sensorLocalFrameName: StringPtr<'a>,

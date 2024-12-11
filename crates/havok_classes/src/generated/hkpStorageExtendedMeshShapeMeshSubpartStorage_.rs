@@ -73,6 +73,7 @@ pub struct hkpStorageExtendedMeshShapeMeshSubpartStorage<'a> {
     /// - name: `namedMaterials`(ctype: `hkArray<struct hkpNamedMeshMaterial>`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "namedMaterials"))]
     #[cfg_attr(feature = "serde", serde(rename = "namedMaterials"))]
     pub m_namedMaterials: Vec<hkpNamedMeshMaterial<'a>>,

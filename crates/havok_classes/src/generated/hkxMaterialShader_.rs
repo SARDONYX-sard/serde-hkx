@@ -31,6 +31,7 @@ pub struct hkxMaterialShader<'a> {
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
@@ -45,6 +46,7 @@ pub struct hkxMaterialShader<'a> {
     /// - name: `vertexEntryName`(ctype: `hkStringPtr`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "vertexEntryName"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexEntryName"))]
     pub m_vertexEntryName: StringPtr<'a>,
@@ -52,6 +54,7 @@ pub struct hkxMaterialShader<'a> {
     /// - name: `geomEntryName`(ctype: `hkStringPtr`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "geomEntryName"))]
     #[cfg_attr(feature = "serde", serde(rename = "geomEntryName"))]
     pub m_geomEntryName: StringPtr<'a>,
@@ -59,6 +62,7 @@ pub struct hkxMaterialShader<'a> {
     /// - name: `pixelEntryName`(ctype: `hkStringPtr`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "pixelEntryName"))]
     #[cfg_attr(feature = "serde", serde(rename = "pixelEntryName"))]
     pub m_pixelEntryName: StringPtr<'a>,

@@ -26,6 +26,7 @@ pub struct hkpEntity<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkpWorldObject<'a>,
     /// # C++ Info
     /// - name: `material`(ctype: `struct hkpMaterial`)

@@ -8,6 +8,7 @@ on:
 env:
   APP_NAME: hkxc
   CARGO_TERM_COLOR: always
+  PROFILE: release-lto
 
 jobs:
   build:
@@ -41,7 +42,7 @@ jobs:
           prefix-key: cargo-release-${{ matrix.job.target }}
 
       - name: Build CLI
-        run: cargo build --release --target ${{ matrix.job.target }}
+        run: cargo build --profile ${{ env.PROFILE }} --target ${{ matrix.job.target }}
 
       - name: Make outputs dir
         run: mkdir -p ./build
@@ -51,7 +52,7 @@ jobs:
         shell: pwsh
         if: runner.os == 'Windows'
         run: |
-          Move-Item -Path ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }}.exe -Destination './build'
+          Move-Item -Path ./target/${{ matrix.job.target }}/${{ env.PROFILE }}/${{ env.APP_NAME }}.exe -Destination './build'
           Move-Item -Path ./LICENSES.toml -Destination './build'
           Compress-Archive -Path './build/*' -DestinationPath './${{ matrix.job.asset }}'
       - name: Release(Windows)
@@ -66,7 +67,7 @@ jobs:
         shell: bash
         if: runner.os == 'macOS'
         run: |
-          mv ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }} ./build
+          mv ./target/${{ matrix.job.target }}/${{ env.PROFILE }}/${{ env.APP_NAME }} ./build
           mv ./LICENSES.toml './build'
           tar -czf ${{ matrix.job.asset }} -C ./build .
       - name: Release(macOS)
@@ -75,15 +76,13 @@ jobs:
         with:
           allowUpdates: true
           artifacts: ${{ matrix.job.asset }}
-          # NOTE: Release documents to macOS, which is the fastest build at this stage.
-          bodyFile: ./docs/release.md
-          generateReleaseNotes: true
+          omitBody: true
       # ----------------------------------------------------------------------------------------------------------------
       - name: Compress outputs(Linux)
         shell: bash
         if: runner.os == 'Linux'
         run: |
-          mv ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }} ./build
+          mv ./target/${{ matrix.job.target }}/${{ env.PROFILE }}/${{ env.APP_NAME }} ./build
           mv ./LICENSES.toml './build'
           tar -czf ${{ matrix.job.asset }} -C ./build .
       - name: Release(Linux)
@@ -125,7 +124,7 @@ jobs:
           prefix-key: cargo-release-${{ matrix.job.target }}-extra_fmt
 
       - name: Build CLI
-        run: cargo build --release --target ${{ matrix.job.target }} --features extra_fmt
+        run: cargo build --profile ${{ env.PROFILE }} --target ${{ matrix.job.target }} --features extra_fmt
 
       - name: Make outputs dir
         run: mkdir -p ./build
@@ -134,7 +133,7 @@ jobs:
         shell: pwsh
         if: runner.os == 'Windows'
         run: |
-          Move-Item -Path ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }}.exe -Destination './build'
+          Move-Item -Path ./target/${{ matrix.job.target }}/${{ env.PROFILE }}/${{ env.APP_NAME }}.exe -Destination './build'
           Move-Item -Path ./LICENSES.toml -Destination './build'
           Compress-Archive -Path './build/*' -DestinationPath './${{ matrix.job.asset }}'
       - name: Release(Windows)
@@ -143,13 +142,17 @@ jobs:
         with:
           allowUpdates: true
           artifacts: ${{ matrix.job.asset }}
-          omitBody: true
+          bodyFile: ./docs/release.md
+          # NOTE: Since releaseNote does not seem to be updated while others are working on releases,
+          # have the slowest Windows create the release document.
+          # https://github.com/ncipollo/release-action/issues/432
+          generateReleaseNotes: true
       # ----------------------------------------------------------------------------------------------------------------
       - name: Compress outputs(MacOS)
         shell: bash
         if: runner.os == 'macOS'
         run: |
-          mv ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }} ./build
+          mv ./target/${{ matrix.job.target }}/${{ env.PROFILE }}/${{ env.APP_NAME }} ./build
           mv ./LICENSES.toml './build'
           tar -czf ${{ matrix.job.asset }} -C ./build .
       - name: Release(macOS)
@@ -164,7 +167,7 @@ jobs:
         shell: bash
         if: runner.os == 'Linux'
         run: |
-          mv ./target/${{ matrix.job.target }}/release/${{ env.APP_NAME }} ./build
+          mv ./target/${{ matrix.job.target }}/${{ env.PROFILE }}/${{ env.APP_NAME }} ./build
           mv ./LICENSES.toml './build'
           tar -czf ${{ matrix.job.asset }} -C ./build .
       - name: Release(Linux)

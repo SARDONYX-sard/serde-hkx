@@ -45,6 +45,7 @@ pub struct hkbAuxiliaryNodeInfo<'a> {
     /// - name: `referenceBehaviorName`(ctype: `hkStringPtr`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "referenceBehaviorName"))]
     #[cfg_attr(feature = "serde", serde(rename = "referenceBehaviorName"))]
     pub m_referenceBehaviorName: StringPtr<'a>,
@@ -52,6 +53,7 @@ pub struct hkbAuxiliaryNodeInfo<'a> {
     /// - name: `selfTransitionNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "selfTransitionNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "selfTransitionNames"))]
     pub m_selfTransitionNames: Vec<StringPtr<'a>>,

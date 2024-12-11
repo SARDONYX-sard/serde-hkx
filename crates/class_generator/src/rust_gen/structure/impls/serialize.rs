@@ -1,10 +1,11 @@
+use crate::get_class_map::get_inherited_class;
 use crate::rust_gen::structure::{
     impls::{n_time_parent_ident, str2lit},
     to_rust_token::to_rust_field_ident,
 };
 use crate::{
     cpp_info::{Class, Member, TypeKind},
-    get_inherited_class, ClassMap,
+    ClassMap,
 };
 use proc_macro2::TokenStream;
 use quote::quote;

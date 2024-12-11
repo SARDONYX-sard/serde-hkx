@@ -26,6 +26,7 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkbBlenderGenerator<'a>,
     /// # C++ Info
     /// - name: `worldFromModelRotation`(ctype: `hkQuaternion`)

@@ -1,9 +1,10 @@
 //! Deserialize ClassMap with extra formats.
 
+use super::error::{JsonSnafu, TomlSnafu, YamlSnafu};
 use crate::types_wrapper::ClassPtrMap;
 use crate::{
     convert::OutFormat,
-    error::{DeSnafu, Error, FailedReadFileSnafu, JsonSnafu, Result, YamlSnafu},
+    error::{DeSnafu, Error, FailedReadFileSnafu, Result},
     ClassMap,
 };
 use snafu::ResultExt as _;
@@ -58,24 +59,26 @@ where
                     OutFormat::Json => {
                         let classes =
                             simd_json::from_slice::<ClassPtrMap>(unsafe { string.as_bytes_mut() })
-                                .context(JsonSnafu {
+                                .with_context(|_| JsonSnafu {
                                     input: input.to_path_buf(),
                                 })?;
                         classes.into_class_map()
                     }
                     OutFormat::Toml => {
-                        let classes = toml::from_str::<ClassPtrMap>(string).map_err(|e| {
-                            Error::TomlDeError {
-                                input: input.to_path_buf(),
-                                source: Box::new(e),
-                            }
-                        })?;
+                        let classes =
+                            basic_toml::from_str::<ClassPtrMap>(string).with_context(|_| {
+                                TomlSnafu {
+                                    input: input.to_path_buf(),
+                                }
+                            })?;
                         classes.into_class_map()
                     }
                     OutFormat::Yaml => {
                         let classes =
-                            serde_yml::from_str::<ClassPtrMap>(string).context(YamlSnafu {
-                                input: input.to_path_buf(),
+                            serde_yml::from_str::<ClassPtrMap>(string).with_context(|_| {
+                                YamlSnafu {
+                                    input: input.to_path_buf(),
+                                }
                             })?;
                         classes.into_class_map()
                     }

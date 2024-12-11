@@ -26,11 +26,13 @@ pub struct hkbBehaviorReferenceGenerator<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `behaviorName`(ctype: `hkStringPtr`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "behaviorName"))]
     #[cfg_attr(feature = "serde", serde(rename = "behaviorName"))]
     pub m_behaviorName: StringPtr<'a>,

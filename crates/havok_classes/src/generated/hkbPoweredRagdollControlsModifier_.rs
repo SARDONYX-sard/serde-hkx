@@ -26,6 +26,7 @@ pub struct hkbPoweredRagdollControlsModifier<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkbModifier<'a>,
     /// # C++ Info
     /// - name: `controlData`(ctype: `struct hkbPoweredRagdollControlData`)

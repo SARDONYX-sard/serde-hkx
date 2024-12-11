@@ -31,6 +31,7 @@ pub struct hkbBehaviorGraphStringData<'a> {
     /// - name: `eventNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventNames"))]
     pub m_eventNames: Vec<StringPtr<'a>>,
@@ -38,6 +39,7 @@ pub struct hkbBehaviorGraphStringData<'a> {
     /// - name: `attributeNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "attributeNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "attributeNames"))]
     pub m_attributeNames: Vec<StringPtr<'a>>,
@@ -45,6 +47,7 @@ pub struct hkbBehaviorGraphStringData<'a> {
     /// - name: `variableNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "variableNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableNames"))]
     pub m_variableNames: Vec<StringPtr<'a>>,
@@ -52,6 +55,7 @@ pub struct hkbBehaviorGraphStringData<'a> {
     /// - name: `characterPropertyNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterPropertyNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterPropertyNames"))]
     pub m_characterPropertyNames: Vec<StringPtr<'a>>,

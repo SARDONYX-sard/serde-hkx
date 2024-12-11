@@ -45,6 +45,7 @@ pub struct hkxTextureInplace<'a> {
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
@@ -52,6 +53,7 @@ pub struct hkxTextureInplace<'a> {
     /// - name: `originalFilename`(ctype: `hkStringPtr`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "originalFilename"))]
     #[cfg_attr(feature = "serde", serde(rename = "originalFilename"))]
     pub m_originalFilename: StringPtr<'a>,

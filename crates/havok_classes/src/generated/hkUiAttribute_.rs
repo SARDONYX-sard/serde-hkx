@@ -41,6 +41,7 @@ pub struct hkUiAttribute<'a> {
     /// - name: `label`(ctype: `char*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "label"))]
     #[cfg_attr(feature = "serde", serde(rename = "label"))]
     pub m_label: CString<'a>,
@@ -48,6 +49,7 @@ pub struct hkUiAttribute<'a> {
     /// - name: `group`(ctype: `char*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "group"))]
     #[cfg_attr(feature = "serde", serde(rename = "group"))]
     pub m_group: CString<'a>,
@@ -55,6 +57,7 @@ pub struct hkUiAttribute<'a> {
     /// - name: `hideBaseClassMembers`(ctype: `char*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "hideBaseClassMembers"))]
     #[cfg_attr(feature = "serde", serde(rename = "hideBaseClassMembers"))]
     pub m_hideBaseClassMembers: CString<'a>,

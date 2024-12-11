@@ -26,11 +26,13 @@ pub struct hkxNode<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkxAttributeHolder<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: StringPtr<'a>,
@@ -59,6 +61,7 @@ pub struct hkxNode<'a> {
     /// - name: `annotations`(ctype: `hkArray<struct hkxNodeAnnotationData>`)
     /// - offset: ` 52`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "annotations"))]
     #[cfg_attr(feature = "serde", serde(rename = "annotations"))]
     pub m_annotations: Vec<hkxNodeAnnotationData<'a>>,
@@ -66,6 +69,7 @@ pub struct hkxNode<'a> {
     /// - name: `userProperties`(ctype: `hkStringPtr`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "userProperties"))]
     #[cfg_attr(feature = "serde", serde(rename = "userProperties"))]
     pub m_userProperties: StringPtr<'a>,

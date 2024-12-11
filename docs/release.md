@@ -1,12 +1,22 @@
 # serde-hkx CLI
 
-## About `extra_fmt` version
+The hkx and XML specifications are determined by Havok and will not change. They
+are compatible with any version of the CLI.
 
-Special version with json and yaml output in addition to hkx and XML.
-The json and yaml representation specifications have not yet been stabilized.
+## `extra_fmt`
 
-Please consider that json and yaml output from this version will be incompatible with the next version.
-This is because the representation will be slightly different depending on what version of the Rust library we use.
-This is not a problem if you convert to hkx.
+### About
 
-This is a proprietary specification using the library, but unlike XML, it outputs the abstract syntax tree itself, so there is minimal loss of data when converting back to hkx.
+It can output hkx, xml, json, toml, yaml.
+
+json will be used by [`d-merge`](https://github.com/SARDONYX-sard/d-merge) in
+due course.
+
+### Compatibility
+
+json, toml, and yaml are still under development. This indicates that the form
+of json may change in the next version.
+
+- 0.3.0..0.3.1
+- 0.4.0..0.5.0
+- 0.6.0

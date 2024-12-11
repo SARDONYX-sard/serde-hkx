@@ -26,6 +26,7 @@ pub struct BSSynchronizedClipGenerator<'a> {
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
+    #[cfg_attr(feature = "serde", serde(borrow))]
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
     /// - name: `pClipGenerator`(ctype: `struct hkbGenerator*`)
@@ -39,6 +40,7 @@ pub struct BSSynchronizedClipGenerator<'a> {
     /// - name: `SyncAnimPrefix`(ctype: `char*`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "SyncAnimPrefix"))]
     #[cfg_attr(feature = "serde", serde(rename = "SyncAnimPrefix"))]
     pub m_SyncAnimPrefix: CString<'a>,

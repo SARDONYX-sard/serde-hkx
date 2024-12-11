@@ -1,4 +1,5 @@
 //! `serde_hkx_features`(`extra_fmt`) errors
+use snafu::Location;
 use std::path::PathBuf;
 
 /// Cli error
@@ -13,29 +14,27 @@ pub enum ExtraSerdeError {
     JsonError {
         input: PathBuf,
         source: simd_json::Error,
+        #[snafu(implicit)]
+        location: Location,
     },
-    /// (De)Serialize yaml error
+
+    /// (De)Serialize toml error
     #[cfg(feature = "extra_fmt")]
     #[snafu(display("{}:\n {source}", input.display()))]
-    TomlSerError {
+    TomlError {
         input: PathBuf,
-        source: toml::ser::Error,
+        source: basic_toml::Error,
+        #[snafu(implicit)]
+        location: Location,
     },
-    /// (De)Serialize yaml error
-    #[cfg(feature = "extra_fmt")]
-    #[snafu(display("{}:\n {source}", input.display()))]
-    TomlDeError {
-        input: PathBuf,
-        source: Box<toml::de::Error>,
-    },
+
     /// (De)Serialize yaml error
     #[cfg(feature = "extra_fmt")]
     #[snafu(display("{}:\n {source}", input.display()))]
     YamlError {
         input: PathBuf,
         source: serde_yml::Error,
+        #[snafu(implicit)]
+        location: Location,
     },
 }
-
-/// `Result` for `serde_hkx` wrapper crate.
-pub type Result<T, E = ExtraSerdeError> = core::result::Result<T, E>;

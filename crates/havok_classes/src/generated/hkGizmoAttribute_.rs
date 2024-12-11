@@ -34,6 +34,7 @@ pub struct hkGizmoAttribute<'a> {
     /// - name: `label`(ctype: `char*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "label"))]
     #[cfg_attr(feature = "serde", serde(rename = "label"))]
     pub m_label: CString<'a>,

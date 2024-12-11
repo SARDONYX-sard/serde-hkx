@@ -4,6 +4,10 @@
 #[derive(Debug, snafu::Snafu)]
 #[snafu(visibility(pub))]
 pub enum ClassGeneratorError {
+    /// Failed to generate class code
+    #[snafu(display("Failed to generate class. error len({}): {}", errors.len(), errors.join("\n")))]
+    FailedGenerate { errors: Vec<String> },
+
     /// File meta-information not found error
     #[snafu(display("Not found file stem: {path}"))]
     NotFoundFileStem {
@@ -24,6 +28,15 @@ pub enum ClassGeneratorError {
     #[snafu(transparent)]
     JWalkError {
         source: jwalk::Error,
+        #[snafu(implicit)]
+        location: snafu::Location,
+    },
+
+    /// Standard library io error
+    #[snafu(display("[{location}]({}): {source}", path.display()))]
+    Io {
+        path: PathBuf,
+        source: std::io::Error,
         #[snafu(implicit)]
         location: snafu::Location,
     },
@@ -58,6 +71,8 @@ macro_rules! syn_error {
         syn::Error::new(proc_macro2::Span::call_site(), format!($($msg)*))
     };
 }
+use std::path::PathBuf;
+
 pub(crate) use syn_error;
 
 /// early return `syn::Error`

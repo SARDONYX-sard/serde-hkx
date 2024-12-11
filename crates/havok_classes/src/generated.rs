@@ -1374,83 +1374,114 @@ pub use hkxVertexVectorDataChannel_::*;
 use havok_serde as _serde;
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[derive(Debug, Default, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Classes<'a> {
-    /// For binary writing, the youngest pointer index must be first after sorting in reverse order.
-    ///
-    /// To speed up the process, swap the first and last indexes instead of using shift.
-    /// This dummy class exists to reserve space for this purpose.
-    #[default]
-    #[cfg_attr(feature = "json_schema", schemars(skip))]
-    SwapDummy,
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BGSGamebryoSequenceGenerator(BGSGamebryoSequenceGenerator<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSBoneSwitchGenerator(BSBoneSwitchGenerator<'a>),
     BSBoneSwitchGeneratorBoneData(BSBoneSwitchGeneratorBoneData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSComputeAddBoneAnimModifier(BSComputeAddBoneAnimModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSCyclicBlendTransitionGenerator(BSCyclicBlendTransitionGenerator<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSDecomposeVectorModifier(BSDecomposeVectorModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSDirectAtModifier(BSDirectAtModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSDistTriggerModifier(BSDistTriggerModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSEventEveryNEventsModifier(BSEventEveryNEventsModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSEventOnDeactivateModifier(BSEventOnDeactivateModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSEventOnFalseToTrueModifier(BSEventOnFalseToTrueModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSGetTimeStepModifier(BSGetTimeStepModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSInterpValueModifier(BSInterpValueModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSIsActiveModifier(BSIsActiveModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSIStateManagerModifier(BSIStateManagerModifier<'a>),
     BSIStateManagerModifierBSiStateData(BSIStateManagerModifierBSiStateData),
     BSIStateManagerModifierBSIStateManagerStateListener(
         BSIStateManagerModifierBSIStateManagerStateListener,
     ),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSiStateTaggingGenerator(BSiStateTaggingGenerator<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSLimbIKModifier(BSLimbIKModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSLookAtModifier(BSLookAtModifier<'a>),
     BSLookAtModifierBoneData(BSLookAtModifierBoneData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSModifyOnceModifier(BSModifyOnceModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSOffsetAnimationGenerator(BSOffsetAnimationGenerator<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSPassByTargetTriggerModifier(BSPassByTargetTriggerModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSRagdollContactListenerModifier(BSRagdollContactListenerModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSSpeedSamplerModifier(BSSpeedSamplerModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSSynchronizedClipGenerator(BSSynchronizedClipGenerator<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSTimerModifier(BSTimerModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     BSTweenerModifier(BSTweenerModifier<'a>),
     hkAabb(hkAabb),
     hkAabbHalf(hkAabbHalf),
     hkAabbUint32(hkAabbUint32),
     hkaAnimatedReferenceFrame(hkaAnimatedReferenceFrame),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaAnimation(hkaAnimation<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaAnimationBinding(hkaAnimationBinding<'a>),
     hkaAnimationContainer(hkaAnimationContainer),
     hkaAnimationPreviewColorContainer(hkaAnimationPreviewColorContainer),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaAnnotationTrack(hkaAnnotationTrack<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaAnnotationTrackAnnotation(hkaAnnotationTrackAnnotation<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaBone(hkaBone<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaBoneAttachment(hkaBoneAttachment<'a>),
     hkaDefaultAnimatedReferenceFrame(hkaDefaultAnimatedReferenceFrame),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaDeltaCompressedAnimation(hkaDeltaCompressedAnimation<'a>),
     hkaDeltaCompressedAnimationQuantizationFormat(
         hkaDeltaCompressedAnimationQuantizationFormat,
     ),
     hkaFootstepAnalysisInfo(hkaFootstepAnalysisInfo),
     hkaFootstepAnalysisInfoContainer(hkaFootstepAnalysisInfoContainer),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaInterleavedUncompressedAnimation(hkaInterleavedUncompressedAnimation<'a>),
     hkaKeyFrameHierarchyUtility(hkaKeyFrameHierarchyUtility),
     hkaKeyFrameHierarchyUtilityControlData(hkaKeyFrameHierarchyUtilityControlData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkAlignSceneToNodeOptions(hkAlignSceneToNodeOptions<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaMeshBinding(hkaMeshBinding<'a>),
     hkaMeshBindingMapping(hkaMeshBindingMapping),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaQuantizedAnimation(hkaQuantizedAnimation<'a>),
     hkaQuantizedAnimationTrackCompressionParams(
         hkaQuantizedAnimationTrackCompressionParams,
     ),
     hkaRagdollInstance(hkaRagdollInstance),
     hkArrayTypeAttribute(hkArrayTypeAttribute),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaSkeleton(hkaSkeleton<'a>),
     hkaSkeletonLocalFrameOnBone(hkaSkeletonLocalFrameOnBone),
     hkaSkeletonMapper(hkaSkeletonMapper),
     hkaSkeletonMapperData(hkaSkeletonMapperData),
     hkaSkeletonMapperDataChainMapping(hkaSkeletonMapperDataChainMapping),
     hkaSkeletonMapperDataSimpleMapping(hkaSkeletonMapperDataSimpleMapping),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaSplineCompressedAnimation(hkaSplineCompressedAnimation<'a>),
     hkaSplineCompressedAnimationAnimationCompressionParams(
         hkaSplineCompressedAnimationAnimationCompressionParams,
@@ -1458,6 +1489,7 @@ pub enum Classes<'a> {
     hkaSplineCompressedAnimationTrackCompressionParams(
         hkaSplineCompressedAnimationTrackCompressionParams,
     ),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkaWaveletCompressedAnimation(hkaWaveletCompressedAnimation<'a>),
     hkaWaveletCompressedAnimationCompressionParams(
         hkaWaveletCompressedAnimationCompressionParams,
@@ -1466,26 +1498,36 @@ pub enum Classes<'a> {
         hkaWaveletCompressedAnimationQuantizationFormat,
     ),
     hkBaseObject(hkBaseObject),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbAttachmentModifier(hkbAttachmentModifier<'a>),
     hkbAttachmentSetup(hkbAttachmentSetup),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbAttributeModifier(hkbAttributeModifier<'a>),
     hkbAttributeModifierAssignment(hkbAttributeModifierAssignment),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbAuxiliaryNodeInfo(hkbAuxiliaryNodeInfo<'a>),
     hkbBehaviorEventsInfo(hkbBehaviorEventsInfo),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbBehaviorGraph(hkbBehaviorGraph<'a>),
     hkbBehaviorGraphData(hkbBehaviorGraphData),
     hkbBehaviorGraphInternalState(hkbBehaviorGraphInternalState),
     hkbBehaviorGraphInternalStateInfo(hkbBehaviorGraphInternalStateInfo),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbBehaviorGraphStringData(hkbBehaviorGraphStringData<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbBehaviorInfo(hkbBehaviorInfo<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbBehaviorInfoIdToNamePair(hkbBehaviorInfoIdToNamePair<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbBehaviorReferenceGenerator(hkbBehaviorReferenceGenerator<'a>),
     hkbBindable(hkbBindable),
     hkbBlendCurveUtils(hkbBlendCurveUtils),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbBlenderGenerator(hkbBlenderGenerator<'a>),
     hkbBlenderGeneratorChild(hkbBlenderGeneratorChild),
     hkbBlenderGeneratorChildInternalState(hkbBlenderGeneratorChildInternalState),
     hkbBlenderGeneratorInternalState(hkbBlenderGeneratorInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbBlendingTransitionEffect(hkbBlendingTransitionEffect<'a>),
     hkbBlendingTransitionEffectInternalState(hkbBlendingTransitionEffectInternalState),
     hkbBoneIndexArray(hkbBoneIndexArray),
@@ -1493,10 +1535,13 @@ pub enum Classes<'a> {
     hkbBoolVariableSequencedData(hkbBoolVariableSequencedData),
     hkbBoolVariableSequencedDataSample(hkbBoolVariableSequencedDataSample),
     hkbCameraShakeEventPayload(hkbCameraShakeEventPayload),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbCharacter(hkbCharacter<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbCharacterAddedInfo(hkbCharacterAddedInfo<'a>),
     hkbCharacterControlCommand(hkbCharacterControlCommand),
     hkbCharacterControllerControlData(hkbCharacterControllerControlData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbCharacterControllerModifier(hkbCharacterControllerModifier<'a>),
     hkbCharacterControllerModifierInternalState(
         hkbCharacterControllerModifierInternalState,
@@ -1507,38 +1552,49 @@ pub enum Classes<'a> {
     hkbCharacterSetup(hkbCharacterSetup),
     hkbCharacterSkinInfo(hkbCharacterSkinInfo),
     hkbCharacterSteppedInfo(hkbCharacterSteppedInfo),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbCharacterStringData(hkbCharacterStringData<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbClientCharacterState(hkbClientCharacterState<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbClipGenerator(hkbClipGenerator<'a>),
     hkbClipGeneratorEcho(hkbClipGeneratorEcho),
     hkbClipGeneratorInternalState(hkbClipGeneratorInternalState),
     hkbClipTrigger(hkbClipTrigger),
     hkbClipTriggerArray(hkbClipTriggerArray),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbCombineTransformsModifier(hkbCombineTransformsModifier<'a>),
     hkbCombineTransformsModifierInternalState(hkbCombineTransformsModifierInternalState),
     hkbCompiledExpressionSet(hkbCompiledExpressionSet),
     hkbCompiledExpressionSetToken(hkbCompiledExpressionSetToken),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbComputeDirectionModifier(hkbComputeDirectionModifier<'a>),
     hkbComputeDirectionModifierInternalState(hkbComputeDirectionModifierInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbComputeRotationFromAxisAngleModifier(hkbComputeRotationFromAxisAngleModifier<'a>),
     hkbComputeRotationFromAxisAngleModifierInternalState(
         hkbComputeRotationFromAxisAngleModifierInternalState,
     ),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbComputeRotationToTargetModifier(hkbComputeRotationToTargetModifier<'a>),
     hkbComputeRotationToTargetModifierInternalState(
         hkbComputeRotationToTargetModifierInternalState,
     ),
     hkbCondition(hkbCondition),
     hkbContext(hkbContext),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbDampingModifier(hkbDampingModifier<'a>),
     hkbDampingModifierInternalState(hkbDampingModifierInternalState),
     hkbDefaultMessageLog(hkbDefaultMessageLog),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbDelayedModifier(hkbDelayedModifier<'a>),
     hkbDelayedModifierInternalState(hkbDelayedModifierInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbDetectCloseToGroundModifier(hkbDetectCloseToGroundModifier<'a>),
     hkbDetectCloseToGroundModifierInternalState(
         hkbDetectCloseToGroundModifierInternalState,
     ),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbEvaluateExpressionModifier(hkbEvaluateExpressionModifier<'a>),
     hkbEvaluateExpressionModifierInternalExpressionData(
         hkbEvaluateExpressionModifierInternalExpressionData,
@@ -1546,115 +1602,164 @@ pub enum Classes<'a> {
     hkbEvaluateExpressionModifierInternalState(
         hkbEvaluateExpressionModifierInternalState,
     ),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbEvaluateHandleModifier(hkbEvaluateHandleModifier<'a>),
     hkbEvent(hkbEvent),
     hkbEventBase(hkbEventBase),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbEventDrivenModifier(hkbEventDrivenModifier<'a>),
     hkbEventDrivenModifierInternalState(hkbEventDrivenModifierInternalState),
     hkbEventInfo(hkbEventInfo),
     hkbEventPayload(hkbEventPayload),
     hkbEventPayloadList(hkbEventPayloadList),
     hkbEventProperty(hkbEventProperty),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbEventRaisedInfo(hkbEventRaisedInfo<'a>),
     hkbEventRangeData(hkbEventRangeData),
     hkbEventRangeDataArray(hkbEventRangeDataArray),
     hkbEventSequencedData(hkbEventSequencedData),
     hkbEventSequencedDataSequencedEvent(hkbEventSequencedDataSequencedEvent),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbEventsFromRangeModifier(hkbEventsFromRangeModifier<'a>),
     hkbEventsFromRangeModifierInternalState(hkbEventsFromRangeModifierInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbExpressionCondition(hkbExpressionCondition<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbExpressionData(hkbExpressionData<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbExpressionDataArray(hkbExpressionDataArray<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbExtractRagdollPoseModifier(hkbExtractRagdollPoseModifier<'a>),
     hkbFootIkControlData(hkbFootIkControlData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbFootIkControlsModifier(hkbFootIkControlsModifier<'a>),
     hkbFootIkControlsModifierLeg(hkbFootIkControlsModifierLeg),
     hkbFootIkDriverInfo(hkbFootIkDriverInfo),
     hkbFootIkDriverInfoLeg(hkbFootIkDriverInfoLeg),
     hkbFootIkGains(hkbFootIkGains),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbFootIkModifier(hkbFootIkModifier<'a>),
     hkbFootIkModifierInternalLegData(hkbFootIkModifierInternalLegData),
     hkbFootIkModifierLeg(hkbFootIkModifierLeg),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbGenerator(hkbGenerator<'a>),
     hkbGeneratorOutputListener(hkbGeneratorOutputListener),
     hkbGeneratorSyncInfo(hkbGeneratorSyncInfo),
     hkbGeneratorSyncInfoSyncPoint(hkbGeneratorSyncInfoSyncPoint),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbGeneratorTransitionEffect(hkbGeneratorTransitionEffect<'a>),
     hkbGeneratorTransitionEffectInternalState(hkbGeneratorTransitionEffectInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbGetHandleOnBoneModifier(hkbGetHandleOnBoneModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbGetUpModifier(hkbGetUpModifier<'a>),
     hkbGetUpModifierInternalState(hkbGetUpModifierInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbGetWorldFromModelModifier(hkbGetWorldFromModelModifier<'a>),
     hkbGetWorldFromModelModifierInternalState(hkbGetWorldFromModelModifierInternalState),
     hkbHandIkControlData(hkbHandIkControlData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbHandIkControlsModifier(hkbHandIkControlsModifier<'a>),
     hkbHandIkControlsModifierHand(hkbHandIkControlsModifierHand),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbHandIkDriverInfo(hkbHandIkDriverInfo<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbHandIkDriverInfoHand(hkbHandIkDriverInfoHand<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbHandIkModifier(hkbHandIkModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbHandIkModifierHand(hkbHandIkModifierHand<'a>),
     hkbHandle(hkbHandle),
     hkbIntEventPayload(hkbIntEventPayload),
     hkbIntVariableSequencedData(hkbIntVariableSequencedData),
     hkbIntVariableSequencedDataSample(hkbIntVariableSequencedDataSample),
     hkBitField(hkBitField),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbKeyframeBonesModifier(hkbKeyframeBonesModifier<'a>),
     hkbKeyframeBonesModifierKeyframeInfo(hkbKeyframeBonesModifierKeyframeInfo),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbLinkedSymbolInfo(hkbLinkedSymbolInfo<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbLookAtModifier(hkbLookAtModifier<'a>),
     hkbLookAtModifierInternalState(hkbLookAtModifierInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbManualSelectorGenerator(hkbManualSelectorGenerator<'a>),
     hkbManualSelectorGeneratorInternalState(hkbManualSelectorGeneratorInternalState),
     hkbMessageLog(hkbMessageLog),
     hkbMirroredSkeletonInfo(hkbMirroredSkeletonInfo),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbMirrorModifier(hkbMirrorModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbModifier(hkbModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbModifierGenerator(hkbModifierGenerator<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbModifierList(hkbModifierList<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbModifierWrapper(hkbModifierWrapper<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbMoveCharacterModifier(hkbMoveCharacterModifier<'a>),
     hkbMoveCharacterModifierInternalState(hkbMoveCharacterModifierInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbNamedEventPayload(hkbNamedEventPayload<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbNamedIntEventPayload(hkbNamedIntEventPayload<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbNamedRealEventPayload(hkbNamedRealEventPayload<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbNamedStringEventPayload(hkbNamedStringEventPayload<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbNode(hkbNode<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbNodeInternalStateInfo(hkbNodeInternalStateInfo<'a>),
     hkbParticleSystemEventPayload(hkbParticleSystemEventPayload),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbPoseMatchingGenerator(hkbPoseMatchingGenerator<'a>),
     hkbPoseMatchingGeneratorInternalState(hkbPoseMatchingGeneratorInternalState),
     hkbPoweredRagdollControlData(hkbPoweredRagdollControlData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbPoweredRagdollControlsModifier(hkbPoweredRagdollControlsModifier<'a>),
     hkbProjectData(hkbProjectData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbProjectStringData(hkbProjectStringData<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbProxyModifier(hkbProxyModifier<'a>),
     hkbProxyModifierProxyInfo(hkbProxyModifierProxyInfo),
     hkbRaiseEventCommand(hkbRaiseEventCommand),
     hkbRealEventPayload(hkbRealEventPayload),
     hkbRealVariableSequencedData(hkbRealVariableSequencedData),
     hkbRealVariableSequencedDataSample(hkbRealVariableSequencedDataSample),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbReferencePoseGenerator(hkbReferencePoseGenerator<'a>),
     hkbRegisteredGenerator(hkbRegisteredGenerator),
     hkbRigidBodyRagdollControlData(hkbRigidBodyRagdollControlData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbRigidBodyRagdollControlsModifier(hkbRigidBodyRagdollControlsModifier<'a>),
     hkbRoleAttribute(hkbRoleAttribute),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbRotateCharacterModifier(hkbRotateCharacterModifier<'a>),
     hkbRotateCharacterModifierInternalState(hkbRotateCharacterModifierInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbSenseHandleModifier(hkbSenseHandleModifier<'a>),
     hkbSenseHandleModifierRange(hkbSenseHandleModifierRange),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbSequence(hkbSequence<'a>),
     hkbSequencedData(hkbSequencedData),
     hkbSequenceInternalState(hkbSequenceInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbSequenceStringData(hkbSequenceStringData<'a>),
     hkbSetBehaviorCommand(hkbSetBehaviorCommand),
     hkbSetLocalTimeOfClipGeneratorCommand(hkbSetLocalTimeOfClipGeneratorCommand),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbSetNodePropertyCommand(hkbSetNodePropertyCommand<'a>),
     hkbSetWordVariableCommand(hkbSetWordVariableCommand),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbSetWorldFromModelModifier(hkbSetWorldFromModelModifier<'a>),
     hkbSimulationControlCommand(hkbSimulationControlCommand),
     hkbSimulationStateInfo(hkbSimulationStateInfo),
     hkbStateChooser(hkbStateChooser),
     hkbStateListener(hkbStateListener),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbStateMachine(hkbStateMachine<'a>),
     hkbStateMachineActiveTransitionInfo(hkbStateMachineActiveTransitionInfo),
     hkbStateMachineDelayedTransitionInfo(hkbStateMachineDelayedTransitionInfo),
@@ -1662,54 +1767,83 @@ pub enum Classes<'a> {
     hkbStateMachineInternalState(hkbStateMachineInternalState),
     hkbStateMachineNestedStateMachineData(hkbStateMachineNestedStateMachineData),
     hkbStateMachineProspectiveTransitionInfo(hkbStateMachineProspectiveTransitionInfo),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbStateMachineStateInfo(hkbStateMachineStateInfo<'a>),
     hkbStateMachineTimeInterval(hkbStateMachineTimeInterval),
     hkbStateMachineTransitionInfo(hkbStateMachineTransitionInfo),
     hkbStateMachineTransitionInfoArray(hkbStateMachineTransitionInfoArray),
     hkbStateMachineTransitionInfoReference(hkbStateMachineTransitionInfoReference),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbStringCondition(hkbStringCondition<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbStringEventPayload(hkbStringEventPayload<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbTestStateChooser(hkbTestStateChooser<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbTimerModifier(hkbTimerModifier<'a>),
     hkbTimerModifierInternalState(hkbTimerModifierInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbTransformVectorModifier(hkbTransformVectorModifier<'a>),
     hkbTransformVectorModifierInternalState(hkbTransformVectorModifierInternalState),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbTransitionEffect(hkbTransitionEffect<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbTwistModifier(hkbTwistModifier<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbVariableBindingSet(hkbVariableBindingSet<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkbVariableBindingSetBinding(hkbVariableBindingSetBinding<'a>),
     hkbVariableInfo(hkbVariableInfo),
     hkbVariableValue(hkbVariableValue),
     hkbVariableValueSet(hkbVariableValueSet),
     hkbWorldEnums(hkbWorldEnums),
     hkbWorldFromModelModeData(hkbWorldFromModelModeData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkClass(hkClass<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkClassEnum(hkClassEnum<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkClassEnumItem(hkClassEnumItem<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkClassMember(hkClassMember<'a>),
     hkColor(hkColor),
     hkContactPoint(hkContactPoint),
     hkContactPointMaterial(hkContactPointMaterial),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkCustomAttributes(hkCustomAttributes<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkCustomAttributesAttribute(hkCustomAttributesAttribute<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkDataObjectTypeAttribute(hkDataObjectTypeAttribute<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkDescriptionAttribute(hkDescriptionAttribute<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkDocumentationAttribute(hkDocumentationAttribute<'a>),
     hkGeometry(hkGeometry),
     hkGeometryTriangle(hkGeometryTriangle),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkGizmoAttribute(hkGizmoAttribute<'a>),
     hkHalf8(hkHalf8),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkIndexedTransformSet(hkIndexedTransformSet<'a>),
     hkLinkAttribute(hkLinkAttribute),
     hkLocalFrame(hkLocalFrame),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkLocalFrameGroup(hkLocalFrameGroup<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMemoryMeshBody(hkMemoryMeshBody<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMemoryMeshMaterial(hkMemoryMeshMaterial<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMemoryMeshShape(hkMemoryMeshShape<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMemoryMeshTexture(hkMemoryMeshTexture<'a>),
     hkMemoryMeshVertexBuffer(hkMemoryMeshVertexBuffer),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMemoryResourceContainer(hkMemoryResourceContainer<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMemoryResourceHandle(hkMemoryResourceHandle<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMemoryResourceHandleExternalLink(hkMemoryResourceHandleExternalLink<'a>),
     hkMemoryTrackerAttribute(hkMemoryTrackerAttribute),
     hkMeshBody(hkMeshBody),
@@ -1721,10 +1855,15 @@ pub enum Classes<'a> {
     hkMeshTexture(hkMeshTexture),
     hkMeshVertexBuffer(hkMeshVertexBuffer),
     hkModelerNodeTypeAttribute(hkModelerNodeTypeAttribute),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMonitorStreamColorTable(hkMonitorStreamColorTable<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMonitorStreamColorTableColorPair(hkMonitorStreamColorTableColorPair<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMonitorStreamFrameInfo(hkMonitorStreamFrameInfo<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMonitorStreamStringMap(hkMonitorStreamStringMap<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkMonitorStreamStringMapStringMap(hkMonitorStreamStringMapStringMap<'a>),
     hkMoppBvTreeShapeBase(hkMoppBvTreeShapeBase),
     hkMotionState(hkMotionState),
@@ -1734,24 +1873,30 @@ pub enum Classes<'a> {
     hkMultipleVertexBufferVertexBufferInfo(hkMultipleVertexBufferVertexBufferInfo),
     hkMultiThreadCheck(hkMultiThreadCheck),
     hkp2dAngConstraintAtom(hkp2dAngConstraintAtom),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpAabbPhantom(hkpAabbPhantom<'a>),
     hkPackedVector3(hkPackedVector3),
     hkPackfileHeader(hkPackfileHeader),
     hkPackfileSectionHeader(hkPackfileSectionHeader),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpAction(hkpAction<'a>),
     hkpAgent1nSector(hkpAgent1nSector),
     hkpAngConstraintAtom(hkpAngConstraintAtom),
     hkpAngFrictionConstraintAtom(hkpAngFrictionConstraintAtom),
     hkpAngLimitConstraintAtom(hkpAngLimitConstraintAtom),
     hkpAngMotorConstraintAtom(hkpAngMotorConstraintAtom),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpAngularDashpotAction(hkpAngularDashpotAction<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpArrayAction(hkpArrayAction<'a>),
     hkpBallAndSocketConstraintData(hkpBallAndSocketConstraintData),
     hkpBallAndSocketConstraintDataAtoms(hkpBallAndSocketConstraintDataAtoms),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpBallGun(hkpBallGun<'a>),
     hkpBallSocketChainData(hkpBallSocketChainData),
     hkpBallSocketChainDataConstraintInfo(hkpBallSocketChainDataConstraintInfo),
     hkpBallSocketConstraintAtom(hkpBallSocketConstraintAtom),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpBinaryAction(hkpBinaryAction<'a>),
     hkpBoxMotion(hkpBoxMotion),
     hkpBoxShape(hkpBoxShape),
@@ -1762,6 +1907,7 @@ pub enum Classes<'a> {
     hkpBroadPhaseHandle(hkpBroadPhaseHandle),
     hkpBvShape(hkpBvShape),
     hkpBvTreeShape(hkpBvTreeShape),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpCachingShapePhantom(hkpCachingShapePhantom<'a>),
     hkpCallbackConstraintMotor(hkpCallbackConstraintMotor),
     hkpCapsuleShape(hkpCapsuleShape),
@@ -1781,6 +1927,7 @@ pub enum Classes<'a> {
     hkpCollidableCollidableFilter(hkpCollidableCollidableFilter),
     hkpCollisionFilter(hkpCollisionFilter),
     hkpCollisionFilterList(hkpCollisionFilterList),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpCompressedMeshShape(hkpCompressedMeshShape<'a>),
     hkpCompressedMeshShapeBigTriangle(hkpCompressedMeshShapeBigTriangle),
     hkpCompressedMeshShapeChunk(hkpCompressedMeshShapeChunk),
@@ -1790,10 +1937,13 @@ pub enum Classes<'a> {
     hkpConstrainedSystemFilter(hkpConstrainedSystemFilter),
     hkpConstraintAtom(hkpConstraintAtom),
     hkpConstraintChainData(hkpConstraintChainData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpConstraintChainInstance(hkpConstraintChainInstance<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpConstraintChainInstanceAction(hkpConstraintChainInstanceAction<'a>),
     hkpConstraintCollisionFilter(hkpConstraintCollisionFilter),
     hkpConstraintData(hkpConstraintData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpConstraintInstance(hkpConstraintInstance<'a>),
     hkpConstraintInstanceSmallArraySerializeOverrideType(
         hkpConstraintInstanceSmallArraySerializeOverrideType,
@@ -1811,6 +1961,7 @@ pub enum Classes<'a> {
     hkpConvexVerticesShape(hkpConvexVerticesShape),
     hkpConvexVerticesShapeFourVectors(hkpConvexVerticesShapeFourVectors),
     hkpCylinderShape(hkpCylinderShape),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpDashpotAction(hkpDashpotAction<'a>),
     hkpDefaultConvexListFilter(hkpDefaultConvexListFilter),
     hkpDefaultWorldMemoryWatchDog(hkpDefaultWorldMemoryWatchDog),
@@ -1818,6 +1969,7 @@ pub enum Classes<'a> {
     hkpDisplayBindingData(hkpDisplayBindingData),
     hkpDisplayBindingDataPhysicsSystem(hkpDisplayBindingDataPhysicsSystem),
     hkpDisplayBindingDataRigidBody(hkpDisplayBindingDataRigidBody),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpEntity(hkpEntity<'a>),
     hkpEntityExtendedListeners(hkpEntityExtendedListeners),
     hkpEntitySmallArraySerializeOverrideType(hkpEntitySmallArraySerializeOverrideType),
@@ -1827,6 +1979,7 @@ pub enum Classes<'a> {
     hkpExtendedMeshShapeSubpart(hkpExtendedMeshShapeSubpart),
     hkpExtendedMeshShapeTrianglesSubpart(hkpExtendedMeshShapeTrianglesSubpart),
     hkpFastMeshShape(hkpFastMeshShape),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpFirstPersonGun(hkpFirstPersonGun<'a>),
     hkpFixedRigidMotion(hkpFixedRigidMotion),
     hkpGenericConstraintData(hkpGenericConstraintData),
@@ -1834,6 +1987,7 @@ pub enum Classes<'a> {
     hkpGenericConstraintDataSchemeConstraintInfo(
         hkpGenericConstraintDataSchemeConstraintInfo,
     ),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpGravityGun(hkpGravityGun<'a>),
     hkpGroupCollisionFilter(hkpGroupCollisionFilter),
     hkpGroupFilter(hkpGroupFilter),
@@ -1870,14 +2024,18 @@ pub enum Classes<'a> {
     hkpMoppCodeCodeInfo(hkpMoppCodeCodeInfo),
     hkpMoppCodeReindexedTerminal(hkpMoppCodeReindexedTerminal),
     hkpMotion(hkpMotion),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpMotorAction(hkpMotorAction<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpMountedBallGun(hkpMountedBallGun<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpMouseSpringAction(hkpMouseSpringAction<'a>),
     hkpMovingSurfaceModifierConstraintAtom(hkpMovingSurfaceModifierConstraintAtom),
     hkpMultiRayShape(hkpMultiRayShape),
     hkpMultiRayShapeRay(hkpMultiRayShapeRay),
     hkpMultiSphereShape(hkpMultiSphereShape),
     hkpMultithreadedVehicleManager(hkpMultithreadedVehicleManager),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpNamedMeshMaterial(hkpNamedMeshMaterial<'a>),
     hkpNullCollisionFilter(hkpNullCollisionFilter),
     hkPostFinishAttribute(hkPostFinishAttribute),
@@ -1887,10 +2045,13 @@ pub enum Classes<'a> {
         hkpPairCollisionFilterMapPairFilterKeyOverrideType,
     ),
     hkpParametricCurve(hkpParametricCurve),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpPhantom(hkpPhantom<'a>),
     hkpPhantomCallbackShape(hkpPhantomCallbackShape),
     hkpPhysicsData(hkpPhysicsData),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpPhysicsSystem(hkpPhysicsSystem<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpPhysicsSystemWithContacts(hkpPhysicsSystemWithContacts<'a>),
     hkpPlaneShape(hkpPlaneShape),
     hkpPointToPathConstraintData(hkpPointToPathConstraintData),
@@ -1904,6 +2065,7 @@ pub enum Classes<'a> {
     hkpPoweredChainMapperTarget(hkpPoweredChainMapperTarget),
     hkpPrismaticConstraintData(hkpPrismaticConstraintData),
     hkpPrismaticConstraintDataAtoms(hkpPrismaticConstraintDataAtoms),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpProjectileGun(hkpProjectileGun<'a>),
     hkpProperty(hkpProperty),
     hkpPropertyValue(hkpPropertyValue),
@@ -1922,7 +2084,9 @@ pub enum Classes<'a> {
     hkpRayShapeCollectionFilter(hkpRayShapeCollectionFilter),
     hkpRejectChassisListener(hkpRejectChassisListener),
     hkpRemoveTerminalsMoppModifier(hkpRemoveTerminalsMoppModifier),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpReorientAction(hkpReorientAction<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpRigidBody(hkpRigidBody<'a>),
     hkpRotationalConstraintData(hkpRotationalConstraintData),
     hkpRotationalConstraintDataAtoms(hkpRotationalConstraintDataAtoms),
@@ -1944,13 +2108,16 @@ pub enum Classes<'a> {
     hkpShapeCollection(hkpShapeCollection),
     hkpShapeCollectionFilter(hkpShapeCollectionFilter),
     hkpShapeContainer(hkpShapeContainer),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpShapeInfo(hkpShapeInfo<'a>),
     hkpShapeModifier(hkpShapeModifier),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpShapePhantom(hkpShapePhantom<'a>),
     hkpSimpleContactConstraintAtom(hkpSimpleContactConstraintAtom),
     hkpSimpleContactConstraintDataInfo(hkpSimpleContactConstraintDataInfo),
     hkpSimpleMeshShape(hkpSimpleMeshShape),
     hkpSimpleMeshShapeTriangle(hkpSimpleMeshShapeTriangle),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpSimpleShapePhantom(hkpSimpleShapePhantom<'a>),
     hkpSimpleShapePhantomCollisionDetail(hkpSimpleShapePhantomCollisionDetail),
     hkpSimulation(hkpSimulation),
@@ -1959,6 +2126,7 @@ pub enum Classes<'a> {
     hkpSphereMotion(hkpSphereMotion),
     hkpSphereRepShape(hkpSphereRepShape),
     hkpSphereShape(hkpSphereShape),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpSpringAction(hkpSpringAction<'a>),
     hkpSpringDamperConstraintMotor(hkpSpringDamperConstraintMotor),
     hkpStiffSpringChainData(hkpStiffSpringChainData),
@@ -1968,6 +2136,7 @@ pub enum Classes<'a> {
     hkpStiffSpringConstraintDataAtoms(hkpStiffSpringConstraintDataAtoms),
     hkpStorageExtendedMeshShape(hkpStorageExtendedMeshShape),
     hkpStorageExtendedMeshShapeMaterial(hkpStorageExtendedMeshShapeMaterial),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpStorageExtendedMeshShapeMeshSubpartStorage(
         hkpStorageExtendedMeshShapeMeshSubpartStorage<'a>,
     ),
@@ -1989,6 +2158,7 @@ pub enum Classes<'a> {
     hkpTyremarkPoint(hkpTyremarkPoint),
     hkpTyremarksInfo(hkpTyremarksInfo),
     hkpTyremarksWheel(hkpTyremarksWheel),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpUnaryAction(hkpUnaryAction<'a>),
     hkpVehicleAerodynamics(hkpVehicleAerodynamics),
     hkpVehicleBrake(hkpVehicleBrake),
@@ -2019,6 +2189,7 @@ pub enum Classes<'a> {
     ),
     hkpVehicleFrictionStatus(hkpVehicleFrictionStatus),
     hkpVehicleFrictionStatusAxisStatus(hkpVehicleFrictionStatusAxisStatus),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpVehicleInstance(hkpVehicleInstance<'a>),
     hkpVehicleInstanceWheelInfo(hkpVehicleInstanceWheelInfo),
     hkpVehicleLinearCastBatchingManager(hkpVehicleLinearCastBatchingManager),
@@ -2044,18 +2215,23 @@ pub enum Classes<'a> {
     hkpWheelConstraintDataAtoms(hkpWheelConstraintDataAtoms),
     hkpWorld(hkpWorld),
     hkpWorldCinfo(hkpWorldCinfo),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkpWorldObject(hkpWorldObject<'a>),
     hkQTransform(hkQTransform),
     hkRangeInt32Attribute(hkRangeInt32Attribute),
     hkRangeRealAttribute(hkRangeRealAttribute),
     hkReferencedObject(hkReferencedObject),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkReflectedFileAttribute(hkReflectedFileAttribute<'a>),
     hkResourceBase(hkResourceBase),
     hkResourceContainer(hkResourceContainer),
     hkResourceHandle(hkResourceHandle),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkRootLevelContainer(hkRootLevelContainer<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkRootLevelContainerNamedVariant(hkRootLevelContainerNamedVariant<'a>),
     hkSemanticsAttribute(hkSemanticsAttribute),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkSimpleLocalFrame(hkSimpleLocalFrame<'a>),
     hkSphere(hkSphere),
     hkSweptTransform(hkSweptTransform),
@@ -2065,6 +2241,7 @@ pub enum Classes<'a> {
         hkTrackerSerializableScanSnapshotAllocation,
     ),
     hkTrackerSerializableScanSnapshotBlock(hkTrackerSerializableScanSnapshotBlock),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkUiAttribute(hkUiAttribute<'a>),
     hkVertexFormat(hkVertexFormat),
     hkVertexFormatElement(hkVertexFormatElement),
@@ -2073,36 +2250,55 @@ pub enum Classes<'a> {
     hkxAnimatedMatrix(hkxAnimatedMatrix),
     hkxAnimatedQuaternion(hkxAnimatedQuaternion),
     hkxAnimatedVector(hkxAnimatedVector),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxAttribute(hkxAttribute<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxAttributeGroup(hkxAttributeGroup<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxAttributeHolder(hkxAttributeHolder<'a>),
     hkxCamera(hkxCamera),
     hkxEdgeSelectionChannel(hkxEdgeSelectionChannel),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxEnum(hkxEnum<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxEnumItem(hkxEnumItem<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxEnvironment(hkxEnvironment<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxEnvironmentVariable(hkxEnvironmentVariable<'a>),
     hkxIndexBuffer(hkxIndexBuffer),
     hkxLight(hkxLight),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxMaterial(hkxMaterial<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxMaterialEffect(hkxMaterialEffect<'a>),
     hkxMaterialProperty(hkxMaterialProperty),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxMaterialShader(hkxMaterialShader<'a>),
     hkxMaterialShaderSet(hkxMaterialShaderSet),
     hkxMaterialTextureStage(hkxMaterialTextureStage),
     hkxMesh(hkxMesh),
     hkxMeshSection(hkxMeshSection),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxMeshUserChannelInfo(hkxMeshUserChannelInfo<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxNode(hkxNode<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxNodeAnnotationData(hkxNodeAnnotationData<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxNodeSelectionSet(hkxNodeSelectionSet<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxScene(hkxScene<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxSkinBinding(hkxSkinBinding<'a>),
     hkxSparselyAnimatedBool(hkxSparselyAnimatedBool),
     hkxSparselyAnimatedEnum(hkxSparselyAnimatedEnum),
     hkxSparselyAnimatedInt(hkxSparselyAnimatedInt),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxSparselyAnimatedString(hkxSparselyAnimatedString<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxTextureFile(hkxTextureFile<'a>),
+    #[cfg_attr(feature = "serde", serde(borrow))]
     hkxTextureInplace(hkxTextureInplace<'a>),
     hkxTriangleSelectionChannel(hkxTriangleSelectionChannel),
     hkxVertexBuffer(hkxVertexBuffer),
@@ -2114,14 +2310,14 @@ pub enum Classes<'a> {
     hkxVertexSelectionChannel(hkxVertexSelectionChannel),
     hkxVertexVectorDataChannel(hkxVertexVectorDataChannel),
 }
+impl Default for Classes<'_> {
+    fn default() -> Self {
+        Self::BGSGamebryoSequenceGenerator(BGSGamebryoSequenceGenerator::default())
+    }
+}
 impl _serde::HavokClass for Classes<'_> {
     fn name(&self) -> &'static str {
         match &self {
-            Classes::SwapDummy => {
-                panic!(
-                    "The dummy class is used only for sorting, so being called name is not a good use of the API."
-                )
-            }
             Classes::BGSGamebryoSequenceGenerator(class) => class.name(),
             Classes::BSBoneSwitchGenerator(class) => class.name(),
             Classes::BSBoneSwitchGeneratorBoneData(class) => class.name(),
@@ -2830,11 +3026,6 @@ impl _serde::HavokClass for Classes<'_> {
     }
     fn signature(&self) -> _serde::__private::Signature {
         match &self {
-            Classes::SwapDummy => {
-                panic!(
-                    "The dummy class is used only for sorting, so being called name is not a good use of the API."
-                )
-            }
             Classes::BGSGamebryoSequenceGenerator(class) => class.signature(),
             Classes::BSBoneSwitchGenerator(class) => class.signature(),
             Classes::BSBoneSwitchGeneratorBoneData(class) => class.signature(),
@@ -3575,11 +3766,6 @@ impl _serde::HavokClass for Classes<'_> {
     }
     fn deps_indexes(&self) -> Vec<usize> {
         match &self {
-            Classes::SwapDummy => {
-                panic!(
-                    "The dummy class is used only for sorting, so being called name is not a good use of the API."
-                )
-            }
             Classes::BGSGamebryoSequenceGenerator(class) => class.deps_indexes(),
             Classes::BSBoneSwitchGenerator(class) => class.deps_indexes(),
             Classes::BSBoneSwitchGeneratorBoneData(class) => class.deps_indexes(),
@@ -4357,11 +4543,6 @@ impl<'a> _serde::Serialize for Classes<'a> {
         serializer: S,
     ) -> Result<S::Ok, S::Error> {
         match self {
-            Classes::SwapDummy => {
-                panic!(
-                    "The dummy class is used only for sorting, so being called name is not a good use of the API."
-                )
-            }
             Classes::BGSGamebryoSequenceGenerator(class) => class.serialize(serializer),
             Classes::BSBoneSwitchGenerator(class) => class.serialize(serializer),
             Classes::BSBoneSwitchGeneratorBoneData(class) => class.serialize(serializer),

@@ -27,6 +27,7 @@ pub struct hkClass<'a> {
     /// - name: `name`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "name"))]
     #[cfg_attr(feature = "serde", serde(rename = "name"))]
     pub m_name: CString<'a>,
@@ -55,6 +56,7 @@ pub struct hkClass<'a> {
     /// - name: `declaredEnums`(ctype: `hkSimpleArray<struct hkClassEnum>`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: `  8`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "declaredEnums"))]
     #[cfg_attr(feature = "serde", serde(rename = "declaredEnums"))]
     pub m_declaredEnums: Vec<hkClassEnum<'a>>,
@@ -62,6 +64,7 @@ pub struct hkClass<'a> {
     /// - name: `declaredMembers`(ctype: `hkSimpleArray<struct hkClassMember>`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  8`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "declaredMembers"))]
     #[cfg_attr(feature = "serde", serde(rename = "declaredMembers"))]
     pub m_declaredMembers: Vec<hkClassMember<'a>>,

@@ -39,7 +39,7 @@ fn print_node(
 ) {
     if path.contains(&idx) {
         // Cycle detected
-        let cycle_start = path.iter().position(|&x| x == idx).unwrap();
+        let cycle_start = path.iter().position(|&x| x == idx).unwrap_or_default();
         let cycle_path: Vec<String> = path[cycle_start..]
             .iter()
             .map(|&i| nodes[&i].name.clone())

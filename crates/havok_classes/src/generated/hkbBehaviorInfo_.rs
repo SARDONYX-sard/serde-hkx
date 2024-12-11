@@ -45,6 +45,7 @@ pub struct hkbBehaviorInfo<'a> {
     /// - name: `idToNamePairs`(ctype: `hkArray<struct hkbBehaviorInfoIdToNamePair>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "idToNamePairs"))]
     #[cfg_attr(feature = "serde", serde(rename = "idToNamePairs"))]
     pub m_idToNamePairs: Vec<hkbBehaviorInfoIdToNamePair<'a>>,
