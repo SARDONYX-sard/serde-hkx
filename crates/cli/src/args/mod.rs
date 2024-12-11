@@ -3,6 +3,7 @@ mod convert;
 mod diff;
 mod dump;
 mod tree;
+mod verify;
 
 #[cfg(feature = "color")]
 use self::color::get_styles;
@@ -14,6 +15,7 @@ use serde_hkx_features::{
     dump as hexdump,
     error::{Error, Result},
     tree::output as show_tree,
+    verify::verify as reproduce,
 };
 use std::{io, path::PathBuf};
 
@@ -36,6 +38,7 @@ pub(crate) async fn run(args: Args) -> Result<()> {
                 false => hexdump::to_string(args.input, args.output).await,
             },
             SubCommands::Diff(args) => exec(args.old, args.new, args.output, args.color).await,
+            SubCommands::Verify(args) => reproduce(args.path, args.color),
             SubCommands::Completions { shell } => {
                 shell.generate(&mut Args::command(), &mut io::stdout());
                 Ok(())
@@ -93,6 +96,9 @@ pub(crate) enum SubCommands {
 
     /// Show diff between two files.(In the case of `.hkx`, it is automatically converted to hexdump)
     Diff(diff::Args),
+
+    /// Parallel hkx reproduction checks. If an error occurs, return a diff showing the location of each error.
+    Verify(verify::Args),
 
     /// Generate shell completions
     #[clap(arg_required_else_help = true)]

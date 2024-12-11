@@ -155,7 +155,7 @@ where
 
     // 1. Deserialize root file header.
     let header = tri!(de
-        .parse_peek(HkxHeader::from_bytes())
+        .parse_peek(HkxHeader::parser())
         .map_err(|err| de.to_readable_err(err)));
     de.current_position += 64; // Advance the position by the header size.
     de.is_x86 = header.pointer_size == 4;
