@@ -63,11 +63,13 @@ serde_hkx_features = { path = "./crates/serde_hkx_features" }
 pretty_assertions = "1.4.1"                                  # Color diff assertion
 quick_tracing = { version = "0.1.5", features = ["derive"] } # Easy logging
 
-[profile.release]
+# Use release mode during development to prevent `serde-hkx` stack overflow
+# - ref: https://doc.rust-lang.org/cargo/reference/profiles.html#release
+[profile.release-lto]
 codegen-units = 1
-debug = false
+inherits = "release"
 lto = true
-opt-level = 3
+panic = "abort"
 strip = true
 
 [workspace.lints.clippy]
