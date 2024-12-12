@@ -1246,6 +1246,7 @@ dependencies = [
  "indexmap 2.7.0",
  "jwalk",
  "parse-display",
+ "quick_tracing",
  "rayon",
  "schemars",
  "serde",

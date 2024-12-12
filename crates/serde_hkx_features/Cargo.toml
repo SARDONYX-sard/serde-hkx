@@ -39,6 +39,10 @@ havok_classes = { workspace = true, features = ["ignore_duplicates"] }
 serde_hkx = { workspace = true }
 havok_types = { workspace = true, features = ["serde"], optional = true }
 
+[dev-dependencies]
+quick_tracing = { workspace = true }
+serde_hkx = { workspace = true, features = ["tracing"] }
+tracing = { workspace = true }
 
 [features]
 # default = ["extra_fmt"] # For debug

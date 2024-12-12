@@ -33,7 +33,16 @@ where
 ///
 /// # Errors
 /// If an error occurs, returns an array of error paths.
-pub fn verify_dir(dir: &Path) -> Result<()> {
+pub fn verify_dir<P>(dir: P) -> Result<()>
+where
+    P: AsRef<Path>,
+{
+    let dir = dir.as_ref();
+    verify_dir_(dir)
+}
+
+// NOTE: By making the arguments inside the process concrete types, we expect the binary size to be less bloated when generics are used as arguments.
+fn verify_dir_(dir: &Path) -> Result<()> {
     let entries: Vec<_> = jwalk::WalkDir::new(dir).into_iter().collect();
 
     let results: Vec<(PathBuf, bool)> = entries
@@ -131,3 +140,23 @@ where
 
     Ok((expected_bytes, actual_bytes))
 }
+
+// NOTE: We don't try it except local PC because MIRI makes an error. Therefore, leave it commented out.
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
+
+//     #[test]
+//     #[quick_tracing::init(file = "../../tests/verify_file.log", stdio = false)]
+//     fn test_verify_file() {
+//         let input = "../../tests/input\\x86\\meshes\\actors\\ambient\\chicken\\animations\\idle_fulbody3.hkx";
+//         // let input = "../../tests/input\\x86\\meshes\\actors\\ambient\\chicken\\animations\\idle_sitdpeck.hkx";
+//         verify_file(input, true).unwrap_or_else(|err| panic!("{err}"));
+//     }
+
+//     #[test]
+//     fn test_verify_dir() {
+//         let input = "../../tests/input";
+//         verify_dir(input).unwrap_or_else(|err| panic!("{err}"));
+//     }
+// }
