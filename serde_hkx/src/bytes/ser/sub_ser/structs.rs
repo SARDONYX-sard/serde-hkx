@@ -177,7 +177,17 @@ impl SerializeStruct for StructSerializer<'_> {
     {
         #[cfg(feature = "tracing")]
         tracing::trace!("serialize field({:#x}): {_key}", self.ser.output.position());
-        value.serialize(&mut *self.ser)
+        let prev_is_in_str_array = self.ser.is_in_str_array;
+
+        // NOTE: Need to turn flags on and off
+        // If this flag is not turned off for each field serialization, a single field string in a struct in an array
+        // will be align2 even though it should be align16.
+        // If set this to false and it is an array, there is no problem because the flag is turned on internally.
+        self.ser.is_in_str_array = false;
+        tri!(value.serialize(&mut *self.ser));
+        self.ser.is_in_str_array = prev_is_in_str_array;
+
+        Ok(())
     }
 
     /// Even if it is skipped on XML, it is not skipped because it exists in binary data.
