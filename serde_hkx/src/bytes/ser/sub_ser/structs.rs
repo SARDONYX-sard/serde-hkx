@@ -52,20 +52,19 @@ impl<'a> StructSerializer<'a> {
                     size_x86_64
                 };
                 let mut write_pointed_pos = { array_base_pos + (one_size * (len as u64)) };
+                #[cfg(feature = "tracing")]
+                tracing::trace!(
+                    "Calculate Struct of Array local dst: array_base_pos({array_base_pos:#x}) + one_size({one_size}) * len({len}) = {write_pointed_pos:#x}"
+                );
 
                 // NOTE: The first write beyond the ptr after the Array nests twice should be align16 (not sure why)
                 //       Then, for some reason, the binary data reproduction is perfect.
                 if self.ser.pointed_pos.len() >= 2 {
                     let new_write_pointed_pos = align!(write_pointed_pos, 16_u64);
                     #[cfg(feature = "tracing")]
-                    tracing::trace!("The first write beyond the ptr after the Array nests twice should be align16 (not sure why)");
+                    tracing::trace!("Apply special align16 to `next_struct_local_dst` because the hkArray is nested twice: {write_pointed_pos:#x} -> {new_write_pointed_pos:#x}");
                     write_pointed_pos = new_write_pointed_pos;
                 }
-
-                #[cfg(feature = "tracing")]
-                tracing::trace!(
-                    "Calculate Struct of Array local dst: array_base_pos({array_base_pos:#x}) + one_size({one_size}) * len({len}) = {write_pointed_pos:#x}"
-                );
                 self.ser.pointed_pos.push(write_pointed_pos); // To write inner member type.
             }
             TypeSize::String => {
