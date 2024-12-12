@@ -107,7 +107,7 @@ impl Fixups {
 
             let local_max_len = local_range / LOCAL_FIXUP_ONE_SIZE;
             let global_max_len = global_range / GLOBAL_FIXUP_ONE_SIZE;
-            let virtual_max_len = local_range / VIRTUAL_FIXUP_ONE_SIZE;
+            let virtual_max_len = virtual_range / VIRTUAL_FIXUP_ONE_SIZE;
             Ok(Self {
                 local_fixups: tri!(read_local_fixups(bytes, endian, local_max_len)),
                 global_fixups: tri!(read_fixups(bytes, endian, global_max_len)),
@@ -159,7 +159,6 @@ fn read_fixups(bytes: &mut &[u8], endian: Endianness, len: u32) -> winnow::PResu
     for _ in 0..len {
         if let Ok(src) = binary::u32::<&[u8], ContextError>(endian)
             .verify(|src| *src != FIXUP_VALUE_FOR_ALIGN)
-            .context(StrContext::Expected(Description("fixup.src(u32)")))
             .parse_next(bytes)
         {
             #[cfg(feature = "tracing")]
