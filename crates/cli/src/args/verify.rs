@@ -18,10 +18,6 @@ pub const EXAMPLES: &str = color_print::cstr!(
 #[derive(Debug, clap::Args)]
 #[clap(arg_required_else_help = true, after_long_help = EXAMPLES)]
 pub(crate) struct Args {
-    /// hkx file path or dir for which you want to verify reproducibility.
+    /// hkx file path or dir for which you want to verify reproducibility. It is recommended to use log in INFO mode.
     pub path: PathBuf,
-
-    /// Option to make the diff display colorful in case of error when file is specified.
-    #[clap(long)]
-    pub color: bool,
 }

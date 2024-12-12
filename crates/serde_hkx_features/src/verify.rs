@@ -3,8 +3,7 @@
 use crate::{
     diff,
     error::{
-        DeSnafu, Error, FailedReadFileSnafu, ReproduceHkxFilesSnafu, ReproduceHkxSnafu, Result,
-        SerSnafu,
+        DeSnafu, FailedReadFileSnafu, ReproduceHkxFilesSnafu, ReproduceHkxSnafu, Result, SerSnafu,
     },
     ClassMap,
 };
@@ -13,10 +12,10 @@ use serde_hkx::bytes::{hexdump, serde::hkx_header::HkxHeader};
 use snafu::ResultExt as _;
 use std::path::{Path, PathBuf};
 
-/// Parallel hkx reproduction checks.
+/// Checks reproduction for file/dir hkx.
 ///
 /// # Errors
-/// If an error occurs, return a diff showing the location of each error.
+/// If an error occurs, return a diff showing the location of each error.(If `input` is one file path)
 pub fn verify<I>(input: I, color: bool) -> Result<()>
 where
     I: AsRef<Path>,
@@ -26,18 +25,18 @@ where
     if path.is_file() {
         verify_file(path, color)
     } else {
-        verify_dir(path, color)
+        verify_dir(path)
     }
 }
 
-/// Parallel hkx reproduction checks.
+/// Parallel checks reproduction for hkx files.
 ///
 /// # Errors
-/// If an error occurs, return a diff showing the location of each error.
-pub fn verify_dir(input: &Path, color: bool) -> Result<()> {
-    let entries: Vec<_> = jwalk::WalkDir::new(input).into_iter().collect();
+/// If an error occurs, returns an array of error paths.
+pub fn verify_dir(dir: &Path) -> Result<()> {
+    let entries: Vec<_> = jwalk::WalkDir::new(dir).into_iter().collect();
 
-    let results: Vec<(PathBuf, Result<(), Error>)> = entries
+    let results: Vec<(PathBuf, bool)> = entries
         .into_par_iter()
         .filter_map(|entry| entry.ok())
         .filter(|entry| {
@@ -50,23 +49,35 @@ pub fn verify_dir(input: &Path, color: bool) -> Result<()> {
         })
         .map(|entry| {
             let input = entry.path();
-            (input.clone(), verify_file(&input, color))
+            let verify_result = verify_inner(&input);
+
+            let is_valid = if let Ok((expected_bytes, actual_bytes)) = &verify_result {
+                let is_valid = expected_bytes == actual_bytes;
+                if is_valid {
+                    #[cfg(feature = "tracing")]
+                    tracing::info!("OK reproducible: {}", input.display());
+                }
+                is_valid
+            } else {
+                false
+            };
+            (input, is_valid)
         })
         .collect();
     let all_len = results.len();
 
-    let errors: Vec<PathBuf> = results
+    let err_paths: Vec<PathBuf> = results
         .into_par_iter()
-        .filter_map(|(path, result)| result.err().map(|_| path))
+        .filter_map(|(path, is_valid)| if !is_valid { Some(path) } else { None })
         .collect();
 
-    if errors.is_empty() {
+    if err_paths.is_empty() {
         Ok(())
     } else {
         ReproduceHkxFilesSnafu {
-            path: input.to_path_buf(),
+            path: dir.to_path_buf(),
             all_len,
-            err_paths: errors,
+            err_paths,
         }
         .fail()
     }
@@ -76,7 +87,31 @@ pub fn verify_dir(input: &Path, color: bool) -> Result<()> {
 ///
 /// # Errors
 /// If an error occurs, return a input hexdump diff.
-pub fn verify_file<I>(input: I, color: bool) -> Result<()>
+pub fn verify_file<I>(path: I, color: bool) -> Result<()>
+where
+    I: AsRef<Path>,
+{
+    let input = path.as_ref();
+
+    let (expected_bytes, actual_bytes) = verify_inner(input)?;
+
+    // Verify
+    if actual_bytes == expected_bytes {
+        #[cfg(feature = "tracing")]
+        tracing::info!("OK reproducible: {}", input.display());
+        return Ok(());
+    }
+
+    let actual = hexdump::to_string(&actual_bytes);
+    let expected = hexdump::to_string(&expected_bytes);
+    ReproduceHkxSnafu {
+        path: input.to_path_buf(),
+        diff: diff::diff(expected, actual, color),
+    }
+    .fail()
+}
+
+fn verify_inner<I>(input: I) -> Result<(Vec<u8>, Vec<u8>)>
 where
     I: AsRef<Path>,
 {
@@ -94,18 +129,5 @@ where
         serde_hkx::to_bytes(&classes, &header).with_context(|_| SerSnafu { input })?
     };
 
-    // Verify
-    if actual_bytes != expected_bytes {
-        let actual = hexdump::to_string(&actual_bytes);
-        let expected = hexdump::to_string(&expected_bytes);
-        return ReproduceHkxSnafu {
-            path: input.to_path_buf(),
-            diff: diff::diff(expected, actual, color),
-        }
-        .fail();
-    }
-
-    #[cfg(feature = "tracing")]
-    tracing::info!("OK reproducible: {}", input.display());
-    Ok(())
+    Ok((expected_bytes, actual_bytes))
 }
