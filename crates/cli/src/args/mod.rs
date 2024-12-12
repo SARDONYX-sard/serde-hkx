@@ -41,7 +41,7 @@ pub(crate) async fn run(args: Args) -> Result<()> {
             SubCommands::Diff(args) => exec(args.old, args.new, args.output, args.color).await,
             SubCommands::Verify(args) => {
                 println!("Verifying...");
-                reproduce(&args.path, true).map(|_| {
+                reproduce(&args.path, args.color).map(|_| {
                     cprintln!(
                         "<green>Complete hkx reproduction: {}</green>",
                         args.path.display()
