@@ -46,26 +46,26 @@ impl<'a> StructSerializer<'a> {
                 size_x86,
                 size_x86_64,
             } => {
-                let write_pointed_pos = {
-                    let one_size = if self.ser.is_x86 {
-                        size_x86
-                    } else {
-                        size_x86_64
-                    };
-                    array_base_pos + (one_size * (len as u64))
-                }; // `local_dst` starting position of class.
+                let one_size = if self.ser.is_x86 {
+                    size_x86
+                } else {
+                    size_x86_64
+                };
+                let write_pointed_pos = { array_base_pos + (one_size * (len as u64)) }; // `local_dst` starting position of class.
+                #[cfg(feature = "tracing")]
+                tracing::trace!(
+                    "Calculate Struct of Array local dst: array_base_pos({array_base_pos:#x}) + one_size({one_size}) * len({len}) = {write_pointed_pos:#x}"
+                );
                 self.ser.pointed_pos.push(write_pointed_pos); // To write inner member type.
             }
             TypeSize::String => {
                 self.ser.is_in_str_array = true;
-                let write_pointed_pos = {
-                    let one_size = if self.ser.is_x86 { 4 } else { 8 };
-                    #[cfg(feature = "tracing")]
-                    tracing::trace!(
-                        "array_base_pos({array_base_pos:#x}) + one_size({one_size}) * len({len})"
-                    );
-                    array_base_pos + (one_size * (len as u64))
-                }; // `local_dst` starting position of string.
+                let one_size = if self.ser.is_x86 { 4 } else { 8 };
+                let write_pointed_pos = { array_base_pos + (one_size * (len as u64)) }; // `local_dst` starting position of string.
+                #[cfg(feature = "tracing")]
+                tracing::trace!(
+                    "Calculate String of Array local dst: array_base_pos({array_base_pos:#x}) + one_size({one_size}) * len({len}) = {write_pointed_pos:#x}"
+                );
 
                 self.ser.pointed_pos.push(write_pointed_pos); // To write pointed string data.
             }
@@ -177,17 +177,7 @@ impl SerializeStruct for StructSerializer<'_> {
     {
         #[cfg(feature = "tracing")]
         tracing::trace!("serialize field({:#x}): {_key}", self.ser.output.position());
-        let prev_is_in_str_array = self.ser.is_in_str_array;
-
-        // NOTE: Need to turn flags on and off
-        // If this flag is not turned off for each field serialization, a single field string in a struct in an array
-        // will be align2 even though it should be align16.
-        // If set this to false and it is an array, there is no problem because the flag is turned on internally.
-        self.ser.is_in_str_array = false;
-        tri!(value.serialize(&mut *self.ser));
-        self.ser.is_in_str_array = prev_is_in_str_array;
-
-        Ok(())
+        value.serialize(&mut *self.ser)
     }
 
     /// Even if it is skipped on XML, it is not skipped because it exists in binary data.
