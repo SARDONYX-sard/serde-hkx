@@ -10,7 +10,7 @@ on:
 env:
   APP_NAME: hkxc
   CARGO_TERM_COLOR: always
-  PROFILE: release-lto
+  PROFILE: release
 
 jobs:
   build:
