@@ -72,9 +72,9 @@ jobs:
           asset_name: ${{ matrix.job.asset }}
           features: ${{ matrix.job.features }}
 
+      # NOTE: For some reason, the artifact is not pre-compressed even though it is compressed. So we compress it.
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.4.3
         with:
           name: ${{ matrix.job.asset }}
           path: ./build/
-          compression-level: 0
