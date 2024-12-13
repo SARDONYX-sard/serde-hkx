@@ -77,3 +77,4 @@ jobs:
         with:
           name: ${{ matrix.job.asset }}
           path: ./build/
+          compression-level: 0
