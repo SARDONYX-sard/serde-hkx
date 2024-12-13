@@ -35,7 +35,7 @@ runs:
     - name: Generate LICENSES.toml
       uses: ./.github/actions/licenses-gen
       with:
-        output_path: ./LICENSE.toml
+        output_path: ./LICENSES.toml
 
     # NOTE: zip uses cd because for some reason, even if we use wildcard, it will put in the root dir.
     # https://askubuntu.com/questions/521011/zip-an-archive-without-including-parent-directory

@@ -2,7 +2,7 @@
 #    - name: Generate LICENSES.toml
 #      uses: ./.github/actions/licenses-gen
 #      with:
-#        output_path: ./LICENSE.toml
+#        output_path: ./LICENSES.toml
 
 name: Generate Licenses
 description: Generate licenses.toml
