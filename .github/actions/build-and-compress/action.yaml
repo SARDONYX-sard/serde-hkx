@@ -37,17 +37,24 @@ runs:
       with:
         output_path: ./LICENSES.toml
 
-    # NOTE: zip uses cd because for some reason, even if we use wildcard, it will put in the root dir.
-    # https://askubuntu.com/questions/521011/zip-an-archive-without-including-parent-directory
-    - name: Compress outputs
+    - name: Make outputs dir
+      run: mkdir -p ./build
+      shell: bash
+
+    # NOTE: Because the `zip` command does not exist
+    - name: Compress outputs(Windows)
+      shell: pwsh
+      if: runner.os == 'Windows'
+      run: |
+        Move-Item -Path ./target/${{ matrix.job.target }}/${{ inputs.profile }}/${{ inputs.app_name }}.exe -Destination './build'
+        Move-Item -Path ./LICENSES.toml -Destination './build'
+        Compress-Archive -Path './build/*' -DestinationPath './${{ inputs.asset_name }}'
+
+    - name: Compress outputs(MacOS/Linux)
+      if: runner.os != 'Windows'
       shell: bash
       run: |
         mkdir -p ./build
         mv ./LICENSES.toml ./build
-        if [ "${{ runner.os }}" = "Windows" ]; then
-          mv ./target/${{ inputs.target }}/${{ inputs.profile }}/${{ inputs.app_name }}.exe ./build
-          cd ./build/ && zip -r ../${{ inputs.asset_name }} . && cd ..
-        else
-          mv ./target/${{ inputs.target }}/${{ inputs.profile }}/${{ inputs.app_name }} ./build
-          tar -czf ${{ inputs.asset_name }} -C ./build .
-        fi
+        mv ./target/${{ inputs.target }}/${{ inputs.profile }}/${{ inputs.app_name }} ./build
+        tar -czf ${{ inputs.asset_name }} -C ./build .
