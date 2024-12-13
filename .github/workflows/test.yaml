@@ -1,0 +1,51 @@
+name: Test(Cargo)
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["*"]
+  workflow_dispatch:
+env:
+  APP_NAME: hkxc
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - { target: aarch64-apple-darwin, os: macos-latest }
+          - { target: x86_64-pc-windows-msvc, os: windows-latest }
+          - { target: x86_64-unknown-linux-gnu, os: ubuntu-latest }
+    runs-on: ${{ matrix.job.os }}
+
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.5
+        with:
+          prefix-key: cargo-debug-${{ matrix.job.target }}
+
+      # https://nexte.st/docs/installation/pre-built-binaries/#using-nextest-in-github-actions
+      - name: Install nextest(Parallel Test Execution CLI)
+        uses: taiki-e/install-action@nextest
+      - name: Test
+        run: cargo nextest run --workspace --target ${{ matrix.job.target }}
+
+  miri:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.5
+        with:
+          prefix-key: cargo-debug-miri-x86_64_unknown-linux-gnu
+      - name: Install Miri
+        run: |
+          rustup toolchain install nightly --component miri
+          rustup override set nightly
+          cargo miri setup
+      - name: Search undefined behavior
+        run: cargo miri test --workspace

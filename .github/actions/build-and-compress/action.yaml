@@ -1,0 +1,52 @@
+name: "Build and Compress"
+description: "Build the CLI and compress the outputs"
+inputs:
+  target:
+    description: "Rust target triple"
+    required: true
+  profile:
+    description: "Build profile"
+    required: true
+  app_name:
+    description: "Application name"
+    required: true
+  asset_name:
+    description: "Compressed asset name"
+    required: true
+  features:
+    description: "build features"
+    default: ""
+
+runs:
+  using: "composite"
+  steps:
+    - name: Rust cache
+      uses: Swatinem/rust-cache@v2.7.5
+      with:
+        prefix-key: cargo-${{ inputs.profile }}-${{ inputs.target }}-${{ inputs.features }}
+
+    - run: cargo build --profile ${{ inputs.profile }} --target ${{ inputs.target }} --features ${{ inputs.features }}
+      shell: bash
+
+    - name: Generate LICENSES.toml
+      id: licenses
+      uses: ./.github/actions/licenses-gen
+    - run: echo "$LICENSE" > ./LICENSE.toml
+      shell: bash
+      env:
+        LICENSE: ${{ steps.licenses.outputs.licenses }}
+
+    # NOTE: zip uses cd because for some reason, even if we use wildcard, it will put in the root dir.
+    # https://askubuntu.com/questions/521011/zip-an-archive-without-including-parent-directory
+    - name: Compress outputs
+      shell: bash
+      run: |
+        mkdir -p ./build
+        mv ./LICENSES.toml ./build
+        if [ "${{ runner.os }}" = "Windows" ]; then
+          mv ./target/${{ inputs.target }}/${{ inputs.profile }}/${{ inputs.app_name }}.exe ./build
+          cd ./build/ && zip -r ../${{ inputs.asset_name }} . && cd ..
+        else
+          mv ./target/${{ inputs.target }}/${{ inputs.profile }}/${{ inputs.app_name }} ./build
+          tar -czf ${{ inputs.asset_name }} -C ./build .
+        fi
