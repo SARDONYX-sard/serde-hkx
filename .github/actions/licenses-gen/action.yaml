@@ -26,7 +26,7 @@ runs:
       shell: bash
       run: |
         cargo install cargo-license
-        cargo install bundle-licenses
+        cargo install cargo-bundle-licenses
 
     - name: Generate LICENSES.toml
       shell: bash
