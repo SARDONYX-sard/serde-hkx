@@ -15,7 +15,6 @@ inputs:
     required: true
   features:
     description: "build features"
-    default: ""
 
 runs:
   using: "composite"
@@ -25,7 +24,12 @@ runs:
       with:
         prefix-key: cargo-${{ inputs.profile }}-${{ inputs.target }}-${{ inputs.features }}
 
-    - run: cargo build --profile ${{ inputs.profile }} --target ${{ inputs.target }} --features ${{ inputs.features }}
+    - run: |
+        if [[ -z "${{ inputs.features }}" ]]; then
+          cargo build --profile ${{ inputs.profile }} --target ${{ inputs.target }}
+        else
+          cargo build --profile ${{ inputs.profile }} --target ${{ inputs.target }} --features ${{ inputs.features }}
+        fi
       shell: bash
 
     - name: Generate LICENSES.toml
