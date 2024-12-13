@@ -33,12 +33,9 @@ runs:
       shell: bash
 
     - name: Generate LICENSES.toml
-      id: licenses
       uses: ./.github/actions/licenses-gen
-    - run: echo "$LICENSE" > ./LICENSE.toml
-      shell: bash
-      env:
-        LICENSE: ${{ steps.licenses.outputs.licenses }}
+      with:
+        output_path: ./LICENSE.toml
 
     # NOTE: zip uses cd because for some reason, even if we use wildcard, it will put in the root dir.
     # https://askubuntu.com/questions/521011/zip-an-archive-without-including-parent-directory
