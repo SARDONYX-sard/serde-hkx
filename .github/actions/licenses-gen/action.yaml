@@ -30,7 +30,7 @@ runs:
 
     - name: Generate LICENSES.toml
       shell: bash
-      id: license
+      id: licenses
       run: |
         echo '# SPDX-License-Identifier: Apache-2.0 OR MIT' > $GITHUB_OUTPUT
         echo '# SPDX-FileCopyrightText: (C) 2024 SARDONYX' >> $GITHUB_OUTPUT
