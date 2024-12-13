@@ -1,0 +1,60 @@
+name: "Build and Compress"
+description: "Build the CLI and compress the outputs"
+inputs:
+  target:
+    description: "Rust target triple"
+    required: true
+  profile:
+    description: "Build profile"
+    required: true
+  app_name:
+    description: "Application name"
+    required: true
+  asset_name:
+    description: "Compressed asset name"
+    required: true
+  features:
+    description: "build features"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Rust cache
+      uses: Swatinem/rust-cache@v2.7.5
+      with:
+        prefix-key: cargo-${{ inputs.profile }}-${{ inputs.target }}-${{ inputs.features }}
+
+    - run: |
+        if [[ -z "${{ inputs.features }}" ]]; then
+          cargo build --profile ${{ inputs.profile }} --target ${{ inputs.target }}
+        else
+          cargo build --profile ${{ inputs.profile }} --target ${{ inputs.target }} --features ${{ inputs.features }}
+        fi
+      shell: bash
+
+    - name: Generate LICENSES.toml
+      uses: ./.github/actions/licenses-gen
+      with:
+        output_path: ./LICENSES.toml
+
+    - name: Make outputs dir
+      run: mkdir -p ./build
+      shell: bash
+
+    # NOTE: Because the `zip` command does not exist
+    - name: Compress outputs(Windows)
+      shell: pwsh
+      if: runner.os == 'Windows'
+      run: |
+        Move-Item -Path ./target/${{ matrix.job.target }}/${{ inputs.profile }}/${{ inputs.app_name }}.exe -Destination './build'
+        Move-Item -Path ./LICENSES.toml -Destination './build'
+        Compress-Archive -Path './build/*' -DestinationPath './${{ inputs.asset_name }}'
+
+    - name: Compress outputs(MacOS/Linux)
+      if: runner.os != 'Windows'
+      shell: bash
+      run: |
+        mkdir -p ./build
+        mv ./LICENSES.toml ./build
+        mv ./target/${{ inputs.target }}/${{ inputs.profile }}/${{ inputs.app_name }} ./build
+        tar -czf ${{ inputs.asset_name }} -C ./build .

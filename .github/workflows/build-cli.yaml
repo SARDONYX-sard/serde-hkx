@@ -1,14 +1,21 @@
-name: Release(CLI)
+name: Build(CLI)
 
 on:
   push:
-    tags:
-      - "*"
+    branches: ["main"]
+  pull_request:
+    types: [opened, reopened, synchronize]
+  workflow_dispatch:
+
+# Only the latest push job is executed when successive pushes are performed.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   APP_NAME: hkxc
   CARGO_TERM_COLOR: always
-  PROFILE: release-lto
+  PROFILE: release
 
 jobs:
   build:
@@ -16,6 +23,7 @@ jobs:
       fail-fast: false
       matrix:
         job:
+          # default features
           - {
               target: aarch64-apple-darwin,
               os: macos-latest,
@@ -32,6 +40,7 @@ jobs:
               asset: serde-hkx-cli-x86_64-unknown-linux-gnu.tar.gz,
             }
 
+          # extra_fmt(json) features
           - {
               target: aarch64-apple-darwin,
               os: macos-latest,
@@ -63,10 +72,9 @@ jobs:
           asset_name: ${{ matrix.job.asset }}
           features: ${{ matrix.job.features }}
 
-      - name: Release
-        uses: ncipollo/release-action@v1.14.0
+      # NOTE: For some reason, the artifact is not pre-compressed even though it is compressed. So we compress it.
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.4.3
         with:
-          allowUpdates: true
-          artifacts: ${{ matrix.job.asset }}
-          omitBody: ${{ !(matrix.job.feature == 'extra_fmt' && runner.os == 'Windows') }}
-          bodyFile: ${{ matrix.job.feature == 'extra_fmt' && runner.os == 'Windows' && './docs/release.md' || '' }}
+          name: ${{ matrix.job.asset }}
+          path: ./build/
