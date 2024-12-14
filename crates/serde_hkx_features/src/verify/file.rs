@@ -40,6 +40,7 @@ where
 mod tests {
     use super::*;
 
+    #[ignore = "need templates"]
     #[test]
     #[quick_tracing::init(file = "../../tests/verify_file.log", stdio = false)]
     fn test_verify_file() {

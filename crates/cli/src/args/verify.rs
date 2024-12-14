@@ -136,7 +136,7 @@ impl ProgressHandler for CliProgressHandler {
 mod tests {
     use super::*;
 
-    #[cfg_attr(miri, ignore = "need templates")]
+    #[ignore = "need templates"]
     #[test]
     fn test_verify_dir() {
         let input = "../../tests/input";
