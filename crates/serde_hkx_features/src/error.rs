@@ -33,15 +33,23 @@ pub enum Error {
     /// Please specify the output path.(OS cannot output bytes as stdout.)
     InvalidStdout,
 
-    /// hkx reproduce error
-    #[snafu(display("Failed to reproduce(-: input/+: output) {}: \n{diff}", path.display()))]
-    ReproduceHkx { path: PathBuf, diff: String },
+    /// hkx conversion error
+    #[snafu(display("Failed to convert the following paths (error count: {}/{total_files}) in {}: \n{err_paths:#?}", err_paths.len(), path.display()))]
+    FailedConvertFiles {
+        path: PathBuf,
+        total_files: usize,
+        err_paths: Vec<PathBuf>,
+    },
+
+    /// Reproduce file error
+    #[snafu(display("Failed to reproduce (-: input / +: output) {}: \n{diff}", path.display()))]
+    FailedReproduceFile { path: PathBuf, diff: String },
 
     /// hkx reproduce error
-    #[snafu(display("Failed Reproduce the following paths(err count: {}/{all_len}) in {}: \n{err_paths:#?}", err_paths.len(), path.display()))]
-    ReproduceHkxFiles {
+    #[snafu(display("Failed to reproduce the following paths (error count: {}/{total_files}) in {}: \n{err_paths:#?}", err_paths.len(), path.display()))]
+    FailedReproduceFiles {
         path: PathBuf,
-        all_len: usize,
+        total_files: usize,
         err_paths: Vec<PathBuf>,
     },
 
@@ -96,5 +104,5 @@ pub enum Error {
     },
 }
 
-/// `Result` for `serde_hkx` wrapper crate.
+/// `Result` for `serde_hkx_features` crate.
 pub type Result<T, E = Error> = core::result::Result<T, E>;

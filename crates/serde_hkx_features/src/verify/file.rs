@@ -1,6 +1,6 @@
 use crate::{
     diff,
-    error::{ReproduceHkxSnafu, Result},
+    error::{FailedReproduceFileSnafu, Result},
 };
 use serde_hkx::bytes::hexdump;
 use std::path::Path;
@@ -28,7 +28,7 @@ where
 
     let actual = hexdump::to_string(&actual_bytes);
     let expected = hexdump::to_string(&expected_bytes);
-    ReproduceHkxSnafu {
+    FailedReproduceFileSnafu {
         path: input.to_path_buf(),
         diff: diff::diff(expected, actual, color),
     }

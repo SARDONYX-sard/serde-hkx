@@ -36,32 +36,17 @@ pub(crate) struct Args {
     pub format: OutFormat,
 
     /// Execution runtime: async (Tokio) or parallel (Rayon) (NOTE: Effective only when dir path is selected.)
-    #[arg(short, long, value_enum, default_value = "rayon")]
+    #[arg(short, long, ignore_case = true, default_value = "rayon")]
     pub runtime: Runtime,
 }
 
 /// Runtime options
 #[derive(ValueEnum, Clone, Debug)]
 pub enum Runtime {
-    /// Uses Rayon for multi-threaded parallel processing
+    /// Uses Rayon for multi-threaded parallel processing & Enumerate error paths
     Rayon,
-    /// Uses Tokio for async processing
+    /// Uses Tokio for async processing(M:N thread) & fail fast
     Tokio,
-}
-
-/// convert with cli progress.
-pub async fn async_convert<I, O>(input: I, output: Option<O>, format: OutFormat) -> Result<()>
-where
-    I: AsRef<Path>,
-    O: AsRef<Path>,
-{
-    serde_hkx_features::convert::tokio::convert_progress(
-        input,
-        output,
-        format,
-        CliProgressHandler::new(),
-    )
-    .await
 }
 
 pub async fn convert<I, O>(
@@ -76,7 +61,7 @@ where
 {
     match runtime {
         Runtime::Rayon => rayon_convert(&input, output, format),
-        Runtime::Tokio => async_convert(&input, output, format).await,
+        Runtime::Tokio => tokio_convert(&input, output, format).await,
     }
 }
 
@@ -91,4 +76,19 @@ where
         format,
         CliProgressHandler::new(),
     )
+}
+
+/// convert with cli progress.
+pub async fn tokio_convert<I, O>(input: I, output: Option<O>, format: OutFormat) -> Result<()>
+where
+    I: AsRef<Path>,
+    O: AsRef<Path>,
+{
+    serde_hkx_features::convert::tokio::convert_progress(
+        input,
+        output,
+        format,
+        CliProgressHandler::new(),
+    )
+    .await
 }

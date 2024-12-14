@@ -1,22 +1,16 @@
 //! Parallel Convert hkx <-> xml
 
-use super::OutFormat;
+use super::{get_output_path, get_supported_files, process_serde, OutFormat};
 use crate::{
-    error::{Result, SerSnafu},
+    error::{FailedConvertFilesSnafu, Result},
     fs::write_sync,
     verify::ProgressHandler,
 };
 use rayon::prelude::*;
-use serde_hkx::HavokSort as _;
-use snafu::ResultExt as _;
 use std::{
     fs,
     io::{self},
     path::{Path, PathBuf},
-    sync::{
-        atomic::{AtomicUsize, Ordering},
-        Arc,
-    },
 };
 
 /// Convert dir or file (hkx, xml).
@@ -71,60 +65,47 @@ where
     P: ProgressHandler + Sync,
 {
     let input_dir = input_dir.as_ref();
-
-    let files: Vec<PathBuf> = jwalk::WalkDir::new(input_dir)
-        .into_iter()
-        .filter_map(|entry| entry.ok())
-        .map(|entry| entry.path())
-        .filter(|path| path.is_file())
-        .collect();
+    let files: Vec<PathBuf> = get_supported_files(input_dir);
 
     if files.is_empty() {
         progress.on_empty();
         return Ok(());
     }
 
-    progress.on_set_total(files.len());
-    let success_count = Arc::new(AtomicUsize::new(0));
-    let failure_count = Arc::new(AtomicUsize::new(0));
-    progress.start_progress_monitoring(Arc::clone(&success_count), Arc::clone(&failure_count));
+    let total_files = files.len();
+    progress.on_set_total(total_files);
 
-    files.into_par_iter().try_for_each(|input| -> Result<()> {
-        if let Some(ext) = input.extension() {
+    let err_paths: Vec<PathBuf> = files
+        .into_par_iter()
+        .filter_map(|input| {
             progress.on_processing_path(&input);
 
-            if OutFormat::from_extension(ext).is_ok() {
-                let output = match output_dir.as_ref() {
-                    Some(output_dir) => {
-                        let input_inner_dir = input.strip_prefix(input_dir)?;
-                        let mut output = output_dir.as_ref().join(input_inner_dir);
-                        output.set_extension(format.as_extension());
-                        Some(output)
-                    }
-                    None => None,
-                };
+            let output = get_output_path(input_dir, &input, &output_dir, format);
+            let res = convert_file(&input, output, format);
+            progress.inc(1);
 
-                match convert_file(input, output, format) {
-                    Ok(_) => {
-                        success_count.fetch_add(1, Ordering::AcqRel);
-                        Ok(())
-                    }
-                    Err(err) => {
-                        failure_count.fetch_add(1, Ordering::AcqRel);
-                        Err(err)
-                    }
-                }?;
-                progress.inc(1);
+            if matches!(res, Ok(())) {
+                progress.success_inc(1);
+                None
             } else {
-                #[cfg(feature = "tracing")]
-                tracing::info!("Skip unsupported extension: {}", input.display());
+                progress.failure_inc(1);
+                Some(input)
             }
-        }
-        Ok(())
-    })?;
+        })
+        .collect();
 
     progress.on_finish();
-    Ok(())
+
+    if err_paths.is_empty() {
+        Ok(())
+    } else {
+        FailedConvertFilesSnafu {
+            path: input_dir.to_path_buf(),
+            total_files,
+            err_paths,
+        }
+        .fail()
+    }
 }
 
 /// Convert `hkx`/`xml` file and vice versa.
@@ -141,41 +122,7 @@ where
 {
     let input = input.as_ref();
     let in_bytes = fs::read(input)?;
-    let mut string = String::new();
+    let out_bytes = process_serde(&in_bytes, input, format)?;
 
-    // Deserialize
-    let mut classes = {
-        #[cfg(not(feature = "extra_fmt"))]
-        {
-            crate::serde::de::deserialize(&in_bytes, &mut string, input)?
-        }
-        #[cfg(feature = "extra_fmt")]
-        {
-            crate::serde_extra::de::deserialize(&in_bytes, &mut string, input)?
-        }
-    };
-
-    // Serialize
-    let out_bytes = match format {
-        OutFormat::Amd64 | OutFormat::Win32 => {
-            crate::serde::ser::to_bytes(input, format, &mut classes)?
-        }
-        OutFormat::Xml => {
-            let top_ptr = classes.sort_for_xml().context(SerSnafu {
-                input: input.to_path_buf(),
-            })?;
-            let xml = serde_hkx::to_string(&classes, top_ptr).context(SerSnafu {
-                input: input.to_path_buf(),
-            })?;
-            xml.into_bytes()
-        }
-        #[cfg(feature = "extra_fmt")]
-        OutFormat::Json | OutFormat::Toml | OutFormat::Yaml => {
-            let mut classes = crate::types_wrapper::ClassPtrMap::from_class_map(classes);
-            crate::serde_extra::ser::to_bytes(input, format, &mut classes)?
-        }
-    };
-
-    write_sync(input, output, format.as_extension(), out_bytes)?;
-    Ok(())
+    Ok(write_sync(input, output, format.as_extension(), out_bytes)?)
 }

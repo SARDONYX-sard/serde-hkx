@@ -31,14 +31,7 @@ pub fn verify<P>(path: P, color: bool) -> Result<()>
 where
     P: AsRef<Path>,
 {
-    let path = path.as_ref();
-    println!("Verifying...");
-    serde_hkx_features::verify::verify(path, color, CliProgressHandler::new()).map(|_| {
-        color_print::cprintln!(
-            "<green>Complete hkx reproduction: {}</green>",
-            path.display()
-        );
-    })
+    serde_hkx_features::verify::verify(path, color, CliProgressHandler::new())
 }
 
 // NOTE: We don't try it except local PC because MIRI makes an error. Therefore, leave it commented out.

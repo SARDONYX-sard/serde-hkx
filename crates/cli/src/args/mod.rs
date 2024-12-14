@@ -8,7 +8,7 @@ mod verify;
 
 #[cfg(feature = "color")]
 use self::color::get_styles;
-use self::convert::{async_convert, convert};
+use self::convert::{convert, tokio_convert};
 use crate::logger::LogLevel;
 use clap::CommandFactory as _;
 use serde_hkx_features::{
@@ -27,7 +27,7 @@ pub(crate) async fn run(args: Args) -> Result<()> {
     if let Some(input) = args.input {
         let out_fmt = OutFormat::from_input(&input)?;
         let output: Option<PathBuf> = None;
-        return async_convert(input, output, out_fmt).await;
+        return tokio_convert(input, output, out_fmt).await;
     }
 
     if let Some(command) = args.subcommand {

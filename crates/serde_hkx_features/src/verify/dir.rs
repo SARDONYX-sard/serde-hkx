@@ -1,10 +1,8 @@
 use super::verify_inner;
-use crate::error::{ReproduceHkxFilesSnafu, Result};
+use crate::error::{FailedReproduceFilesSnafu, Result};
 use crate::progress::ProgressHandler;
 use rayon::prelude::*;
 use std::path::{Path, PathBuf};
-use std::sync::atomic::{AtomicUsize, Ordering};
-use std::sync::Arc;
 
 /// Parallel checks reproduction for hkx files.
 ///
@@ -47,11 +45,6 @@ where
 
     progress.on_set_total(total_files);
 
-    let success_count = Arc::new(AtomicUsize::new(0));
-    let failure_count = Arc::new(AtomicUsize::new(0));
-
-    progress.start_progress_monitoring(Arc::clone(&success_count), Arc::clone(&failure_count));
-
     let results: Vec<_> = filtered_entries
         .into_par_iter()
         .map(|path| {
@@ -64,9 +57,9 @@ where
             };
 
             if is_valid {
-                success_count.fetch_add(1, Ordering::AcqRel);
+                progress.success_inc(1);
             } else {
-                failure_count.fetch_add(1, Ordering::AcqRel);
+                progress.failure_inc(1);
             }
 
             progress.inc(1);
@@ -86,9 +79,9 @@ where
     if err_paths.is_empty() {
         Ok(())
     } else {
-        ReproduceHkxFilesSnafu {
+        FailedReproduceFilesSnafu {
             path: dir.to_path_buf(),
-            all_len: total_files,
+            total_files,
             err_paths,
         }
         .fail()

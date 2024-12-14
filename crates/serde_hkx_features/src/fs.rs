@@ -76,7 +76,11 @@ where
     fs::write(&output, contents).await?;
 
     #[cfg(feature = "tracing")]
-    tracing::info!("Input: {} -> Output: {}", input.display(), output.display());
+    tracing::info!(
+        "Write Input: {} -> Output: {}",
+        input.display(),
+        output.display()
+    );
     Ok(())
 }
 
@@ -114,6 +118,10 @@ where
     std::fs::write(&output, contents)?;
 
     #[cfg(feature = "tracing")]
-    tracing::info!("Input: {} -> Output: {}", input.display(), output.display());
+    tracing::info!(
+        "Write Input: {} -> Output: {}",
+        input.display(),
+        output.display()
+    );
     Ok(())
 }
