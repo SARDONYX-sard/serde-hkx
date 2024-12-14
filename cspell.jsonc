@@ -41,6 +41,7 @@
     "idents",
     "impls",
     "indexmap",
+    "indicatif",
     "Inplace",
     "INPLACEARRAY",
     "iostream",

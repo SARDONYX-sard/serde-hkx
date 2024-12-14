@@ -9,14 +9,12 @@ mod verify;
 use self::color::get_styles;
 use crate::logger::LogLevel;
 use clap::CommandFactory as _;
-use color_print::cprintln;
 use serde_hkx_features::{
     convert::{convert, OutFormat},
-    diff::exec,
+    diff::write_diff,
     dump as hexdump,
     error::{Error, Result},
-    tree::output as show_tree,
-    verify::verify as reproduce,
+    tree::write_tree,
 };
 use std::{io, path::PathBuf};
 
@@ -33,21 +31,15 @@ pub(crate) async fn run(args: Args) -> Result<()> {
     if let Some(command) = args.subcommand {
         match command {
             SubCommands::Convert(args) => convert(&args.input, args.output, args.format).await,
-            SubCommands::Tree(args) => show_tree(args.input, args.output).await,
+            SubCommands::Tree(args) => write_tree(args.input, args.output).await,
             SubCommands::Dump(args) => match args.reverse {
                 true => hexdump::to_bytes(args.input, args.output).await,
                 false => hexdump::to_string(args.input, args.output).await,
             },
-            SubCommands::Diff(args) => exec(args.old, args.new, args.output, args.color).await,
-            SubCommands::Verify(args) => {
-                println!("Verifying...");
-                reproduce(&args.path, args.color).map(|_| {
-                    cprintln!(
-                        "<green>Complete hkx reproduction: {}</green>",
-                        args.path.display()
-                    );
-                })
+            SubCommands::Diff(args) => {
+                write_diff(args.old, args.new, args.output, args.color).await
             }
+            SubCommands::Verify(args) => self::verify::verify(&args.path, args.color),
             SubCommands::Completions { shell } => {
                 shell.generate(&mut Args::command(), &mut io::stdout());
                 Ok(())
