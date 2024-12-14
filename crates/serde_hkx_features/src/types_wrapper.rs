@@ -30,7 +30,7 @@ const fn default_schema_url() -> Cow<'static, str> {
 impl<'a> ClassPtrMap<'a> {
     pub fn from_class_map(value: ClassMap<'a>) -> Self {
         Self {
-            schema: None,
+            schema: default_schema_url(),
             classes: value
                 .into_par_iter()
                 .map(|(k, v)| (Pointer::new(k), v))
