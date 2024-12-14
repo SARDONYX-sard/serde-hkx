@@ -3,8 +3,8 @@
 mod dir;
 mod file;
 
-use self::dir::verify_dir;
-use self::file::verify_file;
+pub use self::dir::verify_dir;
+pub use self::file::verify_file;
 pub use crate::progress::{DefaultProgressMonitor, ProgressHandler};
 use crate::{
     error::{DeSnafu, FailedReadFileSnafu, Result, SerSnafu},

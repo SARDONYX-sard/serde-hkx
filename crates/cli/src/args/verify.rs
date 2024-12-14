@@ -1,5 +1,8 @@
 use crate::args::progress_handler::CliProgressHandler;
-use serde_hkx_features::error::Result;
+use serde_hkx_features::{
+    error::Result,
+    verify::{verify_dir, verify_file},
+};
 use std::path::{Path, PathBuf};
 
 /// ANSI color representation command examples.
@@ -31,7 +34,19 @@ pub fn verify<P>(path: P, color: bool) -> Result<()>
 where
     P: AsRef<Path>,
 {
-    serde_hkx_features::verify::verify(path, color, CliProgressHandler::new())
+    let path = path.as_ref();
+
+    if path.is_file() {
+        println!("Verifying...");
+        verify_file(path, color).map(|_| {
+            color_print::cprintln!(
+                "<green>Complete hkx reproduction: {}</green>",
+                path.display()
+            );
+        })
+    } else {
+        verify_dir(path, CliProgressHandler::new())
+    }
 }
 
 // NOTE: We don't try it except local PC because MIRI makes an error. Therefore, leave it commented out.
