@@ -2,15 +2,17 @@ mod color;
 mod convert;
 mod diff;
 mod dump;
+mod progress_handler;
 mod tree;
 mod verify;
 
 #[cfg(feature = "color")]
 use self::color::get_styles;
+use self::convert::{async_convert, convert};
 use crate::logger::LogLevel;
 use clap::CommandFactory as _;
 use serde_hkx_features::{
-    convert::{convert, OutFormat},
+    convert::OutFormat,
     diff::write_diff,
     dump as hexdump,
     error::{Error, Result},
@@ -25,12 +27,14 @@ pub(crate) async fn run(args: Args) -> Result<()> {
     if let Some(input) = args.input {
         let out_fmt = OutFormat::from_input(&input)?;
         let output: Option<PathBuf> = None;
-        return convert(input, output, out_fmt).await;
+        return async_convert(input, output, out_fmt).await;
     }
 
     if let Some(command) = args.subcommand {
         match command {
-            SubCommands::Convert(args) => convert(&args.input, args.output, args.format).await,
+            SubCommands::Convert(args) => {
+                convert(&args.input, args.output, args.format, args.runtime).await
+            }
             SubCommands::Tree(args) => write_tree(args.input, args.output).await,
             SubCommands::Dump(args) => match args.reverse {
                 true => hexdump::to_bytes(args.input, args.output).await,

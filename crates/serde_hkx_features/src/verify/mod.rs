@@ -5,11 +5,11 @@ mod file;
 
 use self::dir::verify_dir;
 use self::file::verify_file;
+pub use crate::progress::{DefaultProgressMonitor, ProgressHandler};
 use crate::{
     error::{DeSnafu, FailedReadFileSnafu, Result, SerSnafu},
     ClassMap,
 };
-pub use dir::{DefaultProgressMonitor, ProgressHandler};
 use serde_hkx::bytes::serde::hkx_header::HkxHeader;
 use snafu::ResultExt as _;
 use std::path::Path;
