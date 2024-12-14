@@ -2,9 +2,8 @@ name: Deploy Rust Docs
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    tags:
+      - "*"
 
 jobs:
   deploy:
