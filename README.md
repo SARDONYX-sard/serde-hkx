@@ -61,8 +61,7 @@ no_run + rust syntax highlighting
 -->
 
 ```rust ,no_run
-use serde_hkx_features::convert::{convert, OutFormat};
-use serde_hkx_features::error::{Result};
+use serde_hkx_features::{convert, OutFormat, Result};
 use std::path::PathBuf;
 
 #[tokio::main]

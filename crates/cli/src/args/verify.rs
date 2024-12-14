@@ -1,4 +1,6 @@
-use std::path::PathBuf;
+use crate::args::progress_handler::CliProgressHandler;
+use serde_hkx_features::error::Result;
+use std::path::{Path, PathBuf};
 
 /// ANSI color representation command examples.
 pub const EXAMPLES: &str = color_print::cstr!(
@@ -23,4 +25,24 @@ pub(crate) struct Args {
     /// Option to make the diff display colorful in case of error when file is specified.
     #[clap(long)]
     pub color: bool,
+}
+
+pub fn verify<P>(path: P, color: bool) -> Result<()>
+where
+    P: AsRef<Path>,
+{
+    serde_hkx_features::verify::verify(path, color, CliProgressHandler::new())
+}
+
+// NOTE: We don't try it except local PC because MIRI makes an error. Therefore, leave it commented out.
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[ignore = "need templates"]
+    #[test]
+    fn test_verify_dir() {
+        let input = "../../tests/input";
+        verify(input, false).unwrap_or_else(|err| panic!("{err}"));
+    }
 }

@@ -1,6 +1,8 @@
 //! Convert hkx <-> xml
-use serde_hkx_features::convert::OutFormat;
-use std::path::PathBuf;
+use super::progress_handler::CliProgressHandler;
+use clap::ValueEnum;
+use serde_hkx_features::{convert::OutFormat, error::Result};
+use std::path::{Path, PathBuf};
 
 /// ANSI color representation command examples.
 pub const EXAMPLES: &str = color_print::cstr!(
@@ -32,4 +34,61 @@ pub(crate) struct Args {
     /// File format to output
     #[clap(short = 'v', long, ignore_case = true)]
     pub format: OutFormat,
+
+    /// Execution runtime: async (Tokio) or parallel (Rayon) (NOTE: Effective only when dir path is selected.)
+    #[arg(short, long, ignore_case = true, default_value = "rayon")]
+    pub runtime: Runtime,
+}
+
+/// Runtime options
+#[derive(ValueEnum, Clone, Debug)]
+pub enum Runtime {
+    /// Uses Rayon for multi-threaded parallel processing & Enumerate error paths
+    Rayon,
+    /// Uses Tokio for async processing(M:N thread) & fail fast
+    Tokio,
+}
+
+pub async fn convert<I, O>(
+    input: I,
+    output: Option<O>,
+    format: OutFormat,
+    runtime: Runtime,
+) -> Result<()>
+where
+    I: AsRef<Path>,
+    O: AsRef<Path> + Sync,
+{
+    match runtime {
+        Runtime::Rayon => rayon_convert(&input, output, format),
+        Runtime::Tokio => tokio_convert(&input, output, format).await,
+    }
+}
+
+fn rayon_convert<I, O>(input: I, output: Option<O>, format: OutFormat) -> Result<()>
+where
+    I: AsRef<Path>,
+    O: AsRef<Path> + Sync,
+{
+    serde_hkx_features::convert::rayon::convert_progress(
+        input,
+        output,
+        format,
+        CliProgressHandler::new(),
+    )
+}
+
+/// convert with cli progress.
+pub async fn tokio_convert<I, O>(input: I, output: Option<O>, format: OutFormat) -> Result<()>
+where
+    I: AsRef<Path>,
+    O: AsRef<Path>,
+{
+    serde_hkx_features::convert::tokio::convert_progress(
+        input,
+        output,
+        format,
+        CliProgressHandler::new(),
+    )
+    .await
 }

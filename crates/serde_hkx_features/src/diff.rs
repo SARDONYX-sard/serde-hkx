@@ -19,7 +19,12 @@ use tokio::fs;
 /// extension
 /// - `hkx` -> Hexdump string
 /// - else -> Any encode string
-pub async fn exec<I1, I2, O>(old: I1, new: I2, output: Option<O>, use_color: bool) -> Result<()>
+pub async fn write_diff<I1, I2, O>(
+    old: I1,
+    new: I2,
+    output: Option<O>,
+    use_color: bool,
+) -> Result<()>
 where
     I1: AsRef<Path>,
     I2: AsRef<Path>,

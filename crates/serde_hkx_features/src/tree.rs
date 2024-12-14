@@ -9,7 +9,7 @@ use tokio::fs;
 ///
 /// # Errors
 /// If the extension is not `hkx` or `xml`.
-pub async fn output<I, O>(input: I, output: Option<O>) -> Result<()>
+pub async fn write_tree<I, O>(input: I, output: Option<O>) -> Result<()>
 where
     I: AsRef<Path>,
     O: AsRef<Path>,

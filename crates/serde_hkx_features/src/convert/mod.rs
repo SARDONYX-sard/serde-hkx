@@ -1,15 +1,11 @@
-//! Convert hkx <-> xml
-use crate::{
-    error::{Error, Result, SerSnafu},
-    fs::{write, ReadExt as _},
-};
+pub mod rayon;
+pub mod tokio;
+
+use crate::error::{Error, Result};
 use parse_display::{Display, FromStr};
-use serde_hkx::HavokSort as _;
-use snafu::ResultExt as _;
 use std::{
     ffi::OsStr,
-    io::{self},
-    path::Path,
+    path::{Path, PathBuf},
 };
 
 /// Output format
@@ -156,136 +152,93 @@ impl OutFormat {
     }
 }
 
-/// Convert dir or file(hkx, xml).
-///
-/// # Note
-/// If `output` is not specified, the output is placed at the same level as `input`.
-///
-/// # Errors
-/// Failed to convert.
-pub async fn convert<I, O>(input: I, output: Option<O>, format: OutFormat) -> Result<()>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// tokio & rayon common code
+
+fn get_output_path<D, I, O>(
+    input_dir: D,
+    input: I,
+    output_dir: &Option<O>,
+    format: OutFormat,
+) -> Option<PathBuf>
 where
+    D: AsRef<Path>,
     I: AsRef<Path>,
     O: AsRef<Path>,
 {
     let input = input.as_ref();
-    if input.is_dir() {
-        convert_dir(input, output, format).await?;
-    } else if input.is_file() {
-        convert_file(input, output, format).await?;
-    } else {
-        return Err(io::Error::new(
-            io::ErrorKind::NotFound,
-            format!("The path does not exist: {}", input.display()),
-        ))?;
-    }
-
-    Ok(())
-}
-
-/// Convert dir.
-///
-/// # Note
-/// If `output` is not specified, the output is placed at the same level as `input`.
-///
-/// # Errors
-/// Failed to convert.
-pub async fn convert_dir<I, O>(input_dir: I, output_dir: Option<O>, format: OutFormat) -> Result<()>
-where
-    I: AsRef<Path>,
-    O: AsRef<Path>,
-{
     let input_dir = input_dir.as_ref();
 
-    let mut task_handles: Vec<tokio::task::JoinHandle<_>> = Vec::new();
-    for path in jwalk::WalkDir::new(input_dir) {
-        let input = path?.path();
-        if !input.is_file() {
-            continue;
+    match output_dir {
+        Some(output_dir) => {
+            let input_inner_dir = input.strip_prefix(input_dir).ok()?;
+            let mut output = output_dir.as_ref().join(input_inner_dir);
+            output.set_extension(format.as_extension()); // 拡張子を設定
+            Some(output)
         }
-
-        // Convert only if there is a supported extension.
-        if let Some(ext) = input.extension() {
-            if OutFormat::from_extension(ext).is_err() {
-                #[cfg(feature = "tracing")]
-                tracing::info!("Skip this unsupported extension`: {}", input.display());
-                continue;
-            };
-
-            // If `out_dir` is specified, join the internal dirs of `input_dir` with it as root.
-            let output = match output_dir.as_ref() {
-                Some(output_dir) => {
-                    let input_inner_dir = input.strip_prefix(input_dir)?;
-                    let mut output = output_dir.as_ref().join(input_inner_dir);
-                    output.set_extension(format.as_extension());
-                    Some(output)
-                }
-                None => None,
-            };
-
-            task_handles.push(tokio::spawn(async move {
-                convert_file(&input, output, format).await
-            }));
-        };
+        None => None,
     }
-
-    for task_handle in task_handles {
-        task_handle.await??;
-    }
-    Ok(())
 }
 
-/// Convert `hkx`/`xml` file and vice vasa.
-///
-/// # Note
-/// If `output` is not specified, the output is placed at the same level as `input`.
-///
-/// # Errors
-/// Failed to convert.
-pub async fn convert_file<I, O>(input: I, output: Option<O>, format: OutFormat) -> Result<()>
+fn filter_supported_files(entry: &jwalk::DirEntry<((), ())>) -> bool {
+    let path = entry.path();
+
+    if !path.is_file() {
+        return false;
+    }
+
+    path.extension()
+        .and_then(|ext| ext.to_str())
+        .is_some_and(|ext| {
+            if OutFormat::from_extension(ext).is_err() {
+                #[cfg(feature = "tracing")]
+                tracing::info!("Skip this unsupported extension: {}", path.display());
+                false
+            } else {
+                true
+            }
+        })
+}
+
+fn get_supported_files(input_dir: &Path) -> Vec<PathBuf> {
+    jwalk::WalkDir::new(input_dir)
+        .into_iter()
+        .filter_map(|entry| entry.ok())
+        .filter(filter_supported_files)
+        .map(|entry| entry.path())
+        .collect()
+}
+
+fn process_serde<I>(in_bytes: &Vec<u8>, input: I, format: OutFormat) -> Result<Vec<u8>>
 where
     I: AsRef<Path>,
-    O: AsRef<Path>,
 {
     let input = input.as_ref();
-    let in_bytes = input.read_bytes().await?;
-    let mut string = String::new(); // To avoid ownership errors, declare it here, but since it is a 0-allocation, there is no problem.
+    let mut string = String::new();
 
     // Deserialize
     let mut classes = {
         #[cfg(not(feature = "extra_fmt"))]
         {
-            crate::serde::de::deserialize(&in_bytes, &mut string, input)?
+            crate::serde::de::deserialize(in_bytes, &mut string, input)?
         }
         #[cfg(feature = "extra_fmt")]
         {
-            crate::serde_extra::de::deserialize(&in_bytes, &mut string, input)?
+            crate::serde_extra::de::deserialize(in_bytes, &mut string, input)?
         }
     };
 
     // Serialize
-    let out_bytes = {
-        match format {
-            OutFormat::Amd64 | OutFormat::Win32 => {
-                crate::serde::ser::to_bytes(input, format, &mut classes)?
-            }
-            OutFormat::Xml => {
-                let top_ptr = classes.sort_for_xml().context(SerSnafu {
-                    input: input.to_path_buf(),
-                })?;
-                let xml = serde_hkx::to_string(&classes, top_ptr).context(SerSnafu {
-                    input: input.to_path_buf(),
-                })?;
-                xml.into_bytes()
-            }
-            #[cfg(feature = "extra_fmt")]
-            OutFormat::Json | OutFormat::Toml | OutFormat::Yaml => {
-                // NOTE: Use a number (e.g. `1`) as a key, which is not supported by TOML, so use a `Pointer`(e.g. `#0001`).
-                let mut classes = crate::types_wrapper::ClassPtrMap::from_class_map(classes);
-                crate::serde_extra::ser::to_bytes(input, format, &mut classes)?
-            }
+    let out_bytes = match format {
+        OutFormat::Amd64 | OutFormat::Win32 | OutFormat::Xml => {
+            crate::serde::ser::to_bytes(input, format, &mut classes)?
+        }
+        #[cfg(feature = "extra_fmt")]
+        OutFormat::Json | OutFormat::Toml | OutFormat::Yaml => {
+            let mut classes = crate::types_wrapper::ClassPtrMap::from_class_map(classes);
+            crate::serde_extra::ser::to_bytes(input, format, &mut classes)?
         }
     };
 
-    Ok(write(input, output, format.as_extension(), out_bytes).await?)
+    Ok(out_bytes)
 }
