@@ -1,9 +1,8 @@
 pub mod rayon;
 pub mod tokio;
 
-use crate::error::{Error, Result, SerSnafu};
+use crate::error::{Error, Result};
 use parse_display::{Display, FromStr};
-use snafu::ResultExt as _;
 use std::{
     ffi::OsStr,
     path::{Path, PathBuf},
@@ -231,18 +230,8 @@ where
 
     // Serialize
     let out_bytes = match format {
-        OutFormat::Amd64 | OutFormat::Win32 => {
+        OutFormat::Amd64 | OutFormat::Win32 | OutFormat::Xml => {
             crate::serde::ser::to_bytes(input, format, &mut classes)?
-        }
-        OutFormat::Xml => {
-            use serde_hkx::HavokSort as _;
-            let top_ptr = classes.sort_for_xml().with_context(|_| SerSnafu {
-                input: input.to_path_buf(),
-            })?;
-            let xml = serde_hkx::to_string(&classes, top_ptr).with_context(|_| SerSnafu {
-                input: input.to_path_buf(),
-            })?;
-            xml.into_bytes()
         }
         #[cfg(feature = "extra_fmt")]
         OutFormat::Json | OutFormat::Toml | OutFormat::Yaml => {
