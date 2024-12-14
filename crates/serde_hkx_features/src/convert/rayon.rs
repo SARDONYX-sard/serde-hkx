@@ -13,6 +13,10 @@ use std::{
     fs,
     io::{self},
     path::{Path, PathBuf},
+    sync::{
+        atomic::{AtomicUsize, Ordering},
+        Arc,
+    },
 };
 
 /// Convert dir or file (hkx, xml).
@@ -81,6 +85,9 @@ where
     }
 
     progress.on_set_total(files.len());
+    let success_count = Arc::new(AtomicUsize::new(0));
+    let failure_count = Arc::new(AtomicUsize::new(0));
+    progress.start_progress_monitoring(Arc::clone(&success_count), Arc::clone(&failure_count));
 
     files.into_par_iter().try_for_each(|input| -> Result<()> {
         if let Some(ext) = input.extension() {
@@ -97,7 +104,16 @@ where
                     None => None,
                 };
 
-                convert_file(input, output, format)?;
+                match convert_file(input, output, format) {
+                    Ok(_) => {
+                        success_count.fetch_add(1, Ordering::AcqRel);
+                        Ok(())
+                    }
+                    Err(err) => {
+                        failure_count.fetch_add(1, Ordering::AcqRel);
+                        Err(err)
+                    }
+                }?;
                 progress.inc(1);
             } else {
                 #[cfg(feature = "tracing")]

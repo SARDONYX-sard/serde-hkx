@@ -10,6 +10,10 @@ use snafu::ResultExt as _;
 use std::{
     io::{self},
     path::{Path, PathBuf},
+    sync::{
+        atomic::{AtomicUsize, Ordering},
+        Arc,
+    },
 };
 
 /// Convert dir or file(hkx, xml).
@@ -95,6 +99,9 @@ where
     }
 
     progress.on_set_total(files.len());
+    let success_count = Arc::new(AtomicUsize::new(0));
+    let failure_count = Arc::new(AtomicUsize::new(0));
+    progress.start_progress_monitoring(Arc::clone(&success_count), Arc::clone(&failure_count));
 
     for input in files {
         // Convert only if there is a supported extension.
@@ -119,8 +126,19 @@ where
             };
 
             let progress = progress.clone();
+            let success_count = Arc::clone(&success_count);
+            let failure_count = Arc::clone(&failure_count);
             task_handles.push(tokio::spawn(async move {
-                convert_file(&input, output, format).await?;
+                match convert_file(&input, output, format).await {
+                    Ok(_) => {
+                        success_count.fetch_add(1, Ordering::AcqRel);
+                        Ok(())
+                    }
+                    Err(err) => {
+                        failure_count.fetch_add(1, Ordering::AcqRel);
+                        Err(err)
+                    }
+                }?;
                 progress.inc(1);
                 Result::Ok(())
             }));
