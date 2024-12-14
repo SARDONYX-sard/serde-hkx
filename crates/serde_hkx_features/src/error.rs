@@ -97,11 +97,16 @@ pub enum Error {
     },
 
     // Extra formats
-    #[cfg(any(feature = "extra_fmt", feature = "json_schema"))]
+    #[cfg(feature = "extra_fmt")]
     #[snafu(transparent)]
     ExtraSerdeError {
         source: crate::serde_extra::error::ExtraSerdeError,
     },
+
+    // Extra formats
+    #[cfg(feature = "json_schema")]
+    #[snafu(transparent)]
+    JsonError { source: simd_json::Error },
 }
 
 /// `Result` for `serde_hkx_features` crate.

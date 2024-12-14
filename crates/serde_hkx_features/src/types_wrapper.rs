@@ -6,6 +6,7 @@ use havok_types::Pointer;
 use indexmap::IndexMap;
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
+use std::borrow::Cow;
 
 /// - key: class index(e.g `#0001`)
 /// - value: C++ Class
@@ -14,11 +15,16 @@ use serde::{Deserialize, Serialize};
 pub struct ClassPtrMap<'a> {
     /// Path of Json schema
     #[cfg_attr(feature = "json_schema", schemars(rename = "$schema"))]
-    #[serde(default)]
-    schema: Option<String>,
+    #[serde(default = "default_schema_url")]
+    schema: Option<Cow<'a, str>>,
     #[serde(flatten)]
     #[serde(borrow)]
     classes: IndexMap<Pointer, Classes<'a>>,
+}
+
+#[inline]
+const fn default_schema_url() -> Option<Cow<'static, str>> {
+    Some(Cow::Borrowed("https://raw.githubusercontent.com/SARDONYX-sard/serde-hkx/refs/tags/0.7.0/assets/serde_hkx_schema.json"))
 }
 
 impl<'a> ClassPtrMap<'a> {
