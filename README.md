@@ -78,8 +78,8 @@ async fn main() -> Result<()> {
 
 ```toml
 # in Cargo.toml
-havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.6.0" }
-serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.6.0" }
+havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.7.0" }
+serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.7.0" }
 ```
 
 ## Documentation
