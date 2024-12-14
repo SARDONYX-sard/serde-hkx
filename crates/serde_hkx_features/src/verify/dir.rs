@@ -58,6 +58,8 @@ where
 
             if is_valid {
                 progress.success_inc(1);
+                #[cfg(feature = "tracing")]
+                tracing::info!("Passed Reproduction: {}", path.display());
             } else {
                 progress.failure_inc(1);
             }
