@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["NULL_STR"],"mod":["cstring","half","math","pointer","signature","string_ptr","ulong","variant"]};

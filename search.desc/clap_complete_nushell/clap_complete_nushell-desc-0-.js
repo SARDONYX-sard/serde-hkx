@@ -1,0 +1,1 @@
+searchState.loadedDescShard("clap_complete_nushell", 0, "Generates Nushell completions for <code>clap</code> based CLIs\nGenerate Nushell complete file\nReturns the argument unchanged.\nCalls <code>U::from(self)</code>.")
