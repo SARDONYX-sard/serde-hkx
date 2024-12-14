@@ -117,6 +117,8 @@ where
     for task_handle in task_handles {
         task_handle.await??;
     }
+
+    progress.on_finish();
     Ok(())
 }
 
