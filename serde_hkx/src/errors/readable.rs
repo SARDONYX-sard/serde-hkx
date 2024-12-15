@@ -35,22 +35,27 @@ impl ReadableError {
     {
         let (labels, message) = error
             .map(|ctx_err| {
-                let mut labels = String::new();
-                let mut msg = "expected ".to_string();
+                ctx_err.cause().map_or_else(
+                    || {
+                        let mut labels = String::new();
+                        let mut msg = "expected ".to_string();
 
-                for ctx in ctx_err.context() {
-                    match ctx {
-                        StrContext::Label(label) => {
-                            labels += " <- ";
-                            labels += label;
+                        for ctx in ctx_err.context() {
+                            match ctx {
+                                StrContext::Label(label) => {
+                                    labels += " <- ";
+                                    labels += label;
+                                }
+                                StrContext::Expected(expected) => {
+                                    msg += &expected.to_string();
+                                }
+                                _ => (),
+                            }
                         }
-                        StrContext::Expected(expected) => {
-                            msg += &expected.to_string();
-                        }
-                        _ => (),
-                    }
-                }
-                (labels, msg)
+                        (labels, msg)
+                    },
+                    |cause| (String::new(), cause.to_string()),
+                )
             })
             .into_inner()
             .unwrap_or_default();
