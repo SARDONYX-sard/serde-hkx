@@ -3,7 +3,7 @@ use super::{get_output_path, get_supported_files, process_serde, OutFormat};
 use crate::{
     error::Result,
     fs::{write, ReadExt as _},
-    verify::{DefaultProgressMonitor, ProgressHandler},
+    progress::{DefaultProgressMonitor, ProgressHandler},
 };
 use std::{
     io::{self},

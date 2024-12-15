@@ -4,7 +4,7 @@ use super::{get_output_path, get_supported_files, process_serde, OutFormat};
 use crate::{
     error::{FailedConvertFilesSnafu, Result},
     fs::write_sync,
-    verify::ProgressHandler,
+    progress::ProgressHandler,
 };
 use rayon::prelude::*;
 use std::{

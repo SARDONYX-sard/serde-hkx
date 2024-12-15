@@ -5,7 +5,7 @@ mod file;
 
 pub use self::dir::verify_dir;
 pub use self::file::verify_file;
-pub use crate::progress::{DefaultProgressMonitor, ProgressHandler};
+use crate::progress::ProgressHandler;
 use crate::{
     error::{DeSnafu, FailedReadFileSnafu, Result, SerSnafu},
     ClassMap,
