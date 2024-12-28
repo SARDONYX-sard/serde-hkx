@@ -26,8 +26,7 @@
 - [x] 32bit to 64bit (reverse) conversion of hkx.
 - [x] XML to 32bit/64bit hkx (reverse) conversion.
 - [x] Display of hkx/XML state machine dependency tree.
-- [x] Output logs that make it possible to determine the binary data location of
-      hkx.
+- [x] Output logs that make it possible to determine the binary data location of hkx.
 - [x] Hexdump the binary data of hkx.
 - [x] Display data differences between two hkx/XML.
 
@@ -43,8 +42,8 @@
 
 ## When used as a library(For developer)
 
-NOTE: Currently there is a stack overflow problem of unknown cause. This occurs
-with debug build (`cargo build`) but not with release (`cargo build --release`).
+NOTE: Currently there is a stack overflow problem of unknown cause.
+This occurs with debug build (`cargo build`) but not with release (`cargo build --release`).
 
 - Convenience wrapper API(For CLI/GUI):
   [Examples](./crates/cli/src/args/mod.rs)/[API docs](https://serde-hkx-api.netlify.app/serde_hkx_features/)
@@ -52,7 +51,7 @@ with debug build (`cargo build`) but not with release (`cargo build --release`).
 ```toml
 # in Cargo.toml
 tokio = { version = "1.41.0", features = ["full"] } # Async runtime
-serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.6.0" }
+serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.7.0" }
 ```
 
 <!--
@@ -88,7 +87,7 @@ serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.7.0" 
 - [Binary analysis](./docs/handson_hex_dump/defaultmale/readme.md)
 - [API](https://serde-hkx-api.netlify.app/serde_hkx/)
 
-## implementation progress
+## Implementation progress
 
 The only way to find out if it is possible or not is to try it out.
 
