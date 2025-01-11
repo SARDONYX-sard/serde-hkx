@@ -25,7 +25,7 @@ fn filter_hkx_files(dir: &Path) -> Vec<PathBuf> {
             entry
                 .path()
                 .extension()
-                .map_or(false, |ext| ext.eq_ignore_ascii_case("hkx"))
+                .is_some_and(|ext| ext.eq_ignore_ascii_case("hkx"))
         })
         .map(|entry| entry.path())
         .collect()
