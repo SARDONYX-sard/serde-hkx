@@ -173,7 +173,7 @@ where
         Some(output_dir) => {
             let input_inner_dir = input.strip_prefix(input_dir).ok()?;
             let mut output = output_dir.as_ref().join(input_inner_dir);
-            output.set_extension(format.as_extension()); // 拡張子を設定
+            output.set_extension(format.as_extension());
             Some(output)
         }
         None => None,
