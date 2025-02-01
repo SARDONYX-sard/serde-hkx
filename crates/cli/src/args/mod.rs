@@ -93,7 +93,7 @@ pub(crate) enum SubCommands {
     /// Convert hkx <-> xml
     Convert(convert::Args),
 
-    /// Show dependency tree from havok behavior state machine (hkx/xml file)
+    /// Show dependency tree from havok behavior(hkx/xml file)
     Tree(tree::Args),
 
     /// Dump binary data in hexadecimal

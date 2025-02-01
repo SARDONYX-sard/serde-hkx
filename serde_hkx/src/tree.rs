@@ -5,7 +5,7 @@ use havok_types::Pointer;
 use indexmap::IndexMap;
 use std::collections::HashMap;
 
-/// Trait to create a state transition tree
+/// Trait to create ptr dependencies tree
 pub trait HavokTree {
     /// Tree of the order in which to serialize as binary data.
     fn tree_for_bytes(&mut self) -> String;
