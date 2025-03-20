@@ -71,9 +71,6 @@ impl_deserialize!(QsTransform, visit_qstransform, deserialize_qstransform);
 impl_deserialize!(Matrix4, visit_matrix4, deserialize_matrix4);
 impl_deserialize!(Transform, visit_transform, deserialize_transform);
 
-impl_deserialize!(Variant, visit_variant, deserialize_variant);
-impl_deserialize!(Pointer, visit_pointer, deserialize_pointer);
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 macro_rules! impl_deserialize_with_lifetime {
@@ -126,6 +123,19 @@ impl_deserialize_with_lifetime!(
     CString<'a>,
     visit_cstring,
     deserialize_cstring
+);
+
+impl_deserialize_with_lifetime!(
+    Variant<'de>,
+    Variant<'a>,
+    visit_variant,
+    deserialize_variant
+);
+impl_deserialize_with_lifetime!(
+    Pointer<'de>,
+    Pointer<'a>,
+    visit_pointer,
+    deserialize_pointer
 );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -254,7 +264,7 @@ macro_rules! seq_vec_impl_with_lifetime {
     };
 }
 
-seq_vec_impl_with_lifetime!(U8<'de>, U16<'de>, U32<'de>, U64<'de>, I8<'de>, I16<'de>, I32<'de>, I64<'de> => next_primitive_element, next_primitive_element_seed);
+seq_vec_impl_with_lifetime!(Pointer<'de>, U8<'de>, U16<'de>, U32<'de>, U64<'de>, I8<'de>, I16<'de>, I32<'de>, I64<'de> => next_primitive_element, next_primitive_element_seed);
 seq_vec_impl_with_lifetime!(StringPtr<'de> => next_stringptr_element, next_stringptr_element_seed);
 seq_vec_impl_with_lifetime!(CString<'de> => next_cstring_element, next_cstring_element_seed);
 
@@ -348,7 +358,7 @@ macro_rules! seq_vec_impl {
     };
 }
 
-seq_vec_impl!((), bool, char, f16, f32, Pointer, Ulong => next_primitive_element, next_primitive_element_seed);
+seq_vec_impl!((), bool, char, f16, f32, Ulong => next_primitive_element, next_primitive_element_seed);
 seq_vec_impl!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => next_math_element, next_math_element_seed);
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -539,7 +549,7 @@ macro_rules! array_impls {
     }
 }
 
-array_impls!((), bool, char, U8<'de>, U16<'de>, U32<'de>, U64<'de>, I8<'de>, I16<'de>, I32<'de>, I64<'de>, f16, f32, Pointer, Ulong => next_primitive_element, next_primitive_element_seed);
+array_impls!((), bool, char, U8<'de>, U16<'de>, U32<'de>, U64<'de>, I8<'de>, I16<'de>, I32<'de>, I64<'de>, f16, f32, Ulong => next_primitive_element, next_primitive_element_seed);
 array_impls!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => next_math_element, next_math_element_seed);
 
 impl<'de, T, const N: usize> Visitor<'de> for ArrayVisitor<[T; N]>
@@ -627,7 +637,7 @@ where
 macro_rules! impl_deserialize_for_map {
     ($($map_ident:ident),+ $(,)?) => {
         $(
-        impl<'de, T> Deserialize<'de> for $map_ident<usize, T>
+        impl<'de, T> Deserialize<'de> for $map_ident<std::borrow::Cow<'de, str>, T>
         where
             T: Deserialize<'de> + crate::HavokClass,
         {
@@ -641,7 +651,7 @@ macro_rules! impl_deserialize_for_map {
                 where
                     T: Deserialize<'de> + crate::HavokClass,
                 {
-                    type Value = $map_ident<usize, T>;
+                    type Value = $map_ident<Cow<'de, str>, T>;
 
                     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
                         formatter.write_str("a sequence")
@@ -666,7 +676,7 @@ macro_rules! impl_deserialize_for_map {
             }
         }
 
-        impl<'de, T> Deserialize<'de> for $map_ident<Pointer, T>
+        impl<'de, T> Deserialize<'de> for $map_ident<Pointer<'de>, T>
         where
             T: Deserialize<'de> + crate::HavokClass,
         {
@@ -680,7 +690,7 @@ macro_rules! impl_deserialize_for_map {
                 where
                     T: Deserialize<'de> + crate::HavokClass,
                 {
-                    type Value = $map_ident<Pointer, T>;
+                    type Value = $map_ident<Pointer<'de>, T>;
 
                     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
                         formatter.write_str("a sequence")

@@ -240,7 +240,7 @@ pub enum Unexpected<'a> {
     Transform(Transform),
 
     /// - C++ type: `T*`
-    Pointer(Pointer),
+    Pointer(Pointer<'a>),
 
     /// Array of items of type T.
     /// - C++ type: `hkArray<T>`
@@ -254,7 +254,7 @@ pub enum Unexpected<'a> {
     Struct,
 
     /// - C++ type: `hkVariant` (void* and hkClass*) type
-    Variant(Variant),
+    Variant(Variant<'a>),
 
     /// Null terminated string.
     /// - C++ type: `char*`
@@ -887,7 +887,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a u32.
     ///
     /// The default implementation fails with a type error.
-    fn visit_uint32<E>(self, v: U32<'de>)-> Result<Self::Value, E>
+    fn visit_uint32<E>(self, v: U32<'de>) -> Result<Self::Value, E>
     where
         E: Error,
     {
@@ -997,7 +997,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a Pointer.
     ///
     /// The default implementation fails with a type error.
-    fn visit_pointer<E>(self, v: Pointer) -> Result<Self::Value, E>
+    fn visit_pointer<E>(self, v: Pointer<'de>) -> Result<Self::Value, E>
     where
         E: Error,
     {
@@ -1007,7 +1007,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a Variant.
     ///
     /// The default implementation fails with a type error.
-    fn visit_variant<E>(self, v: Variant) -> Result<Self::Value, E>
+    fn visit_variant<E>(self, v: Variant<'de>) -> Result<Self::Value, E>
     where
         E: Error,
     {
@@ -1143,7 +1143,7 @@ pub trait SeqAccess<'de> {
     type Error: Error;
 
     /// Get current class index attribute(XML: e.g. `#0050`) for key of [`HashMap`]
-    fn class_ptr(&self) -> Result<usize, Self::Error>;
+    fn class_ptr(&self) -> Result<Cow<'de, str>, Self::Error>;
 
     /// This returns `Ok(Some(value))` for the next value in the sequence, or
     /// `Ok(None)` if there are no more remaining items.
@@ -1264,7 +1264,7 @@ where
     type Error = A::Error;
 
     #[inline]
-    fn class_ptr(&self) -> Result<usize, Self::Error> {
+    fn class_ptr(&self) -> Result<Cow<'de, str>, Self::Error> {
         (**self).class_ptr()
     }
 

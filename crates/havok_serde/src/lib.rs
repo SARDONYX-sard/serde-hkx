@@ -50,6 +50,9 @@ mod lib {
     pub use self::core::marker::PhantomData;
     pub use self::core::mem;
 
+    #[cfg(feature = "std")]
+    pub use std::borrow::Cow;
+
     #[cfg(all(feature = "alloc", not(feature = "std")))]
     pub use alloc::vec::Vec;
     #[cfg(feature = "std")]
@@ -98,5 +101,5 @@ pub trait HavokClass {
     fn signature(&self) -> Signature;
 
     /// Get dependencies class of indexes to do topological sort.
-    fn deps_indexes(&self) -> Vec<usize>;
+    fn deps_indexes(&self) -> Vec<Cow<'_, str>>;
 }

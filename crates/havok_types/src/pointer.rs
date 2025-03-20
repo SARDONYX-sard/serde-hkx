@@ -6,7 +6,7 @@
 //! # Example
 //! - `#0457`
 //! - `#0007`
-use core::str::FromStr;
+use crate::lib::*;
 use parse_display::Display;
 
 /// Havok C++ Class unique number.
@@ -18,21 +18,10 @@ use parse_display::Display;
 ///
 /// # Examples
 /// ```
-/// use havok_types::pointer::Pointer;
-///
-/// assert_eq!(Pointer::new(50).to_string(), "#0050");
-/// assert_eq!(Pointer::new(100).to_string(), "#0100");
-/// assert_eq!(Pointer::new(1000).to_string(), "#1000");
-/// assert_eq!(Pointer::new(10000).to_string(), "#10000");
-///
-/// assert_eq!("#0050".parse(), Ok(Pointer::new(50)));
-/// assert_eq!("#100".parse(),  Ok(Pointer::new(100)));
-/// assert_eq!("#1000".parse(), Ok(Pointer::new(1000)));
-/// assert_eq!("#10000".parse(),Ok(Pointer::new(10000)));
+/// # use havok_types::pointer::Pointer;
+/// assert_eq!(Pointer::new("#0050").to_string(), "#0050");
+/// assert_eq!(Pointer::new("#0100").to_string(), "#0100");
 /// ```
-///
-/// # Note
-/// The [`Copy`] is derive for [`usize`] wrapper type.
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "json_schema", schemars(transparent))]
 #[cfg_attr(
@@ -40,52 +29,38 @@ use parse_display::Display;
     derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)
 )]
 #[repr(transparent)]
-#[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display)]
-#[display("#{0:04}")]
-pub struct Pointer(#[cfg_attr(feature = "json_schema", schemars(with = "String"))] usize);
+#[derive(Debug, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display)]
+#[display("{0}")]
+pub struct Pointer<'a>(
+    #[cfg_attr(feature = "json_schema", schemars(with = "String"))] Cow<'a, str>,
+);
 
-impl Pointer {
+impl<'a> Pointer<'a> {
     /// Creates a new `Pointer`
     #[inline]
-    pub const fn new(ptr: usize) -> Self {
+    pub const fn new(ptr: Cow<'a, str>) -> Self {
         Self(ptr)
     }
 
     /// Pointer(Class index) is null(`#0000`)?
     #[inline]
-    pub const fn is_null(&self) -> bool {
-        self.0 == 0
+    pub fn is_null(&self) -> bool {
+        self.0 == "#0000"
     }
 
     /// Get inner value.
     #[inline]
-    pub const fn get(&self) -> usize {
-        self.0
+    pub const fn get(&self) -> &Cow<'a, str> {
+        &self.0
     }
 }
 
-impl FromStr for Pointer {
-    type Err = &'static str;
-
+/// #0000
+/// #9999
+/// $sample$ <- new for Nemesis
+impl<'a> From<Cow<'a, str>> for Pointer<'a> {
     #[inline]
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(Self::new(
-            parse_int::parse(s.trim_start_matches('#'))
-                .map_err(|_err| "Invalid integer for Name")?,
-        ))
-    }
-}
-
-impl From<usize> for Pointer {
-    #[inline]
-    fn from(value: usize) -> Self {
+    fn from(value: Cow<'a, str>) -> Self {
         Self(value)
-    }
-}
-
-impl From<Pointer> for usize {
-    #[inline]
-    fn from(value: Pointer) -> Self {
-        value.0
     }
 }

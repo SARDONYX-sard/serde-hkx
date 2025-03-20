@@ -55,8 +55,8 @@ impl_serialize!(QsTransform, serialize_qstransform);
 impl_serialize!(Matrix4, serialize_matrix4);
 impl_serialize!(Transform, serialize_transform);
 
-impl_serialize!(Variant, serialize_variant);
-impl_serialize!(*Pointer, serialize_pointer);
+impl_serialize!(Variant<'_>, serialize_variant);
+impl_serialize!(Pointer<'_>, serialize_pointer);
 impl_serialize!(*Ulong, serialize_ulong);
 
 impl Serialize for &str {
@@ -122,7 +122,7 @@ macro_rules! impl_serialize_with_index_array {
     };
 }
 
-impl_serialize_with_index_array!((), bool, char, U8<'_>, U16<'_>, U32<'_>, U64<'_>, I8<'_>, I16<'_>, I32<'_>, I64<'_>, f32, Pointer, Ulong => serialize_primitive_element);
+impl_serialize_with_index_array!((), bool, char, U8<'_>, U16<'_>, U32<'_>, U64<'_>, I8<'_>, I16<'_>, I32<'_>, I64<'_>, f32, Pointer<'_>, Ulong => serialize_primitive_element);
 
 macro_rules! impl_serialize_vec {
     ($($ty:ty),+ $(,)? => $fn_name:tt) => {

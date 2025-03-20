@@ -192,7 +192,7 @@ pub trait Serializer {
     fn serialize_transform(self, v: &Transform) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Pointer` value.
-    fn serialize_pointer(self, v: Pointer) -> Result<Self::Ok, Self::Error>;
+    fn serialize_pointer(self, v: &Pointer) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Array` value.
     fn serialize_array(self, len: Option<usize>) -> Result<Self::SerializeSeq, Self::Error>;
