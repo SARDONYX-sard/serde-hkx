@@ -19,6 +19,7 @@
 //! Implement `Deserialize`
 
 use super::{Deserialize, Deserializer, Error, Visitor};
+use crate::de::Unexpected;
 use crate::de::{seed::InPlaceSeed, size_hint, SeqAccess};
 use crate::lib::*;
 use havok_types::*;
@@ -27,6 +28,7 @@ use havok_types::*;
 
 macro_rules! impl_deserialize {
     ($ty:ty, $visitor:tt, $de_method:tt) => {
+        // ty = U8<'de>
         impl<'de> Deserialize<'de> for $ty {
             fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
             where
@@ -34,7 +36,7 @@ macro_rules! impl_deserialize {
             {
                 struct InnerVisitor;
                 impl<'a> Visitor<'a> for InnerVisitor {
-                    type Value = $ty;
+                    type Value = $ty; // ty = U8<'a>
 
                     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
                         formatter.write_str(stringify!($ty))
@@ -58,16 +60,6 @@ impl_deserialize!((), visit_void, deserialize_void);
 impl_deserialize!(char, visit_char, deserialize_char);
 impl_deserialize!(bool, visit_bool, deserialize_bool);
 
-impl_deserialize!(i8, visit_int8, deserialize_int8);
-impl_deserialize!(i16, visit_int16, deserialize_int16);
-impl_deserialize!(i32, visit_int32, deserialize_int32);
-impl_deserialize!(i64, visit_int64, deserialize_int64);
-
-impl_deserialize!(u8, visit_uint8, deserialize_uint8);
-impl_deserialize!(u16, visit_uint16, deserialize_uint16);
-impl_deserialize!(u32, visit_uint32, deserialize_uint32);
-impl_deserialize!(u64, visit_uint64, deserialize_uint64);
-
 impl_deserialize!(f16, visit_half, deserialize_half);
 impl_deserialize!(f32, visit_real, deserialize_real);
 
@@ -82,7 +74,61 @@ impl_deserialize!(Transform, visit_transform, deserialize_transform);
 impl_deserialize!(Variant, visit_variant, deserialize_variant);
 impl_deserialize!(Pointer, visit_pointer, deserialize_pointer);
 
-////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+macro_rules! impl_deserialize_with_lifetime {
+    ($ty1:ty, $ty2:ty, $visitor:tt, $de_method:tt) => {
+        impl<'de: 'a, 'a> Deserialize<'de> for $ty1 {
+            fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+            where
+                D: Deserializer<'de>,
+            {
+                struct InnerVisitor;
+                impl<'a> Visitor<'a> for InnerVisitor {
+                    type Value = $ty2;
+
+                    fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                        formatter.write_str(stringify!($ty))
+                    }
+
+                    fn $visitor<E>(self, v: $ty2) -> Result<Self::Value, E>
+                    where
+                        E: Error,
+                    {
+                        Ok(v)
+                    }
+                }
+
+                Ok(tri!(deserializer.$de_method(InnerVisitor)))
+            }
+        }
+    };
+}
+
+impl_deserialize_with_lifetime!(I8<'de>, I8<'a>, visit_int8, deserialize_int8);
+impl_deserialize_with_lifetime!(I16<'de>, I16<'a>, visit_int16, deserialize_int16);
+impl_deserialize_with_lifetime!(I32<'de>, I32<'a>, visit_int32, deserialize_int32);
+impl_deserialize_with_lifetime!(I64<'de>, I64<'a>, visit_int64, deserialize_int64);
+
+impl_deserialize_with_lifetime!(U8<'de>, U8<'a>, visit_uint8, deserialize_uint8);
+impl_deserialize_with_lifetime!(U16<'de>, U16<'a>, visit_uint16, deserialize_uint16);
+impl_deserialize_with_lifetime!(U32<'de>, U32<'a>, visit_uint32, deserialize_uint32);
+impl_deserialize_with_lifetime!(U64<'de>, U64<'a>, visit_uint64, deserialize_uint64);
+
+impl_deserialize_with_lifetime!(
+    StringPtr<'de>,
+    StringPtr<'a>,
+    visit_stringptr,
+    deserialize_stringptr
+);
+impl_deserialize_with_lifetime!(
+    CString<'de>,
+    CString<'a>,
+    visit_cstring,
+    deserialize_cstring
+);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl<'de> Deserialize<'de> for Ulong {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
@@ -90,25 +136,31 @@ impl<'de> Deserialize<'de> for Ulong {
         D: Deserializer<'de>,
     {
         struct InnerVisitor;
-        impl Visitor<'_> for InnerVisitor {
+        impl<'a> Visitor<'a> for InnerVisitor {
             type Value = Ulong;
 
             fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
                 formatter.write_str("Ulong")
             }
 
-            fn visit_uint32<E>(self, v: u32) -> Result<Self::Value, E>
+            fn visit_uint32<E>(self, v: U32<'a>) -> Result<Self::Value, E>
             where
                 E: Error,
             {
-                Ok(Ulong::new(v as u64))
+                match v {
+                    U32::Number(n) => Ok(Ulong::new(n as u64)),
+                    unexpected => Err(Error::invalid_type(Unexpected::Uint32(unexpected), &self)),
+                }
             }
 
-            fn visit_uint64<E>(self, v: u64) -> Result<Self::Value, E>
+            fn visit_uint64<E>(self, v: U64) -> Result<Self::Value, E>
             where
                 E: Error,
             {
-                Ok(Ulong::new(v))
+                match v {
+                    U64::Number(n) => Ok(Ulong::new(n)),
+                    unexpected => Err(Error::invalid_type(Unexpected::Uint64(unexpected), &self)),
+                }
             }
         }
 
@@ -116,143 +168,97 @@ impl<'de> Deserialize<'de> for Ulong {
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
+macro_rules! seq_vec_impl_with_lifetime {
+    ($($ty:ty),+ $(,)? => $fn_name:tt,  $fn_name_seed:tt) => {
+        $(
+            #[cfg(any(feature = "std", feature = "alloc"))]
+            #[cfg_attr(docsrs, doc(cfg(any(feature = "std", feature = "alloc"))))]
+            impl<'de> Deserialize<'de> for Vec<$ty> {
+                fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+                where
+                    D: Deserializer<'de>,
+                {
+                    struct VecVisitor;
 
-impl<'de: 'a, 'a> Deserialize<'de> for CString<'a> {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        struct CStringVisitor;
-        impl<'a> Visitor<'a> for CStringVisitor {
-            type Value = CString<'a>;
+                    impl<'de> Visitor<'de> for VecVisitor {
+                        type Value = Vec<$ty>;
 
-            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-                formatter.write_str("a cstring")
-            }
+                        fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                            formatter.write_str("a sequence")
+                        }
 
-            fn visit_cstring<E>(self, v: CString<'a>) -> Result<Self::Value, E>
-            where
-                E: Error,
-            {
-                Ok(v)
-            }
-        }
+                        fn visit_array<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
+                        where
+                            A: SeqAccess<'de>,
+                        {
+                            let capacity = size_hint::cautious::<$ty>(seq.size_hint());
+                            let mut values = Vec::with_capacity(capacity);
 
-        Ok(tri!(deserializer.deserialize_cstring(CStringVisitor)))
-    }
-}
+                            while let Some(value) = tri!(seq.$fn_name()) {
+                                values.push(value);
+                            }
 
-////////////////////////////////////////////////////////////////////////////////
-
-impl<'de: 'a, 'a> Deserialize<'de> for StringPtr<'a> {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        struct StringPtrVisitor;
-        impl<'a> Visitor<'a> for StringPtrVisitor {
-            type Value = StringPtr<'a>;
-
-            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-                formatter.write_str("a stringptr")
-            }
-
-            fn visit_stringptr<E>(self, v: StringPtr<'a>) -> Result<Self::Value, E>
-            where
-                E: Error,
-            {
-                Ok(v)
-            }
-        }
-
-        Ok(tri!(deserializer.deserialize_stringptr(StringPtrVisitor)))
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-#[cfg(any(feature = "std", feature = "alloc"))]
-#[cfg_attr(docsrs, doc(cfg(any(feature = "std", feature = "alloc"))))]
-impl<'de> Deserialize<'de> for Vec<StringPtr<'de>> {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        struct VecVisitor;
-
-        impl<'de> Visitor<'de> for VecVisitor {
-            type Value = Vec<StringPtr<'de>>;
-
-            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-                formatter.write_str("a sequence")
-            }
-
-            fn visit_array<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
-            where
-                A: SeqAccess<'de>,
-            {
-                let capacity = size_hint::cautious::<StringPtr<'de>>(seq.size_hint());
-                let mut values = Vec::with_capacity(capacity);
-
-                while let Some(value) = tri!(seq.next_stringptr_element()) {
-                    values.push(value);
-                }
-
-                Ok(values)
-            }
-        }
-
-        let visitor = VecVisitor;
-        deserializer.deserialize_array(visitor)
-    }
-
-    fn deserialize_in_place<D>(deserializer: D, place: &mut Self) -> Result<(), D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        struct VecInPlaceVisitor<'a, 'de: 'a>(&'a mut Vec<StringPtr<'de>>);
-
-        impl<'a, 'de: 'a> Visitor<'de> for VecInPlaceVisitor<'a, 'de> {
-            type Value = ();
-
-            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-                formatter.write_str("a sequence")
-            }
-
-            fn visit_array<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
-            where
-                A: SeqAccess<'de>,
-            {
-                let hint = size_hint::cautious::<StringPtr<'de>>(seq.size_hint());
-                if let Some(additional) = hint.checked_sub(self.0.len()) {
-                    self.0.reserve(additional);
-                }
-
-                for i in 0..self.0.len() {
-                    let next = {
-                        let next_place = InPlaceSeed(&mut self.0[i]);
-                        tri!(seq.next_stringptr_element_seed(next_place))
-                    };
-                    if next.is_none() {
-                        self.0.truncate(i);
-                        return Ok(());
+                            Ok(values)
+                        }
                     }
+
+                    let visitor = VecVisitor;
+                    deserializer.deserialize_array(visitor)
                 }
 
-                while let Some(value) = tri!(seq.next_stringptr_element()) {
-                    self.0.push(value);
-                }
+                fn deserialize_in_place<D>(deserializer: D, place: &mut Self) -> Result<(), D::Error>
+                where
+                    D: Deserializer<'de>,
+                {
+                    struct VecInPlaceVisitor<'a, 'de: 'a>(&'a mut Vec<$ty>);
 
-                Ok(())
+                    impl<'a, 'de: 'a> Visitor<'de> for VecInPlaceVisitor<'a, 'de> {
+                        type Value = ();
+
+                        fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                            formatter.write_str("a sequence")
+                        }
+
+                        fn visit_array<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
+                        where
+                            A: SeqAccess<'de>,
+                        {
+                            let hint = size_hint::cautious::<$ty>(seq.size_hint());
+                            if let Some(additional) = hint.checked_sub(self.0.len()) {
+                                self.0.reserve(additional);
+                            }
+
+                            for i in 0..self.0.len() {
+                                let next = {
+                                    let next_place = InPlaceSeed(&mut self.0[i]);
+                                    tri!(seq.$fn_name_seed(next_place))
+                                };
+                                if next.is_none() {
+                                    self.0.truncate(i);
+                                    return Ok(());
+                                }
+                            }
+
+                            while let Some(value) = tri!(seq.$fn_name()) {
+                                self.0.push(value);
+                            }
+
+                            Ok(())
+                        }
+                    }
+
+                    deserializer.deserialize_array(VecInPlaceVisitor(place))
+                }
             }
-        }
-
-        deserializer.deserialize_array(VecInPlaceVisitor(place))
-    }
+        )*
+    };
 }
 
-////////////////////////////////////////////////////////////////////////////////
+seq_vec_impl_with_lifetime!(U8<'de>, U16<'de>, U32<'de>, U64<'de>, I8<'de>, I16<'de>, I32<'de>, I64<'de> => next_primitive_element, next_primitive_element_seed);
+seq_vec_impl_with_lifetime!(StringPtr<'de> => next_stringptr_element, next_stringptr_element_seed);
+seq_vec_impl_with_lifetime!(CString<'de> => next_cstring_element, next_cstring_element_seed);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 macro_rules! seq_vec_impl {
     ($($ty:ty),+ $(,)? => $fn_name:tt,  $fn_name_seed:tt) => {
@@ -342,10 +348,7 @@ macro_rules! seq_vec_impl {
     };
 }
 
-seq_vec_impl!(
-    (), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f16, f32, Pointer, Ulong
-    => next_primitive_element, next_primitive_element_seed
-);
+seq_vec_impl!((), bool, char, f16, f32, Pointer, Ulong => next_primitive_element, next_primitive_element_seed);
 seq_vec_impl!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => next_math_element, next_math_element_seed);
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -536,7 +539,7 @@ macro_rules! array_impls {
     }
 }
 
-array_impls!((), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f16, f32, Pointer, Ulong => next_primitive_element, next_primitive_element_seed);
+array_impls!((), bool, char, U8<'de>, U16<'de>, U32<'de>, U64<'de>, I8<'de>, I16<'de>, I32<'de>, I64<'de>, f16, f32, Pointer, Ulong => next_primitive_element, next_primitive_element_seed);
 array_impls!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => next_math_element, next_math_element_seed);
 
 impl<'de, T, const N: usize> Visitor<'de> for ArrayVisitor<[T; N]>

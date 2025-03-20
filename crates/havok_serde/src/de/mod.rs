@@ -16,10 +16,7 @@ mod impls;
 mod seed;
 mod size_hint;
 
-use havok_types::{
-    f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, StringPtr,
-    Transform, Ulong, Variant, Vector4,
-};
+use havok_types::*;
 
 use crate::lib::*;
 
@@ -195,28 +192,28 @@ pub enum Unexpected<'a> {
     Char(char),
 
     /// - C++ type: `hkInt8` (`signed char`)
-    Int8(i8),
+    Int8(I8<'a>),
 
     /// - C++ type: `hkUint8` (`unsigned char`)
-    Uint8(u8),
+    Uint8(U8<'a>),
 
     /// - C++ type: `hkInt16` (`signed short`)
-    Int16(i16),
+    Int16(I16<'a>),
 
     /// - C++ type: `hkUint16` (`unsigned short`)
-    Uint16(u16),
+    Uint16(U16<'a>),
 
     /// - C++ type: `hkInt32` (`signed int`)
-    Int32(i32),
+    Int32(I32<'a>),
 
     /// - C++ type: `hkUint32` (`unsigned int`)
-    Uint32(u32),
+    Uint32(U32<'a>),
 
     /// - C++ type: `hkInt64` (`signed long long`)
-    Int64(i64),
+    Int64(I64<'a>),
 
     /// - C++ type: `hkUint64` (`unsigned long long`)
-    Uint64(u64),
+    Uint64(U64<'a>),
 
     /// - C++ type: `hkReal` (`float`)
     Real(f32),
@@ -291,14 +288,14 @@ impl fmt::Display for Unexpected<'_> {
             Void => write!(formatter, "void"),
             Bool(b) => write!(formatter, "boolean `{}`", b),
             Char(c) => write!(formatter, "character `{}`", c),
-            Int8(i) => write!(formatter, "8-bit integer `{}`", i),
-            Uint8(i) => write!(formatter, "8-bit unsigned integer `{}`", i),
-            Int16(i) => write!(formatter, "16-bit integer `{}`", i),
-            Uint16(i) => write!(formatter, "16-bit unsigned integer `{}`", i),
-            Int32(i) => write!(formatter, "32-bit integer `{}`", i),
-            Uint32(i) => write!(formatter, "32-bit unsigned integer `{}`", i),
-            Int64(i) => write!(formatter, "64-bit integer `{}`", i),
-            Uint64(i) => write!(formatter, "64-bit unsigned integer `{}`", i),
+            Int8(ref i) => write!(formatter, "8-bit integer `{}`", i),
+            Uint8(ref i) => write!(formatter, "8-bit unsigned integer `{}`", i),
+            Int16(ref i) => write!(formatter, "16-bit integer `{}`", i),
+            Uint16(ref i) => write!(formatter, "16-bit unsigned integer `{}`", i),
+            Int32(ref i) => write!(formatter, "32-bit integer `{}`", i),
+            Uint32(ref i) => write!(formatter, "32-bit unsigned integer `{}`", i),
+            Int64(ref i) => write!(formatter, "64-bit integer `{}`", i),
+            Uint64(ref i) => write!(formatter, "64-bit unsigned integer `{}`", i),
             Real(f) => write!(formatter, "floating point `{}`", f),
             Vector4(ref v) => write!(formatter, "vector4 `{:?}`", v),
             Quaternion(ref q) => write!(formatter, "quaternion `{:?}`", q),
@@ -840,7 +837,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a i8.
     ///
     /// The default implementation fails with a type error.
-    fn visit_int8<E>(self, v: i8) -> Result<Self::Value, E>
+    fn visit_int8<E>(self, v: I8<'de>) -> Result<Self::Value, E>
     where
         E: Error,
     {
@@ -850,7 +847,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a u8.
     ///
     /// The default implementation fails with a type error.
-    fn visit_uint8<E>(self, v: u8) -> Result<Self::Value, E>
+    fn visit_uint8<E>(self, v: U8<'de>) -> Result<Self::Value, E>
     where
         E: Error,
     {
@@ -860,7 +857,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a i16.
     ///
     /// The default implementation fails with a type error.
-    fn visit_int16<E>(self, v: i16) -> Result<Self::Value, E>
+    fn visit_int16<E>(self, v: I16<'de>) -> Result<Self::Value, E>
     where
         E: Error,
     {
@@ -870,7 +867,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a u16.
     ///
     /// The default implementation fails with a type error.
-    fn visit_uint16<E>(self, v: u16) -> Result<Self::Value, E>
+    fn visit_uint16<E>(self, v: U16<'de>) -> Result<Self::Value, E>
     where
         E: Error,
     {
@@ -880,7 +877,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a i32.
     ///
     /// The default implementation fails with a type error.
-    fn visit_int32<E>(self, v: i32) -> Result<Self::Value, E>
+    fn visit_int32<E>(self, v: I32<'de>) -> Result<Self::Value, E>
     where
         E: Error,
     {
@@ -890,7 +887,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a u32.
     ///
     /// The default implementation fails with a type error.
-    fn visit_uint32<E>(self, v: u32) -> Result<Self::Value, E>
+    fn visit_uint32<E>(self, v: U32<'de>)-> Result<Self::Value, E>
     where
         E: Error,
     {
@@ -900,7 +897,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a i64.
     ///
     /// The default implementation fails with a type error.
-    fn visit_int64<E>(self, v: i64) -> Result<Self::Value, E>
+    fn visit_int64<E>(self, v: I64<'de>) -> Result<Self::Value, E>
     where
         E: Error,
     {
@@ -910,7 +907,7 @@ pub trait Visitor<'de>: Sized {
     /// The input contains a u64.
     ///
     /// The default implementation fails with a type error.
-    fn visit_uint64<E>(self, v: u64) -> Result<Self::Value, E>
+    fn visit_uint64<E>(self, v: U64<'de>) -> Result<Self::Value, E>
     where
         E: Error,
     {

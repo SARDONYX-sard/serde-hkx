@@ -4,10 +4,7 @@
 use crate::lib::*;
 
 use super::{Serialize, Serializer};
-use havok_types::{
-    f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, StringPtr,
-    Transform, Ulong, Variant, Vector4,
-};
+use havok_types::*;
 
 macro_rules! impl_serialize {
     (*$ty:ty, $fn_name:tt) => {
@@ -39,14 +36,14 @@ macro_rules! impl_serialize {
 impl_serialize!(*(), serialize_void);
 impl_serialize!(*char, serialize_char);
 impl_serialize!(*bool, serialize_bool);
-impl_serialize!(*i8, serialize_int8);
-impl_serialize!(*i16, serialize_int16);
-impl_serialize!(*i32, serialize_int32);
-impl_serialize!(*i64, serialize_int64);
-impl_serialize!(*u8, serialize_uint8);
-impl_serialize!(*u16, serialize_uint16);
-impl_serialize!(*u32, serialize_uint32);
-impl_serialize!(*u64, serialize_uint64);
+impl_serialize!(I8<'_>, serialize_int8);
+impl_serialize!(I16<'_>, serialize_int16);
+impl_serialize!(I32<'_>, serialize_int32);
+impl_serialize!(I64<'_>, serialize_int64);
+impl_serialize!(U8<'_>, serialize_uint8);
+impl_serialize!(U16<'_>, serialize_uint16);
+impl_serialize!(U32<'_>, serialize_uint32);
+impl_serialize!(U64<'_>, serialize_uint64);
 impl_serialize!(*f16, serialize_half);
 impl_serialize!(*f32, serialize_real);
 
@@ -125,7 +122,7 @@ macro_rules! impl_serialize_with_index_array {
     };
 }
 
-impl_serialize_with_index_array!((), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f16, f32, Pointer, Ulong => serialize_primitive_element);
+impl_serialize_with_index_array!((), bool, char, U8<'_>, U16<'_>, U32<'_>, U64<'_>, I8<'_>, I16<'_>, I32<'_>, I64<'_>, f32, Pointer, Ulong => serialize_primitive_element);
 
 macro_rules! impl_serialize_vec {
     ($($ty:ty),+ $(,)? => $fn_name:tt) => {
