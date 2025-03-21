@@ -39,7 +39,7 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> Result<String> {
             default_impl = quote! {
                 impl Default for Classes<'_> {
                     fn default() -> Self {
-                        Self::#class_name_ident(#class_name_ident::default())
+                        Self::#class_name_ident(Box::new(#class_name_ident::default()))
                     }
                 }
             };
@@ -47,13 +47,13 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> Result<String> {
 
         enum_variants.push(quote! {
             #serde_borrow_attr
-            #class_name_ident(#class_name_ident #lifetime)
+            #class_name_ident(Box<#class_name_ident #lifetime>)
         });
 
         enum_match_variants.push(quote! { Classes::#class_name_ident });
 
         de_matcher.push(quote! {
-            #class_name => Ok(Classes::#class_name_ident(map.next_value()?))
+            #class_name => Ok(Classes::#class_name_ident(Box::new(map.next_value()?)))
         });
     }
 
