@@ -4,9 +4,9 @@
   "signature": "0x27c6cafa",
   "size_x86": 36,
   "size_x86_64": 36,
-  "parent_has_ref": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_ref": false,
+  "has_ref": true,
   "members": [
     {
       "name": "quantizationBits",

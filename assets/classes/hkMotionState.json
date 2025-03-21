@@ -4,9 +4,9 @@
   "signature": "0x5797386e",
   "size_x86": 176,
   "size_x86_64": 176,
-  "parent_has_ref": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_ref": false,
+  "has_ref": true,
   "members": [
     {
       "name": "transform",

@@ -4,9 +4,9 @@
   "signature": "0x29efee59",
   "size_x86": 64,
   "size_x86_64": 64,
-  "parent_has_ref": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_ref": false,
+  "has_ref": true,
   "members": [
     {
       "name": "index",

@@ -4,9 +4,9 @@
   "signature": "0xd72b6fd0",
   "size_x86": 84,
   "size_x86_64": 104,
-  "parent_has_ref": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_ref": false,
+  "has_ref": true,
   "members": [
     {
       "name": "vectorData",

@@ -4,7 +4,7 @@
   "signature": "0xe9f9578a",
   "size_x86": 4,
   "size_x86_64": 8,
-  "parent_has_ref": false,
+  "parent_has_ref": true,
   "vtable": false,
   "has_ref": true,
   "members": [

@@ -5,7 +5,7 @@
   "size_x86": 12,
   "size_x86_64": 16,
   "parent": "hkpMeshMaterial",
-  "parent_has_ref": false,
+  "parent_has_ref": true,
   "vtable": false,
   "has_ref": true,
   "members": [

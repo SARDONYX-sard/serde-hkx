@@ -5,7 +5,7 @@
   "size_x86": 32,
   "size_x86_64": 56,
   "parent": "hkReferencedObject",
-  "parent_has_ref": false,
+  "parent_has_ref": true,
   "vtable": true,
   "has_ref": true,
   "members": [

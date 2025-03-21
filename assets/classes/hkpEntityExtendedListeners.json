@@ -4,9 +4,9 @@
   "signature": "0xf557023c",
   "size_x86": 16,
   "size_x86_64": 32,
-  "parent_has_ref": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_ref": false,
+  "has_ref": true,
   "members": [
     {
       "name": "activationListeners",

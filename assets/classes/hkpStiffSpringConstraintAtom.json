@@ -5,9 +5,9 @@
   "size_x86": 8,
   "size_x86_64": 8,
   "parent": "hkpConstraintAtom",
-  "parent_has_ref": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_ref": false,
+  "has_ref": true,
   "members": [
     {
       "name": "length",

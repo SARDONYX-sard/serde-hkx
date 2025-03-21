@@ -4,7 +4,7 @@
   "signature": "0x6cb92c76",
   "size_x86": 16,
   "size_x86_64": 32,
-  "parent_has_ref": false,
+  "parent_has_ref": true,
   "vtable": false,
   "has_ref": true,
   "enums": [
