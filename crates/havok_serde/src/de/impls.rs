@@ -549,7 +549,7 @@ macro_rules! array_impls {
     }
 }
 
-array_impls!((), bool, char, U8<'de>, U16<'de>, U32<'de>, U64<'de>, I8<'de>, I16<'de>, I32<'de>, I64<'de>, f16, f32, Ulong => next_primitive_element, next_primitive_element_seed);
+array_impls!((), bool, char, U8<'de>, U16<'de>, U32<'de>, U64<'de>, I8<'de>, I16<'de>, I32<'de>, I64<'de>, f16, f32, Ulong, Pointer<'de> => next_primitive_element, next_primitive_element_seed);
 array_impls!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => next_math_element, next_math_element_seed);
 
 impl<'de, T, const N: usize> Visitor<'de> for ArrayVisitor<[T; N]>

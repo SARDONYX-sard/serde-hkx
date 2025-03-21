@@ -85,7 +85,7 @@ pub mod __private;
 pub use de::{Deserialize, Deserializer};
 pub use ser::Serialize;
 
-use havok_types::Signature;
+use havok_types::{Pointer, Signature};
 use lib::*;
 
 /// Trait whether it is Havok Class or not.
@@ -101,5 +101,5 @@ pub trait HavokClass {
     fn signature(&self) -> Signature;
 
     /// Get dependencies class of indexes to do topological sort.
-    fn deps_indexes(&self) -> Vec<Cow<'_, str>>;
+    fn deps_indexes(&self) -> Vec<&Pointer<'_>>;
 }

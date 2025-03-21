@@ -17,17 +17,14 @@ pub(super) fn member_to_rust_type(member: &Member, class_name: &str) -> Result<T
         name,
         class_ref,
         enum_ref,
-        has_ref,
+        // has_ref,
         vtype,
         vsubtype,
         arrsize,
         ..
     } = member;
 
-    let lifetime = match has_ref {
-        true => quote! { <'a> },
-        false => quote! {},
-    };
+    let lifetime = quote! { <'a> }; // struct lifetime.
 
     let field_type = match member.vtype {
         TypeKind::Struct => {

@@ -78,13 +78,17 @@ fn generate_and_write_code<'a>(
         .par_iter()
         .map(|(class_name, class)| {
             let file_name = format!("{class_name}_");
+
+            // if matches!(
+            //     class_name.as_str(),
+            //     "hkaBone" | "hkColor" | "hkbRoleAttribute" | "hkAabbUint32"
+            // ) {
             let output_file = class_out_dir.join(format!("{file_name}.rs"));
             let output_file = output_file.to_string_lossy();
-
             tracing::debug!(?output_file);
-
             let rust_code = prettyplease::unparse(&rust_gen::from_cpp_class(class, class_map)?);
             std::fs::write(output_file.as_ref(), rust_code)?;
+            // }
 
             Ok((class_name, class.has_ref))
         })

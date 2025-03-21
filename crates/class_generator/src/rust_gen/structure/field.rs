@@ -42,7 +42,7 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> Result<TokenStream
             | TypeKind::Int64
             | TypeKind::Uint64 => {
                 quote! {
-                    #[educe(Default = [0; #arrsize])]
+                    #[educe(Default(expression = core::array::from_fn(|_idx| Default::default())))]
                 }
             }
             _ => {

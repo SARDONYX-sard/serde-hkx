@@ -1346,7 +1346,7 @@ pub trait MapAccess<'de> {
     type Error: Error;
 
     /// Get this class pointer name (e.g. `Pointer::new(1`)
-    fn class_ptr(&mut self) -> Option<Pointer>;
+    fn class_ptr(&mut self) -> Option<Pointer<'de>>;
 
     /// - Skip reading the current position of binary data by pad minutes.
     /// - The XML deserializer does nothing.
@@ -1496,7 +1496,7 @@ where
     type Error = A::Error;
 
     #[inline]
-    fn class_ptr(&mut self) -> Option<Pointer> {
+    fn class_ptr(&mut self) -> Option<Pointer<'de>> {
         (**self).class_ptr()
     }
 

@@ -26,8 +26,9 @@ use parse_display::Display;
 #[cfg_attr(feature = "json_schema", schemars(transparent))]
 #[cfg_attr(
     feature = "serde",
-    derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)
+    derive(serde_with::SerializeDisplay, serde::Deserialize)
 )]
+#[cfg_attr(feature = "serde", serde(transparent))]
 #[repr(transparent)]
 #[derive(Debug, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display)]
 #[display("{0}")]
@@ -64,3 +65,33 @@ impl<'a> From<Cow<'a, str>> for Pointer<'a> {
         Self(value)
     }
 }
+
+// #[cfg(feature = "serde")]
+// impl<'de: 'a, 'a> serde::Deserialize<'de> for Pointer<'a> {
+//     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+//     where
+//         D: serde::Deserializer<'de>,
+//     {
+//         struct PointerVisitor;
+
+//         impl<'de> serde::de::Visitor<'de> for PointerVisitor {
+//             type Value = Pointer<'de>;
+
+//             fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+//                 formatter.write_str("Pointer with a string starting with '#' or '$'")
+//             }
+
+//             fn visit_borrowed_str<E>(self, value: &'de str) -> Result<Self::Value, E>
+//             where
+//                 E: serde::de::Error,
+//             {
+//                 if value.starts_with('#') || value.starts_with('$') {
+//                     Ok(Pointer::new(Cow::Borrowed(value)))
+//                 } else {
+//                     Err(E::custom(format!("invalid pointer format: {}", value)))
+//                 }
+//             }
+//         }
+//         deserializer.deserialize_str(PointerVisitor)
+//     }
+// }

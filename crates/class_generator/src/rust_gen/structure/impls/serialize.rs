@@ -17,10 +17,7 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let class_name = syn::Ident::new(name, proc_macro2::Span::call_site());
     let fields = impl_serialize_fields(class, class_map);
     let deps_class_indexes = deps_class_indexes_token(&class.name, class_map);
-    let lifetime = match class.has_ref {
-        true => quote! { <'a> },
-        false => quote! {},
-    };
+    let lifetime = quote! { <'a> };
 
     quote::quote! {
         const _: () = {
@@ -38,7 +35,7 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
                 }
 
                 #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-                fn deps_indexes(&self) -> Vec<usize> {
+                fn deps_indexes(&self) -> Vec<&Pointer<'_>>{
                     let mut v = Vec::new();
                     #(#deps_class_indexes;)*
                     v
@@ -49,7 +46,7 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
                 fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
                     where S: _serde::ser::Serializer
                 {
-                    let class_meta = self.__ptr.map(|name| (name, _serde::__private::Signature::new(#hex_signature)));
+                    let class_meta = self.__ptr.as_ref().map(|name| (name, _serde::__private::Signature::new(#hex_signature)));
                     let mut serializer = __serializer.serialize_struct(#name, class_meta, (#size_x86, #size_x64))?;
                     #(#fields)*
                     serializer.end()
@@ -271,7 +268,7 @@ fn deps_class_indexes_token(class_name: &str, classes_map: &ClassMap) -> Vec<Tok
                 {
                     let parent_ident = n_time_parent_ident(parent_depth);
                     let member_name = to_rust_field_ident(&member.name);
-                    quote! {  v.extend(self #parent_ident.#member_name.iter().map(|ptr| ptr.get())) }
+                    quote! {  v.extend(self #parent_ident.#member_name.iter()) }
                 }
 
                 // struct array(get ptr of fields)
@@ -281,7 +278,7 @@ fn deps_class_indexes_token(class_name: &str, classes_map: &ClassMap) -> Vec<Tok
                     let parent_ident = n_time_parent_ident(parent_depth);
                     let member_name = to_rust_field_ident(&member.name);
                     quote! {
-                        v.extend(self #parent_ident.#member_name.iter().flat_map(|class| class.deps_indexes()).collect::<Vec<usize>>())
+                        v.extend(self #parent_ident.#member_name.iter().flat_map(|class| class.deps_indexes()).collect::<Vec<&Pointer<'_>>>())
                     }
                 }
 
@@ -295,7 +292,7 @@ fn deps_class_indexes_token(class_name: &str, classes_map: &ClassMap) -> Vec<Tok
                 TypeKind::Pointer => {
                     let parent_ident = n_time_parent_ident(parent_depth);
                     let member_name = to_rust_field_ident(&member.name);
-                    quote! { v.push(self #parent_ident.#member_name.get()) }
+                    quote! { v.push(&self #parent_ident.#member_name) }
                 }
 
                 _ => continue,

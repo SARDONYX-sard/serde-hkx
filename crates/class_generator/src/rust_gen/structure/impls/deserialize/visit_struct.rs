@@ -51,7 +51,7 @@ pub fn gen(class: &Class, classes_map: &ClassMap) -> Result<TokenStream> {
         });
 
         let default_value = if let 33.. = arrsize {
-            quote! { [Default::default(); #arrsize] }
+            quote! { core::array::from_fn(|_idx| Default::default()) }
         } else {
             quote! { Default::default() }
         };
@@ -126,7 +126,7 @@ fn create_struct<'a>(class: &'a Class<'a>) -> TokenStream {
     let mut fields = Vec::new();
     let mut has_skip_once = false; // All fields whose serialize is skipped are made to use `Default::default`.
 
-    fields.push(quote! { __ptr });
+    fields.push(quote! { __ptr: __ptr.clone() });
     if class.parent.is_some() {
         fields.push(quote! { parent });
     };

@@ -203,7 +203,7 @@ pub trait Serializer {
     fn serialize_struct(
         self,
         name: &'static str,
-        class_meta: Option<(Pointer, Signature)>,
+        class_meta: Option<(&Pointer, Signature)>,
         sizes: (u64, u64),
     ) -> Result<Self::SerializeStruct, Self::Error>;
 

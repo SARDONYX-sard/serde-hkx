@@ -13,6 +13,12 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> Result<String> {
 
     let mut default_impl = quote! {};
     for (index, (class_name, has_string)) in class_index_map.iter().enumerate() {
+        // if !matches!(
+        //     class_name.as_str(),
+        //     "hkaBone" | "hkColor" | "hkbRoleAttribute" | "hkAabbUint32"
+        // ) {
+        //     continue;
+        // }
         class_names.push(class_name);
 
         let class_name_ident = quote::format_ident!("{class_name}");
@@ -93,7 +99,7 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> Result<String> {
                     }
                 }
 
-                fn deps_indexes(&self) -> Vec<usize> {
+                fn deps_indexes(&self) -> Vec<&havok_types::Pointer<'_>> {
                     match &self {
                         #(#enum_match_variants(class) => class.deps_indexes(),)*
                     }
