@@ -5,6 +5,7 @@ use crate::{
     tests::{diff, ClassMap},
     to_bytes, to_string, HavokSort as _,
 };
+use havok_types::Pointer;
 use pretty_assertions::assert_eq;
 use winnow::Parser;
 
@@ -106,7 +107,8 @@ fn should_reproduce_xml() -> Result<()> {
     let bytes_to_xml = || {
         let mut actual_classes: ClassMap = from_bytes(bytes)?;
         let top_ptr = actual_classes.sort_for_xml()?;
-        Result::Ok(to_string(&actual_classes, top_ptr)?)
+        let top_ptr: Pointer<'static> = Pointer::new(top_ptr).to_static();
+        Result::Ok(to_string(&actual_classes, &top_ptr)?)
     };
 
     let actual = match bytes_to_xml() {

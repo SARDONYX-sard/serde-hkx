@@ -9,7 +9,7 @@ use self::trait_impls::{Align as _, ClassNamesWriter, ClassStartsMap};
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
-    Result, UnsupportedPtrSizeSnafu,
+    NotFoundEventIdSnafu, NotFoundVariableIdSnafu, Result, UnsupportedPtrSizeSnafu,
 };
 use byteorder::{BigEndian, ByteOrder, LittleEndian, WriteBytesExt as _};
 use havok_serde::ser::{Serialize, Serializer};
@@ -149,6 +149,9 @@ pub struct ByteSerializer {
     /// Bytes
     output: Cursor<Vec<u8>>,
 
+    event_id_map: HashMap<String, usize>,
+    variable_id_map: HashMap<String, usize>,
+
     /// This is cached to find the relative position of the binary.
     abs_data_offset: u32,
 
@@ -180,7 +183,7 @@ pub struct ByteSerializer {
     /// A map that holds the src of global_fixups until the dst of virtual_fixups is known.
     /// -   key: Starting point of the binary for which the pointer class write is requested.
     /// - value: Unique class pointer.(e.g. XML: #0050 -> 50)
-    global_fixups_ptr_src: IndexMap<u32, Pointer>,
+    global_fixups_ptr_src: IndexMap<u32, Pointer<'static>>,
     /// The `global_fixup.dst` == `virtual_fixup.src`.
     ///
     /// Therefore, the write start position must be retained.
@@ -191,7 +194,7 @@ pub struct ByteSerializer {
     /// # Note
     /// - This is used as a key since no duplicate ptr is required at the same relative position.
     ///   The ptr may be shared-referenced and cannot be keyed.
-    virtual_fixups_ptr_src: HashMap<Pointer, u32>,
+    virtual_fixups_ptr_src: HashMap<Pointer<'static>, u32>,
     /// Index of the contents section.(To write `global_fixups` index)
     ///
     /// It is usually `2` and refers to the index of `__data__`.
@@ -260,7 +263,10 @@ impl ByteSerializer {
                     self.output.write_u32::<BigEndian>(dst)?; // dst(virtual_fixup.dst)
                 }
             } else {
-                return MissingGlobalFixupClassSnafu { ptr: *ptr }.fail();
+                return MissingGlobalFixupClassSnafu {
+                    ptr: ptr.to_static(),
+                }
+                .fail();
             }
         }
         Ok(())
@@ -423,15 +429,36 @@ impl ByteSerializer {
 
 /// Endianness and a common write process that takes into account whether the array is being serialized or not.
 macro_rules! impl_serialize_primitive {
-    ($method:ident, $value_type:ty, $write:ident) => {
-        #[inline]
-        fn $method(self, v: $value_type) -> Result<Self::Ok, Self::Error> {
-            match self.is_little_endian {
-                true => self.output.$write::<LittleEndian>(v),
-                false => self.output.$write::<BigEndian>(v),
-            }?;
-            Ok(())
-        }
+    ($($serialize_fn:ident, $write:ident => ($ty:ty, $cast_ty:ty, $num:path, $eid:path, $vid:path)),+ $(,)?) => {
+        $(
+            #[inline]
+            fn $serialize_fn(self, v: &$ty) -> Result<Self::Ok> {
+                let v = match v {
+                    $num(n) => *n,
+                    $eid(id) => {
+                        let n = tri!(self.event_id_map.get(id.as_ref()).ok_or_else(||
+                            NotFoundEventIdSnafu {
+                                event_id: id.to_string(),
+                            }.build()
+                        ));
+                        *n as $cast_ty
+                    },
+                    $vid(id) => {
+                        let n = tri!(self.variable_id_map.get(id.as_ref()).ok_or_else(||
+                            NotFoundVariableIdSnafu {
+                                variable_id: id.to_string(),
+                            }.build()
+                        ));
+                        *n as $cast_ty
+                    },
+                };
+                match self.is_little_endian {
+                    true => self.output.$write::<LittleEndian>(v),
+                    false => self.output.$write::<BigEndian>(v),
+                }?;
+                Ok(())
+            }
+        )*
     };
 }
 
@@ -463,37 +490,92 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
     #[inline]
     fn serialize_bool(self, v: bool) -> Result<Self::Ok, Self::Error> {
-        self.serialize_uint8(v as u8)
+        self.serialize_uint8(&U8::Number(v as u8))
     }
 
     #[inline]
     /// Assume that the characters are ASCII characters`c_char`. In that case, i8 is used to fit into 128 characters.
     fn serialize_char(self, v: char) -> Result<Self::Ok, Self::Error> {
-        self.serialize_int8(v as i8)
+        self.serialize_int8(&I8::Number(v as i8))
     }
 
     #[inline]
-    fn serialize_int8(self, v: i8) -> Result<Self::Ok, Self::Error> {
+    fn serialize_int8(self, v: &I8) -> Result<Self::Ok, Self::Error> {
+        let v = match v {
+            I8::Number(n) => *n,
+            I8::EventId(event_id) => {
+                let n = self.event_id_map.get(event_id.as_ref()).ok_or_else(|| {
+                    NotFoundEventIdSnafu {
+                        event_id: event_id.to_string(),
+                    }
+                    .build()
+                })?;
+                *n as i8
+            }
+            I8::VariableId(variable_id) => {
+                let n = tri!(self
+                    .variable_id_map
+                    .get(variable_id.as_ref())
+                    .ok_or_else(|| {
+                        NotFoundVariableIdSnafu {
+                            variable_id: variable_id.to_string(),
+                        }
+                        .build()
+                    }));
+                *n as i8
+            }
+        };
         self.output.write_i8(v)?;
         Ok(())
     }
 
     #[inline]
-    fn serialize_uint8(self, v: u8) -> Result<Self::Ok, Self::Error> {
+    fn serialize_uint8(self, v: &U8) -> Result<Self::Ok, Self::Error> {
+        let v = match v {
+            U8::Number(n) => *n,
+            U8::EventId(event_id) => {
+                let n = self.event_id_map.get(event_id.as_ref()).ok_or_else(|| {
+                    NotFoundEventIdSnafu {
+                        event_id: event_id.to_string(),
+                    }
+                    .build()
+                })?;
+                *n as u8
+            }
+            U8::VariableId(variable_id) => {
+                let n = tri!(self
+                    .variable_id_map
+                    .get(variable_id.as_ref())
+                    .ok_or_else(|| {
+                        NotFoundVariableIdSnafu {
+                            variable_id: variable_id.to_string(),
+                        }
+                        .build()
+                    }));
+                *n as u8
+            }
+        };
         self.output.write_u8(v)?;
         Ok(())
     }
 
-    impl_serialize_primitive!(serialize_int16, i16, write_i16);
-    impl_serialize_primitive!(serialize_uint16, u16, write_u16);
+    impl_serialize_primitive![
+        serialize_int16 , write_i16 => (I16, i16 , I16::Number, I16::EventId, I16::VariableId),
+        serialize_uint16, write_u16 => (U16, u16, U16::Number, U16::EventId, U16::VariableId),
+        serialize_int32 , write_i32 => (I32, i32 , I32::Number, I32::EventId, I32::VariableId),
+        serialize_uint32, write_u32 => (U32, u32, U32::Number, U32::EventId, U32::VariableId),
+        serialize_int64 , write_i64 => (I64, i64 , I64::Number, I64::EventId, I64::VariableId),
+        serialize_uint64, write_u64 => (U64, u64, U64::Number, U64::EventId, U64::VariableId),
+    ];
 
-    impl_serialize_primitive!(serialize_int32, i32, write_i32);
-    impl_serialize_primitive!(serialize_uint32, u32, write_u32);
-
-    impl_serialize_primitive!(serialize_int64, i64, write_i64);
-    impl_serialize_primitive!(serialize_uint64, u64, write_u64);
-
-    impl_serialize_primitive!(serialize_real, f32, write_f32);
+    #[inline]
+    fn serialize_real(self, v: f32) -> std::result::Result<Self::Ok, Self::Error> {
+        match self.is_little_endian {
+            true => self.output.write_f32::<LittleEndian>(v),
+            false => self.output.write_f32::<BigEndian>(v),
+        }?;
+        Ok(())
+    }
 
     impl_serialize_math!(serialize_vector4, Vector4);
     impl_serialize_math!(serialize_quaternion, Quaternion);
@@ -505,7 +587,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
     // Register data to be written to global_fixups.
     // Until the data in virtual_fixups is determined (until all C++ classes are written), temporarily write to `IndexMap` as the value of dst is unknown.
-    fn serialize_pointer(self, ptr: Pointer) -> Result<Self::Ok, Self::Error> {
+    fn serialize_pointer(self, ptr: &Pointer) -> Result<Self::Ok, Self::Error> {
         #[allow(clippy::needless_else)]
         if !ptr.is_null() {
             // Write global_fixup src(write start) position.
@@ -515,7 +597,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
                 "Insert `global_fixup.src`({start}:{start:#x}/abs {:#x}): {ptr}",
                 self.output.position()
             );
-            self.global_fixups_ptr_src.insert(start, ptr);
+            self.global_fixups_ptr_src.insert(start, ptr.to_static());
         } else {
             #[cfg(feature = "tracing")]
             tracing::debug!("Skip global_fixup.src writing, because it's null ptr.");
@@ -537,7 +619,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     fn serialize_struct(
         self,
         name: &'static str,
-        class_meta: Option<(Pointer, Signature)>,
+        class_meta: Option<(&Pointer, Signature)>,
         sizes: (u64, u64),
     ) -> Result<Self::SerializeStruct, Self::Error> {
         let size = if self.is_x86 { sizes.0 } else { sizes.1 };
@@ -554,7 +636,8 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
             let virtual_src = self.relative_position()?;
             self.write_virtual_fixups_pair(name, virtual_src)?; // Ok, `virtual_fixup` is known.
-            self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // Backup to write `global_fixups`
+            self.virtual_fixups_ptr_src
+                .insert(ptr.to_static(), virtual_src); // Backup to write `global_fixups`
 
             // The data pointed to by the pointer (`T* m_data`) must first be aligned 16 bytes before it is written.
             let last_local_dst = align!(virtual_fixup_abs + size, 16_u64);
@@ -575,8 +658,8 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
     #[inline]
     fn serialize_variant(self, v: &Variant) -> Result<Self::Ok, Self::Error> {
-        self.serialize_pointer(v.object)?;
-        self.serialize_pointer(v.class)
+        self.serialize_pointer(&v.object)?;
+        self.serialize_pointer(&v.class)
     }
 
     #[inline]
@@ -587,8 +670,8 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     #[inline]
     fn serialize_ulong(self, v: Ulong) -> Result<Self::Ok, Self::Error> {
         match self.is_x86 {
-            true => self.serialize_uint32(v.get() as u32),
-            false => self.serialize_uint64(v.get()),
+            true => self.serialize_uint32(&U32::Number(v.get() as u32)),
+            false => self.serialize_uint64(&U64::Number(v.get())),
         }
     }
 
@@ -689,8 +772,8 @@ mod tests {
                 m_flags: FlagBits::FLAG_IGNORE_FROM_WORLD_FROM_MODEL, // [1, 0]
                 m_endMode: EndMode::END_MODE_CAP_DURATION_AT_END_OF_FROM_GENERATOR, // [2]
                 m_blendCurve: BlendCurve::BLEND_CURVE_LINEAR,         // [1]
-                m_fromGenerator: Pointer::new(0),                     // 0 fill 8bytes(x86_64)
-                m_toGenerator: Pointer::new(0),                       // 0 fill 8bytes(x86_64)
+                m_fromGenerator: Pointer::null(),                     // 0 fill 8bytes(x86_64)
+                m_toGenerator: Pointer::null(),                       // 0 fill 8bytes(x86_64)
                 m_characterPoseAtBeginningOfTransition: Vec::new(),   // hkArray 16bytes
                 m_timeRemaining: 2.0,                                 // - f32 bits: 0x40000000
                 m_timeInTransition: 1.0,                              // - f32 bits: 0x3F800000
@@ -754,7 +837,7 @@ mod tests {
 
         partial_parse_assert(
             hkbModifierGenerator {
-                __ptr: Some(Pointer::new(1)), // Root class must have a pointer.
+                __ptr: Some(1.into()), // Root class must have a pointer.
                 parent: hkbGenerator {
                     __ptr: None,
                     parent: havok_classes::hkbNode {
@@ -762,13 +845,13 @@ mod tests {
                         parent: Default::default(),
                         m_userData: Ulong::new(1),
                         m_name: "NodeName".into(),
-                        m_id: 0,
-                        m_cloneState: 0,
+                        m_id: I16::Number(0),
+                        m_cloneState: I8::Number(0),
                         m_padNode: [false],
                     },
                 },
-                m_modifier: Pointer::new(0),
-                m_generator: Pointer::new(0),
+                m_modifier: 0.into(),
+                m_generator: 0.into(),
             },
             &expected,
             Some(ser),

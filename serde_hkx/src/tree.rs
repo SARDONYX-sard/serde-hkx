@@ -1,5 +1,5 @@
 /// Trait to create a state transition tree
-use crate::HavokSort as _;
+use crate::{ClassMapKey, GenericClassMap, HavokSort as _};
 use havok_serde::HavokClass;
 use havok_types::Pointer;
 use indexmap::IndexMap;
@@ -14,35 +14,40 @@ pub trait HavokTree {
 }
 
 #[derive(Debug)]
-struct Node {
+struct Node<'a> {
     name: String,
-    deps: Vec<usize>,
+    deps: Vec<&'a Pointer<'a>>,
 }
 
-impl Node {
+impl<'a> Node<'a> {
     #[inline]
-    const fn new(name: String, deps: Vec<usize>) -> Self {
+    const fn new(name: String, deps: Vec<&'a Pointer<'a>>) -> Self {
         Self { name, deps }
     }
 }
 
+// 30 ~ fn print_node<'a>(
+// 31 |     nodes: &IndexMap<ClassMapKey, Node>,
+// 32 ~     idx: ClassMapKey<'a>,
+// 33 |     depth: usize,
+// 34 ~     visited: &mut HashMap<ClassMapKey<'a>, usize>
 #[allow(clippy::too_many_arguments)]
-fn print_node(
-    nodes: &IndexMap<usize, Node>,
-    idx: usize,
+fn print_node<'a>(
+    nodes: &IndexMap<ClassMapKey<'a>, Node<'a>>,
+    idx: ClassMapKey<'a>,
     depth: usize,
-    visited: &mut HashMap<usize, usize>,
+    visited: &mut HashMap<ClassMapKey<'a>, usize>,
     last_children: &mut Vec<bool>,
     result: &mut String,
-    path: &mut Vec<usize>,
-    already_visited: &mut HashMap<usize, bool>,
+    path: &mut Vec<ClassMapKey<'a>>,
+    already_visited: &mut HashMap<ClassMapKey<'a>, bool>,
 ) {
     if path.contains(&idx) {
         // Cycle detected
-        let cycle_start = path.iter().position(|&x| x == idx).unwrap_or_default();
+        let cycle_start = path.iter().position(|x| *x == idx).unwrap_or_default();
         let cycle_path: Vec<String> = path[cycle_start..]
             .iter()
-            .map(|&i| nodes[&i].name.clone())
+            .map(|i| nodes[i].name.clone())
             .collect();
 
         result.push_str(&format!(
@@ -63,10 +68,10 @@ fn print_node(
         return;
     }
 
-    let visit_count = visited.entry(idx).or_insert(0);
+    let visit_count = visited.entry(idx.clone()).or_insert(0);
     *visit_count += 1;
 
-    let is_already_visited = already_visited.entry(idx).or_insert(false);
+    let is_already_visited = already_visited.entry(idx.clone()).or_insert(false);
 
     if !*is_already_visited {
         *is_already_visited = true;
@@ -114,15 +119,15 @@ fn print_node(
     }
 
     // Add the current node to the path
-    path.push(idx);
+    path.push(idx.clone());
 
     // Print visited tree dependencies
     if let Some(node) = nodes.get(&idx) {
-        for (i, &dep) in node.deps.iter().enumerate() {
+        for (i, dep) in node.deps.iter().enumerate() {
             last_children.push(i == node.deps.len() - 1);
             print_node(
                 nodes,
-                dep,
+                Pointer::clone(dep).into_inner(),
                 depth + 1,
                 visited,
                 last_children,
@@ -138,25 +143,25 @@ fn print_node(
     path.pop();
 }
 
-impl<V> HavokTree for IndexMap<usize, V>
+impl<V> HavokTree for GenericClassMap<'_, V>
 where
     V: HavokClass,
 {
     fn tree_for_bytes(&mut self) -> String {
         self.sort_for_bytes();
 
-        let mut nodes: IndexMap<usize, Node> = IndexMap::new();
-        for (&index, class) in self.iter() {
+        let mut nodes: IndexMap<ClassMapKey, Node> = IndexMap::new();
+        for (index, class) in self.iter() {
             let non_null_deps = class
                 .deps_indexes()
                 .into_iter()
-                .filter(|&index| index != 0)
+                .filter(|index| !index.is_null())
                 .collect();
 
             nodes.insert(
-                index,
+                index.clone(),
                 Node::new(
-                    format!("{}({})", class.name(), Pointer::new(index)),
+                    format!("{}({})", class.name(), Pointer::new(index.clone())),
                     non_null_deps,
                 ),
             );
@@ -166,11 +171,11 @@ where
         let mut result = String::new();
         let mut already_visited = HashMap::new();
         let mut path = Vec::new();
-        for &key in nodes.keys() {
-            if !already_visited.contains_key(&key) {
+        for key in nodes.keys() {
+            if !already_visited.contains_key(key) {
                 print_node(
                     &nodes,
-                    key,
+                    key.clone(),
                     0,
                     &mut visited,
                     &mut vec![],

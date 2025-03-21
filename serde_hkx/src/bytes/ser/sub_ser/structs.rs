@@ -3,7 +3,7 @@ use crate::{align, lib::*, tri};
 use super::super::ByteSerializer;
 use crate::errors::ser::{Error, Result};
 use havok_serde::ser::{Serialize, SerializeStruct, Serializer, TypeSize};
-use havok_types::Ulong;
+use havok_types::{Ulong, U32};
 use std::io::Write as _;
 
 /// For bytes struct serializer.
@@ -289,8 +289,8 @@ impl SerializeStruct for StructSerializer<'_> {
         let local_src = tri!(self.ser.relative_position()); // Ptr type need to pointing data position(local.dst).
         tri!(self.ser.serialize_ulong(Ulong::new(0))); // ptr size
         let len = value.as_ref().len() as u32;
-        tri!(self.ser.serialize_uint32(len)); // array size
-        tri!(self.ser.serialize_uint32(len | (1 << 31))); // Capacity(same as size) | Owned flag(32nd bit)
+        tri!(self.ser.serialize_uint32(&U32::Number(len))); // array size
+        tri!(self.ser.serialize_uint32(&U32::Number(len | (1 << 31)))); // Capacity(same as size) | Owned flag(32nd bit)
 
         if len == 0 {
             return Ok(());

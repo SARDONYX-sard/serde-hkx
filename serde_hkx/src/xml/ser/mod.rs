@@ -8,7 +8,7 @@ use havok_serde::ser::{
 use havok_types::variant::Variant;
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
-    StringPtr, Transform, Ulong, Vector4,
+    StringPtr, Transform, Ulong, Vector4, I16, I32, I64, I8, U16, U32, U64, U8,
 };
 
 #[derive(Debug)]
@@ -54,7 +54,7 @@ impl Default for XmlSerializer {
 /// # Errors
 /// serde(fork version) Error defined on crate's trace definition, but will not fail due to mere XML stringing.
 #[inline]
-pub fn to_string<T>(value: &T, top_ptr: usize) -> Result<String>
+pub fn to_string<T>(value: &T, top_ptr: &Pointer<'_>) -> Result<String>
 where
     T: Serialize,
 {
@@ -68,7 +68,7 @@ where
 ///
 /// # Info
 /// This can be done in partial mode by eliminating the root string.
-pub fn to_string_with_opt<T>(value: &T, top_ptr: usize, ser: XmlSerializer) -> Result<String>
+pub fn to_string_with_opt<T>(value: &T, top_ptr: &Pointer<'_>, ser: XmlSerializer) -> Result<String>
 where
     T: Serialize,
 {
@@ -76,7 +76,7 @@ where
 
     if let Some(start_root) = serializer.start_root {
         serializer.output += start_root;
-        serializer.output += &Pointer::new(top_ptr).to_string();
+        serializer.output += &top_ptr.to_string();
         serializer.output += "\">\n\n";
         serializer.increment_depth();
         serializer.indent();
@@ -96,6 +96,37 @@ where
         serializer.output += end_root;
     };
     Ok(serializer.output)
+}
+
+macro_rules! forward_impl_serialize_to_i64 {
+    ($($serialize_fn:ident => ($ty:ty, $num:path, $eid:path, $vid:path)),+ $(,)?) => {
+        $(
+            #[inline]
+            fn $serialize_fn(self, v: &$ty) -> Result<Self::Ok> {
+                let v = match v {
+                    $num(n) => I64::Number(*n as i64),
+                    $eid(id) => I64::EventId(id.as_ref().into()),
+                    $vid(id) => I64::VariableId(id.as_ref().into()),
+                };
+                self.serialize_int64(&v)
+            }
+        )*
+    };
+}
+macro_rules! forward_impl_serialize_to_u64 {
+    ($($serialize_fn:ident => ($ty:ty, $num:path, $eid:path, $vid:path)),+ $(,)?) => {
+        $(
+            #[inline]
+            fn $serialize_fn(self, v: &$ty) -> Result<Self::Ok> {
+                let v = match v {
+                     $num(n) => U64::Number(*n as u64),
+                    $eid(id) => U64::EventId(id.as_ref().into()),
+                    $vid(id) => U64::VariableId(id.as_ref().into()),
+                };
+                self.serialize_uint64(&v)
+            }
+        )*
+    };
 }
 
 impl Serializer for &mut XmlSerializer {
@@ -124,43 +155,34 @@ impl Serializer for &mut XmlSerializer {
     }
 
     #[inline]
-    fn serialize_int8(self, v: i8) -> Result<Self::Ok> {
-        self.serialize_int64(v as i64)
+    fn serialize_int8(self, v: &I8) -> Result<Self::Ok> {
+        let v = match v {
+            I8::Number(n) => I64::Number(*n as i64),
+            I8::EventId(id) => I64::EventId(id.as_ref().into()),
+            I8::VariableId(id) => I64::VariableId(id.as_ref().into()),
+        };
+        self.serialize_int64(&v)
     }
 
-    #[inline]
-    fn serialize_uint8(self, v: u8) -> Result<Self::Ok> {
-        self.serialize_uint64(v as u64)
-    }
+    forward_impl_serialize_to_i64! [
+    //    serialize_int8 => ( I8,  I8::Number,  I8::EventId,  I8::VariableId),
+       serialize_int16 => (I16, I16::Number, I16::EventId, I16::VariableId),
+       serialize_int32 => (I32, I32::Number, I32::EventId, I32::VariableId),
+    ];
+    forward_impl_serialize_to_u64! [
+         serialize_uint8 => ( U8,  U8::Number,  U8::EventId,  U8::VariableId),
+        serialize_uint16 => (U16, U16::Number, U16::EventId, U16::VariableId),
+        serialize_uint32 => (U32, U32::Number, U32::EventId, U32::VariableId),
+    ];
 
     #[inline]
-    fn serialize_int16(self, v: i16) -> Result<Self::Ok> {
-        self.serialize_int64(v as i64)
-    }
-
-    #[inline]
-    fn serialize_uint16(self, v: u16) -> Result<Self::Ok> {
-        self.serialize_uint64(v as u64)
-    }
-
-    #[inline]
-    fn serialize_int32(self, v: i32) -> Result<Self::Ok> {
-        self.serialize_int64(v as i64)
-    }
-
-    #[inline]
-    fn serialize_uint32(self, v: u32) -> Result<Self::Ok> {
-        self.serialize_uint64(v as u64)
-    }
-
-    #[inline]
-    fn serialize_int64(self, v: i64) -> Result<Self::Ok> {
+    fn serialize_int64(self, v: &I64) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
     #[inline]
-    fn serialize_uint64(self, v: u64) -> Result<Self::Ok> {
+    fn serialize_uint64(self, v: &U64) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
@@ -214,8 +236,8 @@ impl Serializer for &mut XmlSerializer {
     }
 
     #[inline]
-    fn serialize_pointer(self, v: Pointer) -> Result<Self::Ok> {
-        if v.get() == 0 {
+    fn serialize_pointer(self, v: &Pointer) -> Result<Self::Ok> {
+        if v.is_null() {
             self.output += "null"; // Null pointer
         } else {
             self.output += &v.to_string();
@@ -241,7 +263,7 @@ impl Serializer for &mut XmlSerializer {
     fn serialize_struct(
         self,
         name: &'static str,
-        class_meta: Option<(Pointer, Signature)>,
+        class_meta: Option<(&Pointer, Signature)>,
         _sizes: (u64, u64),
     ) -> Result<Self::SerializeStruct> {
         if let Some((ptr_name, sig)) = class_meta {
@@ -269,8 +291,8 @@ impl Serializer for &mut XmlSerializer {
     /// FIXME: Unclear XML representation
     #[inline]
     fn serialize_variant(self, v: &Variant) -> Result<Self::Ok> {
-        tri!(self.serialize_pointer(v.object));
-        self.serialize_pointer(v.class)
+        tri!(self.serialize_pointer(&v.object));
+        self.serialize_pointer(&v.class)
     }
 
     #[inline]
@@ -600,8 +622,8 @@ mod tests {
     fn test_serialize_defaultmale() -> Result<()> {
         let mut classes = new_defaultmale();
         let top_ptr = classes.sort_for_xml()?; // hkRootContainer" is processed last.
-
-        let actual = tri!(to_string(&classes, top_ptr));
+        let top_ptr: Pointer<'static> = Pointer::new(top_ptr).to_static();
+        let actual = tri!(to_string(&classes, &top_ptr));
         let expected =
             include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
 

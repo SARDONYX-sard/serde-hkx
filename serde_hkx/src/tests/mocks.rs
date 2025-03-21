@@ -1,9 +1,10 @@
 //! Reduce the burden of individual imports by importing a set of types needed to create a havok class structure here.
 use havok_classes::*;
 pub use havok_types::*;
-use indexmap::IndexMap;
 
-pub fn new_defaultmale<'a>() -> IndexMap<usize, Classes<'a>> {
+use super::ClassMap;
+
+pub fn new_defaultmale<'a>() -> ClassMap<'a> {
     let hkb_project_string_data = hkbProjectStringData {
         __ptr: Some(9.into()),
         m_animationFilenames: vec![],
@@ -21,7 +22,7 @@ pub fn new_defaultmale<'a>() -> IndexMap<usize, Classes<'a>> {
     let hkb_project_data = hkbProjectData {
         __ptr: Some(10.into()),
         m_worldUpWS: Vector4::new(0.0, 0.0, 1.0, 0.0),
-        m_stringData: Pointer::new(9),
+        m_stringData: 9.into(),
         m_defaultEventMode: EventMode::EVENT_MODE_IGNORE_FROM_GENERATOR,
         ..Default::default()
     };
@@ -32,13 +33,22 @@ pub fn new_defaultmale<'a>() -> IndexMap<usize, Classes<'a>> {
             __ptr: None,
             m_name: "hkbProjectData".into(),
             m_className: "hkbProjectData".into(),
-            m_variant: Pointer::new(10),
+            m_variant: 10.into(),
         }],
     };
 
-    let mut classes = indexmap::IndexMap::new();
-    classes.insert(8, Classes::hkRootLevelContainer(hk_root_level_container));
-    classes.insert(9, Classes::hkbProjectStringData(hkb_project_string_data));
-    classes.insert(10, Classes::hkbProjectData(hkb_project_data));
+    let mut classes = ClassMap::new();
+    classes.insert(
+        "#0008".into(),
+        Classes::hkRootLevelContainer(Box::new(hk_root_level_container)),
+    );
+    classes.insert(
+        "#0008".into(),
+        Classes::hkbProjectStringData(Box::new(hkb_project_string_data)),
+    );
+    classes.insert(
+        "#0010".into(),
+        Classes::hkbProjectData(Box::new(hkb_project_data)),
+    );
     classes
 }

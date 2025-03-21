@@ -34,7 +34,7 @@ impl<'de> MapAccess<'de> for MapDeserializer<'_, 'de> {
     type Error = Error;
 
     #[inline]
-    fn class_ptr(&mut self) -> Option<Pointer> {
+    fn class_ptr(&mut self) -> Option<Pointer<'de>> {
         self.de.takable_class_index.take()
     }
 

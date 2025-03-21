@@ -35,7 +35,7 @@ pub enum Error {
     /// Missing global fixup class: {ptr}
     MissingGlobalFixupClass {
         /// missing global fixup class ptr(e.g. #0050)
-        ptr: Pointer,
+        ptr: Pointer<'static>,
         /// error location
         #[snafu(implicit)]
         location: snafu::Location,
@@ -53,6 +53,22 @@ pub enum Error {
 
     /// Not found where to write ptr. This could be an incorrect value inside hkx or a mistake by the library implementor.
     NotFoundPointedPosition,
+
+    /// Variable `{event_id}` for Nemesis is used, but its name could not be found in `hkbBehaviorGraphStringData`.`eventNames` in hkx, so the variable could not be replaced
+    NotFoundEventId {
+        event_id: String,
+        /// error location
+        #[snafu(implicit)]
+        location: snafu::Location,
+    },
+
+    /// Variable `{variable_id}` for Nemesis is used, but its name could not be found in `hkbBehaviorGraphStringData`.`variableNames` in hkx, so the variable could not be replaced
+    NotFoundVariableId {
+        variable_id: String,
+        /// error location
+        #[snafu(implicit)]
+        location: snafu::Location,
+    },
 
     /// Invalid utf8 error
     #[snafu(transparent)]

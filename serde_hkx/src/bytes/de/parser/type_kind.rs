@@ -7,7 +7,7 @@ use winnow::binary::{self, Endianness};
 use winnow::combinator::{alt, seq, terminated};
 use winnow::error::{ContextError, StrContext, StrContextValue};
 use winnow::token::take_until;
-use winnow::{PResult, Parser};
+use winnow::{ModalResult, Parser};
 
 /// Parses [`bool`]. `true` or `false``
 /// - The corresponding type kind: `Bool`
@@ -15,7 +15,7 @@ use winnow::{PResult, Parser};
 /// # Errors
 /// When parse failed.
 #[inline]
-pub fn boolean(input: &mut BytesStream<'_>) -> PResult<bool> {
+pub fn boolean(input: &mut BytesStream<'_>) -> ModalResult<bool> {
     alt((1.value(true), 0.value(false)))
         .context(StrContext::Label("bool(u8)"))
         .context(StrContext::Expected(StrContextValue::Description(
@@ -145,7 +145,7 @@ pub fn half<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f16, Context
 ///
 /// # Errors
 /// If parse failed.
-pub fn string<'a>(input: &mut BytesStream<'a>) -> PResult<&'a str> {
+pub fn string<'a>(input: &mut BytesStream<'a>) -> ModalResult<&'a str> {
     terminated(take_until(0.., b'\0'), b'\0')
         .try_map(|bytes| core::str::from_utf8(bytes))
         .context(StrContext::Label("string"))

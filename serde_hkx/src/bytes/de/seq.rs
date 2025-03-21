@@ -1,7 +1,10 @@
 //! Deserializing each element in an `Array`
+use std::borrow::Cow;
+
 use super::BytesDeserializer;
 use crate::errors::de::{Error, Result};
 use havok_serde::de::{DeserializeSeed, SeqAccess};
+use havok_types::Pointer;
 
 /// A structure for deserializing each element in an `Array`.
 ///
@@ -32,11 +35,11 @@ impl<'de> SeqAccess<'de> for SeqDeserializer<'_, 'de> {
 
     // If we don't call `next_class_element` afterwards, we won't get the index of the correct class.
     #[inline]
-    fn class_ptr(&self) -> Result<usize, Self::Error> {
+    fn class_ptr(&self) -> Result<Cow<'de, str>, Self::Error> {
         if self.de.class_index == 0 {
             Err(Error::NotFoundClassPtr)
         } else {
-            Ok(self.de.class_index)
+            Ok(Pointer::from_usize(self.de.class_index).into_inner())
         }
     }
 

@@ -5,11 +5,11 @@ use crate::{lib::*, tri};
 use super::delimited_with_multispace0;
 use havok_types::*;
 use std::borrow::Cow;
-use winnow::ascii::{digit1, float, multispace0, Caseless};
-use winnow::combinator::{alt, opt, preceded, seq};
+use winnow::ascii::{float, multispace0, Caseless};
+use winnow::combinator::{alt, opt, seq};
 use winnow::error::{StrContext, StrContextValue};
 use winnow::token::take_until;
-use winnow::{PResult, Parser};
+use winnow::{ModalResult, Parser};
 
 /// Parses [`bool`]. `true` or `false`
 /// - The corresponding type kind: `Bool`
@@ -27,7 +27,7 @@ use winnow::{PResult, Parser};
 ///
 /// # Errors
 /// When parse failed.
-pub fn boolean(input: &mut &str) -> PResult<bool> {
+pub fn boolean(input: &mut &str) -> ModalResult<bool> {
     alt(("true".value(true), "false".value(false)))
         .context(StrContext::Label("bool"))
         .context(StrContext::Expected(StrContextValue::Description(
@@ -66,7 +66,7 @@ pub fn boolean(input: &mut &str) -> PResult<bool> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn real(input: &mut &str) -> PResult<f32> {
+pub fn real(input: &mut &str) -> ModalResult<f32> {
     // NOTE: For some reason, early errors occur if the display digits, such as 00, are not parsed first.
 
     // Need to support special representation of decimal points in C++
@@ -109,7 +109,7 @@ pub fn real(input: &mut &str) -> PResult<f32> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn vector4(input: &mut &str) -> PResult<Vector4> {
+pub fn vector4(input: &mut &str) -> ModalResult<Vector4> {
     seq!(Vector4 {
         _: opt(delimited_with_multispace0("(")),
         x: real.context(StrContext::Label("x")),
@@ -142,7 +142,7 @@ pub fn vector4(input: &mut &str) -> PResult<Vector4> {
 /// # Errors
 /// When parse failed.
 #[inline]
-pub fn quaternion(input: &mut &str) -> PResult<Quaternion> {
+pub fn quaternion(input: &mut &str) -> ModalResult<Quaternion> {
     let Vector4 { x, y, z, w } = tri!(vector4
         .context(StrContext::Label("Quaternion"))
         .parse_next(input));
@@ -170,7 +170,7 @@ pub fn quaternion(input: &mut &str) -> PResult<Quaternion> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn matrix3(input: &mut &str) -> PResult<Matrix3> {
+pub fn matrix3(input: &mut &str) -> ModalResult<Matrix3> {
     seq!(Matrix3 {
         x: vector3.context(StrContext::Label("x")),
         y: vector3.context(StrContext::Label("y")),
@@ -201,7 +201,7 @@ pub fn matrix3(input: &mut &str) -> PResult<Matrix3> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn rotation(input: &mut &str) -> PResult<Rotation> {
+pub fn rotation(input: &mut &str) -> ModalResult<Rotation> {
     seq!(Rotation {
         x: vector3.context(StrContext::Label("x")),
         y: vector3.context(StrContext::Label("y")),
@@ -232,7 +232,7 @@ pub fn rotation(input: &mut &str) -> PResult<Rotation> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn qstransform(input: &mut &str) -> PResult<QsTransform> {
+pub fn qstransform(input: &mut &str) -> ModalResult<QsTransform> {
     seq!(QsTransform {
         transition: vector3.context(StrContext::Label("transition")),
         quaternion: quaternion.context(StrContext::Label("quaternion")),
@@ -265,7 +265,7 @@ pub fn qstransform(input: &mut &str) -> PResult<QsTransform> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn matrix4(input: &mut &str) -> PResult<Matrix4> {
+pub fn matrix4(input: &mut &str) -> ModalResult<Matrix4> {
     seq!(Matrix4 {
         x: vector4.context(StrContext::Label("x")),
         y: vector4.context(StrContext::Label("y")),
@@ -315,7 +315,7 @@ pub fn matrix4(input: &mut &str) -> PResult<Matrix4> {
 ///  [0, 0, 0,  1], // transition
 /// ]
 /// ```
-pub fn transform(input: &mut &str) -> PResult<Transform> {
+pub fn transform(input: &mut &str) -> ModalResult<Transform> {
     seq!(Transform {
         rotation: rotation.context(StrContext::Label("rotation")),
         transition: vector3
@@ -349,23 +349,23 @@ pub fn transform(input: &mut &str) -> PResult<Transform> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn pointer(input: &mut &str) -> PResult<Pointer> {
+pub fn pointer<'a>(input: &mut &'a str) -> ModalResult<Pointer<'a>> {
     let null_ptr = Caseless("null")
-        .value(Pointer::new(0))
+        .value(Pointer::null())
         .context(StrContext::Label("Pointer"))
         .context(StrContext::Expected(StrContextValue::Description(
             "Pointer(e.g. `null`)",
         )));
 
-    alt((null_ptr, move |input: &mut &str| {
-        let digit = tri!(preceded("#", digit1)
-            .parse_to()
-            .context(StrContext::Label("Pointer"))
-            .context(StrContext::Expected(StrContextValue::Description(
-                "Pointer(e.g. `#0001`)"
-            )))
-            .parse_next(input));
-        Ok(Pointer::new(digit))
+    alt((null_ptr, move |input: &mut &'a str| {
+        // let digit = tri!(preceded("#", digit1)
+        //     .parse_to()
+        //     .context(StrContext::Label("Pointer"))
+        //     .context(StrContext::Expected(StrContextValue::Description(
+        //         "Pointer(e.g. `#0001`)"
+        //     )))
+        //     .parse_next(input));
+        Ok(Pointer::new((*input).into()))
     }))
     .parse_next(input)
 }
@@ -397,7 +397,7 @@ pub fn pointer(input: &mut &str) -> PResult<Pointer> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn string<'a>(input: &mut &'a str) -> PResult<Cow<'a, str>> {
+pub fn string<'a>(input: &mut &'a str) -> ModalResult<Cow<'a, str>> {
     take_until(0.., "</")
         .map(|s| html_escape::decode_html_entities(s))
         .context(StrContext::Label(
@@ -430,7 +430,7 @@ pub fn string<'a>(input: &mut &'a str) -> PResult<Cow<'a, str>> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn vector3(input: &mut &str) -> PResult<Vector4> {
+pub fn vector3(input: &mut &str) -> ModalResult<Vector4> {
     struct Vector3 {
         x: f32,
         y: f32,

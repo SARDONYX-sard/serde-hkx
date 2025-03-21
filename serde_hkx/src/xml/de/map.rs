@@ -30,7 +30,7 @@ use winnow::{combinator::alt, token::take_until, Parser as _};
 pub struct MapDeserializer<'a, 'de: 'a> {
     /// Deserializer
     de: &'a mut XmlDeserializer<'de>,
-    ptr_name: Option<Pointer>,
+    ptr_name: Option<Pointer<'de>>,
     class_name: &'static str,
 }
 
@@ -39,7 +39,7 @@ impl<'a, 'de> MapDeserializer<'a, 'de> {
     #[inline]
     pub fn new(
         de: &'a mut XmlDeserializer<'de>,
-        ptr_name: Option<Pointer>,
+        ptr_name: Option<Pointer<'de>>,
         class_name: &'static str,
     ) -> Self {
         Self {
@@ -54,7 +54,7 @@ impl<'de> MapAccess<'de> for MapDeserializer<'_, 'de> {
     type Error = Error;
 
     #[inline]
-    fn class_ptr(&mut self) -> Option<Pointer> {
+    fn class_ptr(&mut self) -> Option<Pointer<'de>> {
         self.ptr_name.take()
     }
 

@@ -43,7 +43,37 @@ impl<'a> Pointer<'a> {
         Self(ptr)
     }
 
+    /// Creates a new null `Pointer`
+    ///
+    /// # Example
+    /// ```
+    /// # use havok_types::pointer::Pointer;
+    /// assert_eq!(Pointer::null().to_string(), "#0000");
+    /// ```
+    #[inline]
+    pub const fn null() -> Self {
+        Self::new(Cow::Borrowed("#0000"))
+    }
+
+    /// Creates a new `Pointer` from a `usize`
+    ///
+    /// # Example
+    /// ```
+    /// # use havok_types::pointer::Pointer;
+    /// assert_eq!(Pointer::from_usize(50).to_string(), "#0050");
+    /// ```
+    #[inline]
+    pub fn from_usize(value: usize) -> Self {
+        Self::new(format!("#{:04}", value).into())
+    }
+
     /// Pointer(Class index) is null(`#0000`)?
+    ///
+    /// # Example
+    /// ```
+    /// # use havok_types::pointer::Pointer;
+    /// assert!(Pointer::new(std::borrow::Cow::Borrowed("#0000")).is_null());
+    /// ```
     #[inline]
     pub fn is_null(&self) -> bool {
         self.0 == "#0000"
@@ -53,6 +83,27 @@ impl<'a> Pointer<'a> {
     #[inline]
     pub const fn get(&self) -> &Cow<'a, str> {
         &self.0
+    }
+
+    /// Into inner value.
+    #[inline]
+    pub fn into_inner(self) -> Cow<'a, str> {
+        self.0
+    }
+
+    /// To owned 'static pointer
+    #[inline]
+    pub fn to_static(&self) -> Pointer<'static> {
+        Pointer(Cow::Owned(self.0.to_string()))
+    }
+}
+
+/// #0000
+/// #9999
+impl From<usize> for Pointer<'_> {
+    #[inline]
+    fn from(value: usize) -> Self {
+        Self::from_usize(value)
     }
 }
 
