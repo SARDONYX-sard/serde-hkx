@@ -18,9 +18,9 @@ pub struct Member<'a> {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub enum_ref: Option<Cow<'a, str>>,
 
-    /// Whether `CString` or `StringPtr` is contained in its own member or in a member of its parent?
+    /// The reference type(e.g. `CString`, `StringPtr`) is contained in its own member or in a member of its parent?
     /// (To calculate lifetime annotation)
-    pub has_string: bool,
+    pub has_ref: bool,
 
     /// C++ Type
     #[serde(bound(deserialize = "Cow<'a, str>: Deserialize<'de>"))]

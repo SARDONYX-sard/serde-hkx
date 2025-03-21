@@ -86,7 +86,7 @@ fn generate_and_write_code<'a>(
             let rust_code = prettyplease::unparse(&rust_gen::from_cpp_class(class, class_map)?);
             std::fs::write(output_file.as_ref(), rust_code)?;
 
-            Ok((class_name, class.has_string))
+            Ok((class_name, class.has_ref))
         })
         .collect();
 

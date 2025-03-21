@@ -17,7 +17,7 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let class_name = syn::Ident::new(name, proc_macro2::Span::call_site());
     let fields = impl_serialize_fields(class, class_map);
     let deps_class_indexes = deps_class_indexes_token(&class.name, class_map);
-    let lifetime = match class.has_string {
+    let lifetime = match class.has_ref {
         true => quote! { <'a> },
         false => quote! {},
     };

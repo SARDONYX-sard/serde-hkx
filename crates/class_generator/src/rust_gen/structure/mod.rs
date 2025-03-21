@@ -24,7 +24,7 @@ pub fn generate(class: &Class) -> Result<ItemStruct, Error> {
 
     let doc_attrs = struct_doc_attrs(class);
     let struct_name = format_ident!("{class_name}");
-    let lifetime = match class.has_string {
+    let lifetime = match class.has_ref {
         true => quote! { <'a> },
         false => quote! {},
     };
@@ -34,8 +34,8 @@ pub fn generate(class: &Class) -> Result<ItemStruct, Error> {
         |parent| {
             let parent_struct_name = format_ident!("{parent}");
 
-            let serde_borrow_attr = serde_borrow_attr(class.parent_has_string);
-            let lifetime = match class.parent_has_string {
+            let serde_borrow_attr = serde_borrow_attr(class.parent_has_ref);
+            let lifetime = match class.parent_has_ref {
                 true => quote! { <'a> },
                 false => quote! {},
             };

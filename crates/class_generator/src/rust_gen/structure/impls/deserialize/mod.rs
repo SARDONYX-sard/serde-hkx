@@ -26,7 +26,7 @@ pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> Result<TokenStre
     let expected_msg = format!("struct {class_name_str}");
 
     let class_name = format_ident!("{class_name_str}");
-    let lifetime = if class.has_string {
+    let lifetime = if class.has_ref {
         quote! { <'de> }
     } else {
         quote! {}
@@ -98,7 +98,7 @@ pub(super) fn member_to_de_rust_type(member: &Member, class_name: &str) -> Resul
         name,
         class_ref,
         enum_ref,
-        has_string,
+        has_ref: has_string,
         vtype,
         vsubtype,
         arrsize,
