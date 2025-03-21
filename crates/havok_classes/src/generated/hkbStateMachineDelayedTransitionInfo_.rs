@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbStateMachineDelayedTransitionInfo {
+pub struct hkbStateMachineDelayedTransitionInfo<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,14 +22,15 @@ pub struct hkbStateMachineDelayedTransitionInfo {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `delayedTransition`(ctype: `struct hkbStateMachineProspectiveTransitionInfo`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "delayedTransition"))]
     #[cfg_attr(feature = "serde", serde(rename = "delayedTransition"))]
-    pub m_delayedTransition: hkbStateMachineProspectiveTransitionInfo,
+    pub m_delayedTransition: hkbStateMachineProspectiveTransitionInfo<'a>,
     /// # C++ Info
     /// - name: `timeDelayed`(ctype: `hkReal`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
@@ -60,7 +61,7 @@ pub struct hkbStateMachineDelayedTransitionInfo {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbStateMachineDelayedTransitionInfo {
+    impl<'a> _serde::HavokClass for hkbStateMachineDelayedTransitionInfo<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbStateMachineDelayedTransitionInfo"
@@ -70,19 +71,20 @@ const _: () = {
             _serde::__private::Signature::new(0x26d5499)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_delayedTransition.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkbStateMachineDelayedTransitionInfo {
+    impl<'a> _serde::Serialize for hkbStateMachineDelayedTransitionInfo<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x26d5499)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -112,7 +114,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbStateMachineDelayedTransitionInfo {
+    impl<'de> _serde::Deserialize<'de> for hkbStateMachineDelayedTransitionInfo<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -171,7 +173,7 @@ const _: () = {
             }
             struct __hkbStateMachineDelayedTransitionInfoVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkbStateMachineDelayedTransitionInfo,
+                    hkbStateMachineDelayedTransitionInfo<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -180,7 +182,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbStateMachineDelayedTransitionInfoVisitor<'de> {
-                type Value = hkbStateMachineDelayedTransitionInfo;
+                type Value = hkbStateMachineDelayedTransitionInfo<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -521,7 +523,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbStateMachineDelayedTransitionInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_delayedTransition,
                         m_timeDelayed,
                         m_isDelayedTransitionReturnToPreviousState,

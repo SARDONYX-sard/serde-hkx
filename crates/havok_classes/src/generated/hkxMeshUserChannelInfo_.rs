@@ -22,7 +22,8 @@ pub struct hkxMeshUserChannelInfo<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -57,7 +58,7 @@ const _: () = {
             _serde::__private::Signature::new(0x270724a5)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
@@ -65,7 +66,7 @@ const _: () = {
                     .m_attributeGroups
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -77,6 +78,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x270724a5)));
             let mut serializer = __serializer
                 .serialize_struct("hkxMeshUserChannelInfo", class_meta, (28u64, 48u64))?;
@@ -381,20 +383,22 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkxAttributeHolder {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_attributeGroups,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkxMeshUserChannelInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_name,
                         m_className,

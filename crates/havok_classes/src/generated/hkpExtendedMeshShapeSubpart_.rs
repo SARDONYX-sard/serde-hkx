@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpExtendedMeshShapeSubpart {
+pub struct hkpExtendedMeshShapeSubpart<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkpExtendedMeshShapeSubpart {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `type`(ctype: `enum SubpartType`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -44,7 +45,7 @@ pub struct hkpExtendedMeshShapeSubpart {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialStriding"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialStriding"))]
-    pub m_materialStriding: i16,
+    pub m_materialStriding: I16<'a>,
     /// # C++ Info
     /// - name: `materialIndexBase`(ctype: `void*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
@@ -52,21 +53,21 @@ pub struct hkpExtendedMeshShapeSubpart {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialIndexBase"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialIndexBase"))]
-    pub m_materialIndexBase: Pointer,
+    pub m_materialIndexBase: Pointer<'a>,
     /// # C++ Info
     /// - name: `materialIndexStriding`(ctype: `hkUint16`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialIndexStriding"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialIndexStriding"))]
-    pub m_materialIndexStriding: u16,
+    pub m_materialIndexStriding: U16<'a>,
     /// # C++ Info
     /// - name: `numMaterials`(ctype: `hkUint16`)
     /// - offset: ` 10`(x86)/` 18`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numMaterials"))]
     #[cfg_attr(feature = "serde", serde(rename = "numMaterials"))]
-    pub m_numMaterials: u16,
+    pub m_numMaterials: U16<'a>,
     /// # C++ Info
     /// - name: `materialBase`(ctype: `void*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
@@ -74,7 +75,7 @@ pub struct hkpExtendedMeshShapeSubpart {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialBase"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialBase"))]
-    pub m_materialBase: Pointer,
+    pub m_materialBase: Pointer<'a>,
     /// # C++ Info
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -85,7 +86,7 @@ pub struct hkpExtendedMeshShapeSubpart {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpExtendedMeshShapeSubpart {
+    impl<'a> _serde::HavokClass for hkpExtendedMeshShapeSubpart<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpExtendedMeshShapeSubpart"
@@ -95,20 +96,21 @@ const _: () = {
             _serde::__private::Signature::new(0xf4608207)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_materialIndexBase.get());
-            v.push(self.m_materialBase.get());
+            v.push(&self.m_materialIndexBase);
+            v.push(&self.m_materialBase);
             v
         }
     }
-    impl _serde::Serialize for hkpExtendedMeshShapeSubpart {
+    impl<'a> _serde::Serialize for hkpExtendedMeshShapeSubpart<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xf4608207)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -143,7 +145,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpExtendedMeshShapeSubpart {
+    impl<'de> _serde::Deserialize<'de> for hkpExtendedMeshShapeSubpart<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -201,7 +203,7 @@ const _: () = {
                 }
             }
             struct __hkpExtendedMeshShapeSubpartVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpExtendedMeshShapeSubpart>,
+                marker: _serde::__private::PhantomData<hkpExtendedMeshShapeSubpart<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -209,7 +211,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpExtendedMeshShapeSubpartVisitor<'de> {
-                type Value = hkpExtendedMeshShapeSubpart;
+                type Value = hkpExtendedMeshShapeSubpart<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -231,11 +233,15 @@ const _: () = {
                     let mut m_materialIndexStridingType: _serde::__private::Option<
                         MaterialIndexStridingType,
                     > = _serde::__private::None;
-                    let mut m_materialStriding: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_materialIndexBase: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_materialIndexStriding: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_numMaterials: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_materialBase: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_materialStriding: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_materialIndexBase: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_materialIndexStriding: _serde::__private::Option<
+                        U16<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numMaterials: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_materialBase: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     for i in 0..8usize {
                         match i {
@@ -284,7 +290,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialStriding = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -304,7 +310,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_materialIndexBase = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -323,7 +329,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndexStriding = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -340,7 +346,7 @@ const _: () = {
                                     );
                                 }
                                 m_numMaterials = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -358,7 +364,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_materialBase = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -486,8 +492,10 @@ const _: () = {
                     let mut m_materialIndexStridingType: _serde::__private::Option<
                         MaterialIndexStridingType,
                     > = _serde::__private::None;
-                    let mut m_materialIndexStriding: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_numMaterials: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_materialIndexStriding: _serde::__private::Option<
+                        U16<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numMaterials: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -567,7 +575,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndexStriding = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -593,7 +601,7 @@ const _: () = {
                                     );
                                 }
                                 m_numMaterials = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -688,7 +696,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpExtendedMeshShapeSubpart {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_type,
                         m_materialIndexStridingType,
                         m_materialIndexStriding,

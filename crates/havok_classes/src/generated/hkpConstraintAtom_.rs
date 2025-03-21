@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpConstraintAtom {
+pub struct hkpConstraintAtom<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkpConstraintAtom {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `type`(ctype: `enum AtomType`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -33,7 +34,7 @@ pub struct hkpConstraintAtom {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpConstraintAtom {
+    impl<'a> _serde::HavokClass for hkpConstraintAtom<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpConstraintAtom"
@@ -43,18 +44,19 @@ const _: () = {
             _serde::__private::Signature::new(0x59d67ef6)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpConstraintAtom {
+    impl<'a> _serde::Serialize for hkpConstraintAtom<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x59d67ef6)));
             let mut serializer = __serializer
                 .serialize_struct("hkpConstraintAtom", class_meta, (2u64, 2u64))?;
@@ -68,7 +70,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpConstraintAtom {
+    impl<'de> _serde::Deserialize<'de> for hkpConstraintAtom<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -116,14 +118,14 @@ const _: () = {
                 }
             }
             struct __hkpConstraintAtomVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpConstraintAtom>,
+                marker: _serde::__private::PhantomData<hkpConstraintAtom<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpConstraintAtomVisitor<'de> {
-                type Value = hkpConstraintAtom;
+                type Value = hkpConstraintAtom<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -223,7 +225,10 @@ const _: () = {
                         }
                     };
                     let __ptr = __A::class_ptr(&mut __map);
-                    _serde::__private::Ok(hkpConstraintAtom { __ptr, m_type })
+                    _serde::__private::Ok(hkpConstraintAtom {
+                        __ptr: __ptr.clone(),
+                        m_type,
+                    })
                 }
             }
             const FIELDS: &[&str] = &["type"];
@@ -506,45 +511,45 @@ const _: () = {
                 }
                 fn visit_uint16<__E>(
                     self,
-                    __value: u16,
+                    __value: U16<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u16 => _serde::__private::Ok(__Field::__field0),
-                        1u16 => _serde::__private::Ok(__Field::__field1),
-                        2u16 => _serde::__private::Ok(__Field::__field2),
-                        3u16 => _serde::__private::Ok(__Field::__field3),
-                        4u16 => _serde::__private::Ok(__Field::__field4),
-                        5u16 => _serde::__private::Ok(__Field::__field5),
-                        6u16 => _serde::__private::Ok(__Field::__field6),
-                        7u16 => _serde::__private::Ok(__Field::__field7),
-                        8u16 => _serde::__private::Ok(__Field::__field8),
-                        9u16 => _serde::__private::Ok(__Field::__field9),
-                        10u16 => _serde::__private::Ok(__Field::__field10),
-                        11u16 => _serde::__private::Ok(__Field::__field11),
-                        12u16 => _serde::__private::Ok(__Field::__field12),
-                        13u16 => _serde::__private::Ok(__Field::__field13),
-                        14u16 => _serde::__private::Ok(__Field::__field14),
-                        15u16 => _serde::__private::Ok(__Field::__field15),
-                        16u16 => _serde::__private::Ok(__Field::__field16),
-                        17u16 => _serde::__private::Ok(__Field::__field17),
-                        18u16 => _serde::__private::Ok(__Field::__field18),
-                        19u16 => _serde::__private::Ok(__Field::__field19),
-                        20u16 => _serde::__private::Ok(__Field::__field20),
-                        21u16 => _serde::__private::Ok(__Field::__field21),
-                        22u16 => _serde::__private::Ok(__Field::__field22),
-                        23u16 => _serde::__private::Ok(__Field::__field23),
-                        24u16 => _serde::__private::Ok(__Field::__field24),
-                        25u16 => _serde::__private::Ok(__Field::__field25),
-                        26u16 => _serde::__private::Ok(__Field::__field26),
-                        27u16 => _serde::__private::Ok(__Field::__field27),
-                        28u16 => _serde::__private::Ok(__Field::__field28),
-                        29u16 => _serde::__private::Ok(__Field::__field29),
-                        30u16 => _serde::__private::Ok(__Field::__field30),
-                        31u16 => _serde::__private::Ok(__Field::__field31),
-                        32u16 => _serde::__private::Ok(__Field::__field32),
+                        U16::Number(0u16) => _serde::__private::Ok(__Field::__field0),
+                        U16::Number(1u16) => _serde::__private::Ok(__Field::__field1),
+                        U16::Number(2u16) => _serde::__private::Ok(__Field::__field2),
+                        U16::Number(3u16) => _serde::__private::Ok(__Field::__field3),
+                        U16::Number(4u16) => _serde::__private::Ok(__Field::__field4),
+                        U16::Number(5u16) => _serde::__private::Ok(__Field::__field5),
+                        U16::Number(6u16) => _serde::__private::Ok(__Field::__field6),
+                        U16::Number(7u16) => _serde::__private::Ok(__Field::__field7),
+                        U16::Number(8u16) => _serde::__private::Ok(__Field::__field8),
+                        U16::Number(9u16) => _serde::__private::Ok(__Field::__field9),
+                        U16::Number(10u16) => _serde::__private::Ok(__Field::__field10),
+                        U16::Number(11u16) => _serde::__private::Ok(__Field::__field11),
+                        U16::Number(12u16) => _serde::__private::Ok(__Field::__field12),
+                        U16::Number(13u16) => _serde::__private::Ok(__Field::__field13),
+                        U16::Number(14u16) => _serde::__private::Ok(__Field::__field14),
+                        U16::Number(15u16) => _serde::__private::Ok(__Field::__field15),
+                        U16::Number(16u16) => _serde::__private::Ok(__Field::__field16),
+                        U16::Number(17u16) => _serde::__private::Ok(__Field::__field17),
+                        U16::Number(18u16) => _serde::__private::Ok(__Field::__field18),
+                        U16::Number(19u16) => _serde::__private::Ok(__Field::__field19),
+                        U16::Number(20u16) => _serde::__private::Ok(__Field::__field20),
+                        U16::Number(21u16) => _serde::__private::Ok(__Field::__field21),
+                        U16::Number(22u16) => _serde::__private::Ok(__Field::__field22),
+                        U16::Number(23u16) => _serde::__private::Ok(__Field::__field23),
+                        U16::Number(24u16) => _serde::__private::Ok(__Field::__field24),
+                        U16::Number(25u16) => _serde::__private::Ok(__Field::__field25),
+                        U16::Number(26u16) => _serde::__private::Ok(__Field::__field26),
+                        U16::Number(27u16) => _serde::__private::Ok(__Field::__field27),
+                        U16::Number(28u16) => _serde::__private::Ok(__Field::__field28),
+                        U16::Number(29u16) => _serde::__private::Ok(__Field::__field29),
+                        U16::Number(30u16) => _serde::__private::Ok(__Field::__field30),
+                        U16::Number(31u16) => _serde::__private::Ok(__Field::__field31),
+                        U16::Number(32u16) => _serde::__private::Ok(__Field::__field32),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -962,14 +967,14 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

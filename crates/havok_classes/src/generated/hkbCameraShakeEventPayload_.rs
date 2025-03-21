@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbCameraShakeEventPayload {
+pub struct hkbCameraShakeEventPayload<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkbCameraShakeEventPayload {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkbEventPayload,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkbEventPayload<'a>,
     /// # C++ Info
     /// - name: `amplitude`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -44,7 +46,7 @@ pub struct hkbCameraShakeEventPayload {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbCameraShakeEventPayload {
+    impl<'a> _serde::HavokClass for hkbCameraShakeEventPayload<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbCameraShakeEventPayload"
@@ -54,18 +56,19 @@ const _: () = {
             _serde::__private::Signature::new(0x64136982)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkbCameraShakeEventPayload {
+    impl<'a> _serde::Serialize for hkbCameraShakeEventPayload<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x64136982)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -90,7 +93,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbCameraShakeEventPayload {
+    impl<'de> _serde::Deserialize<'de> for hkbCameraShakeEventPayload<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -140,7 +143,7 @@ const _: () = {
                 }
             }
             struct __hkbCameraShakeEventPayloadVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbCameraShakeEventPayload>,
+                marker: _serde::__private::PhantomData<hkbCameraShakeEventPayload<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -148,7 +151,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbCameraShakeEventPayloadVisitor<'de> {
-                type Value = hkbCameraShakeEventPayload;
+                type Value = hkbCameraShakeEventPayload<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -325,16 +328,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
-                    let parent = hkbEventPayload { __ptr, parent };
+                    let parent = hkbEventPayload {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbCameraShakeEventPayload {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_amplitude,
                         m_halfLife,

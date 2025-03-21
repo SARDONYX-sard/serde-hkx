@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkxIndexBuffer {
+pub struct hkxIndexBuffer<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkxIndexBuffer {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `indexType`(ctype: `enum IndexType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -40,32 +42,32 @@ pub struct hkxIndexBuffer {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indices16"))]
     #[cfg_attr(feature = "serde", serde(rename = "indices16"))]
-    pub m_indices16: Vec<u16>,
+    pub m_indices16: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `indices32`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indices32"))]
     #[cfg_attr(feature = "serde", serde(rename = "indices32"))]
-    pub m_indices32: Vec<u32>,
+    pub m_indices32: Vec<U32<'a>>,
     /// # C++ Info
     /// - name: `vertexBaseOffset`(ctype: `hkUint32`)
     /// - offset: ` 36`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "vertexBaseOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexBaseOffset"))]
-    pub m_vertexBaseOffset: u32,
+    pub m_vertexBaseOffset: U32<'a>,
     /// # C++ Info
     /// - name: `length`(ctype: `hkUint32`)
     /// - offset: ` 40`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "length"))]
     #[cfg_attr(feature = "serde", serde(rename = "length"))]
-    pub m_length: u32,
+    pub m_length: U32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkxIndexBuffer {
+    impl<'a> _serde::HavokClass for hkxIndexBuffer<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkxIndexBuffer"
@@ -75,18 +77,19 @@ const _: () = {
             _serde::__private::Signature::new(0xc12c8197)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkxIndexBuffer {
+    impl<'a> _serde::Serialize for hkxIndexBuffer<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xc12c8197)));
             let mut serializer = __serializer
                 .serialize_struct("hkxIndexBuffer", class_meta, (44u64, 64u64))?;
@@ -119,7 +122,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkxIndexBuffer {
+    impl<'de> _serde::Deserialize<'de> for hkxIndexBuffer<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -175,14 +178,14 @@ const _: () = {
                 }
             }
             struct __hkxIndexBufferVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkxIndexBuffer>,
+                marker: _serde::__private::PhantomData<hkxIndexBuffer<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkxIndexBufferVisitor<'de> {
-                type Value = hkxIndexBuffer;
+                type Value = hkxIndexBuffer<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -199,10 +202,10 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_indexType: _serde::__private::Option<IndexType> = _serde::__private::None;
-                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_vertexBaseOffset: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_length: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_indices16: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_indices32: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_vertexBaseOffset: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_length: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
                             0usize => {
@@ -232,7 +235,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 7usize)?;
                                 m_indices16 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -249,7 +252,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices32 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -266,7 +269,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexBaseOffset = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -281,7 +284,7 @@ const _: () = {
                                     );
                                 }
                                 m_length = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -359,10 +362,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_indexType: _serde::__private::Option<IndexType> = _serde::__private::None;
-                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_vertexBaseOffset: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_length: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_indices16: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_indices32: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_vertexBaseOffset: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_length: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -411,7 +414,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices16 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -437,7 +440,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices32 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -463,7 +466,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexBaseOffset = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -487,7 +490,7 @@ const _: () = {
                                     );
                                 }
                                 m_length = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -557,15 +560,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkxIndexBuffer {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_indexType,
                         m_indices16,
@@ -689,17 +694,17 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
-                        4i8 => _serde::__private::Ok(__Field::__field4),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(4i8) => _serde::__private::Ok(__Field::__field4),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

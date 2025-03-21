@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpExtendedMeshShapeShapesSubpart {
+pub struct hkpExtendedMeshShapeShapesSubpart<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkpExtendedMeshShapeShapesSubpart {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpExtendedMeshShapeSubpart,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpExtendedMeshShapeSubpart<'a>,
     /// # C++ Info
     /// - name: `childShapes`(ctype: `hkArray<hkpConvexShape*>`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "childShapes"))]
     #[cfg_attr(feature = "serde", serde(rename = "childShapes"))]
-    pub m_childShapes: Vec<Pointer>,
+    pub m_childShapes: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `rotation`(ctype: `hkQuaternion`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
@@ -51,7 +53,7 @@ pub struct hkpExtendedMeshShapeShapesSubpart {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpExtendedMeshShapeShapesSubpart {
+    impl<'a> _serde::HavokClass for hkpExtendedMeshShapeShapesSubpart<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpExtendedMeshShapeShapesSubpart"
@@ -61,21 +63,22 @@ const _: () = {
             _serde::__private::Signature::new(0xf204b155)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_materialIndexBase.get());
-            v.push(self.parent.m_materialBase.get());
-            v.extend(self.m_childShapes.iter().map(|ptr| ptr.get()));
+            v.push(&self.parent.m_materialIndexBase);
+            v.push(&self.parent.m_materialBase);
+            v.extend(self.m_childShapes.iter());
             v
         }
     }
-    impl _serde::Serialize for hkpExtendedMeshShapeShapesSubpart {
+    impl<'a> _serde::Serialize for hkpExtendedMeshShapeShapesSubpart<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xf204b155)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -120,7 +123,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpExtendedMeshShapeShapesSubpart {
+    impl<'de> _serde::Deserialize<'de> for hkpExtendedMeshShapeShapesSubpart<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -185,7 +188,7 @@ const _: () = {
             }
             struct __hkpExtendedMeshShapeShapesSubpartVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkpExtendedMeshShapeShapesSubpart,
+                    hkpExtendedMeshShapeShapesSubpart<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -194,7 +197,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpExtendedMeshShapeShapesSubpartVisitor<'de> {
-                type Value = hkpExtendedMeshShapeShapesSubpart;
+                type Value = hkpExtendedMeshShapeShapesSubpart<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -213,7 +216,9 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_childShapes: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_childShapes: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     let mut m_rotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
                     let mut m_translation: _serde::__private::Option<Vector4> = _serde::__private::None;
                     for i in 0..3usize {
@@ -227,7 +232,7 @@ const _: () = {
                                     );
                                 }
                                 m_childShapes = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -321,10 +326,14 @@ const _: () = {
                     let mut m_materialIndexStridingType: _serde::__private::Option<
                         MaterialIndexStridingType,
                     > = _serde::__private::None;
-                    let mut m_materialIndexStriding: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_numMaterials: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_materialIndexStriding: _serde::__private::Option<
+                        U16<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numMaterials: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
-                    let mut m_childShapes: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_childShapes: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     let mut m_rotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
                     let mut m_translation: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -405,7 +414,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndexStriding = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -431,7 +440,7 @@ const _: () = {
                                     );
                                 }
                                 m_numMaterials = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -483,7 +492,7 @@ const _: () = {
                                     );
                                 }
                                 m_childShapes = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -638,7 +647,7 @@ const _: () = {
                     };
                     let __ptr = None;
                     let parent = hkpExtendedMeshShapeSubpart {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_type,
                         m_materialIndexStridingType,
                         m_materialIndexStriding,
@@ -648,7 +657,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpExtendedMeshShapeShapesSubpart {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_childShapes,
                         m_rotation,

@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpLinMotorConstraintAtom {
+pub struct hkpLinMotorConstraintAtom<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpLinMotorConstraintAtom {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConstraintAtom,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `isEnabled`(ctype: `hkBool`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
@@ -40,14 +42,14 @@ pub struct hkpLinMotorConstraintAtom {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "motorAxis"))]
     #[cfg_attr(feature = "serde", serde(rename = "motorAxis"))]
-    pub m_motorAxis: u8,
+    pub m_motorAxis: U8<'a>,
     /// # C++ Info
     /// - name: `initializedOffset`(ctype: `hkInt16`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "initializedOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "initializedOffset"))]
-    pub m_initializedOffset: i16,
+    pub m_initializedOffset: I16<'a>,
     /// # C++ Info
     /// - name: `previousTargetPositionOffset`(ctype: `hkInt16`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
@@ -57,7 +59,7 @@ pub struct hkpLinMotorConstraintAtom {
         schemars(rename = "previousTargetPositionOffset")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "previousTargetPositionOffset"))]
-    pub m_previousTargetPositionOffset: i16,
+    pub m_previousTargetPositionOffset: I16<'a>,
     /// # C++ Info
     /// - name: `targetPosition`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
@@ -71,11 +73,11 @@ pub struct hkpLinMotorConstraintAtom {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "motor"))]
     #[cfg_attr(feature = "serde", serde(rename = "motor"))]
-    pub m_motor: Pointer,
+    pub m_motor: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpLinMotorConstraintAtom {
+    impl<'a> _serde::HavokClass for hkpLinMotorConstraintAtom<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpLinMotorConstraintAtom"
@@ -85,19 +87,20 @@ const _: () = {
             _serde::__private::Signature::new(0x10312464)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_motor.get());
+            v.push(&self.m_motor);
             v
         }
     }
-    impl _serde::Serialize for hkpLinMotorConstraintAtom {
+    impl<'a> _serde::Serialize for hkpLinMotorConstraintAtom<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x10312464)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -126,7 +129,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpLinMotorConstraintAtom {
+    impl<'de> _serde::Deserialize<'de> for hkpLinMotorConstraintAtom<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -188,7 +191,7 @@ const _: () = {
                 }
             }
             struct __hkpLinMotorConstraintAtomVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpLinMotorConstraintAtom>,
+                marker: _serde::__private::PhantomData<hkpLinMotorConstraintAtom<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -196,7 +199,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpLinMotorConstraintAtomVisitor<'de> {
-                type Value = hkpLinMotorConstraintAtom;
+                type Value = hkpLinMotorConstraintAtom<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -216,13 +219,13 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_motorAxis: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_initializedOffset: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_motorAxis: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_initializedOffset: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_previousTargetPositionOffset: _serde::__private::Option<
-                        i16,
+                        I16<'de>,
                     > = _serde::__private::None;
                     let mut m_targetPosition: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_motor: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_motor: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..6usize {
                         match i {
                             0usize => {
@@ -251,7 +254,7 @@ const _: () = {
                                     );
                                 }
                                 m_motorAxis = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -270,7 +273,7 @@ const _: () = {
                                     );
                                 }
                                 m_initializedOffset = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -289,7 +292,7 @@ const _: () = {
                                     );
                                 }
                                 m_previousTargetPositionOffset = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -322,7 +325,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_motor = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -412,13 +415,13 @@ const _: () = {
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
                     let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_motorAxis: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_initializedOffset: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_motorAxis: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_initializedOffset: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_previousTargetPositionOffset: _serde::__private::Option<
-                        i16,
+                        I16<'de>,
                     > = _serde::__private::None;
                     let mut m_targetPosition: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_motor: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_motor: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -491,7 +494,7 @@ const _: () = {
                                     );
                                 }
                                 m_motorAxis = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -519,7 +522,7 @@ const _: () = {
                                     );
                                 }
                                 m_initializedOffset = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -547,7 +550,7 @@ const _: () = {
                                     );
                                 }
                                 m_previousTargetPositionOffset = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -597,7 +600,7 @@ const _: () = {
                                     );
                                 }
                                 m_motor = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -689,10 +692,13 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkpConstraintAtom { __ptr, m_type };
+                    let parent = hkpConstraintAtom {
+                        __ptr: __ptr.clone(),
+                        m_type,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpLinMotorConstraintAtom {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_isEnabled,
                         m_motorAxis,

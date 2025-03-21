@@ -22,7 +22,8 @@ pub struct BSEventOnFalseToTrueModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -46,9 +47,10 @@ pub struct BSEventOnFalseToTrueModifier<'a> {
     /// - name: `EventToSend1`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "EventToSend1"))]
     #[cfg_attr(feature = "serde", serde(rename = "EventToSend1"))]
-    pub m_EventToSend1: hkbEventProperty,
+    pub m_EventToSend1: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `bEnableEvent2`(ctype: `hkBool`)
     /// - offset: ` 56`(x86)/`104`(x86_64)
@@ -67,9 +69,10 @@ pub struct BSEventOnFalseToTrueModifier<'a> {
     /// - name: `EventToSend2`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 60`(x86)/`112`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "EventToSend2"))]
     #[cfg_attr(feature = "serde", serde(rename = "EventToSend2"))]
-    pub m_EventToSend2: hkbEventProperty,
+    pub m_EventToSend2: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `bEnableEvent3`(ctype: `hkBool`)
     /// - offset: ` 68`(x86)/`128`(x86_64)
@@ -88,9 +91,10 @@ pub struct BSEventOnFalseToTrueModifier<'a> {
     /// - name: `EventToSend3`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 72`(x86)/`136`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "EventToSend3"))]
     #[cfg_attr(feature = "serde", serde(rename = "EventToSend3"))]
-    pub m_EventToSend3: hkbEventProperty,
+    pub m_EventToSend3: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `bSlot1ActivatedLastFrame`(ctype: `hkBool`)
     /// - offset: ` 80`(x86)/`152`(x86_64)
@@ -128,9 +132,9 @@ const _: () = {
             _serde::__private::Signature::new(0x81d0777a)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(self.m_EventToSend1.deps_indexes());
             v.extend(self.m_EventToSend2.deps_indexes());
             v.extend(self.m_EventToSend3.deps_indexes());
@@ -144,6 +148,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x81d0777a)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -340,17 +345,17 @@ const _: () = {
                     let mut m_bEnableEvent1: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_bVariableToTest1: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_EventToSend1: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_bEnableEvent2: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_bVariableToTest2: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_EventToSend2: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_bEnableEvent3: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_bVariableToTest3: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_EventToSend3: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_bSlot1ActivatedLastFrame: _serde::__private::Option<
                         bool,
@@ -407,7 +412,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 2usize, 6usize)?;
                                 m_EventToSend1 = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -459,7 +464,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 2usize, 6usize)?;
                                 m_EventToSend2 = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -511,7 +516,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 2usize, 6usize)?;
                                 m_EventToSend3 = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -725,24 +730,26 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_bEnableEvent1: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_bVariableToTest1: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_EventToSend1: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_bEnableEvent2: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_bVariableToTest2: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_EventToSend2: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_bEnableEvent3: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_bVariableToTest3: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_EventToSend3: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -768,7 +775,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -920,7 +927,7 @@ const _: () = {
                                     );
                                 }
                                 m_EventToSend1 = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -998,7 +1005,7 @@ const _: () = {
                                     );
                                 }
                                 m_EventToSend2 = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1076,7 +1083,7 @@ const _: () = {
                                     );
                                 }
                                 m_EventToSend3 = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1238,34 +1245,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(BSEventOnFalseToTrueModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_bEnableEvent1,
                         m_bVariableToTest1,

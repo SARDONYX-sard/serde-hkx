@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpRejectChassisListener {
+pub struct hkpRejectChassisListener<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpRejectChassisListener {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `chassis`(ctype: `void*`)
     /// - offset: ` 12`(x86)/` 16`(x86_64)
@@ -34,11 +36,11 @@ pub struct hkpRejectChassisListener {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "chassis"))]
     #[cfg_attr(feature = "serde", serde(rename = "chassis"))]
-    pub m_chassis: Pointer,
+    pub m_chassis: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpRejectChassisListener {
+    impl<'a> _serde::HavokClass for hkpRejectChassisListener<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpRejectChassisListener"
@@ -48,19 +50,20 @@ const _: () = {
             _serde::__private::Signature::new(0xc4fa16c9)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_chassis.get());
+            v.push(&self.m_chassis);
             v
         }
     }
-    impl _serde::Serialize for hkpRejectChassisListener {
+    impl<'a> _serde::Serialize for hkpRejectChassisListener<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xc4fa16c9)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -83,7 +86,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpRejectChassisListener {
+    impl<'de> _serde::Deserialize<'de> for hkpRejectChassisListener<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -129,7 +132,7 @@ const _: () = {
                 }
             }
             struct __hkpRejectChassisListenerVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpRejectChassisListener>,
+                marker: _serde::__private::PhantomData<hkpRejectChassisListener<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -137,7 +140,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpRejectChassisListenerVisitor<'de> {
-                type Value = hkpRejectChassisListener;
+                type Value = hkpRejectChassisListener<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -156,7 +159,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_chassis: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_chassis: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..1usize {
                         match i {
                             0usize => {
@@ -169,7 +172,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 4usize, 0usize)?;
                                 m_chassis = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -210,15 +213,17 @@ const _: () = {
                         }
                     }
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpRejectChassisListener {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     })

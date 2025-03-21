@@ -22,7 +22,8 @@ pub struct hkbPoweredRagdollControlsModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,28 +35,28 @@ pub struct hkbPoweredRagdollControlsModifier<'a> {
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "controlData"))]
     #[cfg_attr(feature = "serde", serde(rename = "controlData"))]
-    pub m_controlData: hkbPoweredRagdollControlData,
+    pub m_controlData: hkbPoweredRagdollControlData<'a>,
     /// # C++ Info
     /// - name: `bones`(ctype: `struct hkbBoneIndexArray*`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bones"))]
     #[cfg_attr(feature = "serde", serde(rename = "bones"))]
-    pub m_bones: Pointer,
+    pub m_bones: Pointer<'a>,
     /// # C++ Info
     /// - name: `worldFromModelModeData`(ctype: `struct hkbWorldFromModelModeData`)
     /// - offset: ` 84`(x86)/`120`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "worldFromModelModeData"))]
     #[cfg_attr(feature = "serde", serde(rename = "worldFromModelModeData"))]
-    pub m_worldFromModelModeData: hkbWorldFromModelModeData,
+    pub m_worldFromModelModeData: hkbWorldFromModelModeData<'a>,
     /// # C++ Info
     /// - name: `boneWeights`(ctype: `struct hkbBoneWeightArray*`)
     /// - offset: ` 92`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "boneWeights"))]
     #[cfg_attr(feature = "serde", serde(rename = "boneWeights"))]
-    pub m_boneWeights: Pointer,
+    pub m_boneWeights: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -69,13 +70,13 @@ const _: () = {
             _serde::__private::Signature::new(0x7cb54065)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(self.m_controlData.deps_indexes());
-            v.push(self.m_bones.get());
+            v.push(&self.m_bones);
             v.extend(self.m_worldFromModelModeData.deps_indexes());
-            v.push(self.m_boneWeights.get());
+            v.push(&self.m_boneWeights);
             v
         }
     }
@@ -86,6 +87,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x7cb54065)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -254,11 +256,11 @@ const _: () = {
                     let mut m_controlData: _serde::__private::Option<
                         hkbPoweredRagdollControlData,
                     > = _serde::__private::None;
-                    let mut m_bones: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_bones: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_worldFromModelModeData: _serde::__private::Option<
                         hkbWorldFromModelModeData,
                     > = _serde::__private::None;
-                    let mut m_boneWeights: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_boneWeights: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
                             0usize => {
@@ -288,7 +290,7 @@ const _: () = {
                                     );
                                 }
                                 m_bones = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -326,7 +328,7 @@ const _: () = {
                                     );
                                 }
                                 m_boneWeights = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -393,18 +395,20 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_controlData: _serde::__private::Option<
                         hkbPoweredRagdollControlData,
                     > = _serde::__private::None;
-                    let mut m_bones: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_bones: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_worldFromModelModeData: _serde::__private::Option<
                         hkbWorldFromModelModeData,
                     > = _serde::__private::None;
-                    let mut m_boneWeights: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_boneWeights: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -429,7 +433,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -555,7 +559,7 @@ const _: () = {
                                     );
                                 }
                                 m_bones = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -611,7 +615,7 @@ const _: () = {
                                     );
                                 }
                                 m_boneWeights = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -711,34 +715,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbPoweredRagdollControlsModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_controlData,
                         m_bones,

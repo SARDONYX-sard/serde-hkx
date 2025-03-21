@@ -22,11 +22,13 @@ pub struct hkbNamedEventPayload<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkbEventPayload,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkbEventPayload<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -48,7 +50,7 @@ const _: () = {
             _serde::__private::Signature::new(0x65bdd3a0)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -60,6 +62,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x65bdd3a0)));
             let mut serializer = __serializer
                 .serialize_struct("hkbNamedEventPayload", class_meta, (12u64, 24u64))?;
@@ -239,16 +242,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
-                    let parent = hkbEventPayload { __ptr, parent };
+                    let parent = hkbEventPayload {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbNamedEventPayload {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_name,
                     })

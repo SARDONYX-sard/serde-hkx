@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpMotion {
+pub struct hkpMotion<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpMotion {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `type`(ctype: `enum MotionType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -43,7 +45,7 @@ pub struct hkpMotion {
         schemars(rename = "deactivationIntegrateCounter")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "deactivationIntegrateCounter"))]
-    pub m_deactivationIntegrateCounter: u8,
+    pub m_deactivationIntegrateCounter: U8<'a>,
     /// # C++ Info
     /// - name: `deactivationNumInactiveFrames`(ctype: `hkUint16[2]`)
     /// - offset: ` 10`(x86)/` 18`(x86_64)
@@ -53,14 +55,14 @@ pub struct hkpMotion {
         schemars(rename = "deactivationNumInactiveFrames")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "deactivationNumInactiveFrames"))]
-    pub m_deactivationNumInactiveFrames: [u16; 2usize],
+    pub m_deactivationNumInactiveFrames: [U16<'a>; 2usize],
     /// # C++ Info
     /// - name: `motionState`(ctype: `struct hkMotionState`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `176`(x86)/`176`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "motionState"))]
     #[cfg_attr(feature = "serde", serde(rename = "motionState"))]
-    pub m_motionState: hkMotionState,
+    pub m_motionState: hkMotionState<'a>,
     /// # C++ Info
     /// - name: `inertiaAndMassInv`(ctype: `hkVector4`)
     /// - offset: `192`(x86)/`208`(x86_64)
@@ -95,21 +97,21 @@ pub struct hkpMotion {
     /// - type_size: `  8`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "deactivationRefOrientation"))]
     #[cfg_attr(feature = "serde", serde(rename = "deactivationRefOrientation"))]
-    pub m_deactivationRefOrientation: [u32; 2usize],
+    pub m_deactivationRefOrientation: [U32<'a>; 2usize],
     /// # C++ Info
     /// - name: `savedMotion`(ctype: `struct hkpMaxSizeMotion*`)
     /// - offset: `280`(x86)/`296`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "savedMotion"))]
     #[cfg_attr(feature = "serde", serde(rename = "savedMotion"))]
-    pub m_savedMotion: Pointer,
+    pub m_savedMotion: Pointer<'a>,
     /// # C++ Info
     /// - name: `savedQualityTypeIndex`(ctype: `hkUint16`)
     /// - offset: `284`(x86)/`304`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "savedQualityTypeIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "savedQualityTypeIndex"))]
-    pub m_savedQualityTypeIndex: u16,
+    pub m_savedQualityTypeIndex: U16<'a>,
     /// # C++ Info
     /// - name: `gravityFactor`(ctype: `hkHalf`)
     /// - offset: `286`(x86)/`306`(x86_64)
@@ -120,7 +122,7 @@ pub struct hkpMotion {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpMotion {
+    impl<'a> _serde::HavokClass for hkpMotion<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpMotion"
@@ -130,20 +132,21 @@ const _: () = {
             _serde::__private::Signature::new(0x98aadb4f)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_motionState.deps_indexes());
-            v.push(self.m_savedMotion.get());
+            v.push(&self.m_savedMotion);
             v
         }
     }
-    impl _serde::Serialize for hkpMotion {
+    impl<'a> _serde::Serialize for hkpMotion<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x98aadb4f)));
             let mut serializer = __serializer
                 .serialize_struct("hkpMotion", class_meta, (288u64, 320u64))?;
@@ -197,7 +200,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpMotion {
+    impl<'de> _serde::Deserialize<'de> for hkpMotion<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -275,14 +278,14 @@ const _: () = {
                 }
             }
             struct __hkpMotionVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpMotion>,
+                marker: _serde::__private::PhantomData<hkpMotion<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
-                type Value = hkpMotion;
+                type Value = hkpMotion<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -300,10 +303,10 @@ const _: () = {
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_type: _serde::__private::Option<MotionType> = _serde::__private::None;
                     let mut m_deactivationIntegrateCounter: _serde::__private::Option<
-                        u8,
+                        U8<'de>,
                     > = _serde::__private::None;
                     let mut m_deactivationNumInactiveFrames: _serde::__private::Option<
-                        [u16; 2usize],
+                        [U16<'de>; 2usize],
                     > = _serde::__private::None;
                     let mut m_motionState: _serde::__private::Option<hkMotionState> = _serde::__private::None;
                     let mut m_inertiaAndMassInv: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -313,10 +316,12 @@ const _: () = {
                         [Vector4; 2usize],
                     > = _serde::__private::None;
                     let mut m_deactivationRefOrientation: _serde::__private::Option<
-                        [u32; 2usize],
+                        [U32<'de>; 2usize],
                     > = _serde::__private::None;
-                    let mut m_savedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_savedQualityTypeIndex: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_savedMotion: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_savedQualityTypeIndex: _serde::__private::Option<
+                        U16<'de>,
+                    > = _serde::__private::None;
                     let mut m_gravityFactor: _serde::__private::Option<f16> = _serde::__private::None;
                     for i in 0..12usize {
                         match i {
@@ -346,7 +351,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationIntegrateCounter = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -365,7 +370,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationNumInactiveFrames = _serde::__private::Some(
-                                    match __A::next_value::<[u16; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[U16<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -474,7 +479,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationRefOrientation = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -491,7 +496,7 @@ const _: () = {
                                     );
                                 }
                                 m_savedMotion = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -510,7 +515,7 @@ const _: () = {
                                     );
                                 }
                                 m_savedQualityTypeIndex = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -684,10 +689,10 @@ const _: () = {
                 {
                     let mut m_type: _serde::__private::Option<MotionType> = _serde::__private::None;
                     let mut m_deactivationIntegrateCounter: _serde::__private::Option<
-                        u8,
+                        U8<'de>,
                     > = _serde::__private::None;
                     let mut m_deactivationNumInactiveFrames: _serde::__private::Option<
-                        [u16; 2usize],
+                        [U16<'de>; 2usize],
                     > = _serde::__private::None;
                     let mut m_motionState: _serde::__private::Option<hkMotionState> = _serde::__private::None;
                     let mut m_inertiaAndMassInv: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -697,10 +702,12 @@ const _: () = {
                         [Vector4; 2usize],
                     > = _serde::__private::None;
                     let mut m_deactivationRefOrientation: _serde::__private::Option<
-                        [u32; 2usize],
+                        [U32<'de>; 2usize],
                     > = _serde::__private::None;
-                    let mut m_savedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_savedQualityTypeIndex: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_savedMotion: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_savedQualityTypeIndex: _serde::__private::Option<
+                        U16<'de>,
+                    > = _serde::__private::None;
                     let mut m_gravityFactor: _serde::__private::Option<f16> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -750,7 +757,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationIntegrateCounter = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -778,7 +785,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationNumInactiveFrames = _serde::__private::Some(
-                                    match __A::next_value::<[u16; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[U16<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -940,7 +947,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationRefOrientation = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -966,7 +973,7 @@ const _: () = {
                                     );
                                 }
                                 m_savedMotion = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -994,7 +1001,7 @@ const _: () = {
                                     );
                                 }
                                 m_savedQualityTypeIndex = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1174,15 +1181,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpMotion {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_type,
                         m_deactivationIntegrateCounter,
@@ -1338,21 +1347,21 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
-                        4u8 => _serde::__private::Ok(__Field::__field4),
-                        5u8 => _serde::__private::Ok(__Field::__field5),
-                        6u8 => _serde::__private::Ok(__Field::__field6),
-                        7u8 => _serde::__private::Ok(__Field::__field7),
-                        8u8 => _serde::__private::Ok(__Field::__field8),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(5u8) => _serde::__private::Ok(__Field::__field5),
+                        U8::Number(6u8) => _serde::__private::Ok(__Field::__field6),
+                        U8::Number(7u8) => _serde::__private::Ok(__Field::__field7),
+                        U8::Number(8u8) => _serde::__private::Ok(__Field::__field8),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

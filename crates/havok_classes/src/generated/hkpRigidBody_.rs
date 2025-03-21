@@ -22,7 +22,8 @@ pub struct hkpRigidBody<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -41,9 +42,9 @@ const _: () = {
             _serde::__private::Signature::new(0x75f8d805)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.m_world.get());
+            v.push(&self.parent.parent.m_world);
             v.extend(self.parent.parent.m_collidable.deps_indexes());
             v.extend(self.parent.parent.m_multiThreadCheck.deps_indexes());
             v.extend(
@@ -53,21 +54,21 @@ const _: () = {
                     .m_properties
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.push(self.parent.parent.m_treeData.get());
+            v.push(&self.parent.parent.m_treeData);
             v.extend(self.parent.m_material.deps_indexes());
-            v.push(self.parent.m_limitContactImpulseUtilAndFlag.get());
-            v.push(self.parent.m_breakableBody.get());
+            v.push(&self.parent.m_limitContactImpulseUtilAndFlag);
+            v.push(&self.parent.m_breakableBody);
             v.extend(self.parent.m_constraintsMaster.deps_indexes());
-            v.extend(self.parent.m_constraintsSlave.iter().map(|ptr| ptr.get()));
-            v.push(self.parent.m_simulationIsland.get());
+            v.extend(self.parent.m_constraintsSlave.iter());
+            v.push(&self.parent.m_simulationIsland);
             v.extend(self.parent.m_spuCollisionCallback.deps_indexes());
             v.extend(self.parent.m_motion.deps_indexes());
             v.extend(self.parent.m_contactListeners.deps_indexes());
             v.extend(self.parent.m_actions.deps_indexes());
-            v.push(self.parent.m_localFrame.get());
-            v.push(self.parent.m_extendedListeners.get());
+            v.push(&self.parent.m_localFrame);
+            v.push(&self.parent.m_extendedListeners);
             v
         }
     }
@@ -78,6 +79,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x75f8d805)));
             let mut serializer = __serializer
                 .serialize_struct("hkpRigidBody", class_meta, (544u64, 720u64))?;
@@ -306,7 +308,7 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_collidable: _serde::__private::Option<
-                        hkpLinkedCollidable,
+                        hkpLinkedCollidable<'de>,
                     > = _serde::__private::None;
                     let mut m_multiThreadCheck: _serde::__private::Option<
                         hkMultiThreadCheck,
@@ -315,22 +317,24 @@ const _: () = {
                     let mut m_properties: _serde::__private::Option<Vec<hkpProperty>> = _serde::__private::None;
                     let mut m_material: _serde::__private::Option<hkpMaterial> = _serde::__private::None;
                     let mut m_damageMultiplier: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_storageIndex: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_storageIndex: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_contactPointCallbackDelay: _serde::__private::Option<
-                        u16,
+                        U16<'de>,
                     > = _serde::__private::None;
-                    let mut m_autoRemoveLevel: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_autoRemoveLevel: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     let mut m_numShapeKeysInContactPointProperties: _serde::__private::Option<
-                        u8,
+                        U8<'de>,
                     > = _serde::__private::None;
-                    let mut m_responseModifierFlags: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_uid: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_responseModifierFlags: _serde::__private::Option<
+                        U8<'de>,
+                    > = _serde::__private::None;
+                    let mut m_uid: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_spuCollisionCallback: _serde::__private::Option<
                         hkpEntitySpuCollisionCallback,
                     > = _serde::__private::None;
-                    let mut m_motion: _serde::__private::Option<hkpMaxSizeMotion> = _serde::__private::None;
-                    let mut m_localFrame: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_npData: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_motion: _serde::__private::Option<hkpMaxSizeMotion<'de>> = _serde::__private::None;
+                    let mut m_localFrame: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_npData: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -379,7 +383,9 @@ const _: () = {
                                     );
                                 }
                                 m_collidable = _serde::__private::Some(
-                                    match __A::next_value::<hkpLinkedCollidable>(&mut __map) {
+                                    match __A::next_value::<
+                                        hkpLinkedCollidable<'de>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -533,7 +539,7 @@ const _: () = {
                                     );
                                 }
                                 m_storageIndex = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -561,7 +567,7 @@ const _: () = {
                                     );
                                 }
                                 m_contactPointCallbackDelay = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -587,7 +593,7 @@ const _: () = {
                                     );
                                 }
                                 m_autoRemoveLevel = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -615,7 +621,7 @@ const _: () = {
                                     );
                                 }
                                 m_numShapeKeysInContactPointProperties = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -643,7 +649,7 @@ const _: () = {
                                     );
                                 }
                                 m_responseModifierFlags = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -667,7 +673,7 @@ const _: () = {
                                     );
                                 }
                                 m_uid = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -721,7 +727,7 @@ const _: () = {
                                     );
                                 }
                                 m_motion = _serde::__private::Some(
-                                    match __A::next_value::<hkpMaxSizeMotion>(&mut __map) {
+                                    match __A::next_value::<hkpMaxSizeMotion<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -747,7 +753,7 @@ const _: () = {
                                     );
                                 }
                                 m_localFrame = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -771,7 +777,7 @@ const _: () = {
                                     );
                                 }
                                 m_npData = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -975,14 +981,16 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpWorldObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_collidable,
@@ -992,7 +1000,7 @@ const _: () = {
                         ..Default::default()
                     };
                     let parent = hkpEntity {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_material,
                         m_damageMultiplier,
@@ -1009,7 +1017,10 @@ const _: () = {
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
-                    _serde::__private::Ok(hkpRigidBody { __ptr, parent })
+                    _serde::__private::Ok(hkpRigidBody {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    })
                 }
             }
             const FIELDS: &[&str] = &[];

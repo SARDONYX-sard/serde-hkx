@@ -22,60 +22,62 @@ pub struct hkbClientCharacterState<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `deformableSkinIds`(ctype: `hkArray<hkUint64>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "deformableSkinIds"))]
     #[cfg_attr(feature = "serde", serde(rename = "deformableSkinIds"))]
-    pub m_deformableSkinIds: Vec<u64>,
+    pub m_deformableSkinIds: Vec<U64<'a>>,
     /// # C++ Info
     /// - name: `rigidSkinIds`(ctype: `hkArray<hkUint64>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "rigidSkinIds"))]
     #[cfg_attr(feature = "serde", serde(rename = "rigidSkinIds"))]
-    pub m_rigidSkinIds: Vec<u64>,
+    pub m_rigidSkinIds: Vec<U64<'a>>,
     /// # C++ Info
     /// - name: `externalEventIds`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "externalEventIds"))]
     #[cfg_attr(feature = "serde", serde(rename = "externalEventIds"))]
-    pub m_externalEventIds: Vec<i16>,
+    pub m_externalEventIds: Vec<I16<'a>>,
     /// # C++ Info
     /// - name: `auxiliaryInfo`(ctype: `hkArray<hkbAuxiliaryNodeInfo*>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "auxiliaryInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "auxiliaryInfo"))]
-    pub m_auxiliaryInfo: Vec<Pointer>,
+    pub m_auxiliaryInfo: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `activeEventIds`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "activeEventIds"))]
     #[cfg_attr(feature = "serde", serde(rename = "activeEventIds"))]
-    pub m_activeEventIds: Vec<i16>,
+    pub m_activeEventIds: Vec<I16<'a>>,
     /// # C++ Info
     /// - name: `activeVariableIds`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "activeVariableIds"))]
     #[cfg_attr(feature = "serde", serde(rename = "activeVariableIds"))]
-    pub m_activeVariableIds: Vec<i16>,
+    pub m_activeVariableIds: Vec<I16<'a>>,
     /// # C++ Info
     /// - name: `characterId`(ctype: `hkUint64`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterId"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterId"))]
-    pub m_characterId: u64,
+    pub m_characterId: U64<'a>,
     /// # C++ Info
     /// - name: `instanceName`(ctype: `hkStringPtr`)
     /// - offset: ` 88`(x86)/`120`(x86_64)
@@ -106,14 +108,14 @@ pub struct hkbClientCharacterState<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "behaviorData"))]
     #[cfg_attr(feature = "serde", serde(rename = "behaviorData"))]
-    pub m_behaviorData: Pointer,
+    pub m_behaviorData: Pointer<'a>,
     /// # C++ Info
     /// - name: `behaviorInternalState`(ctype: `struct hkbBehaviorGraphInternalState*`)
     /// - offset: `104`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "behaviorInternalState"))]
     #[cfg_attr(feature = "serde", serde(rename = "behaviorInternalState"))]
-    pub m_behaviorInternalState: Pointer,
+    pub m_behaviorInternalState: Pointer<'a>,
     /// # C++ Info
     /// - name: `nodeIdToInternalStateMap`(ctype: `void*`)
     /// - offset: `108`(x86)/`160`(x86_64)
@@ -121,7 +123,7 @@ pub struct hkbClientCharacterState<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "nodeIdToInternalStateMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "nodeIdToInternalStateMap"))]
-    pub m_nodeIdToInternalStateMap: Pointer,
+    pub m_nodeIdToInternalStateMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `visible`(ctype: `hkBool`)
     /// - offset: `112`(x86)/`168`(x86_64)
@@ -142,7 +144,7 @@ pub struct hkbClientCharacterState<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "skeleton"))]
     #[cfg_attr(feature = "serde", serde(rename = "skeleton"))]
-    pub m_skeleton: Pointer,
+    pub m_skeleton: Pointer<'a>,
     /// # C++ Info
     /// - name: `worldFromModel`(ctype: `hkQsTransform`)
     /// - offset: `128`(x86)/`192`(x86_64)
@@ -177,13 +179,13 @@ const _: () = {
             _serde::__private::Signature::new(0xa2624c97)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.extend(self.m_auxiliaryInfo.iter().map(|ptr| ptr.get()));
-            v.push(self.m_behaviorData.get());
-            v.push(self.m_behaviorInternalState.get());
-            v.push(self.m_nodeIdToInternalStateMap.get());
-            v.push(self.m_skeleton.get());
+            v.extend(self.m_auxiliaryInfo.iter());
+            v.push(&self.m_behaviorData);
+            v.push(&self.m_behaviorInternalState);
+            v.push(&self.m_nodeIdToInternalStateMap);
+            v.push(&self.m_skeleton);
             v
         }
     }
@@ -194,6 +196,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xa2624c97)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -399,28 +402,36 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_deformableSkinIds: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
-                    let mut m_rigidSkinIds: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
-                    let mut m_externalEventIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
-                    let mut m_auxiliaryInfo: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_activeEventIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
-                    let mut m_activeVariableIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
-                    let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_deformableSkinIds: _serde::__private::Option<
+                        Vec<U64<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_rigidSkinIds: _serde::__private::Option<Vec<U64<'de>>> = _serde::__private::None;
+                    let mut m_externalEventIds: _serde::__private::Option<
+                        Vec<I16<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_auxiliaryInfo: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_activeEventIds: _serde::__private::Option<Vec<I16<'de>>> = _serde::__private::None;
+                    let mut m_activeVariableIds: _serde::__private::Option<
+                        Vec<I16<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_characterId: _serde::__private::Option<U64<'de>> = _serde::__private::None;
                     let mut m_instanceName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_templateName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_fullPathToProject: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
-                    let mut m_behaviorData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_behaviorData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_behaviorInternalState: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_nodeIdToInternalStateMap: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_elapsedSimulationTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_skeleton: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_worldFromModel: _serde::__private::Option<QsTransform> = _serde::__private::None;
                     let mut m_poseModelSpace: _serde::__private::Option<
                         Vec<QsTransform>,
@@ -441,7 +452,7 @@ const _: () = {
                                     );
                                 }
                                 m_deformableSkinIds = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u64>>(&mut __map) {
+                                    match __A::next_value::<Vec<U64<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -458,7 +469,7 @@ const _: () = {
                                     );
                                 }
                                 m_rigidSkinIds = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u64>>(&mut __map) {
+                                    match __A::next_value::<Vec<U64<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -475,7 +486,7 @@ const _: () = {
                                     );
                                 }
                                 m_externalEventIds = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -492,7 +503,7 @@ const _: () = {
                                     );
                                 }
                                 m_auxiliaryInfo = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -509,7 +520,7 @@ const _: () = {
                                     );
                                 }
                                 m_activeEventIds = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -528,7 +539,7 @@ const _: () = {
                                     );
                                 }
                                 m_activeVariableIds = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -545,7 +556,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<U64<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -615,7 +626,7 @@ const _: () = {
                                     );
                                 }
                                 m_behaviorData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -634,7 +645,7 @@ const _: () = {
                                     );
                                 }
                                 m_behaviorInternalState = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -653,7 +664,7 @@ const _: () = {
                                     );
                                 }
                                 m_nodeIdToInternalStateMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -707,7 +718,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeleton = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -991,25 +1002,33 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_deformableSkinIds: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
-                    let mut m_rigidSkinIds: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
-                    let mut m_externalEventIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
-                    let mut m_auxiliaryInfo: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_activeEventIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
-                    let mut m_activeVariableIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
-                    let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_deformableSkinIds: _serde::__private::Option<
+                        Vec<U64<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_rigidSkinIds: _serde::__private::Option<Vec<U64<'de>>> = _serde::__private::None;
+                    let mut m_externalEventIds: _serde::__private::Option<
+                        Vec<I16<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_auxiliaryInfo: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_activeEventIds: _serde::__private::Option<Vec<I16<'de>>> = _serde::__private::None;
+                    let mut m_activeVariableIds: _serde::__private::Option<
+                        Vec<I16<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_characterId: _serde::__private::Option<U64<'de>> = _serde::__private::None;
                     let mut m_instanceName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_templateName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_fullPathToProject: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
-                    let mut m_behaviorData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_behaviorData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_behaviorInternalState: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_elapsedSimulationTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_skeleton: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_worldFromModel: _serde::__private::Option<QsTransform> = _serde::__private::None;
                     let mut m_poseModelSpace: _serde::__private::Option<
                         Vec<QsTransform>,
@@ -1041,7 +1060,7 @@ const _: () = {
                                     );
                                 }
                                 m_deformableSkinIds = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u64>>(&mut __map) {
+                                    match __A::next_value::<Vec<U64<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1067,7 +1086,7 @@ const _: () = {
                                     );
                                 }
                                 m_rigidSkinIds = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u64>>(&mut __map) {
+                                    match __A::next_value::<Vec<U64<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1093,7 +1112,7 @@ const _: () = {
                                     );
                                 }
                                 m_externalEventIds = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1119,7 +1138,7 @@ const _: () = {
                                     );
                                 }
                                 m_auxiliaryInfo = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1145,7 +1164,7 @@ const _: () = {
                                     );
                                 }
                                 m_activeEventIds = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1173,7 +1192,7 @@ const _: () = {
                                     );
                                 }
                                 m_activeVariableIds = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1199,7 +1218,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<U64<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1305,7 +1324,7 @@ const _: () = {
                                     );
                                 }
                                 m_behaviorData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1333,7 +1352,7 @@ const _: () = {
                                     );
                                 }
                                 m_behaviorInternalState = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1413,7 +1432,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeleton = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1717,15 +1736,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbClientCharacterState {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_deformableSkinIds,
                         m_rigidSkinIds,

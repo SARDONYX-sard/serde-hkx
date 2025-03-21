@@ -22,7 +22,8 @@ pub struct hkbBlenderGenerator<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -65,14 +66,14 @@ pub struct hkbBlenderGenerator<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indexOfSyncMasterChild"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexOfSyncMasterChild"))]
-    pub m_indexOfSyncMasterChild: i16,
+    pub m_indexOfSyncMasterChild: I16<'a>,
     /// # C++ Info
     /// - name: `flags`(ctype: `hkInt16`)
     /// - offset: ` 58`(x86)/` 90`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
-    pub m_flags: i16,
+    pub m_flags: I16<'a>,
     /// # C++ Info
     /// - name: `subtractLastChild`(ctype: `hkBool`)
     /// - offset: ` 60`(x86)/` 92`(x86_64)
@@ -86,7 +87,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "children"))]
     #[cfg_attr(feature = "serde", serde(rename = "children"))]
-    pub m_children: Vec<Pointer>,
+    pub m_children: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `childrenInternalStates`(ctype: `hkArray<void>`)
     /// - offset: ` 76`(x86)/`112`(x86_64)
@@ -118,7 +119,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "numActiveChildren"))]
     #[cfg_attr(feature = "serde", serde(rename = "numActiveChildren"))]
-    pub m_numActiveChildren: i32,
+    pub m_numActiveChildren: I32<'a>,
     /// # C++ Info
     /// - name: `beginIntervalIndex`(ctype: `hkInt16`)
     /// - offset: `108`(x86)/`152`(x86_64)
@@ -126,7 +127,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "beginIntervalIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "beginIntervalIndex"))]
-    pub m_beginIntervalIndex: i16,
+    pub m_beginIntervalIndex: I16<'a>,
     /// # C++ Info
     /// - name: `endIntervalIndex`(ctype: `hkInt16`)
     /// - offset: `110`(x86)/`154`(x86_64)
@@ -134,7 +135,7 @@ pub struct hkbBlenderGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "endIntervalIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "endIntervalIndex"))]
-    pub m_endIntervalIndex: i16,
+    pub m_endIntervalIndex: I16<'a>,
     /// # C++ Info
     /// - name: `initSync`(ctype: `hkBool`)
     /// - offset: `112`(x86)/`156`(x86_64)
@@ -164,10 +165,10 @@ const _: () = {
             _serde::__private::Signature::new(0x22df7147)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
-            v.extend(self.m_children.iter().map(|ptr| ptr.get()));
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
+            v.extend(self.m_children.iter());
             v
         }
     }
@@ -178,6 +179,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x22df7147)));
             let mut serializer = __serializer
                 .serialize_struct("hkbBlenderGenerator", class_meta, (116u64, 160u64))?;
@@ -381,18 +383,20 @@ const _: () = {
                     let mut m_blendParameter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minCyclicBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxCyclicBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_indexOfSyncMasterChild: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_indexOfSyncMasterChild: _serde::__private::Option<
+                        I16<'de>,
+                    > = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_subtractLastChild: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_children: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     let mut m_childrenInternalStates: _serde::__private::Option<
                         Vec<()>,
                     > = _serde::__private::None;
                     let mut m_sortedChildren: _serde::__private::Option<Vec<()>> = _serde::__private::None;
                     let mut m_endIntervalWeight: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_numActiveChildren: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_beginIntervalIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_endIntervalIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_numActiveChildren: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_beginIntervalIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_endIntervalIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_initSync: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_doSubtractiveBlend: _serde::__private::Option<bool> = _serde::__private::None;
                     for i in 0..16usize {
@@ -482,7 +486,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexOfSyncMasterChild = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -497,7 +501,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -534,7 +538,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_children = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -608,7 +612,7 @@ const _: () = {
                                     );
                                 }
                                 m_numActiveChildren = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -627,7 +631,7 @@ const _: () = {
                                     );
                                 }
                                 m_beginIntervalIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -644,7 +648,7 @@ const _: () = {
                                     );
                                 }
                                 m_endIntervalIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -875,7 +879,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_referencePoseWeightThreshold: _serde::__private::Option<
@@ -884,10 +890,12 @@ const _: () = {
                     let mut m_blendParameter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minCyclicBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxCyclicBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_indexOfSyncMasterChild: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_indexOfSyncMasterChild: _serde::__private::Option<
+                        I16<'de>,
+                    > = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_subtractLastChild: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_children: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -912,7 +920,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1100,7 +1108,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexOfSyncMasterChild = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1124,7 +1132,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1178,7 +1186,7 @@ const _: () = {
                                     );
                                 }
                                 m_children = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1314,29 +1322,34 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
-                    let parent = hkbGenerator { __ptr, parent };
+                    let parent = hkbGenerator {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbBlenderGenerator {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_referencePoseWeightThreshold,
                         m_blendParameter,

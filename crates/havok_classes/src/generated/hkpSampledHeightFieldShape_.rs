@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpSampledHeightFieldShape {
+pub struct hkpSampledHeightFieldShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,25 +22,27 @@ pub struct hkpSampledHeightFieldShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpHeightFieldShape,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpHeightFieldShape<'a>,
     /// # C++ Info
     /// - name: `xRes`(ctype: `hkInt32`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "xRes"))]
     #[cfg_attr(feature = "serde", serde(rename = "xRes"))]
-    pub m_xRes: i32,
+    pub m_xRes: I32<'a>,
     /// # C++ Info
     /// - name: `zRes`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "zRes"))]
     #[cfg_attr(feature = "serde", serde(rename = "zRes"))]
-    pub m_zRes: i32,
+    pub m_zRes: I32<'a>,
     /// # C++ Info
     /// - name: `heightCenter`(ctype: `hkReal`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
@@ -96,7 +98,7 @@ pub struct hkpSampledHeightFieldShape {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpSampledHeightFieldShape {
+    impl<'a> _serde::HavokClass for hkpSampledHeightFieldShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpSampledHeightFieldShape"
@@ -106,18 +108,19 @@ const _: () = {
             _serde::__private::Signature::new(0x11213421)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpSampledHeightFieldShape {
+    impl<'a> _serde::Serialize for hkpSampledHeightFieldShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x11213421)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -167,7 +170,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpSampledHeightFieldShape {
+    impl<'de> _serde::Deserialize<'de> for hkpSampledHeightFieldShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -237,7 +240,7 @@ const _: () = {
                 }
             }
             struct __hkpSampledHeightFieldShapeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpSampledHeightFieldShape>,
+                marker: _serde::__private::PhantomData<hkpSampledHeightFieldShape<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -245,7 +248,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpSampledHeightFieldShapeVisitor<'de> {
-                type Value = hkpSampledHeightFieldShape;
+                type Value = hkpSampledHeightFieldShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -264,8 +267,8 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_xRes: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_zRes: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_xRes: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_zRes: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_heightCenter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_useProjectionBasedHeight: _serde::__private::Option<
                         bool,
@@ -288,7 +291,7 @@ const _: () = {
                                     );
                                 }
                                 m_xRes = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -303,7 +306,7 @@ const _: () = {
                                     );
                                 }
                                 m_zRes = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -545,8 +548,8 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
-                    let mut m_xRes: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_zRes: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_xRes: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_zRes: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_heightCenter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_useProjectionBasedHeight: _serde::__private::Option<
                         bool,
@@ -606,7 +609,7 @@ const _: () = {
                                     );
                                 }
                                 m_xRes = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -630,7 +633,7 @@ const _: () = {
                                     );
                                 }
                                 m_zRes = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -940,25 +943,27 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
                     let parent = hkpHeightFieldShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpSampledHeightFieldShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_xRes,
                         m_zRes,
@@ -1085,16 +1090,16 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

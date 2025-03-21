@@ -22,11 +22,13 @@ pub struct hkSimpleLocalFrame<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkLocalFrame,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkLocalFrame<'a>,
     /// # C++ Info
     /// - name: `transform`(ctype: `hkTransform`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
@@ -40,7 +42,7 @@ pub struct hkSimpleLocalFrame<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "children"))]
     #[cfg_attr(feature = "serde", serde(rename = "children"))]
-    pub m_children: Vec<Pointer>,
+    pub m_children: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `parentFrame`(ctype: `struct hkLocalFrame*`)
     /// - offset: ` 92`(x86)/` 96`(x86_64)
@@ -48,14 +50,14 @@ pub struct hkSimpleLocalFrame<'a> {
     /// - flags: `NOT_OWNED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "parentFrame"))]
     #[cfg_attr(feature = "serde", serde(rename = "parentFrame"))]
-    pub m_parentFrame: Pointer,
+    pub m_parentFrame: Pointer<'a>,
     /// # C++ Info
     /// - name: `group`(ctype: `struct hkLocalFrameGroup*`)
     /// - offset: ` 96`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "group"))]
     #[cfg_attr(feature = "serde", serde(rename = "group"))]
-    pub m_group: Pointer,
+    pub m_group: Pointer<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `100`(x86)/`112`(x86_64)
@@ -77,11 +79,11 @@ const _: () = {
             _serde::__private::Signature::new(0xe758f63c)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.extend(self.m_children.iter().map(|ptr| ptr.get()));
-            v.push(self.m_parentFrame.get());
-            v.push(self.m_group.get());
+            v.extend(self.m_children.iter());
+            v.push(&self.m_parentFrame);
+            v.push(&self.m_group);
             v
         }
     }
@@ -92,6 +94,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xe758f63c)));
             let mut serializer = __serializer
                 .serialize_struct("hkSimpleLocalFrame", class_meta, (112u64, 128u64))?;
@@ -201,9 +204,9 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_transform: _serde::__private::Option<Transform> = _serde::__private::None;
-                    let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_parentFrame: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_group: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_children: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_parentFrame: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_group: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
@@ -234,7 +237,7 @@ const _: () = {
                                     );
                                 }
                                 m_children = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -251,7 +254,7 @@ const _: () = {
                                     );
                                 }
                                 m_parentFrame = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -266,7 +269,7 @@ const _: () = {
                                     );
                                 }
                                 m_group = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -356,9 +359,9 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_transform: _serde::__private::Option<Transform> = _serde::__private::None;
-                    let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_parentFrame: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_group: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_children: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_parentFrame: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_group: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -408,7 +411,7 @@ const _: () = {
                                     );
                                 }
                                 m_children = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -434,7 +437,7 @@ const _: () = {
                                     );
                                 }
                                 m_parentFrame = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -458,7 +461,7 @@ const _: () = {
                                     );
                                 }
                                 m_group = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -548,16 +551,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
-                    let parent = hkLocalFrame { __ptr, parent };
+                    let parent = hkLocalFrame {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkSimpleLocalFrame {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_transform,
                         m_children,

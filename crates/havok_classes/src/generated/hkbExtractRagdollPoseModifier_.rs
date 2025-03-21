@@ -22,7 +22,8 @@ pub struct hkbExtractRagdollPoseModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,21 +35,21 @@ pub struct hkbExtractRagdollPoseModifier<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "poseMatchingBone0"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone0"))]
-    pub m_poseMatchingBone0: i16,
+    pub m_poseMatchingBone0: I16<'a>,
     /// # C++ Info
     /// - name: `poseMatchingBone1`(ctype: `hkInt16`)
     /// - offset: ` 46`(x86)/` 82`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "poseMatchingBone1"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone1"))]
-    pub m_poseMatchingBone1: i16,
+    pub m_poseMatchingBone1: I16<'a>,
     /// # C++ Info
     /// - name: `poseMatchingBone2`(ctype: `hkInt16`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "poseMatchingBone2"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone2"))]
-    pub m_poseMatchingBone2: i16,
+    pub m_poseMatchingBone2: I16<'a>,
     /// # C++ Info
     /// - name: `enableComputeWorldFromModel`(ctype: `hkBool`)
     /// - offset: ` 50`(x86)/` 86`(x86_64)
@@ -72,9 +73,9 @@ const _: () = {
             _serde::__private::Signature::new(0x804dcbab)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v
         }
     }
@@ -85,6 +86,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x804dcbab)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -251,9 +253,9 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_poseMatchingBone0: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_poseMatchingBone1: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_poseMatchingBone2: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_poseMatchingBone0: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_poseMatchingBone1: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_poseMatchingBone2: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_enableComputeWorldFromModel: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
@@ -270,7 +272,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone0 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -289,7 +291,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone1 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -308,7 +310,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone2 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -396,13 +398,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_poseMatchingBone0: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_poseMatchingBone1: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_poseMatchingBone2: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_poseMatchingBone0: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_poseMatchingBone1: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_poseMatchingBone2: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_enableComputeWorldFromModel: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
@@ -430,7 +434,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -532,7 +536,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone0 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -560,7 +564,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone1 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -588,7 +592,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone2 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -718,34 +722,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbExtractRagdollPoseModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_poseMatchingBone0,
                         m_poseMatchingBone1,

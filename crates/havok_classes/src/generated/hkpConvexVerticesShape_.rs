@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpConvexVerticesShape {
+pub struct hkpConvexVerticesShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpConvexVerticesShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConvexShape,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConvexShape<'a>,
     /// # C++ Info
     /// - name: `aabbHalfExtents`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
@@ -47,14 +49,14 @@ pub struct hkpConvexVerticesShape {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "rotatedVertices"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotatedVertices"))]
-    pub m_rotatedVertices: Vec<hkpConvexVerticesShapeFourVectors>,
+    pub m_rotatedVertices: Vec<hkpConvexVerticesShapeFourVectors<'a>>,
     /// # C++ Info
     /// - name: `numVertices`(ctype: `hkInt32`)
     /// - offset: ` 76`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numVertices"))]
     #[cfg_attr(feature = "serde", serde(rename = "numVertices"))]
-    pub m_numVertices: i32,
+    pub m_numVertices: I32<'a>,
     /// # C++ Info
     /// - name: `externalObject`(ctype: `void*`)
     /// - offset: ` 80`(x86)/`104`(x86_64)
@@ -62,7 +64,7 @@ pub struct hkpConvexVerticesShape {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "externalObject"))]
     #[cfg_attr(feature = "serde", serde(rename = "externalObject"))]
-    pub m_externalObject: Pointer,
+    pub m_externalObject: Pointer<'a>,
     /// # C++ Info
     /// - name: `getFaceNormals`(ctype: `void*`)
     /// - offset: ` 84`(x86)/`112`(x86_64)
@@ -70,7 +72,7 @@ pub struct hkpConvexVerticesShape {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "getFaceNormals"))]
     #[cfg_attr(feature = "serde", serde(rename = "getFaceNormals"))]
-    pub m_getFaceNormals: Pointer,
+    pub m_getFaceNormals: Pointer<'a>,
     /// # C++ Info
     /// - name: `planeEquations`(ctype: `hkArray<hkVector4>`)
     /// - offset: ` 88`(x86)/`120`(x86_64)
@@ -84,11 +86,11 @@ pub struct hkpConvexVerticesShape {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "connectivity"))]
     #[cfg_attr(feature = "serde", serde(rename = "connectivity"))]
-    pub m_connectivity: Pointer,
+    pub m_connectivity: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpConvexVerticesShape {
+    impl<'a> _serde::HavokClass for hkpConvexVerticesShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpConvexVerticesShape"
@@ -98,28 +100,29 @@ const _: () = {
             _serde::__private::Signature::new(0x28726ad8)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_rotatedVertices
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.push(self.m_externalObject.get());
-            v.push(self.m_getFaceNormals.get());
-            v.push(self.m_connectivity.get());
+            v.push(&self.m_externalObject);
+            v.push(&self.m_getFaceNormals);
+            v.push(&self.m_connectivity);
             v
         }
     }
-    impl _serde::Serialize for hkpConvexVerticesShape {
+    impl<'a> _serde::Serialize for hkpConvexVerticesShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x28726ad8)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -178,7 +181,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpConvexVerticesShape {
+    impl<'de> _serde::Deserialize<'de> for hkpConvexVerticesShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -240,14 +243,14 @@ const _: () = {
                 }
             }
             struct __hkpConvexVerticesShapeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpConvexVerticesShape>,
+                marker: _serde::__private::PhantomData<hkpConvexVerticesShape<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpConvexVerticesShapeVisitor<'de> {
-                type Value = hkpConvexVerticesShape;
+                type Value = hkpConvexVerticesShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -271,11 +274,11 @@ const _: () = {
                     let mut m_rotatedVertices: _serde::__private::Option<
                         Vec<hkpConvexVerticesShapeFourVectors>,
                     > = _serde::__private::None;
-                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_externalObject: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_getFaceNormals: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_numVertices: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_externalObject: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_getFaceNormals: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_planeEquations: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
-                    let mut m_connectivity: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_connectivity: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..8usize {
                         match i {
                             0usize => {
@@ -341,7 +344,7 @@ const _: () = {
                                     );
                                 }
                                 m_numVertices = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -359,7 +362,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_externalObject = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -376,7 +379,7 @@ const _: () = {
                                     );
                                 }
                                 m_getFaceNormals = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -410,7 +413,7 @@ const _: () = {
                                     );
                                 }
                                 m_connectivity = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -530,9 +533,9 @@ const _: () = {
                     let mut m_rotatedVertices: _serde::__private::Option<
                         Vec<hkpConvexVerticesShapeFourVectors>,
                     > = _serde::__private::None;
-                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numVertices: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_planeEquations: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
-                    let mut m_connectivity: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_connectivity: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -685,7 +688,7 @@ const _: () = {
                                     );
                                 }
                                 m_numVertices = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -737,7 +740,7 @@ const _: () = {
                                     );
                                 }
                                 m_connectivity = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -841,27 +844,32 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
-                    let parent = hkpSphereRepShape { __ptr, parent };
+                    let parent = hkpSphereRepShape {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let parent = hkpConvexShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_radius,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpConvexVerticesShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_aabbHalfExtents,
                         m_aabbCenter,

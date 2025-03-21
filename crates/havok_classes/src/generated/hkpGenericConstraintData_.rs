@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpGenericConstraintData {
+pub struct hkpGenericConstraintData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,29 +22,31 @@ pub struct hkpGenericConstraintData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConstraintData,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConstraintData<'a>,
     /// # C++ Info
     /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "atoms"))]
     #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
-    pub m_atoms: hkpBridgeAtoms,
+    pub m_atoms: hkpBridgeAtoms<'a>,
     /// # C++ Info
     /// - name: `scheme`(ctype: `struct hkpGenericConstraintDataScheme`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: ` 64`(x86)/` 80`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "scheme"))]
     #[cfg_attr(feature = "serde", serde(rename = "scheme"))]
-    pub m_scheme: hkpGenericConstraintDataScheme,
+    pub m_scheme: hkpGenericConstraintDataScheme<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpGenericConstraintData {
+    impl<'a> _serde::HavokClass for hkpGenericConstraintData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpGenericConstraintData"
@@ -54,20 +56,21 @@ const _: () = {
             _serde::__private::Signature::new(0xfa824640)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_atoms.deps_indexes());
             v.extend(self.m_scheme.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkpGenericConstraintData {
+    impl<'a> _serde::Serialize for hkpGenericConstraintData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xfa824640)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -93,7 +96,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpGenericConstraintData {
+    impl<'de> _serde::Deserialize<'de> for hkpGenericConstraintData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -145,7 +148,7 @@ const _: () = {
                 }
             }
             struct __hkpGenericConstraintDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpGenericConstraintData>,
+                marker: _serde::__private::PhantomData<hkpGenericConstraintData<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -153,7 +156,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpGenericConstraintDataVisitor<'de> {
-                type Value = hkpGenericConstraintData;
+                type Value = hkpGenericConstraintData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -363,20 +366,22 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpConstraintData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpGenericConstraintData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_atoms,
                         m_scheme,

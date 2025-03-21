@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkSweptTransform {
+pub struct hkSweptTransform<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkSweptTransform {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `centerOfMass0`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -61,7 +62,7 @@ pub struct hkSweptTransform {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkSweptTransform {
+    impl<'a> _serde::HavokClass for hkSweptTransform<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkSweptTransform"
@@ -71,18 +72,19 @@ const _: () = {
             _serde::__private::Signature::new(0xb4e5770)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkSweptTransform {
+    impl<'a> _serde::Serialize for hkSweptTransform<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xb4e5770)));
             let mut serializer = __serializer
                 .serialize_struct("hkSweptTransform", class_meta, (80u64, 80u64))?;
@@ -100,7 +102,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkSweptTransform {
+    impl<'de> _serde::Deserialize<'de> for hkSweptTransform<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -156,14 +158,14 @@ const _: () = {
                 }
             }
             struct __hkSweptTransformVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkSweptTransform>,
+                marker: _serde::__private::PhantomData<hkSweptTransform<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkSweptTransformVisitor<'de> {
-                type Value = hkSweptTransform;
+                type Value = hkSweptTransform<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -551,7 +553,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkSweptTransform {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_centerOfMass0,
                         m_centerOfMass1,
                         m_rotation0,

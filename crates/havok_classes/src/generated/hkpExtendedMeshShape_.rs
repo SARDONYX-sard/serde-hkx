@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpExtendedMeshShape {
+pub struct hkpExtendedMeshShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,21 @@ pub struct hkpExtendedMeshShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpShapeCollection,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpShapeCollection<'a>,
     /// # C++ Info
     /// - name: `embeddedTrianglesSubpart`(ctype: `struct hkpExtendedMeshShapeTrianglesSubpart`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: `112`(x86)/`160`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "embeddedTrianglesSubpart"))]
     #[cfg_attr(feature = "serde", serde(rename = "embeddedTrianglesSubpart"))]
-    pub m_embeddedTrianglesSubpart: hkpExtendedMeshShapeTrianglesSubpart,
+    pub m_embeddedTrianglesSubpart: hkpExtendedMeshShapeTrianglesSubpart<'a>,
     /// # C++ Info
     /// - name: `aabbHalfExtents`(ctype: `hkVector4`)
     /// - offset: `144`(x86)/`208`(x86_64)
@@ -55,35 +58,37 @@ pub struct hkpExtendedMeshShape {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialClass"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialClass"))]
-    pub m_materialClass: Pointer,
+    pub m_materialClass: Pointer<'a>,
     /// # C++ Info
     /// - name: `numBitsForSubpartIndex`(ctype: `hkInt32`)
     /// - offset: `180`(x86)/`248`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numBitsForSubpartIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "numBitsForSubpartIndex"))]
-    pub m_numBitsForSubpartIndex: i32,
+    pub m_numBitsForSubpartIndex: I32<'a>,
     /// # C++ Info
     /// - name: `trianglesSubparts`(ctype: `hkArray<struct hkpExtendedMeshShapeTrianglesSubpart>`)
     /// - offset: `184`(x86)/`256`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "trianglesSubparts"))]
     #[cfg_attr(feature = "serde", serde(rename = "trianglesSubparts"))]
-    pub m_trianglesSubparts: Vec<hkpExtendedMeshShapeTrianglesSubpart>,
+    pub m_trianglesSubparts: Vec<hkpExtendedMeshShapeTrianglesSubpart<'a>>,
     /// # C++ Info
     /// - name: `shapesSubparts`(ctype: `hkArray<struct hkpExtendedMeshShapeShapesSubpart>`)
     /// - offset: `196`(x86)/`272`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "shapesSubparts"))]
     #[cfg_attr(feature = "serde", serde(rename = "shapesSubparts"))]
-    pub m_shapesSubparts: Vec<hkpExtendedMeshShapeShapesSubpart>,
+    pub m_shapesSubparts: Vec<hkpExtendedMeshShapeShapesSubpart<'a>>,
     /// # C++ Info
     /// - name: `weldingInfo`(ctype: `hkArray<hkUint16>`)
     /// - offset: `208`(x86)/`288`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "weldingInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "weldingInfo"))]
-    pub m_weldingInfo: Vec<u16>,
+    pub m_weldingInfo: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `weldingType`(ctype: `enum WeldingType`)
     /// - offset: `220`(x86)/`304`(x86_64)
@@ -97,14 +102,14 @@ pub struct hkpExtendedMeshShape {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "defaultCollisionFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "defaultCollisionFilterInfo"))]
-    pub m_defaultCollisionFilterInfo: u32,
+    pub m_defaultCollisionFilterInfo: U32<'a>,
     /// # C++ Info
     /// - name: `cachedNumChildShapes`(ctype: `hkInt32`)
     /// - offset: `228`(x86)/`312`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "cachedNumChildShapes"))]
     #[cfg_attr(feature = "serde", serde(rename = "cachedNumChildShapes"))]
-    pub m_cachedNumChildShapes: i32,
+    pub m_cachedNumChildShapes: I32<'a>,
     /// # C++ Info
     /// - name: `triangleRadius`(ctype: `hkReal`)
     /// - offset: `232`(x86)/`316`(x86_64)
@@ -119,11 +124,11 @@ pub struct hkpExtendedMeshShape {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "padding"))]
     #[cfg_attr(feature = "serde", serde(rename = "padding"))]
-    pub m_padding: i32,
+    pub m_padding: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpExtendedMeshShape {
+    impl<'a> _serde::HavokClass for hkpExtendedMeshShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpExtendedMeshShape"
@@ -133,34 +138,35 @@ const _: () = {
             _serde::__private::Signature::new(0x177114a2)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_embeddedTrianglesSubpart.deps_indexes());
-            v.push(self.m_materialClass.get());
+            v.push(&self.m_materialClass);
             v.extend(
                 self
                     .m_trianglesSubparts
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_shapesSubparts
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkpExtendedMeshShape {
+    impl<'a> _serde::Serialize for hkpExtendedMeshShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x177114a2)));
             let mut serializer = __serializer
                 .serialize_struct("hkpExtendedMeshShape", class_meta, (240u64, 336u64))?;
@@ -243,7 +249,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpExtendedMeshShape {
+    impl<'de> _serde::Deserialize<'de> for hkpExtendedMeshShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -321,14 +327,14 @@ const _: () = {
                 }
             }
             struct __hkpExtendedMeshShapeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpExtendedMeshShape>,
+                marker: _serde::__private::PhantomData<hkpExtendedMeshShape<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
-                type Value = hkpExtendedMeshShape;
+                type Value = hkpExtendedMeshShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -348,26 +354,30 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_embeddedTrianglesSubpart: _serde::__private::Option<
-                        hkpExtendedMeshShapeTrianglesSubpart,
+                        hkpExtendedMeshShapeTrianglesSubpart<'de>,
                     > = _serde::__private::None;
                     let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_materialClass: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_numBitsForSubpartIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_materialClass: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_numBitsForSubpartIndex: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_trianglesSubparts: _serde::__private::Option<
-                        Vec<hkpExtendedMeshShapeTrianglesSubpart>,
+                        Vec<hkpExtendedMeshShapeTrianglesSubpart<'de>>,
                     > = _serde::__private::None;
                     let mut m_shapesSubparts: _serde::__private::Option<
-                        Vec<hkpExtendedMeshShapeShapesSubpart>,
+                        Vec<hkpExtendedMeshShapeShapesSubpart<'de>>,
                     > = _serde::__private::None;
-                    let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_weldingInfo: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
                     let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
                     let mut m_defaultCollisionFilterInfo: _serde::__private::Option<
-                        u32,
+                        U32<'de>,
                     > = _serde::__private::None;
-                    let mut m_cachedNumChildShapes: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_cachedNumChildShapes: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_triangleRadius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_padding: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_padding: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..13usize {
                         match i {
                             0usize => {
@@ -383,7 +393,7 @@ const _: () = {
                                 __A::pad(&mut __map, 8usize, 0usize)?;
                                 m_embeddedTrianglesSubpart = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpExtendedMeshShapeTrianglesSubpart,
+                                        hkpExtendedMeshShapeTrianglesSubpart<'de>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -435,7 +445,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialClass = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -454,7 +464,7 @@ const _: () = {
                                     );
                                 }
                                 m_numBitsForSubpartIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -475,7 +485,7 @@ const _: () = {
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_trianglesSubparts = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkpExtendedMeshShapeTrianglesSubpart>,
+                                        Vec<hkpExtendedMeshShapeTrianglesSubpart<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -494,7 +504,7 @@ const _: () = {
                                 }
                                 m_shapesSubparts = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkpExtendedMeshShapeShapesSubpart>,
+                                        Vec<hkpExtendedMeshShapeShapesSubpart<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -512,7 +522,7 @@ const _: () = {
                                     );
                                 }
                                 m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -549,7 +559,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_defaultCollisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -568,7 +578,7 @@ const _: () = {
                                     );
                                 }
                                 m_cachedNumChildShapes = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -602,7 +612,7 @@ const _: () = {
                                     );
                                 }
                                 m_padding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -774,23 +784,27 @@ const _: () = {
                         CollectionType,
                     > = _serde::__private::None;
                     let mut m_embeddedTrianglesSubpart: _serde::__private::Option<
-                        hkpExtendedMeshShapeTrianglesSubpart,
+                        hkpExtendedMeshShapeTrianglesSubpart<'de>,
                     > = _serde::__private::None;
                     let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_numBitsForSubpartIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numBitsForSubpartIndex: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_trianglesSubparts: _serde::__private::Option<
-                        Vec<hkpExtendedMeshShapeTrianglesSubpart>,
+                        Vec<hkpExtendedMeshShapeTrianglesSubpart<'de>>,
                     > = _serde::__private::None;
                     let mut m_shapesSubparts: _serde::__private::Option<
-                        Vec<hkpExtendedMeshShapeShapesSubpart>,
+                        Vec<hkpExtendedMeshShapeShapesSubpart<'de>>,
                     > = _serde::__private::None;
-                    let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_weldingInfo: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
                     let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
                     let mut m_defaultCollisionFilterInfo: _serde::__private::Option<
-                        u32,
+                        U32<'de>,
                     > = _serde::__private::None;
-                    let mut m_cachedNumChildShapes: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_cachedNumChildShapes: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_triangleRadius: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -895,7 +909,7 @@ const _: () = {
                                 }
                                 m_embeddedTrianglesSubpart = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpExtendedMeshShapeTrianglesSubpart,
+                                        hkpExtendedMeshShapeTrianglesSubpart<'de>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -976,7 +990,7 @@ const _: () = {
                                     );
                                 }
                                 m_numBitsForSubpartIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1005,7 +1019,7 @@ const _: () = {
                                 }
                                 m_trianglesSubparts = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkpExtendedMeshShapeTrianglesSubpart>,
+                                        Vec<hkpExtendedMeshShapeTrianglesSubpart<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1033,7 +1047,7 @@ const _: () = {
                                 }
                                 m_shapesSubparts = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkpExtendedMeshShapeShapesSubpart>,
+                                        Vec<hkpExtendedMeshShapeShapesSubpart<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1060,7 +1074,7 @@ const _: () = {
                                     );
                                 }
                                 m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1114,7 +1128,7 @@ const _: () = {
                                     );
                                 }
                                 m_defaultCollisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1142,7 +1156,7 @@ const _: () = {
                                     );
                                 }
                                 m_cachedNumChildShapes = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1346,27 +1360,29 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
                     let parent = hkpShapeCollection {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_disableWelding,
                         m_collectionType,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpExtendedMeshShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_embeddedTrianglesSubpart,
                         m_aabbHalfExtents,
@@ -1603,17 +1619,17 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
-                        4i8 => _serde::__private::Ok(__Field::__field4),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(4i8) => _serde::__private::Ok(__Field::__field4),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -1780,16 +1796,16 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -1957,14 +1973,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

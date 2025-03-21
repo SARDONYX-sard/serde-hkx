@@ -22,46 +22,48 @@ pub struct hkbStateMachineStateInfo<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkbBindable,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkbBindable<'a>,
     /// # C++ Info
     /// - name: `listeners`(ctype: `hkArray<hkbStateListener*>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "listeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "listeners"))]
-    pub m_listeners: Vec<Pointer>,
+    pub m_listeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `enterNotifyEvents`(ctype: `struct hkbStateMachineEventPropertyArray*`)
     /// - offset: ` 40`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "enterNotifyEvents"))]
     #[cfg_attr(feature = "serde", serde(rename = "enterNotifyEvents"))]
-    pub m_enterNotifyEvents: Pointer,
+    pub m_enterNotifyEvents: Pointer<'a>,
     /// # C++ Info
     /// - name: `exitNotifyEvents`(ctype: `struct hkbStateMachineEventPropertyArray*`)
     /// - offset: ` 44`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "exitNotifyEvents"))]
     #[cfg_attr(feature = "serde", serde(rename = "exitNotifyEvents"))]
-    pub m_exitNotifyEvents: Pointer,
+    pub m_exitNotifyEvents: Pointer<'a>,
     /// # C++ Info
     /// - name: `transitions`(ctype: `struct hkbStateMachineTransitionInfoArray*`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "transitions"))]
     #[cfg_attr(feature = "serde", serde(rename = "transitions"))]
-    pub m_transitions: Pointer,
+    pub m_transitions: Pointer<'a>,
     /// # C++ Info
     /// - name: `generator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "generator"))]
     #[cfg_attr(feature = "serde", serde(rename = "generator"))]
-    pub m_generator: Pointer,
+    pub m_generator: Pointer<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
@@ -76,7 +78,7 @@ pub struct hkbStateMachineStateInfo<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "stateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "stateId"))]
-    pub m_stateId: i32,
+    pub m_stateId: I32<'a>,
     /// # C++ Info
     /// - name: `probability`(ctype: `hkReal`)
     /// - offset: ` 64`(x86)/`108`(x86_64)
@@ -104,14 +106,14 @@ const _: () = {
             _serde::__private::Signature::new(0xed7f9d0)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_variableBindingSet.get());
-            v.extend(self.m_listeners.iter().map(|ptr| ptr.get()));
-            v.push(self.m_enterNotifyEvents.get());
-            v.push(self.m_exitNotifyEvents.get());
-            v.push(self.m_transitions.get());
-            v.push(self.m_generator.get());
+            v.push(&self.parent.m_variableBindingSet);
+            v.extend(self.m_listeners.iter());
+            v.push(&self.m_enterNotifyEvents);
+            v.push(&self.m_exitNotifyEvents);
+            v.push(&self.m_transitions);
+            v.push(&self.m_generator);
             v
         }
     }
@@ -122,6 +124,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xed7f9d0)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -266,13 +269,17 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_listeners: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_enterNotifyEvents: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_exitNotifyEvents: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_transitions: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_generator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_listeners: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_enterNotifyEvents: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_exitNotifyEvents: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_transitions: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_generator: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_stateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_stateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_probability: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     for i in 0..9usize {
@@ -286,7 +293,7 @@ const _: () = {
                                     );
                                 }
                                 m_listeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -305,7 +312,7 @@ const _: () = {
                                     );
                                 }
                                 m_enterNotifyEvents = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -322,7 +329,7 @@ const _: () = {
                                     );
                                 }
                                 m_exitNotifyEvents = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -339,7 +346,7 @@ const _: () = {
                                     );
                                 }
                                 m_transitions = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -356,7 +363,7 @@ const _: () = {
                                     );
                                 }
                                 m_generator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -388,7 +395,7 @@ const _: () = {
                                     );
                                 }
                                 m_stateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -538,14 +545,20 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_listeners: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_enterNotifyEvents: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_exitNotifyEvents: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_transitions: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_generator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_listeners: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_enterNotifyEvents: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_exitNotifyEvents: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_transitions: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_generator: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_stateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_stateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_probability: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -572,7 +585,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -598,7 +611,7 @@ const _: () = {
                                     );
                                 }
                                 m_listeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -626,7 +639,7 @@ const _: () = {
                                     );
                                 }
                                 m_enterNotifyEvents = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -652,7 +665,7 @@ const _: () = {
                                     );
                                 }
                                 m_exitNotifyEvents = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -678,7 +691,7 @@ const _: () = {
                                     );
                                 }
                                 m_transitions = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -704,7 +717,7 @@ const _: () = {
                                     );
                                 }
                                 m_generator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -754,7 +767,7 @@ const _: () = {
                                     );
                                 }
                                 m_stateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -930,21 +943,23 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbStateMachineStateInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_listeners,
                         m_enterNotifyEvents,

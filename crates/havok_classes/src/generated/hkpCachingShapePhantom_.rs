@@ -22,7 +22,8 @@ pub struct hkpCachingShapePhantom<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -57,9 +58,9 @@ const _: () = {
             _serde::__private::Signature::new(0xcf227f58)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_world.get());
+            v.push(&self.parent.parent.parent.m_world);
             v.extend(self.parent.parent.parent.m_collidable.deps_indexes());
             v.extend(self.parent.parent.parent.m_multiThreadCheck.deps_indexes());
             v.extend(
@@ -70,11 +71,11 @@ const _: () = {
                     .m_properties
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.push(self.parent.parent.parent.m_treeData.get());
-            v.extend(self.parent.parent.m_overlapListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.parent.parent.m_phantomListeners.iter().map(|ptr| ptr.get()));
+            v.push(&self.parent.parent.parent.m_treeData);
+            v.extend(self.parent.parent.m_overlapListeners.iter());
+            v.extend(self.parent.parent.m_phantomListeners.iter());
             v.extend(self.parent.m_motionState.deps_indexes());
             v
         }
@@ -86,6 +87,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xcf227f58)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -321,7 +323,7 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_collidable: _serde::__private::Option<
-                        hkpLinkedCollidable,
+                        hkpLinkedCollidable<'de>,
                     > = _serde::__private::None;
                     let mut m_multiThreadCheck: _serde::__private::Option<
                         hkMultiThreadCheck,
@@ -377,7 +379,9 @@ const _: () = {
                                     );
                                 }
                                 m_collidable = _serde::__private::Some(
-                                    match __A::next_value::<hkpLinkedCollidable>(&mut __map) {
+                                    match __A::next_value::<
+                                        hkpLinkedCollidable<'de>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -559,14 +563,16 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpWorldObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_collidable,
@@ -576,18 +582,18 @@ const _: () = {
                         ..Default::default()
                     };
                     let parent = hkpPhantom {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShapePhantom {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_motionState,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpCachingShapePhantom {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     })

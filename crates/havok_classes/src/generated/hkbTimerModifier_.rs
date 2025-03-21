@@ -22,7 +22,8 @@ pub struct hkbTimerModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -39,9 +40,10 @@ pub struct hkbTimerModifier<'a> {
     /// - name: `alarmEvent`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "alarmEvent"))]
     #[cfg_attr(feature = "serde", serde(rename = "alarmEvent"))]
-    pub m_alarmEvent: hkbEventProperty,
+    pub m_alarmEvent: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `secondsElapsed`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/`104`(x86_64)
@@ -63,9 +65,9 @@ const _: () = {
             _serde::__private::Signature::new(0x338b4879)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(self.m_alarmEvent.deps_indexes());
             v
         }
@@ -77,6 +79,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x338b4879)));
             let mut serializer = __serializer
                 .serialize_struct("hkbTimerModifier", class_meta, (60u64, 112u64))?;
@@ -227,7 +230,9 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_alarmTimeSeconds: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_alarmEvent: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+                    let mut m_alarmEvent: _serde::__private::Option<
+                        hkbEventProperty<'de>,
+                    > = _serde::__private::None;
                     let mut m_secondsElapsed: _serde::__private::Option<f32> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
@@ -258,7 +263,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_alarmEvent = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -333,12 +338,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_alarmTimeSeconds: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_alarmEvent: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+                    let mut m_alarmEvent: _serde::__private::Option<
+                        hkbEventProperty<'de>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -363,7 +372,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -489,7 +498,7 @@ const _: () = {
                                     );
                                 }
                                 m_alarmEvent = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -567,34 +576,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbTimerModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_alarmTimeSeconds,
                         m_alarmEvent,

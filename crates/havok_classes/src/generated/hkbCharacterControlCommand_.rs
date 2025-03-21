@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbCharacterControlCommand {
+pub struct hkbCharacterControlCommand<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkbCharacterControlCommand {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `characterId`(ctype: `hkUint64`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterId"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterId"))]
-    pub m_characterId: u64,
+    pub m_characterId: U64<'a>,
     /// # C++ Info
     /// - name: `command`(ctype: `enum CharacterControlCommand`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
@@ -47,11 +49,11 @@ pub struct hkbCharacterControlCommand {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "padding"))]
     #[cfg_attr(feature = "serde", serde(rename = "padding"))]
-    pub m_padding: i32,
+    pub m_padding: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbCharacterControlCommand {
+    impl<'a> _serde::HavokClass for hkbCharacterControlCommand<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbCharacterControlCommand"
@@ -61,18 +63,19 @@ const _: () = {
             _serde::__private::Signature::new(0x7a195d1d)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkbCharacterControlCommand {
+    impl<'a> _serde::Serialize for hkbCharacterControlCommand<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x7a195d1d)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -97,7 +100,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbCharacterControlCommand {
+    impl<'de> _serde::Deserialize<'de> for hkbCharacterControlCommand<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -149,7 +152,7 @@ const _: () = {
                 }
             }
             struct __hkbCharacterControlCommandVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbCharacterControlCommand>,
+                marker: _serde::__private::PhantomData<hkbCharacterControlCommand<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -157,7 +160,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbCharacterControlCommandVisitor<'de> {
-                type Value = hkbCharacterControlCommand;
+                type Value = hkbCharacterControlCommand<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -176,11 +179,11 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_characterId: _serde::__private::Option<U64<'de>> = _serde::__private::None;
                     let mut m_command: _serde::__private::Option<
                         CharacterControlCommand,
                     > = _serde::__private::None;
-                    let mut m_padding: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_padding: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
                             0usize => {
@@ -192,7 +195,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<U64<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -229,7 +232,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_padding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -282,11 +285,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_characterId: _serde::__private::Option<U64<'de>> = _serde::__private::None;
                     let mut m_command: _serde::__private::Option<
                         CharacterControlCommand,
                     > = _serde::__private::None;
-                    let mut m_padding: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_padding: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -309,7 +312,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<U64<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -363,7 +366,7 @@ const _: () = {
                                     );
                                 }
                                 m_padding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -407,15 +410,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbCharacterControlCommand {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_characterId,
                         m_command,
@@ -512,14 +517,14 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

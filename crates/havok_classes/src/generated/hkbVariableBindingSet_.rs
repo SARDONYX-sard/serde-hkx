@@ -22,11 +22,13 @@ pub struct hkbVariableBindingSet<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `bindings`(ctype: `hkArray<struct hkbVariableBindingSetBinding>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -41,7 +43,7 @@ pub struct hkbVariableBindingSet<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indexOfBindingToEnable"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexOfBindingToEnable"))]
-    pub m_indexOfBindingToEnable: i32,
+    pub m_indexOfBindingToEnable: I32<'a>,
     /// # C++ Info
     /// - name: `hasOutputBinding`(ctype: `hkBool`)
     /// - offset: ` 24`(x86)/` 36`(x86_64)
@@ -63,14 +65,14 @@ const _: () = {
             _serde::__private::Signature::new(0x338ad4ff)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_bindings
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -82,6 +84,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x338ad4ff)));
             let mut serializer = __serializer
                 .serialize_struct("hkbVariableBindingSet", class_meta, (28u64, 40u64))?;
@@ -193,7 +196,9 @@ const _: () = {
                     let mut m_bindings: _serde::__private::Option<
                         Vec<hkbVariableBindingSetBinding<'de>>,
                     > = _serde::__private::None;
-                    let mut m_indexOfBindingToEnable: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_indexOfBindingToEnable: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_hasOutputBinding: _serde::__private::Option<bool> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
@@ -227,7 +232,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexOfBindingToEnable = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -303,7 +308,9 @@ const _: () = {
                     let mut m_bindings: _serde::__private::Option<
                         Vec<hkbVariableBindingSetBinding<'de>>,
                     > = _serde::__private::None;
-                    let mut m_indexOfBindingToEnable: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_indexOfBindingToEnable: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -356,7 +363,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexOfBindingToEnable = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -390,15 +397,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbVariableBindingSet {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_bindings,
                         m_indexOfBindingToEnable,

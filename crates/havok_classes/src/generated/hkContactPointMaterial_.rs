@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkContactPointMaterial {
+pub struct hkContactPointMaterial<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkContactPointMaterial {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -36,32 +37,32 @@ pub struct hkContactPointMaterial {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "friction"))]
     #[cfg_attr(feature = "serde", serde(rename = "friction"))]
-    pub m_friction: u8,
+    pub m_friction: U8<'a>,
     /// # C++ Info
     /// - name: `restitution`(ctype: `hkUint8`)
     /// - offset: `  5`(x86)/`  9`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "restitution"))]
     #[cfg_attr(feature = "serde", serde(rename = "restitution"))]
-    pub m_restitution: u8,
+    pub m_restitution: U8<'a>,
     /// # C++ Info
     /// - name: `maxImpulse`(ctype: `hkUint8`)
     /// - offset: `  6`(x86)/` 10`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "maxImpulse"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxImpulse"))]
-    pub m_maxImpulse: u8,
+    pub m_maxImpulse: U8<'a>,
     /// # C++ Info
     /// - name: `flags`(ctype: `hkUint8`)
     /// - offset: `  7`(x86)/` 11`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
-    pub m_flags: u8,
+    pub m_flags: U8<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkContactPointMaterial {
+    impl<'a> _serde::HavokClass for hkContactPointMaterial<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkContactPointMaterial"
@@ -71,18 +72,19 @@ const _: () = {
             _serde::__private::Signature::new(0x4e32287c)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkContactPointMaterial {
+    impl<'a> _serde::Serialize for hkContactPointMaterial<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x4e32287c)));
             let mut serializer = __serializer
                 .serialize_struct("hkContactPointMaterial", class_meta, (8u64, 16u64))?;
@@ -101,7 +103,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkContactPointMaterial {
+    impl<'de> _serde::Deserialize<'de> for hkContactPointMaterial<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -157,14 +159,14 @@ const _: () = {
                 }
             }
             struct __hkContactPointMaterialVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkContactPointMaterial>,
+                marker: _serde::__private::PhantomData<hkContactPointMaterial<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkContactPointMaterialVisitor<'de> {
-                type Value = hkContactPointMaterial;
+                type Value = hkContactPointMaterial<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -183,10 +185,10 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
-                    let mut m_friction: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_restitution: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_maxImpulse: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_friction: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_restitution: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_maxImpulse: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
                             0usize => {
@@ -215,7 +217,7 @@ const _: () = {
                                     );
                                 }
                                 m_friction = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -232,7 +234,7 @@ const _: () = {
                                     );
                                 }
                                 m_restitution = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -249,7 +251,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxImpulse = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -264,7 +266,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -338,10 +340,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
-                    let mut m_friction: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_restitution: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_maxImpulse: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_friction: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_restitution: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_maxImpulse: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -390,7 +392,7 @@ const _: () = {
                                     );
                                 }
                                 m_friction = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -416,7 +418,7 @@ const _: () = {
                                     );
                                 }
                                 m_restitution = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -442,7 +444,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxImpulse = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -466,7 +468,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -533,7 +535,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkContactPointMaterial {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_userData,
                         m_friction,
                         m_restitution,

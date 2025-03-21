@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpWorldCinfo {
+pub struct hkpWorldCinfo<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpWorldCinfo {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `gravity`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
@@ -40,7 +42,7 @@ pub struct hkpWorldCinfo {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseQuerySize"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseQuerySize"))]
-    pub m_broadPhaseQuerySize: i32,
+    pub m_broadPhaseQuerySize: I32<'a>,
     /// # C++ Info
     /// - name: `contactRestingVelocity`(ctype: `hkReal`)
     /// - offset: ` 36`(x86)/` 36`(x86_64)
@@ -74,7 +76,7 @@ pub struct hkpWorldCinfo {
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseWorldAabb"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseWorldAabb"))]
-    pub m_broadPhaseWorldAabb: hkAabb,
+    pub m_broadPhaseWorldAabb: hkAabb<'a>,
     /// # C++ Info
     /// - name: `useKdTree`(ctype: `hkBool`)
     /// - offset: ` 80`(x86)/` 80`(x86_64)
@@ -116,14 +118,14 @@ pub struct hkpWorldCinfo {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "collisionFilter"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionFilter"))]
-    pub m_collisionFilter: Pointer,
+    pub m_collisionFilter: Pointer<'a>,
     /// # C++ Info
     /// - name: `convexListFilter`(ctype: `struct hkpConvexListFilter*`)
     /// - offset: ` 92`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "convexListFilter"))]
     #[cfg_attr(feature = "serde", serde(rename = "convexListFilter"))]
-    pub m_convexListFilter: Pointer,
+    pub m_convexListFilter: Pointer<'a>,
     /// # C++ Info
     /// - name: `expectedMaxLinearVelocity`(ctype: `hkReal`)
     /// - offset: ` 96`(x86)/`104`(x86_64)
@@ -137,7 +139,7 @@ pub struct hkpWorldCinfo {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "sizeOfToiEventQueue"))]
     #[cfg_attr(feature = "serde", serde(rename = "sizeOfToiEventQueue"))]
-    pub m_sizeOfToiEventQueue: i32,
+    pub m_sizeOfToiEventQueue: I32<'a>,
     /// # C++ Info
     /// - name: `expectedMinPsiDeltaTime`(ctype: `hkReal`)
     /// - offset: `104`(x86)/`112`(x86_64)
@@ -151,14 +153,14 @@ pub struct hkpWorldCinfo {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "memoryWatchDog"))]
     #[cfg_attr(feature = "serde", serde(rename = "memoryWatchDog"))]
-    pub m_memoryWatchDog: Pointer,
+    pub m_memoryWatchDog: Pointer<'a>,
     /// # C++ Info
     /// - name: `broadPhaseNumMarkers`(ctype: `hkInt32`)
     /// - offset: `112`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseNumMarkers"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseNumMarkers"))]
-    pub m_broadPhaseNumMarkers: i32,
+    pub m_broadPhaseNumMarkers: I32<'a>,
     /// # C++ Info
     /// - name: `contactPointGeneration`(ctype: `enum ContactPointGeneration`)
     /// - offset: `116`(x86)/`132`(x86_64)
@@ -203,14 +205,14 @@ pub struct hkpWorldCinfo {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "solverIterations"))]
     #[cfg_attr(feature = "serde", serde(rename = "solverIterations"))]
-    pub m_solverIterations: i32,
+    pub m_solverIterations: I32<'a>,
     /// # C++ Info
     /// - name: `solverMicrosteps`(ctype: `hkInt32`)
     /// - offset: `132`(x86)/`148`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "solverMicrosteps"))]
     #[cfg_attr(feature = "serde", serde(rename = "solverMicrosteps"))]
-    pub m_solverMicrosteps: i32,
+    pub m_solverMicrosteps: I32<'a>,
     /// # C++ Info
     /// - name: `maxConstraintViolation`(ctype: `hkReal`)
     /// - offset: `136`(x86)/`152`(x86_64)
@@ -284,7 +286,7 @@ pub struct hkpWorldCinfo {
         schemars(rename = "iterativeLinearCastMaxIterations")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "iterativeLinearCastMaxIterations"))]
-    pub m_iterativeLinearCastMaxIterations: i32,
+    pub m_iterativeLinearCastMaxIterations: I32<'a>,
     /// # C++ Info
     /// - name: `deactivationNumInactiveFramesSelectFlag0`(ctype: `hkUint8`)
     /// - offset: `164`(x86)/`180`(x86_64)
@@ -297,7 +299,7 @@ pub struct hkpWorldCinfo {
         feature = "serde",
         serde(rename = "deactivationNumInactiveFramesSelectFlag0")
     )]
-    pub m_deactivationNumInactiveFramesSelectFlag0: u8,
+    pub m_deactivationNumInactiveFramesSelectFlag0: U8<'a>,
     /// # C++ Info
     /// - name: `deactivationNumInactiveFramesSelectFlag1`(ctype: `hkUint8`)
     /// - offset: `165`(x86)/`181`(x86_64)
@@ -310,7 +312,7 @@ pub struct hkpWorldCinfo {
         feature = "serde",
         serde(rename = "deactivationNumInactiveFramesSelectFlag1")
     )]
-    pub m_deactivationNumInactiveFramesSelectFlag1: u8,
+    pub m_deactivationNumInactiveFramesSelectFlag1: U8<'a>,
     /// # C++ Info
     /// - name: `deactivationIntegrateCounter`(ctype: `hkUint8`)
     /// - offset: `166`(x86)/`182`(x86_64)
@@ -320,7 +322,7 @@ pub struct hkpWorldCinfo {
         schemars(rename = "deactivationIntegrateCounter")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "deactivationIntegrateCounter"))]
-    pub m_deactivationIntegrateCounter: u8,
+    pub m_deactivationIntegrateCounter: U8<'a>,
     /// # C++ Info
     /// - name: `shouldActivateOnRigidBodyTransformChange`(ctype: `hkBool`)
     /// - offset: `167`(x86)/`183`(x86_64)
@@ -363,7 +365,7 @@ pub struct hkpWorldCinfo {
         schemars(rename = "maxSectorsPerMidphaseCollideTask")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "maxSectorsPerMidphaseCollideTask"))]
-    pub m_maxSectorsPerMidphaseCollideTask: i32,
+    pub m_maxSectorsPerMidphaseCollideTask: I32<'a>,
     /// # C++ Info
     /// - name: `maxSectorsPerNarrowphaseCollideTask`(ctype: `hkInt32`)
     /// - offset: `180`(x86)/`196`(x86_64)
@@ -373,7 +375,7 @@ pub struct hkpWorldCinfo {
         schemars(rename = "maxSectorsPerNarrowphaseCollideTask")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "maxSectorsPerNarrowphaseCollideTask"))]
-    pub m_maxSectorsPerNarrowphaseCollideTask: i32,
+    pub m_maxSectorsPerNarrowphaseCollideTask: I32<'a>,
     /// # C++ Info
     /// - name: `processToisMultithreaded`(ctype: `hkBool`)
     /// - offset: `184`(x86)/`200`(x86_64)
@@ -390,7 +392,7 @@ pub struct hkpWorldCinfo {
         schemars(rename = "maxEntriesPerToiMidphaseCollideTask")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "maxEntriesPerToiMidphaseCollideTask"))]
-    pub m_maxEntriesPerToiMidphaseCollideTask: i32,
+    pub m_maxEntriesPerToiMidphaseCollideTask: I32<'a>,
     /// # C++ Info
     /// - name: `maxEntriesPerToiNarrowphaseCollideTask`(ctype: `hkInt32`)
     /// - offset: `192`(x86)/`208`(x86_64)
@@ -403,7 +405,7 @@ pub struct hkpWorldCinfo {
         feature = "serde",
         serde(rename = "maxEntriesPerToiNarrowphaseCollideTask")
     )]
-    pub m_maxEntriesPerToiNarrowphaseCollideTask: i32,
+    pub m_maxEntriesPerToiNarrowphaseCollideTask: I32<'a>,
     /// # C++ Info
     /// - name: `maxNumToiCollisionPairsSinglethreaded`(ctype: `hkInt32`)
     /// - offset: `196`(x86)/`212`(x86_64)
@@ -416,7 +418,7 @@ pub struct hkpWorldCinfo {
         feature = "serde",
         serde(rename = "maxNumToiCollisionPairsSinglethreaded")
     )]
-    pub m_maxNumToiCollisionPairsSinglethreaded: i32,
+    pub m_maxNumToiCollisionPairsSinglethreaded: I32<'a>,
     /// # C++ Info
     /// - name: `numToisTillAllowedPenetrationSimplifiedToi`(ctype: `hkReal`)
     /// - offset: `200`(x86)/`216`(x86_64)
@@ -493,7 +495,7 @@ pub struct hkpWorldCinfo {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "minDesiredIslandSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "minDesiredIslandSize"))]
-    pub m_minDesiredIslandSize: u32,
+    pub m_minDesiredIslandSize: U32<'a>,
     /// # C++ Info
     /// - name: `processActionsInSingleThread`(ctype: `hkBool`)
     /// - offset: `224`(x86)/`240`(x86_64)
@@ -534,7 +536,7 @@ pub struct hkpWorldCinfo {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpWorldCinfo {
+    impl<'a> _serde::HavokClass for hkpWorldCinfo<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpWorldCinfo"
@@ -544,22 +546,23 @@ const _: () = {
             _serde::__private::Signature::new(0xa5255445)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_broadPhaseWorldAabb.deps_indexes());
-            v.push(self.m_collisionFilter.get());
-            v.push(self.m_convexListFilter.get());
-            v.push(self.m_memoryWatchDog.get());
+            v.push(&self.m_collisionFilter);
+            v.push(&self.m_convexListFilter);
+            v.push(&self.m_memoryWatchDog);
             v
         }
     }
-    impl _serde::Serialize for hkpWorldCinfo {
+    impl<'a> _serde::Serialize for hkpWorldCinfo<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xa5255445)));
             let mut serializer = __serializer
                 .serialize_struct("hkpWorldCinfo", class_meta, (240u64, 256u64))?;
@@ -792,7 +795,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpWorldCinfo {
+    impl<'de> _serde::Deserialize<'de> for hkpWorldCinfo<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -1014,14 +1017,14 @@ const _: () = {
                 }
             }
             struct __hkpWorldCinfoVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpWorldCinfo>,
+                marker: _serde::__private::PhantomData<hkpWorldCinfo<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpWorldCinfoVisitor<'de> {
-                type Value = hkpWorldCinfo;
+                type Value = hkpWorldCinfo<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -1038,7 +1041,7 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_gravity: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_broadPhaseQuerySize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_broadPhaseQuerySize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_contactRestingVelocity: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_broadPhaseBorderBehaviour: _serde::__private::Option<
                         BroadPhaseBorderBehaviour,
@@ -1054,15 +1057,19 @@ const _: () = {
                     > = _serde::__private::None;
                     let mut m_autoUpdateKdTree: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_collisionTolerance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_collisionFilter: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_convexListFilter: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_collisionFilter: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_convexListFilter: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_expectedMaxLinearVelocity: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_sizeOfToiEventQueue: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_sizeOfToiEventQueue: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_expectedMinPsiDeltaTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_memoryWatchDog: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_broadPhaseNumMarkers: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_memoryWatchDog: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_broadPhaseNumMarkers: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_contactPointGeneration: _serde::__private::Option<
                         ContactPointGeneration,
                     > = _serde::__private::None;
@@ -1072,8 +1079,8 @@ const _: () = {
                     let mut m_useHybridBroadphase: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_solverTau: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_solverDamp: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_solverIterations: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_solverMicrosteps: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_solverIterations: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_solverMicrosteps: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_maxConstraintViolation: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_forceCoherentConstraintOrderingInSolver: _serde::__private::Option<
                         bool,
@@ -1090,16 +1097,16 @@ const _: () = {
                         f32,
                     > = _serde::__private::None;
                     let mut m_iterativeLinearCastMaxIterations: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_deactivationNumInactiveFramesSelectFlag0: _serde::__private::Option<
-                        u8,
+                        U8<'de>,
                     > = _serde::__private::None;
                     let mut m_deactivationNumInactiveFramesSelectFlag1: _serde::__private::Option<
-                        u8,
+                        U8<'de>,
                     > = _serde::__private::None;
                     let mut m_deactivationIntegrateCounter: _serde::__private::Option<
-                        u8,
+                        U8<'de>,
                     > = _serde::__private::None;
                     let mut m_shouldActivateOnRigidBodyTransformChange: _serde::__private::Option<
                         bool,
@@ -1111,22 +1118,22 @@ const _: () = {
                         f32,
                     > = _serde::__private::None;
                     let mut m_maxSectorsPerMidphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxSectorsPerNarrowphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_processToisMultithreaded: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
                     let mut m_maxEntriesPerToiMidphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxEntriesPerToiNarrowphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxNumToiCollisionPairsSinglethreaded: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_numToisTillAllowedPenetrationSimplifiedToi: _serde::__private::Option<
                         f32,
@@ -1145,7 +1152,9 @@ const _: () = {
                         SimulationType,
                     > = _serde::__private::None;
                     let mut m_enableSimulationIslands: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_minDesiredIslandSize: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_minDesiredIslandSize: _serde::__private::Option<
+                        U32<'de>,
+                    > = _serde::__private::None;
                     let mut m_processActionsInSingleThread: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
@@ -1185,7 +1194,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseQuerySize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1368,7 +1377,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilter = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1385,7 +1394,7 @@ const _: () = {
                                     );
                                 }
                                 m_convexListFilter = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1423,7 +1432,7 @@ const _: () = {
                                     );
                                 }
                                 m_sizeOfToiEventQueue = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1460,7 +1469,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_memoryWatchDog = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1479,7 +1488,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseNumMarkers = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1590,7 +1599,7 @@ const _: () = {
                                     );
                                 }
                                 m_solverIterations = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1607,7 +1616,7 @@ const _: () = {
                                     );
                                 }
                                 m_solverMicrosteps = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1761,7 +1770,7 @@ const _: () = {
                                     );
                                 }
                                 m_iterativeLinearCastMaxIterations = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1780,7 +1789,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationNumInactiveFramesSelectFlag0 = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1799,7 +1808,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationNumInactiveFramesSelectFlag1 = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1818,7 +1827,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationIntegrateCounter = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1894,7 +1903,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxSectorsPerMidphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1913,7 +1922,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxSectorsPerNarrowphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1952,7 +1961,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_maxEntriesPerToiMidphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1971,7 +1980,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxEntriesPerToiNarrowphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1990,7 +1999,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxNumToiCollisionPairsSinglethreaded = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2141,7 +2150,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 1usize, 1usize)?;
                                 m_minDesiredIslandSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2869,7 +2878,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_gravity: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_broadPhaseQuerySize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_broadPhaseQuerySize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_contactRestingVelocity: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_broadPhaseBorderBehaviour: _serde::__private::Option<
                         BroadPhaseBorderBehaviour,
@@ -2885,15 +2894,19 @@ const _: () = {
                     > = _serde::__private::None;
                     let mut m_autoUpdateKdTree: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_collisionTolerance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_collisionFilter: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_convexListFilter: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_collisionFilter: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_convexListFilter: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_expectedMaxLinearVelocity: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_sizeOfToiEventQueue: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_sizeOfToiEventQueue: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_expectedMinPsiDeltaTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_memoryWatchDog: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_broadPhaseNumMarkers: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_memoryWatchDog: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_broadPhaseNumMarkers: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_contactPointGeneration: _serde::__private::Option<
                         ContactPointGeneration,
                     > = _serde::__private::None;
@@ -2903,8 +2916,8 @@ const _: () = {
                     let mut m_useHybridBroadphase: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_solverTau: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_solverDamp: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_solverIterations: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_solverMicrosteps: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_solverIterations: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_solverMicrosteps: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_maxConstraintViolation: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_forceCoherentConstraintOrderingInSolver: _serde::__private::Option<
                         bool,
@@ -2921,16 +2934,16 @@ const _: () = {
                         f32,
                     > = _serde::__private::None;
                     let mut m_iterativeLinearCastMaxIterations: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_deactivationNumInactiveFramesSelectFlag0: _serde::__private::Option<
-                        u8,
+                        U8<'de>,
                     > = _serde::__private::None;
                     let mut m_deactivationNumInactiveFramesSelectFlag1: _serde::__private::Option<
-                        u8,
+                        U8<'de>,
                     > = _serde::__private::None;
                     let mut m_deactivationIntegrateCounter: _serde::__private::Option<
-                        u8,
+                        U8<'de>,
                     > = _serde::__private::None;
                     let mut m_shouldActivateOnRigidBodyTransformChange: _serde::__private::Option<
                         bool,
@@ -2942,22 +2955,22 @@ const _: () = {
                         f32,
                     > = _serde::__private::None;
                     let mut m_maxSectorsPerMidphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxSectorsPerNarrowphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_processToisMultithreaded: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
                     let mut m_maxEntriesPerToiMidphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxEntriesPerToiNarrowphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxNumToiCollisionPairsSinglethreaded: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_numToisTillAllowedPenetrationSimplifiedToi: _serde::__private::Option<
                         f32,
@@ -2976,7 +2989,9 @@ const _: () = {
                         SimulationType,
                     > = _serde::__private::None;
                     let mut m_enableSimulationIslands: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_minDesiredIslandSize: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_minDesiredIslandSize: _serde::__private::Option<
+                        U32<'de>,
+                    > = _serde::__private::None;
                     let mut m_processActionsInSingleThread: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
@@ -3035,7 +3050,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseQuerySize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3307,7 +3322,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilter = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3333,7 +3348,7 @@ const _: () = {
                                     );
                                 }
                                 m_convexListFilter = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3389,7 +3404,7 @@ const _: () = {
                                     );
                                 }
                                 m_sizeOfToiEventQueue = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3443,7 +3458,7 @@ const _: () = {
                                     );
                                 }
                                 m_memoryWatchDog = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3471,7 +3486,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseNumMarkers = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3635,7 +3650,7 @@ const _: () = {
                                     );
                                 }
                                 m_solverIterations = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3661,7 +3676,7 @@ const _: () = {
                                     );
                                 }
                                 m_solverMicrosteps = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3885,7 +3900,7 @@ const _: () = {
                                     );
                                 }
                                 m_iterativeLinearCastMaxIterations = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3913,7 +3928,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationNumInactiveFramesSelectFlag0 = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3941,7 +3956,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationNumInactiveFramesSelectFlag1 = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3969,7 +3984,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationIntegrateCounter = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4081,7 +4096,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxSectorsPerMidphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4109,7 +4124,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxSectorsPerNarrowphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4165,7 +4180,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxEntriesPerToiMidphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4193,7 +4208,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxEntriesPerToiNarrowphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4221,7 +4236,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxNumToiCollisionPairsSinglethreaded = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4443,7 +4458,7 @@ const _: () = {
                                     );
                                 }
                                 m_minDesiredIslandSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -5249,15 +5264,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpWorldCinfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_gravity,
                         m_broadPhaseQuerySize,
@@ -5629,16 +5646,16 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -5808,15 +5825,15 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -5976,16 +5993,16 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -6156,14 +6173,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

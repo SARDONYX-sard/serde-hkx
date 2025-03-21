@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpGroupFilter {
+pub struct hkpGroupFilter<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,25 +22,27 @@ pub struct hkpGroupFilter {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpCollisionFilter,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpCollisionFilter<'a>,
     /// # C++ Info
     /// - name: `nextFreeSystemGroup`(ctype: `hkInt32`)
     /// - offset: ` 48`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "nextFreeSystemGroup"))]
     #[cfg_attr(feature = "serde", serde(rename = "nextFreeSystemGroup"))]
-    pub m_nextFreeSystemGroup: i32,
+    pub m_nextFreeSystemGroup: I32<'a>,
     /// # C++ Info
     /// - name: `collisionLookupTable`(ctype: `hkUint32[32]`)
     /// - offset: ` 52`(x86)/` 76`(x86_64)
     /// - type_size: `128`(x86)/`128`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "collisionLookupTable"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionLookupTable"))]
-    pub m_collisionLookupTable: [u32; 32usize],
+    pub m_collisionLookupTable: [U32<'a>; 32usize],
     /// # C++ Info
     /// - name: `pad256`(ctype: `hkVector4[4]`)
     /// - offset: `192`(x86)/`208`(x86_64)
@@ -51,7 +53,7 @@ pub struct hkpGroupFilter {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpGroupFilter {
+    impl<'a> _serde::HavokClass for hkpGroupFilter<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpGroupFilter"
@@ -61,18 +63,19 @@ const _: () = {
             _serde::__private::Signature::new(0x65ee88e4)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpGroupFilter {
+    impl<'a> _serde::Serialize for hkpGroupFilter<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x65ee88e4)));
             let mut serializer = __serializer
                 .serialize_struct("hkpGroupFilter", class_meta, (256u64, 272u64))?;
@@ -120,7 +123,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpGroupFilter {
+    impl<'de> _serde::Deserialize<'de> for hkpGroupFilter<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -178,14 +181,14 @@ const _: () = {
                 }
             }
             struct __hkpGroupFilterVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpGroupFilter>,
+                marker: _serde::__private::PhantomData<hkpGroupFilter<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpGroupFilterVisitor<'de> {
-                type Value = hkpGroupFilter;
+                type Value = hkpGroupFilter<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -201,9 +204,9 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_nextFreeSystemGroup: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_nextFreeSystemGroup: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_collisionLookupTable: _serde::__private::Option<
-                        [u32; 32usize],
+                        [U32<'de>; 32usize],
                     > = _serde::__private::None;
                     let mut m_pad256: _serde::__private::Option<[Vector4; 4usize]> = _serde::__private::None;
                     for i in 0..3usize {
@@ -219,7 +222,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextFreeSystemGroup = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -238,7 +241,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionLookupTable = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 32usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 32usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -309,12 +312,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_prepad: _serde::__private::Option<[u32; 2usize]> = _serde::__private::None;
+                    let mut m_prepad: _serde::__private::Option<[U32<'de>; 2usize]> = _serde::__private::None;
                     let mut m_type: _serde::__private::Option<hkpFilterType> = _serde::__private::None;
-                    let mut m_postpad: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
-                    let mut m_nextFreeSystemGroup: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_postpad: _serde::__private::Option<[U32<'de>; 3usize]> = _serde::__private::None;
+                    let mut m_nextFreeSystemGroup: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_collisionLookupTable: _serde::__private::Option<
-                        [u32; 32usize],
+                        [U32<'de>; 32usize],
                     > = _serde::__private::None;
                     let mut m_pad256: _serde::__private::Option<[Vector4; 4usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -337,7 +340,7 @@ const _: () = {
                                     );
                                 }
                                 m_prepad = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -387,7 +390,7 @@ const _: () = {
                                     );
                                 }
                                 m_postpad = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -415,7 +418,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextFreeSystemGroup = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -443,7 +446,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionLookupTable = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 32usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 32usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -543,14 +546,16 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpCollisionFilter {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_prepad,
                         m_type,
@@ -558,7 +563,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpGroupFilter {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_nextFreeSystemGroup,
                         m_collisionLookupTable,

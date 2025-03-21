@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpListShape {
+pub struct hkpListShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,32 +22,34 @@ pub struct hkpListShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpShapeCollection,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpShapeCollection<'a>,
     /// # C++ Info
     /// - name: `childInfo`(ctype: `hkArray<struct hkpListShapeChildInfo>`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "childInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "childInfo"))]
-    pub m_childInfo: Vec<hkpListShapeChildInfo>,
+    pub m_childInfo: Vec<hkpListShapeChildInfo<'a>>,
     /// # C++ Info
     /// - name: `flags`(ctype: `hkUint16`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
-    pub m_flags: u16,
+    pub m_flags: U16<'a>,
     /// # C++ Info
     /// - name: `numDisabledChildren`(ctype: `hkUint16`)
     /// - offset: ` 38`(x86)/` 66`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numDisabledChildren"))]
     #[cfg_attr(feature = "serde", serde(rename = "numDisabledChildren"))]
-    pub m_numDisabledChildren: u16,
+    pub m_numDisabledChildren: U16<'a>,
     /// # C++ Info
     /// - name: `aabbHalfExtents`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
@@ -68,11 +70,11 @@ pub struct hkpListShape {
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "enabledChildren"))]
     #[cfg_attr(feature = "serde", serde(rename = "enabledChildren"))]
-    pub m_enabledChildren: [u32; 8usize],
+    pub m_enabledChildren: [U32<'a>; 8usize],
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpListShape {
+    impl<'a> _serde::HavokClass for hkpListShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpListShape"
@@ -82,25 +84,26 @@ const _: () = {
             _serde::__private::Signature::new(0xa1937cbd)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_childInfo
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkpListShape {
+    impl<'a> _serde::Serialize for hkpListShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xa1937cbd)));
             let mut serializer = __serializer
                 .serialize_struct("hkpListShape", class_meta, (112u64, 144u64))?;
@@ -153,7 +156,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpListShape {
+    impl<'de> _serde::Deserialize<'de> for hkpListShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -217,14 +220,14 @@ const _: () = {
                 }
             }
             struct __hkpListShapeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpListShape>,
+                marker: _serde::__private::PhantomData<hkpListShape<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpListShapeVisitor<'de> {
-                type Value = hkpListShape;
+                type Value = hkpListShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -243,12 +246,12 @@ const _: () = {
                     let mut m_childInfo: _serde::__private::Option<
                         Vec<hkpListShapeChildInfo>,
                     > = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_numDisabledChildren: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_numDisabledChildren: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_enabledChildren: _serde::__private::Option<
-                        [u32; 8usize],
+                        [U32<'de>; 8usize],
                     > = _serde::__private::None;
                     for i in 0..6usize {
                         match i {
@@ -278,7 +281,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -297,7 +300,7 @@ const _: () = {
                                     );
                                 }
                                 m_numDisabledChildren = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -349,7 +352,7 @@ const _: () = {
                                     );
                                 }
                                 m_enabledChildren = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 8usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 8usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -445,12 +448,12 @@ const _: () = {
                     let mut m_childInfo: _serde::__private::Option<
                         Vec<hkpListShapeChildInfo>,
                     > = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_numDisabledChildren: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_numDisabledChildren: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_enabledChildren: _serde::__private::Option<
-                        [u32; 8usize],
+                        [U32<'de>; 8usize],
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -578,7 +581,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -606,7 +609,7 @@ const _: () = {
                                     );
                                 }
                                 m_numDisabledChildren = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -684,7 +687,7 @@ const _: () = {
                                     );
                                 }
                                 m_enabledChildren = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 8usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 8usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -800,27 +803,29 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
                     let parent = hkpShapeCollection {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_disableWelding,
                         m_collectionType,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpListShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_childInfo,
                         m_flags,

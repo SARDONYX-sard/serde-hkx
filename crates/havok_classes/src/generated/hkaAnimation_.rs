@@ -22,11 +22,13 @@ pub struct hkaAnimation<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `type`(ctype: `enum AnimationType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -47,21 +49,21 @@ pub struct hkaAnimation<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numberOfTransformTracks"))]
     #[cfg_attr(feature = "serde", serde(rename = "numberOfTransformTracks"))]
-    pub m_numberOfTransformTracks: i32,
+    pub m_numberOfTransformTracks: I32<'a>,
     /// # C++ Info
     /// - name: `numberOfFloatTracks`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numberOfFloatTracks"))]
     #[cfg_attr(feature = "serde", serde(rename = "numberOfFloatTracks"))]
-    pub m_numberOfFloatTracks: i32,
+    pub m_numberOfFloatTracks: I32<'a>,
     /// # C++ Info
     /// - name: `extractedMotion`(ctype: `struct hkaAnimatedReferenceFrame*`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "extractedMotion"))]
     #[cfg_attr(feature = "serde", serde(rename = "extractedMotion"))]
-    pub m_extractedMotion: Pointer,
+    pub m_extractedMotion: Pointer<'a>,
     /// # C++ Info
     /// - name: `annotationTracks`(ctype: `hkArray<struct hkaAnnotationTrack>`)
     /// - offset: ` 28`(x86)/` 40`(x86_64)
@@ -83,15 +85,15 @@ const _: () = {
             _serde::__private::Signature::new(0xa6fa7e88)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_extractedMotion.get());
+            v.push(&self.m_extractedMotion);
             v.extend(
                 self
                     .m_annotationTracks
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -103,6 +105,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xa6fa7e88)));
             let mut serializer = __serializer
                 .serialize_struct("hkaAnimation", class_meta, (40u64, 56u64))?;
@@ -223,9 +226,11 @@ const _: () = {
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_type: _serde::__private::Option<AnimationType> = _serde::__private::None;
                     let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_numberOfTransformTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numberOfFloatTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_extractedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_numberOfTransformTracks: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numberOfFloatTracks: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_extractedMotion: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_annotationTracks: _serde::__private::Option<
                         Vec<hkaAnnotationTrack<'de>>,
                     > = _serde::__private::None;
@@ -274,7 +279,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfTransformTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -293,7 +298,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfFloatTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -310,7 +315,7 @@ const _: () = {
                                     );
                                 }
                                 m_extractedMotion = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -417,9 +422,11 @@ const _: () = {
                 {
                     let mut m_type: _serde::__private::Option<AnimationType> = _serde::__private::None;
                     let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_numberOfTransformTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numberOfFloatTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_extractedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_numberOfTransformTracks: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numberOfFloatTracks: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_extractedMotion: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_annotationTracks: _serde::__private::Option<
                         Vec<hkaAnnotationTrack<'de>>,
                     > = _serde::__private::None;
@@ -497,7 +504,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfTransformTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -525,7 +532,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfFloatTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -551,7 +558,7 @@ const _: () = {
                                     );
                                 }
                                 m_extractedMotion = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -659,15 +666,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaAnimation {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_type,
                         m_duration,
@@ -805,19 +814,19 @@ const _: () = {
                 }
                 fn visit_int32<__E>(
                     self,
-                    __value: i32,
+                    __value: I32<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i32 => _serde::__private::Ok(__Field::__field0),
-                        1i32 => _serde::__private::Ok(__Field::__field1),
-                        2i32 => _serde::__private::Ok(__Field::__field2),
-                        3i32 => _serde::__private::Ok(__Field::__field3),
-                        4i32 => _serde::__private::Ok(__Field::__field4),
-                        5i32 => _serde::__private::Ok(__Field::__field5),
-                        6i32 => _serde::__private::Ok(__Field::__field6),
+                        I32::Number(0i32) => _serde::__private::Ok(__Field::__field0),
+                        I32::Number(1i32) => _serde::__private::Ok(__Field::__field1),
+                        I32::Number(2i32) => _serde::__private::Ok(__Field::__field2),
+                        I32::Number(3i32) => _serde::__private::Ok(__Field::__field3),
+                        I32::Number(4i32) => _serde::__private::Ok(__Field::__field4),
+                        I32::Number(5i32) => _serde::__private::Ok(__Field::__field5),
+                        I32::Number(6i32) => _serde::__private::Ok(__Field::__field6),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

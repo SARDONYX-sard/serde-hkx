@@ -22,11 +22,13 @@ pub struct hkMemoryResourceContainer<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkResourceContainer,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkResourceContainer<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -42,21 +44,21 @@ pub struct hkMemoryResourceContainer<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "parent"))]
     #[cfg_attr(feature = "serde", serde(rename = "parent"))]
-    pub m_parent: Pointer,
+    pub m_parent: Pointer<'a>,
     /// # C++ Info
     /// - name: `resourceHandles`(ctype: `hkArray<hkMemoryResourceHandle*>`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "resourceHandles"))]
     #[cfg_attr(feature = "serde", serde(rename = "resourceHandles"))]
-    pub m_resourceHandles: Vec<Pointer>,
+    pub m_resourceHandles: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `children`(ctype: `hkArray<hkMemoryResourceContainer*>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "children"))]
     #[cfg_attr(feature = "serde", serde(rename = "children"))]
-    pub m_children: Vec<Pointer>,
+    pub m_children: Vec<Pointer<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -70,11 +72,11 @@ const _: () = {
             _serde::__private::Signature::new(0x4762f92a)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_parent.get());
-            v.extend(self.m_resourceHandles.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_children.iter().map(|ptr| ptr.get()));
+            v.push(&self.m_parent);
+            v.extend(self.m_resourceHandles.iter());
+            v.extend(self.m_children.iter());
             v
         }
     }
@@ -85,6 +87,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x4762f92a)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -203,9 +206,11 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_parent: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_resourceHandles: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_parent: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_resourceHandles: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_children: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
                             0usize => {
@@ -230,7 +235,7 @@ const _: () = {
                                     );
                                 }
                                 m_parent = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -247,7 +252,7 @@ const _: () = {
                                     );
                                 }
                                 m_resourceHandles = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -264,7 +269,7 @@ const _: () = {
                                     );
                                 }
                                 m_children = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -327,8 +332,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_resourceHandles: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_resourceHandles: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_children: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -375,7 +382,7 @@ const _: () = {
                                     );
                                 }
                                 m_resourceHandles = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -401,7 +408,7 @@ const _: () = {
                                     );
                                 }
                                 m_children = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -445,20 +452,25 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
-                    let parent = hkResourceBase { __ptr, parent };
+                    let parent = hkResourceBase {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let parent = hkResourceContainer {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkMemoryResourceContainer {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_name,
                         m_resourceHandles,

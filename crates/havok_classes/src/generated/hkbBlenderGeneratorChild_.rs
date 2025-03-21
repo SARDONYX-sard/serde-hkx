@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbBlenderGeneratorChild {
+pub struct hkbBlenderGeneratorChild<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkbBlenderGeneratorChild {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkbBindable,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkbBindable<'a>,
     /// # C++ Info
     /// - name: `generator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
@@ -34,14 +36,14 @@ pub struct hkbBlenderGeneratorChild {
     /// - flags: `ALIGN_16`
     #[cfg_attr(feature = "json_schema", schemars(rename = "generator"))]
     #[cfg_attr(feature = "serde", serde(rename = "generator"))]
-    pub m_generator: Pointer,
+    pub m_generator: Pointer<'a>,
     /// # C++ Info
     /// - name: `boneWeights`(ctype: `struct hkbBoneWeightArray*`)
     /// - offset: ` 36`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "boneWeights"))]
     #[cfg_attr(feature = "serde", serde(rename = "boneWeights"))]
-    pub m_boneWeights: Pointer,
+    pub m_boneWeights: Pointer<'a>,
     /// # C++ Info
     /// - name: `weight`(ctype: `hkReal`)
     /// - offset: ` 40`(x86)/` 64`(x86_64)
@@ -59,7 +61,7 @@ pub struct hkbBlenderGeneratorChild {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbBlenderGeneratorChild {
+    impl<'a> _serde::HavokClass for hkbBlenderGeneratorChild<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbBlenderGeneratorChild"
@@ -69,21 +71,22 @@ const _: () = {
             _serde::__private::Signature::new(0xe2b384b0)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_variableBindingSet.get());
-            v.push(self.m_generator.get());
-            v.push(self.m_boneWeights.get());
+            v.push(&self.parent.m_variableBindingSet);
+            v.push(&self.m_generator);
+            v.push(&self.m_boneWeights);
             v
         }
     }
-    impl _serde::Serialize for hkbBlenderGeneratorChild {
+    impl<'a> _serde::Serialize for hkbBlenderGeneratorChild<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xe2b384b0)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -127,7 +130,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbBlenderGeneratorChild {
+    impl<'de> _serde::Deserialize<'de> for hkbBlenderGeneratorChild<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -183,7 +186,7 @@ const _: () = {
                 }
             }
             struct __hkbBlenderGeneratorChildVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbBlenderGeneratorChild>,
+                marker: _serde::__private::PhantomData<hkbBlenderGeneratorChild<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -191,7 +194,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbBlenderGeneratorChildVisitor<'de> {
-                type Value = hkbBlenderGeneratorChild;
+                type Value = hkbBlenderGeneratorChild<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -210,8 +213,8 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_generator: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_boneWeights: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_generator: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_boneWeights: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_weight: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_worldFromModelWeight: _serde::__private::Option<f32> = _serde::__private::None;
                     for i in 0..4usize {
@@ -226,7 +229,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 4usize, 0usize)?;
                                 m_generator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -243,7 +246,7 @@ const _: () = {
                                     );
                                 }
                                 m_boneWeights = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -344,9 +347,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_generator: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_boneWeights: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_generator: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_boneWeights: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_weight: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_worldFromModelWeight: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -373,7 +378,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -399,7 +404,7 @@ const _: () = {
                                     );
                                 }
                                 m_generator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -425,7 +430,7 @@ const _: () = {
                                     );
                                 }
                                 m_boneWeights = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -547,21 +552,23 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbBlenderGeneratorChild {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_generator,
                         m_boneWeights,

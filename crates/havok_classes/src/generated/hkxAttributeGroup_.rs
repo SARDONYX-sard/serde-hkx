@@ -22,7 +22,8 @@ pub struct hkxAttributeGroup<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -52,14 +53,14 @@ const _: () = {
             _serde::__private::Signature::new(0x345ca95d)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_attributes
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -71,6 +72,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x345ca95d)));
             let mut serializer = __serializer
                 .serialize_struct("hkxAttributeGroup", class_meta, (16u64, 24u64))?;
@@ -330,7 +332,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkxAttributeGroup {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_name,
                         m_attributes,
                     })

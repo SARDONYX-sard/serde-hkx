@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbVariableInfo {
+pub struct hkbVariableInfo<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,14 +22,15 @@ pub struct hkbVariableInfo {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `role`(ctype: `struct hkbRoleAttribute`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "role"))]
     #[cfg_attr(feature = "serde", serde(rename = "role"))]
-    pub m_role: hkbRoleAttribute,
+    pub m_role: hkbRoleAttribute<'a>,
     /// # C++ Info
     /// - name: `type`(ctype: `enum VariableType`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
@@ -40,7 +41,7 @@ pub struct hkbVariableInfo {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbVariableInfo {
+    impl<'a> _serde::HavokClass for hkbVariableInfo<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbVariableInfo"
@@ -50,19 +51,20 @@ const _: () = {
             _serde::__private::Signature::new(0x9e746ba2)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_role.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkbVariableInfo {
+    impl<'a> _serde::Serialize for hkbVariableInfo<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x9e746ba2)));
             let mut serializer = __serializer
                 .serialize_struct("hkbVariableInfo", class_meta, (6u64, 6u64))?;
@@ -78,7 +80,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbVariableInfo {
+    impl<'de> _serde::Deserialize<'de> for hkbVariableInfo<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -128,14 +130,14 @@ const _: () = {
                 }
             }
             struct __hkbVariableInfoVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbVariableInfo>,
+                marker: _serde::__private::PhantomData<hkbVariableInfo<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkbVariableInfoVisitor<'de> {
-                type Value = hkbVariableInfo;
+                type Value = hkbVariableInfo<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -300,7 +302,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbVariableInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_role,
                         m_type,
                     })
@@ -443,22 +445,22 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        255u8 => _serde::__private::Ok(__Field::__field0),
-                        0u8 => _serde::__private::Ok(__Field::__field1),
-                        1u8 => _serde::__private::Ok(__Field::__field2),
-                        2u8 => _serde::__private::Ok(__Field::__field3),
-                        3u8 => _serde::__private::Ok(__Field::__field4),
-                        4u8 => _serde::__private::Ok(__Field::__field5),
-                        5u8 => _serde::__private::Ok(__Field::__field6),
-                        6u8 => _serde::__private::Ok(__Field::__field7),
-                        7u8 => _serde::__private::Ok(__Field::__field8),
-                        8u8 => _serde::__private::Ok(__Field::__field9),
+                        U8::Number(255u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field5),
+                        U8::Number(5u8) => _serde::__private::Ok(__Field::__field6),
+                        U8::Number(6u8) => _serde::__private::Ok(__Field::__field7),
+                        U8::Number(7u8) => _serde::__private::Ok(__Field::__field8),
+                        U8::Number(8u8) => _serde::__private::Ok(__Field::__field9),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

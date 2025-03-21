@@ -22,7 +22,8 @@ pub struct hkbVariableBindingSetBinding<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `memberPath`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -38,7 +39,7 @@ pub struct hkbVariableBindingSetBinding<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "memberClass"))]
     #[cfg_attr(feature = "serde", serde(rename = "memberClass"))]
-    pub m_memberClass: Pointer,
+    pub m_memberClass: Pointer<'a>,
     /// # C++ Info
     /// - name: `offsetInObjectPlusOne`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -46,7 +47,7 @@ pub struct hkbVariableBindingSetBinding<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "offsetInObjectPlusOne"))]
     #[cfg_attr(feature = "serde", serde(rename = "offsetInObjectPlusOne"))]
-    pub m_offsetInObjectPlusOne: i32,
+    pub m_offsetInObjectPlusOne: I32<'a>,
     /// # C++ Info
     /// - name: `offsetInArrayPlusOne`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
@@ -54,7 +55,7 @@ pub struct hkbVariableBindingSetBinding<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "offsetInArrayPlusOne"))]
     #[cfg_attr(feature = "serde", serde(rename = "offsetInArrayPlusOne"))]
-    pub m_offsetInArrayPlusOne: i32,
+    pub m_offsetInArrayPlusOne: I32<'a>,
     /// # C++ Info
     /// - name: `rootVariableIndex`(ctype: `hkInt32`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
@@ -62,21 +63,21 @@ pub struct hkbVariableBindingSetBinding<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "rootVariableIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "rootVariableIndex"))]
-    pub m_rootVariableIndex: i32,
+    pub m_rootVariableIndex: I32<'a>,
     /// # C++ Info
     /// - name: `variableIndex`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "variableIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableIndex"))]
-    pub m_variableIndex: i32,
+    pub m_variableIndex: I32<'a>,
     /// # C++ Info
     /// - name: `bitIndex`(ctype: `hkInt8`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bitIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "bitIndex"))]
-    pub m_bitIndex: i8,
+    pub m_bitIndex: I8<'a>,
     /// # C++ Info
     /// - name: `bindingType`(ctype: `enum BindingType`)
     /// - offset: ` 25`(x86)/` 33`(x86_64)
@@ -91,7 +92,7 @@ pub struct hkbVariableBindingSetBinding<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "memberType"))]
     #[cfg_attr(feature = "serde", serde(rename = "memberType"))]
-    pub m_memberType: u8,
+    pub m_memberType: U8<'a>,
     /// # C++ Info
     /// - name: `variableType`(ctype: `hkInt8`)
     /// - offset: ` 27`(x86)/` 35`(x86_64)
@@ -99,7 +100,7 @@ pub struct hkbVariableBindingSetBinding<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "variableType"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableType"))]
-    pub m_variableType: i8,
+    pub m_variableType: I8<'a>,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags unknown`)
     /// - offset: ` 28`(x86)/` 36`(x86_64)
@@ -107,7 +108,7 @@ pub struct hkbVariableBindingSetBinding<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
-    pub m_flags: i8,
+    pub m_flags: I8<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -121,9 +122,9 @@ const _: () = {
             _serde::__private::Signature::new(0x4d592f72)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_memberClass.get());
+            v.push(&self.m_memberClass);
             v
         }
     }
@@ -134,6 +135,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x4d592f72)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -246,16 +248,20 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_memberPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_memberClass: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_offsetInObjectPlusOne: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_offsetInArrayPlusOne: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_rootVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_variableIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_bitIndex: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_memberClass: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_offsetInObjectPlusOne: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_offsetInArrayPlusOne: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_rootVariableIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_variableIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_bitIndex: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     let mut m_bindingType: _serde::__private::Option<BindingType> = _serde::__private::None;
-                    let mut m_memberType: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_variableType: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_memberType: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_variableType: _serde::__private::Option<I8<'de>> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     for i in 0..11usize {
                         match i {
                             0usize => {
@@ -284,7 +290,7 @@ const _: () = {
                                     );
                                 }
                                 m_memberClass = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -303,7 +309,7 @@ const _: () = {
                                     );
                                 }
                                 m_offsetInObjectPlusOne = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -322,7 +328,7 @@ const _: () = {
                                     );
                                 }
                                 m_offsetInArrayPlusOne = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -341,7 +347,7 @@ const _: () = {
                                     );
                                 }
                                 m_rootVariableIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -358,7 +364,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -375,7 +381,7 @@ const _: () = {
                                     );
                                 }
                                 m_bitIndex = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -409,7 +415,7 @@ const _: () = {
                                     );
                                 }
                                 m_memberType = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -426,7 +432,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableType = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -441,7 +447,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -583,8 +589,8 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_memberPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_variableIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_bitIndex: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_variableIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_bitIndex: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     let mut m_bindingType: _serde::__private::Option<BindingType> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -634,7 +640,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -660,7 +666,7 @@ const _: () = {
                                     );
                                 }
                                 m_bitIndex = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -745,7 +751,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbVariableBindingSetBinding {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_memberPath,
                         m_variableIndex,
                         m_bitIndex,
@@ -862,14 +868,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

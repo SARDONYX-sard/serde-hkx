@@ -22,7 +22,8 @@ pub struct hkbAttachmentModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -32,58 +33,62 @@ pub struct hkbAttachmentModifier<'a> {
     /// - name: `sendToAttacherOnAttach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "sendToAttacherOnAttach"))]
     #[cfg_attr(feature = "serde", serde(rename = "sendToAttacherOnAttach"))]
-    pub m_sendToAttacherOnAttach: hkbEventProperty,
+    pub m_sendToAttacherOnAttach: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `sendToAttacheeOnAttach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "sendToAttacheeOnAttach"))]
     #[cfg_attr(feature = "serde", serde(rename = "sendToAttacheeOnAttach"))]
-    pub m_sendToAttacheeOnAttach: hkbEventProperty,
+    pub m_sendToAttacheeOnAttach: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `sendToAttacherOnDetach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 60`(x86)/`112`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "sendToAttacherOnDetach"))]
     #[cfg_attr(feature = "serde", serde(rename = "sendToAttacherOnDetach"))]
-    pub m_sendToAttacherOnDetach: hkbEventProperty,
+    pub m_sendToAttacherOnDetach: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `sendToAttacheeOnDetach`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 68`(x86)/`128`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "sendToAttacheeOnDetach"))]
     #[cfg_attr(feature = "serde", serde(rename = "sendToAttacheeOnDetach"))]
-    pub m_sendToAttacheeOnDetach: hkbEventProperty,
+    pub m_sendToAttacheeOnDetach: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `attachmentSetup`(ctype: `struct hkbAttachmentSetup*`)
     /// - offset: ` 76`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "attachmentSetup"))]
     #[cfg_attr(feature = "serde", serde(rename = "attachmentSetup"))]
-    pub m_attachmentSetup: Pointer,
+    pub m_attachmentSetup: Pointer<'a>,
     /// # C++ Info
     /// - name: `attacherHandle`(ctype: `struct hkbHandle*`)
     /// - offset: ` 80`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "attacherHandle"))]
     #[cfg_attr(feature = "serde", serde(rename = "attacherHandle"))]
-    pub m_attacherHandle: Pointer,
+    pub m_attacherHandle: Pointer<'a>,
     /// # C++ Info
     /// - name: `attacheeHandle`(ctype: `struct hkbHandle*`)
     /// - offset: ` 84`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "attacheeHandle"))]
     #[cfg_attr(feature = "serde", serde(rename = "attacheeHandle"))]
-    pub m_attacheeHandle: Pointer,
+    pub m_attacheeHandle: Pointer<'a>,
     /// # C++ Info
     /// - name: `attacheeLayer`(ctype: `hkInt32`)
     /// - offset: ` 88`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "attacheeLayer"))]
     #[cfg_attr(feature = "serde", serde(rename = "attacheeLayer"))]
-    pub m_attacheeLayer: i32,
+    pub m_attacheeLayer: I32<'a>,
     /// # C++ Info
     /// - name: `attacheeRB`(ctype: `void*`)
     /// - offset: ` 92`(x86)/`176`(x86_64)
@@ -91,7 +96,7 @@ pub struct hkbAttachmentModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "attacheeRB"))]
     #[cfg_attr(feature = "serde", serde(rename = "attacheeRB"))]
-    pub m_attacheeRB: Pointer,
+    pub m_attacheeRB: Pointer<'a>,
     /// # C++ Info
     /// - name: `oldMotionType`(ctype: `enum unknown`)
     /// - offset: ` 96`(x86)/`184`(x86_64)
@@ -99,7 +104,7 @@ pub struct hkbAttachmentModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "oldMotionType"))]
     #[cfg_attr(feature = "serde", serde(rename = "oldMotionType"))]
-    pub m_oldMotionType: u8,
+    pub m_oldMotionType: U8<'a>,
     /// # C++ Info
     /// - name: `oldFilterInfo`(ctype: `hkInt32`)
     /// - offset: `100`(x86)/`188`(x86_64)
@@ -107,7 +112,7 @@ pub struct hkbAttachmentModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "oldFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "oldFilterInfo"))]
-    pub m_oldFilterInfo: i32,
+    pub m_oldFilterInfo: I32<'a>,
     /// # C++ Info
     /// - name: `attachment`(ctype: `void*`)
     /// - offset: `104`(x86)/`192`(x86_64)
@@ -115,7 +120,7 @@ pub struct hkbAttachmentModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "attachment"))]
     #[cfg_attr(feature = "serde", serde(rename = "attachment"))]
-    pub m_attachment: Pointer,
+    pub m_attachment: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -129,18 +134,18 @@ const _: () = {
             _serde::__private::Signature::new(0xcc0aab32)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(self.m_sendToAttacherOnAttach.deps_indexes());
             v.extend(self.m_sendToAttacheeOnAttach.deps_indexes());
             v.extend(self.m_sendToAttacherOnDetach.deps_indexes());
             v.extend(self.m_sendToAttacheeOnDetach.deps_indexes());
-            v.push(self.m_attachmentSetup.get());
-            v.push(self.m_attacherHandle.get());
-            v.push(self.m_attacheeHandle.get());
-            v.push(self.m_attacheeRB.get());
-            v.push(self.m_attachment.get());
+            v.push(&self.m_attachmentSetup);
+            v.push(&self.m_attacherHandle);
+            v.push(&self.m_attacheeHandle);
+            v.push(&self.m_attacheeRB);
+            v.push(&self.m_attachment);
             v
         }
     }
@@ -151,6 +156,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xcc0aab32)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -342,25 +348,25 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_sendToAttacherOnAttach: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_sendToAttacheeOnAttach: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_sendToAttacherOnDetach: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_sendToAttacheeOnDetach: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
-                    let mut m_attachmentSetup: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_attacherHandle: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_attacheeHandle: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_attacheeLayer: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_attacheeRB: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_oldMotionType: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_oldFilterInfo: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_attachment: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_attachmentSetup: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_attacherHandle: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_attacheeHandle: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_attacheeLayer: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_attacheeRB: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_oldMotionType: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_oldFilterInfo: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_attachment: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..12usize {
                         match i {
                             0usize => {
@@ -374,7 +380,7 @@ const _: () = {
                                     );
                                 }
                                 m_sendToAttacherOnAttach = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -393,7 +399,7 @@ const _: () = {
                                     );
                                 }
                                 m_sendToAttacheeOnAttach = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -412,7 +418,7 @@ const _: () = {
                                     );
                                 }
                                 m_sendToAttacherOnDetach = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -431,7 +437,7 @@ const _: () = {
                                     );
                                 }
                                 m_sendToAttacheeOnDetach = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -448,7 +454,7 @@ const _: () = {
                                     );
                                 }
                                 m_attachmentSetup = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -465,7 +471,7 @@ const _: () = {
                                     );
                                 }
                                 m_attacherHandle = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -482,7 +488,7 @@ const _: () = {
                                     );
                                 }
                                 m_attacheeHandle = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -499,7 +505,7 @@ const _: () = {
                                     );
                                 }
                                 m_attacheeLayer = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -517,7 +523,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_attacheeRB = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -534,7 +540,7 @@ const _: () = {
                                     );
                                 }
                                 m_oldMotionType = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -552,7 +558,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_oldFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -569,7 +575,7 @@ const _: () = {
                                     );
                                 }
                                 m_attachment = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -725,26 +731,28 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_sendToAttacherOnAttach: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_sendToAttacheeOnAttach: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_sendToAttacherOnDetach: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_sendToAttacheeOnDetach: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
-                    let mut m_attachmentSetup: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_attacherHandle: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_attacheeHandle: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_attacheeLayer: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_attachmentSetup: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_attacherHandle: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_attacheeHandle: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_attacheeLayer: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -769,7 +777,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -871,7 +879,7 @@ const _: () = {
                                     );
                                 }
                                 m_sendToAttacherOnAttach = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -899,7 +907,7 @@ const _: () = {
                                     );
                                 }
                                 m_sendToAttacheeOnAttach = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -927,7 +935,7 @@ const _: () = {
                                     );
                                 }
                                 m_sendToAttacherOnDetach = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -955,7 +963,7 @@ const _: () = {
                                     );
                                 }
                                 m_sendToAttacheeOnDetach = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -981,7 +989,7 @@ const _: () = {
                                     );
                                 }
                                 m_attachmentSetup = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1007,7 +1015,7 @@ const _: () = {
                                     );
                                 }
                                 m_attacherHandle = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1033,7 +1041,7 @@ const _: () = {
                                     );
                                 }
                                 m_attacheeHandle = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1059,7 +1067,7 @@ const _: () = {
                                     );
                                 }
                                 m_attacheeLayer = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1209,34 +1217,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbAttachmentModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_sendToAttacherOnAttach,
                         m_sendToAttacheeOnAttach,

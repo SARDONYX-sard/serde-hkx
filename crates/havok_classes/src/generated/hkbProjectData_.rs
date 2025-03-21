@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbProjectData {
+pub struct hkbProjectData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkbProjectData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `worldUpWS`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
@@ -40,7 +42,7 @@ pub struct hkbProjectData {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "stringData"))]
     #[cfg_attr(feature = "serde", serde(rename = "stringData"))]
-    pub m_stringData: Pointer,
+    pub m_stringData: Pointer<'a>,
     /// # C++ Info
     /// - name: `defaultEventMode`(ctype: `enum EventMode`)
     /// - offset: ` 36`(x86)/` 40`(x86_64)
@@ -51,7 +53,7 @@ pub struct hkbProjectData {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbProjectData {
+    impl<'a> _serde::HavokClass for hkbProjectData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbProjectData"
@@ -61,19 +63,20 @@ const _: () = {
             _serde::__private::Signature::new(0x13a39ba7)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_stringData.get());
+            v.push(&self.m_stringData);
             v
         }
     }
-    impl _serde::Serialize for hkbProjectData {
+    impl<'a> _serde::Serialize for hkbProjectData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x13a39ba7)));
             let mut serializer = __serializer
                 .serialize_struct("hkbProjectData", class_meta, (48u64, 48u64))?;
@@ -95,7 +98,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbProjectData {
+    impl<'de> _serde::Deserialize<'de> for hkbProjectData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -147,14 +150,14 @@ const _: () = {
                 }
             }
             struct __hkbProjectDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbProjectData>,
+                marker: _serde::__private::PhantomData<hkbProjectData<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkbProjectDataVisitor<'de> {
-                type Value = hkbProjectData;
+                type Value = hkbProjectData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -171,7 +174,7 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_worldUpWS: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_defaultEventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
@@ -202,7 +205,7 @@ const _: () = {
                                     );
                                 }
                                 m_stringData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -278,7 +281,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_worldUpWS: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_defaultEventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -328,7 +331,7 @@ const _: () = {
                                     );
                                 }
                                 m_stringData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -402,15 +405,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbProjectData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_worldUpWS,
                         m_stringData,

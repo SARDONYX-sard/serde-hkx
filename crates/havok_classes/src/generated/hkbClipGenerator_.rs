@@ -22,7 +22,8 @@ pub struct hkbClipGenerator<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -42,7 +43,7 @@ pub struct hkbClipGenerator<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "triggers"))]
     #[cfg_attr(feature = "serde", serde(rename = "triggers"))]
-    pub m_triggers: Pointer,
+    pub m_triggers: Pointer<'a>,
     /// # C++ Info
     /// - name: `cropStartAmountLocalTime`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
@@ -91,7 +92,7 @@ pub struct hkbClipGenerator<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "animationBindingIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "animationBindingIndex"))]
-    pub m_animationBindingIndex: i16,
+    pub m_animationBindingIndex: I16<'a>,
     /// # C++ Info
     /// - name: `mode`(ctype: `enum PlaybackMode`)
     /// - offset: ` 74`(x86)/`114`(x86_64)
@@ -105,7 +106,7 @@ pub struct hkbClipGenerator<'a> {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
-    pub m_flags: i8,
+    pub m_flags: I8<'a>,
     /// # C++ Info
     /// - name: `animDatas`(ctype: `hkArray<void>`)
     /// - offset: ` 76`(x86)/`120`(x86_64)
@@ -121,7 +122,7 @@ pub struct hkbClipGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "animationControl"))]
     #[cfg_attr(feature = "serde", serde(rename = "animationControl"))]
-    pub m_animationControl: Pointer,
+    pub m_animationControl: Pointer<'a>,
     /// # C++ Info
     /// - name: `originalTriggers`(ctype: `void*`)
     /// - offset: ` 92`(x86)/`144`(x86_64)
@@ -129,7 +130,7 @@ pub struct hkbClipGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "originalTriggers"))]
     #[cfg_attr(feature = "serde", serde(rename = "originalTriggers"))]
-    pub m_originalTriggers: Pointer,
+    pub m_originalTriggers: Pointer<'a>,
     /// # C++ Info
     /// - name: `mapperData`(ctype: `void*`)
     /// - offset: ` 96`(x86)/`152`(x86_64)
@@ -137,7 +138,7 @@ pub struct hkbClipGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "mapperData"))]
     #[cfg_attr(feature = "serde", serde(rename = "mapperData"))]
-    pub m_mapperData: Pointer,
+    pub m_mapperData: Pointer<'a>,
     /// # C++ Info
     /// - name: `binding`(ctype: `void*`)
     /// - offset: `100`(x86)/`160`(x86_64)
@@ -145,7 +146,7 @@ pub struct hkbClipGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "binding"))]
     #[cfg_attr(feature = "serde", serde(rename = "binding"))]
-    pub m_binding: Pointer,
+    pub m_binding: Pointer<'a>,
     /// # C++ Info
     /// - name: `mirroredAnimation`(ctype: `void*`)
     /// - offset: `104`(x86)/`168`(x86_64)
@@ -153,7 +154,7 @@ pub struct hkbClipGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "mirroredAnimation"))]
     #[cfg_attr(feature = "serde", serde(rename = "mirroredAnimation"))]
-    pub m_mirroredAnimation: Pointer,
+    pub m_mirroredAnimation: Pointer<'a>,
     /// # C++ Info
     /// - name: `extractedMotion`(ctype: `hkQsTransform`)
     /// - offset: `112`(x86)/`176`(x86_64)
@@ -204,7 +205,7 @@ pub struct hkbClipGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "bufferSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "bufferSize"))]
-    pub m_bufferSize: i32,
+    pub m_bufferSize: I32<'a>,
     /// # C++ Info
     /// - name: `echoBufferSize`(ctype: `hkInt32`)
     /// - offset: `188`(x86)/`256`(x86_64)
@@ -212,7 +213,7 @@ pub struct hkbClipGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "echoBufferSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "echoBufferSize"))]
-    pub m_echoBufferSize: i32,
+    pub m_echoBufferSize: I32<'a>,
     /// # C++ Info
     /// - name: `atEnd`(ctype: `hkBool`)
     /// - offset: `192`(x86)/`260`(x86_64)
@@ -250,15 +251,15 @@ const _: () = {
             _serde::__private::Signature::new(0x333b85b9)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
-            v.push(self.m_triggers.get());
-            v.push(self.m_animationControl.get());
-            v.push(self.m_originalTriggers.get());
-            v.push(self.m_mapperData.get());
-            v.push(self.m_binding.get());
-            v.push(self.m_mirroredAnimation.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
+            v.push(&self.m_triggers);
+            v.push(&self.m_animationControl);
+            v.push(&self.m_originalTriggers);
+            v.push(&self.m_mapperData);
+            v.push(&self.m_binding);
+            v.push(&self.m_mirroredAnimation);
             v
         }
     }
@@ -269,6 +270,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x333b85b9)));
             let mut serializer = __serializer
                 .serialize_struct("hkbClipGenerator", class_meta, (208u64, 272u64))?;
@@ -477,7 +479,7 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_animationName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_triggers: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_triggers: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_cropStartAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_cropEndAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_startTime: _serde::__private::Option<f32> = _serde::__private::None;
@@ -486,15 +488,23 @@ const _: () = {
                     let mut m_userControlledTimeFraction: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_animationBindingIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_animationBindingIndex: _serde::__private::Option<
+                        I16<'de>,
+                    > = _serde::__private::None;
                     let mut m_mode: _serde::__private::Option<PlaybackMode> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     let mut m_animDatas: _serde::__private::Option<Vec<()>> = _serde::__private::None;
-                    let mut m_animationControl: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_originalTriggers: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_mapperData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_binding: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_mirroredAnimation: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_animationControl: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_originalTriggers: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_mapperData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_binding: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_mirroredAnimation: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_extractedMotion: _serde::__private::Option<QsTransform> = _serde::__private::None;
                     let mut m_echos: _serde::__private::Option<Vec<()>> = _serde::__private::None;
                     let mut m_localTime: _serde::__private::Option<f32> = _serde::__private::None;
@@ -502,8 +512,8 @@ const _: () = {
                     let mut m_previousUserControlledTimeFraction: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_bufferSize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_echoBufferSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_bufferSize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_echoBufferSize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_atEnd: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_ignoreStartTime: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_pingPongBackward: _serde::__private::Option<bool> = _serde::__private::None;
@@ -535,7 +545,7 @@ const _: () = {
                                     );
                                 }
                                 m_triggers = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -662,7 +672,7 @@ const _: () = {
                                     );
                                 }
                                 m_animationBindingIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -692,7 +702,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -727,7 +737,7 @@ const _: () = {
                                     );
                                 }
                                 m_animationControl = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -744,7 +754,7 @@ const _: () = {
                                     );
                                 }
                                 m_originalTriggers = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -761,7 +771,7 @@ const _: () = {
                                     );
                                 }
                                 m_mapperData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -778,7 +788,7 @@ const _: () = {
                                     );
                                 }
                                 m_binding = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -797,7 +807,7 @@ const _: () = {
                                     );
                                 }
                                 m_mirroredAnimation = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -898,7 +908,7 @@ const _: () = {
                                     );
                                 }
                                 m_bufferSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -915,7 +925,7 @@ const _: () = {
                                     );
                                 }
                                 m_echoBufferSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1272,11 +1282,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_animationName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_triggers: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_triggers: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_cropStartAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_cropEndAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_startTime: _serde::__private::Option<f32> = _serde::__private::None;
@@ -1285,9 +1297,11 @@ const _: () = {
                     let mut m_userControlledTimeFraction: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_animationBindingIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_animationBindingIndex: _serde::__private::Option<
+                        I16<'de>,
+                    > = _serde::__private::None;
                     let mut m_mode: _serde::__private::Option<PlaybackMode> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -1312,7 +1326,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1414,7 +1428,7 @@ const _: () = {
                                     );
                                 }
                                 m_triggers = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1604,7 +1618,7 @@ const _: () = {
                                     );
                                 }
                                 m_animationBindingIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1652,7 +1666,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1822,29 +1836,34 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
-                    let parent = hkbGenerator { __ptr, parent };
+                    let parent = hkbGenerator {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbClipGenerator {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_animationName,
                         m_triggers,
@@ -1993,17 +2012,17 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
-                        4i8 => _serde::__private::Ok(__Field::__field4),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(4i8) => _serde::__private::Ok(__Field::__field4),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

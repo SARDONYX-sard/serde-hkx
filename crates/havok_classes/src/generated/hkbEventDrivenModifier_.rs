@@ -22,7 +22,8 @@ pub struct hkbEventDrivenModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,14 +35,14 @@ pub struct hkbEventDrivenModifier<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "activateEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "activateEventId"))]
-    pub m_activateEventId: i32,
+    pub m_activateEventId: I32<'a>,
     /// # C++ Info
     /// - name: `deactivateEventId`(ctype: `hkInt32`)
     /// - offset: ` 52`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "deactivateEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "deactivateEventId"))]
-    pub m_deactivateEventId: i32,
+    pub m_deactivateEventId: I32<'a>,
     /// # C++ Info
     /// - name: `activeByDefault`(ctype: `hkBool`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
@@ -70,10 +71,10 @@ const _: () = {
             _serde::__private::Signature::new(0x7ed3f44e)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.parent.m_variableBindingSet.get());
-            v.push(self.parent.m_modifier.get());
+            v.push(&self.parent.parent.parent.parent.m_variableBindingSet);
+            v.push(&self.parent.m_modifier);
             v
         }
     }
@@ -84,6 +85,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x7ed3f44e)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -244,8 +246,8 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_activateEventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_deactivateEventId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_activateEventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_deactivateEventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_activeByDefault: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_isActive: _serde::__private::Option<bool> = _serde::__private::None;
                     for i in 0..4usize {
@@ -259,7 +261,7 @@ const _: () = {
                                     );
                                 }
                                 m_activateEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -278,7 +280,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivateEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -379,13 +381,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_modifier: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_activateEventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_deactivateEventId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_modifier: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_activateEventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_deactivateEventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_activeByDefault: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -411,7 +415,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -511,7 +515,7 @@ const _: () = {
                                     );
                                 }
                                 m_modifier = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -537,7 +541,7 @@ const _: () = {
                                     );
                                 }
                                 m_activateEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -565,7 +569,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivateEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -691,39 +695,41 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let parent = hkbModifierWrapper {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_modifier,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbEventDrivenModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_activateEventId,
                         m_deactivateEventId,

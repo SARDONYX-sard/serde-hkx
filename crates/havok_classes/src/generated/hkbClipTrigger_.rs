@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbClipTrigger {
+pub struct hkbClipTrigger<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkbClipTrigger {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `localTime`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -34,9 +35,10 @@ pub struct hkbClipTrigger {
     /// - name: `event`(ctype: `struct hkbEventProperty`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "event"))]
     #[cfg_attr(feature = "serde", serde(rename = "event"))]
-    pub m_event: hkbEventProperty,
+    pub m_event: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `relativeToEndOfClip`(ctype: `hkBool`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
@@ -61,7 +63,7 @@ pub struct hkbClipTrigger {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbClipTrigger {
+    impl<'a> _serde::HavokClass for hkbClipTrigger<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbClipTrigger"
@@ -71,19 +73,20 @@ const _: () = {
             _serde::__private::Signature::new(0x7eb45cea)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_event.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkbClipTrigger {
+    impl<'a> _serde::Serialize for hkbClipTrigger<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x7eb45cea)));
             let mut serializer = __serializer
                 .serialize_struct("hkbClipTrigger", class_meta, (16u64, 32u64))?;
@@ -104,7 +107,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbClipTrigger {
+    impl<'de> _serde::Deserialize<'de> for hkbClipTrigger<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -160,14 +163,14 @@ const _: () = {
                 }
             }
             struct __hkbClipTriggerVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbClipTrigger>,
+                marker: _serde::__private::PhantomData<hkbClipTrigger<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkbClipTriggerVisitor<'de> {
-                type Value = hkbClipTrigger;
+                type Value = hkbClipTrigger<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -183,7 +186,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_localTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_event: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+                    let mut m_event: _serde::__private::Option<hkbEventProperty<'de>> = _serde::__private::None;
                     let mut m_relativeToEndOfClip: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_acyclic: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_isAnnotation: _serde::__private::Option<bool> = _serde::__private::None;
@@ -214,7 +217,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_event = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -343,7 +346,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_localTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_event: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+                    let mut m_event: _serde::__private::Option<hkbEventProperty<'de>> = _serde::__private::None;
                     let mut m_relativeToEndOfClip: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_acyclic: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_isAnnotation: _serde::__private::Option<bool> = _serde::__private::None;
@@ -393,7 +396,7 @@ const _: () = {
                                     );
                                 }
                                 m_event = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -542,7 +545,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbClipTrigger {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_localTime,
                         m_event,
                         m_relativeToEndOfClip,

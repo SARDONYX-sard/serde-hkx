@@ -22,7 +22,8 @@ pub struct hkbEventsFromRangeModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -48,7 +49,7 @@ pub struct hkbEventsFromRangeModifier<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventRanges"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventRanges"))]
-    pub m_eventRanges: Pointer,
+    pub m_eventRanges: Pointer<'a>,
     /// # C++ Info
     /// - name: `wasActiveInPreviousFrame`(ctype: `hkArray<void>`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
@@ -70,10 +71,10 @@ const _: () = {
             _serde::__private::Signature::new(0xbc561b6e)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
-            v.push(self.m_eventRanges.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
+            v.push(&self.m_eventRanges);
             v
         }
     }
@@ -84,6 +85,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xbc561b6e)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -246,7 +248,7 @@ const _: () = {
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_inputValue: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_lowerBound: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_eventRanges: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_eventRanges: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_wasActiveInPreviousFrame: _serde::__private::Option<
                         Vec<()>,
                     > = _serde::__private::None;
@@ -295,7 +297,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventRanges = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -382,13 +384,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_inputValue: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_lowerBound: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_eventRanges: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_eventRanges: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -413,7 +417,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -565,7 +569,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventRanges = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -655,34 +659,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbEventsFromRangeModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_inputValue,
                         m_lowerBound,

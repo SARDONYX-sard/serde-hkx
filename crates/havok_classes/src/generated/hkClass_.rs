@@ -22,7 +22,8 @@ pub struct hkClass<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `name`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -37,21 +38,21 @@ pub struct hkClass<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "parent"))]
     #[cfg_attr(feature = "serde", serde(rename = "parent"))]
-    pub m_parent: Pointer,
+    pub m_parent: Pointer<'a>,
     /// # C++ Info
     /// - name: `objectSize`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "objectSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "objectSize"))]
-    pub m_objectSize: i32,
+    pub m_objectSize: I32<'a>,
     /// # C++ Info
     /// - name: `numImplementedInterfaces`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numImplementedInterfaces"))]
     #[cfg_attr(feature = "serde", serde(rename = "numImplementedInterfaces"))]
-    pub m_numImplementedInterfaces: i32,
+    pub m_numImplementedInterfaces: I32<'a>,
     /// # C++ Info
     /// - name: `declaredEnums`(ctype: `hkSimpleArray<struct hkClassEnum>`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
@@ -75,7 +76,7 @@ pub struct hkClass<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "defaults"))]
     #[cfg_attr(feature = "serde", serde(rename = "defaults"))]
-    pub m_defaults: Pointer,
+    pub m_defaults: Pointer<'a>,
     /// # C++ Info
     /// - name: `attributes`(ctype: `struct hkCustomAttributes*`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
@@ -83,7 +84,7 @@ pub struct hkClass<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "attributes"))]
     #[cfg_attr(feature = "serde", serde(rename = "attributes"))]
-    pub m_attributes: Pointer,
+    pub m_attributes: Pointer<'a>,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags FlagValues`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
@@ -97,7 +98,7 @@ pub struct hkClass<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "describedVersion"))]
     #[cfg_attr(feature = "serde", serde(rename = "describedVersion"))]
-    pub m_describedVersion: i32,
+    pub m_describedVersion: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -111,11 +112,11 @@ const _: () = {
             _serde::__private::Signature::new(0x75585ef6)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_parent.get());
-            v.push(self.m_defaults.get());
-            v.push(self.m_attributes.get());
+            v.push(&self.m_parent);
+            v.push(&self.m_defaults);
+            v.push(&self.m_attributes);
             v
         }
     }
@@ -126,6 +127,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x75585ef6)));
             let mut serializer = __serializer
                 .serialize_struct("hkClass", class_meta, (48u64, 80u64))?;
@@ -241,19 +243,21 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-                    let mut m_parent: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_objectSize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numImplementedInterfaces: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_parent: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_objectSize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numImplementedInterfaces: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_declaredEnums: _serde::__private::Option<
                         Vec<hkClassEnum<'de>>,
                     > = _serde::__private::None;
                     let mut m_declaredMembers: _serde::__private::Option<
                         Vec<hkClassMember<'de>>,
                     > = _serde::__private::None;
-                    let mut m_defaults: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_attributes: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_defaults: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_attributes: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_flags: _serde::__private::Option<FlagValues> = _serde::__private::None;
-                    let mut m_describedVersion: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_describedVersion: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..10usize {
                         match i {
                             0usize => {
@@ -278,7 +282,7 @@ const _: () = {
                                     );
                                 }
                                 m_parent = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -295,7 +299,7 @@ const _: () = {
                                     );
                                 }
                                 m_objectSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -314,7 +318,7 @@ const _: () = {
                                     );
                                 }
                                 m_numImplementedInterfaces = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -369,7 +373,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_defaults = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -386,7 +390,7 @@ const _: () = {
                                     );
                                 }
                                 m_attributes = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -418,7 +422,7 @@ const _: () = {
                                     );
                                 }
                                 m_describedVersion = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -544,9 +548,11 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-                    let mut m_parent: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_objectSize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numImplementedInterfaces: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_parent: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_objectSize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numImplementedInterfaces: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_declaredEnums: _serde::__private::Option<
                         Vec<hkClassEnum<'de>>,
                     > = _serde::__private::None;
@@ -554,7 +560,7 @@ const _: () = {
                         Vec<hkClassMember<'de>>,
                     > = _serde::__private::None;
                     let mut m_flags: _serde::__private::Option<FlagValues> = _serde::__private::None;
-                    let mut m_describedVersion: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_describedVersion: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -599,7 +605,7 @@ const _: () = {
                                     );
                                 }
                                 m_parent = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -625,7 +631,7 @@ const _: () = {
                                     );
                                 }
                                 m_objectSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -653,7 +659,7 @@ const _: () = {
                                     );
                                 }
                                 m_numImplementedInterfaces = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -757,7 +763,7 @@ const _: () = {
                                     );
                                 }
                                 m_describedVersion = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -860,7 +866,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkClass {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_name,
                         m_parent,
                         m_objectSize,
@@ -995,12 +1001,24 @@ const _: () = {
                 #[inline]
                 fn visit_uint32<__E>(
                     self,
-                    __value: u32,
+                    __value: U32<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
-                    Ok(FlagValues::from_bits_retain(__value as _))
+                    match __value {
+                        U32::Number(__value) => {
+                            Ok(FlagValues::from_bits_retain(__value as _))
+                        }
+                        _ => {
+                            Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Uint32(__value as _),
+                                    &"FlagValues(U32) Number",
+                                ),
+                            )
+                        }
+                    }
                 }
                 fn visit_stringptr<__E>(
                     self,

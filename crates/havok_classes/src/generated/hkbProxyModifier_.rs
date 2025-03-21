@@ -22,7 +22,8 @@ pub struct hkbProxyModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,7 +35,7 @@ pub struct hkbProxyModifier<'a> {
     /// - type_size: ` 80`(x86)/` 80`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "proxyInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "proxyInfo"))]
-    pub m_proxyInfo: hkbProxyModifierProxyInfo,
+    pub m_proxyInfo: hkbProxyModifierProxyInfo<'a>,
     /// # C++ Info
     /// - name: `linearVelocity`(ctype: `hkVector4`)
     /// - offset: `128`(x86)/`160`(x86_64)
@@ -128,7 +129,7 @@ pub struct hkbProxyModifier<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "collisionFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionFilterInfo"))]
-    pub m_collisionFilterInfo: u32,
+    pub m_collisionFilterInfo: U32<'a>,
     /// # C++ Info
     /// - name: `phantomType`(ctype: `enum PhantomType`)
     /// - offset: `192`(x86)/`224`(x86_64)
@@ -195,7 +196,7 @@ pub struct hkbProxyModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterProxy"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterProxy"))]
-    pub m_characterProxy: Pointer,
+    pub m_characterProxy: Pointer<'a>,
     /// # C++ Info
     /// - name: `phantom`(ctype: `void*`)
     /// - offset: `204`(x86)/`240`(x86_64)
@@ -203,7 +204,7 @@ pub struct hkbProxyModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "phantom"))]
     #[cfg_attr(feature = "serde", serde(rename = "phantom"))]
-    pub m_phantom: Pointer,
+    pub m_phantom: Pointer<'a>,
     /// # C++ Info
     /// - name: `phantomShape`(ctype: `void*`)
     /// - offset: `208`(x86)/`248`(x86_64)
@@ -211,7 +212,7 @@ pub struct hkbProxyModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "phantomShape"))]
     #[cfg_attr(feature = "serde", serde(rename = "phantomShape"))]
-    pub m_phantomShape: Pointer,
+    pub m_phantomShape: Pointer<'a>,
     /// # C++ Info
     /// - name: `horizontalDisplacement`(ctype: `hkVector4`)
     /// - offset: `224`(x86)/`256`(x86_64)
@@ -260,13 +261,13 @@ const _: () = {
             _serde::__private::Signature::new(0x8a41554f)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(self.m_proxyInfo.deps_indexes());
-            v.push(self.m_characterProxy.get());
-            v.push(self.m_phantom.get());
-            v.push(self.m_phantomShape.get());
+            v.push(&self.m_characterProxy);
+            v.push(&self.m_phantom);
+            v.push(&self.m_phantomShape);
             v
         }
     }
@@ -277,6 +278,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x8a41554f)));
             let mut serializer = __serializer
                 .serialize_struct("hkbProxyModifier", class_meta, (256u64, 288u64))?;
@@ -577,7 +579,7 @@ const _: () = {
                     let mut m_capsuleHeight: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_capsuleRadius: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxSlopeForRotation: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_phantomType: _serde::__private::Option<PhantomType> = _serde::__private::None;
                     let mut m_linearVelocityMode: _serde::__private::Option<
                         LinearVelocityMode,
@@ -592,9 +594,9 @@ const _: () = {
                     let mut m_includeDownwardMomentum: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_followWorldFromModel: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_isTouchingGround: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_characterProxy: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_phantom: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_phantomShape: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_characterProxy: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_phantom: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_phantomShape: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_horizontalDisplacement: _serde::__private::Option<
                         Vector4,
                     > = _serde::__private::None;
@@ -854,7 +856,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1019,7 +1021,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterProxy = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1036,7 +1038,7 @@ const _: () = {
                                     );
                                 }
                                 m_phantom = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1053,7 +1055,7 @@ const _: () = {
                                     );
                                 }
                                 m_phantomShape = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1468,7 +1470,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
@@ -1491,7 +1495,7 @@ const _: () = {
                     let mut m_capsuleHeight: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_capsuleRadius: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxSlopeForRotation: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_phantomType: _serde::__private::Option<PhantomType> = _serde::__private::None;
                     let mut m_linearVelocityMode: _serde::__private::Option<
                         LinearVelocityMode,
@@ -1530,7 +1534,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1986,7 +1990,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2524,34 +2528,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbProxyModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_proxyInfo,
                         m_linearVelocity,
@@ -2748,14 +2754,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -2897,14 +2903,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

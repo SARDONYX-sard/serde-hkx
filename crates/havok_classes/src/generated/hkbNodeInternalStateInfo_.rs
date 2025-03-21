@@ -22,18 +22,20 @@ pub struct hkbNodeInternalStateInfo<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `syncInfo`(ctype: `struct hkbGeneratorSyncInfo`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 80`(x86)/` 80`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "syncInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "syncInfo"))]
-    pub m_syncInfo: hkbGeneratorSyncInfo,
+    pub m_syncInfo: hkbGeneratorSyncInfo<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 88`(x86)/` 96`(x86_64)
@@ -48,14 +50,14 @@ pub struct hkbNodeInternalStateInfo<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "internalState"))]
     #[cfg_attr(feature = "serde", serde(rename = "internalState"))]
-    pub m_internalState: Pointer,
+    pub m_internalState: Pointer<'a>,
     /// # C++ Info
     /// - name: `nodeId`(ctype: `hkInt16`)
     /// - offset: ` 96`(x86)/`112`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "nodeId"))]
     #[cfg_attr(feature = "serde", serde(rename = "nodeId"))]
-    pub m_nodeId: i16,
+    pub m_nodeId: I16<'a>,
     /// # C++ Info
     /// - name: `hasActivateBeenCalled`(ctype: `hkBool`)
     /// - offset: ` 98`(x86)/`114`(x86_64)
@@ -76,10 +78,10 @@ const _: () = {
             _serde::__private::Signature::new(0x7db9971d)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_syncInfo.deps_indexes());
-            v.push(self.m_internalState.get());
+            v.push(&self.m_internalState);
             v
         }
     }
@@ -90,6 +92,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x7db9971d)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -207,8 +210,8 @@ const _: () = {
                         hkbGeneratorSyncInfo,
                     > = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_internalState: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_nodeId: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_internalState: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_nodeId: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_hasActivateBeenCalled: _serde::__private::Option<bool> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
@@ -253,7 +256,7 @@ const _: () = {
                                     );
                                 }
                                 m_internalState = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -268,7 +271,7 @@ const _: () = {
                                     );
                                 }
                                 m_nodeId = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -365,8 +368,8 @@ const _: () = {
                         hkbGeneratorSyncInfo,
                     > = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_internalState: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_nodeId: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_internalState: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_nodeId: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_hasActivateBeenCalled: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -440,7 +443,7 @@ const _: () = {
                                     );
                                 }
                                 m_internalState = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -464,7 +467,7 @@ const _: () = {
                                     );
                                 }
                                 m_nodeId = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -558,15 +561,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbNodeInternalStateInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_syncInfo,
                         m_name,

@@ -22,11 +22,13 @@ pub struct hkbExpressionCondition<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkbCondition,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkbCondition<'a>,
     /// # C++ Info
     /// - name: `expression`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -42,7 +44,7 @@ pub struct hkbExpressionCondition<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "compiledExpressionSet"))]
     #[cfg_attr(feature = "serde", serde(rename = "compiledExpressionSet"))]
-    pub m_compiledExpressionSet: Pointer,
+    pub m_compiledExpressionSet: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -56,9 +58,9 @@ const _: () = {
             _serde::__private::Signature::new(0x1c3c1045)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_compiledExpressionSet.get());
+            v.push(&self.m_compiledExpressionSet);
             v
         }
     }
@@ -69,6 +71,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x1c3c1045)));
             let mut serializer = __serializer
                 .serialize_struct("hkbExpressionCondition", class_meta, (16u64, 32u64))?;
@@ -166,7 +169,7 @@ const _: () = {
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_expression: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_compiledExpressionSet: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
@@ -198,7 +201,7 @@ const _: () = {
                                     );
                                 }
                                 m_compiledExpressionSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -291,16 +294,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
-                    let parent = hkbCondition { __ptr, parent };
+                    let parent = hkbCondition {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbExpressionCondition {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_expression,
                         ..Default::default()

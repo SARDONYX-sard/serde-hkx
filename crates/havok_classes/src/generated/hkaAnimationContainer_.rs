@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkaAnimationContainer {
+pub struct hkaAnimationContainer<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,50 +22,52 @@ pub struct hkaAnimationContainer {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `skeletons`(ctype: `hkArray<hkaSkeleton*>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "skeletons"))]
     #[cfg_attr(feature = "serde", serde(rename = "skeletons"))]
-    pub m_skeletons: Vec<Pointer>,
+    pub m_skeletons: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `animations`(ctype: `hkArray<hkaAnimation*>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "animations"))]
     #[cfg_attr(feature = "serde", serde(rename = "animations"))]
-    pub m_animations: Vec<Pointer>,
+    pub m_animations: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `bindings`(ctype: `hkArray<hkaAnimationBinding*>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bindings"))]
     #[cfg_attr(feature = "serde", serde(rename = "bindings"))]
-    pub m_bindings: Vec<Pointer>,
+    pub m_bindings: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `attachments`(ctype: `hkArray<hkaBoneAttachment*>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "attachments"))]
     #[cfg_attr(feature = "serde", serde(rename = "attachments"))]
-    pub m_attachments: Vec<Pointer>,
+    pub m_attachments: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `skins`(ctype: `hkArray<hkaMeshBinding*>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "skins"))]
     #[cfg_attr(feature = "serde", serde(rename = "skins"))]
-    pub m_skins: Vec<Pointer>,
+    pub m_skins: Vec<Pointer<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkaAnimationContainer {
+    impl<'a> _serde::HavokClass for hkaAnimationContainer<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkaAnimationContainer"
@@ -75,23 +77,24 @@ const _: () = {
             _serde::__private::Signature::new(0x8dc20333)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.extend(self.m_skeletons.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_animations.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_bindings.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_attachments.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_skins.iter().map(|ptr| ptr.get()));
+            v.extend(self.m_skeletons.iter());
+            v.extend(self.m_animations.iter());
+            v.extend(self.m_bindings.iter());
+            v.extend(self.m_attachments.iter());
+            v.extend(self.m_skins.iter());
             v
         }
     }
-    impl _serde::Serialize for hkaAnimationContainer {
+    impl<'a> _serde::Serialize for hkaAnimationContainer<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x8dc20333)));
             let mut serializer = __serializer
                 .serialize_struct("hkaAnimationContainer", class_meta, (68u64, 96u64))?;
@@ -129,7 +132,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkaAnimationContainer {
+    impl<'de> _serde::Deserialize<'de> for hkaAnimationContainer<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -185,14 +188,14 @@ const _: () = {
                 }
             }
             struct __hkaAnimationContainerVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkaAnimationContainer>,
+                marker: _serde::__private::PhantomData<hkaAnimationContainer<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkaAnimationContainerVisitor<'de> {
-                type Value = hkaAnimationContainer;
+                type Value = hkaAnimationContainer<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -211,11 +214,13 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_skeletons: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_animations: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_bindings: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_attachments: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_skins: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_skeletons: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_animations: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_bindings: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_attachments: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_skins: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
                             0usize => {
@@ -227,7 +232,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeletons = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -244,7 +249,7 @@ const _: () = {
                                     );
                                 }
                                 m_animations = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -261,7 +266,7 @@ const _: () = {
                                     );
                                 }
                                 m_bindings = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -278,7 +283,7 @@ const _: () = {
                                     );
                                 }
                                 m_attachments = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -293,7 +298,7 @@ const _: () = {
                                     );
                                 }
                                 m_skins = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -368,11 +373,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_skeletons: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_animations: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_bindings: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_attachments: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_skins: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_skeletons: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_animations: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_bindings: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_attachments: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_skins: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -395,7 +402,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeletons = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -421,7 +428,7 @@ const _: () = {
                                     );
                                 }
                                 m_animations = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -447,7 +454,7 @@ const _: () = {
                                     );
                                 }
                                 m_bindings = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -473,7 +480,7 @@ const _: () = {
                                     );
                                 }
                                 m_attachments = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -497,7 +504,7 @@ const _: () = {
                                     );
                                 }
                                 m_skins = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -565,15 +572,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaAnimationContainer {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_skeletons,
                         m_animations,

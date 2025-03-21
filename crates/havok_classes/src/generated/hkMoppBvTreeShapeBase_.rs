@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkMoppBvTreeShapeBase {
+pub struct hkMoppBvTreeShapeBase<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkMoppBvTreeShapeBase {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpBvTreeShape,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpBvTreeShape<'a>,
     /// # C++ Info
     /// - name: `code`(ctype: `struct hkpMoppCode*`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "code"))]
     #[cfg_attr(feature = "serde", serde(rename = "code"))]
-    pub m_code: Pointer,
+    pub m_code: Pointer<'a>,
     /// # C++ Info
     /// - name: `moppData`(ctype: `void*`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
@@ -41,7 +43,7 @@ pub struct hkMoppBvTreeShapeBase {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "moppData"))]
     #[cfg_attr(feature = "serde", serde(rename = "moppData"))]
-    pub m_moppData: Pointer,
+    pub m_moppData: Pointer<'a>,
     /// # C++ Info
     /// - name: `moppDataSize`(ctype: `hkUint32`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
@@ -49,7 +51,7 @@ pub struct hkMoppBvTreeShapeBase {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "moppDataSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "moppDataSize"))]
-    pub m_moppDataSize: u32,
+    pub m_moppDataSize: U32<'a>,
     /// # C++ Info
     /// - name: `codeInfoCopy`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
@@ -61,7 +63,7 @@ pub struct hkMoppBvTreeShapeBase {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkMoppBvTreeShapeBase {
+    impl<'a> _serde::HavokClass for hkMoppBvTreeShapeBase<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkMoppBvTreeShapeBase"
@@ -71,20 +73,21 @@ const _: () = {
             _serde::__private::Signature::new(0x7c338c66)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_code.get());
-            v.push(self.m_moppData.get());
+            v.push(&self.m_code);
+            v.push(&self.m_moppData);
             v
         }
     }
-    impl _serde::Serialize for hkMoppBvTreeShapeBase {
+    impl<'a> _serde::Serialize for hkMoppBvTreeShapeBase<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x7c338c66)));
             let mut serializer = __serializer
                 .serialize_struct("hkMoppBvTreeShapeBase", class_meta, (48u64, 80u64))?;
@@ -119,7 +122,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkMoppBvTreeShapeBase {
+    impl<'de> _serde::Deserialize<'de> for hkMoppBvTreeShapeBase<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -171,14 +174,14 @@ const _: () = {
                 }
             }
             struct __hkMoppBvTreeShapeBaseVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkMoppBvTreeShapeBase>,
+                marker: _serde::__private::PhantomData<hkMoppBvTreeShapeBase<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkMoppBvTreeShapeBaseVisitor<'de> {
-                type Value = hkMoppBvTreeShapeBase;
+                type Value = hkMoppBvTreeShapeBase<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -197,9 +200,9 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_code: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_moppData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_moppDataSize: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_code: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_moppData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_moppDataSize: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_codeInfoCopy: _serde::__private::Option<Vector4> = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
@@ -210,7 +213,7 @@ const _: () = {
                                     );
                                 }
                                 m_code = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -227,7 +230,7 @@ const _: () = {
                                     );
                                 }
                                 m_moppData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -244,7 +247,7 @@ const _: () = {
                                     );
                                 }
                                 m_moppDataSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -328,7 +331,7 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_bvTreeType: _serde::__private::Option<BvTreeType> = _serde::__private::None;
-                    let mut m_code: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_code: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -401,7 +404,7 @@ const _: () = {
                                     );
                                 }
                                 m_code = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -445,26 +448,28 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
                     let parent = hkpBvTreeShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_bvTreeType,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkMoppBvTreeShapeBase {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_code,
                         ..Default::default()

@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbRigidBodyRagdollControlData {
+pub struct hkbRigidBodyRagdollControlData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkbRigidBodyRagdollControlData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `keyFrameHierarchyControlData`(ctype: `struct hkaKeyFrameHierarchyUtilityControlData`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -33,7 +34,7 @@ pub struct hkbRigidBodyRagdollControlData {
         schemars(rename = "keyFrameHierarchyControlData")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "keyFrameHierarchyControlData"))]
-    pub m_keyFrameHierarchyControlData: hkaKeyFrameHierarchyUtilityControlData,
+    pub m_keyFrameHierarchyControlData: hkaKeyFrameHierarchyUtilityControlData<'a>,
     /// # C++ Info
     /// - name: `durationToBlend`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 48`(x86_64)
@@ -44,7 +45,7 @@ pub struct hkbRigidBodyRagdollControlData {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbRigidBodyRagdollControlData {
+    impl<'a> _serde::HavokClass for hkbRigidBodyRagdollControlData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbRigidBodyRagdollControlData"
@@ -54,19 +55,20 @@ const _: () = {
             _serde::__private::Signature::new(0x1e0bc068)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_keyFrameHierarchyControlData.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkbRigidBodyRagdollControlData {
+    impl<'a> _serde::Serialize for hkbRigidBodyRagdollControlData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x1e0bc068)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -90,7 +92,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbRigidBodyRagdollControlData {
+    impl<'de> _serde::Deserialize<'de> for hkbRigidBodyRagdollControlData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -142,7 +144,9 @@ const _: () = {
                 }
             }
             struct __hkbRigidBodyRagdollControlDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbRigidBodyRagdollControlData>,
+                marker: _serde::__private::PhantomData<
+                    hkbRigidBodyRagdollControlData<'de>,
+                >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -150,7 +154,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbRigidBodyRagdollControlDataVisitor<'de> {
-                type Value = hkbRigidBodyRagdollControlData;
+                type Value = hkbRigidBodyRagdollControlData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -343,7 +347,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbRigidBodyRagdollControlData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_keyFrameHierarchyControlData,
                         m_durationToBlend,
                     })

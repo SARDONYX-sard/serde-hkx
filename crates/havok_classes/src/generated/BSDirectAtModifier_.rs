@@ -22,7 +22,8 @@ pub struct BSDirectAtModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -41,21 +42,21 @@ pub struct BSDirectAtModifier<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "sourceBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "sourceBoneIndex"))]
-    pub m_sourceBoneIndex: i16,
+    pub m_sourceBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `startBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "startBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "startBoneIndex"))]
-    pub m_startBoneIndex: i16,
+    pub m_startBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `endBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 50`(x86)/` 86`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "endBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "endBoneIndex"))]
-    pub m_endBoneIndex: i16,
+    pub m_endBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `limitHeadingDegrees`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
@@ -111,7 +112,7 @@ pub struct BSDirectAtModifier<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "userInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "userInfo"))]
-    pub m_userInfo: u32,
+    pub m_userInfo: U32<'a>,
     /// # C++ Info
     /// - name: `directAtCamera`(ctype: `hkBool`)
     /// - offset: `100`(x86)/`132`(x86_64)
@@ -176,7 +177,7 @@ pub struct BSDirectAtModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pSkeletonMemory"))]
     #[cfg_attr(feature = "serde", serde(rename = "pSkeletonMemory"))]
-    pub m_pSkeletonMemory: Pointer,
+    pub m_pSkeletonMemory: Pointer<'a>,
     /// # C++ Info
     /// - name: `hasTarget`(ctype: `hkBool`)
     /// - offset: `136`(x86)/`176`(x86_64)
@@ -214,10 +215,10 @@ const _: () = {
             _serde::__private::Signature::new(0x19a005c0)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
-            v.push(self.m_pSkeletonMemory.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
+            v.push(&self.m_pSkeletonMemory);
             v
         }
     }
@@ -228,6 +229,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x19a005c0)));
             let mut serializer = __serializer
                 .serialize_struct("BSDirectAtModifier", class_meta, (176u64, 224u64))?;
@@ -449,9 +451,9 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_directAtTarget: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_sourceBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_startBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_endBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_sourceBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_startBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_endBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_limitHeadingDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_limitPitchDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_offsetHeadingDegrees: _serde::__private::Option<f32> = _serde::__private::None;
@@ -459,7 +461,7 @@ const _: () = {
                     let mut m_onGain: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_offGain: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_targetLocation: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_userInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_userInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_directAtCamera: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_directAtCameraX: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_directAtCameraY: _serde::__private::Option<f32> = _serde::__private::None;
@@ -468,7 +470,7 @@ const _: () = {
                     let mut m_currentHeadingOffset: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_currentPitchOffset: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_timeStep: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_pSkeletonMemory: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_pSkeletonMemory: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_hasTarget: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_directAtTargetLocation: _serde::__private::Option<
                         Vector4,
@@ -503,7 +505,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 1usize, 1usize)?;
                                 m_sourceBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -520,7 +522,7 @@ const _: () = {
                                     );
                                 }
                                 m_startBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -537,7 +539,7 @@ const _: () = {
                                     );
                                 }
                                 m_endBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -680,7 +682,7 @@ const _: () = {
                                     );
                                 }
                                 m_userInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -838,7 +840,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_pSkeletonMemory = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1171,14 +1173,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_directAtTarget: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_sourceBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_startBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_endBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_sourceBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_startBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_endBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_limitHeadingDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_limitPitchDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_offsetHeadingDegrees: _serde::__private::Option<f32> = _serde::__private::None;
@@ -1186,7 +1190,7 @@ const _: () = {
                     let mut m_onGain: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_offGain: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_targetLocation: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_userInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_userInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_directAtCamera: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_directAtCameraX: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_directAtCameraY: _serde::__private::Option<f32> = _serde::__private::None;
@@ -1218,7 +1222,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1344,7 +1348,7 @@ const _: () = {
                                     );
                                 }
                                 m_sourceBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1370,7 +1374,7 @@ const _: () = {
                                     );
                                 }
                                 m_startBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1396,7 +1400,7 @@ const _: () = {
                                     );
                                 }
                                 m_endBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1610,7 +1614,7 @@ const _: () = {
                                     );
                                 }
                                 m_userInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2068,34 +2072,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(BSDirectAtModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_directAtTarget,
                         m_sourceBoneIndex,

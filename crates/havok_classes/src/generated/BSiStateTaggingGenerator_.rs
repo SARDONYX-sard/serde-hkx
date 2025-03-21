@@ -22,7 +22,8 @@ pub struct BSiStateTaggingGenerator<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -35,21 +36,21 @@ pub struct BSiStateTaggingGenerator<'a> {
     /// - flags: `ALIGN_16`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pDefaultGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "pDefaultGenerator"))]
-    pub m_pDefaultGenerator: Pointer,
+    pub m_pDefaultGenerator: Pointer<'a>,
     /// # C++ Info
     /// - name: `iStateToSetAs`(ctype: `hkInt32`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "iStateToSetAs"))]
     #[cfg_attr(feature = "serde", serde(rename = "iStateToSetAs"))]
-    pub m_iStateToSetAs: i32,
+    pub m_iStateToSetAs: I32<'a>,
     /// # C++ Info
     /// - name: `iPriority`(ctype: `hkInt32`)
     /// - offset: ` 56`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "iPriority"))]
     #[cfg_attr(feature = "serde", serde(rename = "iPriority"))]
-    pub m_iPriority: i32,
+    pub m_iPriority: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -63,10 +64,10 @@ const _: () = {
             _serde::__private::Signature::new(0xf0826fc1)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
-            v.push(self.m_pDefaultGenerator.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
+            v.push(&self.m_pDefaultGenerator);
             v
         }
     }
@@ -77,6 +78,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xf0826fc1)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -223,9 +225,11 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_pDefaultGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_iStateToSetAs: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_iPriority: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_pDefaultGenerator: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_iStateToSetAs: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_iPriority: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
                             0usize => {
@@ -240,7 +244,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 8usize, 8usize)?;
                                 m_pDefaultGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -257,7 +261,7 @@ const _: () = {
                                     );
                                 }
                                 m_iStateToSetAs = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -274,7 +278,7 @@ const _: () = {
                                     );
                                 }
                                 m_iPriority = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -332,12 +336,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_pDefaultGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_iStateToSetAs: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_iPriority: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_pDefaultGenerator: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_iStateToSetAs: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_iPriority: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -362,7 +370,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -440,7 +448,7 @@ const _: () = {
                                     );
                                 }
                                 m_pDefaultGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -466,7 +474,7 @@ const _: () = {
                                     );
                                 }
                                 m_iStateToSetAs = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -492,7 +500,7 @@ const _: () = {
                                     );
                                 }
                                 m_iPriority = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -572,29 +580,34 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
-                    let parent = hkbGenerator { __ptr, parent };
+                    let parent = hkbGenerator {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(BSiStateTaggingGenerator {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_pDefaultGenerator,
                         m_iStateToSetAs,

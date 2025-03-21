@@ -22,7 +22,8 @@ pub struct hkDocumentationAttribute<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `docsSectionTag`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -44,7 +45,7 @@ const _: () = {
             _serde::__private::Signature::new(0x630edd9e)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -56,6 +57,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x630edd9e)));
             let mut serializer = __serializer
                 .serialize_struct("hkDocumentationAttribute", class_meta, (4u64, 8u64))?;
@@ -237,7 +239,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkDocumentationAttribute {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_docsSectionTag,
                     })
                 }

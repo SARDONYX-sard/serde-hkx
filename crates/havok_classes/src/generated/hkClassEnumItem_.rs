@@ -22,14 +22,15 @@ pub struct hkClassEnumItem<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `value`(ctype: `hkInt32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "value"))]
     #[cfg_attr(feature = "serde", serde(rename = "value"))]
-    pub m_value: i32,
+    pub m_value: I32<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `char*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
@@ -51,7 +52,7 @@ const _: () = {
             _serde::__private::Signature::new(0xce6f8a6c)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -63,6 +64,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xce6f8a6c)));
             let mut serializer = __serializer
                 .serialize_struct("hkClassEnumItem", class_meta, (8u64, 16u64))?;
@@ -153,7 +155,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_value: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_value: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
@@ -164,7 +166,7 @@ const _: () = {
                                     );
                                 }
                                 m_value = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -221,7 +223,7 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_value: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_value: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -243,7 +245,7 @@ const _: () = {
                                     );
                                 }
                                 m_value = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -300,7 +302,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkClassEnumItem {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_value,
                         m_name,
                     })

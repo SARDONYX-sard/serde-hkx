@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbCompiledExpressionSetToken {
+pub struct hkbCompiledExpressionSetToken<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkbCompiledExpressionSetToken {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `data`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -47,7 +48,7 @@ pub struct hkbCompiledExpressionSetToken {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbCompiledExpressionSetToken {
+    impl<'a> _serde::HavokClass for hkbCompiledExpressionSetToken<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbCompiledExpressionSetToken"
@@ -57,18 +58,19 @@ const _: () = {
             _serde::__private::Signature::new(0xc6aaccc8)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkbCompiledExpressionSetToken {
+    impl<'a> _serde::Serialize for hkbCompiledExpressionSetToken<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xc6aaccc8)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -89,7 +91,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbCompiledExpressionSetToken {
+    impl<'de> _serde::Deserialize<'de> for hkbCompiledExpressionSetToken<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -141,7 +143,9 @@ const _: () = {
                 }
             }
             struct __hkbCompiledExpressionSetTokenVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbCompiledExpressionSetToken>,
+                marker: _serde::__private::PhantomData<
+                    hkbCompiledExpressionSetToken<'de>,
+                >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -149,7 +153,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbCompiledExpressionSetTokenVisitor<'de> {
-                type Value = hkbCompiledExpressionSetToken;
+                type Value = hkbCompiledExpressionSetToken<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -378,7 +382,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbCompiledExpressionSetToken {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_data,
                         m_type,
                         m_operator,
@@ -653,20 +657,20 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
-                        4i8 => _serde::__private::Ok(__Field::__field4),
-                        5i8 => _serde::__private::Ok(__Field::__field5),
-                        6i8 => _serde::__private::Ok(__Field::__field6),
-                        7i8 => _serde::__private::Ok(__Field::__field7),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(4i8) => _serde::__private::Ok(__Field::__field4),
+                        I8::Number(5i8) => _serde::__private::Ok(__Field::__field5),
+                        I8::Number(6i8) => _serde::__private::Ok(__Field::__field6),
+                        I8::Number(7i8) => _serde::__private::Ok(__Field::__field7),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -907,56 +911,56 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
-                        4i8 => _serde::__private::Ok(__Field::__field4),
-                        5i8 => _serde::__private::Ok(__Field::__field5),
-                        6i8 => _serde::__private::Ok(__Field::__field6),
-                        7i8 => _serde::__private::Ok(__Field::__field7),
-                        8i8 => _serde::__private::Ok(__Field::__field8),
-                        9i8 => _serde::__private::Ok(__Field::__field9),
-                        10i8 => _serde::__private::Ok(__Field::__field10),
-                        11i8 => _serde::__private::Ok(__Field::__field11),
-                        12i8 => _serde::__private::Ok(__Field::__field12),
-                        13i8 => _serde::__private::Ok(__Field::__field13),
-                        14i8 => _serde::__private::Ok(__Field::__field14),
-                        15i8 => _serde::__private::Ok(__Field::__field15),
-                        16i8 => _serde::__private::Ok(__Field::__field16),
-                        17i8 => _serde::__private::Ok(__Field::__field17),
-                        18i8 => _serde::__private::Ok(__Field::__field18),
-                        19i8 => _serde::__private::Ok(__Field::__field19),
-                        20i8 => _serde::__private::Ok(__Field::__field20),
-                        21i8 => _serde::__private::Ok(__Field::__field21),
-                        22i8 => _serde::__private::Ok(__Field::__field22),
-                        23i8 => _serde::__private::Ok(__Field::__field23),
-                        24i8 => _serde::__private::Ok(__Field::__field24),
-                        25i8 => _serde::__private::Ok(__Field::__field25),
-                        26i8 => _serde::__private::Ok(__Field::__field26),
-                        27i8 => _serde::__private::Ok(__Field::__field27),
-                        28i8 => _serde::__private::Ok(__Field::__field28),
-                        29i8 => _serde::__private::Ok(__Field::__field29),
-                        30i8 => _serde::__private::Ok(__Field::__field30),
-                        31i8 => _serde::__private::Ok(__Field::__field31),
-                        32i8 => _serde::__private::Ok(__Field::__field32),
-                        33i8 => _serde::__private::Ok(__Field::__field33),
-                        34i8 => _serde::__private::Ok(__Field::__field34),
-                        35i8 => _serde::__private::Ok(__Field::__field35),
-                        36i8 => _serde::__private::Ok(__Field::__field36),
-                        37i8 => _serde::__private::Ok(__Field::__field37),
-                        38i8 => _serde::__private::Ok(__Field::__field38),
-                        39i8 => _serde::__private::Ok(__Field::__field39),
-                        40i8 => _serde::__private::Ok(__Field::__field40),
-                        41i8 => _serde::__private::Ok(__Field::__field41),
-                        42i8 => _serde::__private::Ok(__Field::__field42),
-                        43i8 => _serde::__private::Ok(__Field::__field43),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(4i8) => _serde::__private::Ok(__Field::__field4),
+                        I8::Number(5i8) => _serde::__private::Ok(__Field::__field5),
+                        I8::Number(6i8) => _serde::__private::Ok(__Field::__field6),
+                        I8::Number(7i8) => _serde::__private::Ok(__Field::__field7),
+                        I8::Number(8i8) => _serde::__private::Ok(__Field::__field8),
+                        I8::Number(9i8) => _serde::__private::Ok(__Field::__field9),
+                        I8::Number(10i8) => _serde::__private::Ok(__Field::__field10),
+                        I8::Number(11i8) => _serde::__private::Ok(__Field::__field11),
+                        I8::Number(12i8) => _serde::__private::Ok(__Field::__field12),
+                        I8::Number(13i8) => _serde::__private::Ok(__Field::__field13),
+                        I8::Number(14i8) => _serde::__private::Ok(__Field::__field14),
+                        I8::Number(15i8) => _serde::__private::Ok(__Field::__field15),
+                        I8::Number(16i8) => _serde::__private::Ok(__Field::__field16),
+                        I8::Number(17i8) => _serde::__private::Ok(__Field::__field17),
+                        I8::Number(18i8) => _serde::__private::Ok(__Field::__field18),
+                        I8::Number(19i8) => _serde::__private::Ok(__Field::__field19),
+                        I8::Number(20i8) => _serde::__private::Ok(__Field::__field20),
+                        I8::Number(21i8) => _serde::__private::Ok(__Field::__field21),
+                        I8::Number(22i8) => _serde::__private::Ok(__Field::__field22),
+                        I8::Number(23i8) => _serde::__private::Ok(__Field::__field23),
+                        I8::Number(24i8) => _serde::__private::Ok(__Field::__field24),
+                        I8::Number(25i8) => _serde::__private::Ok(__Field::__field25),
+                        I8::Number(26i8) => _serde::__private::Ok(__Field::__field26),
+                        I8::Number(27i8) => _serde::__private::Ok(__Field::__field27),
+                        I8::Number(28i8) => _serde::__private::Ok(__Field::__field28),
+                        I8::Number(29i8) => _serde::__private::Ok(__Field::__field29),
+                        I8::Number(30i8) => _serde::__private::Ok(__Field::__field30),
+                        I8::Number(31i8) => _serde::__private::Ok(__Field::__field31),
+                        I8::Number(32i8) => _serde::__private::Ok(__Field::__field32),
+                        I8::Number(33i8) => _serde::__private::Ok(__Field::__field33),
+                        I8::Number(34i8) => _serde::__private::Ok(__Field::__field34),
+                        I8::Number(35i8) => _serde::__private::Ok(__Field::__field35),
+                        I8::Number(36i8) => _serde::__private::Ok(__Field::__field36),
+                        I8::Number(37i8) => _serde::__private::Ok(__Field::__field37),
+                        I8::Number(38i8) => _serde::__private::Ok(__Field::__field38),
+                        I8::Number(39i8) => _serde::__private::Ok(__Field::__field39),
+                        I8::Number(40i8) => _serde::__private::Ok(__Field::__field40),
+                        I8::Number(41i8) => _serde::__private::Ok(__Field::__field41),
+                        I8::Number(42i8) => _serde::__private::Ok(__Field::__field42),
+                        I8::Number(43i8) => _serde::__private::Ok(__Field::__field43),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

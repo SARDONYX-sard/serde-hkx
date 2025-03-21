@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpHingeLimitsData {
+pub struct hkpHingeLimitsData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpHingeLimitsData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConstraintData,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConstraintData<'a>,
     /// # C++ Info
     /// - name: `atoms`(ctype: `struct hkpHingeLimitsDataAtoms`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -34,11 +36,11 @@ pub struct hkpHingeLimitsData {
     /// - flags: `ALIGN_16`
     #[cfg_attr(feature = "json_schema", schemars(rename = "atoms"))]
     #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
-    pub m_atoms: hkpHingeLimitsDataAtoms,
+    pub m_atoms: hkpHingeLimitsDataAtoms<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpHingeLimitsData {
+    impl<'a> _serde::HavokClass for hkpHingeLimitsData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpHingeLimitsData"
@@ -48,19 +50,20 @@ const _: () = {
             _serde::__private::Signature::new(0xbd46760a)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_atoms.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkpHingeLimitsData {
+    impl<'a> _serde::Serialize for hkpHingeLimitsData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xbd46760a)));
             let mut serializer = __serializer
                 .serialize_struct("hkpHingeLimitsData", class_meta, (160u64, 176u64))?;
@@ -82,7 +85,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpHingeLimitsData {
+    impl<'de> _serde::Deserialize<'de> for hkpHingeLimitsData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -132,14 +135,14 @@ const _: () = {
                 }
             }
             struct __hkpHingeLimitsDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpHingeLimitsData>,
+                marker: _serde::__private::PhantomData<hkpHingeLimitsData<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpHingeLimitsDataVisitor<'de> {
-                type Value = hkpHingeLimitsData;
+                type Value = hkpHingeLimitsData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -290,20 +293,22 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpConstraintData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpHingeLimitsData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_atoms,
                     })

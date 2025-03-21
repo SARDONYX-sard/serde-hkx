@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkxVertexDescription {
+pub struct hkxVertexDescription<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,19 @@ pub struct hkxVertexDescription {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `decls`(ctype: `hkArray<struct hkxVertexDescriptionElementDecl>`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "decls"))]
     #[cfg_attr(feature = "serde", serde(rename = "decls"))]
-    pub m_decls: Vec<hkxVertexDescriptionElementDecl>,
+    pub m_decls: Vec<hkxVertexDescriptionElementDecl<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkxVertexDescription {
+    impl<'a> _serde::HavokClass for hkxVertexDescription<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkxVertexDescription"
@@ -43,25 +44,26 @@ const _: () = {
             _serde::__private::Signature::new(0x2df6313d)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_decls
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkxVertexDescription {
+    impl<'a> _serde::Serialize for hkxVertexDescription<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x2df6313d)));
             let mut serializer = __serializer
                 .serialize_struct("hkxVertexDescription", class_meta, (12u64, 16u64))?;
@@ -83,7 +85,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkxVertexDescription {
+    impl<'de> _serde::Deserialize<'de> for hkxVertexDescription<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -131,14 +133,14 @@ const _: () = {
                 }
             }
             struct __hkxVertexDescriptionVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkxVertexDescription>,
+                marker: _serde::__private::PhantomData<hkxVertexDescription<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkxVertexDescriptionVisitor<'de> {
-                type Value = hkxVertexDescription;
+                type Value = hkxVertexDescription<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -250,7 +252,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkxVertexDescription {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_decls,
                     })
                 }
@@ -429,17 +431,17 @@ const _: () = {
                 }
                 fn visit_uint16<__E>(
                     self,
-                    __value: u16,
+                    __value: U16<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u16 => _serde::__private::Ok(__Field::__field0),
-                        1u16 => _serde::__private::Ok(__Field::__field1),
-                        2u16 => _serde::__private::Ok(__Field::__field2),
-                        3u16 => _serde::__private::Ok(__Field::__field3),
-                        4u16 => _serde::__private::Ok(__Field::__field4),
+                        U16::Number(0u16) => _serde::__private::Ok(__Field::__field0),
+                        U16::Number(1u16) => _serde::__private::Ok(__Field::__field1),
+                        U16::Number(2u16) => _serde::__private::Ok(__Field::__field2),
+                        U16::Number(3u16) => _serde::__private::Ok(__Field::__field3),
+                        U16::Number(4u16) => _serde::__private::Ok(__Field::__field4),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -608,22 +610,22 @@ const _: () = {
                 }
                 fn visit_uint16<__E>(
                     self,
-                    __value: u16,
+                    __value: U16<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u16 => _serde::__private::Ok(__Field::__field0),
-                        1u16 => _serde::__private::Ok(__Field::__field1),
-                        2u16 => _serde::__private::Ok(__Field::__field2),
-                        4u16 => _serde::__private::Ok(__Field::__field3),
-                        8u16 => _serde::__private::Ok(__Field::__field4),
-                        16u16 => _serde::__private::Ok(__Field::__field5),
-                        32u16 => _serde::__private::Ok(__Field::__field6),
-                        64u16 => _serde::__private::Ok(__Field::__field7),
-                        128u16 => _serde::__private::Ok(__Field::__field8),
-                        256u16 => _serde::__private::Ok(__Field::__field9),
+                        U16::Number(0u16) => _serde::__private::Ok(__Field::__field0),
+                        U16::Number(1u16) => _serde::__private::Ok(__Field::__field1),
+                        U16::Number(2u16) => _serde::__private::Ok(__Field::__field2),
+                        U16::Number(4u16) => _serde::__private::Ok(__Field::__field3),
+                        U16::Number(8u16) => _serde::__private::Ok(__Field::__field4),
+                        U16::Number(16u16) => _serde::__private::Ok(__Field::__field5),
+                        U16::Number(32u16) => _serde::__private::Ok(__Field::__field6),
+                        U16::Number(64u16) => _serde::__private::Ok(__Field::__field7),
+                        U16::Number(128u16) => _serde::__private::Ok(__Field::__field8),
+                        U16::Number(256u16) => _serde::__private::Ok(__Field::__field9),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

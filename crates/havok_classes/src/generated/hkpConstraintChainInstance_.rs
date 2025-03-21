@@ -22,7 +22,8 @@ pub struct hkpConstraintChainInstance<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,14 +35,14 @@ pub struct hkpConstraintChainInstance<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "chainedEntities"))]
     #[cfg_attr(feature = "serde", serde(rename = "chainedEntities"))]
-    pub m_chainedEntities: Vec<Pointer>,
+    pub m_chainedEntities: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `action`(ctype: `struct hkpConstraintChainInstanceAction*`)
     /// - offset: ` 68`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "action"))]
     #[cfg_attr(feature = "serde", serde(rename = "action"))]
-    pub m_action: Pointer,
+    pub m_action: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -55,16 +56,16 @@ const _: () = {
             _serde::__private::Signature::new(0x7a490753)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_owner.get());
-            v.push(self.parent.m_data.get());
-            v.push(self.parent.m_constraintModifiers.get());
-            v.extend(self.parent.m_entities.iter().map(|ptr| ptr.get()));
+            v.push(&self.parent.m_owner);
+            v.push(&self.parent.m_data);
+            v.push(&self.parent.m_constraintModifiers);
+            v.extend(self.parent.m_entities.iter());
             v.extend(self.parent.m_listeners.deps_indexes());
-            v.push(self.parent.m_internal.get());
-            v.extend(self.m_chainedEntities.iter().map(|ptr| ptr.get()));
-            v.push(self.m_action.get());
+            v.push(&self.parent.m_internal);
+            v.extend(self.m_chainedEntities.iter());
+            v.push(&self.m_action);
             v
         }
     }
@@ -75,6 +76,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x7a490753)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -224,8 +226,10 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_chainedEntities: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_action: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_chainedEntities: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_action: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
                             0usize => {
@@ -237,7 +241,7 @@ const _: () = {
                                     );
                                 }
                                 m_chainedEntities = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -252,7 +256,7 @@ const _: () = {
                                     );
                                 }
                                 m_action = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -296,9 +300,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_constraintModifiers: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_entities: _serde::__private::Option<[Pointer; 2usize]> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_constraintModifiers: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_entities: _serde::__private::Option<
+                        [Pointer<'de>; 2usize],
+                    > = _serde::__private::None;
                     let mut m_priority: _serde::__private::Option<ConstraintPriority> = _serde::__private::None;
                     let mut m_wantRuntime: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_destructionRemapInfo: _serde::__private::Option<
@@ -306,8 +314,10 @@ const _: () = {
                     > = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
-                    let mut m_chainedEntities: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_action: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_chainedEntities: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_action: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -328,7 +338,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -356,7 +366,7 @@ const _: () = {
                                     );
                                 }
                                 m_constraintModifiers = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -382,7 +392,9 @@ const _: () = {
                                     );
                                 }
                                 m_entities = _serde::__private::Some(
-                                    match __A::next_value::<[Pointer; 2usize]>(&mut __map) {
+                                    match __A::next_value::<
+                                        [Pointer<'de>; 2usize],
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -540,7 +552,7 @@ const _: () = {
                                     );
                                 }
                                 m_chainedEntities = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -564,7 +576,7 @@ const _: () = {
                                     );
                                 }
                                 m_action = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -684,14 +696,16 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpConstraintInstance {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_data,
                         m_constraintModifiers,
@@ -705,7 +719,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpConstraintChainInstance {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_chainedEntities,
                         m_action,

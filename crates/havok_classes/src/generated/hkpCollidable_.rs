@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpCollidable {
+pub struct hkpCollidable<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpCollidable {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpCdBody,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpCdBody<'a>,
     /// # C++ Info
     /// - name: `ownerOffset`(ctype: `hkInt8`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -34,14 +36,14 @@ pub struct hkpCollidable {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "ownerOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "ownerOffset"))]
-    pub m_ownerOffset: i8,
+    pub m_ownerOffset: I8<'a>,
     /// # C++ Info
     /// - name: `forceCollideOntoPpu`(ctype: `hkUint8`)
     /// - offset: ` 17`(x86)/` 33`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "forceCollideOntoPpu"))]
     #[cfg_attr(feature = "serde", serde(rename = "forceCollideOntoPpu"))]
-    pub m_forceCollideOntoPpu: u8,
+    pub m_forceCollideOntoPpu: U8<'a>,
     /// # C++ Info
     /// - name: `shapeSizeOnSpu`(ctype: `hkUint16`)
     /// - offset: ` 18`(x86)/` 34`(x86_64)
@@ -49,14 +51,15 @@ pub struct hkpCollidable {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "shapeSizeOnSpu"))]
     #[cfg_attr(feature = "serde", serde(rename = "shapeSizeOnSpu"))]
-    pub m_shapeSizeOnSpu: u16,
+    pub m_shapeSizeOnSpu: U16<'a>,
     /// # C++ Info
     /// - name: `broadPhaseHandle`(ctype: `struct hkpTypedBroadPhaseHandle`)
     /// - offset: ` 20`(x86)/` 36`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseHandle"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseHandle"))]
-    pub m_broadPhaseHandle: hkpTypedBroadPhaseHandle,
+    pub m_broadPhaseHandle: hkpTypedBroadPhaseHandle<'a>,
     /// # C++ Info
     /// - name: `boundingVolumeData`(ctype: `struct hkpCollidableBoundingVolumeData`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
@@ -64,7 +67,7 @@ pub struct hkpCollidable {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "boundingVolumeData"))]
     #[cfg_attr(feature = "serde", serde(rename = "boundingVolumeData"))]
-    pub m_boundingVolumeData: hkpCollidableBoundingVolumeData,
+    pub m_boundingVolumeData: hkpCollidableBoundingVolumeData<'a>,
     /// # C++ Info
     /// - name: `allowedPenetrationDepth`(ctype: `hkReal`)
     /// - offset: ` 76`(x86)/`104`(x86_64)
@@ -75,7 +78,7 @@ pub struct hkpCollidable {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpCollidable {
+    impl<'a> _serde::HavokClass for hkpCollidable<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpCollidable"
@@ -85,23 +88,24 @@ const _: () = {
             _serde::__private::Signature::new(0x9a0e42a5)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_shape.get());
-            v.push(self.parent.m_motion.get());
-            v.push(self.parent.m_parent.get());
+            v.push(&self.parent.m_shape);
+            v.push(&self.parent.m_motion);
+            v.push(&self.parent.m_parent);
             v.extend(self.m_broadPhaseHandle.deps_indexes());
             v.extend(self.m_boundingVolumeData.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkpCollidable {
+    impl<'a> _serde::Serialize for hkpCollidable<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x9a0e42a5)));
             let mut serializer = __serializer
                 .serialize_struct("hkpCollidable", class_meta, (80u64, 112u64))?;
@@ -131,7 +135,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpCollidable {
+    impl<'de> _serde::Deserialize<'de> for hkpCollidable<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -189,14 +193,14 @@ const _: () = {
                 }
             }
             struct __hkpCollidableVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpCollidable>,
+                marker: _serde::__private::PhantomData<hkpCollidable<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpCollidableVisitor<'de> {
-                type Value = hkpCollidable;
+                type Value = hkpCollidable<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -212,11 +216,11 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_ownerOffset: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_forceCollideOntoPpu: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_shapeSizeOnSpu: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_ownerOffset: _serde::__private::Option<I8<'de>> = _serde::__private::None;
+                    let mut m_forceCollideOntoPpu: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_shapeSizeOnSpu: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_broadPhaseHandle: _serde::__private::Option<
-                        hkpTypedBroadPhaseHandle,
+                        hkpTypedBroadPhaseHandle<'de>,
                     > = _serde::__private::None;
                     let mut m_boundingVolumeData: _serde::__private::Option<
                         hkpCollidableBoundingVolumeData,
@@ -233,7 +237,7 @@ const _: () = {
                                     );
                                 }
                                 m_ownerOffset = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -252,7 +256,7 @@ const _: () = {
                                     );
                                 }
                                 m_forceCollideOntoPpu = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -269,7 +273,7 @@ const _: () = {
                                     );
                                 }
                                 m_shapeSizeOnSpu = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -287,7 +291,7 @@ const _: () = {
                                 }
                                 m_broadPhaseHandle = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpTypedBroadPhaseHandle,
+                                        hkpTypedBroadPhaseHandle<'de>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -419,11 +423,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_shapeKey: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_forceCollideOntoPpu: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_shape: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_shapeKey: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_forceCollideOntoPpu: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_broadPhaseHandle: _serde::__private::Option<
-                        hkpTypedBroadPhaseHandle,
+                        hkpTypedBroadPhaseHandle<'de>,
                     > = _serde::__private::None;
                     let mut m_allowedPenetrationDepth: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -446,7 +450,7 @@ const _: () = {
                                     );
                                 }
                                 m_shape = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -472,7 +476,7 @@ const _: () = {
                                     );
                                 }
                                 m_shapeKey = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -500,7 +504,7 @@ const _: () = {
                                     );
                                 }
                                 m_forceCollideOntoPpu = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -527,7 +531,7 @@ const _: () = {
                                 }
                                 m_broadPhaseHandle = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpTypedBroadPhaseHandle,
+                                        hkpTypedBroadPhaseHandle<'de>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -625,14 +629,14 @@ const _: () = {
                     };
                     let __ptr = None;
                     let parent = hkpCdBody {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_shape,
                         m_shapeKey,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpCollidable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_forceCollideOntoPpu,
                         m_broadPhaseHandle,

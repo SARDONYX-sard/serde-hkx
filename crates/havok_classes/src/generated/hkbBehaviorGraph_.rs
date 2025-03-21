@@ -22,7 +22,8 @@ pub struct hkbBehaviorGraph<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -53,7 +54,7 @@ pub struct hkbBehaviorGraph<'a> {
         schemars(rename = "idToStateMachineTemplateMap")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "idToStateMachineTemplateMap"))]
-    pub m_idToStateMachineTemplateMap: Pointer,
+    pub m_idToStateMachineTemplateMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `mirroredExternalIdMap`(ctype: `hkArray<void>`)
     /// - offset: ` 60`(x86)/`104`(x86_64)
@@ -69,21 +70,21 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pseudoRandomGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "pseudoRandomGenerator"))]
-    pub m_pseudoRandomGenerator: Pointer,
+    pub m_pseudoRandomGenerator: Pointer<'a>,
     /// # C++ Info
     /// - name: `rootGenerator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 76`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "rootGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "rootGenerator"))]
-    pub m_rootGenerator: Pointer,
+    pub m_rootGenerator: Pointer<'a>,
     /// # C++ Info
     /// - name: `data`(ctype: `struct hkbBehaviorGraphData*`)
     /// - offset: ` 80`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
-    pub m_data: Pointer,
+    pub m_data: Pointer<'a>,
     /// # C++ Info
     /// - name: `rootGeneratorClone`(ctype: `void*`)
     /// - offset: ` 84`(x86)/`144`(x86_64)
@@ -91,7 +92,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "rootGeneratorClone"))]
     #[cfg_attr(feature = "serde", serde(rename = "rootGeneratorClone"))]
-    pub m_rootGeneratorClone: Pointer,
+    pub m_rootGeneratorClone: Pointer<'a>,
     /// # C++ Info
     /// - name: `activeNodes`(ctype: `void*`)
     /// - offset: ` 88`(x86)/`152`(x86_64)
@@ -99,7 +100,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "activeNodes"))]
     #[cfg_attr(feature = "serde", serde(rename = "activeNodes"))]
-    pub m_activeNodes: Pointer,
+    pub m_activeNodes: Pointer<'a>,
     /// # C++ Info
     /// - name: `activeNodeTemplateToIndexMap`(ctype: `void*`)
     /// - offset: ` 92`(x86)/`160`(x86_64)
@@ -110,7 +111,7 @@ pub struct hkbBehaviorGraph<'a> {
         schemars(rename = "activeNodeTemplateToIndexMap")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "activeNodeTemplateToIndexMap"))]
-    pub m_activeNodeTemplateToIndexMap: Pointer,
+    pub m_activeNodeTemplateToIndexMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `activeNodesChildrenIndices`(ctype: `void*`)
     /// - offset: ` 96`(x86)/`168`(x86_64)
@@ -118,7 +119,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "activeNodesChildrenIndices"))]
     #[cfg_attr(feature = "serde", serde(rename = "activeNodesChildrenIndices"))]
-    pub m_activeNodesChildrenIndices: Pointer,
+    pub m_activeNodesChildrenIndices: Pointer<'a>,
     /// # C++ Info
     /// - name: `globalTransitionData`(ctype: `void*`)
     /// - offset: `100`(x86)/`176`(x86_64)
@@ -126,7 +127,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "globalTransitionData"))]
     #[cfg_attr(feature = "serde", serde(rename = "globalTransitionData"))]
-    pub m_globalTransitionData: Pointer,
+    pub m_globalTransitionData: Pointer<'a>,
     /// # C++ Info
     /// - name: `eventIdMap`(ctype: `void*`)
     /// - offset: `104`(x86)/`184`(x86_64)
@@ -134,7 +135,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventIdMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventIdMap"))]
-    pub m_eventIdMap: Pointer,
+    pub m_eventIdMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `attributeIdMap`(ctype: `void*`)
     /// - offset: `108`(x86)/`192`(x86_64)
@@ -142,7 +143,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "attributeIdMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "attributeIdMap"))]
-    pub m_attributeIdMap: Pointer,
+    pub m_attributeIdMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `variableIdMap`(ctype: `void*`)
     /// - offset: `112`(x86)/`200`(x86_64)
@@ -150,7 +151,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "variableIdMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableIdMap"))]
-    pub m_variableIdMap: Pointer,
+    pub m_variableIdMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `characterPropertyIdMap`(ctype: `void*`)
     /// - offset: `116`(x86)/`208`(x86_64)
@@ -158,7 +159,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterPropertyIdMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterPropertyIdMap"))]
-    pub m_characterPropertyIdMap: Pointer,
+    pub m_characterPropertyIdMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `variableValueSet`(ctype: `void*`)
     /// - offset: `120`(x86)/`216`(x86_64)
@@ -166,7 +167,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "variableValueSet"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableValueSet"))]
-    pub m_variableValueSet: Pointer,
+    pub m_variableValueSet: Pointer<'a>,
     /// # C++ Info
     /// - name: `nodeTemplateToCloneMap`(ctype: `void*`)
     /// - offset: `124`(x86)/`224`(x86_64)
@@ -174,7 +175,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "nodeTemplateToCloneMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "nodeTemplateToCloneMap"))]
-    pub m_nodeTemplateToCloneMap: Pointer,
+    pub m_nodeTemplateToCloneMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `nodeCloneToTemplateMap`(ctype: `void*`)
     /// - offset: `128`(x86)/`232`(x86_64)
@@ -182,7 +183,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "nodeCloneToTemplateMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "nodeCloneToTemplateMap"))]
-    pub m_nodeCloneToTemplateMap: Pointer,
+    pub m_nodeCloneToTemplateMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `stateListenerTemplateToCloneMap`(ctype: `void*`)
     /// - offset: `132`(x86)/`240`(x86_64)
@@ -193,7 +194,7 @@ pub struct hkbBehaviorGraph<'a> {
         schemars(rename = "stateListenerTemplateToCloneMap")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "stateListenerTemplateToCloneMap"))]
-    pub m_stateListenerTemplateToCloneMap: Pointer,
+    pub m_stateListenerTemplateToCloneMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `nodePartitionInfo`(ctype: `void*`)
     /// - offset: `136`(x86)/`248`(x86_64)
@@ -201,7 +202,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "nodePartitionInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "nodePartitionInfo"))]
-    pub m_nodePartitionInfo: Pointer,
+    pub m_nodePartitionInfo: Pointer<'a>,
     /// # C++ Info
     /// - name: `numIntermediateOutputs`(ctype: `hkInt32`)
     /// - offset: `140`(x86)/`256`(x86_64)
@@ -209,7 +210,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "numIntermediateOutputs"))]
     #[cfg_attr(feature = "serde", serde(rename = "numIntermediateOutputs"))]
-    pub m_numIntermediateOutputs: i32,
+    pub m_numIntermediateOutputs: I32<'a>,
     /// # C++ Info
     /// - name: `jobs`(ctype: `hkArray<void*>`)
     /// - offset: `144`(x86)/`264`(x86_64)
@@ -217,7 +218,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "jobs"))]
     #[cfg_attr(feature = "serde", serde(rename = "jobs"))]
-    pub m_jobs: Vec<Pointer>,
+    pub m_jobs: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `allPartitionMemory`(ctype: `hkArray<void*>`)
     /// - offset: `156`(x86)/`280`(x86_64)
@@ -225,7 +226,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "allPartitionMemory"))]
     #[cfg_attr(feature = "serde", serde(rename = "allPartitionMemory"))]
-    pub m_allPartitionMemory: Vec<Pointer>,
+    pub m_allPartitionMemory: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `numStaticNodes`(ctype: `hkInt16`)
     /// - offset: `168`(x86)/`296`(x86_64)
@@ -233,7 +234,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "numStaticNodes"))]
     #[cfg_attr(feature = "serde", serde(rename = "numStaticNodes"))]
-    pub m_numStaticNodes: i16,
+    pub m_numStaticNodes: I16<'a>,
     /// # C++ Info
     /// - name: `nextUniqueId`(ctype: `hkInt16`)
     /// - offset: `170`(x86)/`298`(x86_64)
@@ -241,7 +242,7 @@ pub struct hkbBehaviorGraph<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "nextUniqueId"))]
     #[cfg_attr(feature = "serde", serde(rename = "nextUniqueId"))]
-    pub m_nextUniqueId: i16,
+    pub m_nextUniqueId: I16<'a>,
     /// # C++ Info
     /// - name: `isActive`(ctype: `hkBool`)
     /// - offset: `172`(x86)/`300`(x86_64)
@@ -287,29 +288,29 @@ const _: () = {
             _serde::__private::Signature::new(0xb1218f86)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
-            v.push(self.m_idToStateMachineTemplateMap.get());
-            v.push(self.m_pseudoRandomGenerator.get());
-            v.push(self.m_rootGenerator.get());
-            v.push(self.m_data.get());
-            v.push(self.m_rootGeneratorClone.get());
-            v.push(self.m_activeNodes.get());
-            v.push(self.m_activeNodeTemplateToIndexMap.get());
-            v.push(self.m_activeNodesChildrenIndices.get());
-            v.push(self.m_globalTransitionData.get());
-            v.push(self.m_eventIdMap.get());
-            v.push(self.m_attributeIdMap.get());
-            v.push(self.m_variableIdMap.get());
-            v.push(self.m_characterPropertyIdMap.get());
-            v.push(self.m_variableValueSet.get());
-            v.push(self.m_nodeTemplateToCloneMap.get());
-            v.push(self.m_nodeCloneToTemplateMap.get());
-            v.push(self.m_stateListenerTemplateToCloneMap.get());
-            v.push(self.m_nodePartitionInfo.get());
-            v.extend(self.m_jobs.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_allPartitionMemory.iter().map(|ptr| ptr.get()));
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
+            v.push(&self.m_idToStateMachineTemplateMap);
+            v.push(&self.m_pseudoRandomGenerator);
+            v.push(&self.m_rootGenerator);
+            v.push(&self.m_data);
+            v.push(&self.m_rootGeneratorClone);
+            v.push(&self.m_activeNodes);
+            v.push(&self.m_activeNodeTemplateToIndexMap);
+            v.push(&self.m_activeNodesChildrenIndices);
+            v.push(&self.m_globalTransitionData);
+            v.push(&self.m_eventIdMap);
+            v.push(&self.m_attributeIdMap);
+            v.push(&self.m_variableIdMap);
+            v.push(&self.m_characterPropertyIdMap);
+            v.push(&self.m_variableValueSet);
+            v.push(&self.m_nodeTemplateToCloneMap);
+            v.push(&self.m_nodeCloneToTemplateMap);
+            v.push(&self.m_stateListenerTemplateToCloneMap);
+            v.push(&self.m_nodePartitionInfo);
+            v.extend(self.m_jobs.iter());
+            v.extend(self.m_allPartitionMemory.iter());
             v
         }
     }
@@ -320,6 +321,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xb1218f86)));
             let mut serializer = __serializer
                 .serialize_struct("hkbBehaviorGraph", class_meta, (176u64, 304u64))?;
@@ -531,49 +533,59 @@ const _: () = {
                     let mut m_variableMode: _serde::__private::Option<VariableMode> = _serde::__private::None;
                     let mut m_uniqueIdPool: _serde::__private::Option<Vec<()>> = _serde::__private::None;
                     let mut m_idToStateMachineTemplateMap: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_mirroredExternalIdMap: _serde::__private::Option<
                         Vec<()>,
                     > = _serde::__private::None;
                     let mut m_pseudoRandomGenerator: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_rootGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_rootGeneratorClone: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_activeNodes: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_rootGenerator: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_rootGeneratorClone: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_activeNodes: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_activeNodeTemplateToIndexMap: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_activeNodesChildrenIndices: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_globalTransitionData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_eventIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_attributeIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_variableIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_globalTransitionData: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_eventIdMap: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_attributeIdMap: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_variableIdMap: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_characterPropertyIdMap: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_variableValueSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableValueSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_nodeTemplateToCloneMap: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_nodeCloneToTemplateMap: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_stateListenerTemplateToCloneMap: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_nodePartitionInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_numIntermediateOutputs: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_jobs: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_nodePartitionInfo: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numIntermediateOutputs: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_jobs: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     let mut m_allPartitionMemory: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
-                    let mut m_numStaticNodes: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_nextUniqueId: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_numStaticNodes: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_nextUniqueId: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_isActive: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_isLinked: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_updateActiveNodes: _serde::__private::Option<bool> = _serde::__private::None;
@@ -628,7 +640,7 @@ const _: () = {
                                     );
                                 }
                                 m_idToStateMachineTemplateMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -666,7 +678,7 @@ const _: () = {
                                     );
                                 }
                                 m_pseudoRandomGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -683,7 +695,7 @@ const _: () = {
                                     );
                                 }
                                 m_rootGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -698,7 +710,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -717,7 +729,7 @@ const _: () = {
                                     );
                                 }
                                 m_rootGeneratorClone = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -734,7 +746,7 @@ const _: () = {
                                     );
                                 }
                                 m_activeNodes = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -753,7 +765,7 @@ const _: () = {
                                     );
                                 }
                                 m_activeNodeTemplateToIndexMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -772,7 +784,7 @@ const _: () = {
                                     );
                                 }
                                 m_activeNodesChildrenIndices = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -791,7 +803,7 @@ const _: () = {
                                     );
                                 }
                                 m_globalTransitionData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -808,7 +820,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventIdMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -825,7 +837,7 @@ const _: () = {
                                     );
                                 }
                                 m_attributeIdMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -842,7 +854,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableIdMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -861,7 +873,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterPropertyIdMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -878,7 +890,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableValueSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -897,7 +909,7 @@ const _: () = {
                                     );
                                 }
                                 m_nodeTemplateToCloneMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -916,7 +928,7 @@ const _: () = {
                                     );
                                 }
                                 m_nodeCloneToTemplateMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -935,7 +947,7 @@ const _: () = {
                                     );
                                 }
                                 m_stateListenerTemplateToCloneMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -954,7 +966,7 @@ const _: () = {
                                     );
                                 }
                                 m_nodePartitionInfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -973,7 +985,7 @@ const _: () = {
                                     );
                                 }
                                 m_numIntermediateOutputs = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -989,7 +1001,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_jobs = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1008,7 +1020,7 @@ const _: () = {
                                     );
                                 }
                                 m_allPartitionMemory = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1025,7 +1037,7 @@ const _: () = {
                                     );
                                 }
                                 m_numStaticNodes = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1042,7 +1054,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextUniqueId = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1460,12 +1472,14 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_variableMode: _serde::__private::Option<VariableMode> = _serde::__private::None;
-                    let mut m_rootGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_rootGenerator: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -1490,7 +1504,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1592,7 +1606,7 @@ const _: () = {
                                     );
                                 }
                                 m_rootGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1616,7 +1630,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1694,29 +1708,34 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
-                    let parent = hkbGenerator { __ptr, parent };
+                    let parent = hkbGenerator {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbBehaviorGraph {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableMode,
                         m_rootGenerator,
@@ -1854,14 +1873,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

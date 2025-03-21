@@ -22,7 +22,8 @@ pub struct BSOffsetAnimationGenerator<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -35,7 +36,7 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// - flags: `ALIGN_16`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pDefaultGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "pDefaultGenerator"))]
-    pub m_pDefaultGenerator: Pointer,
+    pub m_pDefaultGenerator: Pointer<'a>,
     /// # C++ Info
     /// - name: `pOffsetClipGenerator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
@@ -43,7 +44,7 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// - flags: `ALIGN_16`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pOffsetClipGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "pOffsetClipGenerator"))]
-    pub m_pOffsetClipGenerator: Pointer,
+    pub m_pOffsetClipGenerator: Pointer<'a>,
     /// # C++ Info
     /// - name: `fOffsetVariable`(ctype: `hkReal`)
     /// - offset: ` 68`(x86)/`104`(x86_64)
@@ -96,7 +97,7 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "iCurrentFrame"))]
     #[cfg_attr(feature = "serde", serde(rename = "iCurrentFrame"))]
-    pub m_iCurrentFrame: u32,
+    pub m_iCurrentFrame: U32<'a>,
     /// # C++ Info
     /// - name: `bZeroOffset`(ctype: `hkBool`)
     /// - offset: `112`(x86)/`160`(x86_64)
@@ -126,11 +127,11 @@ const _: () = {
             _serde::__private::Signature::new(0xb8571122)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
-            v.push(self.m_pDefaultGenerator.get());
-            v.push(self.m_pOffsetClipGenerator.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
+            v.push(&self.m_pDefaultGenerator);
+            v.push(&self.m_pOffsetClipGenerator);
             v
         }
     }
@@ -141,6 +142,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xb8571122)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -304,15 +306,19 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_pDefaultGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_pOffsetClipGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_pDefaultGenerator: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_pOffsetClipGenerator: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_fOffsetVariable: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_fOffsetRangeStart: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_fOffsetRangeEnd: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_BoneOffsetA: _serde::__private::Option<Vec<()>> = _serde::__private::None;
                     let mut m_BoneIndexA: _serde::__private::Option<Vec<()>> = _serde::__private::None;
                     let mut m_fCurrentPercentage: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_iCurrentFrame: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_iCurrentFrame: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_bZeroOffset: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_bOffsetValid: _serde::__private::Option<bool> = _serde::__private::None;
                     for i in 0..11usize {
@@ -329,7 +335,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 8usize, 8usize)?;
                                 m_pDefaultGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -349,7 +355,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 12usize, 8usize)?;
                                 m_pOffsetClipGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -473,7 +479,7 @@ const _: () = {
                                     );
                                 }
                                 m_iCurrentFrame = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -653,11 +659,17 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_pDefaultGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_pOffsetClipGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_pDefaultGenerator: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_pOffsetClipGenerator: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_fOffsetVariable: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_fOffsetRangeStart: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_fOffsetRangeEnd: _serde::__private::Option<f32> = _serde::__private::None;
@@ -685,7 +697,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -763,7 +775,7 @@ const _: () = {
                                     );
                                 }
                                 m_pDefaultGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -791,7 +803,7 @@ const _: () = {
                                     );
                                 }
                                 m_pOffsetClipGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -975,29 +987,34 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
-                    let parent = hkbGenerator { __ptr, parent };
+                    let parent = hkbGenerator {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(BSOffsetAnimationGenerator {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_pDefaultGenerator,
                         m_pOffsetClipGenerator,

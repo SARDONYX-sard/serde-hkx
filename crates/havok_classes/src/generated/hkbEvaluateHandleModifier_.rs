@@ -22,7 +22,8 @@ pub struct hkbEvaluateHandleModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,7 +35,7 @@ pub struct hkbEvaluateHandleModifier<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "handle"))]
     #[cfg_attr(feature = "serde", serde(rename = "handle"))]
-    pub m_handle: Pointer,
+    pub m_handle: Pointer<'a>,
     /// # C++ Info
     /// - name: `handlePositionOut`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 96`(x86_64)
@@ -82,9 +83,10 @@ pub struct hkbEvaluateHandleModifier<'a> {
     /// - offset: ` 96`(x86)/`144`(x86_64)
     /// - type_size: ` 24`(x86)/` 48`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "oldHandle"))]
     #[cfg_attr(feature = "serde", serde(rename = "oldHandle"))]
-    pub m_oldHandle: hkbHandle,
+    pub m_oldHandle: hkbHandle<'a>,
     /// # C++ Info
     /// - name: `oldHandlePosition`(ctype: `hkVector4`)
     /// - offset: `128`(x86)/`192`(x86_64)
@@ -130,10 +132,10 @@ const _: () = {
             _serde::__private::Signature::new(0x79757102)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
-            v.push(self.m_handle.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
+            v.push(&self.m_handle);
             v.extend(self.m_oldHandle.deps_indexes());
             v
         }
@@ -145,6 +147,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x79757102)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -326,7 +329,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_handle: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_handle: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_handlePositionOut: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_handleRotationOut: _serde::__private::Option<Quaternion> = _serde::__private::None;
                     let mut m_isValidOut: _serde::__private::Option<bool> = _serde::__private::None;
@@ -335,7 +338,7 @@ const _: () = {
                     let mut m_handleChangeMode: _serde::__private::Option<
                         HandleChangeMode,
                     > = _serde::__private::None;
-                    let mut m_oldHandle: _serde::__private::Option<hkbHandle> = _serde::__private::None;
+                    let mut m_oldHandle: _serde::__private::Option<hkbHandle<'de>> = _serde::__private::None;
                     let mut m_oldHandlePosition: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_oldHandleRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
                     let mut m_timeSinceLastModify: _serde::__private::Option<f32> = _serde::__private::None;
@@ -349,7 +352,7 @@ const _: () = {
                                     );
                                 }
                                 m_handle = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -479,7 +482,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_oldHandle = _serde::__private::Some(
-                                    match __A::next_value::<hkbHandle>(&mut __map) {
+                                    match __A::next_value::<hkbHandle<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -711,11 +714,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_handle: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_handle: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_handlePositionOut: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_handleRotationOut: _serde::__private::Option<Quaternion> = _serde::__private::None;
                     let mut m_isValidOut: _serde::__private::Option<bool> = _serde::__private::None;
@@ -748,7 +753,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -846,7 +851,7 @@ const _: () = {
                                     );
                                 }
                                 m_handle = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1146,34 +1151,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbEvaluateHandleModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_handle,
                         m_handlePositionOut,
@@ -1293,14 +1300,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

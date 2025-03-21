@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkPackfileSectionHeader {
+pub struct hkPackfileSectionHeader<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkPackfileSectionHeader {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `sectionTag`(ctype: `hkChar[19]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -43,53 +44,53 @@ pub struct hkPackfileSectionHeader {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "absoluteDataStart"))]
     #[cfg_attr(feature = "serde", serde(rename = "absoluteDataStart"))]
-    pub m_absoluteDataStart: i32,
+    pub m_absoluteDataStart: I32<'a>,
     /// # C++ Info
     /// - name: `localFixupsOffset`(ctype: `hkInt32`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "localFixupsOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "localFixupsOffset"))]
-    pub m_localFixupsOffset: i32,
+    pub m_localFixupsOffset: I32<'a>,
     /// # C++ Info
     /// - name: `globalFixupsOffset`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "globalFixupsOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "globalFixupsOffset"))]
-    pub m_globalFixupsOffset: i32,
+    pub m_globalFixupsOffset: I32<'a>,
     /// # C++ Info
     /// - name: `virtualFixupsOffset`(ctype: `hkInt32`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "virtualFixupsOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "virtualFixupsOffset"))]
-    pub m_virtualFixupsOffset: i32,
+    pub m_virtualFixupsOffset: I32<'a>,
     /// # C++ Info
     /// - name: `exportsOffset`(ctype: `hkInt32`)
     /// - offset: ` 36`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "exportsOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "exportsOffset"))]
-    pub m_exportsOffset: i32,
+    pub m_exportsOffset: I32<'a>,
     /// # C++ Info
     /// - name: `importsOffset`(ctype: `hkInt32`)
     /// - offset: ` 40`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "importsOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "importsOffset"))]
-    pub m_importsOffset: i32,
+    pub m_importsOffset: I32<'a>,
     /// # C++ Info
     /// - name: `endOffset`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 44`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "endOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "endOffset"))]
-    pub m_endOffset: i32,
+    pub m_endOffset: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkPackfileSectionHeader {
+    impl<'a> _serde::HavokClass for hkPackfileSectionHeader<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkPackfileSectionHeader"
@@ -99,18 +100,19 @@ const _: () = {
             _serde::__private::Signature::new(0xf2a92154)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkPackfileSectionHeader {
+    impl<'a> _serde::Serialize for hkPackfileSectionHeader<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xf2a92154)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -143,7 +145,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkPackfileSectionHeader {
+    impl<'de> _serde::Deserialize<'de> for hkPackfileSectionHeader<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -207,7 +209,7 @@ const _: () = {
                 }
             }
             struct __hkPackfileSectionHeaderVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkPackfileSectionHeader>,
+                marker: _serde::__private::PhantomData<hkPackfileSectionHeader<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -215,7 +217,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkPackfileSectionHeaderVisitor<'de> {
-                type Value = hkPackfileSectionHeader;
+                type Value = hkPackfileSectionHeader<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -235,13 +237,13 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_sectionTag: _serde::__private::Option<[char; 19usize]> = _serde::__private::None;
                     let mut m_nullByte: _serde::__private::Option<char> = _serde::__private::None;
-                    let mut m_absoluteDataStart: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_localFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_globalFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_virtualFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_exportsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_importsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_endOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_absoluteDataStart: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_localFixupsOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_globalFixupsOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_virtualFixupsOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_exportsOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_importsOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_endOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..9usize {
                         match i {
                             0usize => {
@@ -289,7 +291,7 @@ const _: () = {
                                     );
                                 }
                                 m_absoluteDataStart = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -308,7 +310,7 @@ const _: () = {
                                     );
                                 }
                                 m_localFixupsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -327,7 +329,7 @@ const _: () = {
                                     );
                                 }
                                 m_globalFixupsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -346,7 +348,7 @@ const _: () = {
                                     );
                                 }
                                 m_virtualFixupsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -363,7 +365,7 @@ const _: () = {
                                     );
                                 }
                                 m_exportsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -380,7 +382,7 @@ const _: () = {
                                     );
                                 }
                                 m_importsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -397,7 +399,7 @@ const _: () = {
                                     );
                                 }
                                 m_endOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -519,13 +521,13 @@ const _: () = {
                 {
                     let mut m_sectionTag: _serde::__private::Option<[char; 19usize]> = _serde::__private::None;
                     let mut m_nullByte: _serde::__private::Option<char> = _serde::__private::None;
-                    let mut m_absoluteDataStart: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_localFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_globalFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_virtualFixupsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_exportsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_importsOffset: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_endOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_absoluteDataStart: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_localFixupsOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_globalFixupsOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_virtualFixupsOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_exportsOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_importsOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_endOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -602,7 +604,7 @@ const _: () = {
                                     );
                                 }
                                 m_absoluteDataStart = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -630,7 +632,7 @@ const _: () = {
                                     );
                                 }
                                 m_localFixupsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -658,7 +660,7 @@ const _: () = {
                                     );
                                 }
                                 m_globalFixupsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -686,7 +688,7 @@ const _: () = {
                                     );
                                 }
                                 m_virtualFixupsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -712,7 +714,7 @@ const _: () = {
                                     );
                                 }
                                 m_exportsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -738,7 +740,7 @@ const _: () = {
                                     );
                                 }
                                 m_importsOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -764,7 +766,7 @@ const _: () = {
                                     );
                                 }
                                 m_endOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -883,7 +885,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkPackfileSectionHeader {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_sectionTag,
                         m_nullByte,
                         m_absoluteDataStart,

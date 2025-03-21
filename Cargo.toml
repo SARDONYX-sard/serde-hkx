@@ -15,7 +15,7 @@ members = [
   "crates/class_generator",
   # "crates/cli",
   # "crates/serde_hkx_features",
-  # "crates/havok_classes",
+  "crates/havok_classes",
   "crates/havok_serde",
   "crates/havok_types",
   "crates/havok_types_derive",

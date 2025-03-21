@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkMotionState {
+pub struct hkMotionState<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkMotionState {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `transform`(ctype: `hkTransform`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -36,7 +37,7 @@ pub struct hkMotionState {
     /// - type_size: ` 80`(x86)/` 80`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "sweptTransform"))]
     #[cfg_attr(feature = "serde", serde(rename = "sweptTransform"))]
-    pub m_sweptTransform: hkSweptTransform,
+    pub m_sweptTransform: hkSweptTransform<'a>,
     /// # C++ Info
     /// - name: `deltaAngle`(ctype: `hkVector4`)
     /// - offset: `144`(x86)/`144`(x86_64)
@@ -78,25 +79,25 @@ pub struct hkMotionState {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "maxLinearVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxLinearVelocity"))]
-    pub m_maxLinearVelocity: u8,
+    pub m_maxLinearVelocity: U8<'a>,
     /// # C++ Info
     /// - name: `maxAngularVelocity`(ctype: `hkUint8`)
     /// - offset: `171`(x86)/`171`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "maxAngularVelocity"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxAngularVelocity"))]
-    pub m_maxAngularVelocity: u8,
+    pub m_maxAngularVelocity: U8<'a>,
     /// # C++ Info
     /// - name: `deactivationClass`(ctype: `hkUint8`)
     /// - offset: `172`(x86)/`172`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "deactivationClass"))]
     #[cfg_attr(feature = "serde", serde(rename = "deactivationClass"))]
-    pub m_deactivationClass: u8,
+    pub m_deactivationClass: U8<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkMotionState {
+    impl<'a> _serde::HavokClass for hkMotionState<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkMotionState"
@@ -106,19 +107,20 @@ const _: () = {
             _serde::__private::Signature::new(0x5797386e)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_sweptTransform.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkMotionState {
+    impl<'a> _serde::Serialize for hkMotionState<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x5797386e)));
             let mut serializer = __serializer
                 .serialize_struct("hkMotionState", class_meta, (176u64, 176u64))?;
@@ -143,7 +145,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkMotionState {
+    impl<'de> _serde::Deserialize<'de> for hkMotionState<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -209,14 +211,14 @@ const _: () = {
                 }
             }
             struct __hkMotionStateVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkMotionState>,
+                marker: _serde::__private::PhantomData<hkMotionState<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
-                type Value = hkMotionState;
+                type Value = hkMotionState<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -240,9 +242,9 @@ const _: () = {
                     let mut m_linearDamping: _serde::__private::Option<f16> = _serde::__private::None;
                     let mut m_angularDamping: _serde::__private::Option<f16> = _serde::__private::None;
                     let mut m_timeFactor: _serde::__private::Option<f16> = _serde::__private::None;
-                    let mut m_maxLinearVelocity: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_maxAngularVelocity: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_deactivationClass: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_maxLinearVelocity: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_maxAngularVelocity: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_deactivationClass: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     for i in 0..10usize {
                         match i {
                             0usize => {
@@ -375,7 +377,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxLinearVelocity = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -394,7 +396,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxAngularVelocity = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -413,7 +415,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationClass = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -556,9 +558,9 @@ const _: () = {
                     let mut m_linearDamping: _serde::__private::Option<f16> = _serde::__private::None;
                     let mut m_angularDamping: _serde::__private::Option<f16> = _serde::__private::None;
                     let mut m_timeFactor: _serde::__private::Option<f16> = _serde::__private::None;
-                    let mut m_maxLinearVelocity: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_maxAngularVelocity: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_deactivationClass: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_maxLinearVelocity: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_maxAngularVelocity: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_deactivationClass: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -765,7 +767,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxLinearVelocity = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -793,7 +795,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxAngularVelocity = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -821,7 +823,7 @@ const _: () = {
                                     );
                                 }
                                 m_deactivationClass = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -954,7 +956,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkMotionState {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_transform,
                         m_sweptTransform,
                         m_deltaAngle,

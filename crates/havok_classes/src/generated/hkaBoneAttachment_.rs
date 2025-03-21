@@ -22,11 +22,13 @@ pub struct hkaBoneAttachment<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `originalSkeletonName`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -48,7 +50,7 @@ pub struct hkaBoneAttachment<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "attachment"))]
     #[cfg_attr(feature = "serde", serde(rename = "attachment"))]
-    pub m_attachment: Pointer,
+    pub m_attachment: Pointer<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 84`(x86)/`104`(x86_64)
@@ -63,7 +65,7 @@ pub struct hkaBoneAttachment<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "boneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "boneIndex"))]
-    pub m_boneIndex: i16,
+    pub m_boneIndex: I16<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -77,9 +79,9 @@ const _: () = {
             _serde::__private::Signature::new(0xa8ccd5cf)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_attachment.get());
+            v.push(&self.m_attachment);
             v
         }
     }
@@ -90,6 +92,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xa8ccd5cf)));
             let mut serializer = __serializer
                 .serialize_struct("hkaBoneAttachment", class_meta, (96u64, 128u64))?;
@@ -201,9 +204,9 @@ const _: () = {
                         StringPtr<'de>,
                     > = _serde::__private::None;
                     let mut m_boneFromAttachment: _serde::__private::Option<Matrix4> = _serde::__private::None;
-                    let mut m_attachment: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_attachment: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_boneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_boneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
                             0usize => {
@@ -254,7 +257,7 @@ const _: () = {
                                     );
                                 }
                                 m_attachment = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -286,7 +289,7 @@ const _: () = {
                                     );
                                 }
                                 m_boneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -368,9 +371,9 @@ const _: () = {
                         StringPtr<'de>,
                     > = _serde::__private::None;
                     let mut m_boneFromAttachment: _serde::__private::Option<Matrix4> = _serde::__private::None;
-                    let mut m_attachment: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_attachment: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_boneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_boneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -449,7 +452,7 @@ const _: () = {
                                     );
                                 }
                                 m_attachment = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -499,7 +502,7 @@ const _: () = {
                                     );
                                 }
                                 m_boneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -569,15 +572,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaBoneAttachment {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_originalSkeletonName,
                         m_boneFromAttachment,

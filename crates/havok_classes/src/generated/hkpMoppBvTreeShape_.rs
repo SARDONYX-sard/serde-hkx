@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpMoppBvTreeShape {
+pub struct hkpMoppBvTreeShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkpMoppBvTreeShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkMoppBvTreeShapeBase,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkMoppBvTreeShapeBase<'a>,
     /// # C++ Info
     /// - name: `child`(ctype: `struct hkpSingleShapeContainer`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "child"))]
     #[cfg_attr(feature = "serde", serde(rename = "child"))]
-    pub m_child: hkpSingleShapeContainer,
+    pub m_child: hkpSingleShapeContainer<'a>,
     /// # C++ Info
     /// - name: `childSize`(ctype: `hkInt32`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
@@ -41,11 +43,11 @@ pub struct hkpMoppBvTreeShape {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "childSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "childSize"))]
-    pub m_childSize: i32,
+    pub m_childSize: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpMoppBvTreeShape {
+    impl<'a> _serde::HavokClass for hkpMoppBvTreeShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpMoppBvTreeShape"
@@ -55,21 +57,22 @@ const _: () = {
             _serde::__private::Signature::new(0x90b29d39)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_code.get());
-            v.push(self.parent.m_moppData.get());
+            v.push(&self.parent.m_code);
+            v.push(&self.parent.m_moppData);
             v.extend(self.m_child.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkpMoppBvTreeShape {
+    impl<'a> _serde::Serialize for hkpMoppBvTreeShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x90b29d39)));
             let mut serializer = __serializer
                 .serialize_struct("hkpMoppBvTreeShape", class_meta, (64u64, 112u64))?;
@@ -108,7 +111,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpMoppBvTreeShape {
+    impl<'de> _serde::Deserialize<'de> for hkpMoppBvTreeShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -162,14 +165,14 @@ const _: () = {
                 }
             }
             struct __hkpMoppBvTreeShapeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpMoppBvTreeShape>,
+                marker: _serde::__private::PhantomData<hkpMoppBvTreeShape<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpMoppBvTreeShapeVisitor<'de> {
-                type Value = hkpMoppBvTreeShape;
+                type Value = hkpMoppBvTreeShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -191,7 +194,7 @@ const _: () = {
                     let mut m_child: _serde::__private::Option<
                         hkpSingleShapeContainer,
                     > = _serde::__private::None;
-                    let mut m_childSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_childSize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
                             0usize => {
@@ -220,7 +223,7 @@ const _: () = {
                                     );
                                 }
                                 m_childSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -267,7 +270,7 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_bvTreeType: _serde::__private::Option<BvTreeType> = _serde::__private::None;
-                    let mut m_code: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_code: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_child: _serde::__private::Option<
                         hkpSingleShapeContainer,
                     > = _serde::__private::None;
@@ -343,7 +346,7 @@ const _: () = {
                                     );
                                 }
                                 m_code = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -423,32 +426,34 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
                     let parent = hkpBvTreeShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_bvTreeType,
                     };
                     let parent = hkMoppBvTreeShapeBase {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_code,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpMoppBvTreeShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_child,
                         ..Default::default()

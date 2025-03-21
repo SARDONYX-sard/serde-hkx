@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpCallbackConstraintMotor {
+pub struct hkpCallbackConstraintMotor<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpCallbackConstraintMotor {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpLimitedForceConstraintMotor,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpLimitedForceConstraintMotor<'a>,
     /// # C++ Info
     /// - name: `callbackFunc`(ctype: `void*`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
@@ -34,7 +36,7 @@ pub struct hkpCallbackConstraintMotor {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "callbackFunc"))]
     #[cfg_attr(feature = "serde", serde(rename = "callbackFunc"))]
-    pub m_callbackFunc: Pointer,
+    pub m_callbackFunc: Pointer<'a>,
     /// # C++ Info
     /// - name: `callbackType`(ctype: `enum CallbackType`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
@@ -66,7 +68,7 @@ pub struct hkpCallbackConstraintMotor {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpCallbackConstraintMotor {
+    impl<'a> _serde::HavokClass for hkpCallbackConstraintMotor<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpCallbackConstraintMotor"
@@ -76,19 +78,20 @@ const _: () = {
             _serde::__private::Signature::new(0xafcd79ad)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_callbackFunc.get());
+            v.push(&self.m_callbackFunc);
             v
         }
     }
-    impl _serde::Serialize for hkpCallbackConstraintMotor {
+    impl<'a> _serde::Serialize for hkpCallbackConstraintMotor<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xafcd79ad)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -127,7 +130,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpCallbackConstraintMotor {
+    impl<'de> _serde::Deserialize<'de> for hkpCallbackConstraintMotor<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -187,7 +190,7 @@ const _: () = {
                 }
             }
             struct __hkpCallbackConstraintMotorVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpCallbackConstraintMotor>,
+                marker: _serde::__private::PhantomData<hkpCallbackConstraintMotor<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -195,7 +198,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpCallbackConstraintMotorVisitor<'de> {
-                type Value = hkpCallbackConstraintMotor;
+                type Value = hkpCallbackConstraintMotor<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -214,7 +217,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_callbackFunc: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_callbackFunc: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_callbackType: _serde::__private::Option<CallbackType> = _serde::__private::None;
                     let mut m_userData0: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_userData1: _serde::__private::Option<Ulong> = _serde::__private::None;
@@ -230,7 +233,7 @@ const _: () = {
                                     );
                                 }
                                 m_callbackFunc = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -651,26 +654,28 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpConstraintMotor {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_type,
                     };
                     let parent = hkpLimitedForceConstraintMotor {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_minForce,
                         m_maxForce,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpCallbackConstraintMotor {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_callbackType,
                         m_userData0,
@@ -798,17 +803,17 @@ const _: () = {
                 }
                 fn visit_uint32<__E>(
                     self,
-                    __value: u32,
+                    __value: U32<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u32 => _serde::__private::Ok(__Field::__field0),
-                        1u32 => _serde::__private::Ok(__Field::__field1),
-                        2u32 => _serde::__private::Ok(__Field::__field2),
-                        3u32 => _serde::__private::Ok(__Field::__field3),
-                        4u32 => _serde::__private::Ok(__Field::__field4),
+                        U32::Number(0u32) => _serde::__private::Ok(__Field::__field0),
+                        U32::Number(1u32) => _serde::__private::Ok(__Field::__field1),
+                        U32::Number(2u32) => _serde::__private::Ok(__Field::__field2),
+                        U32::Number(3u32) => _serde::__private::Ok(__Field::__field3),
+                        U32::Number(4u32) => _serde::__private::Ok(__Field::__field4),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

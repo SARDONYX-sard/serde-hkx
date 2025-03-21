@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct BSBoneSwitchGeneratorBoneData {
+pub struct BSBoneSwitchGeneratorBoneData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct BSBoneSwitchGeneratorBoneData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkbBindable,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkbBindable<'a>,
     /// # C++ Info
     /// - name: `pGenerator`(ctype: `struct hkbGenerator*`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
@@ -34,18 +36,18 @@ pub struct BSBoneSwitchGeneratorBoneData {
     /// - flags: `ALIGN_16`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "pGenerator"))]
-    pub m_pGenerator: Pointer,
+    pub m_pGenerator: Pointer<'a>,
     /// # C++ Info
     /// - name: `spBoneWeight`(ctype: `struct hkbBoneWeightArray*`)
     /// - offset: ` 36`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "spBoneWeight"))]
     #[cfg_attr(feature = "serde", serde(rename = "spBoneWeight"))]
-    pub m_spBoneWeight: Pointer,
+    pub m_spBoneWeight: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for BSBoneSwitchGeneratorBoneData {
+    impl<'a> _serde::HavokClass for BSBoneSwitchGeneratorBoneData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "BSBoneSwitchGeneratorBoneData"
@@ -55,21 +57,22 @@ const _: () = {
             _serde::__private::Signature::new(0xc1215be6)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_variableBindingSet.get());
-            v.push(self.m_pGenerator.get());
-            v.push(self.m_spBoneWeight.get());
+            v.push(&self.parent.m_variableBindingSet);
+            v.push(&self.m_pGenerator);
+            v.push(&self.m_spBoneWeight);
             v
         }
     }
-    impl _serde::Serialize for BSBoneSwitchGeneratorBoneData {
+    impl<'a> _serde::Serialize for BSBoneSwitchGeneratorBoneData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xc1215be6)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -110,7 +113,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for BSBoneSwitchGeneratorBoneData {
+    impl<'de> _serde::Deserialize<'de> for BSBoneSwitchGeneratorBoneData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -162,7 +165,9 @@ const _: () = {
                 }
             }
             struct __BSBoneSwitchGeneratorBoneDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<BSBoneSwitchGeneratorBoneData>,
+                marker: _serde::__private::PhantomData<
+                    BSBoneSwitchGeneratorBoneData<'de>,
+                >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -170,7 +175,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __BSBoneSwitchGeneratorBoneDataVisitor<'de> {
-                type Value = BSBoneSwitchGeneratorBoneData;
+                type Value = BSBoneSwitchGeneratorBoneData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -189,8 +194,8 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_pGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_spBoneWeight: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_pGenerator: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_spBoneWeight: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
                             0usize => {
@@ -203,7 +208,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 4usize, 0usize)?;
                                 m_pGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -220,7 +225,7 @@ const _: () = {
                                     );
                                 }
                                 m_spBoneWeight = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -267,9 +272,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_pGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_spBoneWeight: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_pGenerator: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_spBoneWeight: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -294,7 +301,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -320,7 +327,7 @@ const _: () = {
                                     );
                                 }
                                 m_pGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -346,7 +353,7 @@ const _: () = {
                                     );
                                 }
                                 m_spBoneWeight = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -394,21 +401,23 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(BSBoneSwitchGeneratorBoneData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_pGenerator,
                         m_spBoneWeight,

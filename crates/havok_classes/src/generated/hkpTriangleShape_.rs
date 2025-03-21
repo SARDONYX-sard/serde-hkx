@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpTriangleShape {
+pub struct hkpTriangleShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkpTriangleShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConvexShape,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConvexShape<'a>,
     /// # C++ Info
     /// - name: `weldingInfo`(ctype: `hkUint16`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "weldingInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "weldingInfo"))]
-    pub m_weldingInfo: u16,
+    pub m_weldingInfo: U16<'a>,
     /// # C++ Info
     /// - name: `weldingType`(ctype: `enum WeldingType`)
     /// - offset: ` 22`(x86)/` 42`(x86_64)
@@ -47,7 +49,7 @@ pub struct hkpTriangleShape {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "isExtruded"))]
     #[cfg_attr(feature = "serde", serde(rename = "isExtruded"))]
-    pub m_isExtruded: u8,
+    pub m_isExtruded: U8<'a>,
     /// # C++ Info
     /// - name: `vertexA`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
@@ -79,7 +81,7 @@ pub struct hkpTriangleShape {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpTriangleShape {
+    impl<'a> _serde::HavokClass for hkpTriangleShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpTriangleShape"
@@ -89,18 +91,19 @@ const _: () = {
             _serde::__private::Signature::new(0x95ad1a25)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpTriangleShape {
+    impl<'a> _serde::Serialize for hkpTriangleShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x95ad1a25)));
             let mut serializer = __serializer
                 .serialize_struct("hkpTriangleShape", class_meta, (96u64, 112u64))?;
@@ -139,7 +142,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpTriangleShape {
+    impl<'de> _serde::Deserialize<'de> for hkpTriangleShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -203,14 +206,14 @@ const _: () = {
                 }
             }
             struct __hkpTriangleShapeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpTriangleShape>,
+                marker: _serde::__private::PhantomData<hkpTriangleShape<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpTriangleShapeVisitor<'de> {
-                type Value = hkpTriangleShape;
+                type Value = hkpTriangleShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -229,9 +232,9 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_weldingInfo: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_weldingInfo: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
-                    let mut m_isExtruded: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_isExtruded: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_vertexA: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_vertexB: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_vertexC: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -247,7 +250,7 @@ const _: () = {
                                     );
                                 }
                                 m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -281,7 +284,7 @@ const _: () = {
                                     );
                                 }
                                 m_isExtruded = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -447,9 +450,9 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_weldingInfo: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_weldingInfo: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
-                    let mut m_isExtruded: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_isExtruded: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_vertexA: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_vertexB: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_vertexC: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -526,7 +529,7 @@ const _: () = {
                                     );
                                 }
                                 m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -578,7 +581,7 @@ const _: () = {
                                     );
                                 }
                                 m_isExtruded = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -792,27 +795,32 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
-                    let parent = hkpSphereRepShape { __ptr, parent };
+                    let parent = hkpSphereRepShape {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let parent = hkpConvexShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_radius,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpTriangleShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_weldingInfo,
                         m_weldingType,

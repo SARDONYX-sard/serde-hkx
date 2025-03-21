@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkAabbHalf {
+pub struct hkAabbHalf<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,25 +22,26 @@ pub struct hkAabbHalf {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `data`(ctype: `hkUint16[6]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
-    pub m_data: [u16; 6usize],
+    pub m_data: [U16<'a>; 6usize],
     /// # C++ Info
     /// - name: `extras`(ctype: `hkUint16[2]`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "extras"))]
     #[cfg_attr(feature = "serde", serde(rename = "extras"))]
-    pub m_extras: [u16; 2usize],
+    pub m_extras: [U16<'a>; 2usize],
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkAabbHalf {
+    impl<'a> _serde::HavokClass for hkAabbHalf<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkAabbHalf"
@@ -50,18 +51,19 @@ const _: () = {
             _serde::__private::Signature::new(0x1d716a17)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkAabbHalf {
+    impl<'a> _serde::Serialize for hkAabbHalf<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x1d716a17)));
             let mut serializer = __serializer
                 .serialize_struct("hkAabbHalf", class_meta, (16u64, 16u64))?;
@@ -86,7 +88,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkAabbHalf {
+    impl<'de> _serde::Deserialize<'de> for hkAabbHalf<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -136,14 +138,14 @@ const _: () = {
                 }
             }
             struct __hkAabbHalfVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkAabbHalf>,
+                marker: _serde::__private::PhantomData<hkAabbHalf<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkAabbHalfVisitor<'de> {
-                type Value = hkAabbHalf;
+                type Value = hkAabbHalf<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -158,8 +160,8 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_data: _serde::__private::Option<[u16; 6usize]> = _serde::__private::None;
-                    let mut m_extras: _serde::__private::Option<[u16; 2usize]> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<[U16<'de>; 6usize]> = _serde::__private::None;
+                    let mut m_extras: _serde::__private::Option<[U16<'de>; 2usize]> = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
                             0usize => {
@@ -169,7 +171,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<[u16; 6usize]>(&mut __map) {
+                                    match __A::next_value::<[U16<'de>; 6usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -184,7 +186,7 @@ const _: () = {
                                     );
                                 }
                                 m_extras = _serde::__private::Some(
-                                    match __A::next_value::<[u16; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[U16<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -225,8 +227,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_data: _serde::__private::Option<[u16; 6usize]> = _serde::__private::None;
-                    let mut m_extras: _serde::__private::Option<[u16; 2usize]> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<[U16<'de>; 6usize]> = _serde::__private::None;
+                    let mut m_extras: _serde::__private::Option<[U16<'de>; 2usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -247,7 +249,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<[u16; 6usize]>(&mut __map) {
+                                    match __A::next_value::<[U16<'de>; 6usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -271,7 +273,7 @@ const _: () = {
                                     );
                                 }
                                 m_extras = _serde::__private::Some(
-                                    match __A::next_value::<[u16; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[U16<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -304,7 +306,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkAabbHalf {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_data,
                         m_extras,
                     })

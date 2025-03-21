@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkaDeltaCompressedAnimationQuantizationFormat {
+pub struct hkaDeltaCompressedAnimationQuantizationFormat<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,53 +22,54 @@ pub struct hkaDeltaCompressedAnimationQuantizationFormat {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `maxBitWidth`(ctype: `hkUint8`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "maxBitWidth"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxBitWidth"))]
-    pub m_maxBitWidth: u8,
+    pub m_maxBitWidth: U8<'a>,
     /// # C++ Info
     /// - name: `preserved`(ctype: `hkUint8`)
     /// - offset: `  1`(x86)/`  1`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "preserved"))]
     #[cfg_attr(feature = "serde", serde(rename = "preserved"))]
-    pub m_preserved: u8,
+    pub m_preserved: U8<'a>,
     /// # C++ Info
     /// - name: `numD`(ctype: `hkUint32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numD"))]
     #[cfg_attr(feature = "serde", serde(rename = "numD"))]
-    pub m_numD: u32,
+    pub m_numD: U32<'a>,
     /// # C++ Info
     /// - name: `offsetIdx`(ctype: `hkUint32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "offsetIdx"))]
     #[cfg_attr(feature = "serde", serde(rename = "offsetIdx"))]
-    pub m_offsetIdx: u32,
+    pub m_offsetIdx: U32<'a>,
     /// # C++ Info
     /// - name: `scaleIdx`(ctype: `hkUint32`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "scaleIdx"))]
     #[cfg_attr(feature = "serde", serde(rename = "scaleIdx"))]
-    pub m_scaleIdx: u32,
+    pub m_scaleIdx: U32<'a>,
     /// # C++ Info
     /// - name: `bitWidthIdx`(ctype: `hkUint32`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bitWidthIdx"))]
     #[cfg_attr(feature = "serde", serde(rename = "bitWidthIdx"))]
-    pub m_bitWidthIdx: u32,
+    pub m_bitWidthIdx: U32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkaDeltaCompressedAnimationQuantizationFormat {
+    impl<'a> _serde::HavokClass for hkaDeltaCompressedAnimationQuantizationFormat<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkaDeltaCompressedAnimationQuantizationFormat"
@@ -78,18 +79,19 @@ const _: () = {
             _serde::__private::Signature::new(0x724a7561)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkaDeltaCompressedAnimationQuantizationFormat {
+    impl<'a> _serde::Serialize for hkaDeltaCompressedAnimationQuantizationFormat<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x724a7561)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -114,7 +116,7 @@ const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de>
-    for hkaDeltaCompressedAnimationQuantizationFormat {
+    for hkaDeltaCompressedAnimationQuantizationFormat<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -173,7 +175,7 @@ const _: () = {
             }
             struct __hkaDeltaCompressedAnimationQuantizationFormatVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkaDeltaCompressedAnimationQuantizationFormat,
+                    hkaDeltaCompressedAnimationQuantizationFormat<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -182,7 +184,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkaDeltaCompressedAnimationQuantizationFormatVisitor<'de> {
-                type Value = hkaDeltaCompressedAnimationQuantizationFormat;
+                type Value = hkaDeltaCompressedAnimationQuantizationFormat<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -200,12 +202,12 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_maxBitWidth: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_preserved: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_numD: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_offsetIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_scaleIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_bitWidthIdx: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_maxBitWidth: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_preserved: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_numD: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_offsetIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_scaleIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_bitWidthIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     for i in 0..6usize {
                         match i {
                             0usize => {
@@ -217,7 +219,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxBitWidth = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -234,7 +236,7 @@ const _: () = {
                                     );
                                 }
                                 m_preserved = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -250,7 +252,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 2usize, 2usize)?;
                                 m_numD = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -267,7 +269,7 @@ const _: () = {
                                     );
                                 }
                                 m_offsetIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -284,7 +286,7 @@ const _: () = {
                                     );
                                 }
                                 m_scaleIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -301,7 +303,7 @@ const _: () = {
                                     );
                                 }
                                 m_bitWidthIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -386,12 +388,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_maxBitWidth: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_preserved: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_numD: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_offsetIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_scaleIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_bitWidthIdx: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_maxBitWidth: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_preserved: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_numD: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_offsetIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_scaleIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_bitWidthIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -414,7 +416,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxBitWidth = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -440,7 +442,7 @@ const _: () = {
                                     );
                                 }
                                 m_preserved = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -464,7 +466,7 @@ const _: () = {
                                     );
                                 }
                                 m_numD = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -490,7 +492,7 @@ const _: () = {
                                     );
                                 }
                                 m_offsetIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -516,7 +518,7 @@ const _: () = {
                                     );
                                 }
                                 m_scaleIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -542,7 +544,7 @@ const _: () = {
                                     );
                                 }
                                 m_bitWidthIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -623,7 +625,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaDeltaCompressedAnimationQuantizationFormat {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_maxBitWidth,
                         m_preserved,
                         m_numD,

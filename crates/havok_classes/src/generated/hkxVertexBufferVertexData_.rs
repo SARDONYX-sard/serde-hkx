@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkxVertexBufferVertexData {
+pub struct hkxVertexBufferVertexData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkxVertexBufferVertexData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `vectorData`(ctype: `hkArray<hkVector4>`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -43,67 +44,67 @@ pub struct hkxVertexBufferVertexData {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "uint32Data"))]
     #[cfg_attr(feature = "serde", serde(rename = "uint32Data"))]
-    pub m_uint32Data: Vec<u32>,
+    pub m_uint32Data: Vec<U32<'a>>,
     /// # C++ Info
     /// - name: `uint16Data`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 36`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "uint16Data"))]
     #[cfg_attr(feature = "serde", serde(rename = "uint16Data"))]
-    pub m_uint16Data: Vec<u16>,
+    pub m_uint16Data: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `uint8Data`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "uint8Data"))]
     #[cfg_attr(feature = "serde", serde(rename = "uint8Data"))]
-    pub m_uint8Data: Vec<u8>,
+    pub m_uint8Data: Vec<U8<'a>>,
     /// # C++ Info
     /// - name: `numVerts`(ctype: `hkUint32`)
     /// - offset: ` 60`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numVerts"))]
     #[cfg_attr(feature = "serde", serde(rename = "numVerts"))]
-    pub m_numVerts: u32,
+    pub m_numVerts: U32<'a>,
     /// # C++ Info
     /// - name: `vectorStride`(ctype: `hkUint32`)
     /// - offset: ` 64`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "vectorStride"))]
     #[cfg_attr(feature = "serde", serde(rename = "vectorStride"))]
-    pub m_vectorStride: u32,
+    pub m_vectorStride: U32<'a>,
     /// # C++ Info
     /// - name: `floatStride`(ctype: `hkUint32`)
     /// - offset: ` 68`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "floatStride"))]
     #[cfg_attr(feature = "serde", serde(rename = "floatStride"))]
-    pub m_floatStride: u32,
+    pub m_floatStride: U32<'a>,
     /// # C++ Info
     /// - name: `uint32Stride`(ctype: `hkUint32`)
     /// - offset: ` 72`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "uint32Stride"))]
     #[cfg_attr(feature = "serde", serde(rename = "uint32Stride"))]
-    pub m_uint32Stride: u32,
+    pub m_uint32Stride: U32<'a>,
     /// # C++ Info
     /// - name: `uint16Stride`(ctype: `hkUint32`)
     /// - offset: ` 76`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "uint16Stride"))]
     #[cfg_attr(feature = "serde", serde(rename = "uint16Stride"))]
-    pub m_uint16Stride: u32,
+    pub m_uint16Stride: U32<'a>,
     /// # C++ Info
     /// - name: `uint8Stride`(ctype: `hkUint32`)
     /// - offset: ` 80`(x86)/`100`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "uint8Stride"))]
     #[cfg_attr(feature = "serde", serde(rename = "uint8Stride"))]
-    pub m_uint8Stride: u32,
+    pub m_uint8Stride: U32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkxVertexBufferVertexData {
+    impl<'a> _serde::HavokClass for hkxVertexBufferVertexData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkxVertexBufferVertexData"
@@ -113,18 +114,19 @@ const _: () = {
             _serde::__private::Signature::new(0xd72b6fd0)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkxVertexBufferVertexData {
+    impl<'a> _serde::Serialize for hkxVertexBufferVertexData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xd72b6fd0)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -177,7 +179,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkxVertexBufferVertexData {
+    impl<'de> _serde::Deserialize<'de> for hkxVertexBufferVertexData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -245,7 +247,7 @@ const _: () = {
                 }
             }
             struct __hkxVertexBufferVertexDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkxVertexBufferVertexData>,
+                marker: _serde::__private::PhantomData<hkxVertexBufferVertexData<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -253,7 +255,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkxVertexBufferVertexDataVisitor<'de> {
-                type Value = hkxVertexBufferVertexData;
+                type Value = hkxVertexBufferVertexData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -273,15 +275,15 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_vectorData: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
                     let mut m_floatData: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-                    let mut m_uint32Data: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_uint16Data: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_uint8Data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_numVerts: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_vectorStride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_floatStride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_uint32Stride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_uint16Stride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_uint8Stride: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_uint32Data: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_uint16Data: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_uint8Data: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_numVerts: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_vectorStride: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_floatStride: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_uint32Stride: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_uint16Stride: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_uint8Stride: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     for i in 0..11usize {
                         match i {
                             0usize => {
@@ -327,7 +329,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint32Data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -344,7 +346,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint16Data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -361,7 +363,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint8Data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -378,7 +380,7 @@ const _: () = {
                                     );
                                 }
                                 m_numVerts = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -395,7 +397,7 @@ const _: () = {
                                     );
                                 }
                                 m_vectorStride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -412,7 +414,7 @@ const _: () = {
                                     );
                                 }
                                 m_floatStride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -429,7 +431,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint32Stride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -446,7 +448,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint16Stride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -463,7 +465,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint8Stride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -607,15 +609,15 @@ const _: () = {
                 {
                     let mut m_vectorData: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
                     let mut m_floatData: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-                    let mut m_uint32Data: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_uint16Data: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_uint8Data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_numVerts: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_vectorStride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_floatStride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_uint32Stride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_uint16Stride: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_uint8Stride: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_uint32Data: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_uint16Data: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_uint8Data: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_numVerts: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_vectorStride: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_floatStride: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_uint32Stride: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_uint16Stride: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_uint8Stride: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -690,7 +692,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint32Data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -716,7 +718,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint16Data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -742,7 +744,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint8Data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -768,7 +770,7 @@ const _: () = {
                                     );
                                 }
                                 m_numVerts = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -794,7 +796,7 @@ const _: () = {
                                     );
                                 }
                                 m_vectorStride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -820,7 +822,7 @@ const _: () = {
                                     );
                                 }
                                 m_floatStride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -846,7 +848,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint32Stride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -872,7 +874,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint16Stride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -898,7 +900,7 @@ const _: () = {
                                     );
                                 }
                                 m_uint8Stride = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1041,7 +1043,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkxVertexBufferVertexData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_vectorData,
                         m_floatData,
                         m_uint32Data,

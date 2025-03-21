@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpVehicleFrictionDescription {
+pub struct hkpVehicleFrictionDescription<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkpVehicleFrictionDescription {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `wheelDistance`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -43,11 +44,11 @@ pub struct hkpVehicleFrictionDescription {
     /// - type_size: `200`(x86)/`200`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "axleDescr"))]
     #[cfg_attr(feature = "serde", serde(rename = "axleDescr"))]
-    pub m_axleDescr: [hkpVehicleFrictionDescriptionAxisDescription; 2usize],
+    pub m_axleDescr: [hkpVehicleFrictionDescriptionAxisDescription<'a>; 2usize],
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpVehicleFrictionDescription {
+    impl<'a> _serde::HavokClass for hkpVehicleFrictionDescription<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpVehicleFrictionDescription"
@@ -57,25 +58,26 @@ const _: () = {
             _serde::__private::Signature::new(0x1034549a)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_axleDescr
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkpVehicleFrictionDescription {
+    impl<'a> _serde::Serialize for hkpVehicleFrictionDescription<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x1034549a)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -103,7 +105,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpVehicleFrictionDescription {
+    impl<'de> _serde::Deserialize<'de> for hkpVehicleFrictionDescription<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -155,7 +157,9 @@ const _: () = {
                 }
             }
             struct __hkpVehicleFrictionDescriptionVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpVehicleFrictionDescription>,
+                marker: _serde::__private::PhantomData<
+                    hkpVehicleFrictionDescription<'de>,
+                >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -163,7 +167,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpVehicleFrictionDescriptionVisitor<'de> {
-                type Value = hkpVehicleFrictionDescription;
+                type Value = hkpVehicleFrictionDescription<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -419,7 +423,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpVehicleFrictionDescription {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_wheelDistance,
                         m_chassisMassInv,
                         m_axleDescr,

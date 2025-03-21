@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpCharacterRigidBodyCinfo {
+pub struct hkpCharacterRigidBodyCinfo<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,25 +22,27 @@ pub struct hkpCharacterRigidBodyCinfo {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpCharacterControllerCinfo,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpCharacterControllerCinfo<'a>,
     /// # C++ Info
     /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "collisionFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionFilterInfo"))]
-    pub m_collisionFilterInfo: u32,
+    pub m_collisionFilterInfo: U32<'a>,
     /// # C++ Info
     /// - name: `shape`(ctype: `struct hkpShape*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "shape"))]
     #[cfg_attr(feature = "serde", serde(rename = "shape"))]
-    pub m_shape: Pointer,
+    pub m_shape: Pointer<'a>,
     /// # C++ Info
     /// - name: `position`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -141,11 +143,11 @@ pub struct hkpCharacterRigidBodyCinfo {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "vdbColor"))]
     #[cfg_attr(feature = "serde", serde(rename = "vdbColor"))]
-    pub m_vdbColor: i32,
+    pub m_vdbColor: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpCharacterRigidBodyCinfo {
+    impl<'a> _serde::HavokClass for hkpCharacterRigidBodyCinfo<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpCharacterRigidBodyCinfo"
@@ -155,19 +157,20 @@ const _: () = {
             _serde::__private::Signature::new(0x892f441)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_shape.get());
+            v.push(&self.m_shape);
             v
         }
     }
-    impl _serde::Serialize for hkpCharacterRigidBodyCinfo {
+    impl<'a> _serde::Serialize for hkpCharacterRigidBodyCinfo<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x892f441)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -222,7 +225,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpCharacterRigidBodyCinfo {
+    impl<'de> _serde::Deserialize<'de> for hkpCharacterRigidBodyCinfo<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -306,7 +309,7 @@ const _: () = {
                 }
             }
             struct __hkpCharacterRigidBodyCinfoVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpCharacterRigidBodyCinfo>,
+                marker: _serde::__private::PhantomData<hkpCharacterRigidBodyCinfo<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -314,7 +317,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpCharacterRigidBodyCinfoVisitor<'de> {
-                type Value = hkpCharacterRigidBodyCinfo;
+                type Value = hkpCharacterRigidBodyCinfo<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -333,8 +336,8 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_shape: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_position: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_rotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
                     let mut m_mass: _serde::__private::Option<f32> = _serde::__private::None;
@@ -350,7 +353,7 @@ const _: () = {
                     let mut m_maxSpeedForSimplexSolver: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_supportDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_hardSupportDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_vdbColor: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_vdbColor: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..16usize {
                         match i {
                             0usize => {
@@ -364,7 +367,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -380,7 +383,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_shape = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -624,7 +627,7 @@ const _: () = {
                                     );
                                 }
                                 m_vdbColor = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -807,8 +810,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_shape: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_position: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_rotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
                     let mut m_mass: _serde::__private::Option<f32> = _serde::__private::None;
@@ -824,7 +827,7 @@ const _: () = {
                     let mut m_maxSpeedForSimplexSolver: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_supportDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_hardSupportDistance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_vdbColor: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_vdbColor: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -849,7 +852,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -873,7 +876,7 @@ const _: () = {
                                     );
                                 }
                                 m_shape = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1243,7 +1246,7 @@ const _: () = {
                                     );
                                 }
                                 m_vdbColor = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1429,19 +1432,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpCharacterControllerCinfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpCharacterRigidBodyCinfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_collisionFilterInfo,
                         m_shape,

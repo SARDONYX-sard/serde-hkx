@@ -22,7 +22,8 @@ pub struct BSSpeedSamplerModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,7 +35,7 @@ pub struct BSSpeedSamplerModifier<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "state"))]
     #[cfg_attr(feature = "serde", serde(rename = "state"))]
-    pub m_state: i32,
+    pub m_state: I32<'a>,
     /// # C++ Info
     /// - name: `direction`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 84`(x86_64)
@@ -69,9 +70,9 @@ const _: () = {
             _serde::__private::Signature::new(0xd297fda9)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v
         }
     }
@@ -82,6 +83,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xd297fda9)));
             let mut serializer = __serializer
                 .serialize_struct("BSSpeedSamplerModifier", class_meta, (60u64, 96u64))?;
@@ -234,7 +236,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_state: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_state: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_direction: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_goalSpeed: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_speedOut: _serde::__private::Option<f32> = _serde::__private::None;
@@ -247,7 +249,7 @@ const _: () = {
                                     );
                                 }
                                 m_state = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -362,11 +364,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_state: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_state: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_direction: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_goalSpeed: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_speedOut: _serde::__private::Option<f32> = _serde::__private::None;
@@ -394,7 +398,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -492,7 +496,7 @@ const _: () = {
                                     );
                                 }
                                 m_state = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -668,34 +672,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(BSSpeedSamplerModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_state,
                         m_direction,

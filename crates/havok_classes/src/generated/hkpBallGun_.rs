@@ -22,7 +22,8 @@ pub struct hkpBallGun<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -62,7 +63,7 @@ pub struct hkpBallGun<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "maxBulletsInWorld"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxBulletsInWorld"))]
-    pub m_maxBulletsInWorld: i32,
+    pub m_maxBulletsInWorld: I32<'a>,
     /// # C++ Info
     /// - name: `bulletOffsetFromCenter`(ctype: `hkVector4`)
     /// - offset: ` 64`(x86)/` 80`(x86_64)
@@ -77,7 +78,7 @@ pub struct hkpBallGun<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "addedBodies"))]
     #[cfg_attr(feature = "serde", serde(rename = "addedBodies"))]
-    pub m_addedBodies: Pointer,
+    pub m_addedBodies: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -91,10 +92,10 @@ const _: () = {
             _serde::__private::Signature::new(0x57b06d35)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.extend(self.parent.m_listeners.iter().map(|ptr| ptr.get()));
-            v.push(self.m_addedBodies.get());
+            v.extend(self.parent.m_listeners.iter());
+            v.push(&self.m_addedBodies);
             v
         }
     }
@@ -105,6 +106,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x57b06d35)));
             let mut serializer = __serializer
                 .serialize_struct("hkpBallGun", class_meta, (96u64, 112u64))?;
@@ -236,11 +238,11 @@ const _: () = {
                     let mut m_bulletVelocity: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_bulletMass: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_damageMultiplier: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxBulletsInWorld: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_maxBulletsInWorld: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_bulletOffsetFromCenter: _serde::__private::Option<
                         Vector4,
                     > = _serde::__private::None;
-                    let mut m_addedBodies: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_addedBodies: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..7usize {
                         match i {
                             0usize => {
@@ -322,7 +324,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxBulletsInWorld = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -359,7 +361,7 @@ const _: () = {
                                     );
                                 }
                                 m_addedBodies = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -467,7 +469,7 @@ const _: () = {
                     let mut m_bulletVelocity: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_bulletMass: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_damageMultiplier: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxBulletsInWorld: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_maxBulletsInWorld: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_bulletOffsetFromCenter: _serde::__private::Option<
                         Vector4,
                     > = _serde::__private::None;
@@ -649,7 +651,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxBulletsInWorld = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -783,14 +785,16 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpFirstPersonGun {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_name,
                         m_keyboardKey,
@@ -798,7 +802,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpBallGun {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_bulletRadius,
                         m_bulletVelocity,

@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkVertexFormatElement {
+pub struct hkVertexFormatElement<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkVertexFormatElement {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `dataType`(ctype: `enum ComponentType`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -36,7 +37,7 @@ pub struct hkVertexFormatElement {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "numValues"))]
-    pub m_numValues: u8,
+    pub m_numValues: U8<'a>,
     /// # C++ Info
     /// - name: `usage`(ctype: `enum ComponentUsage`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
@@ -50,7 +51,7 @@ pub struct hkVertexFormatElement {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "subUsage"))]
     #[cfg_attr(feature = "serde", serde(rename = "subUsage"))]
-    pub m_subUsage: u8,
+    pub m_subUsage: U8<'a>,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags HintFlags`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
@@ -64,11 +65,11 @@ pub struct hkVertexFormatElement {
     /// - type_size: `  3`(x86)/`  3`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "pad"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad"))]
-    pub m_pad: [u8; 3usize],
+    pub m_pad: [U8<'a>; 3usize],
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkVertexFormatElement {
+    impl<'a> _serde::HavokClass for hkVertexFormatElement<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkVertexFormatElement"
@@ -78,18 +79,19 @@ const _: () = {
             _serde::__private::Signature::new(0x54867cbf)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkVertexFormatElement {
+    impl<'a> _serde::Serialize for hkVertexFormatElement<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x54867cbf)));
             let mut serializer = __serializer
                 .serialize_struct("hkVertexFormatElement", class_meta, (8u64, 8u64))?;
@@ -113,7 +115,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkVertexFormatElement {
+    impl<'de> _serde::Deserialize<'de> for hkVertexFormatElement<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -171,14 +173,14 @@ const _: () = {
                 }
             }
             struct __hkVertexFormatElementVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkVertexFormatElement>,
+                marker: _serde::__private::PhantomData<hkVertexFormatElement<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
-                type Value = hkVertexFormatElement;
+                type Value = hkVertexFormatElement<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -197,11 +199,11 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_dataType: _serde::__private::Option<ComponentType> = _serde::__private::None;
-                    let mut m_numValues: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_numValues: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_usage: _serde::__private::Option<ComponentUsage> = _serde::__private::None;
-                    let mut m_subUsage: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_subUsage: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_flags: _serde::__private::Option<HintFlags> = _serde::__private::None;
-                    let mut m_pad: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
+                    let mut m_pad: _serde::__private::Option<[U8<'de>; 3usize]> = _serde::__private::None;
                     for i in 0..6usize {
                         match i {
                             0usize => {
@@ -230,7 +232,7 @@ const _: () = {
                                     );
                                 }
                                 m_numValues = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -262,7 +264,7 @@ const _: () = {
                                     );
                                 }
                                 m_subUsage = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -292,7 +294,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -372,11 +374,11 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_dataType: _serde::__private::Option<ComponentType> = _serde::__private::None;
-                    let mut m_numValues: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_numValues: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_usage: _serde::__private::Option<ComponentUsage> = _serde::__private::None;
-                    let mut m_subUsage: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_subUsage: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_flags: _serde::__private::Option<HintFlags> = _serde::__private::None;
-                    let mut m_pad: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
+                    let mut m_pad: _serde::__private::Option<[U8<'de>; 3usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -425,7 +427,7 @@ const _: () = {
                                     );
                                 }
                                 m_numValues = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -475,7 +477,7 @@ const _: () = {
                                     );
                                 }
                                 m_subUsage = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -523,7 +525,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -598,7 +600,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkVertexFormatElement {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_dataType,
                         m_numValues,
                         m_usage,

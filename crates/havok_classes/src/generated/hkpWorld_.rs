@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpWorld {
+pub struct hkpWorld<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkpWorld {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `simulation`(ctype: `struct hkpSimulation*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "simulation"))]
     #[cfg_attr(feature = "serde", serde(rename = "simulation"))]
-    pub m_simulation: Pointer,
+    pub m_simulation: Pointer<'a>,
     /// # C++ Info
     /// - name: `gravity`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -48,14 +50,14 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "fixedIsland"))]
     #[cfg_attr(feature = "serde", serde(rename = "fixedIsland"))]
-    pub m_fixedIsland: Pointer,
+    pub m_fixedIsland: Pointer<'a>,
     /// # C++ Info
     /// - name: `fixedRigidBody`(ctype: `struct hkpRigidBody*`)
     /// - offset: ` 36`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "fixedRigidBody"))]
     #[cfg_attr(feature = "serde", serde(rename = "fixedRigidBody"))]
-    pub m_fixedRigidBody: Pointer,
+    pub m_fixedRigidBody: Pointer<'a>,
     /// # C++ Info
     /// - name: `activeSimulationIslands`(ctype: `hkArray<void*>`)
     /// - offset: ` 40`(x86)/` 64`(x86_64)
@@ -63,7 +65,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "activeSimulationIslands"))]
     #[cfg_attr(feature = "serde", serde(rename = "activeSimulationIslands"))]
-    pub m_activeSimulationIslands: Vec<Pointer>,
+    pub m_activeSimulationIslands: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `inactiveSimulationIslands`(ctype: `hkArray<void*>`)
     /// - offset: ` 52`(x86)/` 80`(x86_64)
@@ -71,7 +73,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "inactiveSimulationIslands"))]
     #[cfg_attr(feature = "serde", serde(rename = "inactiveSimulationIslands"))]
-    pub m_inactiveSimulationIslands: Vec<Pointer>,
+    pub m_inactiveSimulationIslands: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `dirtySimulationIslands`(ctype: `hkArray<void*>`)
     /// - offset: ` 64`(x86)/` 96`(x86_64)
@@ -79,7 +81,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "dirtySimulationIslands"))]
     #[cfg_attr(feature = "serde", serde(rename = "dirtySimulationIslands"))]
-    pub m_dirtySimulationIslands: Vec<Pointer>,
+    pub m_dirtySimulationIslands: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `maintenanceMgr`(ctype: `void*`)
     /// - offset: ` 76`(x86)/`112`(x86_64)
@@ -87,7 +89,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "maintenanceMgr"))]
     #[cfg_attr(feature = "serde", serde(rename = "maintenanceMgr"))]
-    pub m_maintenanceMgr: Pointer,
+    pub m_maintenanceMgr: Pointer<'a>,
     /// # C++ Info
     /// - name: `memoryWatchDog`(ctype: `void*`)
     /// - offset: ` 80`(x86)/`120`(x86_64)
@@ -95,7 +97,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "memoryWatchDog"))]
     #[cfg_attr(feature = "serde", serde(rename = "memoryWatchDog"))]
-    pub m_memoryWatchDog: Pointer,
+    pub m_memoryWatchDog: Pointer<'a>,
     /// # C++ Info
     /// - name: `assertOnRunningOutOfSolverMemory`(ctype: `hkBool`)
     /// - offset: ` 84`(x86)/`128`(x86_64)
@@ -114,7 +116,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhase"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhase"))]
-    pub m_broadPhase: Pointer,
+    pub m_broadPhase: Pointer<'a>,
     /// # C++ Info
     /// - name: `kdTreeManager`(ctype: `void*`)
     /// - offset: ` 92`(x86)/`144`(x86_64)
@@ -122,7 +124,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "kdTreeManager"))]
     #[cfg_attr(feature = "serde", serde(rename = "kdTreeManager"))]
-    pub m_kdTreeManager: Pointer,
+    pub m_kdTreeManager: Pointer<'a>,
     /// # C++ Info
     /// - name: `autoUpdateTree`(ctype: `hkBool`)
     /// - offset: ` 96`(x86)/`152`(x86_64)
@@ -137,7 +139,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseDispatcher"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseDispatcher"))]
-    pub m_broadPhaseDispatcher: Pointer,
+    pub m_broadPhaseDispatcher: Pointer<'a>,
     /// # C++ Info
     /// - name: `phantomBroadPhaseListener`(ctype: `void*`)
     /// - offset: `104`(x86)/`168`(x86_64)
@@ -145,7 +147,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "phantomBroadPhaseListener"))]
     #[cfg_attr(feature = "serde", serde(rename = "phantomBroadPhaseListener"))]
-    pub m_phantomBroadPhaseListener: Pointer,
+    pub m_phantomBroadPhaseListener: Pointer<'a>,
     /// # C++ Info
     /// - name: `entityEntityBroadPhaseListener`(ctype: `void*`)
     /// - offset: `108`(x86)/`176`(x86_64)
@@ -156,7 +158,7 @@ pub struct hkpWorld {
         schemars(rename = "entityEntityBroadPhaseListener")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "entityEntityBroadPhaseListener"))]
-    pub m_entityEntityBroadPhaseListener: Pointer,
+    pub m_entityEntityBroadPhaseListener: Pointer<'a>,
     /// # C++ Info
     /// - name: `broadPhaseBorderListener`(ctype: `void*`)
     /// - offset: `112`(x86)/`184`(x86_64)
@@ -164,7 +166,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseBorderListener"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseBorderListener"))]
-    pub m_broadPhaseBorderListener: Pointer,
+    pub m_broadPhaseBorderListener: Pointer<'a>,
     /// # C++ Info
     /// - name: `multithreadedSimulationJobData`(ctype: `void*`)
     /// - offset: `116`(x86)/`192`(x86_64)
@@ -175,7 +177,7 @@ pub struct hkpWorld {
         schemars(rename = "multithreadedSimulationJobData")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "multithreadedSimulationJobData"))]
-    pub m_multithreadedSimulationJobData: Pointer,
+    pub m_multithreadedSimulationJobData: Pointer<'a>,
     /// # C++ Info
     /// - name: `collisionInput`(ctype: `void*`)
     /// - offset: `120`(x86)/`200`(x86_64)
@@ -183,7 +185,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "collisionInput"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionInput"))]
-    pub m_collisionInput: Pointer,
+    pub m_collisionInput: Pointer<'a>,
     /// # C++ Info
     /// - name: `collisionFilter`(ctype: `void*`)
     /// - offset: `124`(x86)/`208`(x86_64)
@@ -191,7 +193,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "collisionFilter"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionFilter"))]
-    pub m_collisionFilter: Pointer,
+    pub m_collisionFilter: Pointer<'a>,
     /// # C++ Info
     /// - name: `collisionDispatcher`(ctype: `void*`)
     /// - offset: `128`(x86)/`216`(x86_64)
@@ -199,7 +201,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "collisionDispatcher"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionDispatcher"))]
-    pub m_collisionDispatcher: Pointer,
+    pub m_collisionDispatcher: Pointer<'a>,
     /// # C++ Info
     /// - name: `convexListFilter`(ctype: `void*`)
     /// - offset: `132`(x86)/`224`(x86_64)
@@ -207,7 +209,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "convexListFilter"))]
     #[cfg_attr(feature = "serde", serde(rename = "convexListFilter"))]
-    pub m_convexListFilter: Pointer,
+    pub m_convexListFilter: Pointer<'a>,
     /// # C++ Info
     /// - name: `pendingOperations`(ctype: `void*`)
     /// - offset: `136`(x86)/`232`(x86_64)
@@ -215,14 +217,14 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pendingOperations"))]
     #[cfg_attr(feature = "serde", serde(rename = "pendingOperations"))]
-    pub m_pendingOperations: Pointer,
+    pub m_pendingOperations: Pointer<'a>,
     /// # C++ Info
     /// - name: `pendingOperationsCount`(ctype: `hkInt32`)
     /// - offset: `140`(x86)/`240`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "pendingOperationsCount"))]
     #[cfg_attr(feature = "serde", serde(rename = "pendingOperationsCount"))]
-    pub m_pendingOperationsCount: i32,
+    pub m_pendingOperationsCount: I32<'a>,
     /// # C++ Info
     /// - name: `pendingBodyOperationsCount`(ctype: `hkInt32`)
     /// - offset: `144`(x86)/`244`(x86_64)
@@ -230,7 +232,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pendingBodyOperationsCount"))]
     #[cfg_attr(feature = "serde", serde(rename = "pendingBodyOperationsCount"))]
-    pub m_pendingBodyOperationsCount: i32,
+    pub m_pendingBodyOperationsCount: I32<'a>,
     /// # C++ Info
     /// - name: `criticalOperationsLockCount`(ctype: `hkInt32`)
     /// - offset: `148`(x86)/`248`(x86_64)
@@ -240,7 +242,7 @@ pub struct hkpWorld {
         schemars(rename = "criticalOperationsLockCount")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "criticalOperationsLockCount"))]
-    pub m_criticalOperationsLockCount: i32,
+    pub m_criticalOperationsLockCount: I32<'a>,
     /// # C++ Info
     /// - name: `criticalOperationsLockCountForPhantoms`(ctype: `hkInt32`)
     /// - offset: `152`(x86)/`252`(x86_64)
@@ -253,7 +255,7 @@ pub struct hkpWorld {
         feature = "serde",
         serde(rename = "criticalOperationsLockCountForPhantoms")
     )]
-    pub m_criticalOperationsLockCountForPhantoms: i32,
+    pub m_criticalOperationsLockCountForPhantoms: I32<'a>,
     /// # C++ Info
     /// - name: `blockExecutingPendingOperations`(ctype: `hkBool`)
     /// - offset: `156`(x86)/`256`(x86_64)
@@ -278,14 +280,14 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pendingOperationQueues"))]
     #[cfg_attr(feature = "serde", serde(rename = "pendingOperationQueues"))]
-    pub m_pendingOperationQueues: Pointer,
+    pub m_pendingOperationQueues: Pointer<'a>,
     /// # C++ Info
     /// - name: `pendingOperationQueueCount`(ctype: `hkInt32`)
     /// - offset: `164`(x86)/`272`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "pendingOperationQueueCount"))]
     #[cfg_attr(feature = "serde", serde(rename = "pendingOperationQueueCount"))]
-    pub m_pendingOperationQueueCount: i32,
+    pub m_pendingOperationQueueCount: I32<'a>,
     /// # C++ Info
     /// - name: `multiThreadCheck`(ctype: `struct hkMultiThreadCheck`)
     /// - offset: `168`(x86)/`276`(x86_64)
@@ -293,7 +295,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "multiThreadCheck"))]
     #[cfg_attr(feature = "serde", serde(rename = "multiThreadCheck"))]
-    pub m_multiThreadCheck: hkMultiThreadCheck,
+    pub m_multiThreadCheck: hkMultiThreadCheck<'a>,
     /// # C++ Info
     /// - name: `processActionsInSingleThread`(ctype: `hkBool`)
     /// - offset: `180`(x86)/`288`(x86_64)
@@ -323,7 +325,7 @@ pub struct hkpWorld {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "minDesiredIslandSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "minDesiredIslandSize"))]
-    pub m_minDesiredIslandSize: u32,
+    pub m_minDesiredIslandSize: U32<'a>,
     /// # C++ Info
     /// - name: `modifyConstraintCriticalSection`(ctype: `void*`)
     /// - offset: `188`(x86)/`296`(x86_64)
@@ -334,14 +336,14 @@ pub struct hkpWorld {
         schemars(rename = "modifyConstraintCriticalSection")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "modifyConstraintCriticalSection"))]
-    pub m_modifyConstraintCriticalSection: Pointer,
+    pub m_modifyConstraintCriticalSection: Pointer<'a>,
     /// # C++ Info
     /// - name: `isLocked`(ctype: `hkInt32`)
     /// - offset: `192`(x86)/`304`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "isLocked"))]
     #[cfg_attr(feature = "serde", serde(rename = "isLocked"))]
-    pub m_isLocked: i32,
+    pub m_isLocked: I32<'a>,
     /// # C++ Info
     /// - name: `islandDirtyListCriticalSection`(ctype: `void*`)
     /// - offset: `196`(x86)/`312`(x86_64)
@@ -352,7 +354,7 @@ pub struct hkpWorld {
         schemars(rename = "islandDirtyListCriticalSection")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "islandDirtyListCriticalSection"))]
-    pub m_islandDirtyListCriticalSection: Pointer,
+    pub m_islandDirtyListCriticalSection: Pointer<'a>,
     /// # C++ Info
     /// - name: `propertyMasterLock`(ctype: `void*`)
     /// - offset: `200`(x86)/`320`(x86_64)
@@ -360,7 +362,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "propertyMasterLock"))]
     #[cfg_attr(feature = "serde", serde(rename = "propertyMasterLock"))]
-    pub m_propertyMasterLock: Pointer,
+    pub m_propertyMasterLock: Pointer<'a>,
     /// # C++ Info
     /// - name: `wantSimulationIslands`(ctype: `hkBool`)
     /// - offset: `204`(x86)/`328`(x86_64)
@@ -452,7 +454,7 @@ pub struct hkpWorld {
         schemars(rename = "maxSectorsPerMidphaseCollideTask")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "maxSectorsPerMidphaseCollideTask"))]
-    pub m_maxSectorsPerMidphaseCollideTask: i32,
+    pub m_maxSectorsPerMidphaseCollideTask: I32<'a>,
     /// # C++ Info
     /// - name: `maxSectorsPerNarrowphaseCollideTask`(ctype: `hkInt32`)
     /// - offset: `232`(x86)/`356`(x86_64)
@@ -462,7 +464,7 @@ pub struct hkpWorld {
         schemars(rename = "maxSectorsPerNarrowphaseCollideTask")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "maxSectorsPerNarrowphaseCollideTask"))]
-    pub m_maxSectorsPerNarrowphaseCollideTask: i32,
+    pub m_maxSectorsPerNarrowphaseCollideTask: I32<'a>,
     /// # C++ Info
     /// - name: `processToisMultithreaded`(ctype: `hkBool`)
     /// - offset: `236`(x86)/`360`(x86_64)
@@ -479,7 +481,7 @@ pub struct hkpWorld {
         schemars(rename = "maxEntriesPerToiMidphaseCollideTask")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "maxEntriesPerToiMidphaseCollideTask"))]
-    pub m_maxEntriesPerToiMidphaseCollideTask: i32,
+    pub m_maxEntriesPerToiMidphaseCollideTask: I32<'a>,
     /// # C++ Info
     /// - name: `maxEntriesPerToiNarrowphaseCollideTask`(ctype: `hkInt32`)
     /// - offset: `244`(x86)/`368`(x86_64)
@@ -492,7 +494,7 @@ pub struct hkpWorld {
         feature = "serde",
         serde(rename = "maxEntriesPerToiNarrowphaseCollideTask")
     )]
-    pub m_maxEntriesPerToiNarrowphaseCollideTask: i32,
+    pub m_maxEntriesPerToiNarrowphaseCollideTask: I32<'a>,
     /// # C++ Info
     /// - name: `maxNumToiCollisionPairsSinglethreaded`(ctype: `hkInt32`)
     /// - offset: `248`(x86)/`372`(x86_64)
@@ -505,7 +507,7 @@ pub struct hkpWorld {
         feature = "serde",
         serde(rename = "maxNumToiCollisionPairsSinglethreaded")
     )]
-    pub m_maxNumToiCollisionPairsSinglethreaded: i32,
+    pub m_maxNumToiCollisionPairsSinglethreaded: I32<'a>,
     /// # C++ Info
     /// - name: `simulationType`(ctype: `enum unknown`)
     /// - offset: `252`(x86)/`376`(x86_64)
@@ -513,7 +515,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "simulationType"))]
     #[cfg_attr(feature = "serde", serde(rename = "simulationType"))]
-    pub m_simulationType: i32,
+    pub m_simulationType: I32<'a>,
     /// # C++ Info
     /// - name: `numToisTillAllowedPenetrationSimplifiedToi`(ctype: `hkReal`)
     /// - offset: `256`(x86)/`380`(x86_64)
@@ -569,28 +571,28 @@ pub struct hkpWorld {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "lastEntityUid"))]
     #[cfg_attr(feature = "serde", serde(rename = "lastEntityUid"))]
-    pub m_lastEntityUid: u32,
+    pub m_lastEntityUid: U32<'a>,
     /// # C++ Info
     /// - name: `lastIslandUid`(ctype: `hkUint32`)
     /// - offset: `276`(x86)/`400`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "lastIslandUid"))]
     #[cfg_attr(feature = "serde", serde(rename = "lastIslandUid"))]
-    pub m_lastIslandUid: u32,
+    pub m_lastIslandUid: U32<'a>,
     /// # C++ Info
     /// - name: `lastConstraintUid`(ctype: `hkUint32`)
     /// - offset: `280`(x86)/`404`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "lastConstraintUid"))]
     #[cfg_attr(feature = "serde", serde(rename = "lastConstraintUid"))]
-    pub m_lastConstraintUid: u32,
+    pub m_lastConstraintUid: U32<'a>,
     /// # C++ Info
     /// - name: `phantoms`(ctype: `hkArray<hkpPhantom*>`)
     /// - offset: `284`(x86)/`408`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "phantoms"))]
     #[cfg_attr(feature = "serde", serde(rename = "phantoms"))]
-    pub m_phantoms: Vec<Pointer>,
+    pub m_phantoms: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `actionListeners`(ctype: `hkArray<void*>`)
     /// - offset: `296`(x86)/`424`(x86_64)
@@ -598,7 +600,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "actionListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "actionListeners"))]
-    pub m_actionListeners: Vec<Pointer>,
+    pub m_actionListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `entityListeners`(ctype: `hkArray<void*>`)
     /// - offset: `308`(x86)/`440`(x86_64)
@@ -606,7 +608,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "entityListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "entityListeners"))]
-    pub m_entityListeners: Vec<Pointer>,
+    pub m_entityListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `phantomListeners`(ctype: `hkArray<void*>`)
     /// - offset: `320`(x86)/`456`(x86_64)
@@ -614,7 +616,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "phantomListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "phantomListeners"))]
-    pub m_phantomListeners: Vec<Pointer>,
+    pub m_phantomListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `constraintListeners`(ctype: `hkArray<void*>`)
     /// - offset: `332`(x86)/`472`(x86_64)
@@ -622,7 +624,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "constraintListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "constraintListeners"))]
-    pub m_constraintListeners: Vec<Pointer>,
+    pub m_constraintListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `worldDeletionListeners`(ctype: `hkArray<void*>`)
     /// - offset: `344`(x86)/`488`(x86_64)
@@ -630,7 +632,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "worldDeletionListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "worldDeletionListeners"))]
-    pub m_worldDeletionListeners: Vec<Pointer>,
+    pub m_worldDeletionListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `islandActivationListeners`(ctype: `hkArray<void*>`)
     /// - offset: `356`(x86)/`504`(x86_64)
@@ -638,7 +640,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "islandActivationListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "islandActivationListeners"))]
-    pub m_islandActivationListeners: Vec<Pointer>,
+    pub m_islandActivationListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `worldPostSimulationListeners`(ctype: `hkArray<void*>`)
     /// - offset: `368`(x86)/`520`(x86_64)
@@ -649,7 +651,7 @@ pub struct hkpWorld {
         schemars(rename = "worldPostSimulationListeners")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "worldPostSimulationListeners"))]
-    pub m_worldPostSimulationListeners: Vec<Pointer>,
+    pub m_worldPostSimulationListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `worldPostIntegrateListeners`(ctype: `hkArray<void*>`)
     /// - offset: `380`(x86)/`536`(x86_64)
@@ -660,7 +662,7 @@ pub struct hkpWorld {
         schemars(rename = "worldPostIntegrateListeners")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "worldPostIntegrateListeners"))]
-    pub m_worldPostIntegrateListeners: Vec<Pointer>,
+    pub m_worldPostIntegrateListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `worldPostCollideListeners`(ctype: `hkArray<void*>`)
     /// - offset: `392`(x86)/`552`(x86_64)
@@ -668,7 +670,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "worldPostCollideListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "worldPostCollideListeners"))]
-    pub m_worldPostCollideListeners: Vec<Pointer>,
+    pub m_worldPostCollideListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `islandPostIntegrateListeners`(ctype: `hkArray<void*>`)
     /// - offset: `404`(x86)/`568`(x86_64)
@@ -679,7 +681,7 @@ pub struct hkpWorld {
         schemars(rename = "islandPostIntegrateListeners")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "islandPostIntegrateListeners"))]
-    pub m_islandPostIntegrateListeners: Vec<Pointer>,
+    pub m_islandPostIntegrateListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `islandPostCollideListeners`(ctype: `hkArray<void*>`)
     /// - offset: `416`(x86)/`584`(x86_64)
@@ -687,7 +689,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "islandPostCollideListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "islandPostCollideListeners"))]
-    pub m_islandPostCollideListeners: Vec<Pointer>,
+    pub m_islandPostCollideListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `contactListeners`(ctype: `hkArray<void*>`)
     /// - offset: `428`(x86)/`600`(x86_64)
@@ -695,7 +697,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "contactListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "contactListeners"))]
-    pub m_contactListeners: Vec<Pointer>,
+    pub m_contactListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `contactImpulseLimitBreachedListeners`(ctype: `hkArray<void*>`)
     /// - offset: `440`(x86)/`616`(x86_64)
@@ -709,7 +711,7 @@ pub struct hkpWorld {
         feature = "serde",
         serde(rename = "contactImpulseLimitBreachedListeners")
     )]
-    pub m_contactImpulseLimitBreachedListeners: Vec<Pointer>,
+    pub m_contactImpulseLimitBreachedListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `worldExtensions`(ctype: `hkArray<void*>`)
     /// - offset: `452`(x86)/`632`(x86_64)
@@ -717,7 +719,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "worldExtensions"))]
     #[cfg_attr(feature = "serde", serde(rename = "worldExtensions"))]
-    pub m_worldExtensions: Vec<Pointer>,
+    pub m_worldExtensions: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `violatedConstraintArray`(ctype: `void*`)
     /// - offset: `464`(x86)/`648`(x86_64)
@@ -725,7 +727,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "violatedConstraintArray"))]
     #[cfg_attr(feature = "serde", serde(rename = "violatedConstraintArray"))]
-    pub m_violatedConstraintArray: Pointer,
+    pub m_violatedConstraintArray: Pointer<'a>,
     /// # C++ Info
     /// - name: `broadPhaseBorder`(ctype: `void*`)
     /// - offset: `468`(x86)/`656`(x86_64)
@@ -733,7 +735,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseBorder"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseBorder"))]
-    pub m_broadPhaseBorder: Pointer,
+    pub m_broadPhaseBorder: Pointer<'a>,
     /// # C++ Info
     /// - name: `destructionWorld`(ctype: `void*`)
     /// - offset: `472`(x86)/`664`(x86_64)
@@ -741,7 +743,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "destructionWorld"))]
     #[cfg_attr(feature = "serde", serde(rename = "destructionWorld"))]
-    pub m_destructionWorld: Pointer,
+    pub m_destructionWorld: Pointer<'a>,
     /// # C++ Info
     /// - name: `npWorld`(ctype: `void*`)
     /// - offset: `476`(x86)/`672`(x86_64)
@@ -749,7 +751,7 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "npWorld"))]
     #[cfg_attr(feature = "serde", serde(rename = "npWorld"))]
-    pub m_npWorld: Pointer,
+    pub m_npWorld: Pointer<'a>,
     /// # C++ Info
     /// - name: `broadPhaseExtents`(ctype: `hkVector4[2]`)
     /// - offset: `800`(x86)/`1008`(x86_64)
@@ -763,28 +765,28 @@ pub struct hkpWorld {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseNumMarkers"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseNumMarkers"))]
-    pub m_broadPhaseNumMarkers: i32,
+    pub m_broadPhaseNumMarkers: I32<'a>,
     /// # C++ Info
     /// - name: `sizeOfToiEventQueue`(ctype: `hkInt32`)
     /// - offset: `836`(x86)/`1044`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "sizeOfToiEventQueue"))]
     #[cfg_attr(feature = "serde", serde(rename = "sizeOfToiEventQueue"))]
-    pub m_sizeOfToiEventQueue: i32,
+    pub m_sizeOfToiEventQueue: I32<'a>,
     /// # C++ Info
     /// - name: `broadPhaseQuerySize`(ctype: `hkInt32`)
     /// - offset: `840`(x86)/`1048`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseQuerySize"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseQuerySize"))]
-    pub m_broadPhaseQuerySize: i32,
+    pub m_broadPhaseQuerySize: I32<'a>,
     /// # C++ Info
     /// - name: `broadPhaseUpdateSize`(ctype: `hkInt32`)
     /// - offset: `844`(x86)/`1052`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "broadPhaseUpdateSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "broadPhaseUpdateSize"))]
-    pub m_broadPhaseUpdateSize: i32,
+    pub m_broadPhaseUpdateSize: I32<'a>,
     /// # C++ Info
     /// - name: `contactPointGeneration`(ctype: `enum unknown`)
     /// - offset: `848`(x86)/`1056`(x86_64)
@@ -792,11 +794,11 @@ pub struct hkpWorld {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "contactPointGeneration"))]
     #[cfg_attr(feature = "serde", serde(rename = "contactPointGeneration"))]
-    pub m_contactPointGeneration: i8,
+    pub m_contactPointGeneration: I8<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpWorld {
+    impl<'a> _serde::HavokClass for hkpWorld<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpWorld"
@@ -806,64 +808,63 @@ const _: () = {
             _serde::__private::Signature::new(0xaadcec37)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_simulation.get());
-            v.push(self.m_fixedIsland.get());
-            v.push(self.m_fixedRigidBody.get());
-            v.extend(self.m_activeSimulationIslands.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_inactiveSimulationIslands.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_dirtySimulationIslands.iter().map(|ptr| ptr.get()));
-            v.push(self.m_maintenanceMgr.get());
-            v.push(self.m_memoryWatchDog.get());
-            v.push(self.m_broadPhase.get());
-            v.push(self.m_kdTreeManager.get());
-            v.push(self.m_broadPhaseDispatcher.get());
-            v.push(self.m_phantomBroadPhaseListener.get());
-            v.push(self.m_entityEntityBroadPhaseListener.get());
-            v.push(self.m_broadPhaseBorderListener.get());
-            v.push(self.m_multithreadedSimulationJobData.get());
-            v.push(self.m_collisionInput.get());
-            v.push(self.m_collisionFilter.get());
-            v.push(self.m_collisionDispatcher.get());
-            v.push(self.m_convexListFilter.get());
-            v.push(self.m_pendingOperations.get());
-            v.push(self.m_pendingOperationQueues.get());
+            v.push(&self.m_simulation);
+            v.push(&self.m_fixedIsland);
+            v.push(&self.m_fixedRigidBody);
+            v.extend(self.m_activeSimulationIslands.iter());
+            v.extend(self.m_inactiveSimulationIslands.iter());
+            v.extend(self.m_dirtySimulationIslands.iter());
+            v.push(&self.m_maintenanceMgr);
+            v.push(&self.m_memoryWatchDog);
+            v.push(&self.m_broadPhase);
+            v.push(&self.m_kdTreeManager);
+            v.push(&self.m_broadPhaseDispatcher);
+            v.push(&self.m_phantomBroadPhaseListener);
+            v.push(&self.m_entityEntityBroadPhaseListener);
+            v.push(&self.m_broadPhaseBorderListener);
+            v.push(&self.m_multithreadedSimulationJobData);
+            v.push(&self.m_collisionInput);
+            v.push(&self.m_collisionFilter);
+            v.push(&self.m_collisionDispatcher);
+            v.push(&self.m_convexListFilter);
+            v.push(&self.m_pendingOperations);
+            v.push(&self.m_pendingOperationQueues);
             v.extend(self.m_multiThreadCheck.deps_indexes());
-            v.push(self.m_modifyConstraintCriticalSection.get());
-            v.push(self.m_islandDirtyListCriticalSection.get());
-            v.push(self.m_propertyMasterLock.get());
-            v.extend(self.m_phantoms.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_actionListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_entityListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_phantomListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_constraintListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_worldDeletionListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_islandActivationListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_worldPostSimulationListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_worldPostIntegrateListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_worldPostCollideListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_islandPostIntegrateListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_islandPostCollideListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_contactListeners.iter().map(|ptr| ptr.get()));
-            v.extend(
-                self.m_contactImpulseLimitBreachedListeners.iter().map(|ptr| ptr.get()),
-            );
-            v.extend(self.m_worldExtensions.iter().map(|ptr| ptr.get()));
-            v.push(self.m_violatedConstraintArray.get());
-            v.push(self.m_broadPhaseBorder.get());
-            v.push(self.m_destructionWorld.get());
-            v.push(self.m_npWorld.get());
+            v.push(&self.m_modifyConstraintCriticalSection);
+            v.push(&self.m_islandDirtyListCriticalSection);
+            v.push(&self.m_propertyMasterLock);
+            v.extend(self.m_phantoms.iter());
+            v.extend(self.m_actionListeners.iter());
+            v.extend(self.m_entityListeners.iter());
+            v.extend(self.m_phantomListeners.iter());
+            v.extend(self.m_constraintListeners.iter());
+            v.extend(self.m_worldDeletionListeners.iter());
+            v.extend(self.m_islandActivationListeners.iter());
+            v.extend(self.m_worldPostSimulationListeners.iter());
+            v.extend(self.m_worldPostIntegrateListeners.iter());
+            v.extend(self.m_worldPostCollideListeners.iter());
+            v.extend(self.m_islandPostIntegrateListeners.iter());
+            v.extend(self.m_islandPostCollideListeners.iter());
+            v.extend(self.m_contactListeners.iter());
+            v.extend(self.m_contactImpulseLimitBreachedListeners.iter());
+            v.extend(self.m_worldExtensions.iter());
+            v.push(&self.m_violatedConstraintArray);
+            v.push(&self.m_broadPhaseBorder);
+            v.push(&self.m_destructionWorld);
+            v.push(&self.m_npWorld);
             v
         }
     }
-    impl _serde::Serialize for hkpWorld {
+    impl<'a> _serde::Serialize for hkpWorld<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xaadcec37)));
             let mut serializer = __serializer
                 .serialize_struct("hkpWorld", class_meta, (864u64, 1072u64))?;
@@ -1210,7 +1211,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpWorld {
+    impl<'de> _serde::Deserialize<'de> for hkpWorld<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -1384,14 +1385,14 @@ const _: () = {
                 }
             }
             struct __hkpWorldVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpWorld>,
+                marker: _serde::__private::PhantomData<hkpWorld<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpWorldVisitor<'de> {
-                type Value = hkpWorld;
+                type Value = hkpWorld<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -1407,54 +1408,64 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_simulation: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_simulation: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_gravity: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_fixedIsland: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_fixedRigidBody: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_fixedIsland: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_fixedRigidBody: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_activeSimulationIslands: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_inactiveSimulationIslands: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_dirtySimulationIslands: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
-                    let mut m_maintenanceMgr: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_memoryWatchDog: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_maintenanceMgr: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_memoryWatchDog: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_assertOnRunningOutOfSolverMemory: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_broadPhase: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_kdTreeManager: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_broadPhase: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_kdTreeManager: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_autoUpdateTree: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_broadPhaseDispatcher: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_broadPhaseDispatcher: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_phantomBroadPhaseListener: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_entityEntityBroadPhaseListener: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_broadPhaseBorderListener: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_multithreadedSimulationJobData: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_collisionInput: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_collisionFilter: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_collisionDispatcher: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_convexListFilter: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_pendingOperations: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_pendingOperationsCount: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_collisionInput: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_collisionFilter: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_collisionDispatcher: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_convexListFilter: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_pendingOperations: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_pendingOperationsCount: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_pendingBodyOperationsCount: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_criticalOperationsLockCount: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_criticalOperationsLockCountForPhantoms: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_blockExecutingPendingOperations: _serde::__private::Option<
                         bool,
@@ -1463,10 +1474,10 @@ const _: () = {
                         bool,
                     > = _serde::__private::None;
                     let mut m_pendingOperationQueues: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_pendingOperationQueueCount: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_multiThreadCheck: _serde::__private::Option<
                         hkMultiThreadCheck,
@@ -1477,15 +1488,19 @@ const _: () = {
                     let mut m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_minDesiredIslandSize: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_minDesiredIslandSize: _serde::__private::Option<
+                        U32<'de>,
+                    > = _serde::__private::None;
                     let mut m_modifyConstraintCriticalSection: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_isLocked: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_isLocked: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_islandDirtyListCriticalSection: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_propertyMasterLock: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_propertyMasterLock: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_wantSimulationIslands: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_useHybridBroadphase: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_snapCollisionToConvexEdgeThreshold: _serde::__private::Option<
@@ -1506,24 +1521,24 @@ const _: () = {
                         f32,
                     > = _serde::__private::None;
                     let mut m_maxSectorsPerMidphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxSectorsPerNarrowphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_processToisMultithreaded: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
                     let mut m_maxEntriesPerToiMidphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxEntriesPerToiNarrowphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxNumToiCollisionPairsSinglethreaded: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
-                    let mut m_simulationType: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_simulationType: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_numToisTillAllowedPenetrationSimplifiedToi: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
@@ -1536,60 +1551,76 @@ const _: () = {
                     let mut m_numToisTillAllowedPenetrationToiForced: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_lastEntityUid: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_lastIslandUid: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_lastConstraintUid: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_phantoms: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_actionListeners: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_entityListeners: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_lastEntityUid: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_lastIslandUid: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_lastConstraintUid: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_phantoms: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_actionListeners: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_entityListeners: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     let mut m_phantomListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_constraintListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_worldDeletionListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_islandActivationListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_worldPostSimulationListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_worldPostIntegrateListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_worldPostCollideListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_islandPostIntegrateListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_islandPostCollideListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_contactListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_contactImpulseLimitBreachedListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
-                    let mut m_worldExtensions: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_worldExtensions: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     let mut m_violatedConstraintArray: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_broadPhaseBorder: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_destructionWorld: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_npWorld: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_broadPhaseBorder: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_destructionWorld: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_npWorld: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_broadPhaseExtents: _serde::__private::Option<
                         [Vector4; 2usize],
                     > = _serde::__private::None;
-                    let mut m_broadPhaseNumMarkers: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_sizeOfToiEventQueue: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_broadPhaseQuerySize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_broadPhaseUpdateSize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_contactPointGeneration: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_broadPhaseNumMarkers: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_sizeOfToiEventQueue: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_broadPhaseQuerySize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_broadPhaseUpdateSize: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_contactPointGeneration: _serde::__private::Option<
+                        I8<'de>,
+                    > = _serde::__private::None;
                     for i in 0..87usize {
                         match i {
                             0usize => {
@@ -1601,7 +1632,7 @@ const _: () = {
                                     );
                                 }
                                 m_simulation = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1636,7 +1667,7 @@ const _: () = {
                                     );
                                 }
                                 m_fixedIsland = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1653,7 +1684,7 @@ const _: () = {
                                     );
                                 }
                                 m_fixedRigidBody = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1672,7 +1703,7 @@ const _: () = {
                                     );
                                 }
                                 m_activeSimulationIslands = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1691,7 +1722,7 @@ const _: () = {
                                     );
                                 }
                                 m_inactiveSimulationIslands = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1710,7 +1741,7 @@ const _: () = {
                                     );
                                 }
                                 m_dirtySimulationIslands = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1727,7 +1758,7 @@ const _: () = {
                                     );
                                 }
                                 m_maintenanceMgr = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1744,7 +1775,7 @@ const _: () = {
                                     );
                                 }
                                 m_memoryWatchDog = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1781,7 +1812,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 7usize)?;
                                 m_broadPhase = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1798,7 +1829,7 @@ const _: () = {
                                     );
                                 }
                                 m_kdTreeManager = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1835,7 +1866,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 7usize)?;
                                 m_broadPhaseDispatcher = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1854,7 +1885,7 @@ const _: () = {
                                     );
                                 }
                                 m_phantomBroadPhaseListener = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1873,7 +1904,7 @@ const _: () = {
                                     );
                                 }
                                 m_entityEntityBroadPhaseListener = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1892,7 +1923,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseBorderListener = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1911,7 +1942,7 @@ const _: () = {
                                     );
                                 }
                                 m_multithreadedSimulationJobData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1928,7 +1959,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionInput = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1945,7 +1976,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilter = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1964,7 +1995,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionDispatcher = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1981,7 +2012,7 @@ const _: () = {
                                     );
                                 }
                                 m_convexListFilter = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2000,7 +2031,7 @@ const _: () = {
                                     );
                                 }
                                 m_pendingOperations = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2019,7 +2050,7 @@ const _: () = {
                                     );
                                 }
                                 m_pendingOperationsCount = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2038,7 +2069,7 @@ const _: () = {
                                     );
                                 }
                                 m_pendingBodyOperationsCount = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2057,7 +2088,7 @@ const _: () = {
                                     );
                                 }
                                 m_criticalOperationsLockCount = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2076,7 +2107,7 @@ const _: () = {
                                     );
                                 }
                                 m_criticalOperationsLockCountForPhantoms = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2134,7 +2165,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 2usize, 6usize)?;
                                 m_pendingOperationQueues = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2153,7 +2184,7 @@ const _: () = {
                                     );
                                 }
                                 m_pendingOperationQueueCount = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2228,7 +2259,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 2usize, 2usize)?;
                                 m_minDesiredIslandSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2247,7 +2278,7 @@ const _: () = {
                                     );
                                 }
                                 m_modifyConstraintCriticalSection = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2264,7 +2295,7 @@ const _: () = {
                                     );
                                 }
                                 m_isLocked = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2284,7 +2315,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_islandDirtyListCriticalSection = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2303,7 +2334,7 @@ const _: () = {
                                     );
                                 }
                                 m_propertyMasterLock = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2493,7 +2524,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxSectorsPerMidphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2512,7 +2543,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxSectorsPerNarrowphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2551,7 +2582,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_maxEntriesPerToiMidphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2570,7 +2601,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxEntriesPerToiNarrowphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2589,7 +2620,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxNumToiCollisionPairsSinglethreaded = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2606,7 +2637,7 @@ const _: () = {
                                     );
                                 }
                                 m_simulationType = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2699,7 +2730,7 @@ const _: () = {
                                     );
                                 }
                                 m_lastEntityUid = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2716,7 +2747,7 @@ const _: () = {
                                     );
                                 }
                                 m_lastIslandUid = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2735,7 +2766,7 @@ const _: () = {
                                     );
                                 }
                                 m_lastConstraintUid = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2752,7 +2783,7 @@ const _: () = {
                                     );
                                 }
                                 m_phantoms = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2769,7 +2800,7 @@ const _: () = {
                                     );
                                 }
                                 m_actionListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2786,7 +2817,7 @@ const _: () = {
                                     );
                                 }
                                 m_entityListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2803,7 +2834,7 @@ const _: () = {
                                     );
                                 }
                                 m_phantomListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2822,7 +2853,7 @@ const _: () = {
                                     );
                                 }
                                 m_constraintListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2841,7 +2872,7 @@ const _: () = {
                                     );
                                 }
                                 m_worldDeletionListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2860,7 +2891,7 @@ const _: () = {
                                     );
                                 }
                                 m_islandActivationListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2879,7 +2910,7 @@ const _: () = {
                                     );
                                 }
                                 m_worldPostSimulationListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2898,7 +2929,7 @@ const _: () = {
                                     );
                                 }
                                 m_worldPostIntegrateListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2917,7 +2948,7 @@ const _: () = {
                                     );
                                 }
                                 m_worldPostCollideListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2936,7 +2967,7 @@ const _: () = {
                                     );
                                 }
                                 m_islandPostIntegrateListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2955,7 +2986,7 @@ const _: () = {
                                     );
                                 }
                                 m_islandPostCollideListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2972,7 +3003,7 @@ const _: () = {
                                     );
                                 }
                                 m_contactListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2991,7 +3022,7 @@ const _: () = {
                                     );
                                 }
                                 m_contactImpulseLimitBreachedListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3008,7 +3039,7 @@ const _: () = {
                                     );
                                 }
                                 m_worldExtensions = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3027,7 +3058,7 @@ const _: () = {
                                     );
                                 }
                                 m_violatedConstraintArray = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3044,7 +3075,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseBorder = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3061,7 +3092,7 @@ const _: () = {
                                     );
                                 }
                                 m_destructionWorld = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3078,7 +3109,7 @@ const _: () = {
                                     );
                                 }
                                 m_npWorld = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3117,7 +3148,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseNumMarkers = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3136,7 +3167,7 @@ const _: () = {
                                     );
                                 }
                                 m_sizeOfToiEventQueue = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3155,7 +3186,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseQuerySize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3174,7 +3205,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseUpdateSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -3193,7 +3224,7 @@ const _: () = {
                                     );
                                 }
                                 m_contactPointGeneration = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4167,16 +4198,18 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_simulation: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_simulation: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_gravity: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_fixedRigidBody: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_fixedRigidBody: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_autoUpdateTree: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_pendingOperationsCount: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_pendingOperationsCount: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_criticalOperationsLockCount: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_criticalOperationsLockCountForPhantoms: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_blockExecutingPendingOperations: _serde::__private::Option<
                         bool,
@@ -4185,7 +4218,7 @@ const _: () = {
                         bool,
                     > = _serde::__private::None;
                     let mut m_pendingOperationQueueCount: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_processActionsInSingleThread: _serde::__private::Option<
                         bool,
@@ -4193,8 +4226,10 @@ const _: () = {
                     let mut m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_minDesiredIslandSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_isLocked: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_minDesiredIslandSize: _serde::__private::Option<
+                        U32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_isLocked: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_wantSimulationIslands: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_snapCollisionToConvexEdgeThreshold: _serde::__private::Option<
                         f32,
@@ -4214,22 +4249,22 @@ const _: () = {
                         f32,
                     > = _serde::__private::None;
                     let mut m_maxSectorsPerMidphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxSectorsPerNarrowphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_processToisMultithreaded: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
                     let mut m_maxEntriesPerToiMidphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxEntriesPerToiNarrowphaseCollideTask: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_maxNumToiCollisionPairsSinglethreaded: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_numToisTillAllowedPenetrationSimplifiedToi: _serde::__private::Option<
                         f32,
@@ -4243,17 +4278,21 @@ const _: () = {
                     let mut m_numToisTillAllowedPenetrationToiForced: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_lastEntityUid: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_lastIslandUid: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_lastConstraintUid: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_phantoms: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_lastEntityUid: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_lastIslandUid: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_lastConstraintUid: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_phantoms: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     let mut m_broadPhaseExtents: _serde::__private::Option<
                         [Vector4; 2usize],
                     > = _serde::__private::None;
-                    let mut m_broadPhaseNumMarkers: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_sizeOfToiEventQueue: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_broadPhaseQuerySize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_broadPhaseUpdateSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_broadPhaseNumMarkers: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_sizeOfToiEventQueue: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_broadPhaseQuerySize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_broadPhaseUpdateSize: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -4276,7 +4315,7 @@ const _: () = {
                                     );
                                 }
                                 m_simulation = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4328,7 +4367,7 @@ const _: () = {
                                     );
                                 }
                                 m_fixedRigidBody = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4382,7 +4421,7 @@ const _: () = {
                                     );
                                 }
                                 m_pendingOperationsCount = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4410,7 +4449,7 @@ const _: () = {
                                     );
                                 }
                                 m_criticalOperationsLockCount = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4438,7 +4477,7 @@ const _: () = {
                                     );
                                 }
                                 m_criticalOperationsLockCountForPhantoms = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4522,7 +4561,7 @@ const _: () = {
                                     );
                                 }
                                 m_pendingOperationQueueCount = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4606,7 +4645,7 @@ const _: () = {
                                     );
                                 }
                                 m_minDesiredIslandSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4632,7 +4671,7 @@ const _: () = {
                                     );
                                 }
                                 m_isLocked = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4882,7 +4921,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxSectorsPerMidphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4910,7 +4949,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxSectorsPerNarrowphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4966,7 +5005,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxEntriesPerToiMidphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -4994,7 +5033,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxEntriesPerToiNarrowphaseCollideTask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -5022,7 +5061,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxNumToiCollisionPairsSinglethreaded = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -5160,7 +5199,7 @@ const _: () = {
                                     );
                                 }
                                 m_lastEntityUid = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -5186,7 +5225,7 @@ const _: () = {
                                     );
                                 }
                                 m_lastIslandUid = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -5214,7 +5253,7 @@ const _: () = {
                                     );
                                 }
                                 m_lastConstraintUid = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -5240,7 +5279,7 @@ const _: () = {
                                     );
                                 }
                                 m_phantoms = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -5296,7 +5335,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseNumMarkers = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -5324,7 +5363,7 @@ const _: () = {
                                     );
                                 }
                                 m_sizeOfToiEventQueue = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -5352,7 +5391,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseQuerySize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -5380,7 +5419,7 @@ const _: () = {
                                     );
                                 }
                                 m_broadPhaseUpdateSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -5878,15 +5917,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpWorld {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_simulation,
                         m_gravity,

@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpBreakableConstraintData {
+pub struct hkpBreakableConstraintData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,39 +22,41 @@ pub struct hkpBreakableConstraintData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConstraintData,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConstraintData<'a>,
     /// # C++ Info
     /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "atoms"))]
     #[cfg_attr(feature = "serde", serde(rename = "atoms"))]
-    pub m_atoms: hkpBridgeAtoms,
+    pub m_atoms: hkpBridgeAtoms<'a>,
     /// # C++ Info
     /// - name: `constraintData`(ctype: `struct hkpConstraintData*`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "constraintData"))]
     #[cfg_attr(feature = "serde", serde(rename = "constraintData"))]
-    pub m_constraintData: Pointer,
+    pub m_constraintData: Pointer<'a>,
     /// # C++ Info
     /// - name: `childRuntimeSize`(ctype: `hkUint16`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "childRuntimeSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "childRuntimeSize"))]
-    pub m_childRuntimeSize: u16,
+    pub m_childRuntimeSize: U16<'a>,
     /// # C++ Info
     /// - name: `childNumSolverResults`(ctype: `hkUint16`)
     /// - offset: ` 30`(x86)/` 58`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "childNumSolverResults"))]
     #[cfg_attr(feature = "serde", serde(rename = "childNumSolverResults"))]
-    pub m_childNumSolverResults: u16,
+    pub m_childNumSolverResults: U16<'a>,
     /// # C++ Info
     /// - name: `solverResultLimit`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 60`(x86_64)
@@ -79,7 +81,7 @@ pub struct hkpBreakableConstraintData {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpBreakableConstraintData {
+    impl<'a> _serde::HavokClass for hkpBreakableConstraintData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpBreakableConstraintData"
@@ -89,20 +91,21 @@ const _: () = {
             _serde::__private::Signature::new(0x7d6310c8)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_atoms.deps_indexes());
-            v.push(self.m_constraintData.get());
+            v.push(&self.m_constraintData);
             v
         }
     }
-    impl _serde::Serialize for hkpBreakableConstraintData {
+    impl<'a> _serde::Serialize for hkpBreakableConstraintData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x7d6310c8)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -142,7 +145,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpBreakableConstraintData {
+    impl<'de> _serde::Deserialize<'de> for hkpBreakableConstraintData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -206,7 +209,7 @@ const _: () = {
                 }
             }
             struct __hkpBreakableConstraintDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpBreakableConstraintData>,
+                marker: _serde::__private::PhantomData<hkpBreakableConstraintData<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -214,7 +217,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpBreakableConstraintDataVisitor<'de> {
-                type Value = hkpBreakableConstraintData;
+                type Value = hkpBreakableConstraintData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -234,9 +237,11 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
-                    let mut m_constraintData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_childRuntimeSize: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_childNumSolverResults: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_constraintData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_childRuntimeSize: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_childNumSolverResults: _serde::__private::Option<
+                        U16<'de>,
+                    > = _serde::__private::None;
                     let mut m_solverResultLimit: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_removeWhenBroken: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_revertBackVelocityOnBreak: _serde::__private::Option<
@@ -268,7 +273,7 @@ const _: () = {
                                     );
                                 }
                                 m_constraintData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -285,7 +290,7 @@ const _: () = {
                                     );
                                 }
                                 m_childRuntimeSize = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -304,7 +309,7 @@ const _: () = {
                                     );
                                 }
                                 m_childNumSolverResults = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -461,9 +466,11 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
-                    let mut m_constraintData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_childRuntimeSize: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_childNumSolverResults: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_constraintData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_childRuntimeSize: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_childNumSolverResults: _serde::__private::Option<
+                        U16<'de>,
+                    > = _serde::__private::None;
                     let mut m_solverResultLimit: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_removeWhenBroken: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_revertBackVelocityOnBreak: _serde::__private::Option<
@@ -541,7 +548,7 @@ const _: () = {
                                     );
                                 }
                                 m_constraintData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -567,7 +574,7 @@ const _: () = {
                                     );
                                 }
                                 m_childRuntimeSize = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -595,7 +602,7 @@ const _: () = {
                                     );
                                 }
                                 m_childNumSolverResults = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -781,20 +788,22 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpConstraintData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpBreakableConstraintData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_atoms,
                         m_constraintData,

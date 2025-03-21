@@ -22,7 +22,8 @@ pub struct hkpConstraintChainInstanceAction<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -35,7 +36,7 @@ pub struct hkpConstraintChainInstanceAction<'a> {
     /// - flags: `NOT_OWNED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "constraintInstance"))]
     #[cfg_attr(feature = "serde", serde(rename = "constraintInstance"))]
-    pub m_constraintInstance: Pointer,
+    pub m_constraintInstance: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -49,11 +50,11 @@ const _: () = {
             _serde::__private::Signature::new(0xc3971189)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_world.get());
-            v.push(self.parent.m_island.get());
-            v.push(self.m_constraintInstance.get());
+            v.push(&self.parent.m_world);
+            v.push(&self.parent.m_island);
+            v.push(&self.m_constraintInstance);
             v
         }
     }
@@ -64,6 +65,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xc3971189)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -173,7 +175,9 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_constraintInstance: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_constraintInstance: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     for i in 0..1usize {
                         match i {
                             0usize => {
@@ -187,7 +191,7 @@ const _: () = {
                                     );
                                 }
                                 m_constraintInstance = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -224,7 +228,9 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_constraintInstance: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_constraintInstance: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -299,7 +305,7 @@ const _: () = {
                                     );
                                 }
                                 m_constraintInstance = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -343,14 +349,16 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpAction {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
@@ -358,7 +366,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpConstraintChainInstanceAction {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_constraintInstance,
                     })

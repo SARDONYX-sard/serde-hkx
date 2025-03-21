@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkPackfileHeader {
+pub struct hkPackfileHeader<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,56 +22,57 @@ pub struct hkPackfileHeader {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `magic`(ctype: `hkInt32[2]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "magic"))]
     #[cfg_attr(feature = "serde", serde(rename = "magic"))]
-    pub m_magic: [i32; 2usize],
+    pub m_magic: [I32<'a>; 2usize],
     /// # C++ Info
     /// - name: `userTag`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "userTag"))]
     #[cfg_attr(feature = "serde", serde(rename = "userTag"))]
-    pub m_userTag: i32,
+    pub m_userTag: I32<'a>,
     /// # C++ Info
     /// - name: `fileVersion`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "fileVersion"))]
     #[cfg_attr(feature = "serde", serde(rename = "fileVersion"))]
-    pub m_fileVersion: i32,
+    pub m_fileVersion: I32<'a>,
     /// # C++ Info
     /// - name: `layoutRules`(ctype: `hkUint8[4]`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "layoutRules"))]
     #[cfg_attr(feature = "serde", serde(rename = "layoutRules"))]
-    pub m_layoutRules: [u8; 4usize],
+    pub m_layoutRules: [U8<'a>; 4usize],
     /// # C++ Info
     /// - name: `numSections`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numSections"))]
     #[cfg_attr(feature = "serde", serde(rename = "numSections"))]
-    pub m_numSections: i32,
+    pub m_numSections: I32<'a>,
     /// # C++ Info
     /// - name: `contentsSectionIndex`(ctype: `hkInt32`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "contentsSectionIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "contentsSectionIndex"))]
-    pub m_contentsSectionIndex: i32,
+    pub m_contentsSectionIndex: I32<'a>,
     /// # C++ Info
     /// - name: `contentsSectionOffset`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "contentsSectionOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "contentsSectionOffset"))]
-    pub m_contentsSectionOffset: i32,
+    pub m_contentsSectionOffset: I32<'a>,
     /// # C++ Info
     /// - name: `contentsClassNameSectionIndex`(ctype: `hkInt32`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
@@ -81,7 +82,7 @@ pub struct hkPackfileHeader {
         schemars(rename = "contentsClassNameSectionIndex")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "contentsClassNameSectionIndex"))]
-    pub m_contentsClassNameSectionIndex: i32,
+    pub m_contentsClassNameSectionIndex: I32<'a>,
     /// # C++ Info
     /// - name: `contentsClassNameSectionOffset`(ctype: `hkInt32`)
     /// - offset: ` 36`(x86)/` 36`(x86_64)
@@ -91,7 +92,7 @@ pub struct hkPackfileHeader {
         schemars(rename = "contentsClassNameSectionOffset")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "contentsClassNameSectionOffset"))]
-    pub m_contentsClassNameSectionOffset: i32,
+    pub m_contentsClassNameSectionOffset: I32<'a>,
     /// # C++ Info
     /// - name: `contentsVersion`(ctype: `hkChar[16]`)
     /// - offset: ` 40`(x86)/` 40`(x86_64)
@@ -105,18 +106,18 @@ pub struct hkPackfileHeader {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
-    pub m_flags: i32,
+    pub m_flags: I32<'a>,
     /// # C++ Info
     /// - name: `pad`(ctype: `hkInt32[1]`)
     /// - offset: ` 60`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "pad"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad"))]
-    pub m_pad: [i32; 1usize],
+    pub m_pad: [I32<'a>; 1usize],
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkPackfileHeader {
+    impl<'a> _serde::HavokClass for hkPackfileHeader<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkPackfileHeader"
@@ -126,18 +127,19 @@ const _: () = {
             _serde::__private::Signature::new(0x79f9ffda)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkPackfileHeader {
+    impl<'a> _serde::Serialize for hkPackfileHeader<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x79f9ffda)));
             let mut serializer = __serializer
                 .serialize_struct("hkPackfileHeader", class_meta, (64u64, 64u64))?;
@@ -195,7 +197,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkPackfileHeader {
+    impl<'de> _serde::Deserialize<'de> for hkPackfileHeader<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -269,14 +271,14 @@ const _: () = {
                 }
             }
             struct __hkPackfileHeaderVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkPackfileHeader>,
+                marker: _serde::__private::PhantomData<hkPackfileHeader<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkPackfileHeaderVisitor<'de> {
-                type Value = hkPackfileHeader;
+                type Value = hkPackfileHeader<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -294,24 +296,30 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_magic: _serde::__private::Option<[i32; 2usize]> = _serde::__private::None;
-                    let mut m_userTag: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_fileVersion: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_layoutRules: _serde::__private::Option<[u8; 4usize]> = _serde::__private::None;
-                    let mut m_numSections: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_contentsSectionIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_contentsSectionOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_magic: _serde::__private::Option<[I32<'de>; 2usize]> = _serde::__private::None;
+                    let mut m_userTag: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_fileVersion: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_layoutRules: _serde::__private::Option<
+                        [U8<'de>; 4usize],
+                    > = _serde::__private::None;
+                    let mut m_numSections: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_contentsSectionIndex: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_contentsSectionOffset: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_contentsClassNameSectionIndex: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_contentsClassNameSectionOffset: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_contentsVersion: _serde::__private::Option<
                         [char; 16usize],
                     > = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_pad: _serde::__private::Option<[i32; 1usize]> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_pad: _serde::__private::Option<[I32<'de>; 1usize]> = _serde::__private::None;
                     for i in 0..12usize {
                         match i {
                             0usize => {
@@ -321,7 +329,7 @@ const _: () = {
                                     );
                                 }
                                 m_magic = _serde::__private::Some(
-                                    match __A::next_value::<[i32; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[I32<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -338,7 +346,7 @@ const _: () = {
                                     );
                                 }
                                 m_userTag = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -355,7 +363,7 @@ const _: () = {
                                     );
                                 }
                                 m_fileVersion = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -372,7 +380,7 @@ const _: () = {
                                     );
                                 }
                                 m_layoutRules = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 4usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 4usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -389,7 +397,7 @@ const _: () = {
                                     );
                                 }
                                 m_numSections = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -408,7 +416,7 @@ const _: () = {
                                     );
                                 }
                                 m_contentsSectionIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -427,7 +435,7 @@ const _: () = {
                                     );
                                 }
                                 m_contentsSectionOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -446,7 +454,7 @@ const _: () = {
                                     );
                                 }
                                 m_contentsClassNameSectionIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -465,7 +473,7 @@ const _: () = {
                                     );
                                 }
                                 m_contentsClassNameSectionOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -497,7 +505,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -512,7 +520,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad = _serde::__private::Some(
-                                    match __A::next_value::<[i32; 1usize]>(&mut __map) {
+                                    match __A::next_value::<[I32<'de>; 1usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -659,24 +667,30 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_magic: _serde::__private::Option<[i32; 2usize]> = _serde::__private::None;
-                    let mut m_userTag: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_fileVersion: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_layoutRules: _serde::__private::Option<[u8; 4usize]> = _serde::__private::None;
-                    let mut m_numSections: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_contentsSectionIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_contentsSectionOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_magic: _serde::__private::Option<[I32<'de>; 2usize]> = _serde::__private::None;
+                    let mut m_userTag: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_fileVersion: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_layoutRules: _serde::__private::Option<
+                        [U8<'de>; 4usize],
+                    > = _serde::__private::None;
+                    let mut m_numSections: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_contentsSectionIndex: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_contentsSectionOffset: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_contentsClassNameSectionIndex: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_contentsClassNameSectionOffset: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_contentsVersion: _serde::__private::Option<
                         [char; 16usize],
                     > = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_pad: _serde::__private::Option<[i32; 1usize]> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_pad: _serde::__private::Option<[I32<'de>; 1usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -697,7 +711,7 @@ const _: () = {
                                     );
                                 }
                                 m_magic = _serde::__private::Some(
-                                    match __A::next_value::<[i32; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[I32<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -723,7 +737,7 @@ const _: () = {
                                     );
                                 }
                                 m_userTag = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -749,7 +763,7 @@ const _: () = {
                                     );
                                 }
                                 m_fileVersion = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -775,7 +789,7 @@ const _: () = {
                                     );
                                 }
                                 m_layoutRules = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 4usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 4usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -801,7 +815,7 @@ const _: () = {
                                     );
                                 }
                                 m_numSections = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -829,7 +843,7 @@ const _: () = {
                                     );
                                 }
                                 m_contentsSectionIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -857,7 +871,7 @@ const _: () = {
                                     );
                                 }
                                 m_contentsSectionOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -885,7 +899,7 @@ const _: () = {
                                     );
                                 }
                                 m_contentsClassNameSectionIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -913,7 +927,7 @@ const _: () = {
                                     );
                                 }
                                 m_contentsClassNameSectionOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -963,7 +977,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -987,7 +1001,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad = _serde::__private::Some(
-                                    match __A::next_value::<[i32; 1usize]>(&mut __map) {
+                                    match __A::next_value::<[I32<'de>; 1usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1136,7 +1150,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkPackfileHeader {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_magic,
                         m_userTag,
                         m_fileVersion,

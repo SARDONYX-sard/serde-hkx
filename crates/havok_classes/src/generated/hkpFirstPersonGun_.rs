@@ -22,11 +22,13 @@ pub struct hkpFirstPersonGun<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `type`(ctype: `enum unknown`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -34,7 +36,7 @@ pub struct hkpFirstPersonGun<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "type"))]
     #[cfg_attr(feature = "serde", serde(rename = "type"))]
-    pub m_type: u8,
+    pub m_type: U8<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
@@ -57,7 +59,7 @@ pub struct hkpFirstPersonGun<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "listeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "listeners"))]
-    pub m_listeners: Vec<Pointer>,
+    pub m_listeners: Vec<Pointer<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -71,9 +73,9 @@ const _: () = {
             _serde::__private::Signature::new(0x852ab70b)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.extend(self.m_listeners.iter().map(|ptr| ptr.get()));
+            v.extend(self.m_listeners.iter());
             v
         }
     }
@@ -84,6 +86,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x852ab70b)));
             let mut serializer = __serializer
                 .serialize_struct("hkpFirstPersonGun", class_meta, (32u64, 56u64))?;
@@ -183,10 +186,10 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_type: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_type: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_keyboardKey: _serde::__private::Option<KeyboardKey> = _serde::__private::None;
-                    let mut m_listeners: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_listeners: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
                             0usize => {
@@ -196,7 +199,7 @@ const _: () = {
                                     );
                                 }
                                 m_type = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -247,7 +250,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 7usize)?;
                                 m_listeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -393,15 +396,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpFirstPersonGun {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_name,
                         m_keyboardKey,
@@ -607,23 +612,23 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
-                        4u8 => _serde::__private::Ok(__Field::__field4),
-                        5u8 => _serde::__private::Ok(__Field::__field5),
-                        6u8 => _serde::__private::Ok(__Field::__field6),
-                        7u8 => _serde::__private::Ok(__Field::__field7),
-                        8u8 => _serde::__private::Ok(__Field::__field8),
-                        9u8 => _serde::__private::Ok(__Field::__field9),
-                        10u8 => _serde::__private::Ok(__Field::__field10),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(5u8) => _serde::__private::Ok(__Field::__field5),
+                        U8::Number(6u8) => _serde::__private::Ok(__Field::__field6),
+                        U8::Number(7u8) => _serde::__private::Ok(__Field::__field7),
+                        U8::Number(8u8) => _serde::__private::Ok(__Field::__field8),
+                        U8::Number(9u8) => _serde::__private::Ok(__Field::__field9),
+                        U8::Number(10u8) => _serde::__private::Ok(__Field::__field10),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -853,24 +858,24 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        112u8 => _serde::__private::Ok(__Field::__field0),
-                        113u8 => _serde::__private::Ok(__Field::__field1),
-                        114u8 => _serde::__private::Ok(__Field::__field2),
-                        115u8 => _serde::__private::Ok(__Field::__field3),
-                        116u8 => _serde::__private::Ok(__Field::__field4),
-                        117u8 => _serde::__private::Ok(__Field::__field5),
-                        118u8 => _serde::__private::Ok(__Field::__field6),
-                        119u8 => _serde::__private::Ok(__Field::__field7),
-                        120u8 => _serde::__private::Ok(__Field::__field8),
-                        121u8 => _serde::__private::Ok(__Field::__field9),
-                        122u8 => _serde::__private::Ok(__Field::__field10),
-                        123u8 => _serde::__private::Ok(__Field::__field11),
+                        U8::Number(112u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(113u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(114u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(115u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(116u8) => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(117u8) => _serde::__private::Ok(__Field::__field5),
+                        U8::Number(118u8) => _serde::__private::Ok(__Field::__field6),
+                        U8::Number(119u8) => _serde::__private::Ok(__Field::__field7),
+                        U8::Number(120u8) => _serde::__private::Ok(__Field::__field8),
+                        U8::Number(121u8) => _serde::__private::Ok(__Field::__field9),
+                        U8::Number(122u8) => _serde::__private::Ok(__Field::__field10),
+                        U8::Number(123u8) => _serde::__private::Ok(__Field::__field11),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

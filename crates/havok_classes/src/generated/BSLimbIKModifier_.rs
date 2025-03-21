@@ -22,7 +22,8 @@ pub struct BSLimbIKModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -49,14 +50,14 @@ pub struct BSLimbIKModifier<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "startBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "startBoneIndex"))]
-    pub m_startBoneIndex: i16,
+    pub m_startBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `endBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 54`(x86)/` 90`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "endBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "endBoneIndex"))]
-    pub m_endBoneIndex: i16,
+    pub m_endBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `gain`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/` 92`(x86_64)
@@ -93,7 +94,7 @@ pub struct BSLimbIKModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pSkeletonMemory"))]
     #[cfg_attr(feature = "serde", serde(rename = "pSkeletonMemory"))]
-    pub m_pSkeletonMemory: Pointer,
+    pub m_pSkeletonMemory: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -107,10 +108,10 @@ const _: () = {
             _serde::__private::Signature::new(0x8ea971e5)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
-            v.push(self.m_pSkeletonMemory.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
+            v.push(&self.m_pSkeletonMemory);
             v
         }
     }
@@ -121,6 +122,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x8ea971e5)));
             let mut serializer = __serializer
                 .serialize_struct("BSLimbIKModifier", class_meta, (76u64, 120u64))?;
@@ -285,13 +287,13 @@ const _: () = {
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_limitAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_currentAngle: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_startBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_endBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_startBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_endBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_gain: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_boneRadius: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_castOffset: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_timeStep: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_pSkeletonMemory: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_pSkeletonMemory: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..9usize {
                         match i {
                             0usize => {
@@ -339,7 +341,7 @@ const _: () = {
                                     );
                                 }
                                 m_startBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -356,7 +358,7 @@ const _: () = {
                                     );
                                 }
                                 m_endBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -440,7 +442,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_pSkeletonMemory = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -559,13 +561,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_limitAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_startBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_endBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_startBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_endBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_gain: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_boneRadius: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_castOffset: _serde::__private::Option<f32> = _serde::__private::None;
@@ -593,7 +597,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -721,7 +725,7 @@ const _: () = {
                                     );
                                 }
                                 m_startBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -747,7 +751,7 @@ const _: () = {
                                     );
                                 }
                                 m_endBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -947,34 +951,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(BSLimbIKModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_limitAngleDegrees,
                         m_startBoneIndex,

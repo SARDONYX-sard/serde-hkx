@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpVehicleDefaultBrakeWheelBrakingProperties {
+pub struct hkpVehicleDefaultBrakeWheelBrakingProperties<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkpVehicleDefaultBrakeWheelBrakingProperties {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `maxBreakingTorque`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -47,7 +48,7 @@ pub struct hkpVehicleDefaultBrakeWheelBrakingProperties {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpVehicleDefaultBrakeWheelBrakingProperties {
+    impl<'a> _serde::HavokClass for hkpVehicleDefaultBrakeWheelBrakingProperties<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpVehicleDefaultBrakeWheelBrakingProperties"
@@ -57,18 +58,19 @@ const _: () = {
             _serde::__private::Signature::new(0x1ffad971)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpVehicleDefaultBrakeWheelBrakingProperties {
+    impl<'a> _serde::Serialize for hkpVehicleDefaultBrakeWheelBrakingProperties<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x1ffad971)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -94,7 +96,8 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpVehicleDefaultBrakeWheelBrakingProperties {
+    impl<'de> _serde::Deserialize<'de>
+    for hkpVehicleDefaultBrakeWheelBrakingProperties<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -147,7 +150,7 @@ const _: () = {
             }
             struct __hkpVehicleDefaultBrakeWheelBrakingPropertiesVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkpVehicleDefaultBrakeWheelBrakingProperties,
+                    hkpVehicleDefaultBrakeWheelBrakingProperties<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -156,7 +159,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpVehicleDefaultBrakeWheelBrakingPropertiesVisitor<'de> {
-                type Value = hkpVehicleDefaultBrakeWheelBrakingProperties;
+                type Value = hkpVehicleDefaultBrakeWheelBrakingProperties<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -417,7 +420,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpVehicleDefaultBrakeWheelBrakingProperties {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_maxBreakingTorque,
                         m_minPedalInputToBlock,
                         m_isConnectedToHandbrake,

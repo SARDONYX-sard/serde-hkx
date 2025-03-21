@@ -22,7 +22,8 @@ pub struct hkbHandIkDriverInfoHand<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `elbowAxisLS`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -71,35 +72,35 @@ pub struct hkbHandIkDriverInfoHand<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "shoulderIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "shoulderIndex"))]
-    pub m_shoulderIndex: i16,
+    pub m_shoulderIndex: I16<'a>,
     /// # C++ Info
     /// - name: `shoulderSiblingIndex`(ctype: `hkInt16`)
     /// - offset: ` 74`(x86)/` 74`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "shoulderSiblingIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "shoulderSiblingIndex"))]
-    pub m_shoulderSiblingIndex: i16,
+    pub m_shoulderSiblingIndex: I16<'a>,
     /// # C++ Info
     /// - name: `elbowIndex`(ctype: `hkInt16`)
     /// - offset: ` 76`(x86)/` 76`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "elbowIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "elbowIndex"))]
-    pub m_elbowIndex: i16,
+    pub m_elbowIndex: I16<'a>,
     /// # C++ Info
     /// - name: `elbowSiblingIndex`(ctype: `hkInt16`)
     /// - offset: ` 78`(x86)/` 78`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "elbowSiblingIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "elbowSiblingIndex"))]
-    pub m_elbowSiblingIndex: i16,
+    pub m_elbowSiblingIndex: I16<'a>,
     /// # C++ Info
     /// - name: `wristIndex`(ctype: `hkInt16`)
     /// - offset: ` 80`(x86)/` 80`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "wristIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "wristIndex"))]
-    pub m_wristIndex: i16,
+    pub m_wristIndex: I16<'a>,
     /// # C++ Info
     /// - name: `enforceEndPosition`(ctype: `hkBool`)
     /// - offset: ` 82`(x86)/` 82`(x86_64)
@@ -135,7 +136,7 @@ const _: () = {
             _serde::__private::Signature::new(0x14dfe1dd)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -147,6 +148,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x14dfe1dd)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -296,11 +298,13 @@ const _: () = {
                     > = _serde::__private::None;
                     let mut m_maxElbowAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minElbowAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_shoulderIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_shoulderSiblingIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_elbowIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_elbowSiblingIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_wristIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_shoulderIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_shoulderSiblingIndex: _serde::__private::Option<
+                        I16<'de>,
+                    > = _serde::__private::None;
+                    let mut m_elbowIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_elbowSiblingIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_wristIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_enforceEndPosition: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_enforceEndRotation: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_localFrameName: _serde::__private::Option<
@@ -425,7 +429,7 @@ const _: () = {
                                     );
                                 }
                                 m_shoulderIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -444,7 +448,7 @@ const _: () = {
                                     );
                                 }
                                 m_shoulderSiblingIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -461,7 +465,7 @@ const _: () = {
                                     );
                                 }
                                 m_elbowIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -480,7 +484,7 @@ const _: () = {
                                     );
                                 }
                                 m_elbowSiblingIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -497,7 +501,7 @@ const _: () = {
                                     );
                                 }
                                 m_wristIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -739,11 +743,13 @@ const _: () = {
                     > = _serde::__private::None;
                     let mut m_maxElbowAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minElbowAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_shoulderIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_shoulderSiblingIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_elbowIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_elbowSiblingIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_wristIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_shoulderIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_shoulderSiblingIndex: _serde::__private::Option<
+                        I16<'de>,
+                    > = _serde::__private::None;
+                    let mut m_elbowIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_elbowSiblingIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_wristIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_enforceEndPosition: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_enforceEndRotation: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_localFrameName: _serde::__private::Option<
@@ -933,7 +939,7 @@ const _: () = {
                                     );
                                 }
                                 m_shoulderIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -961,7 +967,7 @@ const _: () = {
                                     );
                                 }
                                 m_shoulderSiblingIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -987,7 +993,7 @@ const _: () = {
                                     );
                                 }
                                 m_elbowIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1015,7 +1021,7 @@ const _: () = {
                                     );
                                 }
                                 m_elbowSiblingIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1041,7 +1047,7 @@ const _: () = {
                                     );
                                 }
                                 m_wristIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1304,7 +1310,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbHandIkDriverInfoHand {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_elbowAxisLS,
                         m_backHandNormalLS,
                         m_handOffsetLS,

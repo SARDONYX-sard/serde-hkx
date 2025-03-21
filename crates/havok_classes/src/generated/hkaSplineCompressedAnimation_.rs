@@ -22,7 +22,8 @@ pub struct hkaSplineCompressedAnimation<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,28 +35,28 @@ pub struct hkaSplineCompressedAnimation<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numFrames"))]
     #[cfg_attr(feature = "serde", serde(rename = "numFrames"))]
-    pub m_numFrames: i32,
+    pub m_numFrames: I32<'a>,
     /// # C++ Info
     /// - name: `numBlocks`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numBlocks"))]
     #[cfg_attr(feature = "serde", serde(rename = "numBlocks"))]
-    pub m_numBlocks: i32,
+    pub m_numBlocks: I32<'a>,
     /// # C++ Info
     /// - name: `maxFramesPerBlock`(ctype: `hkInt32`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "maxFramesPerBlock"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxFramesPerBlock"))]
-    pub m_maxFramesPerBlock: i32,
+    pub m_maxFramesPerBlock: I32<'a>,
     /// # C++ Info
     /// - name: `maskAndQuantizationSize`(ctype: `hkInt32`)
     /// - offset: ` 52`(x86)/` 68`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "maskAndQuantizationSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "maskAndQuantizationSize"))]
-    pub m_maskAndQuantizationSize: i32,
+    pub m_maskAndQuantizationSize: I32<'a>,
     /// # C++ Info
     /// - name: `blockDuration`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/` 72`(x86_64)
@@ -83,42 +84,42 @@ pub struct hkaSplineCompressedAnimation<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "blockOffsets"))]
     #[cfg_attr(feature = "serde", serde(rename = "blockOffsets"))]
-    pub m_blockOffsets: Vec<u32>,
+    pub m_blockOffsets: Vec<U32<'a>>,
     /// # C++ Info
     /// - name: `floatBlockOffsets`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 80`(x86)/`104`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "floatBlockOffsets"))]
     #[cfg_attr(feature = "serde", serde(rename = "floatBlockOffsets"))]
-    pub m_floatBlockOffsets: Vec<u32>,
+    pub m_floatBlockOffsets: Vec<U32<'a>>,
     /// # C++ Info
     /// - name: `transformOffsets`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 92`(x86)/`120`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "transformOffsets"))]
     #[cfg_attr(feature = "serde", serde(rename = "transformOffsets"))]
-    pub m_transformOffsets: Vec<u32>,
+    pub m_transformOffsets: Vec<U32<'a>>,
     /// # C++ Info
     /// - name: `floatOffsets`(ctype: `hkArray<hkUint32>`)
     /// - offset: `104`(x86)/`136`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "floatOffsets"))]
     #[cfg_attr(feature = "serde", serde(rename = "floatOffsets"))]
-    pub m_floatOffsets: Vec<u32>,
+    pub m_floatOffsets: Vec<U32<'a>>,
     /// # C++ Info
     /// - name: `data`(ctype: `hkArray<hkUint8>`)
     /// - offset: `116`(x86)/`152`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
-    pub m_data: Vec<u8>,
+    pub m_data: Vec<U8<'a>>,
     /// # C++ Info
     /// - name: `endian`(ctype: `hkInt32`)
     /// - offset: `128`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "endian"))]
     #[cfg_attr(feature = "serde", serde(rename = "endian"))]
-    pub m_endian: i32,
+    pub m_endian: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -132,16 +133,16 @@ const _: () = {
             _serde::__private::Signature::new(0x792ee0bb)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_extractedMotion.get());
+            v.push(&self.parent.m_extractedMotion);
             v.extend(
                 self
                     .parent
                     .m_annotationTracks
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -153,6 +154,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x792ee0bb)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -355,19 +357,25 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_numFrames: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numBlocks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_maxFramesPerBlock: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_maskAndQuantizationSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numFrames: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numBlocks: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_maxFramesPerBlock: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_maskAndQuantizationSize: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_blockDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_blockInverseDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_frameDuration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_blockOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_floatBlockOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_transformOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_floatOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_endian: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_blockOffsets: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_floatBlockOffsets: _serde::__private::Option<
+                        Vec<U32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_transformOffsets: _serde::__private::Option<
+                        Vec<U32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_floatOffsets: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_endian: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..13usize {
                         match i {
                             0usize => {
@@ -379,7 +387,7 @@ const _: () = {
                                     );
                                 }
                                 m_numFrames = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -396,7 +404,7 @@ const _: () = {
                                     );
                                 }
                                 m_numBlocks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -415,7 +423,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxFramesPerBlock = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -434,7 +442,7 @@ const _: () = {
                                     );
                                 }
                                 m_maskAndQuantizationSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -505,7 +513,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_blockOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -524,7 +532,7 @@ const _: () = {
                                     );
                                 }
                                 m_floatBlockOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -541,7 +549,7 @@ const _: () = {
                                     );
                                 }
                                 m_transformOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -558,7 +566,7 @@ const _: () = {
                                     );
                                 }
                                 m_floatOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -573,7 +581,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -588,7 +596,7 @@ const _: () = {
                                     );
                                 }
                                 m_endian = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -754,25 +762,33 @@ const _: () = {
                 {
                     let mut m_type: _serde::__private::Option<AnimationType> = _serde::__private::None;
                     let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_numberOfTransformTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numberOfFloatTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_extractedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_numberOfTransformTracks: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numberOfFloatTracks: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_extractedMotion: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_annotationTracks: _serde::__private::Option<
                         Vec<hkaAnnotationTrack<'de>>,
                     > = _serde::__private::None;
-                    let mut m_numFrames: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numBlocks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_maxFramesPerBlock: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_maskAndQuantizationSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numFrames: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numBlocks: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_maxFramesPerBlock: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_maskAndQuantizationSize: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_blockDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_blockInverseDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_frameDuration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_blockOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_floatBlockOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_transformOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_floatOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_endian: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_blockOffsets: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_floatBlockOffsets: _serde::__private::Option<
+                        Vec<U32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_transformOffsets: _serde::__private::Option<
+                        Vec<U32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_floatOffsets: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_endian: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -847,7 +863,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfTransformTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -875,7 +891,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfFloatTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -901,7 +917,7 @@ const _: () = {
                                     );
                                 }
                                 m_extractedMotion = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -955,7 +971,7 @@ const _: () = {
                                     );
                                 }
                                 m_numFrames = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -981,7 +997,7 @@ const _: () = {
                                     );
                                 }
                                 m_numBlocks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1009,7 +1025,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxFramesPerBlock = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1037,7 +1053,7 @@ const _: () = {
                                     );
                                 }
                                 m_maskAndQuantizationSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1143,7 +1159,7 @@ const _: () = {
                                     );
                                 }
                                 m_blockOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1171,7 +1187,7 @@ const _: () = {
                                     );
                                 }
                                 m_floatBlockOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1197,7 +1213,7 @@ const _: () = {
                                     );
                                 }
                                 m_transformOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1223,7 +1239,7 @@ const _: () = {
                                     );
                                 }
                                 m_floatOffsets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1247,7 +1263,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1271,7 +1287,7 @@ const _: () = {
                                     );
                                 }
                                 m_endian = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1503,14 +1519,16 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkaAnimation {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_type,
                         m_duration,
@@ -1521,7 +1539,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaSplineCompressedAnimation {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_numFrames,
                         m_numBlocks,

@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpSphereShape {
+pub struct hkpSphereShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpSphereShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConvexShape,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConvexShape<'a>,
     /// # C++ Info
     /// - name: `pad16`(ctype: `hkUint32[3]`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
@@ -34,11 +36,11 @@ pub struct hkpSphereShape {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pad16"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad16"))]
-    pub m_pad16: [u32; 3usize],
+    pub m_pad16: [U32<'a>; 3usize],
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpSphereShape {
+    impl<'a> _serde::HavokClass for hkpSphereShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpSphereShape"
@@ -48,18 +50,19 @@ const _: () = {
             _serde::__private::Signature::new(0x795d9fa)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpSphereShape {
+    impl<'a> _serde::Serialize for hkpSphereShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x795d9fa)));
             let mut serializer = __serializer
                 .serialize_struct("hkpSphereShape", class_meta, (32u64, 56u64))?;
@@ -97,7 +100,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpSphereShape {
+    impl<'de> _serde::Deserialize<'de> for hkpSphereShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -147,14 +150,14 @@ const _: () = {
                 }
             }
             struct __hkpSphereShapeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpSphereShape>,
+                marker: _serde::__private::PhantomData<hkpSphereShape<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpSphereShapeVisitor<'de> {
-                type Value = hkpSphereShape;
+                type Value = hkpSphereShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -170,7 +173,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_pad16: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
+                    let mut m_pad16: _serde::__private::Option<[U32<'de>; 3usize]> = _serde::__private::None;
                     for i in 0..1usize {
                         match i {
                             0usize => {
@@ -180,7 +183,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad16 = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -294,27 +297,32 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
-                    let parent = hkpSphereRepShape { __ptr, parent };
+                    let parent = hkpSphereRepShape {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let parent = hkpConvexShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_radius,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpSphereShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     })

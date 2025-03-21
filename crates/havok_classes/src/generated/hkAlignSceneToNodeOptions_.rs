@@ -22,11 +22,13 @@ pub struct hkAlignSceneToNodeOptions<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `invert`(ctype: `hkBool`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -82,7 +84,7 @@ pub struct hkAlignSceneToNodeOptions<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "keyframe"))]
     #[cfg_attr(feature = "serde", serde(rename = "keyframe"))]
-    pub m_keyframe: i32,
+    pub m_keyframe: I32<'a>,
     /// # C++ Info
     /// - name: `nodeName`(ctype: `hkStringPtr`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
@@ -104,7 +106,7 @@ const _: () = {
             _serde::__private::Signature::new(0x207cb01)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -116,6 +118,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x207cb01)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -248,7 +251,7 @@ const _: () = {
                     let mut m_transformRotation: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_transformScale: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_transformSkew: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_keyframe: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_keyframe: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     for i in 0..9usize {
                         match i {
@@ -387,7 +390,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 1usize, 1usize)?;
                                 m_keyframe = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -529,7 +532,7 @@ const _: () = {
                     let mut m_transformRotation: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_transformScale: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_transformSkew: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_keyframe: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_keyframe: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -741,7 +744,7 @@ const _: () = {
                                     );
                                 }
                                 m_keyframe = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -881,15 +884,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkAlignSceneToNodeOptions {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_invert,
                         m_transformPositionX,

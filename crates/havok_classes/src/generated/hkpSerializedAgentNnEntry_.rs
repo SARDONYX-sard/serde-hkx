@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpSerializedAgentNnEntry {
+pub struct hkpSerializedAgentNnEntry<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,25 +22,27 @@ pub struct hkpSerializedAgentNnEntry {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `bodyA`(ctype: `struct hkpEntity*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bodyA"))]
     #[cfg_attr(feature = "serde", serde(rename = "bodyA"))]
-    pub m_bodyA: Pointer,
+    pub m_bodyA: Pointer<'a>,
     /// # C++ Info
     /// - name: `bodyB`(ctype: `struct hkpEntity*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bodyB"))]
     #[cfg_attr(feature = "serde", serde(rename = "bodyB"))]
-    pub m_bodyB: Pointer,
+    pub m_bodyB: Pointer<'a>,
     /// # C++ Info
     /// - name: `bodyAId`(ctype: `hkUlong`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -75,28 +77,28 @@ pub struct hkpSerializedAgentNnEntry {
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "atom"))]
     #[cfg_attr(feature = "serde", serde(rename = "atom"))]
-    pub m_atom: hkpSimpleContactConstraintAtom,
+    pub m_atom: hkpSimpleContactConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `propertiesStream`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "propertiesStream"))]
     #[cfg_attr(feature = "serde", serde(rename = "propertiesStream"))]
-    pub m_propertiesStream: Vec<u8>,
+    pub m_propertiesStream: Vec<U8<'a>>,
     /// # C++ Info
     /// - name: `contactPoints`(ctype: `hkArray<struct hkContactPoint>`)
     /// - offset: ` 92`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "contactPoints"))]
     #[cfg_attr(feature = "serde", serde(rename = "contactPoints"))]
-    pub m_contactPoints: Vec<hkContactPoint>,
+    pub m_contactPoints: Vec<hkContactPoint<'a>>,
     /// # C++ Info
     /// - name: `cpIdMgr`(ctype: `hkArray<hkUint8>`)
     /// - offset: `104`(x86)/`144`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "cpIdMgr"))]
     #[cfg_attr(feature = "serde", serde(rename = "cpIdMgr"))]
-    pub m_cpIdMgr: Vec<u8>,
+    pub m_cpIdMgr: Vec<U8<'a>>,
     /// # C++ Info
     /// - name: `nnEntryData`(ctype: `hkUint8[160]`)
     /// - offset: `116`(x86)/`160`(x86_64)
@@ -109,35 +111,35 @@ pub struct hkpSerializedAgentNnEntry {
         feature = "serde",
         serde(with = "::serde_with::As::<[::serde_with::Same; 160]>")
     )]
-    #[educe(Default = [0;160usize])]
+    #[educe(Default(expression = core::array::from_fn(|_idx|Default::default())))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "nnEntryData"))]
     #[cfg_attr(feature = "serde", serde(rename = "nnEntryData"))]
-    pub m_nnEntryData: [u8; 160usize],
+    pub m_nnEntryData: [U8<'a>; 160usize],
     /// # C++ Info
     /// - name: `trackInfo`(ctype: `struct hkpSerializedTrack1nInfo`)
     /// - offset: `276`(x86)/`320`(x86_64)
     /// - type_size: ` 24`(x86)/` 32`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "trackInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "trackInfo"))]
-    pub m_trackInfo: hkpSerializedTrack1nInfo,
+    pub m_trackInfo: hkpSerializedTrack1nInfo<'a>,
     /// # C++ Info
     /// - name: `endianCheckBuffer`(ctype: `hkUint8[4]`)
     /// - offset: `300`(x86)/`352`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "endianCheckBuffer"))]
     #[cfg_attr(feature = "serde", serde(rename = "endianCheckBuffer"))]
-    pub m_endianCheckBuffer: [u8; 4usize],
+    pub m_endianCheckBuffer: [U8<'a>; 4usize],
     /// # C++ Info
     /// - name: `version`(ctype: `hkUint32`)
     /// - offset: `304`(x86)/`356`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "version"))]
     #[cfg_attr(feature = "serde", serde(rename = "version"))]
-    pub m_version: u32,
+    pub m_version: U32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpSerializedAgentNnEntry {
+    impl<'a> _serde::HavokClass for hkpSerializedAgentNnEntry<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpSerializedAgentNnEntry"
@@ -147,29 +149,30 @@ const _: () = {
             _serde::__private::Signature::new(0x49ec7de3)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_bodyA.get());
-            v.push(self.m_bodyB.get());
+            v.push(&self.m_bodyA);
+            v.push(&self.m_bodyB);
             v.extend(self.m_atom.deps_indexes());
             v.extend(
                 self
                     .m_contactPoints
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(self.m_trackInfo.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkpSerializedAgentNnEntry {
+    impl<'a> _serde::Serialize for hkpSerializedAgentNnEntry<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x49ec7de3)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -230,7 +233,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpSerializedAgentNnEntry {
+    impl<'de> _serde::Deserialize<'de> for hkpSerializedAgentNnEntry<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -304,7 +307,7 @@ const _: () = {
                 }
             }
             struct __hkpSerializedAgentNnEntryVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpSerializedAgentNnEntry>,
+                marker: _serde::__private::PhantomData<hkpSerializedAgentNnEntry<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -312,7 +315,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpSerializedAgentNnEntryVisitor<'de> {
-                type Value = hkpSerializedAgentNnEntry;
+                type Value = hkpSerializedAgentNnEntry<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -331,8 +334,8 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_bodyA: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_bodyB: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_bodyA: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_bodyB: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_bodyAId: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_bodyBId: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_useEntityIds: _serde::__private::Option<bool> = _serde::__private::None;
@@ -342,19 +345,23 @@ const _: () = {
                     let mut m_atom: _serde::__private::Option<
                         hkpSimpleContactConstraintAtom,
                     > = _serde::__private::None;
-                    let mut m_propertiesStream: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_propertiesStream: _serde::__private::Option<
+                        Vec<U8<'de>>,
+                    > = _serde::__private::None;
                     let mut m_contactPoints: _serde::__private::Option<
                         Vec<hkContactPoint>,
                     > = _serde::__private::None;
-                    let mut m_cpIdMgr: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_nnEntryData: _serde::__private::Option<[u8; 160usize]> = _serde::__private::None;
+                    let mut m_cpIdMgr: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_nnEntryData: _serde::__private::Option<
+                        [U8<'de>; 160usize],
+                    > = _serde::__private::None;
                     let mut m_trackInfo: _serde::__private::Option<
                         hkpSerializedTrack1nInfo,
                     > = _serde::__private::None;
                     let mut m_endianCheckBuffer: _serde::__private::Option<
-                        [u8; 4usize],
+                        [U8<'de>; 4usize],
                     > = _serde::__private::None;
-                    let mut m_version: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_version: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     for i in 0..14usize {
                         match i {
                             0usize => {
@@ -364,7 +371,7 @@ const _: () = {
                                     );
                                 }
                                 m_bodyA = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -379,7 +386,7 @@ const _: () = {
                                     );
                                 }
                                 m_bodyB = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -482,7 +489,7 @@ const _: () = {
                                     );
                                 }
                                 m_propertiesStream = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -516,7 +523,7 @@ const _: () = {
                                     );
                                 }
                                 m_cpIdMgr = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -533,7 +540,7 @@ const _: () = {
                                     );
                                 }
                                 m_nnEntryData = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 160usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 160usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -571,7 +578,7 @@ const _: () = {
                                     );
                                 }
                                 m_endianCheckBuffer = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 4usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 4usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -588,7 +595,7 @@ const _: () = {
                                     );
                                 }
                                 m_version = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -753,8 +760,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_bodyA: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_bodyB: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_bodyA: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_bodyB: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_bodyAId: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_bodyBId: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_useEntityIds: _serde::__private::Option<bool> = _serde::__private::None;
@@ -764,19 +771,23 @@ const _: () = {
                     let mut m_atom: _serde::__private::Option<
                         hkpSimpleContactConstraintAtom,
                     > = _serde::__private::None;
-                    let mut m_propertiesStream: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_propertiesStream: _serde::__private::Option<
+                        Vec<U8<'de>>,
+                    > = _serde::__private::None;
                     let mut m_contactPoints: _serde::__private::Option<
                         Vec<hkContactPoint>,
                     > = _serde::__private::None;
-                    let mut m_cpIdMgr: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_nnEntryData: _serde::__private::Option<[u8; 160usize]> = _serde::__private::None;
+                    let mut m_cpIdMgr: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_nnEntryData: _serde::__private::Option<
+                        [U8<'de>; 160usize],
+                    > = _serde::__private::None;
                     let mut m_trackInfo: _serde::__private::Option<
                         hkpSerializedTrack1nInfo,
                     > = _serde::__private::None;
                     let mut m_endianCheckBuffer: _serde::__private::Option<
-                        [u8; 4usize],
+                        [U8<'de>; 4usize],
                     > = _serde::__private::None;
-                    let mut m_version: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_version: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -797,7 +808,7 @@ const _: () = {
                                     );
                                 }
                                 m_bodyA = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -821,7 +832,7 @@ const _: () = {
                                     );
                                 }
                                 m_bodyB = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -977,7 +988,7 @@ const _: () = {
                                     );
                                 }
                                 m_propertiesStream = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1029,7 +1040,7 @@ const _: () = {
                                     );
                                 }
                                 m_cpIdMgr = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1055,7 +1066,7 @@ const _: () = {
                                     );
                                 }
                                 m_nnEntryData = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 160usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 160usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1111,7 +1122,7 @@ const _: () = {
                                     );
                                 }
                                 m_endianCheckBuffer = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 4usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 4usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1137,7 +1148,7 @@ const _: () = {
                                     );
                                 }
                                 m_version = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1266,7 +1277,7 @@ const _: () = {
                                 ),
                             );
                             #[cfg(not(feature = "strict"))]
-                            [Default::default(); 160usize]
+                            core::array::from_fn(|_idx| Default::default())
                         }
                     };
                     let m_trackInfo = match m_trackInfo {
@@ -1304,15 +1315,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpSerializedAgentNnEntry {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_bodyA,
                         m_bodyB,
@@ -1477,22 +1490,22 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
-                        4i8 => _serde::__private::Ok(__Field::__field4),
-                        5i8 => _serde::__private::Ok(__Field::__field5),
-                        6i8 => _serde::__private::Ok(__Field::__field6),
-                        7i8 => _serde::__private::Ok(__Field::__field7),
-                        8i8 => _serde::__private::Ok(__Field::__field8),
-                        9i8 => _serde::__private::Ok(__Field::__field9),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(4i8) => _serde::__private::Ok(__Field::__field4),
+                        I8::Number(5i8) => _serde::__private::Ok(__Field::__field5),
+                        I8::Number(6i8) => _serde::__private::Ok(__Field::__field6),
+                        I8::Number(7i8) => _serde::__private::Ok(__Field::__field7),
+                        I8::Number(8i8) => _serde::__private::Ok(__Field::__field8),
+                        I8::Number(9i8) => _serde::__private::Ok(__Field::__field9),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

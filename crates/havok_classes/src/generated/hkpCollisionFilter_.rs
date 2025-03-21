@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpCollisionFilter {
+pub struct hkpCollisionFilter<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkpCollisionFilter {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `prepad`(ctype: `hkUint32[2]`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "prepad"))]
     #[cfg_attr(feature = "serde", serde(rename = "prepad"))]
-    pub m_prepad: [u32; 2usize],
+    pub m_prepad: [U32<'a>; 2usize],
     /// # C++ Info
     /// - name: `type`(ctype: `enum hkpFilterType`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
@@ -47,11 +49,11 @@ pub struct hkpCollisionFilter {
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "postpad"))]
     #[cfg_attr(feature = "serde", serde(rename = "postpad"))]
-    pub m_postpad: [u32; 3usize],
+    pub m_postpad: [U32<'a>; 3usize],
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpCollisionFilter {
+    impl<'a> _serde::HavokClass for hkpCollisionFilter<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpCollisionFilter"
@@ -61,18 +63,19 @@ const _: () = {
             _serde::__private::Signature::new(0x60960336)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpCollisionFilter {
+    impl<'a> _serde::Serialize for hkpCollisionFilter<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x60960336)));
             let mut serializer = __serializer
                 .serialize_struct("hkpCollisionFilter", class_meta, (48u64, 72u64))?;
@@ -103,7 +106,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpCollisionFilter {
+    impl<'de> _serde::Deserialize<'de> for hkpCollisionFilter<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -155,14 +158,14 @@ const _: () = {
                 }
             }
             struct __hkpCollisionFilterVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpCollisionFilter>,
+                marker: _serde::__private::PhantomData<hkpCollisionFilter<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpCollisionFilterVisitor<'de> {
-                type Value = hkpCollisionFilter;
+                type Value = hkpCollisionFilter<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -181,9 +184,9 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_prepad: _serde::__private::Option<[u32; 2usize]> = _serde::__private::None;
+                    let mut m_prepad: _serde::__private::Option<[U32<'de>; 2usize]> = _serde::__private::None;
                     let mut m_type: _serde::__private::Option<hkpFilterType> = _serde::__private::None;
-                    let mut m_postpad: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
+                    let mut m_postpad: _serde::__private::Option<[U32<'de>; 3usize]> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
                             0usize => {
@@ -194,7 +197,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 16usize, 32usize)?;
                                 m_prepad = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -226,7 +229,7 @@ const _: () = {
                                     );
                                 }
                                 m_postpad = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -277,9 +280,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_prepad: _serde::__private::Option<[u32; 2usize]> = _serde::__private::None;
+                    let mut m_prepad: _serde::__private::Option<[U32<'de>; 2usize]> = _serde::__private::None;
                     let mut m_type: _serde::__private::Option<hkpFilterType> = _serde::__private::None;
-                    let mut m_postpad: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
+                    let mut m_postpad: _serde::__private::Option<[U32<'de>; 3usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -300,7 +303,7 @@ const _: () = {
                                     );
                                 }
                                 m_prepad = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -350,7 +353,7 @@ const _: () = {
                                     );
                                 }
                                 m_postpad = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -392,15 +395,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpCollisionFilter {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_prepad,
                         m_type,
@@ -526,19 +531,19 @@ const _: () = {
                 }
                 fn visit_uint32<__E>(
                     self,
-                    __value: u32,
+                    __value: U32<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u32 => _serde::__private::Ok(__Field::__field0),
-                        1u32 => _serde::__private::Ok(__Field::__field1),
-                        2u32 => _serde::__private::Ok(__Field::__field2),
-                        3u32 => _serde::__private::Ok(__Field::__field3),
-                        4u32 => _serde::__private::Ok(__Field::__field4),
-                        5u32 => _serde::__private::Ok(__Field::__field5),
-                        6u32 => _serde::__private::Ok(__Field::__field6),
+                        U32::Number(0u32) => _serde::__private::Ok(__Field::__field0),
+                        U32::Number(1u32) => _serde::__private::Ok(__Field::__field1),
+                        U32::Number(2u32) => _serde::__private::Ok(__Field::__field2),
+                        U32::Number(3u32) => _serde::__private::Ok(__Field::__field3),
+                        U32::Number(4u32) => _serde::__private::Ok(__Field::__field4),
+                        U32::Number(5u32) => _serde::__private::Ok(__Field::__field5),
+                        U32::Number(6u32) => _serde::__private::Ok(__Field::__field6),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

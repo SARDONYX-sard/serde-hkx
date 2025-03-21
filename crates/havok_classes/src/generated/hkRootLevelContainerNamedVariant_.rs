@@ -22,7 +22,8 @@ pub struct hkRootLevelContainerNamedVariant<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -45,7 +46,7 @@ pub struct hkRootLevelContainerNamedVariant<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "variant"))]
     #[cfg_attr(feature = "serde", serde(rename = "variant"))]
-    pub m_variant: Pointer,
+    pub m_variant: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -59,9 +60,9 @@ const _: () = {
             _serde::__private::Signature::new(0xb103a2cd)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_variant.get());
+            v.push(&self.m_variant);
             v
         }
     }
@@ -72,6 +73,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xb103a2cd)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -173,7 +175,7 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_className: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_variant: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variant: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
                             0usize => {
@@ -217,7 +219,7 @@ const _: () = {
                                     );
                                 }
                                 m_variant = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -271,7 +273,7 @@ const _: () = {
                 {
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_className: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_variant: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variant: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -344,7 +346,7 @@ const _: () = {
                                     );
                                 }
                                 m_variant = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -389,7 +391,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkRootLevelContainerNamedVariant {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_name,
                         m_className,
                         m_variant,

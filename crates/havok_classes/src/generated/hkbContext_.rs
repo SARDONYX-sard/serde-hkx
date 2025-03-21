@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbContext {
+pub struct hkbContext<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkbContext {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `character`(ctype: `void*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -30,7 +31,7 @@ pub struct hkbContext {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "character"))]
     #[cfg_attr(feature = "serde", serde(rename = "character"))]
-    pub m_character: Pointer,
+    pub m_character: Pointer<'a>,
     /// # C++ Info
     /// - name: `behavior`(ctype: `void*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
@@ -38,7 +39,7 @@ pub struct hkbContext {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "behavior"))]
     #[cfg_attr(feature = "serde", serde(rename = "behavior"))]
-    pub m_behavior: Pointer,
+    pub m_behavior: Pointer<'a>,
     /// # C++ Info
     /// - name: `nodeToIndexMap`(ctype: `void*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -46,7 +47,7 @@ pub struct hkbContext {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "nodeToIndexMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "nodeToIndexMap"))]
-    pub m_nodeToIndexMap: Pointer,
+    pub m_nodeToIndexMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `eventQueue`(ctype: `void*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
@@ -54,7 +55,7 @@ pub struct hkbContext {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventQueue"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventQueue"))]
-    pub m_eventQueue: Pointer,
+    pub m_eventQueue: Pointer<'a>,
     /// # C++ Info
     /// - name: `sharedEventQueue`(ctype: `void*`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -62,14 +63,14 @@ pub struct hkbContext {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "sharedEventQueue"))]
     #[cfg_attr(feature = "serde", serde(rename = "sharedEventQueue"))]
-    pub m_sharedEventQueue: Pointer,
+    pub m_sharedEventQueue: Pointer<'a>,
     /// # C++ Info
     /// - name: `generatorOutputListener`(ctype: `struct hkbGeneratorOutputListener*`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "generatorOutputListener"))]
     #[cfg_attr(feature = "serde", serde(rename = "generatorOutputListener"))]
-    pub m_generatorOutputListener: Pointer,
+    pub m_generatorOutputListener: Pointer<'a>,
     /// # C++ Info
     /// - name: `eventTriggeredTransition`(ctype: `hkBool`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
@@ -85,7 +86,7 @@ pub struct hkbContext {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "world"))]
     #[cfg_attr(feature = "serde", serde(rename = "world"))]
-    pub m_world: Pointer,
+    pub m_world: Pointer<'a>,
     /// # C++ Info
     /// - name: `attachmentManager`(ctype: `void*`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
@@ -93,7 +94,7 @@ pub struct hkbContext {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "attachmentManager"))]
     #[cfg_attr(feature = "serde", serde(rename = "attachmentManager"))]
-    pub m_attachmentManager: Pointer,
+    pub m_attachmentManager: Pointer<'a>,
     /// # C++ Info
     /// - name: `animationCache`(ctype: `void*`)
     /// - offset: ` 36`(x86)/` 72`(x86_64)
@@ -101,11 +102,11 @@ pub struct hkbContext {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "animationCache"))]
     #[cfg_attr(feature = "serde", serde(rename = "animationCache"))]
-    pub m_animationCache: Pointer,
+    pub m_animationCache: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbContext {
+    impl<'a> _serde::HavokClass for hkbContext<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbContext"
@@ -115,27 +116,28 @@ const _: () = {
             _serde::__private::Signature::new(0xe0c4d4a7)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_character.get());
-            v.push(self.m_behavior.get());
-            v.push(self.m_nodeToIndexMap.get());
-            v.push(self.m_eventQueue.get());
-            v.push(self.m_sharedEventQueue.get());
-            v.push(self.m_generatorOutputListener.get());
-            v.push(self.m_world.get());
-            v.push(self.m_attachmentManager.get());
-            v.push(self.m_animationCache.get());
+            v.push(&self.m_character);
+            v.push(&self.m_behavior);
+            v.push(&self.m_nodeToIndexMap);
+            v.push(&self.m_eventQueue);
+            v.push(&self.m_sharedEventQueue);
+            v.push(&self.m_generatorOutputListener);
+            v.push(&self.m_world);
+            v.push(&self.m_attachmentManager);
+            v.push(&self.m_animationCache);
             v
         }
     }
-    impl _serde::Serialize for hkbContext {
+    impl<'a> _serde::Serialize for hkbContext<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xe0c4d4a7)));
             let mut serializer = __serializer
                 .serialize_struct("hkbContext", class_meta, (40u64, 80u64))?;
@@ -167,7 +169,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbContext {
+    impl<'de> _serde::Deserialize<'de> for hkbContext<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -217,14 +219,14 @@ const _: () = {
                 }
             }
             struct __hkbContextVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbContext>,
+                marker: _serde::__private::PhantomData<hkbContext<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkbContextVisitor<'de> {
-                type Value = hkbContext;
+                type Value = hkbContext<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -239,20 +241,24 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_character: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_behavior: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_nodeToIndexMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_eventQueue: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_sharedEventQueue: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_character: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_behavior: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_nodeToIndexMap: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_eventQueue: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_sharedEventQueue: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_generatorOutputListener: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_eventTriggeredTransition: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_world: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_attachmentManager: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_animationCache: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_world: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_attachmentManager: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_animationCache: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..10usize {
                         match i {
                             0usize => {
@@ -264,7 +270,7 @@ const _: () = {
                                     );
                                 }
                                 m_character = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -281,7 +287,7 @@ const _: () = {
                                     );
                                 }
                                 m_behavior = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -298,7 +304,7 @@ const _: () = {
                                     );
                                 }
                                 m_nodeToIndexMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -315,7 +321,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventQueue = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -332,7 +338,7 @@ const _: () = {
                                     );
                                 }
                                 m_sharedEventQueue = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -351,7 +357,7 @@ const _: () = {
                                     );
                                 }
                                 m_generatorOutputListener = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -386,7 +392,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 7usize)?;
                                 m_world = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -405,7 +411,7 @@ const _: () = {
                                     );
                                 }
                                 m_attachmentManager = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -422,7 +428,7 @@ const _: () = {
                                     );
                                 }
                                 m_animationCache = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -552,7 +558,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_generatorOutputListener: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -578,7 +584,7 @@ const _: () = {
                                     );
                                 }
                                 m_generatorOutputListener = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -603,7 +609,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbContext {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_generatorOutputListener,
                         ..Default::default()
                     })

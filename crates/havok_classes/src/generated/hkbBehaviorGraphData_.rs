@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbBehaviorGraphData {
+pub struct hkbBehaviorGraphData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkbBehaviorGraphData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `attributeDefaults`(ctype: `hkArray<hkReal>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -40,53 +42,53 @@ pub struct hkbBehaviorGraphData {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "variableInfos"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableInfos"))]
-    pub m_variableInfos: Vec<hkbVariableInfo>,
+    pub m_variableInfos: Vec<hkbVariableInfo<'a>>,
     /// # C++ Info
     /// - name: `characterPropertyInfos`(ctype: `hkArray<struct hkbVariableInfo>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterPropertyInfos"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterPropertyInfos"))]
-    pub m_characterPropertyInfos: Vec<hkbVariableInfo>,
+    pub m_characterPropertyInfos: Vec<hkbVariableInfo<'a>>,
     /// # C++ Info
     /// - name: `eventInfos`(ctype: `hkArray<struct hkbEventInfo>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventInfos"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventInfos"))]
-    pub m_eventInfos: Vec<hkbEventInfo>,
+    pub m_eventInfos: Vec<hkbEventInfo<'a>>,
     /// # C++ Info
     /// - name: `wordMinVariableValues`(ctype: `hkArray<struct hkbVariableValue>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "wordMinVariableValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "wordMinVariableValues"))]
-    pub m_wordMinVariableValues: Vec<hkbVariableValue>,
+    pub m_wordMinVariableValues: Vec<hkbVariableValue<'a>>,
     /// # C++ Info
     /// - name: `wordMaxVariableValues`(ctype: `hkArray<struct hkbVariableValue>`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "wordMaxVariableValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "wordMaxVariableValues"))]
-    pub m_wordMaxVariableValues: Vec<hkbVariableValue>,
+    pub m_wordMaxVariableValues: Vec<hkbVariableValue<'a>>,
     /// # C++ Info
     /// - name: `variableInitialValues`(ctype: `struct hkbVariableValueSet*`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "variableInitialValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableInitialValues"))]
-    pub m_variableInitialValues: Pointer,
+    pub m_variableInitialValues: Pointer<'a>,
     /// # C++ Info
     /// - name: `stringData`(ctype: `struct hkbBehaviorGraphStringData*`)
     /// - offset: ` 84`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "stringData"))]
     #[cfg_attr(feature = "serde", serde(rename = "stringData"))]
-    pub m_stringData: Pointer,
+    pub m_stringData: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbBehaviorGraphData {
+    impl<'a> _serde::HavokClass for hkbBehaviorGraphData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbBehaviorGraphData"
@@ -96,55 +98,56 @@ const _: () = {
             _serde::__private::Signature::new(0x95aca5d)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_variableInfos
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_characterPropertyInfos
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_eventInfos
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_wordMinVariableValues
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_wordMaxVariableValues
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.push(self.m_variableInitialValues.get());
-            v.push(self.m_stringData.get());
+            v.push(&self.m_variableInitialValues);
+            v.push(&self.m_stringData);
             v
         }
     }
-    impl _serde::Serialize for hkbBehaviorGraphData {
+    impl<'a> _serde::Serialize for hkbBehaviorGraphData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x95aca5d)));
             let mut serializer = __serializer
                 .serialize_struct("hkbBehaviorGraphData", class_meta, (88u64, 128u64))?;
@@ -218,7 +221,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbBehaviorGraphData {
+    impl<'de> _serde::Deserialize<'de> for hkbBehaviorGraphData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -280,14 +283,14 @@ const _: () = {
                 }
             }
             struct __hkbBehaviorGraphDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbBehaviorGraphData>,
+                marker: _serde::__private::PhantomData<hkbBehaviorGraphData<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
-                type Value = hkbBehaviorGraphData;
+                type Value = hkbBehaviorGraphData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -321,9 +324,9 @@ const _: () = {
                         Vec<hkbVariableValue>,
                     > = _serde::__private::None;
                     let mut m_variableInitialValues: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..8usize {
                         match i {
                             0usize => {
@@ -447,7 +450,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableInitialValues = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -464,7 +467,7 @@ const _: () = {
                                     );
                                 }
                                 m_stringData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -591,9 +594,9 @@ const _: () = {
                         Vec<hkbVariableValue>,
                     > = _serde::__private::None;
                     let mut m_variableInitialValues: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -782,7 +785,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableInitialValues = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -808,7 +811,7 @@ const _: () = {
                                     );
                                 }
                                 m_stringData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -916,15 +919,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbBehaviorGraphData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_attributeDefaults,
                         m_variableInfos,
