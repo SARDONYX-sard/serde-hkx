@@ -4,13 +4,13 @@
   "signature": "0x483a429b",
   "size_x86": 16,
   "size_x86_64": 16,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "byteOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     {
       "name": "type",
       "enum_ref": "DataType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum DataType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT16",
@@ -40,7 +40,7 @@
     {
       "name": "usage",
       "enum_ref": "DataUsage",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum DataUsage",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT16",
@@ -54,7 +54,7 @@
     },
     {
       "name": "byteStride",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -68,7 +68,7 @@
     },
     {
       "name": "numElements",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",

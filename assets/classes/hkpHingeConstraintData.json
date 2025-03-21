@@ -5,14 +5,14 @@
   "size_x86": 208,
   "size_x86_64": 224,
   "parent": "hkpConstraintData",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "atoms",
       "class_ref": "hkpHingeConstraintDataAtoms",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpHingeConstraintDataAtoms",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

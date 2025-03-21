@@ -4,13 +4,13 @@
   "signature": "0x4a948b16",
   "size_x86": 32,
   "size_x86_64": 32,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "min",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "max",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",

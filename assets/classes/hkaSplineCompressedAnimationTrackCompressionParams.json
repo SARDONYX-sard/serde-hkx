@@ -4,9 +4,9 @@
   "signature": "0x42e878d3",
   "size_x86": 28,
   "size_x86_64": 28,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "enums": [
     {
       "name": "RotationQuantization",
@@ -60,7 +60,7 @@
   "members": [
     {
       "name": "rotationTolerance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -74,7 +74,7 @@
     },
     {
       "name": "translationTolerance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -88,7 +88,7 @@
     },
     {
       "name": "scaleTolerance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -102,7 +102,7 @@
     },
     {
       "name": "floatingTolerance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -116,7 +116,7 @@
     },
     {
       "name": "rotationDegree",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -130,7 +130,7 @@
     },
     {
       "name": "translationDegree",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -144,7 +144,7 @@
     },
     {
       "name": "scaleDegree",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -158,7 +158,7 @@
     },
     {
       "name": "floatingDegree",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -173,7 +173,7 @@
     {
       "name": "rotationQuantizationType",
       "enum_ref": "RotationQuantization",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum RotationQuantization",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -188,7 +188,7 @@
     {
       "name": "translationQuantizationType",
       "enum_ref": "ScalarQuantization",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ScalarQuantization",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -203,7 +203,7 @@
     {
       "name": "scaleQuantizationType",
       "enum_ref": "ScalarQuantization",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ScalarQuantization",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -218,7 +218,7 @@
     {
       "name": "floatQuantizationType",
       "enum_ref": "ScalarQuantization",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ScalarQuantization",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",

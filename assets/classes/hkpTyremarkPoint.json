@@ -4,13 +4,13 @@
   "signature": "0x6bb7c5e8",
   "size_x86": 32,
   "size_x86_64": 32,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "pointLeft",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "pointRight",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",

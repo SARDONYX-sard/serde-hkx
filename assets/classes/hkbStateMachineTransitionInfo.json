@@ -4,9 +4,9 @@
   "signature": "0xcdec8025",
   "size_x86": 60,
   "size_x86_64": 72,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "enums": [
     {
       "name": "TransitionFlags",
@@ -97,7 +97,7 @@
     {
       "name": "triggerInterval",
       "class_ref": "hkbStateMachineTimeInterval",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbStateMachineTimeInterval",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -112,7 +112,7 @@
     {
       "name": "initiateInterval",
       "class_ref": "hkbStateMachineTimeInterval",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbStateMachineTimeInterval",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -127,7 +127,7 @@
     {
       "name": "transition",
       "class_ref": "hkbTransitionEffect",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbTransitionEffect*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -142,7 +142,7 @@
     {
       "name": "condition",
       "class_ref": "hkbCondition",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbCondition*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -156,7 +156,7 @@
     },
     {
       "name": "eventId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -170,7 +170,7 @@
     },
     {
       "name": "toStateId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -184,7 +184,7 @@
     },
     {
       "name": "fromNestedStateId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -198,7 +198,7 @@
     },
     {
       "name": "toNestedStateId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -212,7 +212,7 @@
     },
     {
       "name": "priority",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -227,7 +227,7 @@
     {
       "name": "flags",
       "enum_ref": "TransitionFlags",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "flags TransitionFlags",
       "vtype": "TYPE_FLAGS",
       "vsubtype": "TYPE_INT16",

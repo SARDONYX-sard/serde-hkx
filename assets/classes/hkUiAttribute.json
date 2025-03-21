@@ -4,9 +4,9 @@
   "signature": "0xeb6e96e3",
   "size_x86": 20,
   "size_x86_64": 40,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "HideInModeler",
@@ -32,7 +32,7 @@
   "members": [
     {
       "name": "visible",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -47,7 +47,7 @@
     {
       "name": "hideInModeler",
       "enum_ref": "HideInModeler",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum HideInModeler",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -61,7 +61,7 @@
     },
     {
       "name": "label",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "char*",
       "vtype": "TYPE_CSTRING",
       "vsubtype": "TYPE_VOID",
@@ -75,7 +75,7 @@
     },
     {
       "name": "group",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "char*",
       "vtype": "TYPE_CSTRING",
       "vsubtype": "TYPE_VOID",
@@ -89,7 +89,7 @@
     },
     {
       "name": "hideBaseClassMembers",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "char*",
       "vtype": "TYPE_CSTRING",
       "vsubtype": "TYPE_VOID",
@@ -103,7 +103,7 @@
     },
     {
       "name": "endGroup",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -117,7 +117,7 @@
     },
     {
       "name": "endGroup2",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -131,7 +131,7 @@
     },
     {
       "name": "advanced",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

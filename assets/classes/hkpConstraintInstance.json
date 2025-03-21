@@ -5,9 +5,9 @@
   "size_x86": 56,
   "size_x86_64": 112,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "ConstraintPriority",
@@ -121,7 +121,7 @@
   "members": [
     {
       "name": "owner",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -136,7 +136,7 @@
     {
       "name": "data",
       "class_ref": "hkpConstraintData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpConstraintData*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -151,7 +151,7 @@
     {
       "name": "constraintModifiers",
       "class_ref": "hkpModifierConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpModifierConstraintAtom*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -166,7 +166,7 @@
     {
       "name": "entities",
       "class_ref": "hkpEntity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpEntity*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -181,7 +181,7 @@
     {
       "name": "priority",
       "enum_ref": "ConstraintPriority",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ConstraintPriority",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -195,7 +195,7 @@
     },
     {
       "name": "wantRuntime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -210,7 +210,7 @@
     {
       "name": "destructionRemapInfo",
       "enum_ref": "OnDestructionRemapInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum OnDestructionRemapInfo",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -225,7 +225,7 @@
     {
       "name": "listeners",
       "class_ref": "hkpConstraintInstanceSmallArraySerializeOverrideType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpConstraintInstanceSmallArraySerializeOverrideType",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -239,7 +239,7 @@
     },
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -253,7 +253,7 @@
     },
     {
       "name": "userData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUlong",
       "vtype": "TYPE_ULONG",
       "vsubtype": "TYPE_VOID",
@@ -267,7 +267,7 @@
     },
     {
       "name": "internal",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -281,7 +281,7 @@
     },
     {
       "name": "uid",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",

@@ -5,9 +5,9 @@
   "size_x86": 208,
   "size_x86_64": 256,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "AlignMode",
@@ -30,7 +30,7 @@
     {
       "name": "gains",
       "class_ref": "hkbFootIkGains",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbFootIkGains",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -45,7 +45,7 @@
     {
       "name": "legs",
       "class_ref": "hkbFootIkModifierLeg",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "hkArray<struct hkbFootIkModifierLeg>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -59,7 +59,7 @@
     },
     {
       "name": "raycastDistanceUp",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -73,7 +73,7 @@
     },
     {
       "name": "raycastDistanceDown",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -87,7 +87,7 @@
     },
     {
       "name": "originalGroundHeightMS",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -101,7 +101,7 @@
     },
     {
       "name": "errorOut",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -115,7 +115,7 @@
     },
     {
       "name": "errorOutTranslation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -129,7 +129,7 @@
     },
     {
       "name": "alignWithGroundRotation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQuaternion",
       "vtype": "TYPE_QUATERNION",
       "vsubtype": "TYPE_VOID",
@@ -143,7 +143,7 @@
     },
     {
       "name": "verticalOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -157,7 +157,7 @@
     },
     {
       "name": "collisionFilterInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -171,7 +171,7 @@
     },
     {
       "name": "forwardAlignFraction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -185,7 +185,7 @@
     },
     {
       "name": "sidewaysAlignFraction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -199,7 +199,7 @@
     },
     {
       "name": "sidewaysSampleWidth",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -213,7 +213,7 @@
     },
     {
       "name": "useTrackData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -227,7 +227,7 @@
     },
     {
       "name": "lockFeetWhenPlanted",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -241,7 +241,7 @@
     },
     {
       "name": "useCharacterUpVector",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -256,7 +256,7 @@
     {
       "name": "alignMode",
       "enum_ref": "AlignMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum AlignMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -271,7 +271,7 @@
     {
       "name": "internalLegData",
       "class_ref": "hkbFootIkModifierInternalLegData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkbFootIkModifierInternalLegData>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -285,7 +285,7 @@
     },
     {
       "name": "prevIsFootIkEnabled",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -299,7 +299,7 @@
     },
     {
       "name": "isSetUp",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -313,7 +313,7 @@
     },
     {
       "name": "isGroundPositionValid",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -327,7 +327,7 @@
     },
     {
       "name": "timeStep",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

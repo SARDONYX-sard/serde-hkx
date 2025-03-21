@@ -5,14 +5,14 @@
   "size_x86": 44,
   "size_x86_64": 64,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "links",
       "class_ref": "hkpPoweredChainMapperLinkInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpPoweredChainMapperLinkInfo>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "targets",
       "class_ref": "hkpPoweredChainMapperTarget",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpPoweredChainMapperTarget>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -42,7 +42,7 @@
     {
       "name": "chains",
       "class_ref": "hkpConstraintChainInstance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpConstraintChainInstance*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

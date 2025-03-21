@@ -5,14 +5,14 @@
   "size_x86": 36,
   "size_x86_64": 72,
   "parent": "hkpShapeCollection",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "convexPieceStream",
       "class_ref": "hkpConvexPieceStreamData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpConvexPieceStreamData*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "displayMesh",
       "class_ref": "hkpShapeCollection",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpShapeCollection*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -41,7 +41,7 @@
     },
     {
       "name": "radius",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

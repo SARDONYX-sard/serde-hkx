@@ -4,14 +4,14 @@
   "signature": "0xf855ba44",
   "size_x86": 160,
   "size_x86_64": 160,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "transforms",
       "class_ref": "hkpSetLocalTransformsConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpSetLocalTransformsConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     {
       "name": "cogWheels",
       "class_ref": "hkpCogWheelConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpCogWheelConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

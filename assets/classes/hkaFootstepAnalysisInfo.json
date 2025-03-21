@@ -5,13 +5,13 @@
   "size_x86": 152,
   "size_x86_64": 208,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "name",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkChar>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_CHAR",
@@ -25,7 +25,7 @@
     },
     {
       "name": "nameStrike",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkChar>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_CHAR",
@@ -39,7 +39,7 @@
     },
     {
       "name": "nameLift",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkChar>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_CHAR",
@@ -53,7 +53,7 @@
     },
     {
       "name": "nameLock",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkChar>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_CHAR",
@@ -67,7 +67,7 @@
     },
     {
       "name": "nameUnlock",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkChar>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_CHAR",
@@ -81,7 +81,7 @@
     },
     {
       "name": "minPos",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReal>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_REAL",
@@ -95,7 +95,7 @@
     },
     {
       "name": "maxPos",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReal>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_REAL",
@@ -109,7 +109,7 @@
     },
     {
       "name": "minVel",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReal>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_REAL",
@@ -123,7 +123,7 @@
     },
     {
       "name": "maxVel",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReal>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_REAL",
@@ -137,7 +137,7 @@
     },
     {
       "name": "allBonesDown",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReal>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_REAL",
@@ -151,7 +151,7 @@
     },
     {
       "name": "anyBonesDown",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReal>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_REAL",
@@ -165,7 +165,7 @@
     },
     {
       "name": "posTol",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -179,7 +179,7 @@
     },
     {
       "name": "velTol",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -193,7 +193,7 @@
     },
     {
       "name": "duration",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

@@ -4,9 +4,9 @@
   "signature": "0x6cb92c76",
   "size_x86": 16,
   "size_x86_64": 32,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "EventRangeMode",
@@ -28,7 +28,7 @@
   "members": [
     {
       "name": "upperBound",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -43,7 +43,7 @@
     {
       "name": "event",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -58,7 +58,7 @@
     {
       "name": "eventMode",
       "enum_ref": "EventRangeMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum EventRangeMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

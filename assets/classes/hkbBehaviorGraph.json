@@ -5,9 +5,9 @@
   "size_x86": 176,
   "size_x86_64": 304,
   "parent": "hkbGenerator",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "VariableMode",
@@ -30,7 +30,7 @@
     {
       "name": "variableMode",
       "enum_ref": "VariableMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum VariableMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -44,7 +44,7 @@
     },
     {
       "name": "uniqueIdPool",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -58,7 +58,7 @@
     },
     {
       "name": "idToStateMachineTemplateMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -72,7 +72,7 @@
     },
     {
       "name": "mirroredExternalIdMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -86,7 +86,7 @@
     },
     {
       "name": "pseudoRandomGenerator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -101,7 +101,7 @@
     {
       "name": "rootGenerator",
       "class_ref": "hkbGenerator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbGenerator*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -116,7 +116,7 @@
     {
       "name": "data",
       "class_ref": "hkbBehaviorGraphData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbBehaviorGraphData*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -130,7 +130,7 @@
     },
     {
       "name": "rootGeneratorClone",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -144,7 +144,7 @@
     },
     {
       "name": "activeNodes",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -158,7 +158,7 @@
     },
     {
       "name": "activeNodeTemplateToIndexMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -172,7 +172,7 @@
     },
     {
       "name": "activeNodesChildrenIndices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -186,7 +186,7 @@
     },
     {
       "name": "globalTransitionData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -200,7 +200,7 @@
     },
     {
       "name": "eventIdMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -214,7 +214,7 @@
     },
     {
       "name": "attributeIdMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -228,7 +228,7 @@
     },
     {
       "name": "variableIdMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -242,7 +242,7 @@
     },
     {
       "name": "characterPropertyIdMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -256,7 +256,7 @@
     },
     {
       "name": "variableValueSet",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -270,7 +270,7 @@
     },
     {
       "name": "nodeTemplateToCloneMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -284,7 +284,7 @@
     },
     {
       "name": "nodeCloneToTemplateMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -298,7 +298,7 @@
     },
     {
       "name": "stateListenerTemplateToCloneMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -312,7 +312,7 @@
     },
     {
       "name": "nodePartitionInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -326,7 +326,7 @@
     },
     {
       "name": "numIntermediateOutputs",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -340,7 +340,7 @@
     },
     {
       "name": "jobs",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -354,7 +354,7 @@
     },
     {
       "name": "allPartitionMemory",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -368,7 +368,7 @@
     },
     {
       "name": "numStaticNodes",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -382,7 +382,7 @@
     },
     {
       "name": "nextUniqueId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -396,7 +396,7 @@
     },
     {
       "name": "isActive",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -410,7 +410,7 @@
     },
     {
       "name": "isLinked",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -424,7 +424,7 @@
     },
     {
       "name": "updateActiveNodes",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -438,7 +438,7 @@
     },
     {
       "name": "stateOrTransitionChanged",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

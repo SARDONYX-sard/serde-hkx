@@ -5,9 +5,9 @@
   "size_x86": 208,
   "size_x86_64": 272,
   "parent": "hkbGenerator",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "PlaybackMode",
@@ -73,7 +73,7 @@
   "members": [
     {
       "name": "animationName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -88,7 +88,7 @@
     {
       "name": "triggers",
       "class_ref": "hkbClipTriggerArray",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbClipTriggerArray*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -102,7 +102,7 @@
     },
     {
       "name": "cropStartAmountLocalTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -116,7 +116,7 @@
     },
     {
       "name": "cropEndAmountLocalTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -130,7 +130,7 @@
     },
     {
       "name": "startTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -144,7 +144,7 @@
     },
     {
       "name": "playbackSpeed",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -158,7 +158,7 @@
     },
     {
       "name": "enforcedDuration",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -172,7 +172,7 @@
     },
     {
       "name": "userControlledTimeFraction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -186,7 +186,7 @@
     },
     {
       "name": "animationBindingIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -201,7 +201,7 @@
     {
       "name": "mode",
       "enum_ref": "PlaybackMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum PlaybackMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -215,7 +215,7 @@
     },
     {
       "name": "flags",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt8",
       "vtype": "TYPE_INT8",
       "vsubtype": "TYPE_VOID",
@@ -229,7 +229,7 @@
     },
     {
       "name": "animDatas",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -243,7 +243,7 @@
     },
     {
       "name": "animationControl",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -257,7 +257,7 @@
     },
     {
       "name": "originalTriggers",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -271,7 +271,7 @@
     },
     {
       "name": "mapperData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -285,7 +285,7 @@
     },
     {
       "name": "binding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -299,7 +299,7 @@
     },
     {
       "name": "mirroredAnimation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -313,7 +313,7 @@
     },
     {
       "name": "extractedMotion",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQsTransform",
       "vtype": "TYPE_QSTRANSFORM",
       "vsubtype": "TYPE_VOID",
@@ -327,7 +327,7 @@
     },
     {
       "name": "echos",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -341,7 +341,7 @@
     },
     {
       "name": "localTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -355,7 +355,7 @@
     },
     {
       "name": "time",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -369,7 +369,7 @@
     },
     {
       "name": "previousUserControlledTimeFraction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -383,7 +383,7 @@
     },
     {
       "name": "bufferSize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -397,7 +397,7 @@
     },
     {
       "name": "echoBufferSize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -411,7 +411,7 @@
     },
     {
       "name": "atEnd",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -425,7 +425,7 @@
     },
     {
       "name": "ignoreStartTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -439,7 +439,7 @@
     },
     {
       "name": "pingPongBackward",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

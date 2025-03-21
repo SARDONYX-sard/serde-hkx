@@ -4,9 +4,9 @@
   "signature": "0x82b894c3",
   "size_x86": 176,
   "size_x86_64": 176,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "enums": [
     {
       "name": "Axis",
@@ -33,7 +33,7 @@
     {
       "name": "rotations",
       "class_ref": "hkpSetLocalRotationsConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpSetLocalRotationsConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -48,7 +48,7 @@
     {
       "name": "twistLimit",
       "class_ref": "hkpTwistLimitConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpTwistLimitConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -63,7 +63,7 @@
     {
       "name": "coneLimit",
       "class_ref": "hkpConeLimitConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpConeLimitConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -78,7 +78,7 @@
     {
       "name": "planesLimit",
       "class_ref": "hkpConeLimitConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpConeLimitConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

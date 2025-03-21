@@ -5,9 +5,9 @@
   "size_x86": 8,
   "size_x86_64": 16,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "Type",

@@ -5,14 +5,14 @@
   "size_x86": 108,
   "size_x86_64": 200,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "sendToAttacherOnAttach",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -27,7 +27,7 @@
     {
       "name": "sendToAttacheeOnAttach",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -42,7 +42,7 @@
     {
       "name": "sendToAttacherOnDetach",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -57,7 +57,7 @@
     {
       "name": "sendToAttacheeOnDetach",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -72,7 +72,7 @@
     {
       "name": "attachmentSetup",
       "class_ref": "hkbAttachmentSetup",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbAttachmentSetup*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -87,7 +87,7 @@
     {
       "name": "attacherHandle",
       "class_ref": "hkbHandle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbHandle*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -102,7 +102,7 @@
     {
       "name": "attacheeHandle",
       "class_ref": "hkbHandle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbHandle*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -116,7 +116,7 @@
     },
     {
       "name": "attacheeLayer",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -130,7 +130,7 @@
     },
     {
       "name": "attacheeRB",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -144,7 +144,7 @@
     },
     {
       "name": "oldMotionType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum unknown",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -158,7 +158,7 @@
     },
     {
       "name": "oldFilterInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -172,7 +172,7 @@
     },
     {
       "name": "attachment",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",

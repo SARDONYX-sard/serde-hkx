@@ -5,13 +5,13 @@
   "size_x86": 80,
   "size_x86_64": 96,
   "parent": "hkpConstraintAtom",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "isEnabled",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "initializedOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     },
     {
       "name": "previousTargetAnglesOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -53,7 +53,7 @@
     },
     {
       "name": "target_bRca",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkMatrix3",
       "vtype": "TYPE_MATRIX3",
       "vsubtype": "TYPE_VOID",
@@ -68,7 +68,7 @@
     {
       "name": "motors",
       "class_ref": "hkpConstraintMotor",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpConstraintMotor*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

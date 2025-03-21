@@ -5,8 +5,8 @@
   "size_x86": 544,
   "size_x86_64": 720,
   "parent": "hkpEntity",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": []
 }

@@ -5,14 +5,14 @@
   "size_x86": 272,
   "size_x86_64": 368,
   "parent": "hkpExtendedMeshShape",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "meshstorage",
       "class_ref": "hkpStorageExtendedMeshShapeMeshSubpartStorage",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpStorageExtendedMeshShapeMeshSubpartStorage*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -27,7 +27,7 @@
     {
       "name": "shapestorage",
       "class_ref": "hkpStorageExtendedMeshShapeShapeSubpartStorage",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpStorageExtendedMeshShapeShapeSubpartStorage*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

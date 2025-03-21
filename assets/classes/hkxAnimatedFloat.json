@@ -5,13 +5,13 @@
   "size_x86": 24,
   "size_x86_64": 40,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "floats",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReal>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_REAL",
@@ -26,7 +26,7 @@
     {
       "name": "hint",
       "enum_ref": "Hint",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum Hint",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",

@@ -5,9 +5,9 @@
   "size_x86": 12,
   "size_x86_64": 24,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "MotorType",
@@ -46,7 +46,7 @@
     {
       "name": "type",
       "enum_ref": "MotorType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum MotorType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

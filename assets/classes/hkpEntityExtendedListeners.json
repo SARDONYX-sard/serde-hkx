@@ -4,14 +4,14 @@
   "signature": "0xf557023c",
   "size_x86": 16,
   "size_x86_64": 32,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "activationListeners",
       "class_ref": "hkpEntitySmallArraySerializeOverrideType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpEntitySmallArraySerializeOverrideType",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     {
       "name": "entityListeners",
       "class_ref": "hkpEntitySmallArraySerializeOverrideType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpEntitySmallArraySerializeOverrideType",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

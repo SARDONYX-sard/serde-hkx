@@ -5,14 +5,14 @@
   "size_x86": 56,
   "size_x86_64": 88,
   "parent": "hkpCollisionFilter",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "otherFilter",
       "class_ref": "hkpCollisionFilter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpCollisionFilter*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

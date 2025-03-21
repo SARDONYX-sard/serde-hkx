@@ -5,14 +5,14 @@
   "size_x86": 20,
   "size_x86_64": 32,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "variables",
       "class_ref": "hkxEnvironmentVariable",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<struct hkxEnvironmentVariable>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",

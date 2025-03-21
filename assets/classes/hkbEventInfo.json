@@ -4,9 +4,9 @@
   "signature": "0x5874eed4",
   "size_x86": 4,
   "size_x86_64": 4,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "enums": [
     {
       "name": "Flags",
@@ -29,7 +29,7 @@
     {
       "name": "flags",
       "enum_ref": "Flags",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "flags Flags",
       "vtype": "TYPE_FLAGS",
       "vsubtype": "TYPE_UINT32",

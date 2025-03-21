@@ -5,14 +5,14 @@
   "size_x86": 24,
   "size_x86_64": 40,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "hands",
       "class_ref": "hkbHandIkDriverInfoHand",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<struct hkbHandIkDriverInfoHand>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "fadeInOutCurve",
       "enum_ref": "BlendCurve",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum BlendCurve",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

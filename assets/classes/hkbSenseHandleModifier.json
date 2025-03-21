@@ -5,9 +5,9 @@
   "size_x86": 160,
   "size_x86_64": 224,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "SensingMode",
@@ -62,7 +62,7 @@
     {
       "name": "handle",
       "class_ref": "hkbHandle",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbHandle",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -76,7 +76,7 @@
     },
     {
       "name": "sensorLocalOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -91,7 +91,7 @@
     {
       "name": "ranges",
       "class_ref": "hkbSenseHandleModifierRange",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "hkArray<struct hkbSenseHandleModifierRange>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -106,7 +106,7 @@
     {
       "name": "handleOut",
       "class_ref": "hkbHandle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbHandle*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -121,7 +121,7 @@
     {
       "name": "handleIn",
       "class_ref": "hkbHandle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbHandle*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -135,7 +135,7 @@
     },
     {
       "name": "localFrameName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -149,7 +149,7 @@
     },
     {
       "name": "sensorLocalFrameName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -163,7 +163,7 @@
     },
     {
       "name": "minDistance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -177,7 +177,7 @@
     },
     {
       "name": "maxDistance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -191,7 +191,7 @@
     },
     {
       "name": "distanceOut",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -205,7 +205,7 @@
     },
     {
       "name": "collisionFilterInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -219,7 +219,7 @@
     },
     {
       "name": "sensorRagdollBoneIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -233,7 +233,7 @@
     },
     {
       "name": "sensorAnimationBoneIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -248,7 +248,7 @@
     {
       "name": "sensingMode",
       "enum_ref": "SensingMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum SensingMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -262,7 +262,7 @@
     },
     {
       "name": "extrapolateSensorPosition",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -276,7 +276,7 @@
     },
     {
       "name": "keepFirstSensedHandle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -290,7 +290,7 @@
     },
     {
       "name": "foundHandleOut",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -304,7 +304,7 @@
     },
     {
       "name": "timeSinceLastModify",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -318,7 +318,7 @@
     },
     {
       "name": "rangeIndexForEventToSendNextUpdate",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

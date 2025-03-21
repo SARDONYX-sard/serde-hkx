@@ -5,14 +5,14 @@
   "size_x86": 32,
   "size_x86_64": 56,
   "parent": "hkpShape",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "rays",
       "class_ref": "hkpMultiRayShapeRay",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpMultiRayShapeRay>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -26,7 +26,7 @@
     },
     {
       "name": "rayPenetrationDistance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

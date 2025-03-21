@@ -5,14 +5,14 @@
   "size_x86": 112,
   "size_x86_64": 144,
   "parent": "hkpShape",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "childShape",
       "class_ref": "hkpSingleShapeContainer",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpSingleShapeContainer",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     },
     {
       "name": "childShapeSize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     },
     {
       "name": "rotation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQuaternion",
       "vtype": "TYPE_QUATERNION",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     },
     {
       "name": "transform",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkTransform",
       "vtype": "TYPE_TRANSFORM",
       "vsubtype": "TYPE_VOID",

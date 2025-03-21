@@ -5,14 +5,14 @@
   "size_x86": 48,
   "size_x86_64": 88,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "modifier",
       "class_ref": "hkbModifier",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbModifier*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

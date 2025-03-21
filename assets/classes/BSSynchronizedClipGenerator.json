@@ -5,14 +5,14 @@
   "size_x86": 256,
   "size_x86_64": 304,
   "parent": "hkbGenerator",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "pClipGenerator",
       "class_ref": "hkbGenerator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbGenerator*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -26,7 +26,7 @@
     },
     {
       "name": "SyncAnimPrefix",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "char*",
       "vtype": "TYPE_CSTRING",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     },
     {
       "name": "bSyncClipIgnoreMarkPlacement",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     },
     {
       "name": "fGetToMarkTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -68,7 +68,7 @@
     },
     {
       "name": "fMarkErrorThreshold",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -82,7 +82,7 @@
     },
     {
       "name": "bLeadCharacter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -96,7 +96,7 @@
     },
     {
       "name": "bReorientSupportChar",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -110,7 +110,7 @@
     },
     {
       "name": "bApplyMotionFromRoot",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -124,7 +124,7 @@
     },
     {
       "name": "pSyncScene",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -138,7 +138,7 @@
     },
     {
       "name": "StartMarkWS",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQsTransform",
       "vtype": "TYPE_QSTRANSFORM",
       "vsubtype": "TYPE_VOID",
@@ -152,7 +152,7 @@
     },
     {
       "name": "EndMarkWS",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQsTransform",
       "vtype": "TYPE_QSTRANSFORM",
       "vsubtype": "TYPE_VOID",
@@ -166,7 +166,7 @@
     },
     {
       "name": "StartMarkMS",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQsTransform",
       "vtype": "TYPE_QSTRANSFORM",
       "vsubtype": "TYPE_VOID",
@@ -180,7 +180,7 @@
     },
     {
       "name": "fCurrentLerp",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -194,7 +194,7 @@
     },
     {
       "name": "pLocalSyncBinding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -208,7 +208,7 @@
     },
     {
       "name": "pEventMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -222,7 +222,7 @@
     },
     {
       "name": "sAnimationBindingIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -236,7 +236,7 @@
     },
     {
       "name": "bAtMark",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -250,7 +250,7 @@
     },
     {
       "name": "bAllCharactersInScene",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -264,7 +264,7 @@
     },
     {
       "name": "bAllCharactersAtMarks",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

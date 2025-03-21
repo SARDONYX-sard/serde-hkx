@@ -5,9 +5,9 @@
   "size_x86": 44,
   "size_x86_64": 64,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "FindContacts",
@@ -69,7 +69,7 @@
   "members": [
     {
       "name": "determinismCheckFrameCounter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -84,7 +84,7 @@
     {
       "name": "world",
       "class_ref": "hkpWorld",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpWorld*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -99,7 +99,7 @@
     {
       "name": "lastProcessingStep",
       "enum_ref": "LastProcessingStep",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum LastProcessingStep",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -113,7 +113,7 @@
     },
     {
       "name": "currentTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -127,7 +127,7 @@
     },
     {
       "name": "currentPsiTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -141,7 +141,7 @@
     },
     {
       "name": "physicsDeltaTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -155,7 +155,7 @@
     },
     {
       "name": "simulateUntilTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -169,7 +169,7 @@
     },
     {
       "name": "frameMarkerPsiSnap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -183,7 +183,7 @@
     },
     {
       "name": "previousStepResult",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",

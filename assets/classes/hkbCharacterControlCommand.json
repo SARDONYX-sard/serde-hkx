@@ -5,9 +5,9 @@
   "size_x86": 24,
   "size_x86_64": 32,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "CharacterControlCommand",
@@ -29,7 +29,7 @@
   "members": [
     {
       "name": "characterId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint64",
       "vtype": "TYPE_UINT64",
       "vsubtype": "TYPE_VOID",
@@ -44,7 +44,7 @@
     {
       "name": "command",
       "enum_ref": "CharacterControlCommand",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum CharacterControlCommand",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -58,7 +58,7 @@
     },
     {
       "name": "padding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

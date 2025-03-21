@@ -4,13 +4,13 @@
   "signature": "0x9ce308e9",
   "size_x86": 16,
   "size_x86_64": 16,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "key",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "alignmentPadding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     {
       "name": "value",
       "class_ref": "hkpPropertyValue",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpPropertyValue",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

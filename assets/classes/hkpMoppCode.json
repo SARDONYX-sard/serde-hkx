@@ -5,9 +5,9 @@
   "size_x86": 48,
   "size_x86_64": 64,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "BuildType",
@@ -34,7 +34,7 @@
     {
       "name": "info",
       "class_ref": "hkpMoppCodeCodeInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpMoppCodeCodeInfo",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -48,7 +48,7 @@
     },
     {
       "name": "data",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint8>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT8",
@@ -63,7 +63,7 @@
     {
       "name": "buildType",
       "enum_ref": "BuildType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum BuildType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

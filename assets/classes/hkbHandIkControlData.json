@@ -4,9 +4,9 @@
   "signature": "0xd72b8d17",
   "size_x86": 80,
   "size_x86_64": 96,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "enums": [
     {
       "name": "HandleChangeMode",
@@ -28,7 +28,7 @@
   "members": [
     {
       "name": "targetPosition",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -42,7 +42,7 @@
     },
     {
       "name": "targetRotation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQuaternion",
       "vtype": "TYPE_QUATERNION",
       "vsubtype": "TYPE_VOID",
@@ -56,7 +56,7 @@
     },
     {
       "name": "targetNormal",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -71,7 +71,7 @@
     {
       "name": "targetHandle",
       "class_ref": "hkbHandle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbHandle*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -85,7 +85,7 @@
     },
     {
       "name": "transformOnFraction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -99,7 +99,7 @@
     },
     {
       "name": "normalOnFraction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -113,7 +113,7 @@
     },
     {
       "name": "fadeInDuration",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -127,7 +127,7 @@
     },
     {
       "name": "fadeOutDuration",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -141,7 +141,7 @@
     },
     {
       "name": "extrapolationTimeStep",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -155,7 +155,7 @@
     },
     {
       "name": "handleChangeSpeed",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -170,7 +170,7 @@
     {
       "name": "handleChangeMode",
       "enum_ref": "HandleChangeMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum HandleChangeMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -184,7 +184,7 @@
     },
     {
       "name": "fixUp",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

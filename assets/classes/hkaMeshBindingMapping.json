@@ -4,13 +4,13 @@
   "signature": "0x48aceb75",
   "size_x86": 12,
   "size_x86_64": 16,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "mapping",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT16",

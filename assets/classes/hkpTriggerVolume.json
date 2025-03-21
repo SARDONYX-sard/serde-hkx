@@ -5,9 +5,9 @@
   "size_x86": 52,
   "size_x86_64": 88,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "EventType",
@@ -62,7 +62,7 @@
     {
       "name": "overlappingBodies",
       "class_ref": "hkpRigidBody",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpRigidBody*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -77,7 +77,7 @@
     {
       "name": "eventQueue",
       "class_ref": "hkpTriggerVolumeEventInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpTriggerVolumeEventInfo>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -92,7 +92,7 @@
     {
       "name": "triggerBody",
       "class_ref": "hkpRigidBody",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpRigidBody*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -106,7 +106,7 @@
     },
     {
       "name": "sequenceNumber",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",

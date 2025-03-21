@@ -5,14 +5,14 @@
   "size_x86": 8,
   "size_x86_64": 16,
   "parent": "hkpShapeContainer",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "childShape",
       "class_ref": "hkpShape",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpShape*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

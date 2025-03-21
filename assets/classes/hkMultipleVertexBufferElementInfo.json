@@ -4,13 +4,13 @@
   "signature": "0x4731fb1b",
   "size_x86": 2,
   "size_x86_64": 2,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "vertexBufferIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "elementIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",

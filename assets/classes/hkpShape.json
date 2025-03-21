@@ -5,13 +5,13 @@
   "size_x86": 16,
   "size_x86_64": 32,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "userData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUlong",
       "vtype": "TYPE_ULONG",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "type",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum unknown",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT32",

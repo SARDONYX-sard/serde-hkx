@@ -5,9 +5,9 @@
   "size_x86": 240,
   "size_x86_64": 336,
   "parent": "hkpShapeCollection",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "IndexStridingType",
@@ -82,7 +82,7 @@
     {
       "name": "embeddedTrianglesSubpart",
       "class_ref": "hkpExtendedMeshShapeTrianglesSubpart",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkpExtendedMeshShapeTrianglesSubpart",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -96,7 +96,7 @@
     },
     {
       "name": "aabbHalfExtents",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -110,7 +110,7 @@
     },
     {
       "name": "aabbCenter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -124,7 +124,7 @@
     },
     {
       "name": "materialClass",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -138,7 +138,7 @@
     },
     {
       "name": "numBitsForSubpartIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -153,7 +153,7 @@
     {
       "name": "trianglesSubparts",
       "class_ref": "hkpExtendedMeshShapeTrianglesSubpart",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "hkArray<struct hkpExtendedMeshShapeTrianglesSubpart>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -168,7 +168,7 @@
     {
       "name": "shapesSubparts",
       "class_ref": "hkpExtendedMeshShapeShapesSubpart",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "hkArray<struct hkpExtendedMeshShapeShapesSubpart>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -182,7 +182,7 @@
     },
     {
       "name": "weldingInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT16",
@@ -197,7 +197,7 @@
     {
       "name": "weldingType",
       "enum_ref": "WeldingType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum WeldingType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -211,7 +211,7 @@
     },
     {
       "name": "defaultCollisionFilterInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -225,7 +225,7 @@
     },
     {
       "name": "cachedNumChildShapes",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -239,7 +239,7 @@
     },
     {
       "name": "triangleRadius",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -253,7 +253,7 @@
     },
     {
       "name": "padding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

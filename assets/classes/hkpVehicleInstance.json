@@ -5,14 +5,14 @@
   "size_x86": 212,
   "size_x86_64": 304,
   "parent": "hkpUnaryAction",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "data",
       "class_ref": "hkpVehicleData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleData*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "driverInput",
       "class_ref": "hkpVehicleDriverInput",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleDriverInput*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -42,7 +42,7 @@
     {
       "name": "steering",
       "class_ref": "hkpVehicleSteering",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleSteering*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -57,7 +57,7 @@
     {
       "name": "engine",
       "class_ref": "hkpVehicleEngine",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleEngine*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -72,7 +72,7 @@
     {
       "name": "transmission",
       "class_ref": "hkpVehicleTransmission",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleTransmission*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -87,7 +87,7 @@
     {
       "name": "brake",
       "class_ref": "hkpVehicleBrake",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleBrake*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -102,7 +102,7 @@
     {
       "name": "suspension",
       "class_ref": "hkpVehicleSuspension",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleSuspension*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -117,7 +117,7 @@
     {
       "name": "aerodynamics",
       "class_ref": "hkpVehicleAerodynamics",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleAerodynamics*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -132,7 +132,7 @@
     {
       "name": "wheelCollide",
       "class_ref": "hkpVehicleWheelCollide",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleWheelCollide*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -147,7 +147,7 @@
     {
       "name": "tyreMarks",
       "class_ref": "hkpTyremarksInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpTyremarksInfo*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -162,7 +162,7 @@
     {
       "name": "velocityDamper",
       "class_ref": "hkpVehicleVelocityDamper",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleVelocityDamper*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -177,7 +177,7 @@
     {
       "name": "wheelsInfo",
       "class_ref": "hkpVehicleInstanceWheelInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpVehicleInstanceWheelInfo>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -192,7 +192,7 @@
     {
       "name": "frictionStatus",
       "class_ref": "hkpVehicleFrictionStatus",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleFrictionStatus",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -207,7 +207,7 @@
     {
       "name": "deviceStatus",
       "class_ref": "hkpVehicleDriverInputStatus",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleDriverInputStatus*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -221,7 +221,7 @@
     },
     {
       "name": "isFixed",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkBool>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_BOOL",
@@ -235,7 +235,7 @@
     },
     {
       "name": "wheelsTimeSinceMaxPedalInput",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -249,7 +249,7 @@
     },
     {
       "name": "tryingToReverse",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -263,7 +263,7 @@
     },
     {
       "name": "torque",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -277,7 +277,7 @@
     },
     {
       "name": "rpm",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -291,7 +291,7 @@
     },
     {
       "name": "mainSteeringAngle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -305,7 +305,7 @@
     },
     {
       "name": "wheelsSteeringAngle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReal>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_REAL",
@@ -319,7 +319,7 @@
     },
     {
       "name": "isReversing",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -333,7 +333,7 @@
     },
     {
       "name": "currentGear",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt8",
       "vtype": "TYPE_INT8",
       "vsubtype": "TYPE_VOID",
@@ -347,7 +347,7 @@
     },
     {
       "name": "delayed",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -361,7 +361,7 @@
     },
     {
       "name": "clutchDelayCountdown",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

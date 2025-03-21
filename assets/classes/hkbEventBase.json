@@ -4,9 +4,9 @@
   "signature": "0x76bddb31",
   "size_x86": 8,
   "size_x86_64": 16,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "enums": [
     {
       "name": "SystemEventIds",
@@ -24,7 +24,7 @@
   "members": [
     {
       "name": "id",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     {
       "name": "payload",
       "class_ref": "hkbEventPayload",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbEventPayload*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

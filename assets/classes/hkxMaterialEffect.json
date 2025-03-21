@@ -5,9 +5,9 @@
   "size_x86": 28,
   "size_x86_64": 48,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "EffectType",
@@ -49,7 +49,7 @@
   "members": [
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -64,7 +64,7 @@
     {
       "name": "type",
       "enum_ref": "EffectType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum EffectType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -78,7 +78,7 @@
     },
     {
       "name": "data",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint8>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT8",

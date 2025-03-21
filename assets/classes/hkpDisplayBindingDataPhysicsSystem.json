@@ -5,14 +5,14 @@
   "size_x86": 24,
   "size_x86_64": 40,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "bindings",
       "class_ref": "hkpDisplayBindingDataRigidBody",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpDisplayBindingDataRigidBody*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -27,7 +27,7 @@
     {
       "name": "system",
       "class_ref": "hkpPhysicsSystem",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpPhysicsSystem*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

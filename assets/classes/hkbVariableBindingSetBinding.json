@@ -4,9 +4,9 @@
   "signature": "0x4d592f72",
   "size_x86": 32,
   "size_x86_64": 40,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "BindingType",
@@ -44,7 +44,7 @@
   "members": [
     {
       "name": "memberPath",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -58,7 +58,7 @@
     },
     {
       "name": "memberClass",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -72,7 +72,7 @@
     },
     {
       "name": "offsetInObjectPlusOne",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -86,7 +86,7 @@
     },
     {
       "name": "offsetInArrayPlusOne",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -100,7 +100,7 @@
     },
     {
       "name": "rootVariableIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -114,7 +114,7 @@
     },
     {
       "name": "variableIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -128,7 +128,7 @@
     },
     {
       "name": "bitIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt8",
       "vtype": "TYPE_INT8",
       "vsubtype": "TYPE_VOID",
@@ -143,7 +143,7 @@
     {
       "name": "bindingType",
       "enum_ref": "BindingType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum BindingType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -157,7 +157,7 @@
     },
     {
       "name": "memberType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum unknown",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -171,7 +171,7 @@
     },
     {
       "name": "variableType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt8",
       "vtype": "TYPE_INT8",
       "vsubtype": "TYPE_VOID",
@@ -185,7 +185,7 @@
     },
     {
       "name": "flags",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "flags unknown",
       "vtype": "TYPE_FLAGS",
       "vsubtype": "TYPE_INT8",

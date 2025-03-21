@@ -4,9 +4,9 @@
   "signature": "0x8a3609cf",
   "size_x86": 20,
   "size_x86_64": 40,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "FlagValues",
@@ -24,7 +24,7 @@
   "members": [
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "char*",
       "vtype": "TYPE_CSTRING",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     {
       "name": "items",
       "class_ref": "hkClassEnumItem",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkSimpleArray<struct hkClassEnumItem>",
       "vtype": "TYPE_SIMPLEARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -54,7 +54,7 @@
     {
       "name": "attributes",
       "class_ref": "hkCustomAttributes",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkCustomAttributes*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -69,7 +69,7 @@
     {
       "name": "flags",
       "enum_ref": "FlagValues",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "flags FlagValues",
       "vtype": "TYPE_FLAGS",
       "vsubtype": "TYPE_UINT32",

@@ -5,14 +5,14 @@
   "size_x86": 48,
   "size_x86_64": 80,
   "parent": "hkpBvTreeShape",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "childContainer",
       "class_ref": "hkpSingleShapeContainer",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpSingleShapeContainer",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     },
     {
       "name": "childSize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     },
     {
       "name": "wantAabbRejectionTest",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     },
     {
       "name": "padding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8[12]",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",

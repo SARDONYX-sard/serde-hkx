@@ -5,9 +5,9 @@
   "size_x86": 80,
   "size_x86_64": 112,
   "parent": "hkpCdBody",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "ForceCollideOntoPpuReasons",
@@ -37,7 +37,7 @@
   "members": [
     {
       "name": "ownerOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt8",
       "vtype": "TYPE_INT8",
       "vsubtype": "TYPE_VOID",
@@ -51,7 +51,7 @@
     },
     {
       "name": "forceCollideOntoPpu",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -65,7 +65,7 @@
     },
     {
       "name": "shapeSizeOnSpu",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -80,7 +80,7 @@
     {
       "name": "broadPhaseHandle",
       "class_ref": "hkpTypedBroadPhaseHandle",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkpTypedBroadPhaseHandle",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -95,7 +95,7 @@
     {
       "name": "boundingVolumeData",
       "class_ref": "hkpCollidableBoundingVolumeData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpCollidableBoundingVolumeData",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -109,7 +109,7 @@
     },
     {
       "name": "allowedPenetrationDepth",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

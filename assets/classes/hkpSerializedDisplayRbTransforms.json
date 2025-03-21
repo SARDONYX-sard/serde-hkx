@@ -5,14 +5,14 @@
   "size_x86": 20,
   "size_x86_64": 32,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "transforms",
       "class_ref": "hkpSerializedDisplayRbTransformsDisplayTransformPair",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpSerializedDisplayRbTransformsDisplayTransformPair>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",

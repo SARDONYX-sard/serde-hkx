@@ -5,13 +5,13 @@
   "size_x86": 68,
   "size_x86_64": 104,
   "parent": "hkpShapeCollection",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "vertices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkVector4>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VECTOR4",
@@ -26,7 +26,7 @@
     {
       "name": "triangles",
       "class_ref": "hkpSimpleMeshShapeTriangle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpSimpleMeshShapeTriangle>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -40,7 +40,7 @@
     },
     {
       "name": "materialIndices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint8>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT8",
@@ -54,7 +54,7 @@
     },
     {
       "name": "radius",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -69,7 +69,7 @@
     {
       "name": "weldingType",
       "enum_ref": "WeldingType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum WeldingType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",

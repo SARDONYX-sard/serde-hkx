@@ -4,14 +4,14 @@
   "signature": "0x9139b821",
   "size_x86": 16,
   "size_x86_64": 32,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "event",
       "class_ref": "hkbEvent",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEvent",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "time",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

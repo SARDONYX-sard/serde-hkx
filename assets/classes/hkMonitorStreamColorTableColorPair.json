@@ -4,13 +4,13 @@
   "signature": "0x738fca05",
   "size_x86": 8,
   "size_x86_64": 16,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "colorName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     {
       "name": "color",
       "enum_ref": "ExtendedColors",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ExtendedColors",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT32",

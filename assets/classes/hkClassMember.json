@@ -4,9 +4,9 @@
   "signature": "0x5c7ea4c2",
   "size_x86": 24,
   "size_x86_64": 40,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "Type",
@@ -224,7 +224,7 @@
   "members": [
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "char*",
       "vtype": "TYPE_CSTRING",
       "vsubtype": "TYPE_VOID",
@@ -239,7 +239,7 @@
     {
       "name": "class",
       "class_ref": "hkClass",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkClass*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -254,7 +254,7 @@
     {
       "name": "enum",
       "class_ref": "hkClassEnum",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkClassEnum*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -269,7 +269,7 @@
     {
       "name": "type",
       "enum_ref": "Type",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum Type",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -284,7 +284,7 @@
     {
       "name": "subtype",
       "enum_ref": "Type",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum Type",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -298,7 +298,7 @@
     },
     {
       "name": "cArraySize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -313,7 +313,7 @@
     {
       "name": "flags",
       "enum_ref": "FlagValues",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "flags FlagValues",
       "vtype": "TYPE_FLAGS",
       "vsubtype": "TYPE_UINT16",
@@ -327,7 +327,7 @@
     },
     {
       "name": "offset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -342,7 +342,7 @@
     {
       "name": "attributes",
       "class_ref": "hkCustomAttributes",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkCustomAttributes*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

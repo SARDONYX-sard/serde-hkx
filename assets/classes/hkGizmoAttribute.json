@@ -4,9 +4,9 @@
   "signature": "0x23aadfb6",
   "size_x86": 12,
   "size_x86_64": 24,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "GizmoType",
@@ -36,7 +36,7 @@
   "members": [
     {
       "name": "visible",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -50,7 +50,7 @@
     },
     {
       "name": "label",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "char*",
       "vtype": "TYPE_CSTRING",
       "vsubtype": "TYPE_VOID",
@@ -65,7 +65,7 @@
     {
       "name": "type",
       "enum_ref": "GizmoType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum GizmoType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

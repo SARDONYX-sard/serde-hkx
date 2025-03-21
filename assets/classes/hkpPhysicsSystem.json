@@ -5,14 +5,14 @@
   "size_x86": 68,
   "size_x86_64": 104,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "rigidBodies",
       "class_ref": "hkpRigidBody",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpRigidBody*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -27,7 +27,7 @@
     {
       "name": "constraints",
       "class_ref": "hkpConstraintInstance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpConstraintInstance*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -42,7 +42,7 @@
     {
       "name": "actions",
       "class_ref": "hkpAction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpAction*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -57,7 +57,7 @@
     {
       "name": "phantoms",
       "class_ref": "hkpPhantom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpPhantom*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -71,7 +71,7 @@
     },
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -85,7 +85,7 @@
     },
     {
       "name": "userData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUlong",
       "vtype": "TYPE_ULONG",
       "vsubtype": "TYPE_VOID",
@@ -99,7 +99,7 @@
     },
     {
       "name": "active",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

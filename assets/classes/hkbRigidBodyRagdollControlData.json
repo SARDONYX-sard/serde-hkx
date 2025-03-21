@@ -4,14 +4,14 @@
   "signature": "0x1e0bc068",
   "size_x86": 64,
   "size_x86_64": 64,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "keyFrameHierarchyControlData",
       "class_ref": "hkaKeyFrameHierarchyUtilityControlData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkaKeyFrameHierarchyUtilityControlData",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "durationToBlend",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

@@ -4,13 +4,13 @@
   "signature": "0x5797386e",
   "size_x86": 176,
   "size_x86_64": 176,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "transform",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkTransform",
       "vtype": "TYPE_TRANSFORM",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     {
       "name": "sweptTransform",
       "class_ref": "hkSweptTransform",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkSweptTransform",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     },
     {
       "name": "deltaAngle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -53,7 +53,7 @@
     },
     {
       "name": "objectRadius",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -67,7 +67,7 @@
     },
     {
       "name": "linearDamping",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkHalf",
       "vtype": "TYPE_HALF",
       "vsubtype": "TYPE_VOID",
@@ -81,7 +81,7 @@
     },
     {
       "name": "angularDamping",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkHalf",
       "vtype": "TYPE_HALF",
       "vsubtype": "TYPE_VOID",
@@ -95,7 +95,7 @@
     },
     {
       "name": "timeFactor",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkHalf",
       "vtype": "TYPE_HALF",
       "vsubtype": "TYPE_VOID",
@@ -109,7 +109,7 @@
     },
     {
       "name": "maxLinearVelocity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -123,7 +123,7 @@
     },
     {
       "name": "maxAngularVelocity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -137,7 +137,7 @@
     },
     {
       "name": "deactivationClass",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",

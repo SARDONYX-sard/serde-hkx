@@ -5,13 +5,13 @@
   "size_x86": 32,
   "size_x86_64": 56,
   "parent": "hkpConvexShape",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "pad16",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32[3]",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",

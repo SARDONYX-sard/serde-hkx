@@ -5,14 +5,14 @@
   "size_x86": 48,
   "size_x86_64": 88,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "retargetingSkeletonMappers",
       "class_ref": "hkaSkeletonMapper",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkaSkeletonMapper*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -27,7 +27,7 @@
     {
       "name": "animationSkeleton",
       "class_ref": "hkaSkeleton",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkaSkeleton*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -42,7 +42,7 @@
     {
       "name": "ragdollToAnimationSkeletonMapper",
       "class_ref": "hkaSkeletonMapper",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkaSkeletonMapper*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -57,7 +57,7 @@
     {
       "name": "animationToRagdollSkeletonMapper",
       "class_ref": "hkaSkeletonMapper",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkaSkeletonMapper*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -71,7 +71,7 @@
     },
     {
       "name": "animationBindingSet",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -86,7 +86,7 @@
     {
       "name": "data",
       "class_ref": "hkbCharacterData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbCharacterData*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -100,7 +100,7 @@
     },
     {
       "name": "mirroredSkeleton",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -114,7 +114,7 @@
     },
     {
       "name": "characterPropertyIdMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",

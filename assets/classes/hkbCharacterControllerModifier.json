@@ -5,9 +5,9 @@
   "size_x86": 144,
   "size_x86_64": 176,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "InitialVelocityCoordinates",
@@ -46,7 +46,7 @@
     {
       "name": "controlData",
       "class_ref": "hkbCharacterControllerControlData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbCharacterControllerControlData",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -60,7 +60,7 @@
     },
     {
       "name": "initialVelocity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -75,7 +75,7 @@
     {
       "name": "initialVelocityCoordinates",
       "enum_ref": "InitialVelocityCoordinates",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum InitialVelocityCoordinates",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -90,7 +90,7 @@
     {
       "name": "motionMode",
       "enum_ref": "MotionMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum MotionMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -104,7 +104,7 @@
     },
     {
       "name": "forceDownwardMomentum",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -118,7 +118,7 @@
     },
     {
       "name": "applyGravity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -132,7 +132,7 @@
     },
     {
       "name": "setInitialVelocity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -146,7 +146,7 @@
     },
     {
       "name": "isTouchingGround",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -160,7 +160,7 @@
     },
     {
       "name": "gravity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -174,7 +174,7 @@
     },
     {
       "name": "timestep",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -188,7 +188,7 @@
     },
     {
       "name": "isInitialVelocityAdded",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

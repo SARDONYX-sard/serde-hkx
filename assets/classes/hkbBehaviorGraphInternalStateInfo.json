@@ -5,13 +5,13 @@
   "size_x86": 56,
   "size_x86_64": 80,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "characterId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint64",
       "vtype": "TYPE_UINT64",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     {
       "name": "internalState",
       "class_ref": "hkbBehaviorGraphInternalState",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbBehaviorGraphInternalState*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -41,7 +41,7 @@
     {
       "name": "auxiliaryNodeInfo",
       "class_ref": "hkbAuxiliaryNodeInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkbAuxiliaryNodeInfo*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -55,7 +55,7 @@
     },
     {
       "name": "activeEventIds",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT16",
@@ -69,7 +69,7 @@
     },
     {
       "name": "activeVariableIds",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT16",

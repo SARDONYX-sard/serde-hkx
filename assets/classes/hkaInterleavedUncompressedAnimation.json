@@ -5,13 +5,13 @@
   "size_x86": 64,
   "size_x86_64": 88,
   "parent": "hkaAnimation",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "transforms",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkQsTransform>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_QSTRANSFORM",
@@ -25,7 +25,7 @@
     },
     {
       "name": "floats",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReal>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_REAL",

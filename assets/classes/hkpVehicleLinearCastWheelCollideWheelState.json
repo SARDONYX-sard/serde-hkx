@@ -4,14 +4,14 @@
   "signature": "0x2a9acf98",
   "size_x86": 96,
   "size_x86_64": 96,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "phantom",
       "class_ref": "hkpAabbPhantom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpAabbPhantom*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -26,7 +26,7 @@
     {
       "name": "shape",
       "class_ref": "hkpShape",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpShape*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -40,7 +40,7 @@
     },
     {
       "name": "transform",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkTransform",
       "vtype": "TYPE_TRANSFORM",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     },
     {
       "name": "to",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",

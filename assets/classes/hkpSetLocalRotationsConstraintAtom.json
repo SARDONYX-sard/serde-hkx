@@ -5,13 +5,13 @@
   "size_x86": 112,
   "size_x86_64": 112,
   "parent": "hkpConstraintAtom",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "rotationA",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkRotation",
       "vtype": "TYPE_ROTATION",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "rotationB",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkRotation",
       "vtype": "TYPE_ROTATION",
       "vsubtype": "TYPE_VOID",

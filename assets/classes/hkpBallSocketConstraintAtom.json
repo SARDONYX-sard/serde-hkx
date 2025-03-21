@@ -5,14 +5,14 @@
   "size_x86": 16,
   "size_x86_64": 16,
   "parent": "hkpConstraintAtom",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "solvingMethod",
       "enum_ref": "SolvingMethod",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum SolvingMethod",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -26,7 +26,7 @@
     },
     {
       "name": "bodiesToNotify",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     },
     {
       "name": "velocityStabilizationFactor",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     },
     {
       "name": "maxImpulse",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -68,7 +68,7 @@
     },
     {
       "name": "inertiaStabilizationFactor",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

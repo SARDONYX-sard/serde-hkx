@@ -5,14 +5,14 @@
   "size_x86": 176,
   "size_x86_64": 192,
   "parent": "hkpConstraintData",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "atoms",
       "class_ref": "hkpPointToPlaneConstraintDataAtoms",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpPointToPlaneConstraintDataAtoms",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

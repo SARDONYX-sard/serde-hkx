@@ -4,14 +4,14 @@
   "signature": "0xf12d48d9",
   "size_x86": 24,
   "size_x86_64": 32,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "sectors",
       "class_ref": "hkpAgent1nSector",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpAgent1nSector*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -26,7 +26,7 @@
     {
       "name": "subTracks",
       "class_ref": "hkpSerializedSubTrack1nInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpSerializedSubTrack1nInfo*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

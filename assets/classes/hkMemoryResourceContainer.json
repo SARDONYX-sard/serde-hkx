@@ -5,13 +5,13 @@
   "size_x86": 40,
   "size_x86_64": 64,
   "parent": "hkResourceContainer",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     {
       "name": "parent",
       "class_ref": "hkMemoryResourceContainer",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkMemoryResourceContainer*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -41,7 +41,7 @@
     {
       "name": "resourceHandles",
       "class_ref": "hkMemoryResourceHandle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkMemoryResourceHandle*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -56,7 +56,7 @@
     {
       "name": "children",
       "class_ref": "hkMemoryResourceContainer",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkMemoryResourceContainer*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

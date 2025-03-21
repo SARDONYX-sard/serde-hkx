@@ -5,9 +5,9 @@
   "size_x86": 176,
   "size_x86_64": 192,
   "parent": "hkpConstraintData",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "OrientationConstraintType",
@@ -42,7 +42,7 @@
     {
       "name": "atoms",
       "class_ref": "hkpBridgeAtoms",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpBridgeAtoms",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -57,7 +57,7 @@
     {
       "name": "path",
       "class_ref": "hkpParametricCurve",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpParametricCurve*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -71,7 +71,7 @@
     },
     {
       "name": "maxFrictionForce",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -86,7 +86,7 @@
     {
       "name": "angularConstrainedDOF",
       "enum_ref": "OrientationConstraintType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum OrientationConstraintType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -100,7 +100,7 @@
     },
     {
       "name": "transform_OS_KS",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkTransform[2]",
       "vtype": "TYPE_TRANSFORM",
       "vsubtype": "TYPE_VOID",

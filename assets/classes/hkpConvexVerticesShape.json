@@ -5,13 +5,13 @@
   "size_x86": 112,
   "size_x86_64": 144,
   "parent": "hkpConvexShape",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "aabbHalfExtents",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "aabbCenter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     {
       "name": "rotatedVertices",
       "class_ref": "hkpConvexVerticesShapeFourVectors",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpConvexVerticesShapeFourVectors>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -54,7 +54,7 @@
     },
     {
       "name": "numVertices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -68,7 +68,7 @@
     },
     {
       "name": "externalObject",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -82,7 +82,7 @@
     },
     {
       "name": "getFaceNormals",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -96,7 +96,7 @@
     },
     {
       "name": "planeEquations",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkVector4>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VECTOR4",
@@ -111,7 +111,7 @@
     {
       "name": "connectivity",
       "class_ref": "hkpConvexVerticesConnectivity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpConvexVerticesConnectivity*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

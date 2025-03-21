@@ -5,9 +5,9 @@
   "size_x86": 24,
   "size_x86_64": 48,
   "parent": "hkpShape",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "CollectionType",
@@ -53,7 +53,7 @@
   "members": [
     {
       "name": "disableWelding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -68,7 +68,7 @@
     {
       "name": "collectionType",
       "enum_ref": "CollectionType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum CollectionType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",

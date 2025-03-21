@@ -5,13 +5,13 @@
   "size_x86": 84,
   "size_x86_64": 120,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "parentIndices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT16",
@@ -40,7 +40,7 @@
     {
       "name": "bones",
       "class_ref": "hkaBone",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<struct hkaBone>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -54,7 +54,7 @@
     },
     {
       "name": "referencePose",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkQsTransform>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_QSTRANSFORM",
@@ -68,7 +68,7 @@
     },
     {
       "name": "referenceFloats",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReal>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_REAL",
@@ -82,7 +82,7 @@
     },
     {
       "name": "floatSlots",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -97,7 +97,7 @@
     {
       "name": "localFrames",
       "class_ref": "hkaSkeletonLocalFrameOnBone",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkaSkeletonLocalFrameOnBone>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",

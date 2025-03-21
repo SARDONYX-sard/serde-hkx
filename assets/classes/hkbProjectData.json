@@ -5,13 +5,13 @@
   "size_x86": 48,
   "size_x86_64": 48,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "worldUpWS",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     {
       "name": "stringData",
       "class_ref": "hkbProjectStringData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbProjectStringData*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -41,7 +41,7 @@
     {
       "name": "defaultEventMode",
       "enum_ref": "EventMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum EventMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

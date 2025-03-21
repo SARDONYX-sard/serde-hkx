@@ -5,13 +5,13 @@
   "size_x86": 64,
   "size_x86_64": 64,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "quadValue",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "characterId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint64",
       "vtype": "TYPE_UINT64",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     },
     {
       "name": "variableId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     {
       "name": "value",
       "class_ref": "hkbVariableValue",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbVariableValue",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -69,7 +69,7 @@
     {
       "name": "type",
       "enum_ref": "VariableType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum VariableType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -83,7 +83,7 @@
     },
     {
       "name": "global",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

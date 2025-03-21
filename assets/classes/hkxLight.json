@@ -5,9 +5,9 @@
   "size_x86": 64,
   "size_x86_64": 80,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "LightType",
@@ -34,7 +34,7 @@
     {
       "name": "type",
       "enum_ref": "LightType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum LightType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -48,7 +48,7 @@
     },
     {
       "name": "position",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -62,7 +62,7 @@
     },
     {
       "name": "direction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -76,7 +76,7 @@
     },
     {
       "name": "color",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -90,7 +90,7 @@
     },
     {
       "name": "angle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

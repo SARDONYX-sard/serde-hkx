@@ -5,13 +5,13 @@
   "size_x86": 132,
   "size_x86_64": 192,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "deformableSkinNames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -25,7 +25,7 @@
     },
     {
       "name": "rigidSkinNames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -39,7 +39,7 @@
     },
     {
       "name": "animationNames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -53,7 +53,7 @@
     },
     {
       "name": "animationFilenames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -67,7 +67,7 @@
     },
     {
       "name": "characterPropertyNames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -81,7 +81,7 @@
     },
     {
       "name": "retargetingSkeletonMapperFilenames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -95,7 +95,7 @@
     },
     {
       "name": "lodNames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -109,7 +109,7 @@
     },
     {
       "name": "mirroredSyncPointSubstringsA",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -123,7 +123,7 @@
     },
     {
       "name": "mirroredSyncPointSubstringsB",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -137,7 +137,7 @@
     },
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -151,7 +151,7 @@
     },
     {
       "name": "rigName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -165,7 +165,7 @@
     },
     {
       "name": "ragdollName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -179,7 +179,7 @@
     },
     {
       "name": "behaviorFilename",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",

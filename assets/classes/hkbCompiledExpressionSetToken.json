@@ -4,9 +4,9 @@
   "signature": "0xc6aaccc8",
   "size_x86": 8,
   "size_x86_64": 8,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "enums": [
     {
       "name": "TokenType",
@@ -236,7 +236,7 @@
   "members": [
     {
       "name": "data",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -251,7 +251,7 @@
     {
       "name": "type",
       "enum_ref": "TokenType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum TokenType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -266,7 +266,7 @@
     {
       "name": "operator",
       "enum_ref": "Operator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum Operator",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

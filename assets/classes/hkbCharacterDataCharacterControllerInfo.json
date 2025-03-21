@@ -4,13 +4,13 @@
   "signature": "0xa0f415bf",
   "size_x86": 16,
   "size_x86_64": 24,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "capsuleHeight",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "capsuleRadius",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -38,7 +38,7 @@
     },
     {
       "name": "collisionFilterInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -53,7 +53,7 @@
     {
       "name": "characterControllerCinfo",
       "class_ref": "hkpCharacterControllerCinfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpCharacterControllerCinfo*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

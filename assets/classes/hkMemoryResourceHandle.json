@@ -5,14 +5,14 @@
   "size_x86": 28,
   "size_x86_64": 48,
   "parent": "hkResourceHandle",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "variant",
       "class_ref": "hkReferencedObject",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkReferencedObject*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -26,7 +26,7 @@
     },
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -41,7 +41,7 @@
     {
       "name": "references",
       "class_ref": "hkMemoryResourceHandleExternalLink",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<struct hkMemoryResourceHandleExternalLink>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",

@@ -4,9 +4,9 @@
   "signature": "0x35a0439a",
   "size_x86": 12,
   "size_x86_64": 24,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "ToolNodeType",
@@ -56,7 +56,7 @@
   "members": [
     {
       "name": "behaviorName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -70,7 +70,7 @@
     },
     {
       "name": "nodeName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -85,7 +85,7 @@
     {
       "name": "toolType",
       "enum_ref": "ToolNodeType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ToolNodeType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -99,7 +99,7 @@
     },
     {
       "name": "id",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",

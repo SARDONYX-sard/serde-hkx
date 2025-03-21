@@ -4,9 +4,9 @@
   "signature": "0x7798b7db",
   "size_x86": 36,
   "size_x86_64": 40,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "AbsoluteTimeCounter",
@@ -32,7 +32,7 @@
   "members": [
     {
       "name": "heading",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -46,7 +46,7 @@
     },
     {
       "name": "indexOfTimer0",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -60,7 +60,7 @@
     },
     {
       "name": "indexOfTimer1",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -75,7 +75,7 @@
     {
       "name": "absoluteTimeCounter",
       "enum_ref": "AbsoluteTimeCounter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum AbsoluteTimeCounter",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT32",
@@ -89,7 +89,7 @@
     },
     {
       "name": "timerFactor0",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -103,7 +103,7 @@
     },
     {
       "name": "timerFactor1",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -117,7 +117,7 @@
     },
     {
       "name": "threadId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -131,7 +131,7 @@
     },
     {
       "name": "frameStreamStart",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -145,7 +145,7 @@
     },
     {
       "name": "frameStreamEnd",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

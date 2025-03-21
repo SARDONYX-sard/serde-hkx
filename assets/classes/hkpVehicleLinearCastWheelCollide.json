@@ -5,13 +5,13 @@
   "size_x86": 52,
   "size_x86_64": 80,
   "parent": "hkpVehicleWheelCollide",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "wheelCollisionFilterInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     {
       "name": "wheelStates",
       "class_ref": "hkpVehicleLinearCastWheelCollideWheelState",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpVehicleLinearCastWheelCollideWheelState>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -41,7 +41,7 @@
     {
       "name": "rejectChassisListener",
       "class_ref": "hkpRejectChassisListener",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkpRejectChassisListener",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -55,7 +55,7 @@
     },
     {
       "name": "maxExtraPenetration",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -69,7 +69,7 @@
     },
     {
       "name": "startPointTolerance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

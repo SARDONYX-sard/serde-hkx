@@ -4,9 +4,9 @@
   "signature": "0x33be6570",
   "size_x86": 12,
   "size_x86_64": 12,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "enums": [
     {
       "name": "ResponseType",
@@ -41,7 +41,7 @@
     {
       "name": "responseType",
       "enum_ref": "ResponseType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ResponseType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -55,7 +55,7 @@
     },
     {
       "name": "rollingFrictionMultiplier",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkHalf",
       "vtype": "TYPE_HALF",
       "vsubtype": "TYPE_VOID",
@@ -69,7 +69,7 @@
     },
     {
       "name": "friction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -83,7 +83,7 @@
     },
     {
       "name": "restitution",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

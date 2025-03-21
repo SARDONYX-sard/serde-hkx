@@ -5,9 +5,9 @@
   "size_x86": 140,
   "size_x86_64": 208,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "MtChecks",
@@ -57,7 +57,7 @@
   "members": [
     {
       "name": "world",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -71,7 +71,7 @@
     },
     {
       "name": "userData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUlong",
       "vtype": "TYPE_ULONG",
       "vsubtype": "TYPE_VOID",
@@ -86,7 +86,7 @@
     {
       "name": "collidable",
       "class_ref": "hkpLinkedCollidable",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkpLinkedCollidable",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -101,7 +101,7 @@
     {
       "name": "multiThreadCheck",
       "class_ref": "hkMultiThreadCheck",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkMultiThreadCheck",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -115,7 +115,7 @@
     },
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -130,7 +130,7 @@
     {
       "name": "properties",
       "class_ref": "hkpProperty",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpProperty>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -144,7 +144,7 @@
     },
     {
       "name": "treeData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",

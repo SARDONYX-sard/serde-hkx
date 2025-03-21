@@ -5,9 +5,9 @@
   "size_x86": 40,
   "size_x86_64": 56,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "AnimationType",
@@ -50,7 +50,7 @@
     {
       "name": "type",
       "enum_ref": "AnimationType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum AnimationType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT32",
@@ -64,7 +64,7 @@
     },
     {
       "name": "duration",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -78,7 +78,7 @@
     },
     {
       "name": "numberOfTransformTracks",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -92,7 +92,7 @@
     },
     {
       "name": "numberOfFloatTracks",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -107,7 +107,7 @@
     {
       "name": "extractedMotion",
       "class_ref": "hkaAnimatedReferenceFrame",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkaAnimatedReferenceFrame*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -122,7 +122,7 @@
     {
       "name": "annotationTracks",
       "class_ref": "hkaAnnotationTrack",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<struct hkaAnnotationTrack>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",

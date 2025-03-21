@@ -4,13 +4,13 @@
   "signature": "0x98dd8bdc",
   "size_x86": 24,
   "size_x86_64": 32,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "vertices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkVector4>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VECTOR4",
@@ -25,7 +25,7 @@
     {
       "name": "triangles",
       "class_ref": "hkGeometryTriangle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkGeometryTriangle>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",

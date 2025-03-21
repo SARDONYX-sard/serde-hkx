@@ -4,14 +4,14 @@
   "signature": "0x54867cbf",
   "size_x86": 8,
   "size_x86_64": 8,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "dataType",
       "enum_ref": "ComponentType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ComponentType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -25,7 +25,7 @@
     },
     {
       "name": "numValues",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     {
       "name": "usage",
       "enum_ref": "ComponentUsage",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ComponentUsage",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -54,7 +54,7 @@
     },
     {
       "name": "subUsage",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -69,7 +69,7 @@
     {
       "name": "flags",
       "enum_ref": "HintFlags",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "flags HintFlags",
       "vtype": "TYPE_FLAGS",
       "vsubtype": "TYPE_UINT8",
@@ -83,7 +83,7 @@
     },
     {
       "name": "pad",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8[3]",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",

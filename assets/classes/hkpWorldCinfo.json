@@ -5,9 +5,9 @@
   "size_x86": 240,
   "size_x86_64": 256,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "SolverType",
@@ -149,7 +149,7 @@
   "members": [
     {
       "name": "gravity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -163,7 +163,7 @@
     },
     {
       "name": "broadPhaseQuerySize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -177,7 +177,7 @@
     },
     {
       "name": "contactRestingVelocity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -192,7 +192,7 @@
     {
       "name": "broadPhaseBorderBehaviour",
       "enum_ref": "BroadPhaseBorderBehaviour",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum BroadPhaseBorderBehaviour",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -206,7 +206,7 @@
     },
     {
       "name": "mtPostponeAndSortBroadPhaseBorderCallbacks",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -221,7 +221,7 @@
     {
       "name": "broadPhaseWorldAabb",
       "class_ref": "hkAabb",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkAabb",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -235,7 +235,7 @@
     },
     {
       "name": "useKdTree",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -249,7 +249,7 @@
     },
     {
       "name": "useMultipleTree",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -264,7 +264,7 @@
     {
       "name": "treeUpdateType",
       "enum_ref": "TreeUpdateType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum TreeUpdateType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -278,7 +278,7 @@
     },
     {
       "name": "autoUpdateKdTree",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -292,7 +292,7 @@
     },
     {
       "name": "collisionTolerance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -307,7 +307,7 @@
     {
       "name": "collisionFilter",
       "class_ref": "hkpCollisionFilter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpCollisionFilter*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -322,7 +322,7 @@
     {
       "name": "convexListFilter",
       "class_ref": "hkpConvexListFilter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpConvexListFilter*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -336,7 +336,7 @@
     },
     {
       "name": "expectedMaxLinearVelocity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -350,7 +350,7 @@
     },
     {
       "name": "sizeOfToiEventQueue",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -364,7 +364,7 @@
     },
     {
       "name": "expectedMinPsiDeltaTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -379,7 +379,7 @@
     {
       "name": "memoryWatchDog",
       "class_ref": "hkWorldMemoryAvailableWatchDog",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkWorldMemoryAvailableWatchDog*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -393,7 +393,7 @@
     },
     {
       "name": "broadPhaseNumMarkers",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -408,7 +408,7 @@
     {
       "name": "contactPointGeneration",
       "enum_ref": "ContactPointGeneration",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ContactPointGeneration",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -422,7 +422,7 @@
     },
     {
       "name": "allowToSkipConfirmedCallbacks",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -436,7 +436,7 @@
     },
     {
       "name": "useHybridBroadphase",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -450,7 +450,7 @@
     },
     {
       "name": "solverTau",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -464,7 +464,7 @@
     },
     {
       "name": "solverDamp",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -478,7 +478,7 @@
     },
     {
       "name": "solverIterations",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -492,7 +492,7 @@
     },
     {
       "name": "solverMicrosteps",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -506,7 +506,7 @@
     },
     {
       "name": "maxConstraintViolation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -520,7 +520,7 @@
     },
     {
       "name": "forceCoherentConstraintOrderingInSolver",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -534,7 +534,7 @@
     },
     {
       "name": "snapCollisionToConvexEdgeThreshold",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -548,7 +548,7 @@
     },
     {
       "name": "snapCollisionToConcaveEdgeThreshold",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -562,7 +562,7 @@
     },
     {
       "name": "enableToiWeldRejection",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -576,7 +576,7 @@
     },
     {
       "name": "enableDeprecatedWelding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -590,7 +590,7 @@
     },
     {
       "name": "iterativeLinearCastEarlyOutDistance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -604,7 +604,7 @@
     },
     {
       "name": "iterativeLinearCastMaxIterations",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -618,7 +618,7 @@
     },
     {
       "name": "deactivationNumInactiveFramesSelectFlag0",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -632,7 +632,7 @@
     },
     {
       "name": "deactivationNumInactiveFramesSelectFlag1",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -646,7 +646,7 @@
     },
     {
       "name": "deactivationIntegrateCounter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -660,7 +660,7 @@
     },
     {
       "name": "shouldActivateOnRigidBodyTransformChange",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -674,7 +674,7 @@
     },
     {
       "name": "deactivationReferenceDistance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -688,7 +688,7 @@
     },
     {
       "name": "toiCollisionResponseRotateNormal",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -702,7 +702,7 @@
     },
     {
       "name": "maxSectorsPerMidphaseCollideTask",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -716,7 +716,7 @@
     },
     {
       "name": "maxSectorsPerNarrowphaseCollideTask",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -730,7 +730,7 @@
     },
     {
       "name": "processToisMultithreaded",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -744,7 +744,7 @@
     },
     {
       "name": "maxEntriesPerToiMidphaseCollideTask",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -758,7 +758,7 @@
     },
     {
       "name": "maxEntriesPerToiNarrowphaseCollideTask",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -772,7 +772,7 @@
     },
     {
       "name": "maxNumToiCollisionPairsSinglethreaded",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -786,7 +786,7 @@
     },
     {
       "name": "numToisTillAllowedPenetrationSimplifiedToi",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -800,7 +800,7 @@
     },
     {
       "name": "numToisTillAllowedPenetrationToi",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -814,7 +814,7 @@
     },
     {
       "name": "numToisTillAllowedPenetrationToiHigher",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -828,7 +828,7 @@
     },
     {
       "name": "numToisTillAllowedPenetrationToiForced",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -842,7 +842,7 @@
     },
     {
       "name": "enableDeactivation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -857,7 +857,7 @@
     {
       "name": "simulationType",
       "enum_ref": "SimulationType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum SimulationType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -871,7 +871,7 @@
     },
     {
       "name": "enableSimulationIslands",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -885,7 +885,7 @@
     },
     {
       "name": "minDesiredIslandSize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -899,7 +899,7 @@
     },
     {
       "name": "processActionsInSingleThread",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -913,7 +913,7 @@
     },
     {
       "name": "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -927,7 +927,7 @@
     },
     {
       "name": "frameMarkerPsiSnap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -941,7 +941,7 @@
     },
     {
       "name": "fireCollisionCallbacks",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

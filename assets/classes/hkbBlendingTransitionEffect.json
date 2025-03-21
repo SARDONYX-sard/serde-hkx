@@ -5,9 +5,9 @@
   "size_x86": 88,
   "size_x86_64": 144,
   "parent": "hkbTransitionEffect",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "FlagBits",
@@ -57,7 +57,7 @@
   "members": [
     {
       "name": "duration",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -71,7 +71,7 @@
     },
     {
       "name": "toGeneratorStartTimeFraction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -86,7 +86,7 @@
     {
       "name": "flags",
       "enum_ref": "FlagBits",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "flags FlagBits",
       "vtype": "TYPE_FLAGS",
       "vsubtype": "TYPE_UINT16",
@@ -101,7 +101,7 @@
     {
       "name": "endMode",
       "enum_ref": "EndMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum EndMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -116,7 +116,7 @@
     {
       "name": "blendCurve",
       "enum_ref": "BlendCurve",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum BlendCurve",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -130,7 +130,7 @@
     },
     {
       "name": "fromGenerator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -144,7 +144,7 @@
     },
     {
       "name": "toGenerator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -158,7 +158,7 @@
     },
     {
       "name": "characterPoseAtBeginningOfTransition",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -172,7 +172,7 @@
     },
     {
       "name": "timeRemaining",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -186,7 +186,7 @@
     },
     {
       "name": "timeInTransition",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -200,7 +200,7 @@
     },
     {
       "name": "applySelfTransition",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -214,7 +214,7 @@
     },
     {
       "name": "initializeCharacterPose",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

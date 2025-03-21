@@ -4,9 +4,9 @@
   "signature": "0x11e4408b",
   "size_x86": 12,
   "size_x86_64": 12,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "enums": [
     {
       "name": "AccessType",
@@ -48,7 +48,7 @@
   "members": [
     {
       "name": "threadId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -62,7 +62,7 @@
     },
     {
       "name": "stackTraceId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -76,7 +76,7 @@
     },
     {
       "name": "markCount",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -90,7 +90,7 @@
     },
     {
       "name": "markBitStack",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",

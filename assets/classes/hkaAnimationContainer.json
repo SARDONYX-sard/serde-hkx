@@ -5,14 +5,14 @@
   "size_x86": 68,
   "size_x86_64": 96,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "skeletons",
       "class_ref": "hkaSkeleton",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkaSkeleton*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -27,7 +27,7 @@
     {
       "name": "animations",
       "class_ref": "hkaAnimation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkaAnimation*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -42,7 +42,7 @@
     {
       "name": "bindings",
       "class_ref": "hkaAnimationBinding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkaAnimationBinding*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -57,7 +57,7 @@
     {
       "name": "attachments",
       "class_ref": "hkaBoneAttachment",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkaBoneAttachment*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -72,7 +72,7 @@
     {
       "name": "skins",
       "class_ref": "hkaMeshBinding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkaMeshBinding*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

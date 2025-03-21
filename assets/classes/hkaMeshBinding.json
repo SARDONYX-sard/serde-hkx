@@ -5,14 +5,14 @@
   "size_x86": 44,
   "size_x86_64": 72,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "mesh",
       "class_ref": "hkxMesh",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkxMesh*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -26,7 +26,7 @@
     },
     {
       "name": "originalSkeletonName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -41,7 +41,7 @@
     {
       "name": "skeleton",
       "class_ref": "hkaSkeleton",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkaSkeleton*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -56,7 +56,7 @@
     {
       "name": "mappings",
       "class_ref": "hkaMeshBindingMapping",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkaMeshBindingMapping>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -70,7 +70,7 @@
     },
     {
       "name": "boneFromSkinMeshTransforms",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkTransform>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_TRANSFORM",

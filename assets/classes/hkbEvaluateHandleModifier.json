@@ -5,9 +5,9 @@
   "size_x86": 176,
   "size_x86_64": 240,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "HandleChangeMode",
@@ -30,7 +30,7 @@
     {
       "name": "handle",
       "class_ref": "hkbHandle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbHandle*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -44,7 +44,7 @@
     },
     {
       "name": "handlePositionOut",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -58,7 +58,7 @@
     },
     {
       "name": "handleRotationOut",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQuaternion",
       "vtype": "TYPE_QUATERNION",
       "vsubtype": "TYPE_VOID",
@@ -72,7 +72,7 @@
     },
     {
       "name": "isValidOut",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -86,7 +86,7 @@
     },
     {
       "name": "extrapolationTimeStep",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -100,7 +100,7 @@
     },
     {
       "name": "handleChangeSpeed",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -115,7 +115,7 @@
     {
       "name": "handleChangeMode",
       "enum_ref": "HandleChangeMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum HandleChangeMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -130,7 +130,7 @@
     {
       "name": "oldHandle",
       "class_ref": "hkbHandle",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbHandle",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -144,7 +144,7 @@
     },
     {
       "name": "oldHandlePosition",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -158,7 +158,7 @@
     },
     {
       "name": "oldHandleRotation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQuaternion",
       "vtype": "TYPE_QUATERNION",
       "vsubtype": "TYPE_VOID",
@@ -172,7 +172,7 @@
     },
     {
       "name": "timeSinceLastModify",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -186,7 +186,7 @@
     },
     {
       "name": "smoothlyChangingHandles",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

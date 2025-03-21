@@ -4,13 +4,13 @@
   "signature": "0xeb60f431",
   "size_x86": 16,
   "size_x86_64": 24,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "sortValue",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint64",
       "vtype": "TYPE_UINT64",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     {
       "name": "body",
       "class_ref": "hkpRigidBody",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpRigidBody*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -40,7 +40,7 @@
     {
       "name": "operation",
       "enum_ref": "Operation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum Operation",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT32",

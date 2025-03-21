@@ -5,14 +5,14 @@
   "size_x86": 60,
   "size_x86_64": 104,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "keyframeInfo",
       "class_ref": "hkbKeyframeBonesModifierKeyframeInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkbKeyframeBonesModifierKeyframeInfo>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "keyframedBonesList",
       "class_ref": "hkbBoneIndexArray",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbBoneIndexArray*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

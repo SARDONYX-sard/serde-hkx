@@ -5,9 +5,9 @@
   "size_x86": 112,
   "size_x86_64": 176,
   "parent": "hkbGenerator",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "CurrentBlendMode",
@@ -42,7 +42,7 @@
     {
       "name": "pBlenderGenerator",
       "class_ref": "hkbGenerator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbGenerator*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -57,7 +57,7 @@
     {
       "name": "EventToFreezeBlendValue",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -72,7 +72,7 @@
     {
       "name": "EventToCrossBlend",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -86,7 +86,7 @@
     },
     {
       "name": "fBlendParameter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -100,7 +100,7 @@
     },
     {
       "name": "fTransitionDuration",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -115,7 +115,7 @@
     {
       "name": "eBlendCurve",
       "enum_ref": "BlendCurve",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum BlendCurve",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -129,7 +129,7 @@
     },
     {
       "name": "pTransitionBlenderGenerator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -143,7 +143,7 @@
     },
     {
       "name": "pTransitionEffect",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -157,7 +157,7 @@
     },
     {
       "name": "currentMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum unknown",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

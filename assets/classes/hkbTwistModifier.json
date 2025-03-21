@@ -5,9 +5,9 @@
   "size_x86": 112,
   "size_x86_64": 144,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "SetAngleMethod",
@@ -45,7 +45,7 @@
   "members": [
     {
       "name": "axisOfRotation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -59,7 +59,7 @@
     },
     {
       "name": "twistAngle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -73,7 +73,7 @@
     },
     {
       "name": "startBoneIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -87,7 +87,7 @@
     },
     {
       "name": "endBoneIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -102,7 +102,7 @@
     {
       "name": "setAngleMethod",
       "enum_ref": "SetAngleMethod",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum SetAngleMethod",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -117,7 +117,7 @@
     {
       "name": "rotationAxisCoordinates",
       "enum_ref": "RotationAxisCoordinates",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum RotationAxisCoordinates",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -131,7 +131,7 @@
     },
     {
       "name": "isAdditive",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -145,7 +145,7 @@
     },
     {
       "name": "boneChainIndices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -159,7 +159,7 @@
     },
     {
       "name": "parentBoneIndices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",

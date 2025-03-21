@@ -5,13 +5,13 @@
   "size_x86": 88,
   "size_x86_64": 128,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "attributeDefaults",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReal>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_REAL",
@@ -26,7 +26,7 @@
     {
       "name": "variableInfos",
       "class_ref": "hkbVariableInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkbVariableInfo>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -41,7 +41,7 @@
     {
       "name": "characterPropertyInfos",
       "class_ref": "hkbVariableInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkbVariableInfo>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -56,7 +56,7 @@
     {
       "name": "eventInfos",
       "class_ref": "hkbEventInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkbEventInfo>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -71,7 +71,7 @@
     {
       "name": "wordMinVariableValues",
       "class_ref": "hkbVariableValue",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkbVariableValue>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -86,7 +86,7 @@
     {
       "name": "wordMaxVariableValues",
       "class_ref": "hkbVariableValue",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkbVariableValue>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -101,7 +101,7 @@
     {
       "name": "variableInitialValues",
       "class_ref": "hkbVariableValueSet",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbVariableValueSet*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -116,7 +116,7 @@
     {
       "name": "stringData",
       "class_ref": "hkbBehaviorGraphStringData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbBehaviorGraphStringData*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
