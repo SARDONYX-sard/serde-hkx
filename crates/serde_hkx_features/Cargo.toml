@@ -63,7 +63,14 @@ extra_fmt = [
   "indexmap/serde",
 ]
 # Json schema generation
-json_schema = ["havok_classes/json_schema", "dep:simd-json", "dep:schemars"]
+json_schema = [
+  "dep:havok_types",
+  "dep:schemars",
+  "dep:serde",
+  "dep:simd-json",
+  "havok_classes/json_schema",
+  "indexmap/serde",
+]
 
 [lints]
 workspace = true
