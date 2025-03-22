@@ -96,7 +96,7 @@ impl<'de> MapAccess<'de> for MapDeserializer<'_, 'de> {
     }
 
     // If an unknown `<hkparam>` exists and `next_value` is not called , `/>` or `</hkparam>` must be skipped.
-    fn skip_value_seed(&mut self) -> std::result::Result<(), Self::Error> {
+    fn skip_value_seed(&mut self) -> Result<(), Self::Error> {
         let (_num, _value) = tri!(
             self.de.parse_next(alt((
                 winnow::seq! {

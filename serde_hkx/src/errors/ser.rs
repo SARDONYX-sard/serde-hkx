@@ -32,7 +32,7 @@ pub enum Error {
     /// This indicates that the value of `absolute_data_offset` in the header is wrong.
     OverflowSubtractAbs { position: u32, abs_data_offset: u32 },
 
-    /// Missing global fixup class: {ptr}
+    /// Missing global fixup class: Index(`{ptr}`)
     MissingGlobalFixupClass {
         /// missing global fixup class ptr(e.g. #0050)
         ptr: Pointer<'static>,

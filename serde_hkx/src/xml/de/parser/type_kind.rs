@@ -6,9 +6,9 @@ use super::delimited_with_multispace0;
 use havok_types::*;
 use std::borrow::Cow;
 use winnow::ascii::{Caseless, float, multispace0};
-use winnow::combinator::{alt, opt, seq};
+use winnow::combinator::{alt, delimited, opt, seq};
 use winnow::error::{StrContext, StrContextValue};
-use winnow::token::take_until;
+use winnow::token::{take_until, take_while};
 use winnow::{ModalResult, Parser};
 
 /// Parses [`bool`]. `true` or `false`
@@ -343,10 +343,9 @@ pub fn transform(input: &mut &str) -> ModalResult<Transform> {
 /// use serde_hkx::xml::de::parser::type_kind::pointer;
 /// use winnow::Parser as _;
 ///
-/// assert_eq!(pointer.parse("null"), Ok(Pointer::new(0))); // null pointer
-/// assert_eq!(pointer.parse("#0000"), Ok(Pointer::new(0))); // null pointer
-/// assert_eq!(pointer.parse("#0100"), Ok(Pointer::new(100)));
-/// assert!(pointer.parse("Non_Prefix#").is_err());
+/// assert_eq!(pointer.parse_next(&mut "null<"), Ok(Pointer::null())); // null pointer
+/// assert_eq!(pointer.parse_next(&mut "#0000<"), Ok(Pointer::from_usize(0))); // read null pointer until end tag
+/// assert_eq!(pointer.parse_next(&mut "#0100<"), Ok(Pointer::from_usize(100)));
 /// ```
 ///
 /// # Errors
@@ -360,14 +359,14 @@ pub fn pointer<'a>(input: &mut &'a str) -> ModalResult<Pointer<'a>> {
         )));
 
     alt((null_ptr, move |input: &mut &'a str| {
-        // let digit = tri!(preceded("#", digit1)
-        //     .parse_to()
-        //     .context(StrContext::Label("Pointer"))
-        //     .context(StrContext::Expected(StrContextValue::Description(
-        //         "Pointer(e.g. `#0001`)"
-        //     )))
-        //     .parse_next(input));
-        Ok(Pointer::new((*input).into()))
+        let ptr = delimited(
+            multispace0,
+            take_while(1.., |c| !matches!(c, ' ' | '\n' | '\t' | '<'))
+                .verify(|s: &str| !s.is_empty()),
+            multispace0,
+        )
+        .parse_next(input)?;
+        Ok(Pointer::new(ptr.into()))
     }))
     .parse_next(input)
 }

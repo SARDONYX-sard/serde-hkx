@@ -1,17 +1,16 @@
 use crate::{
-    HavokSort as _,
     bytes::{hexdump, serde::hkx_header::HkxHeader},
     errors::SerdeHkxError,
     from_bytes, from_str,
-    tests::{ClassMap, diff},
-    to_bytes, to_string,
+    tests::{diff, ClassMap},
+    to_bytes, to_string, HavokSort as _,
 };
 use pretty_assertions::assert_eq;
 use winnow::Parser;
 
 type Result<T> = core::result::Result<T, SerdeHkxError>;
 
-#[cfg_attr(miri, ignore)] // Unexplained hang
+// #[cfg_attr(miri, ignore)] // Unexplained hang
 #[test]
 #[cfg_attr(
     all(feature = "tracing", not(miri)),

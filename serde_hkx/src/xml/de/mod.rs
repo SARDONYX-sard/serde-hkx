@@ -415,7 +415,9 @@ impl<'de> de::Deserializer<'de> for &mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_pointer(tri!(self.parse_next(pointer)))
+        let ptr = tri!(self.parse_next(pointer));
+        tracing::debug!(?ptr);
+        visitor.visit_pointer(ptr)
     }
 
     fn deserialize_array<V>(self, visitor: V) -> Result<V::Value, Self::Error>

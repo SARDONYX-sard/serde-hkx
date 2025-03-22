@@ -19,7 +19,7 @@ pub struct ClassPtrMap<'a> {
     schema: Cow<'a, str>,
     #[serde(flatten)]
     #[serde(borrow)]
-    classes: IndexMap<Pointer, Classes<'a>>,
+    classes: IndexMap<Pointer<'a>, Classes<'a>>,
 }
 
 #[inline]

@@ -3,7 +3,6 @@ use crate::lib::*;
 
 use super::{
     delimited_comment_multispace0, delimited_multispace0_comment, delimited_with_multispace0,
-    type_kind::pointer,
 };
 use havok_types::{Pointer, Signature};
 use winnow::ascii::{digit1, hex_digit1, oct_digit1};
@@ -146,7 +145,10 @@ pub fn attr_string<'a>(input: &mut &'a str) -> ModalResult<&'a str> {
 /// # Errors
 /// When parse failed.
 fn attr_ptr<'a>(input: &mut &'a str) -> ModalResult<Pointer<'a>> {
-    delimited("\"", pointer, "\"").parse_next(input)
+    attr_string
+        .verify(|s: &str| !s.is_empty())
+        .map(|input: &str| Pointer::new(input.into()))
+        .parse_next(input)
 }
 
 /// Parse radix digits. e.g. `0b101`, `0xff`
@@ -234,5 +236,19 @@ mod tests {
         assert_eq!(number_in_string.parse(r#""33""#), Ok(33));
         assert_eq!(number_in_string.parse(r#""100""#), Ok(100));
         assert_eq!(number_in_string.parse(r#""0""#), Ok(0));
+    }
+
+    #[test]
+    fn test_class_start() {
+        let input = r##"<hkobject name="#0010" class="hkbProjectData" signature="0x13a39ba7">"##;
+
+        assert_eq!(
+            class_start_tag.parse(input),
+            Ok((
+                Pointer::new("#0010".into()),
+                "hkbProjectData",
+                Signature::new(0x13a39ba7)
+            ))
+        );
     }
 }
