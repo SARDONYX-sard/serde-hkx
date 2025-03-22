@@ -43,7 +43,7 @@ pub fn new_defaultmale<'a>() -> ClassMap<'a> {
         Classes::hkRootLevelContainer(Box::new(hk_root_level_container)),
     );
     classes.insert(
-        "#0008".into(),
+        "#0009".into(),
         Classes::hkbProjectStringData(Box::new(hkb_project_string_data)),
     );
     classes.insert(

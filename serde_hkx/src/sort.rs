@@ -146,3 +146,18 @@ where
         Ok(root_key)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::tests::mocks::new_defaultmale;
+
+    #[test]
+    fn test_sort() {
+        use super::*;
+
+        let mut classes = new_defaultmale();
+        classes.sort_for_bytes();
+
+        assert_eq!(classes, new_defaultmale());
+    }
+}
