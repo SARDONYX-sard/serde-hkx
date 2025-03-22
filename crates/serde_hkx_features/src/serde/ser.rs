@@ -29,7 +29,7 @@ where
         let top_ptr = classes.sort_for_xml().with_context(|_| SerSnafu {
             input: input.to_path_buf(),
         })?;
-        let xml = to_string(classes, top_ptr).with_context(|_| SerSnafu {
+        let xml = to_string(classes, &top_ptr).with_context(|_| SerSnafu {
             input: input.to_path_buf(),
         })?;
         Ok(xml.into_bytes())

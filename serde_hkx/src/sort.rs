@@ -1,6 +1,7 @@
 //! Provides a method that can be used to sort bytes and XML to serialize.
 use crate::{errors::ser::Error as SerError, ClassMapKey, GenericClassMap};
 use havok_serde::HavokClass;
+use havok_types::Pointer;
 use indexmap::IndexMap;
 use std::borrow::Cow;
 
@@ -25,7 +26,7 @@ pub trait HavokSort {
     ///
     /// # Errors
     /// Missing top pointer.
-    fn sort_for_xml(&mut self) -> Result<ClassMapKey<'_>, Self::Error>;
+    fn sort_for_xml(&mut self) -> Result<Pointer<'static>, Self::Error>;
 }
 
 impl<V> HavokSort for GenericClassMap<'_, V>
@@ -86,7 +87,7 @@ where
         tracing::trace!("sorted_keys = {:?}", self.keys().collect::<Vec<_>>());
     }
 
-    fn sort_for_xml(&mut self) -> Result<ClassMapKey<'static>, Self::Error> {
+    fn sort_for_xml(&mut self) -> Result<Pointer<'static>, Self::Error> {
         /// Create an acyclic directed graph from the order of fields in the root to the tail branch (class of dependencies).
         fn collect_deps<'a, 'xml: 'a, V>(
             classes: &'a IndexMap<ClassMapKey<'xml>, V>,
@@ -143,7 +144,7 @@ where
         // Replace the original IndexMap with the sorted one
         *self = sorted_classes;
 
-        Ok(root_key)
+        Ok(Pointer::new(root_key))
     }
 }
 

@@ -622,7 +622,6 @@ mod tests {
     fn test_serialize_defaultmale() -> Result<()> {
         let mut classes = new_defaultmale();
         let top_ptr = classes.sort_for_xml()?; // hkRootContainer" is processed last.
-        let top_ptr: Pointer<'static> = Pointer::new(top_ptr).to_static();
         let actual = tri!(to_string(&classes, &top_ptr));
         let expected =
             include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");

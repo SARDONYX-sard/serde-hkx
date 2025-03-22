@@ -1,4 +1,3 @@
-pub mod alt_map;
 pub mod convert;
 pub mod diff;
 pub mod dump;
@@ -22,12 +21,9 @@ pub use crate::convert::{tokio::convert, OutFormat};
 pub use crate::error::Result;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-use havok_classes::Classes;
-use indexmap::IndexMap;
-
 /// - key: class index(e.g `1`)
 /// - value: C++ Class
-pub type ClassMap<'a> = IndexMap<usize, Classes<'a>>;
+pub type ClassMap<'a> = serde_hkx::GenericClassMap<'a, havok_classes::Classes<'a>>;
 
 // https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html#include-items-only-when-collecting-doctests
 

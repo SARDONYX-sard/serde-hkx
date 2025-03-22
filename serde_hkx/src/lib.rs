@@ -52,5 +52,5 @@ use indexmap::IndexMap;
 use std::borrow::Cow;
 
 /// Key type alias for flexibility
-type ClassMapKey<'a> = Cow<'a, str>;
-type GenericClassMap<'a, V, K = ClassMapKey<'a>> = IndexMap<K, V>;
+pub type ClassMapKey<'a> = Cow<'a, str>;
+pub type GenericClassMap<'a, V, K = ClassMapKey<'a>> = IndexMap<K, V>;
