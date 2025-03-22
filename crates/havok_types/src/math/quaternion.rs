@@ -68,7 +68,7 @@ impl Quaternion {
 
     /// Create a [`Quaternion`] value from its representation as a byte array in little endian.
     #[inline]
-    pub fn from_le_bytes(bytes: &[u8; 16]) -> Self {
+    pub const fn from_le_bytes(bytes: &[u8; 16]) -> Self {
         Self {
             x: f32::from_le_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]),
             y: f32::from_le_bytes([bytes[4], bytes[5], bytes[6], bytes[7]]),
@@ -79,7 +79,7 @@ impl Quaternion {
 
     /// Create a [`Quaternion`] value from its representation as a byte array in big endian.
     #[inline]
-    pub fn from_be_bytes(bytes: &[u8; 16]) -> Self {
+    pub const fn from_be_bytes(bytes: &[u8; 16]) -> Self {
         Self {
             x: f32::from_be_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]),
             y: f32::from_be_bytes([bytes[4], bytes[5], bytes[6], bytes[7]]),

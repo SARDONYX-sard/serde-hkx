@@ -20,8 +20,8 @@ pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> Result<TokenStre
     let class_name_str = &class.name;
 
     let visitor_ident = to_visitor_ident(class_name_str);
-    let visitor_for_bytes = visit_struct_for_bytes::gen(class, class_map)?;
-    let visitor_for_xml = visit_struct::gen(class, class_map)?;
+    let visitor_for_bytes = visit_struct_for_bytes::generate(class, class_map)?;
+    let visitor_for_xml = visit_struct::generate(class, class_map)?;
 
     let expected_msg = format!("struct {class_name_str}");
 

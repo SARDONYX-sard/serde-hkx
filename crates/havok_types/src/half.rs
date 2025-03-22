@@ -22,14 +22,14 @@ impl f16 {
     //
     /// Creates a new [`f16`] from [`f32`].
     #[inline]
-    pub fn from_f32(f: f32) -> Self {
+    pub const fn from_f32(f: f32) -> Self {
         let bits = f.to_bits();
         Self((bits >> 16) as u16) // Only the most significant 16bits are taken out.
     }
 
     /// Converts the [`f16`] to a 32-bit float.
     #[inline]
-    pub fn to_f32(self) -> f32 {
+    pub const fn to_f32(self) -> f32 {
         f32::from_bits((self.0 as u32) << 16)
     }
 
